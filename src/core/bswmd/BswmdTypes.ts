@@ -45,6 +45,8 @@ export interface BswmdContainer {
  * BSWMD 参数定义
  */
 export interface BswmdParameter {
+  /** Definition-owned editing restriction, also enforced by batch edits. */
+  readOnly?: boolean;
   /** Optional semantic column role for the DTC CSV projection. */
   exportRole?: 'dtcValue' | 'severity' | 'wwhObdClass' | 'eventId';
   uuid: string;

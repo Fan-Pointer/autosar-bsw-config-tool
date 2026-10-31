@@ -34,6 +34,9 @@ import type {
   ImportSession,
 } from '@/core/io/IoTypes';
 import { generateUUID } from '@/utils/uuid';
+import { HistoryStack } from '@/core/history/HistoryStack';
+import { configurationDelta } from '@/core/history/ConfigDelta';
+import { commonParameters, batchSkipReason } from '@/core/config/BatchEdit';
 
 interface StoredContainer extends Omit<
   ConfigContainer,
@@ -114,6 +117,29 @@ export const useConfigStore = defineStore('config', () => {
   let writes: Promise<unknown> = Promise.resolve();
   const selectedContainerUuid = ref<string>();
   const selectedFieldUuid = ref<string>();
+  const selectedContainerUuids = ref<string[]>([]);
+  const histories = new Map<string, HistoryStack>();
+  const historyRevision = ref(0);
+  const activeHistory = computed(() => {
+    void historyRevision.value;
+    return activeUuid.value ? histories.get(activeUuid.value) : undefined;
+  });
+  const canUndo = computed(() => {
+    void historyRevision.value;
+    return activeHistory.value?.canUndo ?? false;
+  });
+  const canRedo = computed(() => {
+    void historyRevision.value;
+    return activeHistory.value?.canRedo ?? false;
+  });
+  const undoLabel = computed(() => {
+    void historyRevision.value;
+    return activeHistory.value?.undoLabel ?? '';
+  });
+  const redoLabel = computed(() => {
+    void historyRevision.value;
+    return activeHistory.value?.redoLabel ?? '';
+  });
   const isDirty = ref(false);
   const isLoading = ref(false);
   const isImporting = ref(false);
@@ -132,6 +158,16 @@ export const useConfigStore = defineStore('config', () => {
   const selectedEntry = computed(() =>
     entries.value.find((entry) => entry.container.uuid === selectedContainerUuid.value)
   );
+  const selectedEntries = computed(() =>
+    entries.value.filter((entry) => selectedContainerUuids.value.includes(entry.container.uuid))
+  );
+  const batchParameters = computed(() => commonParameters(selectedEntries.value));
+  const danglingReferences = computed(() => {
+    const existing = new Set(entries.value.map((entry) => entry.container.uuid));
+    return [...(selectedEntry.value?.container.references.values() ?? [])]
+      .filter((reference) => reference.targetUuid && !existing.has(reference.targetUuid))
+      .map((reference) => reference.definitionRef);
+  });
   const selectedKey = computed(() =>
     selectedFieldUuid.value
       ? `${selectedContainerUuid.value}:${selectedFieldUuid.value}`
@@ -211,6 +247,114 @@ export const useConfigStore = defineStore('config', () => {
   function selectContainer(uuid: string, fieldUuid?: string): void {
     selectedContainerUuid.value = uuid;
     selectedFieldUuid.value = fieldUuid;
+    selectedContainerUuids.value = uuid ? [uuid] : [];
+  }
+
+  /** Select a visible tree range or toggle one instance without including definition nodes.
+   * @param uuid Clicked instance. @param toggle Ctrl/Cmd modifier. @param range Shift modifier.
+   * @param visible Tree order after filtering. @returns Nothing.
+   */
+  function selectContainers(
+    uuid: string,
+    toggle: boolean,
+    range: boolean,
+    visible: string[]
+  ): void {
+    const previous = selectedContainerUuid.value;
+    let selected = toggle ? [...selectedContainerUuids.value] : [uuid];
+    if (range && previous && visible.includes(previous) && visible.includes(uuid)) {
+      const from = visible.indexOf(previous),
+        to = visible.indexOf(uuid);
+      selected = visible.slice(Math.min(from, to), Math.max(from, to) + 1);
+    } else if (toggle)
+      selected = selected.includes(uuid)
+        ? selected.filter((id) => id !== uuid)
+        : [...selected, uuid];
+    selectedContainerUuid.value = uuid;
+    selectedFieldUuid.value = undefined;
+    selectedContainerUuids.value = selected;
+  }
+
+  function selection() {
+    return {
+      uuid: selectedContainerUuid.value,
+      field: selectedFieldUuid.value,
+      multiple: [...selectedContainerUuids.value],
+    };
+  }
+  function edit<T>(label: string, action: () => T): T {
+    const set = config.value;
+    if (!set) return action();
+    const before = serializeConfig(set),
+      priorSelection = selection();
+    const result = action();
+    changed();
+    const delta = configurationDelta(before, serializeConfig(set));
+    const nextSelection = selection(),
+      setUuid = set.uuid;
+    const replay = (forward: boolean): void => {
+      const index = configSets.value.findIndex((item) => item.uuid === setUuid);
+      if (index < 0) throw new Error('历史记录所属配置集已不存在');
+      configSets.value[index] = delta(configSets.value[index], forward);
+      const selected = forward ? nextSelection : priorSelection;
+      selectedContainerUuid.value = selected.uuid;
+      selectedFieldUuid.value = selected.field;
+      selectedContainerUuids.value = [...selected.multiple];
+      // Replay restores the original lastModified exactly; touching here would break lossless undo.
+      revision++;
+      isDirty.value = true;
+      validate();
+    };
+    let history = histories.get(setUuid);
+    if (!history) {
+      history = new HistoryStack();
+      histories.set(setUuid, history);
+    }
+    history.push({
+      label,
+      timestamp: Date.now(),
+      undo: () => replay(false),
+      redo: () => replay(true),
+    });
+    historyRevision.value++;
+    return result;
+  }
+
+  /** @returns Whether the active set's latest edit was undone. */
+  function undo(): boolean {
+    assertEditable();
+    const result = activeHistory.value?.undo() ?? false;
+    historyRevision.value++;
+    return result;
+  }
+  /** @returns Whether the active set's latest undone edit was replayed. */
+  function redo(): boolean {
+    assertEditable();
+    const result = activeHistory.value?.redo() ?? false;
+    historyRevision.value++;
+    return result;
+  }
+
+  /** Apply one shared parameter as a single reversible operation.
+   * @param uuid Shared definition UUID. @param value Proposed typed value.
+   * @returns Success count and per-instance skip reasons.
+   */
+  function batchSetParameter(uuid: string, value: unknown): { success: number; skipped: string[] } {
+    assertEditable();
+    const definition = batchParameters.value.find((p) => p.uuid === uuid);
+    if (!definition) throw new Error('只能修改所选实例共有的参数');
+    const skipped: string[] = [];
+    const writable = selectedEntries.value.filter((entry) => {
+      const local = entry.definition.parameters.find((p) => p.uuid === uuid)!;
+      const reason = batchSkipReason(entry, local, value);
+      if (reason) skipped.push(`${entry.path}：${reason}`);
+      return !reason;
+    });
+    if (writable.length)
+      edit(`批量修改 ${definition.shortName}`, () => {
+        for (const entry of writable) manager.setParameterValue(entry.container, uuid, value);
+      });
+    return { success: writable.length, skipped };
   }
 
   /** Create the initial editable tree from a discovered module.
@@ -334,7 +478,11 @@ export const useConfigStore = defineStore('config', () => {
     revision++;
     isDirty.value = true;
     validate();
-    if (await saveConfig()) return true;
+    if (await saveConfig()) {
+      histories.delete(uuid);
+      historyRevision.value++;
+      return true;
+    }
     configSets.value.splice(index, 0, removed);
     activeUuid.value = previousActive;
     selectContainer(previousSelection ?? '', previousField);
@@ -350,14 +498,15 @@ export const useConfigStore = defineStore('config', () => {
   function addContainerInstance(definitionUuid: string): ConfigContainer | undefined {
     assertEditable();
     if (!config.value) return undefined;
-    const added = manager.addContainerInstance(
-      config.value,
-      selectedEntry.value?.container.uuid ?? null,
-      definitionUuid
-    );
-    selectContainer(added.uuid);
-    changed();
-    return added;
+    return edit('新增实例', () => {
+      const added = manager.addContainerInstance(
+        config.value!,
+        selectedEntry.value?.container.uuid ?? null,
+        definitionUuid
+      );
+      selectContainer(added.uuid);
+      return added;
+    });
   }
 
   /** Remove a confirmed instance; deleting the selection or its ancestor selects the parent.
@@ -367,10 +516,14 @@ export const useConfigStore = defineStore('config', () => {
   function removeContainerInstance(uuid: string): void {
     assertEditable();
     if (!config.value) return;
-    const parent = manager.findParent(config.value, uuid);
-    manager.removeContainerInstance(config.value, uuid);
-    if (!selectedEntry.value) selectContainer(parent?.uuid ?? '');
-    changed();
+    edit('删除实例', () => {
+      const parent = manager.findParent(config.value!, uuid);
+      manager.removeContainerInstance(config.value!, uuid);
+      if (!selectedEntry.value) selectContainer(parent?.uuid ?? '');
+      selectedContainerUuids.value = selectedContainerUuids.value.filter((id) =>
+        entries.value.some((entry) => entry.container.uuid === id)
+      );
+    });
   }
 
   /** Clone the selected subtree through the core and select its copy.
@@ -379,10 +532,14 @@ export const useConfigStore = defineStore('config', () => {
   function cloneContainerInstance(): ConfigContainer | undefined {
     assertEditable();
     if (!config.value || !selectedEntry.value) return undefined;
-    const clone = manager.cloneContainerInstance(config.value, selectedEntry.value.container.uuid);
-    selectContainer(clone.uuid);
-    changed();
-    return clone;
+    return edit('复制实例', () => {
+      const clone = manager.cloneContainerInstance(
+        config.value!,
+        selectedEntry.value!.container.uuid
+      );
+      selectContainer(clone.uuid);
+      return clone;
+    });
   }
 
   /** Update a selected parameter through the core manager.
@@ -393,17 +550,19 @@ export const useConfigStore = defineStore('config', () => {
   function setParameterValue(uuid: string, value: unknown): void {
     assertEditable();
     if (!selectedEntry.value) return;
-    if (
-      !selectedEntry.value.container.parameters.has(uuid) &&
-      selectedEntry.value.definition.parameters.some((def) => def.uuid === uuid)
-    )
-      selectedEntry.value.container.parameters.set(uuid, {
-        definitionRef: uuid,
-        value: undefined,
-        isConfigured: false,
-      });
-    manager.setParameterValue(selectedEntry.value.container, uuid, value);
-    changed();
+    const entry = selectedEntry.value;
+    const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
+    if (!definition || definition.readOnly) return;
+    if (Object.is(entry.container.parameters.get(uuid)?.value, value)) return;
+    edit(`修改 ${definition.shortName}`, () => {
+      if (!entry.container.parameters.has(uuid))
+        entry.container.parameters.set(uuid, {
+          definitionRef: uuid,
+          value: undefined,
+          isConfigured: false,
+        });
+      manager.setParameterValue(entry.container, uuid, value);
+    });
   }
 
   /** Rename the selected instance without changing its UUID or references.
@@ -424,8 +583,10 @@ export const useConfigStore = defineStore('config', () => {
       )
     )
       throw new Error('同级实例名称已存在');
-    selectedEntry.value.container.shortName = clean;
-    changed();
+    if (selectedEntry.value.container.shortName === clean) return;
+    edit('重命名实例', () => {
+      selectedEntry.value!.container.shortName = clean;
+    });
   }
 
   /** Update a selected reference through the core manager.
@@ -436,13 +597,14 @@ export const useConfigStore = defineStore('config', () => {
   function setReferenceTarget(uuid: string, targetUuid: string): void {
     assertEditable();
     if (!selectedEntry.value) return;
-    if (
-      !selectedEntry.value.container.references.has(uuid) &&
-      selectedEntry.value.definition.references.some((def) => def.uuid === uuid)
-    )
-      selectedEntry.value.container.references.set(uuid, { definitionRef: uuid, targetUuid: '' });
-    manager.setReferenceTarget(selectedEntry.value.container, uuid, targetUuid);
-    changed();
+    const entry = selectedEntry.value;
+    const definition = entry.definition.references.find((r) => r.uuid === uuid);
+    if (!definition || entry.container.references.get(uuid)?.targetUuid === targetUuid) return;
+    edit(`修改引用 ${definition.shortName}`, () => {
+      if (!entry.container.references.has(uuid))
+        entry.container.references.set(uuid, { definitionRef: uuid, targetUuid: '' });
+      manager.setReferenceTarget(entry.container, uuid, targetUuid);
+    });
   }
 
   /** Save values locally with explicit Map serialization for every storage driver.
@@ -507,6 +669,8 @@ export const useConfigStore = defineStore('config', () => {
         return set;
       });
       configSets.value = restored;
+      histories.clear();
+      historyRevision.value++;
       if (library?.modulePreferences)
         Object.assign(modulePreferences.value, library.modulePreferences);
       activeUuid.value =
@@ -633,6 +797,8 @@ export const useConfigStore = defineStore('config', () => {
       writes = write.catch(() => undefined);
       await write;
       configSets.value = next;
+      histories.delete(candidate.uuid);
+      historyRevision.value++;
       activeUuid.value = candidate.uuid;
       selectContainer(candidate.containers[0]?.uuid ?? '');
       initialized.value = true;
@@ -664,6 +830,19 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   return {
+    canUndo,
+    canRedo,
+    undoLabel,
+    redoLabel,
+    undo,
+    redo,
+    selectedFieldUuid,
+    selectedContainerUuids,
+    selectContainers,
+    selectedEntries,
+    batchParameters,
+    batchSetParameter,
+    danglingReferences,
     isImporting,
     prepareImport,
     previewImport,

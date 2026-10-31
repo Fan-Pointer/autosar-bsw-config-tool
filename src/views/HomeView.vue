@@ -101,13 +101,13 @@ async function openSet(uuid: string): Promise<void> {
 .title {
   font-size: 48px;
   font-weight: 600;
-  color: #303133;
+  color: var(--color-text);
   margin-bottom: 16px;
 }
 
 .subtitle {
   font-size: 20px;
-  color: #606266;
+  color: var(--color-text);
   margin-bottom: 40px;
 }
 
@@ -130,7 +130,7 @@ async function openSet(uuid: string): Promise<void> {
 .recent-section h2 {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #303133;
+  color: var(--color-text);
 }
 
 .features-section {
@@ -140,7 +140,7 @@ async function openSet(uuid: string): Promise<void> {
 .features-section h2 {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #303133;
+  color: var(--color-text);
 }
 
 .features-section .el-card {
@@ -157,7 +157,7 @@ async function openSet(uuid: string): Promise<void> {
 .footer {
   text-align: center;
   padding: 40px 0;
-  color: #909399;
+  color: var(--color-muted);
   font-size: 14px;
 }
 </style>

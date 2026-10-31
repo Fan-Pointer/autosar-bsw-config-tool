@@ -175,13 +175,13 @@ async function confirm(): Promise<void> {
   padding: 10px 20px;
   margin: 0;
   text-align: center;
-  border-bottom: 1px solid #d6dce3;
-  background: #f6f6f6;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-panel);
 }
 :global(.module-manager .el-dialog__title) {
   font-size: 15px;
   font-weight: 600;
-  color: #596675;
+  color: var(--color-muted);
 }
 :global(.module-manager .el-dialog__headerbtn) {
   top: 0;
@@ -192,7 +192,7 @@ async function confirm(): Promise<void> {
 }
 :global(.module-manager .el-dialog__footer) {
   padding: 10px 20px;
-  border-top: 1px solid #e4e7ed;
+  border-top: 1px solid var(--color-border);
 }
 :global(.module-manager .el-dialog__footer .el-button) {
   width: 100px;
@@ -204,9 +204,9 @@ async function confirm(): Promise<void> {
 }
 .module-catalog,
 .module-selection {
-  border: 1px solid #dfe5ed;
+  border: 1px solid var(--color-border);
   border-radius: 3px;
-  box-shadow: 0 1px 8px #162c4810;
+  box-shadow: 0 1px 8px var(--color-shadow);
   overflow: auto;
 }
 header {
@@ -215,8 +215,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f5f7fa;
-  border-bottom: 1px solid #dfe5ed;
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-border);
 }
 .module-panel-body {
   padding: 20px;
@@ -235,14 +235,14 @@ details {
 }
 summary {
   cursor: pointer;
-  color: #69717a;
+  color: var(--color-muted);
 }
 .catalog-item {
   display: block;
   margin: 12px 20px;
 }
 input[type='checkbox'] {
-  accent-color: #409eff;
+  accent-color: var(--color-accent);
   width: 14px;
   height: 14px;
   vertical-align: middle;
@@ -255,12 +255,12 @@ input[type='checkbox'] {
   justify-content: center;
 }
 .transfer-actions button {
-  border: 1px solid #dce3ec;
+  border: 1px solid var(--color-border);
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  background: white;
-  color: #527da8;
+  background: var(--color-surface);
+  color: var(--color-muted);
   font-size: 23px;
   cursor: pointer;
 }
@@ -277,17 +277,17 @@ table {
 td,
 th {
   height: 33px;
-  border: 1px solid #e4eaf2;
+  border: 1px solid var(--color-border);
   text-align: center;
   padding: 4px 8px;
 }
 th {
-  background: #f6f6f6;
-  color: #8795a5;
+  background: var(--color-panel);
+  color: var(--color-muted);
   font-weight: 600;
 }
 .empty-catalog {
-  color: #9aa5b3;
+  color: var(--color-muted);
   font-size: 12px;
 }
 </style>

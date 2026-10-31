@@ -112,6 +112,29 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
   const version = string(data.version, 'version');
   const module = modules.find((item) => item.shortName === moduleRef && item.version === version);
   if (!module) throw new Error(`未加载 BSWMD：${moduleRef} (${version})`);
+  const occurrences = new Map<unknown, number>();
+  const pending: { value: unknown; depth: number }[] = [{ value: data, depth: 0 }];
+  while (pending.length) {
+    const item = pending.pop()!;
+    if (!item.value || typeof item.value !== 'object') continue;
+    if (item.depth > 400) throw new Error('容器嵌套超过 128 层');
+    const fields = item.value as Record<string, unknown>;
+    if (Object.prototype.hasOwnProperty.call(fields, 'definitionRef'))
+      occurrences.set(fields.definitionRef, (occurrences.get(fields.definitionRef) ?? 0) + 1);
+    for (const value of Object.values(fields)) pending.push({ value, depth: item.depth + 1 });
+  }
+  const definitionError = (
+    path: string,
+    actual: unknown,
+    expected: string[],
+    kind: string
+  ): Error => {
+    const reason =
+      kind === '容器' ? '未知或不属于该父容器的 definitionRef' : `${kind} definitionRef 未知或重复`;
+    return new Error(
+      `${path}：${reason}；实际值 ${String(actual)}；期望值 ${expected.join(', ') || '无'}；出现次数 ${occurrences.get(actual) ?? 0}`
+    );
+  };
   const ids = new Set<string>();
   const identity = (value: unknown, path: string): string => {
     const id = string(value, path);
@@ -138,13 +161,24 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
       names.add(name);
       const path = `${parent}/${name}`;
       const definition = definitions.find((item) => item.uuid === child.definitionRef);
-      if (!definition) throw new Error(`${path}：未知或不属于该父容器的 definitionRef`);
+      if (!definition)
+        throw definitionError(
+          path,
+          child.definitionRef,
+          definitions.map((item) => item.uuid),
+          '容器'
+        );
       const parameters: ConfigContainer['parameters'] = new Map();
       for (const rawParameter of array(child.parameters, path + '.parameters')) {
         const p = record(rawParameter, path);
         const def = definition.parameters.find((item) => item.uuid === p.definitionRef);
         if (!def || parameters.has(def.uuid))
-          throw new Error(`${path}：参数 definitionRef 未知或重复`);
+          throw definitionError(
+            path,
+            p.definitionRef,
+            definition.parameters.map((item) => item.uuid),
+            '参数'
+          );
         if (typeof p.isConfigured !== 'boolean')
           throw new Error(`${path}/${def.shortName}：isConfigured 应为布尔值`);
         parameters.set(def.uuid, {
@@ -158,7 +192,12 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
         const ref = record(rawReference, path);
         const def = definition.references.find((item) => item.uuid === ref.definitionRef);
         if (!def || references.has(def.uuid))
-          throw new Error(`${path}：引用 definitionRef 未知或重复`);
+          throw definitionError(
+            path,
+            ref.definitionRef,
+            definition.references.map((item) => item.uuid),
+            '引用'
+          );
         references.set(def.uuid, {
           definitionRef: def.uuid,
           targetUuid: string(ref.targetUuid, path + '/' + def.shortName, true),

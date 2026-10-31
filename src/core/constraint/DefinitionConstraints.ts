@@ -103,7 +103,17 @@ export const DefinitionConstraints: ConstraintRule[] = [
               );
           } else {
             const target = targets.get(targetUuid);
-            if (!target || target.definition.shortName !== reference.destinationContainerType) {
+            if (!target) {
+              violations.push({
+                ruleId: 'BSWMD-DANGLING-REFERENCE',
+                severity: 'ERROR',
+                path: `${entry.path}/${reference.shortName}`,
+                message: `${reference.shortName}：目标不存在（${targetUuid.slice(0, 8)}）`,
+                suggestion: '清除引用或选择存在的目标实例',
+                containerUuid: entry.container.uuid,
+                definitionRef: reference.uuid,
+              });
+            } else if (target.definition.shortName !== reference.destinationContainerType) {
               add(
                 reference.uuid,
                 reference.shortName,

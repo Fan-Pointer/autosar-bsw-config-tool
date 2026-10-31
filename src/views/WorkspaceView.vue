@@ -17,6 +17,24 @@
       <div class="toolbar-group">
         <button
           class="tool-button"
+          aria-label="撤销"
+          :disabled="!store.canUndo || store.isImporting"
+          :title="store.canUndo ? '撤销：' + store.undoLabel : '无可撤销操作'"
+          @click="store.undo()"
+        >
+          ↶
+        </button>
+        <button
+          class="tool-button"
+          aria-label="重做"
+          :disabled="!store.canRedo || store.isImporting"
+          :title="store.canRedo ? '重做：' + store.redoLabel : '无可重做操作'"
+          @click="store.redo()"
+        >
+          ↷
+        </button>
+        <button
+          class="tool-button"
           title="保存到本机"
           aria-label="保存到本机"
           :disabled="!store.config"
@@ -80,8 +98,16 @@
         </button>
       </div>
       <span v-if="store.isDirty" class="dirty-indicator" title="配置有未保存修改">●</span>
-      <span class="toolbar-spacer" /><span class="language">简体中文⌄</span
-      ><span class="avatar">配</span>
+      <GlobalSearch @navigate="navigateSearch" />
+      <button
+        class="theme-toggle"
+        aria-label="切换主题"
+        :title="theme === 'light' ? '切换到深色' : '切换到浅色'"
+        @click="setTheme(theme === 'light' ? 'dark' : 'light')"
+      >
+        {{ theme === 'light' ? '深色' : '浅色' }}
+      </button>
+      <span class="language">简体中文⌄</span><span class="avatar">配</span>
     </header>
     <el-alert v-if="store.error" :title="store.error" type="error" :closable="false" />
     <main class="workspace-main">
@@ -207,7 +233,8 @@
                 }}</span></template
               >
             </nav>
-            <template v-if="store.selectedEntry">
+            <BatchEditPanel v-if="store.selectedContainerUuids.length > 1" />
+            <template v-else-if="store.selectedEntry">
               <div class="instance-name">
                 <label for="instance-name">实例名称</label
                 ><el-input
@@ -222,6 +249,8 @@
                 :config-data="store.parameterData"
                 :reference-data="store.referenceData"
                 :reference-options="store.referenceOptions"
+                :dangling-references="store.danglingReferences"
+                :selected-field-uuid="store.selectedFieldUuid"
                 @parameter-change="store.setParameterValue"
                 @reference-change="store.setReferenceTarget"
               />
@@ -376,8 +405,14 @@ import ContainerActions from '@/ui/ConfigTree/ContainerActions.vue';
 import ModuleManager from '@/ui/Modules/ModuleManager.vue';
 import ImportDialog from '@/ui/ImportExport/ImportDialog.vue';
 import type { ExportFormat, ImportFormat } from '@/core/io/IoTypes';
+import { useHistory } from '@/ui/History/useHistory';
+import BatchEditPanel from '@/ui/BatchEdit/BatchEditPanel.vue';
+import GlobalSearch from '@/ui/Search/GlobalSearch.vue';
+import type { SearchResult } from '@/core/search/ConfigSearch';
+import { theme, setTheme } from '@/ui/Theme/theme';
 const router = useRouter(),
   store = useConfigStore();
+useHistory();
 const generatedFiles = ref<GeneratedFile[]>([]),
   showGenerated = ref(false);
 const showSets = ref(false),
@@ -558,7 +593,10 @@ async function focusField(uuid?: string): Promise<void> {
   await nextTick();
   const field = document.getElementById('field-' + uuid);
   field?.scrollIntoView({ block: 'center', behavior: 'smooth' });
-  field?.querySelector<HTMLElement>('input, button, [tabindex]')?.focus();
+  (
+    document.getElementById('input-' + uuid) ??
+    field?.querySelector<HTMLElement>('input, button, [tabindex]')
+  )?.focus();
 }
 function navigateViolation(violation: ConstraintViolation): void {
   if (!violation.containerUuid) return;
@@ -567,6 +605,10 @@ function navigateViolation(violation: ConstraintViolation): void {
   store.selectContainer(violation.containerUuid, violation.definitionRef);
   showValidation.value = false;
   void focusField(violation.definitionRef);
+}
+function navigateSearch(result: SearchResult): void {
+  reopenImported();
+  void focusField(result.fieldUuid);
 }
 async function saveConfig(): Promise<void> {
   if (await store.saveConfig()) ElMessage.success('已保存到本机');
@@ -625,8 +667,8 @@ function stopResize(): void {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  color: #314b63;
-  background: #f7f7f7;
+  color: var(--color-text);
+  background: var(--color-panel);
   font-size: 14px;
   overflow: hidden;
 }
@@ -637,16 +679,16 @@ function stopResize(): void {
   align-items: center;
   gap: 10px;
   padding: 0 12px;
-  background: #f5f5f5;
-  border-top: 1px solid #d0d4d8;
-  border-bottom: 1px solid #cdd1d6;
+  background: var(--color-panel);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 .brand-symbol {
   font-size: 15px;
-  color: #6d8bb6;
+  color: var(--color-muted);
 }
 .brand {
-  color: #153047;
+  color: var(--color-text);
   font-size: 14px;
   white-space: nowrap;
   margin-right: 3px;
@@ -655,7 +697,7 @@ function stopResize(): void {
   display: flex;
   align-items: center;
   gap: 3px;
-  border-right: 1px solid #d1d6dc;
+  border-right: 1px solid var(--color-border);
   padding-right: 9px;
 }
 .tool-button {
@@ -666,40 +708,49 @@ function stopResize(): void {
   height: 27px;
   border: 0;
   background: transparent;
-  color: #65839c;
+  color: var(--color-muted);
   cursor: pointer;
   font-size: 17px;
 }
 .tool-button:hover {
-  background: #e2eef9;
+  background: var(--color-selected);
 }
 .tool-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 .green {
-  color: #3a9750;
+  color: var(--color-success);
 }
 .amber {
-  color: #ad8435;
+  color: var(--color-warning);
 }
 .toolbar-spacer {
   flex: 1;
 }
+.theme-toggle {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
 .dirty-indicator {
-  color: #db9d31;
+  color: var(--color-warning);
   font-size: 10px;
 }
 .language {
-  color: #617284;
+  color: var(--color-muted);
   font-size: 13px;
 }
 .avatar {
   width: 27px;
   height: 27px;
   border-radius: 50%;
-  background: #409eff;
-  color: white;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
   text-align: center;
   line-height: 27px;
   margin-left: 12px;
@@ -711,7 +762,7 @@ function stopResize(): void {
 }
 .project-panel {
   flex-shrink: 0;
-  background: #f4f4f4;
+  background: var(--color-panel);
   overflow: hidden;
 }
 .project-heading {
@@ -720,14 +771,14 @@ function stopResize(): void {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #cdd1d6;
+  border-bottom: 1px solid var(--color-border);
   font-size: 13px;
 }
 .project-heading button {
   margin-left: auto;
   border: 0;
   background: none;
-  color: #7c858b;
+  color: var(--color-muted);
   font-size: 23px;
   cursor: pointer;
 }
@@ -750,7 +801,7 @@ function stopResize(): void {
   flex: 1;
 }
 .folder {
-  color: #af7d2e;
+  color: var(--color-warning);
   display: inline-block;
   width: 18px;
 }
@@ -765,7 +816,7 @@ function stopResize(): void {
   content: '⌃';
   float: right;
   margin-right: 17px;
-  color: #7d8790;
+  color: var(--color-muted);
   font-size: 11px;
 }
 .project-tree details:not([open]) > summary::after {
@@ -787,21 +838,21 @@ function stopResize(): void {
   text-align: left;
   height: 30px;
   padding: 0 10px 0 74px;
-  color: #35516a;
+  color: var(--color-text);
   cursor: pointer;
   font-size: 14px;
 }
 .module-node.selected {
-  background: #d9edff;
-  color: #2794ff;
+  background: var(--color-selected);
+  color: var(--color-accent);
 }
 .module-symbol {
   display: inline-block;
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #a5793f;
-  color: white;
+  background: var(--color-warning);
+  color: var(--color-on-accent);
   font-size: 8px;
   font-weight: bold;
   line-height: 13px;
@@ -815,7 +866,7 @@ function stopResize(): void {
   margin: 12px;
   background: none;
   border: 0;
-  color: #3883bf;
+  color: var(--color-accent);
   cursor: pointer;
 }
 .splitter {
@@ -823,20 +874,20 @@ function stopResize(): void {
   width: 4px;
   flex-shrink: 0;
   cursor: col-resize;
-  background: #fff;
-  border-right: 1px solid #edf0f3;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
 }
 .splitter::after {
   content: '';
   position: absolute;
   height: 32px;
   width: 2px;
-  border-left: 1px solid #cdd1d6;
-  border-right: 1px solid #e6e8eb;
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
   top: 65%;
 }
 .splitter:hover {
-  background: #cbe7ff;
+  background: var(--color-selected);
 }
 .editor {
   flex: 1;
@@ -848,22 +899,22 @@ function stopResize(): void {
   height: 34px;
   flex-shrink: 0;
   display: flex;
-  background: #f7f7f7;
+  background: var(--color-panel);
 }
 .module-tab {
   display: flex;
   max-width: 210px;
   height: 34px;
-  border-right: 1px solid #d9dfe7;
+  border-right: 1px solid var(--color-border);
 }
 .module-tab.active {
-  background: white;
-  border-bottom: 2px solid #409eff;
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
 }
 .module-tab button {
   border: 0;
   background: transparent;
-  color: #3c536b;
+  color: var(--color-text);
   cursor: pointer;
 }
 .module-tab [role='tab'] {
@@ -883,7 +934,7 @@ function stopResize(): void {
   display: flex;
   flex: 1;
   min-height: 0;
-  background: white;
+  background: var(--color-surface);
 }
 .configuration-panel {
   flex-shrink: 0;
@@ -892,11 +943,11 @@ function stopResize(): void {
   flex: 1;
   min-width: 0;
   overflow: auto;
-  background: white;
+  background: var(--color-surface);
 }
 .empty-editor {
   flex: 1;
-  background: #f8f8f8;
+  background: var(--color-panel);
 }
 .breadcrumbs {
   display: flex;
@@ -905,13 +956,13 @@ function stopResize(): void {
   height: 38px;
   min-width: max-content;
   padding: 0 20px;
-  background: linear-gradient(90deg, #d6e4f0, #f8fafc 85%);
-  color: #61788d;
+  background: linear-gradient(90deg, var(--color-selected), var(--color-panel) 85%);
+  color: var(--color-muted);
   font-size: 14px;
   border-radius: 3px 0 0 3px;
 }
 .crumb-arrow {
-  color: #a6b6c5;
+  color: var(--color-muted);
 }
 .crumb-parent {
   font-weight: 600;
@@ -919,7 +970,7 @@ function stopResize(): void {
 .instance-name {
   height: 71px;
   margin: 0 22px;
-  border-bottom: 1px solid #d8dee7;
+  border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   gap: 52px;
@@ -933,9 +984,9 @@ function stopResize(): void {
 }
 .empty-children {
   margin: 24px 38px 32px;
-  border-top: 1px solid #e4e7ed;
+  border-top: 1px solid var(--color-border);
   padding-top: 18px;
-  color: #687e92;
+  color: var(--color-muted);
   font-size: 13px;
 }
 .empty-children summary {
@@ -954,9 +1005,9 @@ function stopResize(): void {
 .utility-panel {
   position: absolute;
   z-index: 100;
-  background: white;
-  border: 1px solid #d9e1eb;
-  box-shadow: 0 6px 20px #263d5626;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 6px 20px var(--color-shadow);
   border-radius: 3px;
 }
 .utility-heading {
@@ -965,13 +1016,13 @@ function stopResize(): void {
   align-items: center;
   justify-content: space-between;
   padding: 0 14px;
-  background: #f6f8fa;
-  border-bottom: 1px solid #e4e7ed;
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-border);
 }
 .utility-heading button {
   border: 0;
   background: none;
-  color: #6c7d8d;
+  color: var(--color-muted);
   font-size: 20px;
   cursor: pointer;
 }
@@ -1000,10 +1051,10 @@ function stopResize(): void {
   z-index: 2100;
   width: 180px;
   padding: 5px 0;
-  background: #f4f4f4;
-  border: 1px solid #dce0e5;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
   border-radius: 5px;
-  box-shadow: 0 6px 20px #0002;
+  box-shadow: 0 6px 20px var(--color-shadow);
 }
 .project-menu > span {
   display: block;
@@ -1017,10 +1068,10 @@ function stopResize(): void {
   top: 0;
   width: 180px;
   padding: 5px 0;
-  background: #f4f4f4;
-  border: 1px solid #dce0e5;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
   border-radius: 5px;
-  box-shadow: 0 6px 20px #0002;
+  box-shadow: 0 6px 20px var(--color-shadow);
 }
 .project-menu button {
   width: 100%;
@@ -1032,26 +1083,26 @@ function stopResize(): void {
   border: 0;
   background: transparent;
   font-size: 14px;
-  color: #414c57;
+  color: var(--color-text);
   cursor: pointer;
 }
 .project-menu button:hover:not(:disabled) {
-  background: #ddebfa;
+  background: var(--color-selected);
 }
 .project-menu button:disabled {
-  color: #929ca5;
+  color: var(--color-muted);
   cursor: not-allowed;
 }
 .project-menu hr {
   margin: 3px 0;
   border: 0;
-  border-top: 1px solid #d7dce2;
+  border-top: 1px solid var(--color-border);
 }
 .generated-code {
   max-height: 60vh;
   overflow: auto;
   padding: 12px;
-  background: #f5f7fa;
+  background: var(--color-panel);
 }
 .sr-only {
   position: absolute;

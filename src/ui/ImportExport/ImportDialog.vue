@@ -213,11 +213,11 @@ async function apply(): Promise<void> {
 .import-options select {
   min-height: 32px;
   max-width: 350px;
-  border: 1px solid #d8dee7;
-  color: #3c536b;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 .import-help {
-  color: #68798a;
+  color: var(--color-muted);
   font-size: 13px;
   line-height: 1.7;
 }
@@ -225,7 +225,7 @@ async function apply(): Promise<void> {
   display: flex;
   gap: 28px;
   padding: 12px 16px;
-  border: 1px solid #d8dee7;
+  border: 1px solid var(--color-border);
 }
 .strategies label {
   cursor: pointer;
@@ -237,14 +237,14 @@ async function apply(): Promise<void> {
   margin: 20px 0;
 }
 .import-counts span {
-  background: #f3f7fc;
+  background: var(--color-panel);
   padding: 14px;
   border-radius: 4px;
 }
 .import-counts strong {
   display: block;
   font-size: 24px;
-  color: #247bd3;
+  color: var(--color-accent);
   margin-top: 8px;
 }
 .conflict-scroll {
@@ -259,7 +259,7 @@ async function apply(): Promise<void> {
 }
 .conflict-table th,
 .conflict-table td {
-  border: 1px solid #dce3ec;
+  border: 1px solid var(--color-border);
   padding: 10px;
   text-align: left;
   overflow-wrap: anywhere;
@@ -267,6 +267,6 @@ async function apply(): Promise<void> {
 .conflict-table th {
   position: sticky;
   top: 0;
-  background: #f5f7fa;
+  background: var(--color-panel);
 }
 </style>

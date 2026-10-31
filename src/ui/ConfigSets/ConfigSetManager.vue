@@ -105,8 +105,8 @@ async function deleteSet(): Promise<void> {
 <style scoped>
 .config-sets {
   padding: 12px 20px;
-  border-bottom: 1px solid #e4e7ed;
-  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
 }
 .set-actions {
   display: flex;
@@ -122,7 +122,7 @@ async function deleteSet(): Promise<void> {
 }
 .set-metadata {
   margin: 10px 0 0;
-  color: #606266;
+  color: var(--color-text);
   font-size: 13px;
 }
 </style>

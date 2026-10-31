@@ -109,7 +109,7 @@ function locate(): void {
 }
 .limit-reason {
   width: 100%;
-  color: #606266;
+  color: var(--color-text);
 }
 .child-option {
   display: flex;
@@ -120,14 +120,14 @@ function locate(): void {
 }
 .child-option small {
   width: 100%;
-  color: #b45309;
+  color: var(--color-warning);
 }
 .context-menu {
   width: 300px;
   padding: 12px;
-  background: white;
-  border: 1px solid #dcdfe6;
-  box-shadow: 0 4px 14px #0002;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 14px var(--color-shadow);
   border-radius: 6px;
 }
 </style>

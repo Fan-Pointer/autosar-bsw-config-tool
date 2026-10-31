@@ -199,6 +199,7 @@ export class BswmdParser {
       ),
       type,
       configClass,
+      readOnly: optionalFlag(data.readOnly, `${label}.readOnly`),
       defaultValue,
       min,
       max,

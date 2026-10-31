@@ -14,7 +14,11 @@
       @node-contextmenu="onContextMenu"
     >
       <template #default="{ node, data }">
-        <span class="tree-node">
+        <span
+          class="tree-node"
+          :class="{ 'multi-selected': selectedUuids?.includes(data.containerUuid) }"
+          :data-container-id="data.containerUuid"
+        >
           <span
             v-if="config"
             class="node-status"
@@ -69,9 +73,10 @@ const props = defineProps<{
   mixed?: boolean;
   definitionId?: string;
   query?: string;
+  selectedUuids?: string[];
 }>();
 const emit = defineEmits<{
-  'node-click': [node: TreeNode];
+  'node-click': [node: TreeNode, event?: MouseEvent, visible?: string[]];
   'node-contextmenu': [event: MouseEvent, node: TreeNode];
 }>();
 const icons = {
@@ -218,8 +223,21 @@ function formatMultiplicity(value: BswmdContainer['multiplicity']): string {
     ? String(value.lower)
     : `${value.lower}..${value.upper === 'unbounded' ? 'n' : value.upper}`;
 }
-function onNodeClick(node: TreeNode): void {
-  emit('node-click', node);
+function onNodeClick(
+  node: TreeNode,
+  _treeNode: unknown,
+  _component: unknown,
+  event: MouseEvent
+): void {
+  const visible: string[] = [];
+  const visit = (nodes: TreeNode[]): void => {
+    for (const item of nodes) {
+      if (item.type === 'container' && item.containerUuid) visible.push(item.containerUuid);
+      visit(item.children ?? []);
+    }
+  };
+  visit(treeData.value);
+  emit('node-click', node, event, visible);
 }
 function onContextMenu(event: MouseEvent, node: TreeNode): void {
   event.preventDefault();
@@ -231,19 +249,19 @@ function onContextMenu(event: MouseEvent, node: TreeNode): void {
 .config-tree {
   height: 100%;
   overflow: auto;
-  background: #fff;
+  background: var(--color-surface);
 }
 .tree-header {
   height: 48px;
   display: flex;
   align-items: center;
   padding: 0 16px;
-  border-bottom: 1px solid #e4e7ed;
+  border-bottom: 1px solid var(--color-border);
 }
 .title {
   font-weight: 600;
   font-size: 14px;
-  color: #303133;
+  color: var(--color-text);
 }
 .tree-node {
   display: flex;
@@ -252,8 +270,13 @@ function onContextMenu(event: MouseEvent, node: TreeNode): void {
   min-width: 0;
   width: 100%;
 }
+.multi-selected {
+  background: var(--color-selected);
+  outline: 1px solid var(--color-accent);
+  border-radius: 3px;
+}
 .node-icon {
-  color: #909399;
+  color: var(--color-muted);
 }
 .node-status {
   width: 8px;
@@ -262,37 +285,37 @@ function onContextMenu(event: MouseEvent, node: TreeNode): void {
   flex-shrink: 0;
 }
 .status-configured {
-  background: #299b54;
+  background: var(--color-success);
 }
 .status-warning {
-  background: #d9a017;
+  background: var(--color-warning);
 }
 .status-error {
-  background: #df4545;
+  background: var(--color-error);
 }
 .node-label {
   font-size: 13px;
-  color: #606266;
+  color: var(--color-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .instance-icon {
-  color: #3b65ab;
+  color: var(--color-muted);
   font-family: Georgia, serif;
   width: 14px;
   text-align: center;
 }
 .definition-icon {
-  color: #a2763e;
+  color: var(--color-warning);
   font-size: 17px;
 }
 :deep(.el-tree-node.is-current > .el-tree-node__content) {
-  background: #e5f3ff;
+  background: var(--color-selected);
   border-radius: 4px;
 }
 :deep(.el-tree-node.is-current > .el-tree-node__content .node-label) {
-  color: #318be4;
+  color: var(--color-accent);
 }
 :deep(.el-tree-node__content) {
   height: 28px;

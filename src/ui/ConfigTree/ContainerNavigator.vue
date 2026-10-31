@@ -49,9 +49,16 @@
       :query="query"
       :selected-key="store.selectedEntry?.container.uuid"
       :violations="store.violations"
+      :selected-uuids="store.selectedContainerUuids"
       @node-click="select"
       @node-contextmenu="context"
     />
+    <div class="tree-legend" aria-label="树状态图例">
+      <span>已选 {{ store.selectedContainerUuids.length }} 项</span>
+      <span><i class="ok" />已配置</span><span><i class="warning" />警告</span
+      ><span><i class="error" />错误</span>
+      <small>Ctrl / Cmd 切换选择 · Shift 连选</small>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -106,16 +113,25 @@ function choose(uuid: string): void {
   store.selectContainer(first?.uuid ?? '');
   emit('selected');
 }
-function select(node: {
-  type: string;
-  definitionRef?: string;
-  containerUuid?: string;
-  parentUuid?: string;
-}): void {
+function select(
+  node: {
+    type: string;
+    definitionRef?: string;
+    containerUuid?: string;
+    parentUuid?: string;
+  },
+  event?: MouseEvent,
+  visible: string[] = []
+): void {
   if (node.type === 'definition' && node.definitionRef) {
     selectedDefinition.value = { uuid: node.definitionRef, parentUuid: node.parentUuid };
   } else if (node.containerUuid) {
-    store.selectContainer(node.containerUuid);
+    store.selectContainers(
+      node.containerUuid,
+      Boolean(event?.ctrlKey || event?.metaKey),
+      Boolean(event?.shiftKey),
+      visible
+    );
     selectedDefinition.value = undefined;
   }
   emit('selected');
@@ -155,7 +171,7 @@ async function add(): Promise<void> {
   height: 46px;
   flex-shrink: 0;
   display: flex;
-  border-bottom: 1px solid #eceff3;
+  border-bottom: 1px solid var(--color-border);
 }
 .container-tabs > button {
   flex: 1;
@@ -166,14 +182,14 @@ async function add(): Promise<void> {
 }
 button {
   border: 0;
-  background: white;
-  color: #4e657b;
+  background: var(--color-surface);
+  color: var(--color-text);
   cursor: pointer;
   font-size: 13px;
 }
 .container-tabs > button.active {
-  color: #168bff;
-  border-bottom: 2px solid #168bff;
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
 }
 .overflow-tab {
   height: 45px;
@@ -189,7 +205,7 @@ button {
 .tree-tools button {
   width: 24px;
   height: 24px;
-  color: #658aa7;
+  color: var(--color-muted);
   font-size: 17px;
 }
 .tree-tools button:disabled {
@@ -212,5 +228,34 @@ button {
   flex: 1;
   min-height: 0;
   padding: 0 5px;
+}
+.tree-legend {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  font-size: 11px;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+}
+.tree-legend i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 3px;
+  border-radius: 50%;
+}
+.ok {
+  background: var(--color-success);
+}
+.warning {
+  background: var(--color-warning);
+}
+.error {
+  background: var(--color-error);
+}
+.tree-legend small {
+  width: 100%;
 }
 </style>

@@ -6,7 +6,10 @@
         :id="'field-' + param.uuid"
         :key="param.uuid"
         class="parameter-row"
-        :class="{ 'is-required': !param.isOptional }"
+        :class="{
+          'is-required': !param.isOptional,
+          'selected-field': selectedFieldUuid === param.uuid,
+        }"
         :data-field="param.uuid"
       >
         <input
@@ -15,7 +18,7 @@
           type="checkbox"
           :aria-label="'启用 ' + param.shortName"
           :checked="enabled(param)"
-          :disabled="readonly"
+          :disabled="readonly || param.readOnly"
           @change="toggle(param, ($event.target as HTMLInputElement).checked)"
         />
         <span v-else class="optional-space" />
@@ -33,8 +36,16 @@
               :id="'input-' + param.uuid"
               :aria-label="param.shortName"
               :model-value="hexDrafts[param.uuid] ?? hexValue(param)"
-              :disabled="readonly || !enabled(param)"
+              :disabled="readonly || param.readOnly || !enabled(param)"
               @update:model-value="editHex(param, $event)"
+            />
+            <el-input
+              v-else-if="invalidNumeric(param)"
+              :id="'input-' + param.uuid"
+              :aria-label="param.shortName"
+              :model-value="String(rawValue(param) ?? '')"
+              :disabled="readonly || param.readOnly || !enabled(param)"
+              @update:model-value="editInvalidNumeric(param, $event)"
             />
             <el-input-number
               v-else
@@ -46,14 +57,14 @@
               :step="param.type === 'FLOAT' ? 0.1 : 1"
               :precision="param.type === 'INTEGER' ? 0 : undefined"
               :controls="false"
-              :disabled="readonly || !enabled(param)"
+              :disabled="readonly || param.readOnly || !enabled(param)"
               @update:model-value="onValueChange(param.uuid, $event)"
             />
             <select
               class="radix"
               :aria-label="param.shortName + ' 进制'"
               :value="radices[param.uuid] ?? 'DEC'"
-              :disabled="readonly || !enabled(param)"
+              :disabled="readonly || param.readOnly || !enabled(param)"
               @change="radices[param.uuid] = ($event.target as HTMLSelectElement).value"
             >
               <option>DEC</option>
@@ -66,7 +77,7 @@
             :aria-label="param.shortName"
             :model-value="stringValue(param)"
             placeholder="请选择"
-            :disabled="readonly || !enabled(param)"
+            :disabled="readonly || param.readOnly || !enabled(param)"
             @update:model-value="onValueChange(param.uuid, $event)"
           >
             <el-option
@@ -81,7 +92,7 @@
             :id="'input-' + param.uuid"
             :aria-label="param.shortName"
             :model-value="rawValue(param) === true"
-            :disabled="readonly || !enabled(param)"
+            :disabled="readonly || param.readOnly || !enabled(param)"
             @update:model-value="onValueChange(param.uuid, $event)"
           />
           <el-input
@@ -89,7 +100,7 @@
             :id="'input-' + param.uuid"
             :aria-label="param.shortName"
             :model-value="stringValue(param)"
-            :disabled="readonly || !enabled(param)"
+            :disabled="readonly || param.readOnly || !enabled(param)"
             @update:model-value="onValueChange(param.uuid, $event)"
           />
         </div>
@@ -104,7 +115,11 @@
         :id="'field-' + reference.uuid"
         :key="reference.uuid"
         class="parameter-row"
-        :class="{ 'is-required': !reference.isOptional }"
+        :class="{
+          'is-required': !reference.isOptional,
+          'selected-field': selectedFieldUuid === reference.uuid,
+          'dangling-reference': danglingReferences.includes(reference.uuid),
+        }"
         :data-field="reference.uuid"
       >
         <span class="optional-space" />
@@ -119,27 +134,65 @@
             :model-value="referenceLabel(reference.uuid)"
             readonly
           />
-          <span title="未核实，待补充截图"
+          <span title="选择引用目标"
             ><button
               class="reference-picker"
               type="button"
-              disabled
+              :disabled="readonly"
               :aria-label="'选择 ' + reference.shortName"
+              @click="referencePicker = reference.uuid"
             >
               ▤
             </button></span
           >
         </div>
+        <span v-if="danglingReferences.includes(reference.uuid)" class="field-error" role="alert">
+          目标不存在（{{ referenceData[reference.uuid]?.slice(0, 8) }}）
+          <button
+            class="clear-reference"
+            :disabled="readonly"
+            @click="emit('reference-change', reference.uuid, '')"
+          >
+            清除引用
+          </button>
+        </span>
       </div>
     </section>
     <p v-if="!container.parameters.length && !container.references.length" class="no-fields">
       该容器没有可配置的字段
     </p>
+    <el-dialog
+      :model-value="Boolean(referencePicker)"
+      title="选择引用目标"
+      width="480px"
+      @close="referencePicker = undefined"
+    >
+      <template v-if="referencePicker">
+        <el-select
+          :model-value="referenceData[referencePicker] || undefined"
+          aria-label="引用目标"
+          clearable
+          filterable
+          placeholder="选择目标实例"
+          @update:model-value="chooseReference"
+        >
+          <el-option
+            v-for="option in referenceOptions[referencePicker] ?? []"
+            :key="option.uuid"
+            :value="option.uuid"
+            :label="option.label"
+          />
+        </el-select>
+        <p v-if="!referenceOptions[referencePicker]?.length">
+          暂无可引用的实例，请先在配置树中新增目标实例。
+        </p>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import type { BswmdContainer, BswmdParameter } from '@/core/bswmd/BswmdTypes';
 const props = withDefaults(
   defineProps<{
@@ -149,12 +202,15 @@ const props = withDefaults(
     referenceOptions?: Record<string, { uuid: string; label: string }[]>;
     labelWidth?: string;
     readonly?: boolean;
+    selectedFieldUuid?: string;
+    danglingReferences?: string[];
   }>(),
   {
     configData: () => ({}),
     referenceData: () => ({}),
     referenceOptions: () => ({}),
     readonly: false,
+    danglingReferences: () => [],
   }
 );
 const emit = defineEmits<{
@@ -165,6 +221,20 @@ const emit = defineEmits<{
 const radices = ref<Record<string, string>>({});
 const numericErrors = ref<Record<string, string>>({});
 const hexDrafts = ref<Record<string, string>>({});
+watch(
+  () => props.configData,
+  () => {
+    hexDrafts.value = {};
+    numericErrors.value = {};
+  },
+  { deep: true }
+);
+const referencePicker = ref<string>();
+function chooseReference(target: string | undefined): void {
+  if (referencePicker.value && !props.readonly)
+    emit('reference-change', referencePicker.value, target ?? '');
+  referencePicker.value = undefined;
+}
 function rawValue(parameter: BswmdParameter): unknown {
   // Explicit undefined means an unchecked optional field, not a request to restore the default.
   return Object.prototype.hasOwnProperty.call(props.configData, parameter.uuid)
@@ -177,6 +247,24 @@ function enabled(parameter: BswmdParameter): boolean {
 function numberValue(parameter: BswmdParameter): number | undefined {
   const value = rawValue(parameter);
   return typeof value === 'number' ? value : undefined;
+}
+function invalidNumeric(parameter: BswmdParameter): boolean {
+  const value = rawValue(parameter);
+  if (value === undefined) return false;
+  // InputNumber clamps incoming model values. Render unfinished/restored violations verbatim instead.
+  return (
+    typeof value !== 'number' ||
+    !Number.isFinite(value) ||
+    (parameter.type === 'INTEGER' && !Number.isSafeInteger(value)) ||
+    (parameter.min !== undefined && value < parameter.min) ||
+    (parameter.max !== undefined && value > parameter.max)
+  );
+}
+function editInvalidNumeric(parameter: BswmdParameter, text: string): void {
+  onValueChange(
+    parameter.uuid,
+    text.trim() && Number.isFinite(Number(text)) ? Number(text) : text || undefined
+  );
 }
 function stringValue(parameter: BswmdParameter): string {
   const value = rawValue(parameter);
@@ -232,7 +320,7 @@ function referenceLabel(uuid: string): string {
   );
 }
 function onValueChange(uuid: string, value: unknown): void {
-  if (props.readonly) return;
+  if (props.readonly || props.container.parameters.find((p) => p.uuid === uuid)?.readOnly) return;
   emit('update:configData', { ...props.configData, [uuid]: value });
   emit('parameter-change', uuid, value);
 }
@@ -245,6 +333,10 @@ function resetForm(): void {
   if (props.readonly) return;
   const values: Record<string, unknown> = {};
   for (const parameter of props.container.parameters) {
+    if (parameter.readOnly) {
+      values[parameter.uuid] = rawValue(parameter);
+      continue;
+    }
     values[parameter.uuid] = parameter.defaultValue;
     emit('parameter-change', parameter.uuid, parameter.defaultValue);
   }
@@ -256,7 +348,7 @@ defineExpose({ resetForm, getFormData });
 <style scoped>
 .dynamic-form {
   padding: 0 22px;
-  color: #526477;
+  color: var(--color-text);
   font-size: 14px;
 }
 .parameter-section {
@@ -264,7 +356,7 @@ defineExpose({ resetForm, getFormData });
 }
 .reference-section {
   padding: 16px 0;
-  border-top: 1px solid #d8dee7;
+  border-top: 1px solid var(--color-border);
 }
 .parameter-row {
   position: relative;
@@ -280,14 +372,31 @@ defineExpose({ resetForm, getFormData });
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.selected-field {
+  background: var(--color-selected);
+  outline: 1px solid var(--color-accent);
+}
+.dangling-reference {
+  color: var(--color-error);
+}
+.dangling-reference :deep(.el-input__wrapper) {
+  box-shadow: 0 0 0 1px var(--color-error) inset;
+}
+.clear-reference {
+  color: var(--color-error);
+  background: transparent;
+  border: 1px solid var(--color-error);
+  margin-left: 8px;
+  cursor: pointer;
+}
 .optional-toggle {
   width: 14px;
   height: 14px;
   margin: 0;
-  accent-color: #409eff;
+  accent-color: var(--color-accent);
 }
 .required-mark {
-  color: #ee6060;
+  color: var(--color-error);
   font-size: 15px;
   text-align: center;
 }
@@ -316,12 +425,12 @@ defineExpose({ resetForm, getFormData });
   width: 80px;
   flex-shrink: 0;
   height: 32px;
-  border: 1px solid #d8dee7;
+  border: 1px solid var(--color-border);
   border-left: 0;
   border-radius: 0 3px 3px 0;
   padding-left: 10px;
-  background: #f5f7fa;
-  color: #526477;
+  background: var(--color-panel);
+  color: var(--color-text);
 }
 .reference-control {
   position: relative;
@@ -334,17 +443,17 @@ defineExpose({ resetForm, getFormData });
 .reference-picker {
   border: 0;
   background: transparent;
-  color: #758ea7;
+  color: var(--color-muted);
   padding: 0 3px;
   font-size: 18px;
 }
 .field-error {
   grid-column: 4;
-  color: #d84949;
+  color: var(--color-error);
   font-size: 12px;
 }
 .no-fields {
-  color: #8d9aaa;
+  color: var(--color-muted);
   font-size: 13px;
   margin: 24px;
 }
@@ -355,7 +464,7 @@ defineExpose({ resetForm, getFormData });
 }
 :deep(.el-switch) {
   height: 32px;
-  --el-switch-off-color: #dcdfe6;
+  --el-switch-off-color: var(--color-border);
 }
 @media (max-width: 1200px) {
   .parameter-row {

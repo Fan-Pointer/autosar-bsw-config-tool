@@ -15,7 +15,7 @@
     <div class="panel-content">
       <!-- 无错误 -->
       <div v-if="violations.length === 0 && !isValidating" class="empty-state">
-        <el-icon :size="40" color="#67c23a"><SuccessFilled /></el-icon>
+        <el-icon :size="40" color="var(--color-success)"><SuccessFilled /></el-icon>
         <p>{{ validated ? '验证通过' : '尚未验证' }}</p>
       </div>
 
@@ -121,7 +121,7 @@ defineExpose({ runValidation });
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--color-surface);
 }
 
 .panel-header {
@@ -130,13 +130,13 @@ defineExpose({ runValidation });
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  border-bottom: 1px solid #e4e7ed;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .title {
   font-weight: 600;
   font-size: 14px;
-  color: #303133;
+  color: var(--color-text);
 }
 
 .panel-content {
@@ -152,7 +152,7 @@ defineExpose({ runValidation });
   align-items: center;
   justify-content: center;
   height: 200px;
-  color: #909399;
+  color: var(--color-muted);
 }
 
 .empty-state p {
@@ -169,28 +169,28 @@ defineExpose({ runValidation });
 .violation-item {
   padding: 12px;
   border-radius: 4px;
-  border-left: 3px solid #e4e7ed;
+  border-left: 3px solid var(--color-border);
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .violation-item:hover {
-  background-color: #f5f7fa;
+  background-color: var(--color-panel);
 }
 
 .violation-item.severity-error {
-  border-left-color: #f56c6c;
-  background-color: #fef0f0;
+  border-left-color: var(--color-error);
+  background-color: var(--color-error-bg);
 }
 
 .violation-item.severity-warning {
-  border-left-color: #e6a23c;
-  background-color: #fdf6ec;
+  border-left-color: var(--color-warning);
+  background-color: var(--color-warning-bg);
 }
 
 .violation-item.severity-info {
-  border-left-color: #409eff;
-  background-color: #ecf5ff;
+  border-left-color: var(--color-accent);
+  background-color: var(--color-selected);
 }
 
 .violation-header {
@@ -202,25 +202,25 @@ defineExpose({ runValidation });
 
 .rule-id {
   font-size: 12px;
-  color: #909399;
+  color: var(--color-muted);
   font-family: monospace;
 }
 
 .violation-message {
   font-size: 13px;
-  color: #303133;
+  color: var(--color-text);
   margin-bottom: 4px;
 }
 
 .violation-suggestion {
   font-size: 12px;
-  color: #67c23a;
+  color: var(--color-success);
   margin-bottom: 4px;
 }
 
 .violation-path {
   font-size: 11px;
-  color: #909399;
+  color: var(--color-muted);
   font-family: monospace;
 }
 </style>

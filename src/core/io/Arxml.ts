@@ -1,4 +1,5 @@
 import { XMLParser, XMLValidator } from 'fast-xml-parser';
+import { decodeXmlText, stripDoctype } from './XmlSafety';
 import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
@@ -100,6 +101,7 @@ function text(parent: XmlNode, key: string): string {
 }
 function normalize(node: unknown): unknown {
   if (Array.isArray(node)) return node.map(normalize);
+  if (typeof node === 'string') return decodeXmlText(node);
   if (!node || typeof node !== 'object') return node;
   return Object.fromEntries(
     Object.entries(node).map(([key, value]) => [
@@ -113,6 +115,7 @@ function xmlPreflight(source: string): void {
   // Reject declarations before invoking either validator or parser: entities never get an expansion opportunity.
   if (/<!\s*(?:DOCTYPE|ENTITY)\b/i.test(source))
     throw new Error('禁止 DTD / DOCTYPE 与外部实体，文件未被解析');
+  if (/<(?:[\w.-]+:)?include\b/i.test(source)) throw new Error('禁止 XInclude 外部引用');
   let depth = 0;
   for (const token of source.matchAll(
     /<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>|<\?[\s\S]*?\?>|<[^>]*>/g
@@ -149,16 +152,22 @@ function readValue(value: string, definition: BswmdParameter): unknown {
  */
 export function importArxml(source: string, modules: BswmdModule[]): ConfigInstance {
   xmlPreflight(source);
-  const validation = XMLValidator.validate(source);
+  const safeSource = stripDoctype(source);
+  const validation = XMLValidator.validate(safeSource);
   if (validation !== true)
     throw new Error(`XML 格式错误（第 ${validation.err.line} 行）：${validation.err.msg}`);
+  // CDATA is literal text; protect its ampersands from our single built-in-entity decode pass.
+  const parserSource = safeSource.replace(
+    /<!\[CDATA\[([\s\S]*?)\]\]>/g,
+    (_match: string, content: string) => `<![CDATA[${content.replace(/&/g, '&amp;')}]]>`
+  );
   const parsed: unknown = new XMLParser({
     ignoreAttributes: false,
     parseTagValue: false,
     parseAttributeValue: false,
     trimValues: false,
-    processEntities: true,
-  }).parse(source);
+    processEntities: false,
+  }).parse(parserSource);
   const raw = record(parsed, 'XML');
   const rootKey = Object.keys(raw).find((key) => key === 'AUTOSAR' || key.endsWith(':AUTOSAR'));
   if (!rootKey) throw new Error('缺少 AUTOSAR 根节点');

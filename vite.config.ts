@@ -20,6 +20,7 @@ export default defineConfig({
     sourcemap: true,
   },
   test: {
+    cacheDir: '.temp/vitest-cache',
     globals: true,
     environment: 'jsdom',
   },
