@@ -16,7 +16,7 @@ node scripts/autodev/dispatch.mjs stop
 # 排除失败原因后恢复当前事件，再执行 start.ps1
 node scripts/autodev/dispatch.mjs recover
 # 调度规则测试（不调用模型、不写真实评审）
-node --test scripts/autodev/engine.test.mjs
+node --test scripts/autodev/engine.checks.mjs
 ```
 
 重启电脑后再次运行 start.ps1，从 `.temp/autodev/runtime.json` 续接，不重新实现已确认任务。

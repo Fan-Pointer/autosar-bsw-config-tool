@@ -28,6 +28,10 @@
 - 隐藏后台启动已成功（初次 PID 23352），重复启动返回同一 PID；status 能读取真实 CHANGES_REQUESTED 和外部交接锁。Windows PowerShell 5 的 UTF-8 读取已修复。
 - 停止后 status 确认 running=false，重启为新 PID 18488，并保留当前状态与外部锁；无重复模型调用。
 - WorkBuddy 释放本轮交接后由调度器实际启动 TASK-002 修复。
+- 上项已验证：状态稳定后自动启动 job `ed076df1ddf5d6afd5df17eb-1`，完成首轮修复；52/52 测试（含 GCC）及 build 通过。代码提交 `e125f86fab069e94b347ad6b9dca2baf10582239`，状态提交 `efa166de7e064065af5bbc03b66224f9ffae35db` 均已同步，STATE=SUBMITTED / round 1。
+- 实际恢复缺陷：CLI 内启动的常驻 Vite 服务使 CLI 在最终回执后不退出；停止该已知服务后执行器立即退出并生成 result。预览已移至父会话管理，WORKER 明确禁止留下常驻子服务。
+- 后台浏览器权限缺失时，子执行器如实返回 blocked。父对话已实际在可见 IAB 打开 `http://127.0.0.1:3000/workspace`，观察到配置树/表单/保存/验证并保留交付页，完成用户的界面展示要求。
+- 用户完成授权后后台 WorkBuddy 访问复验仍被拒；不重试或绕过，后台 reviewTransportEnabled 继续为 false。当前桌面对话可继续真实发送评审。
 - 后台桥接得到授权后，再实际验证 round 1 请求发送、版本绑定评审、下一 READY 自动领取。
 
 ## 产品规划需由 WorkBuddy 对齐
