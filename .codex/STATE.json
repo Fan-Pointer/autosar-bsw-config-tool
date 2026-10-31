@@ -2,26 +2,26 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-7",
-  "stageName": "官方 ECUC 定义直读与第二模块闸门（可插拔性验证）",
+  "stage": "PHASE-8",
+  "stageName": "导出语义保真与 NvM CHOICE 收口",
 
   "task": {
-    "id": "TASK-007",
-    "title": "官方 ECUC ARXML 直读 BSWMD + 第二模块 NvM 跑通全链路",
-    "status": "SUBMITTED",
+    "id": "TASK-008",
+    "title": "导出保真修复（未配置不导出/描述回填/时间戳稳定）+ NvM CHOICE 全链路",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "e12f42f98881c440520f6762a7c8bef43ac1b6a364eee5af386efab866a0f690",
+    "contractHash": "6bff40df368117d78fac1477fbd916c1cc70fc9c15131f912effe4d43328ed77",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T04:20:00+08:00",
-    "reportPath": ".codex/reports/TASK-007-REPORT.md",
+    "contractBoundAt": "2026-11-01T05:10:00+08:00",
+    "reportPath": ".codex/reports/TASK-008-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "f72bcf549476399e57ed9bcfc4367902e8d5f44f",
-    "createdAt": "2026-11-01T04:20:00+08:00",
-    "submittedAt": "2026-10-31T20:01:14.001Z",
+    "submissionCommit": null,
+    "createdAt": "2026-11-01T05:10:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "specPath": "docs/UI-REPLICA-SPEC.md"
@@ -175,21 +175,50 @@
         "🟡-4 参考图 870KB 入库 / ARXML 单文件单模块（承前）",
         "跨配置集搜索切换未构造验证（仅 1 个配置集）"
       ]
+    },
+    {
+      "taskId": "TASK-007",
+      "title": "官方 ECUC ARXML 直读 BSWMD + 第二模块 NvM 跑通全链路",
+      "finalStatus": "APPROVED",
+      "rounds": [
+        {
+          "round": 0,
+          "submissionCommit": "f72bcf549476399e57ed9bcfc4367902e8d5f44f",
+          "stateCommit": "bc293be7ff90091e3408d4926e0f463a64fbee99",
+          "verdict": "APPROVED",
+          "blockers": 0,
+          "majors": 2,
+          "minors": 4,
+          "reviewPath": ".codex/review/TASK-007-ROUND-0-REVIEW.md",
+          "at": "2026-11-01T05:00:00+08:00"
+        }
+      ],
+      "approvedAt": "2026-11-01T05:00:00+08:00",
+      "reviewerNotes": "round 0 分批范围达成（契约 §6 许可）。三处硬闸门全过：src/core 零 NvM/CanIf/Dem 字面量；14.6MB 未入库；fixture 527KB。评审方独立实测：205 用例全绿(+41)；NvM 3根/6容器/51参数/9引用，CanIf 6根/20容器/82参数/16引用；六类参数类型齐(含 FUNCTION/FLOAT)，17 带范围、37 必填；拿 CanIf 名解析 NvM fixture 抛错证按名定位；14.6MB 全量读盘32ms+列名158ms+解析NvM 173ms(契约≤3s)；C4 在 CanIf 上实证(新建即 3 条必填违规，NvM/Dem 为 0 因必填都在子容器层)；D2 三项注入全对(提及放行/真实拒/注释夹带拒)；D3 已做。架构加分：DemConstraints 移出 core 到 modules/dem。诚实降级：NvM CHOICE 标记 arxmlExportBlockers 显式拒绝导出而非产出错文件，报告如实标注 C5 未完成，无虚报。",
+      "environmentNotes": "D1 cacheDir 三次未达成（web→ssr，仍在 %TEMP%），评审方认领方案错误并撤销该要求，改用'用例全绿'为判据，不再派给 Codex。",
+      "carriedOver": [
+        "🟠-1 导出把未配置参数写成具体值(Dem 31/31, CanIf 45/45)+丢 DESC，评审方认领为 TASK-005 漏检 -> TASK-008 P0",
+        "🟠-2 D1 cacheDir 要求撤销（评审方方案错误，非 Codex 责任）",
+        "🟡-1 createdAt/lastModified 往返漂移 9ms -> TASK-008 A5",
+        "🟡-2 NvM CHOICE 容器导出被拒（正确降级）-> TASK-008 B1-B4",
+        "🟡-3 首次渲染 ≤500ms 未做真实浏览器计时",
+        "🟡-4 参考图 870KB 入库（承前）"
+      ]
     }
   ],
 
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-006",
+    "taskId": "TASK-007",
     "round": 0,
-    "reviewedCommit": "5f541c2ea76dc6b7b23babc9b30ce6c7110f15d6",
-    "at": "2026-11-01T04:10:00+08:00",
+    "reviewedCommit": "f72bcf549476399e57ed9bcfc4367902e8d5f44f",
+    "at": "2026-11-01T05:00:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
-    "majors": 1,
+    "majors": 2,
     "minors": 4,
-    "reviewPath": ".codex/review/TASK-006-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-006-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-007-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-007-ROUND-0-REVIEW.md"
   },
 
   "autodevReview": {
