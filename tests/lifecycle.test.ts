@@ -38,7 +38,11 @@ function fixture() {
 describe('core cloning and lifecycle availability', () => {
   it('deep-copies a complete set, regenerates every UUID and remaps forward/cyclic references', () => {
     const { module, config, dtc, attributes } = fixture();
-    attributes.references.set('test-back', { definitionRef: 'test-back', targetUuid: dtc.uuid });
+    attributes.references.set('test-back', {
+      definitionRef: 'test-back',
+      targetUuid: dtc.uuid,
+      isConfigured: true,
+    });
     const copy = cloneConfiguration(config, '副本');
     const originalEntries = collectContainers(config, module);
     const copiedEntries = collectContainers(copy, module);
@@ -77,7 +81,11 @@ describe('core cloning and lifecycle availability', () => {
     dtcDefinition.subContainers = [module.containers[0].subContainers[1]];
     const nested = manager.addContainerInstance(config, dtc.uuid, attributes.definitionRef);
     manager.setReferenceTarget(dtc, 'ecuc-dem-dtc-attributes-ref', nested.uuid);
-    nested.references.set('self', { definitionRef: 'self', targetUuid: nested.uuid });
+    nested.references.set('self', {
+      definitionRef: 'self',
+      targetUuid: nested.uuid,
+      isConfigured: true,
+    });
     const clone = manager.cloneContainerInstance(config, dtc.uuid);
     expect(clone.references.get('ecuc-dem-dtc-attributes-ref')?.targetUuid).toBe(
       clone.subContainers[0].uuid

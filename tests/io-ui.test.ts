@@ -7,6 +7,7 @@ import { useConfigStore } from '../src/stores/configStore';
 import { exportJson, importJson, MAX_IMPORT_BYTES } from '../src/core/io/ConfigJson';
 import ImportDialog from '../src/ui/ImportExport/ImportDialog.vue';
 import WorkspaceView from '../src/views/WorkspaceView.vue';
+import { completeDemArxml } from './helpers/completeDemArxml';
 
 const local = vi.hoisted(() => ({
   saved: new Map<string, unknown>(),
@@ -242,6 +243,7 @@ describe('import preview UI and project menus', () => {
   );
   it('imports ARXML through the same local file preview and renders file strings as text', async () => {
     const { store } = await fixture();
+    completeDemArxml(store.config!, store.module!);
     const xml = store.exportConfig('arxml').replace('<VALUE>1</VALUE>', '<VALUE>88</VALUE>');
     await dialog(xml, 'arxml');
     button('应用导入').click();
@@ -282,6 +284,7 @@ describe('import preview UI and project menus', () => {
     );
     wrappers.push(wrapper);
     await flushPromises();
+    completeDemArxml(store.config!, store.module!);
     const blobs: Blob[] = [];
     Object.defineProperty(URL, 'createObjectURL', {
       configurable: true,

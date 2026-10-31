@@ -3,12 +3,14 @@ import { decodeXmlText, stripDoctype, withoutXmlComments } from './XmlSafety';
 import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
+import { createParameterValue } from '../config/ConfigValues';
 import { generateUUID } from '@/utils/uuid';
 import { checkImportSize, hydrateConfig, record, serializeConfig, string } from './ConfigJson';
 import type { SerializedContainer } from './IoTypes';
 
 export const AUTOSAR_NAMESPACE = 'http://autosar.org/schema/r4.2.2';
 type XmlNode = Record<string, unknown>;
+const EDITOR_DATA_GID = 'AUTOSAR-BSW-CONFIG-TOOL-V1';
 
 function escapeXml(value: string): string {
   if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(value))
@@ -20,6 +22,27 @@ function escapeXml(value: string): string {
 }
 function tag(name: string, value: string): string {
   return `<${name}>${escapeXml(value)}</${name}>`;
+}
+function adminData(fields: Record<string, string | undefined>): string {
+  const values = Object.entries(fields).filter(
+    (entry): entry is [string, string] => entry[1] !== undefined
+  );
+  if (!values.length) return '';
+  return `<ADMIN-DATA><SDGS><SDG GID="${EDITOR_DATA_GID}">${values
+    .map(([key, value]) => `<SD GID="${escapeXml(key)}">${escapeXml(value)}</SD>`)
+    .join('')}</SDG></SDGS></ADMIN-DATA>`;
+}
+function descriptionTag(value: string | undefined): string {
+  return value === undefined ? '' : `<DESC><L-2 L="FOR-ALL">${escapeXml(value)}</L-2></DESC>`;
+}
+function emptyStates(
+  fields: { definitionRef: string; isConfigured: boolean }[]
+): string | undefined {
+  return fields.length
+    ? JSON.stringify(
+        fields.map(({ definitionRef, isConfigured }) => ({ definitionRef, isConfigured }))
+      )
+    : undefined;
 }
 function definitionPaths(module: BswmdModule): Map<string, string> {
   const paths = new Map<string, string>();
@@ -51,6 +74,18 @@ export function exportArxml(config: ConfigInstance, module: BswmdModule): string
   const checked = hydrateConfig(serializeConfig(config), [module]);
   const definitions = definitionPaths(module);
   const entries = collectContainers(checked, module);
+  const missing: string[] = [];
+  for (const { container, definition, path } of entries) {
+    for (const def of definition.parameters) {
+      const field = container.parameters.get(def.uuid);
+      if (!def.isOptional && (!field?.isConfigured || field.value === undefined))
+        missing.push(`${path}/${def.shortName}`);
+    }
+  }
+  if (missing.length)
+    throw new Error(
+      `ARXML 导出校验失败，必填项未配置（请显式设置，默认建议值不算配置）：\n${missing.join('\n')}`
+    );
   const instancePaths = new Map(
     entries.map((entry) => [entry.container.uuid, `/Config/${module.shortName}/${entry.path}`])
   );
@@ -61,7 +96,7 @@ export function exportArxml(config: ConfigInstance, module: BswmdModule): string
       .map((container) => {
         const definition = defs.find((item) => item.uuid === container.definitionRef)!;
         const parameters = [...container.parameters.values()]
-          .filter((p) => p.value !== undefined)
+          .filter((p) => p.isConfigured === true && p.value !== undefined)
           .map((parameter) => {
             const def = definition.parameters.find(
               (item) => item.uuid === parameter.definitionRef
@@ -73,17 +108,42 @@ export function exportArxml(config: ConfigInstance, module: BswmdModule): string
           })
           .join('');
         const references = [...container.references.values()]
-          .filter((ref) => ref.targetUuid)
+          .filter((ref) => ref.isConfigured === true && ref.targetUuid)
           .map((ref) => {
             const target = instancePaths.get(ref.targetUuid);
             if (!target) throw new Error(`${container.shortName}：引用目标不存在，无法导出 ARXML`);
             return `<ECUC-REFERENCE-VALUE UUID="${generateUUID()}">${defRef(ref.definitionRef, 'ECUC-REFERENCE-DEF')}<VALUE-REF DEST="ECUC-CONTAINER-VALUE">${escapeXml(target)}</VALUE-REF></ECUC-REFERENCE-VALUE>`;
           })
           .join('');
-        return `<ECUC-CONTAINER-VALUE UUID="${escapeXml(container.uuid)}">${tag('SHORT-NAME', container.shortName)}${defRef(definition.uuid, 'ECUC-PARAM-CONF-CONTAINER-DEF')}<PARAMETER-VALUES>${parameters}</PARAMETER-VALUES><REFERENCE-VALUES>${references}</REFERENCE-VALUES><SUB-CONTAINERS>${containers(container.subContainers, definition.subContainers)}</SUB-CONTAINERS></ECUC-CONTAINER-VALUE>`;
+        // ECUC absence cannot distinguish untouched suggestions from a deliberate disable.
+        // Preserve only that editor state in SDG, never as a parameter/reference value.
+        const editor = adminData({
+          ...Object.fromEntries(
+            [...container.parameters.values()]
+              .filter(
+                (p) =>
+                  p.description !== undefined &&
+                  p.description !==
+                    definition.parameters.find((def) => def.uuid === p.definitionRef)?.description
+              )
+              .map((p) => [`parameterDescription:${p.definitionRef}`, p.description])
+          ),
+          disabledParameters: emptyStates(
+            [...container.parameters.values()].filter((p) => p.value === undefined)
+          ),
+          emptyReferences: emptyStates(
+            [...container.references.values()].filter((r) => !r.targetUuid && r.isConfigured)
+          ),
+        });
+        return `<ECUC-CONTAINER-VALUE UUID="${escapeXml(container.uuid)}">${tag('SHORT-NAME', container.shortName)}${descriptionTag(container.description)}${editor}${defRef(definition.uuid, 'ECUC-PARAM-CONF-CONTAINER-DEF')}<PARAMETER-VALUES>${parameters}</PARAMETER-VALUES><REFERENCE-VALUES>${references}</REFERENCE-VALUES><SUB-CONTAINERS>${containers(container.subContainers, definition.subContainers)}</SUB-CONTAINERS></ECUC-CONTAINER-VALUE>`;
       })
       .join('');
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<AUTOSAR xmlns="${AUTOSAR_NAMESPACE}"><AR-PACKAGES><AR-PACKAGE><SHORT-NAME>Config</SHORT-NAME><ELEMENTS><ECUC-MODULE-CONFIGURATION-VALUES UUID="${escapeXml(checked.uuid)}">${tag('SHORT-NAME', module.shortName)}<DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/${escapeXml(module.shortName)}</DEFINITION-REF><IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT><CONTAINERS>${containers(checked.containers, module.containers)}</CONTAINERS></ECUC-MODULE-CONFIGURATION-VALUES></ELEMENTS></AR-PACKAGE></AR-PACKAGES></AUTOSAR>`;
+  const metadata = adminData({
+    createdAt: String(checked.createdAt),
+    lastModified: String(checked.lastModified),
+    name: checked.name,
+  });
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<AUTOSAR xmlns="${AUTOSAR_NAMESPACE}"><AR-PACKAGES><AR-PACKAGE><SHORT-NAME>Config</SHORT-NAME><ELEMENTS><ECUC-MODULE-CONFIGURATION-VALUES UUID="${escapeXml(checked.uuid)}">${tag('SHORT-NAME', module.shortName)}${metadata}<DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/${escapeXml(module.shortName)}</DEFINITION-REF><IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT><CONTAINERS>${containers(checked.containers, module.containers)}</CONTAINERS></ECUC-MODULE-CONFIGURATION-VALUES></ELEMENTS></AR-PACKAGE></AR-PACKAGES></AUTOSAR>`;
 }
 
 function nodes(parent: XmlNode, key: string): XmlNode[] {
@@ -101,6 +161,59 @@ function text(parent: XmlNode, key: string): string {
   if (typeof value === 'string') return value;
   if (value === undefined) throw new Error(`XML 缺少 ${key}`);
   return string(record(value, key)['#text'], key, true);
+}
+function editorData(parent: XmlNode): Map<string, string> {
+  const groups = nodes(single(single(parent, 'ADMIN-DATA'), 'SDGS'), 'SDG').filter(
+    (group) => group['@_GID'] === EDITOR_DATA_GID
+  );
+  if (groups.length > 1) throw new Error('编辑器 ADMIN-DATA 重复');
+  const fields = new Map<string, string>();
+  for (const field of nodes(groups[0] ?? {}, 'SD')) {
+    const key = string(field['@_GID'], 'SD.GID');
+    if (fields.has(key)) throw new Error(`编辑器 ADMIN-DATA 字段重复：${key}`);
+    fields.set(key, field['#text'] === undefined ? '' : string(field['#text'], key, true));
+  }
+  return fields;
+}
+function emptyFieldStates(
+  value: string | undefined,
+  allowed: { uuid: string }[]
+): Map<string, boolean> {
+  const result = new Map<string, boolean>();
+  if (value === undefined) return result;
+  const states: unknown = JSON.parse(value);
+  if (!Array.isArray(states)) throw new Error('编辑器字段状态应为数组');
+  for (const item of states) {
+    const state = record(item, '编辑器字段状态');
+    const id = string(state.definitionRef, '编辑器字段 definitionRef');
+    if (
+      !allowed.some((def) => def.uuid === id) ||
+      result.has(id) ||
+      typeof state.isConfigured !== 'boolean'
+    )
+      throw new Error('编辑器字段状态的定义或 isConfigured 无效');
+    result.set(id, state.isConfigured);
+  }
+  return result;
+}
+function timestampField(fields: Map<string, string>, key: string, fallback: number): number {
+  const value = fields.get(key);
+  if (value === undefined) return fallback;
+  if (!/^\d+$/.test(value) || !Number.isSafeInteger(Number(value)))
+    throw new Error(`${key}：时间戳无效`);
+  return Number(value);
+}
+function readDescription(parent: XmlNode, fallback?: string): string | undefined {
+  if (parent.DESC === undefined) return fallback;
+  const flatten = (value: unknown): string => {
+    if (typeof value === 'string') return value;
+    if (Array.isArray(value)) return value.map(flatten).join(' ');
+    return Object.entries(record(value, 'DESC'))
+      .filter(([key]) => !key.startsWith('@_'))
+      .map(([, child]) => flatten(child))
+      .join('');
+  };
+  return flatten(parent.DESC);
 }
 function normalize(node: unknown): unknown {
   if (Array.isArray(node)) return node.map(normalize);
@@ -228,6 +341,9 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
       const id = uuid(node);
       if (targets.has(path)) throw new Error(`${path}：实例路径重复`);
       targets.set(path, id);
+      const metadata = editorData(node);
+      const disabled = emptyFieldStates(metadata.get('disabledParameters'), definition.parameters);
+      const emptyRefs = emptyFieldStates(metadata.get('emptyReferences'), definition.references);
       const parameterNodes = single(node, 'PARAMETER-VALUES');
       const parameters = [
         ...nodes(parameterNodes, 'ECUC-NUMERICAL-PARAM-VALUE'),
@@ -238,8 +354,13 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
           (item) => paths.get(item.uuid) === text(p, 'DEFINITION-REF').trim()
         );
         if (!def) throw new Error(`${path}：参数定义路径不匹配`);
+        if (disabled.has(def.uuid)) throw new Error(`${path}：禁用参数同时包含 VALUE`);
         return {
           definitionRef: def.uuid,
+          description: readDescription(
+            p,
+            metadata.get(`parameterDescription:${def.uuid}`) ?? def.description
+          ),
           isConfigured: true,
           value: readValue(text(p, 'VALUE'), def),
         };
@@ -251,24 +372,37 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
             (item) => paths.get(item.uuid) === text(r, 'DEFINITION-REF').trim()
           );
           if (!def) throw new Error(`${path}：引用定义路径不匹配`);
-          const ref = { definitionRef: def.uuid, targetUuid: '' };
+          if (emptyRefs.has(def.uuid)) throw new Error(`${path}：清空引用同时包含 VALUE-REF`);
+          const ref = { definitionRef: def.uuid, targetUuid: '', isConfigured: true };
           pending.push({ ref, path: text(r, 'VALUE-REF').trim() });
           return ref;
         }
       );
-      // Missing XML values mean unconfigured fields, not permission to silently reinstate BSWMD defaults.
+      // Missing XML values remain unconfigured. Suggestions are editor-only and never exported as values.
       for (const def of definition.parameters) {
-        if (!parameters.some((item) => item.definitionRef === def.uuid))
-          parameters.push({ definitionRef: def.uuid, isConfigured: true, value: undefined });
+        if (!parameters.some((item) => item.definitionRef === def.uuid)) {
+          const field = createParameterValue(def);
+          field.description = metadata.get(`parameterDescription:${def.uuid}`) ?? field.description;
+          if (disabled.has(def.uuid)) {
+            field.value = undefined;
+            field.isConfigured = disabled.get(def.uuid)!;
+          }
+          parameters.push({ ...field, description: field.description });
+        }
       }
       for (const def of definition.references) {
         if (!references.some((item) => item.definitionRef === def.uuid))
-          references.push({ definitionRef: def.uuid, targetUuid: '' });
+          references.push({
+            definitionRef: def.uuid,
+            targetUuid: '',
+            isConfigured: emptyRefs.get(def.uuid) ?? false,
+          });
       }
       return {
         uuid: id,
         shortName: name,
         definitionRef: definition.uuid,
+        description: readDescription(node, definition.description),
         parameters,
         references,
         subContainers: visit(
@@ -294,14 +428,15 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
     item.ref.targetUuid = targets.get(item.path) ?? '';
   }
   const now = Date.now();
+  const metadata = editorData(moduleNode);
   return hydrateConfig(
     {
       uuid: configUuid,
-      name,
+      name: metadata.get('name') ?? name,
       moduleRef: module.shortName,
       version: module.version,
-      createdAt: now,
-      lastModified: now,
+      createdAt: timestampField(metadata, 'createdAt', now),
+      lastModified: timestampField(metadata, 'lastModified', now),
       containers,
     },
     modules

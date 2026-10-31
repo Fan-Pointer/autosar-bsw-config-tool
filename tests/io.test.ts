@@ -35,6 +35,18 @@ function fixture() {
   manager.setReferenceTarget(event, 'ecuc-dem-event-dtc-ref', dtc.uuid);
   return { module, manager, config, root, dtc, attributes, event };
 }
+function arxmlFixture() {
+  const result = fixture();
+  // A value file now requires explicit choices for mandatory fields, including existing defaults.
+  for (const { container, definition } of collectContainers(result.config, result.module))
+    for (const parameter of definition.parameters.filter((p) => !p.isOptional))
+      result.manager.setParameterValue(
+        container,
+        parameter.uuid,
+        container.parameters.get(parameter.uuid)!.value
+      );
+  return result;
+}
 afterEach(() => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
@@ -115,7 +127,7 @@ describe('lossless JSON import/export', () => {
 
 describe('ARXML structure and security', () => {
   it('uses r4.2.2, ECUC hierarchy, UUIDs, definition paths, and correct reference paths', () => {
-    const { config, module } = fixture();
+    const { config, module } = arxmlFixture();
     const xml = exportArxml(config, module);
     const document = new DOMParser().parseFromString(xml, 'application/xml');
     expect(document.querySelector('parsererror')).toBeNull();
@@ -131,7 +143,12 @@ describe('ARXML structure and security', () => {
     const parameterNodes = [
       ...document.querySelectorAll('ECUC-NUMERICAL-PARAM-VALUE, ECUC-TEXTUAL-PARAM-VALUE'),
     ];
-    expect(parameterNodes).toHaveLength(31);
+    expect(parameterNodes).toHaveLength(15);
+    expect(
+      collectContainers(config, module)
+        .flatMap((entry) => [...entry.container.parameters.values()])
+        .filter((p) => !p.isConfigured)
+    ).toHaveLength(16);
     expect(parameterNodes.every((node) => Boolean(node.getAttribute('UUID')))).toBe(true);
     const uuids = [...document.querySelectorAll('[UUID]')].map((node) => node.getAttribute('UUID'));
     expect(new Set(uuids).size).toBe(uuids.length);
@@ -145,6 +162,24 @@ describe('ARXML structure and security', () => {
       original = collectContainers(config, module);
     expect(actual.map((item) => item.path)).toEqual(original.map((item) => item.path));
     for (let i = 0; i < original.length; i++) {
+      expect(
+        Object.fromEntries(
+          [...actual[i].container.parameters].map(([id, p]) => [id, p.isConfigured])
+        )
+      ).toEqual(
+        Object.fromEntries(
+          [...original[i].container.parameters].map(([id, p]) => [id, p.isConfigured])
+        )
+      );
+      expect(
+        Object.fromEntries(
+          [...actual[i].container.references].map(([id, r]) => [id, r.isConfigured])
+        )
+      ).toEqual(
+        Object.fromEntries(
+          [...original[i].container.references].map(([id, r]) => [id, r.isConfigured])
+        )
+      );
       expect(
         Object.fromEntries(
           [...actual[i].container.parameters.values()].map((p) => [p.definitionRef, p.value])
@@ -162,7 +197,7 @@ describe('ARXML structure and security', () => {
     }
   });
   it('escapes and restores text including entities and whitespace without markup injection', () => {
-    const { config, module, dtc, manager } = fixture();
+    const { config, module, dtc, manager } = arxmlFixture();
     const value = '  中文 <img src=x> & "quoted" \'single\'\n末行  ';
     manager.setParameterValue(dtc, 'ecuc-dem-dtc-j1939-node-ref', value);
     const xml = exportArxml(config, module);
@@ -173,7 +208,7 @@ describe('ARXML structure and security', () => {
     ).toBe(value);
   });
   it('accepts namespace-prefixed ARXML and generates missing UUIDs through the common utility', () => {
-    const { config, module } = fixture();
+    const { config, module } = arxmlFixture();
     const xml = exportArxml(config, module)
       .replace(/xmlns=/, 'xmlns:a=')
       .replace(/<(\/?)([A-Z][A-Z-]*)/g, '<$1a:$2')
@@ -210,7 +245,7 @@ describe('ARXML structure and security', () => {
     expect(() => importArxml(xml, [])).toThrow('禁止 DTD');
   });
   it('rejects malformed XML, wrong namespaces, multiple modules, unresolved references and excessive nesting', () => {
-    const { config, module } = fixture();
+    const { config, module } = arxmlFixture();
     const xml = exportArxml(config, module);
     expect(() => importArxml('<AUTOSAR><x></AUTOSAR>', [module])).toThrow('XML 格式错误');
     expect(() => importArxml(xml.replace(AUTOSAR_NAMESPACE, 'urn:wrong'), [module])).toThrow(
@@ -238,7 +273,7 @@ describe('ARXML structure and security', () => {
 
 describe('conflict preview and immutable merge', () => {
   it('renames ARXML value conflicts without treating default/configured flags as value differences', () => {
-    const { config, module, manager, root } = fixture();
+    const { config, module, manager, root } = arxmlFixture();
     manager.setParameterValue(root, module.containers[0].parameters[0].uuid, undefined);
     const incoming = importArxml(exportArxml(config, module), [module]);
     expect(

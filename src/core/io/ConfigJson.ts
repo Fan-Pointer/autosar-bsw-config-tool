@@ -183,6 +183,10 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
           throw new Error(`${path}/${def.shortName}：isConfigured 应为布尔值`);
         parameters.set(def.uuid, {
           definitionRef: def.uuid,
+          description:
+            p.description === undefined
+              ? def.description
+              : string(p.description, path + '/' + def.shortName + '.description', true),
           value: parameterValue(p.value, def, path + '/' + def.shortName),
           isConfigured: p.isConfigured,
         });
@@ -198,18 +202,24 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
             definition.references.map((item) => item.uuid),
             '引用'
           );
+        if (ref.isConfigured !== undefined && typeof ref.isConfigured !== 'boolean')
+          throw new Error(`${path}/${def.shortName}：isConfigured 应为布尔值`);
+        const targetUuid = string(ref.targetUuid, path + '/' + def.shortName, true);
         references.set(def.uuid, {
           definitionRef: def.uuid,
-          targetUuid: string(ref.targetUuid, path + '/' + def.shortName, true),
+          targetUuid,
+          // Legacy JSON predates the explicit flag; only a chosen target implied configuration.
+          isConfigured: ref.isConfigured === undefined ? Boolean(targetUuid) : ref.isConfigured,
         });
       }
       return {
         uuid: identity(child.uuid, path + '.uuid'),
         definitionRef: definition.uuid,
         shortName: name,
-        ...(child.description === undefined
-          ? {}
-          : { description: string(child.description, path + '.description', true) }),
+        description:
+          child.description === undefined
+            ? definition.description
+            : string(child.description, path + '.description', true),
         parameters,
         references,
         subContainers: visit(child.subContainers, definition.subContainers, path, depth + 1),

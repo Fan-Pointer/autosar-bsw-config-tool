@@ -37,6 +37,7 @@ export function cloneContainers(containers: ConfigContainer[]): ConfigContainer[
     // A second pass also resolves forward references and cycles between sibling subtrees.
     for (const reference of container.references.values()) {
       reference.targetUuid = identities.get(reference.targetUuid) ?? '';
+      if (!reference.targetUuid) reference.isConfigured = false;
     }
     container.subContainers.forEach(remap);
   };

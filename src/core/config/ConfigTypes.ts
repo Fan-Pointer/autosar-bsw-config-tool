@@ -37,6 +37,8 @@ export interface ConfigContainer {
 export interface ConfigParameterValue {
   /** 引用 BswmdParameter.uuid */
   definitionRef: string;
+  /** Description from the loaded definition, unless the input supplies one. */
+  description?: string;
   value: unknown;
   /** 是否已配置（非默认值） */
   isConfigured: boolean;
@@ -50,4 +52,6 @@ export interface ConfigReferenceValue {
   definitionRef: string;
   /** 引用的容器 UUID；空字符串表示尚未选择目标。 */
   targetUuid: UUID;
+  /** Whether the user explicitly selected this reference. */
+  isConfigured: boolean;
 }

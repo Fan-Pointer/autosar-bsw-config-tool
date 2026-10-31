@@ -13,6 +13,7 @@ import type {
 import { generateUUID } from '@/utils/uuid';
 import { indexDefinitions } from './ConfigTraversal';
 import { cloneContainers } from './ConfigClone';
+import { createParameterValue } from './ConfigValues';
 
 /** An allowed child definition and the core-owned reason it cannot currently be added. */
 export interface ContainerAddOption {
@@ -288,12 +289,7 @@ export class ConfigInstanceManager {
     const map = new Map<string, ConfigParameterValue>();
 
     for (const param of parameters) {
-      const value: ConfigParameterValue = {
-        definitionRef: param.uuid,
-        value: this.getDefaultValue(param),
-        isConfigured: false,
-      };
-      map.set(param.uuid, value);
+      map.set(param.uuid, createParameterValue(param));
     }
 
     return map;
@@ -311,40 +307,12 @@ export class ConfigInstanceManager {
       const value: ConfigReferenceValue = {
         definitionRef: ref.uuid,
         targetUuid: '', // 初始为空，需用户后续设置
+        isConfigured: false,
       };
       map.set(ref.uuid, value);
     }
 
     return map;
-  }
-
-  /**
-   * 获取参数的默认值
-   */
-  private getDefaultValue(param: BswmdParameter): unknown {
-    if (param.defaultValue !== undefined) {
-      return param.defaultValue;
-    }
-
-    // 根据类型返回合适的默认值
-    switch (param.type) {
-      case 'BOOLEAN':
-        return false;
-      case 'INTEGER':
-        return param.min ?? 0;
-      case 'FLOAT':
-        return param.min ?? 0.0;
-      case 'STRING':
-        return '';
-      case 'ENUM':
-        return param.enumValues?.[0] ?? '';
-      case 'FUNCTION':
-        return '';
-      case 'REFERENCE':
-        return '';
-      default:
-        return null;
-    }
   }
 
   /**
@@ -412,6 +380,7 @@ export class ConfigInstanceManager {
     }
 
     ref.targetUuid = targetUuid;
+    ref.isConfigured = targetUuid !== '';
   }
 
   /**

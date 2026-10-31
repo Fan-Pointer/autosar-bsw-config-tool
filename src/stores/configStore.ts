@@ -77,7 +77,15 @@ function deserialize(container: StoredContainer): ConfigContainer {
   return {
     ...container,
     parameters: new Map(container.parameters),
-    references: new Map(container.references),
+    references: new Map(
+      container.references.map(([id, reference]) => [
+        id,
+        {
+          ...reference,
+          isConfigured: reference.isConfigured ?? Boolean(reference.targetUuid),
+        },
+      ])
+    ),
     subContainers: container.subContainers.map(deserialize),
   };
 }
@@ -256,6 +264,7 @@ export const useConfigStore = defineStore('config', () => {
       source.container.references.set(referenceUuid, {
         definitionRef: referenceUuid,
         targetUuid: target.uuid,
+        isConfigured: true,
       });
     });
   }
@@ -644,11 +653,13 @@ export const useConfigStore = defineStore('config', () => {
     const entry = selectedEntry.value;
     const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
     if (!definition || definition.readOnly) return;
-    if (Object.is(entry.container.parameters.get(uuid)?.value, value)) return;
+    const current = entry.container.parameters.get(uuid);
+    if (current?.isConfigured && Object.is(current.value, value)) return;
     edit(`修改 ${definition.shortName}`, () => {
       if (!entry.container.parameters.has(uuid))
         entry.container.parameters.set(uuid, {
           definitionRef: uuid,
+          description: definition.description,
           value: undefined,
           isConfigured: false,
         });
@@ -690,10 +701,19 @@ export const useConfigStore = defineStore('config', () => {
     if (!selectedEntry.value) return;
     const entry = selectedEntry.value;
     const definition = entry.definition.references.find((r) => r.uuid === uuid);
-    if (!definition || entry.container.references.get(uuid)?.targetUuid === targetUuid) return;
+    const current = entry.container.references.get(uuid);
+    if (
+      !definition ||
+      (current?.targetUuid === targetUuid && current.isConfigured === Boolean(targetUuid))
+    )
+      return;
     edit(`修改引用 ${definition.shortName}`, () => {
       if (!entry.container.references.has(uuid))
-        entry.container.references.set(uuid, { definitionRef: uuid, targetUuid: '' });
+        entry.container.references.set(uuid, {
+          definitionRef: uuid,
+          targetUuid: '',
+          isConfigured: false,
+        });
       manager.setReferenceTarget(entry.container, uuid, targetUuid);
     });
   }

@@ -12,6 +12,7 @@ import { ConfigInstanceManager } from '../src/core/config/ConfigInstance';
 import { collectContainers } from '../src/core/config/ConfigTraversal';
 import { commonParameters, batchSkipReason } from '../src/core/config/BatchEdit';
 import { initializeTheme, setTheme } from '../src/ui/Theme/theme';
+import { completeDemArxml } from './helpers/completeDemArxml';
 
 const saved = vi.hoisted(() => new Map<string, unknown>());
 vi.mock('localforage', () => ({
@@ -325,6 +326,7 @@ describe('import hardening and diagnostics', () => {
     expect(() => stripDoctype('<!DOCTYPE root [')).toThrow('未闭合');
     const { store } = fixture();
     const parser = vi.spyOn(XMLParser.prototype, 'parse');
+    completeDemArxml(store.config!, store.module!);
     const xml = exportArxml(store.config!, store.module!);
     importArxml(xml, store.modules);
     expect(parser.mock.calls[0][0]).not.toContain('<!DOCTYPE');
@@ -347,6 +349,7 @@ describe('import hardening and diagnostics', () => {
   it('preserves literal CDATA alongside ordinary builtin and numeric entities', () => {
     const { store } = fixture();
     store.setParameterValue('ecuc-dem-dtc-j1939-node-ref', 'CDATA_SENTINEL');
+    completeDemArxml(store.config!, store.module!);
     const xml = exportArxml(store.config!, store.module!).replace(
       '>CDATA_SENTINEL<',
       '><![CDATA[literal &amp; <text>]]> &amp; &#65;<'
