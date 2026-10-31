@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "actionKey": { "type": "string" },
+    "outcome": { "type": "string", "enum": ["completed", "handed_off", "blocked", "retryable"] },
+    "summary": { "type": "string" },
+    "evidence": { "type": "string" }
+  },
+  "required": ["actionKey", "outcome", "summary", "evidence"]
+}

@@ -1,5 +1,35 @@
 # Codex 协作协议（文件握手）
 
+## 1.1 升级：状态文件 + 实际执行触发（2026-10-31 用户授权）
+
+用户授权双方围绕本项目自动交接、发评审、收意见、修复及 scoped commit/push。
+产品范围变更、最终验收和对外发布仍归用户。旧版下方“待命/打开 Codex/每小时巡检”的触发说明保留作历史参考，由本节和 `AUTODEV.md` 替代。
+
+实际入口：`scripts/autodev/start.ps1`。本地 Node 监听每 15 秒检查状态，稳定后按事件键派发；未变时不调用模型。
+Codex 实现入口为已实测的 `codex exec --approve-for-me`。WorkBuddy 必须由真实指定任务执行；后台桥接未获权限时明确阻塞，写请求文件不算调用成功。
+使用 `AUTODEV.md` 的状态/停止/恢复命令；本地日志在 `.temp/autodev`，不入 Git。
+
+| 状态 | 自动动作 | 决策人 |
+|---|---|---|
+| READY | Codex 读契约、实现、自检、报告、提交代码及版本绑定交接 | Codex 只负责实现 |
+| SUBMITTED | 向指定 WorkBuddy 任务发带任务/round/submissionCommit 的请求并观察发送成功 | WorkBuddy 独立评审 |
+| CHANGES_REQUESTED | 验证评审版本后修阻塞/重要项，测试、追加报告、round+1 重提 | Codex |
+| APPROVED | 请求 WorkBuddy 按产品计划下发下一 READY，空队列也要核对剩余工作 | WorkBuddy 规划/推进 stage |
+| BLOCKED | 保存原因、责任人、恢复条件并通知一次；无变化不重复调用 | 对应责任人/用户 |
+| 最终技术验收通过 | WorkBuddy 填 delivery，停止调度，交用户验收 | WorkBuddy 技术审；用户产品验收 |
+
+评审绑定 `lastReview.reviewer=WorkBuddy`、taskId、round、reviewedCommit、verdict；代码提交使用完整 SHA。
+每轮保留不可变 `review/<TASK>-ROUND-<N>-REVIEW.md`。源码变化后旧 APPROVED 不得授权新版本。
+连续两轮不通过先由 WorkBuddy 重新定位/澄清/拆任务，设置 `task.replannedForRound` 后再修，不能降低标准。
+单个调度进程及子进程互斥；WorkBuddy 工作期间保留 busy 记录，完成提交同步后写 done 凭据。消息必须带唯一事件标记，未知发送结果先对账再重试。
+Git 只暂存本轮文件，禁止 add -A 收走对方工作。Codex 不改 review、lastReview、stage 或批准任务。
+
+初次接入证据和当前权限缺口见 `.codex/reports/AUTODEV-SETUP.md`。后台通道未验证时不得报告“无人值守闭环已打通”。
+
+---
+
+## 1.0 历史说明（触发及提交方式以 1.1 为准）
+
 ## 核心思路
 
 不靠人盯、不靠闲聊，靠**仓库里的状态文件**完成三人（Codex / 架构师 / 王上）交接。
