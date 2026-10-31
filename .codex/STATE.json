@@ -8,8 +8,8 @@
   "task": {
     "id": "TASK-002",
     "title": "BSWMD 解析器与动态配置引擎",
-    "status": "CHANGES_REQUESTED",
-    "round": 0,
+    "status": "SUBMITTED",
+    "round": 1,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
     "reportPath": ".codex/reports/TASK-002-REPORT.md",
@@ -17,7 +17,8 @@
     "reviewSnapshotPath": ".codex/review/TASK-002-ROUND-0-REVIEW.md",
     "reviewedCommit": "7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5",
     "createdAt": "2026-10-31T22:35:00+08:00",
-    "submittedAt": "2026-10-31T22:53:45+08:00",
+    "submittedAt": "2026-10-31T15:46:44.360Z",
+    "submissionCommit": "e125f86fab069e94b347ad6b9dca2baf10582239",
     "approvedAt": null
   },
 
