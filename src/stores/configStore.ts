@@ -2,39 +2,34 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import localforage from 'localforage';
 
-// TODO: Import data models
-// import type { AutosarConfig } from '@/models/AutosarConfig';
+import type { AutosarConfig } from '@/models/AutosarConfig';
+import type { DemConfigSet } from '@/modules/dem/models/DemConfigSet';
 
 const STORAGE_KEY = 'autosar-config-v1';
 
-/**
- * Global Config Store
- * Manages the entire AUTOSAR configuration state
- */
 export const useConfigStore = defineStore('config', () => {
-  // State
-  // const config = ref<AutosarConfig | null>(null);
-  const config = ref<any>(null);
+  const config = ref<AutosarConfig | null>(null);
   const currentConfigSetId = ref<string | null>(null);
   const isDirty = ref(false);
   const isLoading = ref(false);
   const error = ref<string | null>(null);
 
-  // Getters
   const hasConfig = computed(() => config.value !== null);
-  const currentConfigSet = computed(() => {
+
+  const currentConfigSet = computed<DemConfigSet | null>(() => {
     if (!config.value || !currentConfigSetId.value) return null;
-    return config.value.dem?.configSets?.find(
-      (cs: any) => cs.uuid === currentConfigSetId.value
+    return (
+      config.value.dem.configSets.find(
+        (cs: DemConfigSet) => cs.uuid === currentConfigSetId.value
+      ) ?? null
     );
   });
 
-  // Actions
   const initStorage = () => {
     localforage.config({
       name: 'AutosarBswConfigTool',
       storeName: 'config',
-      description: 'AUTOSAR BSW Configuration Data',
+      description: 'AUTOSAR BSW Configuration Data'
     });
   };
 
@@ -42,7 +37,7 @@ export const useConfigStore = defineStore('config', () => {
     isLoading.value = true;
     error.value = null;
     try {
-      const data = await localforage.getItem(STORAGE_KEY);
+      const data = (await localforage.getItem(STORAGE_KEY)) as AutosarConfig | null;
       if (data) {
         config.value = data;
       }
@@ -56,11 +51,9 @@ export const useConfigStore = defineStore('config', () => {
 
   const saveConfig = async () => {
     if (!config.value) return;
-    
     isLoading.value = true;
     error.value = null;
     try {
-      // Update metadata
       config.value.metadata.lastModified = Date.now();
       await localforage.setItem(STORAGE_KEY, config.value);
       isDirty.value = false;
@@ -76,34 +69,54 @@ export const useConfigStore = defineStore('config', () => {
     isDirty.value = true;
   };
 
-  // TODO: Implement config set management
-  // const createConfigSet = (name: string) => { ... };
-  // const deleteConfigSet = (id: string) => { ... };
-  // const cloneConfigSet = (id: string, newName: string) => { ... };
+  const createConfigSet = (name: string) => {
+    if (!config.value) {
+      config.value = {
+        version: '1.0.0',
+        metadata: {
+          createdAt: Date.now(),
+          lastModified: Date.now(),
+          toolVersion: '0.1.0',
+          autosarVersion: '4.2.2'
+        },
+        dem: { configSets: [] }
+      } as AutosarConfig;
+    }
 
-  // TODO: Implement import/export
-  // const importFromJson = (json: string) => { ... };
-  // const exportToJson = () => { ... };
-  // const exportToArxml = () => { ... };
+    const newSet: DemConfigSet = {
+      uuid: crypto.randomUUID ? crypto.randomUUID() : `cs-${Date.now()}`,
+      shortName: name,
+      description: '',
+      version: '1.0.0',
+      lastModified: Date.now(),
+      demDTCs: [],
+      demDTCAttributes: [],
+      demEventParameters: [],
+      demDebounceCounterBasedClasses: [],
+      demDebounceTimeBasedClasses: [],
+      demFreezeFrameClasses: [],
+      demExtendedDataClasses: [],
+      demOperationCycles: []
+    };
 
-  // Initialize
+    config.value.dem.configSets.push(newSet);
+    currentConfigSetId.value = newSet.uuid;
+    markDirty();
+  };
+
   initStorage();
 
   return {
-    // State
     config,
     currentConfigSetId,
     isDirty,
     isLoading,
     error,
-    
-    // Getters
     hasConfig,
     currentConfigSet,
-    
-    // Actions
     loadConfig,
     saveConfig,
     markDirty,
+    createConfigSet
   };
 });

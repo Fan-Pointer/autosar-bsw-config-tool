@@ -1,0 +1,83 @@
+你是一个专业的 Vue 3 + TypeScript 开发工程师。
+
+请完成以下任务：
+
+1. 阅读项目根目录下的文件 docs/internal-data-model.md，这是完整的数据模型定义参考。
+
+2. 阅读 .codex/tasks/task-001-skeleton.md 了解具体任务要求。
+
+3. 创建以下文件：
+
+   a) src/types/base.ts
+   - UUID, EcucRef, ShortName 类型
+   - ConfigClass 枚举
+   - Multiplicity 接口
+   - EcucElement 接口
+
+   b) src/modules/dem/models/DemDTC.ts
+   - DemDTCSeverity 枚举
+   - DemWWHOBDDTCClass 枚举
+   - DemDTC 接口
+   - createDemDTC 工厂函数
+   - DemDTCValidationRules
+
+   c) src/modules/dem/models/DemDTCAttributes.ts
+   - DemEventSignificance 枚举
+   - DemMemoryDestination 枚举
+   - DemDTCAttributes 接口
+   - DemDTCAttributesDependencies 联动配置
+   - createDemDTCAttributes 工厂函数
+
+   d) src/modules/dem/models/DemEventParameter.ts
+   - DemEventKind 枚举
+   - DemDebounceType 枚举
+   - DemEventParameter 接口
+   - generateEventId 函数
+   - createDemEventParameter 工厂函数
+
+   e) src/modules/dem/models/DemDebounceCounterBasedClass.ts
+   - DemDebounceBehavior 枚举
+   - DemDebounceCounterBasedClass 接口
+   - DemDebounceCounterValidationRules
+   - createDemDebounceCounterBasedClass 工厂函数
+
+   f) src/modules/dem/models/DemDebounceTimeBasedClass.ts
+   - DemDebounceTimeBasedClass 接口
+   - DemDebounceTimeValidationRules
+   - createDemDebounceTimeBasedClass 工厂函数
+
+   g) src/modules/dem/models/DemOperationCycle.ts
+   - DemOperationCycleType 枚举
+   - DemOperationCycle 接口
+   - createDemOperationCycle 工厂函数
+
+   h) src/modules/dem/models/DemConfigSet.ts
+   - DemConfigSet 接口
+   - createDemConfigSet 工厂函数
+
+   i) src/modules/dem/models/index.ts
+   - 统一导出所有模型
+
+   j) src/models/AutosarConfig.ts
+   - AutosarConfig 接口
+   - createAutosarConfig 工厂函数
+
+   k) src/utils/uuid.ts
+   - generateUUID 函数 (使用 uuid 包)
+   - generateEcucUUID 函数
+
+   l) 完善 src/stores/configStore.ts
+   - 使用 LocalForage 持久化
+   - 实现完整 State/Getters/Actions
+
+4. 技术要求：
+   - 所有类型必须显式定义，禁止 any
+   - 使用 uuid v11 API (v4)
+   - 使用 LocalForage 持久化配置
+
+5. 验证：
+   - 运行 npm install
+   - 运行 npm run build
+   - 确保无 TypeScript 错误
+
+开始实现。
