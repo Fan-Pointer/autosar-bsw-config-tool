@@ -17,6 +17,7 @@ node scripts/autodev/dispatch.mjs stop
 node scripts/autodev/dispatch.mjs recover
 # 调度规则测试（不调用模型、不写真实评审）
 node --test scripts/autodev/engine.checks.mjs
+node --test scripts/autodev/resident.checks.mjs
 ```
 
 重启电脑后再次运行 start.ps1，从 `.temp/autodev/runtime.json` 续接，不重新实现已确认任务。
@@ -26,14 +27,16 @@ node --test scripts/autodev/engine.checks.mjs
 
 1. 初次 TASK-002 round 0 已通过当前 Codex 桌面对话的 computer-use，向用户指定 WorkBuddy 任务实际发送；WorkBuddy 已独立执行测试、写 REVIEW/STATE 并提交。
 2. 持续实现使用 `codex exec --approve-for-me -C <仓库>`，stdin 传完整事件，JSON schema 回执，正常受控审批；不使用危险绕过开关。
-3. 后台评审桥接设计为 Codex CLI 使用受支持的 computer-use 向同一 WorkBuddy 任务发消息。当前 CLI 应用访问授权被拒，故本地 `config.json.reviewTransportEnabled=false`，不会将未发送的请求记作成功。
-4. 已检查 WorkBuddy 自带 CLI、ACP/HTTP 能力；独立调用要求认证，未采用桌面内部令牌或绕过权限。旧定时任务保持暂停。
-5. `codex queue --resume` 探针已进入当前对话，但命令警告无本地 daemon；不能作为“空闲自动唤醒成功”的证据，因此未用它作为调度入口。
+3. 后台评审现采用 WorkBuddy 原生 Bash 后台等待 + task-notification 自动唤起。2026-11-01 已实测：WorkBuddy 回复结束后投递 `async-probe-1793465780300`，后台任务 `06STth` 退出，完成通知自动开启新回合；WorkBuddy 读取真实 stdout 并亲自写 ACK。
+4. 调度器 `reviewTransport=resident` 时先核对监听心跳，发布事件后记 awaiting_ack；只有绑定任务/轮次/版本的 WorkBuddy agent ACK 才算实际交接。仅 request/received 文件不能算调用成功。WorkBuddy 写本地提交和 done 后，调度器同步确定 SHA，成功才释放外部锁。
+5. Codex CLI 直接 computer-use 访问 WorkBuddy 仍被拒；此路未启用。WorkBuddy 自带 CLI 独立调用仍要求认证，未采用桌面内部令牌或绕过权限。旧模型定时巡检保持暂停。
+6. `codex queue --resume` 探针已进入当前对话，但命令警告无本地 daemon；未用它作为调度入口。
 
-后台 computer-use 访问得到正常授权并通过真实发送验证后，才可启用 reviewTransportEnabled。
+只有真实后台通知探针验证后才启用 resident；若退回 desktop-cli，仍需其应用访问正常授权和真实发送验证。
 禁止为了打通把 auth none、bypassPermissions、复制认证文件或篡改 WorkBuddy 数据库当作方案。
 
-备用通道实验：在指定 WorkBuddy 任务内执行 `node scripts/autodev/workbuddy-wait.mjs`，等待本地事件作为工具输出返回。只有 WorkBuddy 真正消费输出并自己写回 agent ACK，才算调用成功；脚本的 received 文件不算。当前仅完成脚本准备，尚未证实其执行工具的长时间等待及自动续接能力，未启用此路径。
+WorkBuddy 一侧的启动/恢复口令：**“按 `.codex/autodev/WORKBUDDY.md` 核对未完成交接并重新挂原生后台监听。”** 由指定任务执行一次即可；正常每轮由其自行重新挂起。单次脚本窗口 3 小时，无模型空闲轮询。小时级存活及应用重启后的自动恢复尚未验证；不能宣称跨关机工作。
+启动顺序：先 start.ps1，再在指定 WorkBuddy 任务挂监听。stop 会停止派发并结束等待，已执行的实现/评审仍完成；显式恢复时依上述两步，不清空账本。若只是 Git 同步连续失败，排除原因后 recover 只恢复该确定提交的同步，不重复发评审。
 
 ## 持久化、互斥和证据
 
@@ -42,6 +45,7 @@ node --test scripts/autodev/engine.checks.mjs
 - `jobs/`：请求、CLI 日志、回执、最终结果；每轮先保存派发意图再启动。
 - `dispatcher.lock`：单进程锁；重启发现活子进程只接续观察，不再派发。
 - `workbuddy-busy.json` / `workbuddy-done.json`：外部工作租约/完成凭据，防止一方写 STATE 时另一方开工。
+- `workbuddy-listener.json` 心跳；`workbuddy-request.json`、`workbuddy-received.json` 为传输层；`workbuddy-agent-ack.json` 必须由真实 WorkBuddy 写；`workbuddy-synced.json` 记录确定提交同步。
 - 失败最多 3 次，退避 60/300/900 秒。权限或登录明确缺失直接阻塞，不能反复试探。请求已经发出但超时不自动重发，先核对真实目标会话。
 - 工作树中未完成的实现不会被撤销；修复续接先检查现有改动。SUBMITTED 和 APPROVED 强校验代码版本，旧评审不能批准新代码。
 - READY/交付/返工均校验 WorkBuddy 下发的 task.contractHash（UTF-8 去 BOM、CRLF 转 LF 后 SHA-256）；缺失或契约改变则停止派发。该字段只能由 WorkBuddy 更新。
@@ -52,7 +56,7 @@ node --test scripts/autodev/engine.checks.mjs
 ## 运行依赖
 
 机器开机、保持唤醒；Codex CLI 的 ChatGPT 登录及网络有效；本地依赖和 Git 凭据可用。
-GUI 桥接还需要 WorkBuddy 已登录、桌面会话解锁、computer-use 对该应用有授权。对方出现权限/登录弹窗时自动化会停止并报告，不能代替用户修改安全设置。
+原生后台路径需要 WorkBuddy 已登录、指定任务的后台等待仍运行、宿主能投递 task-notification。初次挂起用当前已授权桌面会话完成；正常交接不再依赖后台 Codex 操作 WorkBuddy 窗口。对方出现权限/登录弹窗时自动化会停止并报告，不能代替用户修改安全设置。
 关闭机器、休眠、断网、登录过期或额度耗尽时不会承诺继续运行。
 
 ## 产品终点

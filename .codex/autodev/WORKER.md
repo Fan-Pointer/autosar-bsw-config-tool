@@ -26,6 +26,8 @@ READY 按当前契约实现；CHANGES_REQUESTED 读取绑定当前任务/轮次/
 
 ## review / plan / replan：Codex 只做消息桥接
 
+当前首选 resident 模式由调度器直接投递给 WorkBuddy 自己挂起的原生后台进程，收到通知后其按 WORKBUDDY.md 执行；此模式不会启动 Codex CLI GUI 桥接。下述 GUI 规则仅用于已获授权的人工会话恢复或未来明确启用的 desktop-cli 路径。
+
 此功能只在后台 computer-use 获授权后启用。不得使用桌面内部令牌、反向调用 IPC、直接修改 WorkBuddy 数据库或伪造评审。
 按 computer-use 技能，通过 `mcp__node_repl` 和 `@oai/sky` 选择已返回的 WorkBuddy 窗口。目标严格为「配置器」空间的「设计 Autosar BSW 配置工具架构」，不是「BSW代码评审 / CodeReview」或旧自动任务。
 过滤 accessibility.tree 中含 `wbSeedToken` 的文档 URL，不打印密钥或整份 UI 状态对象。

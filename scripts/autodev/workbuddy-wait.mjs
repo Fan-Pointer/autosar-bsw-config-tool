@@ -21,6 +21,10 @@ const startedAt = now();
 const deadline = Date.now() + timeoutSeconds * 1000;
 try {
   while (Date.now() < deadline) {
+    if (existsSync(resolve(dir, 'workbuddy-stop'))) {
+      console.log(JSON.stringify({ transportOnly: true, outcome: 'stopped', instruction: '停止监听，不自动重新挂起。保留既有状态。' }));
+      break;
+    }
     writeJson(listenerPath, { pid: process.pid, startedAt, heartbeatAt: now() });
     if (existsSync(requestPath)) {
       const request = readJson(requestPath);

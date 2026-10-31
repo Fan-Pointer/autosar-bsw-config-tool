@@ -45,3 +45,13 @@
 - WorkBuddy 独立调度评审指出契约哈希缺失。Codex 已增加预期 `task.contractHash` 校验，测试 12/12 通过；尚待 WorkBuddy 为 TASK-003 写入该字段并复审，Codex 不替其赋值。
 - 当前第二次 WorkBuddy Git push 再次等待 SSH 文件读取授权，尚无 done 凭据；调度器停止派发，避免并发。
 - 新增 `workbuddy-wait.mjs` 用于验证 WorkBuddy 自身等待本地事件后的续接。它只返回请求，不生成评审、agent ACK 或状态结论。尚未完成真实验证，未接入生产调度，也不代表通道已经打通。
+
+## 2026-11-01 续接：后台通知路径已实测
+
+- 用户看不到弹窗的实际原因是 WorkBuddy 显示“授权超时未确认 / 已取消”，并非用户未找到入口。原评审提交保留；Codex 已正常同步。没有代点安全权限。
+- 同一 WorkBuddy 任务补回原 round1 done，独立验证12项调度测试，亲自绑定 TASK-003 contractHash，提交 `e1cda4f`；已由 Codex 同步。TASK-003 实现由调度器恢复，job `5eb92ab8eb63c29a0cdda817-1`，父执行器 PID 28220。
+- 前台真实探针 `resident-probe-1793465472704`：WorkBuddy 前台执行等待后以工具 stdout 消费事件，亲自写 ACK。
+- 后台真实探针 `async-probe-1793465780300`：WorkBuddy 原生 Bash `run_in_background=true`，task_id `06STth`。Codex 观察其最终回复和禁用发送按钮后才投递；进程42秒退出、exit0；完成通知自动开启 WorkBuddy 新回合，它用 TaskOutput 取回真实 stdout 并亲自写 ACK。没有再次发消息来促成该回合。
+- 证据在 `.temp/autodev/async-probe-dispatch.json`、`workbuddy-agent-ack.json`、`workbuddy-resident-capability.md`。仅脚本 received 从未被当成独立评审或模型调用证明。
+- resident 接入增加真实 ACK 校验、确定提交同步、未知结果不重发、停止等待与失败恢复。任务间继续挂等待由真实 WorkBuddy 完成，旧模型巡检保持暂停。完整产品任务在此路径上的连续交接仍需继续验证；不把短探针等同于小时级运行或产品验收完成。
+- 新增 resident 独立检查 5/5 通过：心跳失效、任务/轮次/版本绑定 ACK、received 不代表模型确认、真实等待脚本去重/停止，以及本地临时 Git 远端上的确定提交同步和未提交文件拦截。所有测试评审均为临时 fixture，不写真实项目评审。

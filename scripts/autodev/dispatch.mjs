@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync, existsSync, openSync, closeSync, unlinkSyn
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { inspect, disposition, runtimeDirectory, loadJournal, readJson, writeJson, alive, now, sha } from './engine.mjs';
+import { listenerReady, prepareResident, publishResident, reconcileResident, syncReviewerCommit } from './resident.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const dir = runtimeDirectory(root);
@@ -11,6 +12,7 @@ const configPath = resolve(dir, 'config.json');
 const defaults = {
   pollSeconds: 15, stableSeconds: 15, maxAttempts: 3, retrySeconds: [60, 300, 900],
   externalTimeoutMinutes: 90, workerTimeoutMinutes: 120, reviewTransportEnabled: false,
+  reviewTransport: 'desktop-cli', agentAckTimeoutSeconds: 180,
   codexExecutable: 'codex', workbuddyTask: '设计 Autosar BSW 配置工具架构', workbuddySpace: '配置器',
 };
 if (!existsSync(configPath)) writeJson(configPath, defaults);
@@ -44,7 +46,7 @@ function status() {
     config: config(), current: event, active: journal.active, last: journal.last,
     workbuddyBusy: existsSync(resolve(dir, 'workbuddy-busy.json')) ? readJson(resolve(dir, 'workbuddy-busy.json')) : null,
     record: journal.records[event.key], attention: existsSync(resolve(dir, 'attention.json'))
-      ? readJson(resolve(dir, 'attention.json')) : null }, null, 2));
+      ? readJson(resolve(dir, 'attention.json')) : null, residentListenerReady: listenerReady(dir) }, null, 2));
 }
 
 function acquireLock() {
@@ -97,6 +99,20 @@ function collect(journal, cfg) {
 
 function dispatch(event, journal, cfg) {
   const record = journal.records[event.key] ?? { attempts: 0 };
+  if (event.kind !== 'implement' && cfg.reviewTransport === 'resident') {
+    if (!listenerReady(dir)) {
+      notice(journal, `listener-${event.key}`, `WorkBuddy 后台监听未运行；${event.taskId} 请求尚未发送。按 WORKBUDDY.md 恢复监听后自动续接。`);
+      return;
+    }
+    record.attempts += 1;
+    record.status = 'awaiting_ack';
+    record.request = prepareResident(event, root);
+    journal.records[event.key] = record;
+    save(journal);
+    publishResident(dir, record.request);
+    audit({ type: 'resident-published', key: event.key, kind: event.kind, outcome: 'awaiting-real-agent-ack' });
+    return;
+  }
   const jobId = `${event.key}-${record.attempts + 1}`;
   const job = { ...event, jobId, root, config: cfg, reconcile: record.attempts > 0 };
   writeJson(resolve(dir, 'jobs', `${jobId}.request.json`), job);
@@ -117,6 +133,7 @@ function dispatch(event, journal, cfg) {
 async function run() {
   acquireLock();
   if (existsSync(stopPath)) unlinkSync(stopPath);
+  if (existsSync(resolve(dir, 'workbuddy-stop'))) unlinkSync(resolve(dir, 'workbuddy-stop'));
   let observed = null;
   let since = 0;
   try {
@@ -125,11 +142,43 @@ async function run() {
       const journal = loadJournal(dir);
       if (collect(journal, cfg)) { save(journal); await sleep(cfg.pollSeconds * 1000); continue; }
       const busyPath = resolve(dir, 'workbuddy-busy.json');
+      // Recover a crash after durable intent but before publishing the request.
+      if (!existsSync(busyPath)) {
+        const pending = Object.values(journal.records).find(r => r.status === 'awaiting_ack' && r.request);
+        if (pending) publishResident(dir, pending.request);
+      }
       if (existsSync(busyPath)) {
+        try {
         const busy = readJson(busyPath);
+        const record = journal.records[busy.actionKey];
+        if (busy.transport === 'resident') {
+          const receipt = reconcileResident(dir, busy, record, cfg);
+          if (receipt !== 'acknowledged') {
+            if (receipt === 'ack-timeout') notice(journal, `ack-${busy.actionKey}`, '请求已投递但尚无真实 WorkBuddy agent ACK；保留交接锁，不重发、不并发实现。');
+            save(journal); await sleep(cfg.pollSeconds * 1000); continue;
+          }
+        }
         const donePath = resolve(dir, 'workbuddy-done.json');
         const done = existsSync(donePath) ? readJson(donePath) : null;
         if (done?.actionKey === busy.actionKey && done.taskId === busy.taskId && done.round === busy.round) {
+          if (busy.transport === 'resident' || done.needsSync) {
+            if (!record) throw new Error('Sync receipt has no matching handoff record');
+            record.sync ??= { attempts: 0 };
+            if (record.sync.attempts >= cfg.maxAttempts || record.sync.retryAt > Date.now()) {
+              save(journal); await sleep(cfg.pollSeconds * 1000); continue;
+            }
+            try {
+              const head = syncReviewerCommit(root, done);
+              writeJson(resolve(dir, 'workbuddy-synced.json'), { actionKey: busy.actionKey, head, syncedAt: now() });
+            } catch (error) {
+              record.sync.attempts += 1;
+              record.sync.error = error.message;
+              record.sync.retryAt = Date.now() + cfg.retrySeconds[Math.min(record.sync.attempts - 1, cfg.retrySeconds.length - 1)] * 1000;
+              if (record.sync.attempts >= cfg.maxAttempts) notice(journal, `sync-${busy.actionKey}`, `WorkBuddy 提交同步持续失败：${error.message}`);
+              save(journal); await sleep(cfg.pollSeconds * 1000); continue;
+            }
+          }
+          if (record) { record.status = 'confirmed'; record.completed = done; }
           unlinkSync(busyPath);
           audit({ type: 'external-complete', evidence: done });
         } else {
@@ -137,6 +186,10 @@ async function run() {
           if (Date.now() > Date.parse(busy.at) + cfg.externalTimeoutMinutes * 60_000) {
             notice(journal, `external-busy-${busy.actionKey}`, 'WorkBuddy 本轮尚未释放交接锁；请查看该任务是否等待权限或登录。不会并发启动 Codex。');
           }
+          save(journal); await sleep(cfg.pollSeconds * 1000); continue;
+        }
+        } catch (error) {
+          notice(journal, `handoff-${sha(error.message).slice(0, 12)}`, `外部交接校验失败：${error.message}`);
           save(journal); await sleep(cfg.pollSeconds * 1000); continue;
         }
       }
@@ -177,10 +230,27 @@ async function run() {
 
 if (command === 'run') await run();
 else if (command === 'status') status();
-else if (command === 'stop') { writeFileSync(stopPath, now()); console.log('停止派发；已在执行的本轮会继续完成。'); }
+else if (command === 'stop') {
+  writeFileSync(stopPath, now()); writeFileSync(resolve(dir, 'workbuddy-stop'), now());
+  console.log('停止派发与 WorkBuddy 等待；已在执行的本轮会继续完成。');
+}
 else if (command === 'recover') {
   const journal = loadJournal(dir);
   if (journal.active && alive(journal.active.pid)) throw new Error('Worker still running; wait for it before recovery');
+  const busyFile = resolve(dir, 'workbuddy-busy.json');
+  if (existsSync(busyFile)) {
+    const busy = readJson(busyFile);
+    const record = journal.records[busy.actionKey];
+    if (record?.sync?.attempts) {
+      audit({ type: 'explicit-sync-recovery', key: busy.actionKey, previous: record.sync });
+      record.sync = { attempts: 0 };
+      delete journal.notices[`sync-${busy.actionKey}`];
+      save(journal);
+      console.log('只恢复确定提交的 Git 同步；不重发评审。运行 start.ps1 续接。');
+      process.exit(0);
+    }
+    throw new Error('WorkBuddy handoff unresolved; resume its existing request, do not dispatch a duplicate');
+  }
   const event = inspect(root);
   const previous = journal.records[event.key];
   if (previous?.status === 'handed_off') throw new Error('WorkBuddy request already sent; inspect its live task before retrying');

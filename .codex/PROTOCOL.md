@@ -7,6 +7,7 @@
 
 实际入口：`scripts/autodev/start.ps1`。本地 Node 监听每 15 秒检查状态，稳定后按事件键派发；未变时不调用模型。
 Codex 实现入口为已实测的 `codex exec --approve-for-me`。WorkBuddy 必须由真实指定任务执行；后台桥接未获权限时明确阻塞，写请求文件不算调用成功。
+2026-11-01 原生后台探针已验证：WorkBuddy 自己挂 Bash 后台文件等待，完成通知自动唤起真实任务，亲自写 agent ACK。协议见 `autodev/WORKBUDDY.md`。常规评审由 WorkBuddy 独立本地提交后写 needsSync done，调度器只把该确定 SHA 正常推送；同步成功才启动下一轮。此传输分工不转移评审、契约或 stage 决策权。
 使用 `AUTODEV.md` 的状态/停止/恢复命令；本地日志在 `.temp/autodev`，不入 Git。
 
 | 状态 | 自动动作 | 决策人 |
@@ -22,7 +23,7 @@ Codex 实现入口为已实测的 `codex exec --approve-for-me`。WorkBuddy 必�
 每轮保留不可变 `review/<TASK>-ROUND-<N>-REVIEW.md`。源码变化后旧 APPROVED 不得授权新版本。
 WorkBuddy 下发契约时写 `task.contractHash`：对 UTF-8 内容去 BOM、CRLF 转 LF 后算 SHA-256。Codex 保留该字段；契约被改小或哈希缺失均停止派发，只有 WorkBuddy 调整契约时可同步更新。
 连续两轮不通过先由 WorkBuddy 重新定位/澄清/拆任务，设置 `task.replannedForRound` 后再修，不能降低标准。
-单个调度进程及子进程互斥；WorkBuddy 工作期间保留 busy 记录，完成提交同步后写 done 凭据。消息必须带唯一事件标记，未知发送结果先对账再重试。
+单个调度进程及子进程互斥；WorkBuddy 工作期间保留 busy 记录，本地提交后写 done，调度器写 synced 后释放。消息必须带唯一事件标记，未知发送结果先对账再重试。
 Git 只暂存本轮文件，禁止 add -A 收走对方工作。Codex 不改 review、lastReview、stage 或批准任务。
 
 初次接入证据和当前权限缺口见 `.codex/reports/AUTODEV-SETUP.md`。后台通道未验证时不得报告“无人值守闭环已打通”。
