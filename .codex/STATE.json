@@ -1,0 +1,39 @@
+{
+  "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
+  "protocolVersion": "1.0",
+  "project": "autosar-bsw-config-tool",
+  "stage": "PHASE-2",
+  "stageName": "BSWMD 解析器与动态配置引擎",
+
+  "task": {
+    "id": "TASK-002",
+    "title": "BSWMD 解析器与动态配置引擎",
+    "status": "READY",
+    "round": 0,
+    "assignedTo": "codex",
+    "contractPath": ".codex/tasks/ACTIVE.md",
+    "reportPath": null,
+    "reviewPath": null,
+    "createdAt": "2026-10-31T22:35:00+08:00",
+    "submittedAt": null,
+    "approvedAt": null
+  },
+
+  "statusLegend": {
+    "READY": "任务已下发，等待 Codex 实现",
+    "SUBMITTED": "Codex 已交付，等待评审",
+    "CHANGES_REQUESTED": "评审有阻塞项，Codex 需按 REVIEW 修复",
+    "APPROVED": "已通过，可推进下一任务",
+    "BLOCKED": "等待人工决策"
+  },
+
+  "queue": [],
+
+  "lastReview": {
+    "reviewer": "architect",
+    "at": null,
+    "verdict": null,
+    "blockers": 0,
+    "majors": 0
+  }
+}
