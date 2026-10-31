@@ -113,3 +113,47 @@
 ### 仍未关闭
 
 🟡-B（jobs/与 events.jsonl 无清理）、🟡-C（锁冲突提示不友好）、🟡-D（`productPaths` 未含未来约束/模板目录）三项维持原状，不阻塞。
+
+---
+
+## 九、resident 通道接入复核（2026-11-01 01:05 · commit `21af545965d32fd02c0f3b52c6069dd455e28de9`）
+
+评审对象：`scripts/autodev/resident.mjs`（新增）、`dispatch.mjs`（接入）、`workbuddy-wait.mjs`（stop 支持）、`resident.checks.mjs`（新增检查）。依据 `.codex/autodev/WORKBUDDY.md`。
+**判定：无阻塞，可挂起。** 以下 4 项观察建议改进，均不影响本轮接入。
+
+### 逐项核验（我实跑，不采信声明）
+
+| # | 机制 | 位置 | 结论 |
+|---|---|---|---|
+| 1 | 传输与真 ACK 分层 | `resident.mjs:16-20` `matchesAgentAck()` 校验 `reviewer/actionKey/taskId/round/submissionCommit` 五元组 | ✅ 脚本 `received` 无法冒充 agent ACK |
+| 2 | 监听活性判定 | `:9-13` `listenerReady()`：心跳年龄 `[-5s, 30s)`，容未来时钟偏差 | ✅ 解决「文件在、进程已死」误判；心跳由 waiter 每 1 秒刷新 |
+| 3 | 发布前 fail-closed | `dispatch.mjs` resident 分支先查 `listenerReady`，否则 notice 且**不投递** | ✅ 宁可延迟也不丢事件 |
+| 4 | 不重发已消费事件 | `:41-58` `reconcileResident()`：已 received/published 同键则不再写；命中 ACK 才转 `handed_off` | ✅ 幂等 |
+| 5 | 崩溃恢复 | `dispatch.mjs` 主循环对 `status==='awaiting_ack' && request` 的记录重放 publish | ✅ intent 先落盘、可续 |
+| 6 | 同步只推评审方确定提交 | `:61-76` `syncReviewerCommit()`：要求 40 位 SHA、祖先校验、`owned` 四类文件必须全部已提交 | ✅ 半成品无法被同步 |
+| 7 | 非强推 | `git push origin ${head}:refs/heads/main`，非快进即抛错 → 有限重试 → notice | ✅ 不丢远端提交 |
+| 8 | 停止语义 | waiter 每轮检查 `workbuddy-stop`，输出 `outcome=stopped`；dispatch 启动时清理该标记 | ✅ 与 WORKBUDDY.md 一致 |
+| 9 | 规则测试 | `node --test scripts/autodev/resident.checks.mjs` → **5/5 通过**（stale heartbeat / ACK 五元组 / received≠ACK / 一次投递+stop / 只推确定提交） | ✅ 我本机实跑复核 |
+| 10 | 回归 | `engine.checks.mjs` 仍 12/12（3be16bb 后未退化） | ✅ |
+| 11 | 路由边界 | resident 仅用于 `kind !== 'implement'`；实现仍走 `codex exec` | ✅ 职责未混淆 |
+
+### 观察（建议改进，不阻塞）
+
+**R1｜同步 push 是本机最脆环节**
+`syncReviewerCommit` 由调度器直接 `git push`。本机 HTTPS 曾因 TLS 中断失败，SSH 路径可能弹授权框；`execFileSync` 仅 30s 超时，交互挂起会变成一次失败重试。建议设 `GIT_SSH_COMMAND='ssh -o BatchMode=yes'` 让失败快速显性，而不是等超时。
+
+**R2｜180 秒 ACK 窗口从 publish 起算**
+`agentAckTimeoutSeconds=180`。若我从「收到通知」到「落 ACK」超过 3 分钟（模型启动+读上下文本就有开销），会产生一次 `ack-timeout` notice（幂等、不阻断）。建议放宽到 600s，或改为「检测到监听消费后开始计时」。
+
+**R3｜`attempts` 计数器复用**
+resident 分支 `record.attempts += 1` 与 `disposition()` 的 `attempts >= maxAttempts` 共用同一计数。若同键发生重放，可能提前进入 `exhausted`。建议 ACK 等待与派发重试分开计数。
+
+**R4｜`owned` 守卫需要显式文档化**
+同步要求 `.codex/STATE.json`、`.codex/tasks`、`.codex/review`、`.codex/PRODUCT-PLAN.md` **全部已提交**，任何一处残留未提交即抛错。这是正确的强约束，但 `WORKBUDDY.md` 只写了「只本地提交自己的文件」。建议把四个路径写死进文档，避免评审方漏提交导致同步卡死。
+
+**R5｜HEAD 含未推送实现提交时的边界**
+`--is-ancestor head HEAD` 只保证我的提交在历史里；若此时 HEAD 已含 Codex 未推送的实现提交，push 我的 head 到 main 会留下「实现提交未同步」。当前编排中 Codex 自行推送，风险低；建议 push 前记录 `origin/main` 与 HEAD 关系以便事后对账。
+
+### 接入结论
+
+`reviewTransport=resident` 已生效，`residentListenerReady=false`（我尚未挂起），当前事件为 `implement / TASK-003`（Codex 实现中，工作区有其未提交改动）。本轮**不触碰**产品源码、`STATE.json`、契约与已提交评审，`AUTODEV-REVIEW.md` 的本次追加留待下一正式产品事件时一并提交。
