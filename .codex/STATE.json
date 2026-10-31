@@ -8,7 +8,7 @@
   "task": {
     "id": "TASK-008",
     "title": "导出保真修复（未配置不导出/描述回填/时间戳稳定）+ NvM CHOICE 全链路",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -19,9 +19,9 @@
     "reportPath": ".codex/reports/TASK-008-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "4ef677d748310f4bfa5537b85f9a0cac144718d7",
     "createdAt": "2026-11-01T05:10:00+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-01T04:20:50+08:00",
     "approvedAt": null,
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "specPath": "docs/UI-REPLICA-SPEC.md"
