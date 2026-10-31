@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { inspect, disposition, artifact, git, writeJson } from './engine.mjs';
+import { inspect, disposition, artifact, git, writeJson, contractDigest } from './engine.mjs';
 
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'autosar-autodev-'));
@@ -19,7 +19,8 @@ function fixture(t) {
   git(root, ['add', '.']); git(root, ['commit', '-qm', 'fixture']);
   const commit = git(root, ['rev-parse', 'HEAD']);
   const state = { stage: 'PHASE-2', queue: [], task: { id: 'TASK-X', round: 0,
-    status: 'SUBMITTED', submissionCommit: commit, contractPath: '.codex/contract.md', reportPath: '.codex/report.md' } };
+    status: 'SUBMITTED', submissionCommit: commit, contractPath: '.codex/contract.md',
+    contractHash: contractDigest('agreed scope'), reportPath: '.codex/report.md' } };
   const save = () => writeJson(join(root, '.codex/STATE.json'), state);
   save();
   const review = (status = 'APPROVED') => {
@@ -92,4 +93,22 @@ test('only independent final review can terminate development', t => {
 });
 test('artifact traversal is rejected', () => {
   assert.throws(() => artifact(tmpdir(), '../outside'), /outside repository/);
+});
+test('changed or unbound contracts block READY, SUBMITTED and repair dispatch', t => {
+  const f = fixture(t);
+  for (const status of ['READY', 'SUBMITTED', 'CHANGES_REQUESTED', 'APPROVED']) {
+    f.state.task.status = status; f.save();
+    writeFileSync(join(f.root, '.codex/contract.md'), 'reduced scope');
+    assert.throws(() => inspect(f.root), /Contract hash missing or changed/);
+  }
+  f.state.task.status = 'READY';
+  delete f.state.task.contractHash; f.save();
+  assert.throws(() => inspect(f.root), /Contract hash missing or changed/);
+  f.state.task.contractHash = contractDigest('reduced scope'); f.save();
+  assert.equal(inspect(f.root).kind, 'implement');
+});
+test('contract digest tolerates BOM/CRLF checkout but preserves requirements and spacing', () => {
+  assert.equal(contractDigest('\uFEFFa\r\nb\r\n'), contractDigest('a\nb\n'));
+  assert.notEqual(contractDigest('a\nb\n'), contractDigest('a\n'));
+  assert.notEqual(contractDigest('  a\n'), contractDigest('a\n'));
 });

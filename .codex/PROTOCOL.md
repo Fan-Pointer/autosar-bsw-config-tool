@@ -20,6 +20,7 @@ Codex 实现入口为已实测的 `codex exec --approve-for-me`。WorkBuddy 必�
 
 评审绑定 `lastReview.reviewer=WorkBuddy`、taskId、round、reviewedCommit、verdict；代码提交使用完整 SHA。
 每轮保留不可变 `review/<TASK>-ROUND-<N>-REVIEW.md`。源码变化后旧 APPROVED 不得授权新版本。
+WorkBuddy 下发契约时写 `task.contractHash`：对 UTF-8 内容去 BOM、CRLF 转 LF 后算 SHA-256。Codex 保留该字段；契约被改小或哈希缺失均停止派发，只有 WorkBuddy 调整契约时可同步更新。
 连续两轮不通过先由 WorkBuddy 重新定位/澄清/拆任务，设置 `task.replannedForRound` 后再修，不能降低标准。
 单个调度进程及子进程互斥；WorkBuddy 工作期间保留 busy 记录，完成提交同步后写 done 凭据。消息必须带唯一事件标记，未知发送结果先对账再重试。
 Git 只暂存本轮文件，禁止 add -A 收走对方工作。Codex 不改 review、lastReview、stage 或批准任务。

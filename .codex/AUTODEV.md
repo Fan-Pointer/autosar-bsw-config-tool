@@ -33,6 +33,8 @@ node --test scripts/autodev/engine.checks.mjs
 后台 computer-use 访问得到正常授权并通过真实发送验证后，才可启用 reviewTransportEnabled。
 禁止为了打通把 auth none、bypassPermissions、复制认证文件或篡改 WorkBuddy 数据库当作方案。
 
+备用通道实验：在指定 WorkBuddy 任务内执行 `node scripts/autodev/workbuddy-wait.mjs`，等待本地事件作为工具输出返回。只有 WorkBuddy 真正消费输出并自己写回 agent ACK，才算调用成功；脚本的 received 文件不算。当前仅完成脚本准备，尚未证实其执行工具的长时间等待及自动续接能力，未启用此路径。
+
 ## 持久化、互斥和证据
 
 - 每 15 秒只读文件，状态稳定 15 秒后生成事件键（任务、轮次、版本、契约/报告/评审内容）。没有变化就不调用模型。
@@ -42,6 +44,7 @@ node --test scripts/autodev/engine.checks.mjs
 - `workbuddy-busy.json` / `workbuddy-done.json`：外部工作租约/完成凭据，防止一方写 STATE 时另一方开工。
 - 失败最多 3 次，退避 60/300/900 秒。权限或登录明确缺失直接阻塞，不能反复试探。请求已经发出但超时不自动重发，先核对真实目标会话。
 - 工作树中未完成的实现不会被撤销；修复续接先检查现有改动。SUBMITTED 和 APPROVED 强校验代码版本，旧评审不能批准新代码。
+- READY/交付/返工均校验 WorkBuddy 下发的 task.contractHash（UTF-8 去 BOM、CRLF 转 LF 后 SHA-256）；缺失或契约改变则停止派发。该字段只能由 WorkBuddy 更新。
 - `attention.json` 保存最近需要注意的事件；阶段变化、交付、持续失败、需决策时尝试 Windows 通知，Windows 若压制通知以文件/status 为准。
 
 调度代码和测试可提交；`.temp` 下的路径、任务日志和本机配置不入 Git。禁止双方同时运行旧仓库守护器或手工启动第二个实现器。

@@ -7,6 +7,9 @@ export const sha = value => createHash('sha256').update(value).digest('hex');
 export const now = () => new Date().toISOString();
 export const readJson = path => JSON.parse(readFileSync(path, 'utf8').replace(/^\uFEFF/, ''));
 
+/** Contract SHA-256 uses UTF-8 text without BOM and with LF, so Windows checkout is stable. */
+export const contractDigest = content => sha(content.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n'));
+
 /** Replace a JSON file atomically; readers never see a half-written journal. */
 export function writeJson(path, value) {
   const temporary = `${path}.${process.pid}.tmp`;
@@ -58,7 +61,13 @@ export function inspect(root) {
   } else if (!task?.id) {
     kind = 'plan'; // Empty queue is not completion.
   } else {
-    if (task.contractPath) payload.contractHash = hashFile(task.contractPath);
+    if (task.contractPath) {
+      payload.contractHash = contractDigest(readFileSync(artifact(root, task.contractPath), 'utf8'));
+      if (task.status !== 'BLOCKED' && (!/^[0-9a-f]{64}$/.test(task.contractHash ?? '') ||
+          payload.contractHash !== task.contractHash)) {
+        throw new Error('Contract hash missing or changed; WorkBuddy must assign the agreed contractHash');
+      }
+    } else if (task.status !== 'BLOCKED') throw new Error('Task contractPath missing');
     if (task.status === 'READY') kind = 'implement';
     else if (task.status === 'BLOCKED') kind = 'blocked';
     else if (task.status === 'SUBMITTED') {

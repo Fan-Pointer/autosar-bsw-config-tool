@@ -6,6 +6,7 @@
 
 完整读取 AGENTS、STATE、DIVISION、PROTOCOL、ACTIVE、相关 ADR 和报告/真实评审。
 请求文件含事件键、任务、轮次、观测状态。开始时重新读 STATE，若事件已过期就回执 completed 并说明实际状态，不再重复执行。
+`task.contractHash` 只能由 WorkBuddy 下发/调整契约时写入。Codex 必须保留，不得重算后改小契约；若不匹配应报告阻塞。
 先核对 Git 和上一轮产物，保留不属于本轮的文件；禁止 `git add -A`、强推、清空工作树、关闭测试或严格类型检查。
 若 `.temp/autodev/workbuddy-busy.json` 存在且相应任务还没有完成凭据，等待该 WorkBuddy 轮次释放，不同时改代码/STATE/提交。
 禁止创建内部子代理；禁止自行修改调度器和规划/评审文件。
@@ -36,7 +37,7 @@ READY 按当前契约实现；CHANGES_REQUESTED 读取绑定当前任务/轮次/
 
 - 项目绝对路径，STATE、ACTIVE、报告和评审路径；任务、轮次、submissionCommit、测试证据；本事件标记。
 - review：独立读取实际 diff、运行测试和按契约验证功能，不依 Codex 报告或编译成功判定；写当前 REVIEW 和不可变 ROUND 快照。只由 WorkBuddy 更新 task.status/reviewPath 和 lastReview（reviewer=WorkBuddy、taskId、round、reviewedCommit、verdict）。不改 round。
-- plan：对照 PRODUCT-PLAN 和原已确认需求安排剩余任务，更新 ACTIVE/STATE=READY、阶段和队列。队列空不是完成；不要另扩完整商业配置器。
+- plan：对照 PRODUCT-PLAN 和原已确认需求安排剩余任务，更新 ACTIVE/STATE=READY、阶段和队列。下发时写 task.contractHash（sha256：UTF-8 文本去 BOM、CRLF 规范为 LF 后计算，可调用 engine.mjs 的 contractDigest）。队列空不是完成；不要另扩完整商业配置器。
 - replan：同任务连续两轮不通过，重新定位/澄清或拆小契约，保留质量门槛；STATE 中设 task.replannedForRound=当前 round 后再交 Codex。
 - 只暂存 WorkBuddy 本轮拥有的文件并 commit/push，不能同时改业务源码或收走调度文件。完成所有写入和 Git 同步后，最后原子写 `.temp/autodev/workbuddy-done.json`，字段 actionKey、taskId、round、head、finishedAt。
 - 最终技术验收需真实运行产品场景、交付文档/示例/限制；通过后 WorkBuddy 写 delivery.status=READY_FOR_USER_ACCEPTANCE、reviewer=WorkBuddy、reviewedCommit、reviewPath，调度结束，用户最终验收。不得对外发布。

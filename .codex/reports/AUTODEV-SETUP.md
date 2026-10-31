@@ -37,3 +37,11 @@
 ## 产品规划需由 WorkBuddy 对齐
 
 其新 PRODUCT-PLAN 将 ARXML 导入列为暂不做，并遗漏部分 docs/REQUIREMENTS.md 中已有导入/导出/JSON 场景。Codex 不自行改规划，需 WorkBuddy 对照已确认需求补齐；确需变更必须集中交用户决定，不能把既有能力移成“已知限制”后视为验收通过。
+
+## 2026-11-01：第二次真实评审与契约保护
+
+- 23:53 向指定任务实际发送 round 1（标记 `3fd8f558bf08c1284c541ab8`）；WorkBuddy 独立检查代码并运行 52 项测试和 build，批准 TASK-002，提交 `318b044`，下发 TASK-003 配置集/实例操作/界面接线。
+- WorkBuddy 已纠正 PRODUCT-PLAN：保留已有 JSON/ARXML 导入和 JSON/ARXML/CSV 导出等范围。
+- WorkBuddy 独立调度评审指出契约哈希缺失。Codex 已增加预期 `task.contractHash` 校验，测试 12/12 通过；尚待 WorkBuddy 为 TASK-003 写入该字段并复审，Codex 不替其赋值。
+- 当前第二次 WorkBuddy Git push 再次等待 SSH 文件读取授权，尚无 done 凭据；调度器停止派发，避免并发。
+- 新增 `workbuddy-wait.mjs` 用于验证 WorkBuddy 自身等待本地事件后的续接。它只返回请求，不生成评审、agent ACK 或状态结论。尚未完成真实验证，未接入生产调度，也不代表通道已经打通。
