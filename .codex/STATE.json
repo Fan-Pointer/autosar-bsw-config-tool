@@ -2,29 +2,28 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-4",
-  "stageName": "界面复刻（按用户截图对齐参考配置界面形态）",
+  "stage": "PHASE-5",
+  "stageName": "数据进出（导入导出 + 冲突处理 + XXE 防护）",
 
   "task": {
-    "id": "TASK-004",
-    "title": "界面复刻：三栏骨架 + 两级页签 + 混排树 + 参数行 + 模块管理",
-    "status": "SUBMITTED",
+    "id": "TASK-005",
+    "title": "导入导出：JSON / ARXML / CSV + 预览冲突 + XXE 防护",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "937a8377bcec7a9b26c72517627095faa24db089dc2a90cfeedd4f2c33d7c62a",
+    "contractHash": "b8511000f0564c40aef33cfc963a9a7442d55d3403a12c863d51507c4bdeaa08",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T02:10:00+08:00",
-    "reportPath": ".codex/reports/TASK-004-REPORT.md",
+    "contractBoundAt": "2026-11-01T02:50:00+08:00",
+    "reportPath": ".codex/reports/TASK-005-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "0f472de0cb5b59487dcfc0e702c10a6677984a3a",
-    "createdAt": "2026-11-01T02:10:00+08:00",
-    "submittedAt": "2026-10-31T18:30:21Z",
+    "submissionCommit": null,
+    "createdAt": "2026-11-01T02:50:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
-    "specPath": "docs/UI-REPLICA-SPEC.md",
-    "visualEvidence": ".codex/references/easysar-2026-11-01/"
+    "specPath": "docs/UI-REPLICA-SPEC.md"
   },
 
   "statusLegend": {
@@ -89,21 +88,49 @@
         "Codex 侧：Local browser use is disabled in Work settings，无法完成真实浏览器验收",
         "评审方侧：AUTODEV-REVIEW.md 未提交曾阻断其交付（已于 commit 0e29a67 解除）"
       ]
+    },
+    {
+      "taskId": "TASK-004",
+      "title": "界面复刻：三栏骨架 + 两级页签 + 混排树 + 参数行 + 模块管理",
+      "finalStatus": "APPROVED",
+      "rounds": [
+        {
+          "round": 0,
+          "submissionCommit": "0f472de0cb5b59487dcfc0e702c10a6677984a3a",
+          "stateCommit": "6479a108e40cbae89384ae98353711dbcdc58d22",
+          "verdict": "APPROVED",
+          "blockers": 0,
+          "majors": 1,
+          "minors": 5,
+          "reviewPath": ".codex/review/TASK-004-ROUND-0-REVIEW.md",
+          "at": "2026-11-01T02:48:00+08:00"
+        }
+      ],
+      "approvedAt": "2026-11-01T02:48:00+08:00",
+      "reviewerNotes": "20/20 交付清单、12/12 验收通过；三栏实测 212/240px 与 SPEC 一致；可选复选框禁用联动、右键 9 项禁用态+tooltip、模块管理双栏弹窗、树搜索过滤均由评审方本机实操验证。案例模块未写死进 UI。",
+      "carriedOver": [
+        "🟠-1 添加子容器入口与工具栏 + 重叠且拥挤 -> 并入 TASK-005",
+        "🟡-1 模块页签缺模块/配置集 tooltip -> 并入 TASK-005",
+        "🟡-2 参数控件列右边界不对齐 -> 并入 TASK-005",
+        "🟡-3 树状态点缺图例 -> 记入 TASK-006",
+        "🟡-4 参考图 870KB 二进制入库 -> 建议压缩或移出构建范围",
+        "🟡-5 测试缓存目录导致宿主 EPERM 抖动 -> 建议显式 cacheDir"
+      ]
     }
   ],
 
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-002",
-    "round": 1,
-    "reviewedCommit": "e125f86fab069e94b347ad6b9dca2baf10582239",
-    "at": "2026-10-31T23:58:00+08:00",
+    "taskId": "TASK-004",
+    "round": 0,
+    "reviewedCommit": "0f472de0cb5b59487dcfc0e702c10a6677984a3a",
+    "at": "2026-11-01T02:48:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
-    "majors": 0,
-    "minors": 4,
-    "reviewPath": ".codex/review/TASK-002-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-002-ROUND-1-REVIEW.md"
+    "majors": 1,
+    "minors": 5,
+    "reviewPath": ".codex/review/TASK-004-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-004-ROUND-0-REVIEW.md"
   },
 
   "autodevReview": {
