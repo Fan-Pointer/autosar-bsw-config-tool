@@ -6,6 +6,7 @@ import type {
   ConfigClass,
   EcucParameterType,
 } from './BswmdTypes';
+import { importEcucModuleArxml } from './EcucArxmlImporter';
 
 const parameterTypes: readonly EcucParameterType[] = [
   'INTEGER',
@@ -60,6 +61,13 @@ function optionalFlag(value: unknown, path: string): boolean {
 
 /** Parse JSON module descriptions without depending on a UI framework. */
 export class BswmdParser {
+  /** Read a selected official ECUC module, leaving the JSON entry's semantics unchanged.
+   * @param source ARXML text. @param moduleShortName Exact module name.
+   * @returns Parsed module definition.
+   */
+  parseFromArxml(source: string, moduleShortName: string): BswmdModule {
+    return importEcucModuleArxml(source, moduleShortName);
+  }
   /**
    * Parse and validate every definition, including nested containers.
    * @param jsonString Serialized BSWMD definition.

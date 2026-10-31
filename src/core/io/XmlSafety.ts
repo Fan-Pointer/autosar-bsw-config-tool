@@ -56,3 +56,11 @@ export function decodeXmlText(value: string): string {
     }
   );
 }
+/** Remove comments before declaration checks and parsing, so examples in comments are inert.
+ * @param source XML source. @returns Source without complete XML comments.
+ */
+export function withoutXmlComments(source: string): string {
+  return source.replace(/<!\[CDATA\[[\s\S]*?\]\]>|<!--[\s\S]*?-->/g, (token) =>
+    token.startsWith('<!--') ? '' : token
+  );
+}

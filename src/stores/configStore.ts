@@ -15,7 +15,7 @@ import { cloneConfiguration } from '@/core/config/ConfigClone';
 import { collectContainers } from '@/core/config/ConfigTraversal';
 import { ConstraintEngine } from '@/core/constraint/ConstraintEngine';
 import { DefinitionConstraints } from '@/core/constraint/DefinitionConstraints';
-import { DemConstraints } from '@/core/constraint/DemConstraints';
+import { DemConstraints } from '@/modules/dem/DemConstraints';
 import {
   exportJson,
   importJson,
@@ -53,6 +53,7 @@ const storage = localforage.createInstance({ name: 'AutosarBswConfigTool', store
 const STORAGE_KEY = 'autosar-config-v2';
 const LIBRARY_KEY = 'autosar-config-sets-v3';
 interface StoredLibrary {
+  importedModules?: BswmdModule[];
   sets: StoredConfig[];
   activeUuid?: string;
   modulePreferences?: Record<string, ModulePreference>;
@@ -95,6 +96,7 @@ export const useConfigStore = defineStore('config', () => {
   });
   for (const source of Object.values(sources)) loader.loadFromString(source);
   const modules = ref<BswmdModule[]>(loader.getAllModules());
+  const importedModules = ref<BswmdModule[]>([]);
   const modulePreferences = ref<Record<string, ModulePreference>>(
     Object.fromEntries(
       modules.value.map((item) => [
@@ -103,7 +105,7 @@ export const useConfigStore = defineStore('config', () => {
       ])
     )
   );
-  const manager = new ConfigInstanceManager(modules.value);
+  let manager = new ConfigInstanceManager(modules.value);
   const engine = new ConstraintEngine();
   engine.registerRules([...DefinitionConstraints, ...DemConstraints]);
   const configSets = ref<ConfigInstance[]>([]);
@@ -194,7 +196,11 @@ export const useConfigStore = defineStore('config', () => {
       (selectedEntry.value?.definition.references ?? []).map((reference) => [
         reference.uuid,
         entries.value
-          .filter((entry) => entry.definition.shortName === reference.destinationContainerType)
+          .filter((entry) =>
+            reference.destinationRef
+              ? entry.definition.definitionPath === reference.destinationRef
+              : entry.definition.shortName === reference.destinationContainerType
+          )
           .map((entry) => ({
             uuid: entry.container.uuid,
             label: entry.path,
@@ -202,6 +208,91 @@ export const useConfigStore = defineStore('config', () => {
       ])
     )
   );
+
+  const referenceAddOptions = computed(() =>
+    Object.fromEntries(
+      (selectedEntry.value?.definition.references ?? []).map((reference) => [
+        reference.uuid,
+        config.value
+          ? [null, ...entries.value.map((entry) => entry.container.uuid)].flatMap((parentUuid) =>
+              manager
+                .getAddOptions(config.value!, parentUuid)
+                .filter((option) =>
+                  reference.destinationRef
+                    ? option.definition.definitionPath === reference.destinationRef
+                    : option.definition.shortName === reference.destinationContainerType
+                )
+                .map((option) => ({
+                  definitionUuid: option.definition.uuid,
+                  parentUuid,
+                  label: `${parentUuid ? entries.value.find((entry) => entry.container.uuid === parentUuid)?.path : '模块根'}/${option.definition.shortName}`,
+                  disabledReason: option.disabledReason,
+                }))
+            )
+          : [],
+      ])
+    )
+  );
+
+  /** Create a target under an explicitly chosen valid parent and assign it in one undo step.
+   * @param referenceUuid Selected reference. @param definitionUuid Allowed target definition.
+   * @param parentUuid Target parent, null for module roots. @returns Nothing.
+   */
+  function createReferenceTarget(
+    referenceUuid: string,
+    definitionUuid: string,
+    parentUuid: string | null
+  ): void {
+    assertEditable();
+    const source = selectedEntry.value;
+    if (!config.value || !source) return;
+    const option = referenceAddOptions.value[referenceUuid]?.find(
+      (item) => item.definitionUuid === definitionUuid && item.parentUuid === parentUuid
+    );
+    if (!option || option.disabledReason)
+      throw new Error(option?.disabledReason ?? '请先新增目标父容器或加载目标模块');
+    edit('新增引用目标', () => {
+      const target = manager.addContainerInstance(config.value!, parentUuid, definitionUuid);
+      source.container.references.set(referenceUuid, {
+        definitionRef: referenceUuid,
+        targetUuid: target.uuid,
+      });
+    });
+  }
+
+  /** Add new module definitions and persist them alongside the configuration library.
+   * @param definitions Parsed modules; existing module names cannot be replaced under live configurations.
+   * @returns Whether the complete library was saved.
+   */
+  async function importModuleDefinitions(definitions: BswmdModule[]): Promise<boolean> {
+    assertEditable();
+    if (!(await initialize())) return false;
+    const names = definitions.map((definition) => definition.shortName);
+    if (
+      new Set(names).size !== names.length ||
+      names.some((name) => modules.value.some((item) => item.shortName === name))
+    )
+      throw new Error('模块已加载或名称重复；为保留现有配置的定义绑定，不覆盖已加载模块');
+    const previousModules = [...modules.value],
+      previousImported = [...importedModules.value];
+    const previousPreferences = { ...modulePreferences.value };
+    modules.value.push(...definitions);
+    importedModules.value.push(...definitions);
+    for (const definition of definitions)
+      modulePreferences.value[definition.shortName] = {
+        included: true,
+        generation: true,
+        validation: true,
+      };
+    manager = new ConfigInstanceManager(modules.value);
+    revision++;
+    if (await saveConfig()) return true;
+    modules.value = previousModules;
+    importedModules.value = previousImported;
+    modulePreferences.value = previousPreferences;
+    manager = new ConfigInstanceManager(modules.value);
+    return false;
+  }
 
   const summaries = computed(() =>
     configSets.value.map((set) => {
@@ -617,6 +708,7 @@ export const useConfigStore = defineStore('config', () => {
     const savedRevision = revision;
     try {
       const snapshot: StoredLibrary = {
+        importedModules: JSON.parse(JSON.stringify(importedModules.value)) as BswmdModule[],
         activeUuid: activeUuid.value,
         modulePreferences: JSON.parse(JSON.stringify(modulePreferences.value)) as Record<
           string,
@@ -654,8 +746,11 @@ export const useConfigStore = defineStore('config', () => {
         const legacy = await storage.getItem<StoredConfig>(STORAGE_KEY);
         if (legacy) library = { sets: [legacy], activeUuid: legacy.uuid };
       }
+      const restoredModules = [...loader.getAllModules(), ...(library?.importedModules ?? [])];
+      if (new Set(restoredModules.map((item) => item.shortName)).size !== restoredModules.length)
+        throw new Error('已保存的模块定义名称冲突');
       const restored = (library?.sets ?? []).map((saved) => {
-        const definition = modules.value.find(
+        const definition = restoredModules.find(
           (item) => item.shortName === saved.moduleRef && item.version === saved.version
         );
         if (!definition)
@@ -668,6 +763,9 @@ export const useConfigStore = defineStore('config', () => {
         collectContainers(set, definition);
         return set;
       });
+      modules.value = restoredModules;
+      importedModules.value = library?.importedModules ?? [];
+      manager = new ConfigInstanceManager(modules.value);
       configSets.value = restored;
       histories.clear();
       historyRevision.value++;
@@ -786,6 +884,7 @@ export const useConfigStore = defineStore('config', () => {
         ? configSets.value.map((set) => (set.uuid === session.targetUuid ? candidate : set))
         : [...configSets.value, candidate];
       const snapshot: StoredLibrary = {
+        importedModules: JSON.parse(JSON.stringify(importedModules.value)) as BswmdModule[],
         sets: next.map((set) => ({ ...set, containers: set.containers.map(serialize) })),
         activeUuid: candidate.uuid,
         modulePreferences: JSON.parse(JSON.stringify(modulePreferences.value)) as Record<
@@ -830,6 +929,9 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   return {
+    importModuleDefinitions,
+    referenceAddOptions,
+    createReferenceTarget,
     canUndo,
     canRedo,
     undoLabel,

@@ -8,10 +8,20 @@ export type EcucParameterType =
 
 export type ConfigClass = 'PRE_COMPILE' | 'LINK_TIME' | 'POST_BUILD';
 
+export interface Multiplicity {
+  lower: number;
+  upper: number | 'unbounded';
+}
+
 /**
  * BSWMD 模块根节点
  */
 export interface BswmdModule {
+  multiplicity?: Multiplicity;
+  /** Explicit import limitations, shown before accepting a definition. */
+  importWarnings?: string[];
+  /** Semantics retained for editing but not yet representable by the value exporter. */
+  arxmlExportBlockers?: string[];
   shortName: string;
   version: string;
   description?: string;
@@ -22,6 +32,8 @@ export interface BswmdModule {
  * BSWMD 容器定义
  */
 export interface BswmdContainer {
+  /** Absolute source definition path, when imported from ECUC. */
+  definitionPath?: string;
   uuid: string;
   shortName: string;
   description?: string;
@@ -45,6 +57,10 @@ export interface BswmdContainer {
  * BSWMD 参数定义
  */
 export interface BswmdParameter {
+  multiplicity?: Multiplicity;
+  minLength?: number;
+  maxLength?: number;
+  regularExpression?: string;
   /** Definition-owned editing restriction, also enforced by batch edits. */
   readOnly?: boolean;
   /** Optional semantic column role for the DTC CSV projection. */
@@ -69,6 +85,8 @@ export interface BswmdParameter {
  * BSWMD 引用定义
  */
 export interface BswmdReference {
+  multiplicity?: Multiplicity;
+  destinationRef?: string;
   /** Optional relation role for the DTC CSV projection. */
   exportRole?: 'attributes' | 'dtc';
   uuid: string;

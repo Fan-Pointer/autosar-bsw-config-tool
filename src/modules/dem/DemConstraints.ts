@@ -1,5 +1,9 @@
-import type { ConstraintRule, ConstraintViolation, ConstraintContext } from './ConstraintTypes';
-import { collectContainers, type ContainerEntry } from '../config/ConfigTraversal';
+import type {
+  ConstraintRule,
+  ConstraintViolation,
+  ConstraintContext,
+} from '@/core/constraint/ConstraintTypes';
+import { collectContainers, type ContainerEntry } from '@/core/config/ConfigTraversal';
 
 function entries(ctx: ConstraintContext, name: string): ContainerEntry[] {
   if (ctx.bswmdModule.shortName !== 'Dem') return [];

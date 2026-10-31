@@ -1,5 +1,5 @@
 import { XMLParser, XMLValidator } from 'fast-xml-parser';
-import { decodeXmlText, stripDoctype } from './XmlSafety';
+import { decodeXmlText, stripDoctype, withoutXmlComments } from './XmlSafety';
 import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
@@ -36,6 +36,7 @@ function definitionPaths(module: BswmdModule): Map<string, string> {
   return paths;
 }
 function parameterDest(type: BswmdParameter['type']): string {
+  if (type === 'FUNCTION') return 'ECUC-FUNCTION-NAME-DEF';
   return `ECUC-${{ INTEGER: 'INTEGER', FLOAT: 'FLOAT', BOOLEAN: 'BOOLEAN', ENUM: 'ENUMERATION', STRING: 'STRING', FUNCTION: 'FUNCTION-NAME', REFERENCE: 'STRING' }[type]}-PARAM-DEF`;
 }
 
@@ -45,6 +46,8 @@ function parameterDest(type: BswmdParameter['type']): string {
  * @returns Escaped AUTOSAR r4.2.2 XML.
  */
 export function exportArxml(config: ConfigInstance, module: BswmdModule): string {
+  if (module.arxmlExportBlockers?.length)
+    throw new Error(`该模块暂不能导出 ARXML：${module.arxmlExportBlockers.join('；')}`);
   const checked = hydrateConfig(serializeConfig(config), [module]);
   const definitions = definitionPaths(module);
   const entries = collectContainers(checked, module);
@@ -151,6 +154,8 @@ function readValue(value: string, definition: BswmdParameter): unknown {
  * @returns Validated standalone configuration with resolved forward references.
  */
 export function importArxml(source: string, modules: BswmdModule[]): ConfigInstance {
+  checkImportSize(new TextEncoder().encode(source).byteLength);
+  source = withoutXmlComments(source);
   xmlPreflight(source);
   const safeSource = stripDoctype(source);
   const validation = XMLValidator.validate(safeSource);

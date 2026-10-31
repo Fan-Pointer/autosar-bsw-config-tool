@@ -14,7 +14,7 @@ export interface ConstraintViolation {
   ruleId: string;
   /** 严重程度 */
   severity: 'ERROR' | 'WARNING' | 'INFO';
-  /** 配置路径，如 "DemConfigSet/DemDTC_0/demDtcValue" */
+  /** 配置路径，由容器实例名和字段名组成。 */
   path: string;
   /** 错误消息 */
   message: string;

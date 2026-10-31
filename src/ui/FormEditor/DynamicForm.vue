@@ -183,9 +183,38 @@
             :label="option.label"
           />
         </el-select>
-        <p v-if="!referenceOptions[referencePicker]?.length">
-          暂无可引用的实例，请先在配置树中新增目标实例。
-        </p>
+        <div
+          v-if="!referenceOptions[referencePicker]?.length"
+          class="reference-empty"
+          role="status"
+        >
+          <p>
+            暂无
+            {{
+              container.references.find((item) => item.uuid === referencePicker)
+                ?.destinationContainerType
+            }}
+            实例，请先新增
+          </p>
+          <el-button
+            v-for="option in referenceAddOptions[referencePicker] ?? []"
+            :key="String(option.parentUuid) + option.definitionUuid"
+            :disabled="readonly || Boolean(option.disabledReason)"
+            :title="option.disabledReason"
+            @click="
+              emit(
+                'create-reference-target',
+                referencePicker,
+                option.definitionUuid,
+                option.parentUuid
+              )
+            "
+            >新增 {{ option.label }}</el-button
+          >
+          <p v-if="!referenceAddOptions[referencePicker]?.length">
+            请先新增目标父容器；跨模块目标当前不可创建。
+          </p>
+        </div>
       </template>
     </el-dialog>
   </div>
@@ -200,6 +229,15 @@ const props = withDefaults(
     configData?: Record<string, unknown>;
     referenceData?: Record<string, string>;
     referenceOptions?: Record<string, { uuid: string; label: string }[]>;
+    referenceAddOptions?: Record<
+      string,
+      {
+        definitionUuid: string;
+        parentUuid: string | null;
+        label: string;
+        disabledReason?: string;
+      }[]
+    >;
     labelWidth?: string;
     readonly?: boolean;
     selectedFieldUuid?: string;
@@ -209,6 +247,7 @@ const props = withDefaults(
     configData: () => ({}),
     referenceData: () => ({}),
     referenceOptions: () => ({}),
+    referenceAddOptions: () => ({}),
     readonly: false,
     danglingReferences: () => [],
   }
@@ -217,6 +256,7 @@ const emit = defineEmits<{
   'update:configData': [data: Record<string, unknown>];
   'parameter-change': [paramUuid: string, value: unknown];
   'reference-change': [refUuid: string, targetUuid: string];
+  'create-reference-target': [refUuid: string, definitionUuid: string, parentUuid: string | null];
 }>();
 const radices = ref<Record<string, string>>({});
 const numericErrors = ref<Record<string, string>>({});

@@ -249,10 +249,12 @@
                 :config-data="store.parameterData"
                 :reference-data="store.referenceData"
                 :reference-options="store.referenceOptions"
+                :reference-add-options="store.referenceAddOptions"
                 :dangling-references="store.danglingReferences"
                 :selected-field-uuid="store.selectedFieldUuid"
                 @parameter-change="store.setParameterValue"
                 @reference-change="store.setReferenceTarget"
+                @create-reference-target="store.createReferenceTarget"
               />
               <details
                 v-if="

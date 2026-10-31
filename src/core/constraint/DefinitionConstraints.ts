@@ -113,7 +113,11 @@ export const DefinitionConstraints: ConstraintRule[] = [
                 containerUuid: entry.container.uuid,
                 definitionRef: reference.uuid,
               });
-            } else if (target.definition.shortName !== reference.destinationContainerType) {
+            } else if (
+              reference.destinationRef
+                ? target.definition.definitionPath !== reference.destinationRef
+                : target.definition.shortName !== reference.destinationContainerType
+            ) {
               add(
                 reference.uuid,
                 reference.shortName,

@@ -8,7 +8,7 @@ import { BswmdLoader } from '../src/core/bswmd/BswmdLoader';
 import { ConfigInstanceManager } from '../src/core/config/ConfigInstance';
 import { collectContainers, indexDefinitions } from '../src/core/config/ConfigTraversal';
 import { ConstraintEngine } from '../src/core/constraint/ConstraintEngine';
-import { DemConstraints } from '../src/core/constraint/DemConstraints';
+import { DemConstraints } from '../src/modules/dem/DemConstraints';
 import { DefinitionConstraints } from '../src/core/constraint/DefinitionConstraints';
 import { TemplateEngine } from '../src/core/generator/TemplateEngine';
 import { CGenerator } from '../src/core/generator/CGenerator';

@@ -4,6 +4,7 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  cacheDir: '.temp/vite-cache',
   plugins: [vue()],
   resolve: {
     alias: {
@@ -20,7 +21,6 @@ export default defineConfig({
     sourcemap: true,
   },
   test: {
-    cacheDir: '.temp/vitest-cache',
     globals: true,
     environment: 'jsdom',
   },

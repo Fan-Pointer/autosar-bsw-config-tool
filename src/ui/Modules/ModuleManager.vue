@@ -6,6 +6,50 @@
     class="module-manager"
     @update:model-value="emit('update:modelValue', $event)"
   >
+    <section class="definition-import" aria-label="导入模块定义">
+      <label
+        >导入模块定义（ARXML）
+        <input
+          type="file"
+          accept=".arxml"
+          aria-label="导入模块定义（ARXML）"
+          :disabled="definitionBusy"
+          @change="readDefinitions"
+        />
+      </label>
+      <p v-if="definitionBusy" role="status">{{ definitionStatus }}</p>
+      <p v-if="definitionError" role="alert">{{ definitionError }}</p>
+      <div v-if="fileModules.length" class="definition-choices">
+        <label v-for="name in fileModules" :key="name">
+          <input
+            v-model="selectedDefinitions"
+            type="checkbox"
+            :value="name"
+            :disabled="definitionBusy || store.modules.some((item) => item.shortName === name)"
+            :aria-label="'导入 ' + name"
+          />
+          {{ name }}{{ store.modules.some((item) => item.shortName === name) ? '（已加载）' : '' }}
+        </label>
+      </div>
+      <el-button
+        v-if="fileModules.length"
+        :disabled="definitionBusy || !selectedDefinitions.length"
+        @click="previewDefinitions"
+        >读取选中模块</el-button
+      >
+      <div v-if="pendingDefinitions.length" class="definition-preview">
+        <p>待导入：{{ pendingDefinitions.map((item) => item.shortName).join('、') }}</p>
+        <details v-if="definitionWarnings.length" open>
+          <summary>定义导入限制（{{ definitionWarnings.length }}）</summary>
+          <ul>
+            <li v-for="warning in definitionWarnings" :key="warning">{{ warning }}</li>
+          </ul>
+        </details>
+        <el-button :disabled="definitionBusy" type="primary" @click="applyDefinitions"
+          >导入选中模块</el-button
+        >
+      </div>
+    </section>
     <div class="module-transfer">
       <section class="module-catalog">
         <header>
@@ -92,15 +136,103 @@
         </div>
       </section>
     </div>
-    <template #footer><el-button type="primary" @click="confirm">确定</el-button></template>
+    <template #footer
+      ><el-button type="primary" :disabled="definitionBusy" @click="confirm"
+        >确定</el-button
+      ></template
+    >
   </el-dialog>
 </template>
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useConfigStore, type ModulePreference } from '@/stores/configStore';
+import type { BswmdModule } from '@/core/bswmd/BswmdTypes';
+import { EcucDefinitionSession } from './EcucDefinitionSession';
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{ 'update:modelValue': [value: boolean]; applied: [] }>();
 const store = useConfigStore();
+let definitionSession: EcucDefinitionSession | undefined;
+const fileModules = ref<string[]>([]),
+  selectedDefinitions = ref<string[]>([]);
+const pendingDefinitions = ref<BswmdModule[]>([]);
+const definitionBusy = ref(false),
+  definitionStatus = ref(''),
+  definitionError = ref('');
+const definitionWarnings = computed(() =>
+  pendingDefinitions.value.flatMap((item) => item.importWarnings ?? [])
+);
+watch(
+  selectedDefinitions,
+  () => {
+    pendingDefinitions.value = [];
+  },
+  { deep: true }
+);
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (!value) {
+      definitionSession?.dispose();
+      definitionSession = undefined;
+      fileModules.value = [];
+      pendingDefinitions.value = [];
+    }
+  }
+);
+onBeforeUnmount(() => definitionSession?.dispose());
+async function readDefinitions(event: Event): Promise<void> {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+  if (!file) return;
+  definitionSession?.dispose();
+  fileModules.value = [];
+  selectedDefinitions.value = [];
+  pendingDefinitions.value = [];
+  definitionBusy.value = true;
+  definitionError.value = '';
+  definitionStatus.value = '正在读取文件并列出模块…';
+  try {
+    definitionSession = new EcucDefinitionSession();
+    fileModules.value = await definitionSession.open(file);
+    if (!fileModules.value.length) definitionError.value = '文件中没有 ECUC-MODULE-DEF 定义';
+  } catch (error) {
+    definitionError.value = error instanceof Error ? error.message : String(error);
+  } finally {
+    definitionBusy.value = false;
+    input.value = '';
+  }
+}
+async function previewDefinitions(): Promise<void> {
+  if (!definitionSession) return;
+  definitionBusy.value = true;
+  definitionError.value = '';
+  definitionStatus.value = '正在解析所选模块…';
+  try {
+    pendingDefinitions.value = await definitionSession.parse([...selectedDefinitions.value]);
+  } catch (error) {
+    definitionError.value = error instanceof Error ? error.message : String(error);
+  } finally {
+    definitionBusy.value = false;
+  }
+}
+async function applyDefinitions(): Promise<void> {
+  definitionBusy.value = true;
+  definitionError.value = '';
+  definitionStatus.value = '正在保存模块定义…';
+  try {
+    if (!(await store.importModuleDefinitions(pendingDefinitions.value)))
+      throw new Error(store.error ?? '模块保存失败');
+    for (const item of pendingDefinitions.value)
+      draft.value[item.shortName] = { ...store.modulePreferences[item.shortName] };
+    selectedDefinitions.value = [];
+    pendingDefinitions.value = [];
+    emit('applied');
+  } catch (error) {
+    definitionError.value = error instanceof Error ? error.message : String(error);
+  } finally {
+    definitionBusy.value = false;
+  }
+}
 const draft = ref<Record<string, ModulePreference>>({});
 const leftSelected = ref<string[]>([]),
   rightSelected = ref<string[]>([]);
@@ -166,6 +298,30 @@ async function confirm(): Promise<void> {
 }
 </script>
 <style scoped>
+.definition-import {
+  padding-bottom: 12px;
+  font-size: 13px;
+}
+.definition-import input[type='file'] {
+  margin-left: 12px;
+  max-width: 340px;
+}
+.definition-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-height: 140px;
+  overflow: auto;
+  margin: 10px 0;
+}
+.definition-preview details {
+  max-height: 150px;
+  overflow: auto;
+  margin-bottom: 8px;
+}
+.definition-import [role='alert'] {
+  color: var(--color-error);
+}
 :global(.module-manager) {
   padding: 0;
   border-radius: 6px;
