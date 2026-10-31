@@ -8,7 +8,7 @@
   "task": {
     "id": "TASK-004",
     "title": "界面复刻：三栏骨架 + 两级页签 + 混排树 + 参数行 + 模块管理",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -19,9 +19,9 @@
     "reportPath": ".codex/reports/TASK-004-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "0f472de0cb5b59487dcfc0e702c10a6677984a3a",
     "createdAt": "2026-11-01T02:10:00+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-10-31T18:30:21Z",
     "approvedAt": null,
     "specPath": "docs/UI-REPLICA-SPEC.md",
     "visualEvidence": ".codex/references/easysar-2026-11-01/"
