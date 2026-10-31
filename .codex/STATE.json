@@ -2,26 +2,26 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-5",
-  "stageName": "数据进出（导入导出 + 冲突处理 + XXE 防护）",
+  "stage": "PHASE-6",
+  "stageName": "编辑体验闭环（撤销重做 · 批量修改 · 悬空引用 · 全局搜索 · 主题）",
 
   "task": {
-    "id": "TASK-005",
-    "title": "导入导出：JSON / ARXML / CSV + 预览冲突 + XXE 防护",
-    "status": "SUBMITTED",
+    "id": "TASK-006",
+    "title": "DEM 编辑体验闭环：撤销重做、批量修改、悬空引用、全局搜索、主题",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "b8511000f0564c40aef33cfc963a9a7442d55d3403a12c863d51507c4bdeaa08",
+    "contractHash": "7781461877df218836c50800ad08fa32dad50922cc1c91b9be88cb0bfcd1aa2a",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T02:50:00+08:00",
-    "reportPath": ".codex/reports/TASK-005-REPORT.md",
+    "contractBoundAt": "2026-11-01T03:40:00+08:00",
+    "reportPath": ".codex/reports/TASK-006-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "f1a4a14ca59553738e129de7d1d67e59fc4f8d86",
-    "createdAt": "2026-11-01T02:50:00+08:00",
-    "submittedAt": "2026-10-31T19:03:13.9502334+00:00",
+    "submissionCommit": null,
+    "createdAt": "2026-11-01T03:40:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
     "specPath": "docs/UI-REPLICA-SPEC.md"
   },
@@ -116,21 +116,50 @@
         "🟡-4 参考图 870KB 二进制入库 -> 建议压缩或移出构建范围",
         "🟡-5 测试缓存目录导致宿主 EPERM 抖动 -> 建议显式 cacheDir"
       ]
+    },
+    {
+      "taskId": "TASK-005",
+      "title": "导入导出：JSON / ARXML / CSV + 预览冲突 + XXE 防护",
+      "finalStatus": "APPROVED",
+      "rounds": [
+        {
+          "round": 0,
+          "submissionCommit": "f1a4a14ca59553738e129de7d1d67e59fc4f8d86",
+          "stateCommit": "c58a273d9ebe2256479c854626783b8e91a1ee8a",
+          "verdict": "APPROVED",
+          "blockers": 0,
+          "majors": 1,
+          "minors": 5,
+          "reviewPath": ".codex/review/TASK-005-ROUND-0-REVIEW.md",
+          "at": "2026-11-01T03:36:00+08:00"
+        }
+      ],
+      "approvedAt": "2026-11-01T03:36:00+08:00",
+      "reviewerNotes": "20/20 契约通过。评审方独立证据：build 通过；127 用例全绿（较上轮 83 增 44，无删无 skip）；11 个 XXE 变体（含零宽/大小写/空白/参数实体/外部DTD/CDATA/XInclude）全部拒绝且未读文件未联网；ARXML 命名空间 r4.2.2、UUID 全局唯一、DEFINITION-REF 前缀正确、回读一致；planImport 后基线序列化文本逐字节不变；界面实测四列冲突 DemDtcValue 42 vs 1、覆盖应用后值真变 42/7；三策略计数 rename 6/27/2、skip 5/22/2。",
+      "environmentNotes": "连跑 6 次测试有 2 次因宿主 node-brokered-fs-shim 拦截 %TEMP% 写入出现 EPERM，收集退化为 5 files/100 tests，用例本身无一失败，归因环境非产品缺陷。",
+      "carriedOver": [
+        "🟠-1 processEntities:true 单点防御，纵深不足 -> 并入 TASK-006 E1",
+        "🟡-1 注释里出现 <!DOCTYPE 字样导致合法文件误拒",
+        "🟡-2 ARXML 单文件仅支持一个 ECUC 模块配置，需在后续明确多模块策略",
+        "🟡-3 vitest cacheDir 未显式指定 -> 并入 TASK-006 E2",
+        "🟡-4 未知 definitionRef 错误信息缺期望值 -> 并入 TASK-006 E3",
+        "🟡-5 参考图 870KB 二进制入库（承 TASK-004 🟡-4）"
+      ]
     }
   ],
 
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-004",
+    "taskId": "TASK-005",
     "round": 0,
-    "reviewedCommit": "0f472de0cb5b59487dcfc0e702c10a6677984a3a",
-    "at": "2026-11-01T02:48:00+08:00",
+    "reviewedCommit": "f1a4a14ca59553738e129de7d1d67e59fc4f8d86",
+    "at": "2026-11-01T03:36:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 1,
     "minors": 5,
-    "reviewPath": ".codex/review/TASK-004-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-004-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-005-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-005-ROUND-0-REVIEW.md"
   },
 
   "autodevReview": {
