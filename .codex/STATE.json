@@ -2,26 +2,26 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-8",
-  "stageName": "导出语义保真与 NvM CHOICE 收口",
+  "stage": "PHASE-9",
+  "stageName": "NvM CHOICE 全链路收口与必填项体验",
 
   "task": {
-    "id": "TASK-008",
-    "title": "导出保真修复（未配置不导出/描述回填/时间戳稳定）+ NvM CHOICE 全链路",
-    "status": "SUBMITTED",
+    "id": "TASK-009",
+    "title": "NvM CHOICE 容器全链路（解析/互斥/导出/往返）+ 必填项一键确认建议值",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "6bff40df368117d78fac1477fbd916c1cc70fc9c15131f912effe4d43328ed77",
+    "contractHash": "cf2a86f978694d46471354eca2d3617559fcac8e117d70fb2adc0bdfdc7fc0f0",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T05:10:00+08:00",
-    "reportPath": ".codex/reports/TASK-008-REPORT.md",
+    "contractBoundAt": "2026-11-01T06:05:00+08:00",
+    "reportPath": ".codex/reports/TASK-009-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "4ef677d748310f4bfa5537b85f9a0cac144718d7",
-    "createdAt": "2026-11-01T05:10:00+08:00",
-    "submittedAt": "2026-11-01T04:20:50+08:00",
+    "submissionCommit": null,
+    "createdAt": "2026-11-01T06:05:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "specPath": "docs/UI-REPLICA-SPEC.md"
@@ -204,21 +204,47 @@
         "🟡-3 首次渲染 ≤500ms 未做真实浏览器计时",
         "🟡-4 参考图 870KB 入库（承前）"
       ]
+    },
+    {
+      "taskId": "TASK-008",
+      "title": "导出保真修复（未配置不导出/描述回填/时间戳稳定）+ NvM CHOICE 全链路",
+      "finalStatus": "APPROVED",
+      "rounds": [
+        {
+          "round": 0,
+          "submissionCommit": "4ef677d748310f4bfa5537b85f9a0cac144718d7",
+          "stateCommit": "5afbda518412a3afbd8cc3a33759cf056c10d4ed",
+          "verdict": "APPROVED",
+          "blockers": 0,
+          "majors": 0,
+          "minors": 3,
+          "reviewPath": ".codex/review/TASK-008-ROUND-0-REVIEW.md",
+          "at": "2026-11-01T06:00:00+08:00"
+        }
+      ],
+      "approvedAt": "2026-11-01T06:00:00+08:00",
+      "reviewerNotes": "round 0 分批范围 A1-A5 + C1-C5 全达成，B1-B4 由 Codex 声明未实施（符合契约 §5）。评审方独立实测：208 用例全绿；Dem 15 配置→导出 15 VALUE（修前 31/31）；CanIf 0 配置→拒绝导出、0 VALUE（修前 45/45）；必填报错逐项列清单；isConfigured 往返 31 键差异 0；时间戳不漂；描述差异 0；ARXML 结构合规且注入 DOCTYPE 仍被拒（XXE 未破）。额外压力测试：剥离 ADMIN-DATA 后导入仍 15/31 已配置 → isConfigured 由 <VALUE> 存在性承载，未被私有扩展绑架。C3 既有用例调整逐文件逐行组说明，31→15 因旧断言即缺陷本身且新增逐 UUID isConfigured 比对与 16 个未配置计数，覆盖面不降反升。本轮为质量最高一轮。",
+      "environmentNotes": "首次运行 12 files/191（EPERM 收集抖动），二次 11 files/208，用例无一失败。",
+      "carriedOver": [
+        "🟡-1 必填项缺『一键确认建议值』，37 个必填逐条手填成本高 -> TASK-009 C1-C3",
+        "🟡-2 NvM CHOICE 未做，仍不可导出，第二模块闸门只过一半 -> TASK-009 A1-B4",
+        "🟡-3 首次渲染 ≤500ms 未做真实浏览器计时（三轮挂账）-> 产品化阶段"
+      ]
     }
   ],
 
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-007",
+    "taskId": "TASK-008",
     "round": 0,
-    "reviewedCommit": "f72bcf549476399e57ed9bcfc4367902e8d5f44f",
-    "at": "2026-11-01T05:00:00+08:00",
+    "reviewedCommit": "4ef677d748310f4bfa5537b85f9a0cac144718d7",
+    "at": "2026-11-01T06:00:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
-    "majors": 2,
-    "minors": 4,
-    "reviewPath": ".codex/review/TASK-007-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-007-ROUND-0-REVIEW.md"
+    "majors": 0,
+    "minors": 3,
+    "reviewPath": ".codex/review/TASK-008-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-008-ROUND-0-REVIEW.md"
   },
 
   "autodevReview": {
