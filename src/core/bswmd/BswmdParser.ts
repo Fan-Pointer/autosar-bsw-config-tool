@@ -192,6 +192,11 @@ export class BswmdParser {
     }
     return {
       ...identity,
+      exportRole: this.exportRole(
+        data.exportRole,
+        ['dtcValue', 'severity', 'wwhObdClass', 'eventId'] as const,
+        label
+      ),
       type,
       configClass,
       defaultValue,
@@ -206,8 +211,20 @@ export class BswmdParser {
     const data = object(raw, path);
     return {
       ...this.identity(data, path, ids),
+      exportRole: this.exportRole(data.exportRole, ['attributes', 'dtc'] as const, path),
       destinationContainerType: requiredString(data, 'destinationContainerType', path),
       isOptional: optionalFlag(data.isOptional, `${path}.isOptional`),
     };
+  }
+
+  private exportRole<T extends string>(
+    value: unknown,
+    allowed: readonly T[],
+    path: string
+  ): T | undefined {
+    if (value === undefined) return undefined;
+    const role = allowed.find((item) => item === value);
+    if (!role) throw new Error(`${path}.exportRole: unsupported CSV role`);
+    return role;
   }
 }

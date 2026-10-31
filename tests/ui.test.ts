@@ -287,9 +287,10 @@ describe('TASK-003 user interactions', () => {
     expect(store.config?.name).toBe('界面测试配置');
     expect(wrapper.text()).toContain('添加第一条 DTC');
     expect(wrapper.text()).toContain('lower multiplicity 1 required');
+    await wrapper.get('.empty-children summary').trigger('click');
     await wrapper
       .findAll('button')
-      .find((button) => button.text() === '添加第一条 DTC')!
+      .find((button) => button.text() === '＋ 添加第一条 DTC')!
       .trigger('click');
     await flushPromises();
     expect(store.selectedEntry?.container.shortName).toBe('DemDTC');

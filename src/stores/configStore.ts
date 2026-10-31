@@ -16,6 +16,24 @@ import { collectContainers } from '@/core/config/ConfigTraversal';
 import { ConstraintEngine } from '@/core/constraint/ConstraintEngine';
 import { DefinitionConstraints } from '@/core/constraint/DefinitionConstraints';
 import { DemConstraints } from '@/core/constraint/DemConstraints';
+import {
+  exportJson,
+  importJson,
+  importError,
+  serializeConfig,
+  hydrateConfig,
+} from '@/core/io/ConfigJson';
+import { exportArxml, importArxml } from '@/core/io/Arxml';
+import { exportCsv } from '@/core/io/Csv';
+import { planImport } from '@/core/io/ImportPlan';
+import type {
+  ConflictStrategy,
+  ExportFormat,
+  ImportFormat,
+  ImportPlan,
+  ImportSession,
+} from '@/core/io/IoTypes';
+import { generateUUID } from '@/utils/uuid';
 
 interface StoredContainer extends Omit<
   ConfigContainer,
@@ -98,6 +116,8 @@ export const useConfigStore = defineStore('config', () => {
   const selectedFieldUuid = ref<string>();
   const isDirty = ref(false);
   const isLoading = ref(false);
+  const isImporting = ref(false);
+  const importPlans = new WeakMap<ImportSession, { key: string; plan: ImportPlan }>();
   const error = ref<string | null>(null);
   const violations = ref<ConstraintViolation[]>([]);
   const validated = ref(false);
@@ -119,9 +139,9 @@ export const useConfigStore = defineStore('config', () => {
   );
   const parameterData = computed(() =>
     Object.fromEntries(
-      [...(selectedEntry.value?.container.parameters ?? [])].map(([id, parameter]) => [
-        id,
-        parameter.value,
+      (selectedEntry.value?.definition.parameters ?? []).map((parameter) => [
+        parameter.uuid,
+        selectedEntry.value?.container.parameters.get(parameter.uuid)?.value,
       ])
     )
   );
@@ -199,6 +219,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Nothing.
    */
   function createConfig(moduleName = modules.value[0]?.shortName, name?: string): void {
+    assertEditable();
     const definition = modules.value.find((item) => item.shortName === moduleName);
     if (!definition) throw new Error('No BSWMD module is available');
     const created = manager.createFromBswmd(definition);
@@ -251,6 +272,7 @@ export const useConfigStore = defineStore('config', () => {
     name: string,
     moduleName = modules.value[0]?.shortName
   ): Promise<boolean> {
+    assertEditable();
     if (!name.trim()) throw new Error('请输入配置集名称');
     if (!(await initialize()) || (isDirty.value && !(await saveConfig()))) return false;
     createConfig(moduleName, name);
@@ -262,6 +284,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether switching and persistence succeeded.
    */
   async function switchConfigSet(uuid: string): Promise<boolean> {
+    assertEditable();
     if (!configSets.value.some((set) => set.uuid === uuid)) return false;
     if (isDirty.value && !(await saveConfig())) return false;
     activeUuid.value = uuid;
@@ -277,6 +300,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether the cloned library was saved.
    */
   async function cloneConfigSet(uuid: string): Promise<boolean> {
+    assertEditable();
     const source = configSets.value.find((set) => set.uuid === uuid);
     if (!source || (isDirty.value && !(await saveConfig()))) return false;
     const base = source.name ?? source.moduleRef;
@@ -296,6 +320,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether deletion succeeded; a failed write restores the deleted set.
    */
   async function deleteConfigSet(uuid: string): Promise<boolean> {
+    assertEditable();
     const index = configSets.value.findIndex((set) => set.uuid === uuid);
     if (index < 0 || (isDirty.value && !(await saveConfig()))) return false;
     const previousActive = activeUuid.value;
@@ -323,6 +348,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns New instance, or undefined when no set is open.
    */
   function addContainerInstance(definitionUuid: string): ConfigContainer | undefined {
+    assertEditable();
     if (!config.value) return undefined;
     const added = manager.addContainerInstance(
       config.value,
@@ -339,6 +365,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Nothing.
    */
   function removeContainerInstance(uuid: string): void {
+    assertEditable();
     if (!config.value) return;
     const parent = manager.findParent(config.value, uuid);
     manager.removeContainerInstance(config.value, uuid);
@@ -350,6 +377,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns New subtree, or undefined without a selection.
    */
   function cloneContainerInstance(): ConfigContainer | undefined {
+    assertEditable();
     if (!config.value || !selectedEntry.value) return undefined;
     const clone = manager.cloneContainerInstance(config.value, selectedEntry.value.container.uuid);
     selectContainer(clone.uuid);
@@ -363,7 +391,17 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Nothing.
    */
   function setParameterValue(uuid: string, value: unknown): void {
+    assertEditable();
     if (!selectedEntry.value) return;
+    if (
+      !selectedEntry.value.container.parameters.has(uuid) &&
+      selectedEntry.value.definition.parameters.some((def) => def.uuid === uuid)
+    )
+      selectedEntry.value.container.parameters.set(uuid, {
+        definitionRef: uuid,
+        value: undefined,
+        isConfigured: false,
+      });
     manager.setParameterValue(selectedEntry.value.container, uuid, value);
     changed();
   }
@@ -373,6 +411,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Nothing; throws for invalid names.
    */
   function renameContainer(name: string): void {
+    assertEditable();
     if (!config.value || !selectedEntry.value) return;
     const clean = name.trim();
     if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(clean))
@@ -395,7 +434,13 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Nothing.
    */
   function setReferenceTarget(uuid: string, targetUuid: string): void {
+    assertEditable();
     if (!selectedEntry.value) return;
+    if (
+      !selectedEntry.value.container.references.has(uuid) &&
+      selectedEntry.value.definition.references.some((def) => def.uuid === uuid)
+    )
+      selectedEntry.value.container.references.set(uuid, { definitionRef: uuid, targetUuid: '' });
     manager.setReferenceTarget(selectedEntry.value.container, uuid, targetUuid);
     changed();
   }
@@ -404,6 +449,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether saving succeeded.
    */
   async function saveConfig(): Promise<boolean> {
+    if (isImporting.value) return false;
     isLoading.value = true;
     error.value = null;
     const savedRevision = revision;
@@ -437,6 +483,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether a saved configuration was restored.
    */
   async function loadConfig(): Promise<boolean> {
+    if (isImporting.value) return false;
     isLoading.value = true;
     error.value = null;
     try {
@@ -478,7 +525,150 @@ export const useConfigStore = defineStore('config', () => {
     }
   }
 
+  function assertEditable(): void {
+    if (isImporting.value) throw new Error('正在应用导入，请稍后编辑');
+  }
+
+  function importBaseline(): string {
+    return JSON.stringify({
+      activeUuid: activeUuid.value,
+      sets: configSets.value.map(serializeConfig),
+      modulePreferences: modulePreferences.value,
+    });
+  }
+
+  /** Parse a file into an isolated preview session without writing storage or editor state.
+   * @param text File content.
+   * @param format Explicit file format.
+   * @param target Current set or a new set.
+   * @returns A session bound to the exact project snapshot being previewed.
+   */
+  function prepareImport(
+    text: string,
+    format: ImportFormat,
+    target: 'current' | 'new' = 'current'
+  ): ImportSession {
+    try {
+      const incoming =
+        format === 'json' ? importJson(text, modules.value) : importArxml(text, modules.value);
+      if (
+        target === 'current' &&
+        config.value &&
+        (incoming.moduleRef !== config.value.moduleRef || incoming.version !== config.value.version)
+      )
+        throw new Error('文件模块或版本与当前配置集不一致，请选择新建配置集');
+      return {
+        incoming,
+        targetUuid: target === 'current' ? config.value?.uuid : undefined,
+        baseline: importBaseline(),
+      };
+    } catch (reason) {
+      throw new Error(importError(reason));
+    }
+  }
+
+  /** Compute preview counts and four-column conflict rows for a bound session.
+   * @param session Previously parsed file and project snapshot.
+   * @param strategy Selected conflict strategy.
+   * @returns Detached candidate and preview statistics.
+   */
+  function previewImport(session: ImportSession, strategy: ConflictStrategy): ImportPlan {
+    if (session.baseline !== importBaseline())
+      throw new Error('工程已在预览后更改，请重新读取文件并预览');
+    const definition = modules.value.find(
+      (item) =>
+        item.shortName === session.incoming.moduleRef && item.version === session.incoming.version
+    );
+    if (!definition) throw new Error('导入模块定义已不可用');
+    const target = configSets.value.find((set) => set.uuid === session.targetUuid) ?? null;
+    const key = JSON.stringify([session.targetUuid, strategy, exportJson(session.incoming)]);
+    let cached = importPlans.get(session);
+    if (!cached || cached.key !== key) {
+      cached = { key, plan: planImport(target, session.incoming, definition, strategy) };
+      importPlans.set(session, cached);
+    }
+    // Keep preview identities stable, while handing callers a detached candidate they cannot use to alter the cache.
+    return {
+      ...cached.plan,
+      conflicts: cached.plan.conflicts.map((row) => ({ ...row })),
+      result: hydrateConfig(serializeConfig(cached.plan.result), modules.value),
+    };
+  }
+
+  /** Persist a staged library atomically, publishing it only after a successful local write.
+   * @param session Parsed file bound to its original project snapshot.
+   * @param strategy Conflict strategy shown in preview.
+   * @returns Whether application succeeded; errors leave configuration, selection and dirty state intact.
+   */
+  async function applyImport(session: ImportSession, strategy: ConflictStrategy): Promise<boolean> {
+    if (isLoading.value || isImporting.value) {
+      error.value = '正在保存配置，请稍后应用导入';
+      return false;
+    }
+    isImporting.value = true;
+    isLoading.value = true;
+    error.value = null;
+    try {
+      // Keep the entire live snapshot untouched until the single IndexedDB/library write succeeds.
+      const candidate = previewImport(session, strategy).result;
+      if (session.targetUuid) candidate.lastModified = Date.now();
+      else if (configSets.value.some((set) => set.uuid === candidate.uuid))
+        candidate.uuid = generateUUID();
+      const definition = modules.value.find(
+        (item) => item.shortName === candidate.moduleRef && item.version === candidate.version
+      )!;
+      const nextViolations = engine.validate(candidate, definition);
+      const next = session.targetUuid
+        ? configSets.value.map((set) => (set.uuid === session.targetUuid ? candidate : set))
+        : [...configSets.value, candidate];
+      const snapshot: StoredLibrary = {
+        sets: next.map((set) => ({ ...set, containers: set.containers.map(serialize) })),
+        activeUuid: candidate.uuid,
+        modulePreferences: JSON.parse(JSON.stringify(modulePreferences.value)) as Record<
+          string,
+          ModulePreference
+        >,
+      };
+      const write = writes.then(() => storage.setItem(LIBRARY_KEY, snapshot));
+      writes = write.catch(() => undefined);
+      await write;
+      configSets.value = next;
+      activeUuid.value = candidate.uuid;
+      selectContainer(candidate.containers[0]?.uuid ?? '');
+      initialized.value = true;
+      revision++;
+      isDirty.value = false;
+      violations.value = nextViolations;
+      validated.value = true;
+      return true;
+    } catch (reason) {
+      error.value = importError(reason);
+      return false;
+    } finally {
+      isImporting.value = false;
+      isLoading.value = false;
+    }
+  }
+
+  /** Export the active configuration using definition-driven core codecs.
+   * @param format Requested local download format.
+   * @returns File content; throws a readable error when no configuration is active.
+   */
+  function exportConfig(format: ExportFormat): string {
+    if (!config.value || !module.value) throw new Error('请先打开配置集');
+    return format === 'json'
+      ? exportJson(config.value)
+      : format === 'arxml'
+        ? exportArxml(config.value, module.value)
+        : exportCsv(config.value, module.value);
+  }
+
   return {
+    isImporting,
+    prepareImport,
+    previewImport,
+    applyImport,
+    exportConfig,
     modules,
     modulePreferences,
     configSets,

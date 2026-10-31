@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE AUTOSAR [
+  <!ENTITY external SYSTEM "file:///AUTODEV-XXE-SECRET.txt">
+]>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.2.2">
+  <AR-PACKAGES><AR-PACKAGE><SHORT-NAME>&external;</SHORT-NAME></AR-PACKAGE></AR-PACKAGES>
+</AUTOSAR>

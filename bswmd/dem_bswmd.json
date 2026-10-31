@@ -61,6 +61,7 @@
             {
               "uuid": "ecuc-dem-dtc-value",
               "shortName": "DemDtcValue",
+              "exportRole": "dtcValue",
               "description": "The DTC value (3 bytes hexadecimal)",
               "type": "INTEGER",
               "configClass": "PRE_COMPILE",
@@ -82,6 +83,7 @@
             {
               "uuid": "ecuc-dem-dtc-severity",
               "shortName": "DemDTCSeverity",
+              "exportRole": "severity",
               "description": "Severity of the DTC",
               "type": "ENUM",
               "configClass": "PRE_COMPILE",
@@ -97,6 +99,7 @@
             {
               "uuid": "ecuc-dem-dtc-wwhobd-class",
               "shortName": "DemWWHOBDDTCClass",
+              "exportRole": "wwhObdClass",
               "description": "WWH-OBD classification of the DTC",
               "type": "ENUM",
               "configClass": "PRE_COMPILE",
@@ -123,6 +126,7 @@
             {
               "uuid": "ecuc-dem-dtc-attributes-ref",
               "shortName": "DemDTCAttributesRef",
+              "exportRole": "attributes",
               "description": "Reference to the DTC attributes",
               "destinationContainerType": "DemDTCAttributes",
               "isOptional": false
@@ -245,6 +249,7 @@
             {
               "uuid": "ecuc-dem-event-id",
               "shortName": "DemEventId",
+              "exportRole": "eventId",
               "description": "Unique event identifier",
               "type": "INTEGER",
               "configClass": "PRE_COMPILE",
@@ -288,6 +293,7 @@
             {
               "uuid": "ecuc-dem-event-dtc-ref",
               "shortName": "DemDTCRef",
+              "exportRole": "dtc",
               "description": "Reference to the DTC",
               "destinationContainerType": "DemDTC",
               "isOptional": true

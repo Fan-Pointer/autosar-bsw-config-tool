@@ -45,6 +45,8 @@ export interface BswmdContainer {
  * BSWMD 参数定义
  */
 export interface BswmdParameter {
+  /** Optional semantic column role for the DTC CSV projection. */
+  exportRole?: 'dtcValue' | 'severity' | 'wwhObdClass' | 'eventId';
   uuid: string;
   shortName: string;
   description?: string;
@@ -65,6 +67,8 @@ export interface BswmdParameter {
  * BSWMD 引用定义
  */
 export interface BswmdReference {
+  /** Optional relation role for the DTC CSV projection. */
+  exportRole?: 'attributes' | 'dtc';
   uuid: string;
   shortName: string;
   description?: string;

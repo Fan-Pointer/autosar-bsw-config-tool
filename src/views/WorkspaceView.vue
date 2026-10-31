@@ -1,6 +1,8 @@
 <template>
   <div
     class="workspace-container"
+    v-loading="store.isImporting"
+    element-loading-text="正在应用导入…"
     @click="
       contextMenu = undefined;
       projectMenu = undefined;
@@ -162,6 +164,7 @@
             <button
               role="tab"
               :aria-selected="uuid === store.activeUuid"
+              :title="tabTooltip(uuid)"
               @click="store.switchConfigSet(uuid)"
             >
               <span class="module-symbol">M</span>{{ tabLabel(uuid) }}
@@ -222,25 +225,29 @@
                 @parameter-change="store.setParameterValue"
                 @reference-change="store.setReferenceTarget"
               />
-              <div
+              <details
                 v-if="
                   !store.selectedEntry.container.subContainers.length && store.childOptions.length
                 "
                 class="empty-children"
               >
-                <el-button
-                  v-for="option in store.childOptions"
-                  :key="option.definition.uuid"
-                  size="small"
-                  text
-                  :disabled="Boolean(option.disabledReason)"
-                  :title="option.disabledReason"
-                  @click="addFirst(option.definition.uuid)"
-                  >{{
-                    option.definition.initialAddLabel ?? '添加 ' + option.definition.shortName
-                  }}</el-button
-                >
-              </div>
+                <summary>＋ 添加子容器</summary>
+                <div class="child-shortcuts">
+                  <el-button
+                    v-for="option in store.childOptions"
+                    :key="option.definition.uuid"
+                    size="small"
+                    text
+                    :disabled="Boolean(option.disabledReason)"
+                    :title="option.disabledReason"
+                    @click="addFirst(option.definition.uuid)"
+                    >＋
+                    {{
+                      option.definition.initialAddLabel ?? '添加 ' + option.definition.shortName
+                    }}</el-button
+                  >
+                </div>
+              </details>
             </template>
           </section>
         </div>
@@ -295,15 +302,45 @@
     >
       <template v-for="(item, index) in menuItems" :key="index">
         <hr v-if="item.separator" />
-        <span v-else :title="item.disabled ? '未核实，待补充截图' : undefined"
-          ><button role="menuitem" :disabled="item.disabled" @click="projectAction(item.action)">
+        <span
+          v-else
+          :title="item.disabled ? '未核实，待补充截图' : undefined"
+          class="project-menu-entry"
+          ><button
+            role="menuitem"
+            :disabled="item.disabled || (item.action === 'export' && !store.config)"
+            :aria-expanded="
+              item.action === 'import' || item.action === 'export'
+                ? projectSubmenu === item.action
+                : undefined
+            "
+            @click="projectAction(item.action)"
+          >
             <span>{{ item.label }}</span
             ><span v-if="item.submenu">›</span>
-          </button></span
-        >
+          </button>
+          <div
+            v-if="
+              projectSubmenu === item.action &&
+              (item.action === 'import' || item.action === 'export')
+            "
+            class="io-submenu"
+            role="menu"
+          >
+            <button
+              v-for="format in item.action === 'import' ? importFormats : exportFormats"
+              :key="format"
+              role="menuitem"
+              @click="ioAction(item.action, format)"
+            >
+              {{ format === 'csv' ? 'CSV（DTC 列表）' : format.toUpperCase() }}
+            </button>
+          </div>
+        </span>
       </template>
     </div>
     <ModuleManager v-model="showModules" @applied="reconcileModules" />
+    <ImportDialog v-model="showImport" :format="importFormat" @imported="reopenImported" />
     <el-dialog v-model="showGenerated" title="生成的 C 配置文件" width="80%">
       <el-tabs
         ><el-tab-pane v-for="file in generatedFiles" :key="file.filename" :label="file.filename"
@@ -337,6 +374,8 @@ import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
 import ContainerActions from '@/ui/ConfigTree/ContainerActions.vue';
 import ModuleManager from '@/ui/Modules/ModuleManager.vue';
+import ImportDialog from '@/ui/ImportExport/ImportDialog.vue';
+import type { ExportFormat, ImportFormat } from '@/core/io/IoTypes';
 const router = useRouter(),
   store = useConfigStore();
 const generatedFiles = ref<GeneratedFile[]>([]),
@@ -351,6 +390,11 @@ const contextMenu = ref<{ x: number; y: number }>(),
 const projectWidth = ref(212),
   treeWidth = ref(240),
   projectCollapsed = ref(false);
+const showImport = ref(false),
+  importFormat = ref<ImportFormat>('json');
+const projectSubmenu = ref<string>();
+const importFormats: ImportFormat[] = ['json', 'arxml'];
+const exportFormats: ExportFormat[] = ['json', 'arxml', 'csv'];
 const activeOpen = computed(() =>
   Boolean(store.activeUuid && opened.value.includes(store.activeUuid))
 );
@@ -371,8 +415,8 @@ const menuItems = [
   { separator: true },
   { label: '代码验证', action: 'validate' },
   { label: '代码生成', action: 'generate' },
-  { label: '导入', submenu: true, disabled: true },
-  { label: '导出', submenu: true, disabled: true },
+  { label: '导入', submenu: true, action: 'import' },
+  { label: '导出', submenu: true, action: 'export' },
   { separator: true },
   { label: '自动计算', disabled: true },
   { label: '关闭工程', action: 'close' },
@@ -416,6 +460,35 @@ function operationEnabled(operation: 'generation' | 'validation'): boolean {
 function tabLabel(uuid: string): string {
   const set = store.configSets.find((item) => item.uuid === uuid);
   return set ? set.moduleRef + '(' + set.name + ')' : '';
+}
+function tabTooltip(uuid: string): string {
+  const set = store.configSets.find((item) => item.uuid === uuid);
+  return set ? `模块：${set.moduleRef}\n配置集：${set.name ?? set.moduleRef}` : '';
+}
+function reopenImported(): void {
+  if (store.activeUuid && !opened.value.includes(store.activeUuid))
+    opened.value.push(store.activeUuid);
+}
+function ioAction(action: string, format: ExportFormat): void {
+  projectMenu.value = undefined;
+  if (action === 'import' && format !== 'csv') {
+    importFormat.value = format;
+    showImport.value = true;
+    return;
+  }
+  try {
+    const content = store.exportConfig(format);
+    const mime =
+      format === 'json' ? 'application/json' : format === 'csv' ? 'text/csv' : 'application/xml';
+    const url = URL.createObjectURL(new Blob([content], { type: mime + ';charset=utf-8' }));
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `${(store.config?.name ?? 'configuration').replace(/[\\/:*?"<>|]/g, '_')}.${format}`;
+    anchor.click();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+  } catch (reason) {
+    ElMessage.error(reason instanceof Error ? reason.message : String(reason));
+  }
 }
 async function openModule(name: string): Promise<void> {
   const existing = store.configSets.find((item) => item.moduleRef === name);
@@ -462,9 +535,14 @@ function openContextMenu(event: MouseEvent): void {
   contextMenu.value = position(event);
 }
 function openProjectMenu(event: MouseEvent | KeyboardEvent): void {
+  projectSubmenu.value = undefined;
   projectMenu.value = position(event);
 }
 async function projectAction(action?: string): Promise<void> {
+  if (action === 'import' || action === 'export') {
+    projectSubmenu.value = projectSubmenu.value === action ? undefined : action;
+    return;
+  }
   projectMenu.value = undefined;
   if (action === 'modules') showModules.value = true;
   if (action === 'validate' && operationEnabled('validation')) validate();
@@ -854,10 +932,21 @@ function stopResize(): void {
   width: 270px;
 }
 .empty-children {
-  margin: 8px 38px;
+  margin: 24px 38px 32px;
+  border-top: 1px solid #e4e7ed;
+  padding-top: 18px;
+  color: #687e92;
+  font-size: 13px;
+}
+.empty-children summary {
+  cursor: pointer;
+}
+.child-shortcuts {
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 16px;
 }
 .empty-children .el-button {
   margin: 0;
@@ -918,6 +1007,20 @@ function stopResize(): void {
 }
 .project-menu > span {
   display: block;
+}
+.project-menu-entry {
+  position: relative;
+}
+.io-submenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 180px;
+  padding: 5px 0;
+  background: #f4f4f4;
+  border: 1px solid #dce0e5;
+  border-radius: 5px;
+  box-shadow: 0 6px 20px #0002;
 }
 .project-menu button {
   width: 100%;

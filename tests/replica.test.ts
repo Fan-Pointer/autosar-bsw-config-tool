@@ -223,7 +223,8 @@ describe('screenshot replica interactions', () => {
     const { wrapper } = await workspace();
     await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
     expect(wrapper.findAll('.project-menu [role=menuitem]')).toHaveLength(9);
-    expect(wrapper.findAll('.project-menu button[disabled]')).toHaveLength(5);
+    // Import is now available; export requires an active set. Unverified actions remain disabled.
+    expect(wrapper.findAll('.project-menu button[disabled]')).toHaveLength(4);
     await wrapper
       .findAll('.project-menu button')
       .find((item) => item.text().startsWith('模块管理'))!

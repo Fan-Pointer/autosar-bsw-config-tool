@@ -294,6 +294,9 @@ defineExpose({ resetForm, getFormData });
 .field-control {
   min-width: 0;
   width: 270px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .numeric {
   display: flex;
