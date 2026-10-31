@@ -4,7 +4,9 @@
 
 **一句话目标**：基于浏览器的 AUTOSAR BSW 配置工具，首期实现 DEM DTC 模块的可视化配置与 ARXML 导入导出。
 
-**当前阶段**：② 架构设计 → ③ 模块实现（Phase 1 骨架搭建中）
+**当前阶段**：② 架构设计 → ③ 模块实现（Phase 2：BSWMD 解析器与动态配置引擎）
+
+**仓库维护责任**：由架构师（锻码师）承担，含评审通过后提交、定期推送、远程同步校验
 
 **最后更新时间**：2026-10-31
 
@@ -170,15 +172,34 @@ ECUC 前缀: ECUC_Dem_{参数短名}
 ```
 
 ### 验收流程
-1. Codex 提交代码 → PR
-2. 锻码师 review（对照评审清单）
-3. 问题分级输出（阻塞/重要/建议）
-4. Codex 修复 → 重新 review
-5. 通过后合并，更新工程档案
+1. Codex 提交代码 → 写 `reports/<task>-REPORT.md` → 改 `STATE.json` 为 `SUBMITTED`
+2. 锻码师评审（按 `.codex/review/_TEMPLATE.md` 出具 `review/<task>-REVIEW.md`）
+3. 问题分级输出（🔴阻塞/🟠重要/🟡建议）
+4. Codex 按 REVIEW 修复 → 追加报告 → 改回 `SUBMITTED`，`round` +1
+5. 通过后 `APPROVED` → 架构师提交并推送 → 更新工程档案
+
+---
+
+## 附录 B：仓库维护规约（2026-10-31 定）
+
+**责任归属**：仓库由架构师（锻码师）维护，王上不再手动操作 Git。
+
+| 项 | 规约 |
+|---|---|
+| 远程 | `git@github.com:Fan-Pointer/autosar-bsw-config-tool.git`，主分支 `main` |
+| 提交时机 | ① 每次评审判定后立即提交评审产物；② 架构文档/协议变更后；③ 定时守护任务发现滞留改动时 |
+| 提交前置 | 有 `node_modules` 时先跑 `npm run build`，失败不提交并保留现场 |
+| 提交粒度 | 一次提交一个关注点，不混合无关模块 |
+| 消息格式 | `feat(<模块>): ...` / `fix(<模块>): ...` / `review(<task-id>): ...` / `chore(repo): ...`；禁用 "update"/"修改" |
+| 禁止操作 | `push --force`、`reset --hard`、提交 `node_modules`/`dist`/`.env`、提交构建失败产物 |
+| 远程冲突 | `pull --rebase`，冲突即停并报告，不强推 |
+| 自动化 | ①`AUTOSAR配置器-Codex交付自动评审`（每小时）；②`AUTOSAR配置器-仓库定时守护`（每 6 小时） |
+
+**同步判据**：`git rev-parse HEAD` 与 `git rev-parse origin/main` 一致才算已同步。
 
 ---
 
 **下次工程卡**
-- 本次已交付：项目工程档案、架构设计文档、目录骨架
-- 下次回来做什么：GitHub 仓库创建后，初始化 Vue 项目，开始 Phase 1
-- 需带来的材料：GitHub 仓库地址、王上确认的技术栈版本
+- 本次已交付：AGENTS.md 握手协议、STATE 状态机、TASK-002 契约、评审/报告模板、两个定时任务（自动评审 + 仓库守护）
+- 下次回来做什么：等 Codex 跑完 TASK-002 一轮，看 `.codex/review/TASK-002-REVIEW.md` 首轮判定
+- 需带来的材料：Codex 执行输出（若有报错）、`STATE.json` 当前内容
