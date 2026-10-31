@@ -11,18 +11,42 @@ import type {
   BswmdReference,
 } from '@/core/bswmd/BswmdTypes';
 import { generateUUID } from '@/utils/uuid';
+import { indexDefinitions } from './ConfigTraversal';
 
 /**
  * 配置实例管理器
  * 从 BSWMD 创建和管理配置实例
  */
 export class ConfigInstanceManager {
+  private readonly modules = new Map<string, BswmdModule>();
+
+  /**
+   * Supply definitions when editing configurations restored from storage.
+   * @param modules Module definitions available to this manager.
+   */
+  constructor(modules: BswmdModule[] = []) {
+    for (const module of modules) this.rememberModule(module);
+  }
+
+  private rememberModule(module: BswmdModule): void {
+    this.modules.set(JSON.stringify([module.shortName, module.version]), module);
+  }
+
+  private getModule(instance: ConfigInstance): BswmdModule {
+    const module = this.modules.get(JSON.stringify([instance.moduleRef, instance.version]));
+    if (!module) {
+      throw new Error(`BSWMD module not loaded: ${instance.moduleRef} (${instance.version})`);
+    }
+    return module;
+  }
+
   /**
    * 从 BSWMD 创建空配置实例
    * @param bswmd Module definition to instantiate.
    * @returns Editable configuration with definition references and defaults.
    */
   createFromBswmd(bswmd: BswmdModule): ConfigInstance {
+    this.rememberModule(bswmd);
     const now = Date.now();
 
     return {
@@ -36,20 +60,97 @@ export class ConfigInstanceManager {
   }
 
   private createContainers(definitions: BswmdContainer[]): ConfigContainer[] {
-    // TASK-002 requires a starter instance for every definition, including optional containers.
+    // Only the lower bound is mandatory; optional definitions must remain absent until added.
     return definitions.flatMap((definition) =>
-      Array.from(
-        {
-          length:
-            definition.multiplicity.upper === 0 ? 0 : Math.max(1, definition.multiplicity.lower),
-        },
-        (_, index) => {
-          const container = this.createContainerFromBswmd(definition);
-          if (index > 0) container.shortName += `_${index + 1}`;
-          return container;
-        }
-      )
+      Array.from({ length: definition.multiplicity.lower }, (_, index) => {
+        const container = this.createContainerFromBswmd(definition);
+        if (index > 0) container.shortName += `_${index + 1}`;
+        return container;
+      })
     );
+  }
+
+  /**
+   * Add a container and its required descendants without exceeding the sibling upper bound.
+   * @param instance Configuration created here, or restored using constructor-supplied definitions.
+   * @param parentContainerUuid Parent instance UUID, or null to add a root container.
+   * @param definitionUuid UUID of a definition directly allowed under that parent.
+   * @returns The newly inserted container, with defaults and fresh instance UUIDs.
+   */
+  addContainerInstance(
+    instance: ConfigInstance,
+    parentContainerUuid: string | null,
+    definitionUuid: string
+  ): ConfigContainer {
+    const module = this.getModule(instance);
+    const parent =
+      parentContainerUuid === null ? null : this.findContainer(instance, parentContainerUuid);
+    if (parentContainerUuid !== null && !parent) {
+      throw new Error(`Parent container not found: ${parentContainerUuid}`);
+    }
+    const definitions = parent
+      ? indexDefinitions(module).get(parent.definitionRef)?.subContainers
+      : module.containers;
+    const definition = definitions?.find((item) => item.uuid === definitionUuid);
+    if (!definition) {
+      throw new Error(
+        `Definition ${definitionUuid} is not allowed under ${parentContainerUuid ?? 'module root'}`
+      );
+    }
+    const siblings = parent ? parent.subContainers : instance.containers;
+    const count = siblings.filter((item) => item.definitionRef === definitionUuid).length;
+    if (definition.multiplicity.upper !== 'unbounded' && count >= definition.multiplicity.upper) {
+      throw new Error(
+        `${definition.shortName}: upper multiplicity ${definition.multiplicity.upper} reached`
+      );
+    }
+    const container = this.createContainerFromBswmd(definition);
+    const names = new Set(siblings.map((item) => item.shortName));
+    // Count alone is insufficient after deletion: reusing it could duplicate a remaining name.
+    for (let suffix = 2; names.has(container.shortName); suffix++) {
+      container.shortName = `${definition.shortName}_${suffix}`;
+    }
+    siblings.push(container);
+    this.touch(instance);
+    return container;
+  }
+
+  /**
+   * Remove a container subtree without violating its sibling lower bound.
+   * References from remaining containers are retained for validation to report dangling targets.
+   * @param instance Configuration with definitions available to this manager.
+   * @param containerUuid UUID of the container to remove.
+   * @returns The removed container subtree; throws when missing or required by multiplicity.
+   */
+  removeContainerInstance(instance: ConfigInstance, containerUuid: string): ConfigContainer {
+    const module = this.getModule(instance);
+    const siblings = this.findContainerSiblings(instance.containers, containerUuid);
+    const container = siblings?.find((item) => item.uuid === containerUuid);
+    if (!siblings || !container) throw new Error(`Container not found: ${containerUuid}`);
+    const definition = indexDefinitions(module).get(container.definitionRef);
+    if (!definition) throw new Error(`Unknown definitionRef: ${container.definitionRef}`);
+    const count = siblings.filter((item) => item.definitionRef === container.definitionRef).length;
+    if (count <= definition.multiplicity.lower) {
+      throw new Error(
+        `${definition.shortName}: lower multiplicity ${definition.multiplicity.lower} required`
+      );
+    }
+    siblings.splice(siblings.indexOf(container), 1);
+    this.touch(instance);
+    return container;
+  }
+
+  private findContainerSiblings(
+    containers: ConfigContainer[],
+    uuid: string
+  ): ConfigContainer[] | null {
+    if (containers.some((item) => item.uuid === uuid)) return containers;
+    // Return the actual containing array so a nested removal mutates only that parent's children.
+    for (const container of containers) {
+      const siblings = this.findContainerSiblings(container.subContainers, uuid);
+      if (siblings) return siblings;
+    }
+    return null;
   }
 
   /**

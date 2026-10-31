@@ -6,7 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router';
 import ElementPlus, { ElInputNumber, ElSelect, ElSwitch, ElInput } from 'element-plus';
 import { BswmdParser } from '../src/core/bswmd/BswmdParser';
 import { ConfigInstanceManager } from '../src/core/config/ConfigInstance';
-import { collectContainers } from '../src/core/config/ConfigTraversal';
+import { indexDefinitions } from '../src/core/config/ConfigTraversal';
 import DynamicForm from '../src/ui/FormEditor/DynamicForm.vue';
 import ConfigTree from '../src/ui/ConfigTree/ConfigTree.vue';
 import ValidationPanel from '../src/ui/Validator/ValidationPanel.vue';
@@ -14,6 +14,7 @@ import WorkspaceView from '../src/views/WorkspaceView.vue';
 import { useConfigStore } from '../src/stores/configStore';
 import rawDefinition from '../bswmd/dem_bswmd.json';
 import type { ConstraintViolation } from '../src/core/constraint/ConstraintTypes';
+import type { ConfigInstance } from '../src/core/config/ConfigTypes';
 
 const local = vi.hoisted(() => ({
   saved: new Map<string, unknown>(),
@@ -27,10 +28,14 @@ vi.mock('localforage', () => ({
 const wrappers: VueWrapper[] = [];
 const module = new BswmdParser().parseFromJson(JSON.stringify(rawDefinition));
 const definition = (name: string) => {
-  const config = new ConfigInstanceManager().createFromBswmd(module);
-  return collectContainers(config, module).find((entry) => entry.definition.shortName === name)!
-    .definition;
+  return [...indexDefinitions(module).values()].find((item) => item.shortName === name)!;
 };
+function addOptionalContainers(config: ConfigInstance): void {
+  const manager = new ConfigInstanceManager([module]);
+  for (const child of module.containers[0].subContainers) {
+    manager.addContainerInstance(config, config.containers[0].uuid, child.uuid);
+  }
+}
 const ui = { plugins: [ElementPlus] };
 beforeEach(() => {
   local.saved.clear();
@@ -98,6 +103,7 @@ describe('definition-driven components', () => {
 
   it('renders recursive tree nodes, multiplicities and distinct parameter/reference icons', async () => {
     const config = new ConfigInstanceManager().createFromBswmd(module);
+    addOptionalContainers(config);
     const wrapper = mount(ConfigTree, { props: { module, config }, global: ui });
     wrappers.push(wrapper);
     await nextTick();
@@ -142,6 +148,7 @@ describe('workspace integration and local persistence', () => {
   it('round-trips recursive Maps, references and values through local storage', async () => {
     const store = useConfigStore();
     store.createConfig();
+    addOptionalContainers(store.config!);
     const attributes = store.entries.find(
       (entry) => entry.definition.shortName === 'DemDTCAttributes'
     )!.container;
@@ -176,6 +183,7 @@ describe('workspace integration and local persistence', () => {
     setActivePinia(pinia);
     const store = useConfigStore();
     store.createConfig();
+    addOptionalContainers(store.config!);
     const router = createRouter({
       history: createMemoryHistory(),
       routes: [{ path: '/', component: WorkspaceView }],

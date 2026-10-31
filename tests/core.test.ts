@@ -21,6 +21,10 @@ const manager = new ConfigInstanceManager();
 function fixture() {
   const module = parser.parseFromJson(source);
   const config = manager.createFromBswmd(module);
+  // Scenarios below explicitly opt into these optional containers; empty configs no longer do.
+  for (const definition of module.containers[0].subContainers) {
+    manager.addContainerInstance(config, config.containers[0].uuid, definition.uuid);
+  }
   const find = (name: string) => {
     const entry = collectContainers(config, module).find(
       (item) => item.definition.shortName === name
@@ -122,10 +126,129 @@ describe('BSWMD parser and loader', () => {
 });
 
 describe('configuration instances and constraints', () => {
+  it('starts with zero optional children, then adds and removes one by definition', () => {
+    const module = parser.parseFromJson(source);
+    const config = manager.createFromBswmd(module);
+    const root = config.containers[0];
+    expect(root.subContainers).toHaveLength(0);
+    const engine = new ConstraintEngine();
+    engine.registerRules([...DefinitionConstraints, ...DemConstraints]);
+    expect(engine.validate(config, module)).toEqual([]);
+    config.lastModified = 0;
+    const dtc = manager.addContainerInstance(config, root.uuid, 'ecuc-dem-dtc-def');
+    expect(root.subContainers).toEqual([dtc]);
+    expect(dtc.definitionRef).toBe('ecuc-dem-dtc-def');
+    expect(dtc.parameters.get('ecuc-dem-dtc-value')).toMatchObject({
+      value: 1,
+      isConfigured: false,
+    });
+    expect(config.lastModified).toBeGreaterThan(0);
+    config.lastModified = 0;
+    expect(manager.removeContainerInstance(config, dtc.uuid)).toBe(dtc);
+    expect(root.subContainers).toHaveLength(0);
+    expect(config.lastModified).toBeGreaterThan(0);
+  });
+
+  it('adds multiple DTCs with unique identities and names even after a deletion', () => {
+    const module = parser.parseFromJson(source);
+    const config = manager.createFromBswmd(module);
+    const root = config.containers[0];
+    const first = manager.addContainerInstance(config, root.uuid, 'ecuc-dem-dtc-def');
+    const second = manager.addContainerInstance(config, root.uuid, 'ecuc-dem-dtc-def');
+    const third = manager.addContainerInstance(config, root.uuid, 'ecuc-dem-dtc-def');
+    manager.setParameterValue(first, 'ecuc-dem-dtc-value', 123);
+    expect(second.parameters.get('ecuc-dem-dtc-value')?.value).toBe(1);
+    expect(new Set([first.uuid, second.uuid, third.uuid]).size).toBe(3);
+    manager.removeContainerInstance(config, second.uuid);
+    const replacement = manager.addContainerInstance(config, root.uuid, 'ecuc-dem-dtc-def');
+    expect(replacement.uuid).not.toBe(second.uuid);
+    expect(new Set(root.subContainers.map((item) => item.shortName)).size).toBe(3);
+    const engine = new ConstraintEngine();
+    engine.registerRules(DemConstraints);
+    expect(
+      engine.validate(config, module).filter((item) => item.ruleId === 'DEM-001')
+    ).toHaveLength(1);
+  });
+
+  it('enforces sibling bounds and parent definitions without mutating failed operations', () => {
+    const module = parser.parseFromJson(source);
+    const dtcDefinition = module.containers[0].subContainers[0];
+    dtcDefinition.multiplicity = { lower: 1, upper: 2 };
+    const config = manager.createFromBswmd(module);
+    const root = config.containers[0];
+    const first = root.subContainers[0];
+    expect(root.subContainers).toHaveLength(1);
+    expect(() => manager.removeContainerInstance(config, first.uuid)).toThrow(
+      'lower multiplicity 1'
+    );
+    const second = manager.addContainerInstance(config, root.uuid, dtcDefinition.uuid);
+    const snapshot = structuredClone(config);
+    expect(() => manager.addContainerInstance(config, root.uuid, dtcDefinition.uuid)).toThrow(
+      'upper multiplicity 2'
+    );
+    expect(() => manager.addContainerInstance(config, first.uuid, dtcDefinition.uuid)).toThrow(
+      'not allowed'
+    );
+    expect(() => manager.addContainerInstance(config, 'missing', dtcDefinition.uuid)).toThrow(
+      'Parent container not found'
+    );
+    expect(() => manager.addContainerInstance(config, root.uuid, 'missing')).toThrow('not allowed');
+    expect(() => manager.removeContainerInstance(config, 'missing')).toThrow('Container not found');
+    expect(() => manager.removeContainerInstance(config, root.uuid)).toThrow(
+      'lower multiplicity 1'
+    );
+    expect(config).toEqual(snapshot);
+    manager.removeContainerInstance(config, second.uuid);
+    expect(root.subContainers).toEqual([first]);
+  });
+
+  it('supports root containers, zero upper bounds and a restored config with supplied definitions', () => {
+    const module = parser.parseFromJson(source);
+    module.containers[0].multiplicity = { lower: 0, upper: 2 };
+    const config = structuredClone(manager.createFromBswmd(module));
+    const restoredManager = new ConfigInstanceManager([module]);
+    expect(config.containers).toHaveLength(0);
+    const root = restoredManager.addContainerInstance(config, null, module.containers[0].uuid);
+    expect(config.containers).toEqual([root]);
+    expect(root.subContainers).toHaveLength(0);
+    restoredManager.removeContainerInstance(config, root.uuid);
+    expect(config.containers).toHaveLength(0);
+    module.containers[0].multiplicity.upper = 0;
+    expect(() =>
+      restoredManager.addContainerInstance(config, null, module.containers[0].uuid)
+    ).toThrow('upper multiplicity 0');
+    expect(() =>
+      new ConfigInstanceManager().addContainerInstance(config, null, module.containers[0].uuid)
+    ).toThrow('BSWMD module not loaded');
+  });
+
+  it('creates required descendants and removes nested subtrees at the correct parent', () => {
+    const module = parser.parseFromJson(source);
+    const dtcDefinition = module.containers[0].subContainers[0];
+    const cycleDefinition = module.containers[0].subContainers.pop()!;
+    cycleDefinition.multiplicity = { lower: 2, upper: 3 };
+    dtcDefinition.subContainers = [cycleDefinition];
+    const config = manager.createFromBswmd(module);
+    const root = config.containers[0];
+    const dtc = manager.addContainerInstance(config, root.uuid, dtcDefinition.uuid);
+    expect(dtc.subContainers).toHaveLength(2);
+    expect(dtc.subContainers[0].parameters.get('ecuc-dem-opcycle-type')?.value).toBe(
+      'DEM_OPCYC_IGNITION'
+    );
+    const cycle = manager.addContainerInstance(config, dtc.uuid, cycleDefinition.uuid);
+    expect(dtc.subContainers).toHaveLength(3);
+    manager.removeContainerInstance(config, cycle.uuid);
+    expect(dtc.subContainers).toHaveLength(2);
+    manager.removeContainerInstance(config, dtc.uuid);
+    expect(root.subContainers).toHaveLength(0);
+    expect(manager.findContainer(config, dtc.subContainers[0].uuid)).toBeNull();
+  });
+
   it('recursively creates instances, preserves definitions, and updates values and references', () => {
     const { module } = fixture();
     const parent = module.containers[0].subContainers[0];
     parent.subContainers.push(module.containers[0].subContainers.pop()!);
+    for (const definition of indexDefinitions(module).values()) definition.multiplicity.lower = 1;
     const config = manager.createFromBswmd(module);
     const entries = collectContainers(config, module);
     expect(entries).toHaveLength(7);
@@ -149,7 +272,7 @@ describe('configuration instances and constraints', () => {
 
   it('reports duplicate DTC values across separate config sets', () => {
     const { module, config, engine } = fixture();
-    const second = manager.createFromBswmd(module).containers[0];
+    const second = fixture().config.containers[0];
     second.shortName = 'SecondConfig';
     config.containers.push(second);
     const errors = engine.validate(config, module).filter((item) => item.ruleId === 'DEM-001');
@@ -190,7 +313,7 @@ describe('configuration instances and constraints', () => {
     ).toHaveLength(2);
     expect(engine.validate(config, module).some((item) => item.ruleId === 'DEM-006')).toBe(true);
     manager.setParameterValue(find('DemEventParameter'), 'ecuc-dem-event-id', 1);
-    config.containers.push(manager.createFromBswmd(module).containers[0]);
+    config.containers.push(fixture().config.containers[0]);
     expect(
       engine.validate(config, module).filter((item) => item.ruleId === 'DEM-006')
     ).toHaveLength(1);
@@ -281,6 +404,11 @@ describe('configuration instances and constraints', () => {
       },
     ];
     const config = manager.createFromBswmd(module);
+    manager.addContainerInstance(
+      config,
+      config.containers[0].subContainers[0].uuid,
+      'new-definition-dtc-def'
+    );
     const dtc = collectContainers(config, module).find(
       (entry) => entry.definition.shortName === 'DemDTC'
     )!.container;
@@ -293,6 +421,106 @@ describe('configuration instances and constraints', () => {
         path: 'DemConfigSet/Wrapper/DemDTC/DemDtcValue',
       }),
     ]);
+  });
+});
+
+describe('definition-driven diagnostic messages', () => {
+  function diagnosticFixture() {
+    const module = parser.parseFromJson(
+      JSON.stringify({
+        shortName: 'Example',
+        containers: [
+          {
+            uuid: 'root',
+            shortName: 'Root',
+            parameters: [
+              { uuid: 'text', shortName: 'RequiredText', type: 'STRING', isOptional: false },
+              { uuid: 'optional', shortName: 'OptionalText', type: 'STRING', isOptional: true },
+              { uuid: 'count', shortName: 'Count', type: 'INTEGER', min: 1, max: 10 },
+              { uuid: 'ratio', shortName: 'Ratio', type: 'FLOAT', min: 0, max: 1 },
+              { uuid: 'enabled', shortName: 'Enabled', type: 'BOOLEAN' },
+              { uuid: 'mode', shortName: 'Mode', type: 'ENUM', enumValues: ['OFF', 'ON', 'AUTO'] },
+              { uuid: 'blank-mode', shortName: 'BlankMode', type: 'ENUM', enumValues: ['', 'ON'] },
+            ],
+          },
+        ],
+      })
+    );
+    const config = manager.createFromBswmd(module);
+    const engine = new ConstraintEngine();
+    engine.registerRules(DefinitionConstraints);
+    const set = (id: string, value: unknown) =>
+      manager.setParameterValue(config.containers[0], id, value);
+    const check = () => engine.validate(config, module);
+    return { module, config, set, check };
+  }
+
+  it('accepts empty required STRING and an explicitly allowed empty ENUM literal', () => {
+    const { set, check } = diagnosticFixture();
+    set('text', '');
+    set('blank-mode', '');
+    expect(check()).toEqual([]);
+  });
+
+  it.each([undefined, null])('reports only missing required fields for %s', (value) => {
+    const { set, check } = diagnosticFixture();
+    set('text', value);
+    set('optional', value);
+    expect(check()).toEqual([
+      expect.objectContaining({
+        message: 'RequiredText is required',
+        suggestion: 'Set required parameter RequiredText (STRING)',
+        definitionRef: 'text',
+        path: 'Root/RequiredText',
+      }),
+    ]);
+  });
+
+  it.each([
+    ['text', 1, 'STRING'],
+    ['count', '', 'INTEGER'],
+    ['count', 1.5, 'INTEGER'],
+    ['ratio', Infinity, 'FLOAT'],
+    ['enabled', 'false', 'BOOLEAN'],
+    ['mode', 1, 'ENUM'],
+  ])('identifies the expected type for %s = %s', (id, value, expected) => {
+    const { set, check } = diagnosticFixture();
+    set(String(id), value);
+    const violations = check();
+    expect(violations).toHaveLength(1);
+    expect(violations[0].message).toContain(`invalid type; expected ${expected}`);
+    expect(violations[0].suggestion).toContain(`Use ${expected}`);
+    expect(violations[0].message).not.toContain('is required');
+  });
+
+  it('lists exact numeric bounds and distinguishes domain errors from missing values and types', () => {
+    const { set, check } = diagnosticFixture();
+    set('count', 11);
+    set('ratio', -0.1);
+    expect(check()).toEqual([
+      expect.objectContaining({
+        message: 'Count is out of range; allowed range: [1, 10]',
+        suggestion: 'Choose a INTEGER value in [1, 10]',
+      }),
+      expect.objectContaining({
+        message: 'Ratio is out of range; allowed range: [0, 1]',
+        suggestion: 'Choose a FLOAT value in [0, 1]',
+      }),
+    ]);
+    set('count', 1);
+    set('ratio', 1);
+    expect(check()).toEqual([]);
+  });
+
+  it.each(['INVALID', ''])('lists every ENUM candidate for invalid literal %s', (value) => {
+    const { set, check } = diagnosticFixture();
+    set('mode', value);
+    const violations = check();
+    expect(violations).toHaveLength(1);
+    expect(violations[0].message).toBe(
+      'Mode has an invalid choice; allowed values: "OFF", "ON", "AUTO"'
+    );
+    expect(violations[0].suggestion).toBe('Choose one of: "OFF", "ON", "AUTO"');
   });
 });
 

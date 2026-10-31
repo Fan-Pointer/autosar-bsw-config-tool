@@ -123,3 +123,62 @@ $ git diff --check
 ## 提交范围
 
 任务开始时已有未跟踪的 `.workbuddy/memory/automations/.../memory.md`，属于仓库维护自动化记录。本次保留原状，不混入任务提交。未修改 review 目录、stage 或路由结构；未新增 DEM 以外模块、后端、ARXML 或引用图功能。
+
+## 第 1 轮修复
+
+### 依据与范围
+
+- 事件：`ed076df1ddf5d6afd5df17eb`，角色 implement；任务 TASK-002，收到状态 CHANGES_REQUESTED / round 0。
+- WorkBuddy 评审绑定代码 `7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5`，评审提交 `23a10ec550ba287e9dc19668e80b831c136f573f`；当前评审、ROUND-0 快照与 STATE 已跟踪且无未提交改动，没有未完成的 WorkBuddy busy 记录。开始时源码/测试相对被评审版本无变化。
+- 按评审第七节，仅修复 🔴-1 / 🟠-2。🟠-1 的契约文案由 WorkBuddy 负责，本轮保留 1 根 + 6 子、共 7 个容器定义；🟡 项不处理。没有独立 ADR 文件，遵守架构文档中的现有决策及当前契约边界。
+
+| 评审编号 | 修复 | 验证 |
+|---|---|---|
+| 🔴-1 | 初始化数量严格等于 multiplicity.lower，可选容器 lower=0 不生成实例；提供 addContainerInstance / removeContainerInstance 核心 API | DEM 初始化仅根容器，子容器 0 → add 后 1 → remove 后 0；初始定义及 DEM 校验无错误 |
+| 🔴-1 | 新增 API 检查父子定义关系和同定义兄弟实例的 upper；删除检查 lower。新增递归初始化必需后代，UUID 使用统一工具，保留 definitionRef / 默认值；成功增删更新 lastModified | 多条 DTC、独立值与唯一 UUID、删除后重建名称不冲突、有限上下界、upper=0、根容器、嵌套增删、失败不修改配置均覆盖 |
+| 🟠-2 | 仅 undefined/null 表示参数未配置；空字符串由对应类型和枚举规则判断 | 必填 STRING 空串通过；ENUM 显式包含空串时通过，否则列候选值；可选 null/undefined 不报错 |
+| 🟠-2 | 缺失、非法类型、数值越界/非法枚举分别给出具体 message 和 suggestion，包含字段名、期望类型、实际允许区间或全部枚举字面量 | STRING / INTEGER / FLOAT / BOOLEAN / ENUM 类型错误，范围 [1,10] / [0,1]，枚举 OFF / ON / AUTO 的诊断断言通过 |
+
+### 实现说明
+
+1. `parentContainerUuid = null` 表示模块根；其他值必须命中实际父实例，`definitionUuid` 必须是该父定义的直接子定义。API 返回新增/移除的容器；非法操作抛出带原因的错误。
+2. 管理器记住 createFromBswmd 使用的模块定义，按模块名与版本区分；恢复配置后可用 `new ConfigInstanceManager([module])` 提供定义，不把定义或 UI 依赖塞入配置实例。
+3. 删除会移除整棵子树；其他容器指向它的引用保持原值，由已有定义校验提示目标失效，避免暗中改变其他配置字段。
+4. 既有核心及 UI 测试改为显式通过 API 添加需要的可选实例，保留原有约束、生成、回跳及保存恢复断言。新增 17 项回归用例，没有删减或跳过既有测试。
+5. 容器增删按钮按评审要求留在后续任务。本轮新配置界面只展示必需根容器及其参数，不再预填可选 DTC/事件等实例。
+
+### 自检结果
+
+```text
+$ npm test -- --run
+tests/core.test.ts: 45 passed
+tests/ui.test.ts:    7 passed
+Test Files: 2 passed
+Tests: 52 passed, 0 skipped
+GCC C11 -Wall -Wextra -Werror -pedantic 编译用例真实执行并通过。
+
+$ npm run build
+vue-tsc --noEmit 通过
+Vite 1780 modules transformed; built in 11.69s
+保留既有主包超过 500 kB 的提示（评审 🟡-2，本轮不改）。
+
+$ rg 核心 UI 依赖 / src 与 tests 的 any 和类型忽略 / UI 中 DEM 字段
+全部无匹配；新增公开 API 含 @param / @returns JSDoc。
+
+$ git diff --check -- <本轮四个源码及测试文件>
+退出码 0，无空白错误。
+```
+
+首次测试和构建在沙箱内因 esbuild 子进程 `spawn EPERM` 无法启动；通过正常受控权限流程获准后重跑，以上是最终成功结果，没有更改测试配置或关闭类型检查。
+
+### 界面展示与待处理
+
+用户追加要求已读取。已在后台启动仅绑定 `127.0.0.1:3000` 的 Vite 开发服务器，进程 PID `12468`，`http://127.0.0.1:3000/workspace` HTTP 检查返回 200。启动文件和日志位于被忽略的 `.temp/task-002-preview.*`。
+
+受支持浏览器工具 `cua.createBrowserTab("iab", ..., { visible: true })` 返回 **Local browser use is disabled in Work settings**。因此没有打开或目视验收页面；未绕过该设置。需父会话在已有正常浏览器权限下打开上述地址。本轮代码自检与 Git 交接不依赖该显示权限。
+
+### 本轮提交范围
+
+仅 `src/core/config/ConfigInstance.ts`、`src/core/constraint/DefinitionConstraints.ts`、`tests/core.test.ts`、`tests/ui.test.ts` 和本报告；随后单独提交 STATE 的允许 task 字段，round 0 → 1，状态 SUBMITTED，submissionCommit 绑定本轮完整代码提交 SHA。
+
+执行期间出现的 `.codex/AUTODEV.md`、`.codex/reports/AUTODEV-SETUP.md`、`scripts/autodev/engine.test.mjs` / `engine.checks.mjs` 改动属于父任务，本轮未修改、未暂存。未修改 review、lastReview、stage、契约、协议或调度器；本轮不发送下一次评审请求。
