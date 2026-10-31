@@ -8,7 +8,7 @@
   "task": {
     "id": "TASK-009",
     "title": "NvM CHOICE 容器全链路（解析/互斥/导出/往返）+ 必填项一键确认建议值",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -19,9 +19,9 @@
     "reportPath": ".codex/reports/TASK-009-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "6812b39524cb15a723dcbdf74a742d2126b42464",
     "createdAt": "2026-11-01T06:05:00+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-10-31T20:41:02.358Z",
     "approvedAt": null,
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "specPath": "docs/UI-REPLICA-SPEC.md"
