@@ -162,7 +162,13 @@ describe('official module manager and persisted editing', () => {
     expect(restored.module?.shortName).toBe('NvM');
     expect(restored.parameterData[field.uuid]).toBe(42);
     expect(exportJson(restored.config!)).toBe(before);
-    expect(restored.module?.arxmlExportBlockers?.length).toBeGreaterThan(0);
+    expect(restored.module?.arxmlExportBlockers).toEqual([]);
+    const choice = restored.entries.find((entry) => entry.definition.choice)!;
+    expect(choice.definition.choice?.candidateRefs).toEqual(
+      choice.definition.subContainers.map((candidate) => candidate.uuid)
+    );
+    expect(choice.definition.choice?.candidateRefs).toHaveLength(2);
+    expect(choice.container.subContainers).toHaveLength(0);
     // The reloaded lifecycle manager must know runtime-loaded definitions too.
     restored.selectContainer('');
     expect(

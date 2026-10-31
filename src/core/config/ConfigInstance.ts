@@ -105,10 +105,12 @@ export class ConfigInstanceManager {
     if (parentContainerUuid !== null && !parent) {
       throw new Error(`Parent container not found: ${parentContainerUuid}`);
     }
-    const definitions = parent
-      ? indexDefinitions(module).get(parent.definitionRef)?.subContainers
-      : module.containers;
+    const parentDefinition = parent
+      ? indexDefinitions(module).get(parent.definitionRef)
+      : undefined;
+    const definitions = parent ? parentDefinition?.subContainers : module.containers;
     return {
+      parentDefinition,
       definitions: definitions ?? [],
       siblings: parent ? parent.subContainers : instance.containers,
     };
@@ -126,13 +128,18 @@ export class ConfigInstanceManager {
     parentContainerUuid: string | null,
     definitionUuid: string
   ) {
-    const { definitions, siblings } = this.childContext(instance, parentContainerUuid);
+    const { definitions, siblings, parentDefinition } = this.childContext(
+      instance,
+      parentContainerUuid
+    );
     const definition = definitions.find((item) => item.uuid === definitionUuid);
     if (!definition) {
       throw new Error(
         `Definition ${definitionUuid} is not allowed under ${parentContainerUuid ?? 'module root'}`
       );
     }
+    if (parentDefinition?.choice && siblings.length)
+      throw new Error('CHOICE 只能选择一个候选，请使用切换候选操作');
     const reason = this.upperReason(definition, siblings);
     if (reason) throw new Error(reason);
     return { definition, siblings };
@@ -155,10 +162,13 @@ export class ConfigInstanceManager {
    * @returns Direct child definitions with disabled reasons.
    */
   getAddOptions(instance: ConfigInstance, parentUuid: string | null): ContainerAddOption[] {
-    const { definitions, siblings } = this.childContext(instance, parentUuid);
+    const { definitions, siblings, parentDefinition } = this.childContext(instance, parentUuid);
     return definitions.map((definition) => ({
       definition,
-      disabledReason: this.upperReason(definition, siblings),
+      disabledReason:
+        parentDefinition?.choice && siblings.length
+          ? 'CHOICE 只能选择一个候选，请使用切换候选操作'
+          : this.upperReason(definition, siblings),
     }));
   }
 
@@ -183,6 +193,9 @@ export class ConfigInstanceManager {
     if (!siblings || !container) throw new Error(`Container not found: ${containerUuid}`);
     const definition = indexDefinitions(module).get(container.definitionRef);
     if (!definition) throw new Error(`Unknown definitionRef: ${container.definitionRef}`);
+    const parent = this.findParent(instance, containerUuid);
+    if (parent && indexDefinitions(module).get(parent.definitionRef)?.choice)
+      throw new Error('CHOICE 候选不可单独删除，请切换候选或删除可选分组');
     const count = siblings.filter((item) => item.definitionRef === container.definitionRef).length;
     if (count <= definition.multiplicity.lower) {
       throw new Error(
@@ -276,8 +289,33 @@ export class ConfigInstanceManager {
       description: bswmdContainer.description,
       parameters: this.createParametersFromBswmd(bswmdContainer.parameters),
       references: this.createReferencesFromBswmd(bswmdContainer.references),
-      subContainers: this.createContainers(bswmdContainer.subContainers),
+      // Candidate lower bounds do not authorize choosing every alternative on the user's behalf.
+      subContainers: bswmdContainer.choice
+        ? []
+        : this.createContainers(bswmdContainer.subContainers),
     };
+  }
+
+  /** Replace a choice's selected subtree after the caller confirms data loss.
+   * @param instance Configuration with loaded definitions.
+   * @param groupUuid Choice group instance UUID.
+   * @param candidateRef Candidate definition UUID.
+   * @returns Selected subtree; the caller records the whole replacement as one undo operation.
+   */
+  selectChoice(instance: ConfigInstance, groupUuid: string, candidateRef: string): ConfigContainer {
+    const group = this.findContainer(instance, groupUuid);
+    const definition = group && indexDefinitions(this.getModule(instance)).get(group.definitionRef);
+    if (!group || !definition?.choice?.candidateRefs.includes(candidateRef))
+      throw new Error('CHOICE 分组或候选定义无效');
+    const candidate = definition.subContainers.find((child) => child.uuid === candidateRef)!;
+    if (candidate.multiplicity.upper === 0) throw new Error('CHOICE 候选实例上限为 0');
+    if (group.subContainers.length === 1 && group.subContainers[0].definitionRef === candidateRef)
+      return group.subContainers[0];
+    // Construct before replacing, so a failed creation leaves the previous configuration intact.
+    const selected = this.createContainerFromBswmd(candidate);
+    group.subContainers = [selected];
+    this.touch(instance);
+    return selected;
   }
 
   /**

@@ -116,8 +116,31 @@ export class BswmdParser {
       const data = object(raw, location);
       const identity = this.identity(data, location, ids);
       const childPath = `${location} (${identity.shortName})`;
+      const subContainers = this.containers(
+        data.subContainers,
+        `${childPath}.subContainers`,
+        ids,
+        depth + 1
+      );
+      let choice: BswmdContainer['choice'];
+      if (data.choice !== undefined) {
+        const refs = array(object(data.choice, childPath).candidateRefs, childPath).map((ref) => {
+          if (typeof ref !== 'string' || !subContainers.some((child) => child.uuid === ref))
+            throw new Error(`${childPath}: CHOICE candidateRef 无效`);
+          return ref;
+        });
+        if (
+          !refs.length ||
+          new Set(refs).size !== refs.length ||
+          refs.length !== subContainers.length
+        )
+          throw new Error(`${childPath}: CHOICE 候选必须覆盖全部子定义且不重复`);
+        choice = { candidateRefs: refs };
+      }
       return {
         ...identity,
+        definitionPath: optionalString(data.definitionPath, `${childPath}.definitionPath`),
+        choice,
         initialAddLabel: optionalString(data.initialAddLabel, `${childPath}.initialAddLabel`),
         multiplicity: this.multiplicity(data.multiplicity, childPath),
         parameters: array(data.parameters, `${childPath}.parameters`).map((item, i) =>
@@ -126,12 +149,7 @@ export class BswmdParser {
         references: array(data.references, `${childPath}.references`).map((item, i) =>
           this.reference(item, `${childPath}.references[${i}]`, ids)
         ),
-        subContainers: this.containers(
-          data.subContainers,
-          `${childPath}.subContainers`,
-          ids,
-          depth + 1
-        ),
+        subContainers,
       };
     });
   }

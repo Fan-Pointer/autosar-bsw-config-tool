@@ -4,6 +4,7 @@ import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/Bswmd
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
 import { createParameterValue } from '../config/ConfigValues';
+import { choiceSelectionError } from '../config/ChoiceSelection';
 import { generateUUID } from '@/utils/uuid';
 import { checkImportSize, hydrateConfig, record, serializeConfig, string } from './ConfigJson';
 import type { SerializedContainer } from './IoTypes';
@@ -48,7 +49,7 @@ function definitionPaths(module: BswmdModule): Map<string, string> {
   const paths = new Map<string, string>();
   const visit = (definitions: BswmdContainer[], parent: string): void => {
     for (const definition of definitions) {
-      const path = `${parent}/${definition.shortName}`;
+      const path = definition.definitionPath ?? `${parent}/${definition.shortName}`;
       paths.set(definition.uuid, path);
       for (const field of [...definition.parameters, ...definition.references])
         paths.set(field.uuid, `${path}/${field.shortName}`);
@@ -76,6 +77,8 @@ export function exportArxml(config: ConfigInstance, module: BswmdModule): string
   const entries = collectContainers(checked, module);
   const missing: string[] = [];
   for (const { container, definition, path } of entries) {
+    const choiceError = choiceSelectionError(container, definition, true);
+    if (choiceError) throw new Error(`ARXML 导出校验失败：${path}：${choiceError}`);
     for (const def of definition.parameters) {
       const field = container.parameters.get(def.uuid);
       if (!def.isOptional && (!field?.isConfigured || field.value === undefined))
@@ -135,7 +138,7 @@ export function exportArxml(config: ConfigInstance, module: BswmdModule): string
             [...container.references.values()].filter((r) => !r.targetUuid && r.isConfigured)
           ),
         });
-        return `<ECUC-CONTAINER-VALUE UUID="${escapeXml(container.uuid)}">${tag('SHORT-NAME', container.shortName)}${descriptionTag(container.description)}${editor}${defRef(definition.uuid, 'ECUC-PARAM-CONF-CONTAINER-DEF')}<PARAMETER-VALUES>${parameters}</PARAMETER-VALUES><REFERENCE-VALUES>${references}</REFERENCE-VALUES><SUB-CONTAINERS>${containers(container.subContainers, definition.subContainers)}</SUB-CONTAINERS></ECUC-CONTAINER-VALUE>`;
+        return `<ECUC-CONTAINER-VALUE UUID="${escapeXml(container.uuid)}">${tag('SHORT-NAME', container.shortName)}${descriptionTag(container.description)}${editor}${defRef(definition.uuid, definition.choice ? 'ECUC-CHOICE-CONTAINER-DEF' : 'ECUC-PARAM-CONF-CONTAINER-DEF')}<PARAMETER-VALUES>${parameters}</PARAMETER-VALUES><REFERENCE-VALUES>${references}</REFERENCE-VALUES><SUB-CONTAINERS>${containers(container.subContainers, definition.subContainers)}</SUB-CONTAINERS></ECUC-CONTAINER-VALUE>`;
       })
       .join('');
   const metadata = adminData({

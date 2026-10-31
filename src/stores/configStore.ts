@@ -37,6 +37,8 @@ import { generateUUID } from '@/utils/uuid';
 import { HistoryStack } from '@/core/history/HistoryStack';
 import { configurationDelta } from '@/core/history/ConfigDelta';
 import { commonParameters, batchSkipReason } from '@/core/config/BatchEdit';
+import { planRequiredDefaults } from '@/core/config/RequiredDefaults';
+import { createParameterValue } from '@/core/config/ConfigValues';
 
 interface StoredContainer extends Omit<
   ConfigContainer,
@@ -609,6 +611,40 @@ export const useConfigStore = defineStore('config', () => {
     });
   }
 
+  /** Select a confirmed choice and retain the replaced subtree in one undo record.
+   * @param groupUuid Choice group UUID. @param candidateRef Candidate definition UUID.
+   * @returns Nothing; invalid choices throw before mutation.
+   */
+  function selectChoice(groupUuid: string, candidateRef: string): void {
+    assertEditable();
+    if (!config.value) return;
+    const group = manager.findContainer(config.value, groupUuid);
+    if (group?.subContainers.length === 1 && group.subContainers[0].definitionRef === candidateRef)
+      return;
+    edit('切换 CHOICE 候选', () => {
+      manager.selectChoice(config.value!, groupUuid, candidateRef);
+      selectContainer(groupUuid);
+    });
+  }
+
+  /** Explicitly confirm required metadata defaults across the active set in one undo step.
+   * @returns Counts for the visible result; remaining excludes optional fields and references.
+   */
+  function confirmRequiredDefaults(): { confirmed: number; remaining: number } {
+    assertEditable();
+    if (!config.value || !module.value) throw new Error('请先打开配置集');
+    const { assignments, remaining } = planRequiredDefaults(config.value, module.value);
+    if (assignments.length)
+      edit('一键确认建议值', () => {
+        for (const { container, definition } of assignments) {
+          if (!container.parameters.has(definition.uuid))
+            container.parameters.set(definition.uuid, createParameterValue(definition));
+          manager.setParameterValue(container, definition.uuid, definition.defaultValue);
+        }
+      });
+    return { confirmed: assignments.length, remaining };
+  }
+
   /** Remove a confirmed instance; deleting the selection or its ancestor selects the parent.
    * @param uuid Confirmed container UUID.
    * @returns Nothing.
@@ -949,6 +985,8 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   return {
+    selectChoice,
+    confirmRequiredDefaults,
     importModuleDefinitions,
     referenceAddOptions,
     createReferenceTarget,

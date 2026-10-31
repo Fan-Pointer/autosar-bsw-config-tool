@@ -1,5 +1,6 @@
 import type { ConstraintRule, ConstraintViolation } from './ConstraintTypes';
 import { collectContainers } from '../config/ConfigTraversal';
+import { choiceSelectionError } from '../config/ChoiceSelection';
 
 /** Validate field types, bounds, choices, and reference targets directly from BSWMD. */
 export const DefinitionConstraints: ConstraintRule[] = [
@@ -24,6 +25,9 @@ export const DefinitionConstraints: ConstraintRule[] = [
             definitionRef: uuid,
           });
         };
+        const choiceError = choiceSelectionError(entry.container, entry.definition, true);
+        if (choiceError)
+          add(entry.definition.uuid, '', choiceError, '选择一个候选；切换候选可撤销');
         for (const parameter of entry.definition.parameters) {
           const value = entry.container.parameters.get(parameter.uuid)?.value;
           if (value === undefined || value === null) {

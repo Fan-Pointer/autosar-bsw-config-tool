@@ -240,12 +240,20 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
             id = identity(data, path),
             childPath = `${path}/${id.shortName}`;
           if (tag === 'ECUC-CHOICE-CONTAINER-DEF') {
-            const limitation = `${id.shortName}：CHOICE 暂按编辑分组保留全部候选，互斥及 ARXML 选择容器语义尚未支持。`;
-            warnings.push(limitation);
-            arxmlExportBlockers.push(limitation);
+            warnings.push(`${id.shortName}：CHOICE 分组需选择一个候选后导出；切换候选可撤销。`);
           }
+          const subContainers = containers(
+            node(tag === 'ECUC-CHOICE-CONTAINER-DEF' ? data.CHOICES : data['SUB-CONTAINERS']),
+            childPath,
+            depth + 1
+          );
+          if (tag === 'ECUC-CHOICE-CONTAINER-DEF' && !subContainers.length)
+            throw new Error(`${id.shortName}: CHOICE 缺少候选`);
           return {
             ...id,
+            ...(tag === 'ECUC-CHOICE-CONTAINER-DEF'
+              ? { choice: { candidateRefs: subContainers.map((child) => child.uuid) } }
+              : {}),
             definitionPath: childPath,
             multiplicity: multiplicity(data),
             parameters: definitions(
@@ -256,11 +264,7 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
               node(data.REFERENCES ?? data['REFERENCE-DEFS']),
               (child, kind) => reference(child, kind, childPath)
             ),
-            subContainers: containers(
-              node(data['SUB-CONTAINERS'] ?? data.CHOICES),
-              childPath,
-              depth + 1
-            ),
+            subContainers,
           };
         })
       );

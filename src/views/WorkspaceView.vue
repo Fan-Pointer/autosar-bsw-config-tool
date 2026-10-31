@@ -204,6 +204,7 @@
             </button>
           </div>
         </div>
+        <RequiredDefaultsAction v-if="activeOpen" />
         <div v-if="activeOpen" class="editor-body">
           <aside class="configuration-panel" :style="{ width: treeWidth + 'px' }">
             <ContainerNavigator
@@ -243,6 +244,7 @@
                   @change="rename"
                 />
               </div>
+              <ChoiceSelector />
               <DynamicForm
                 :key="store.selectedEntry.container.uuid"
                 :container="store.selectedEntry.definition"
@@ -258,7 +260,9 @@
               />
               <details
                 v-if="
-                  !store.selectedEntry.container.subContainers.length && store.childOptions.length
+                  !store.selectedEntry.definition.choice &&
+                  !store.selectedEntry.container.subContainers.length &&
+                  store.childOptions.length
                 "
                 class="empty-children"
               >
@@ -409,6 +413,8 @@ import ImportDialog from '@/ui/ImportExport/ImportDialog.vue';
 import type { ExportFormat, ImportFormat } from '@/core/io/IoTypes';
 import { useHistory } from '@/ui/History/useHistory';
 import BatchEditPanel from '@/ui/BatchEdit/BatchEditPanel.vue';
+import ChoiceSelector from '@/ui/FormEditor/ChoiceSelector.vue';
+import RequiredDefaultsAction from '@/ui/FormEditor/RequiredDefaultsAction.vue';
 import GlobalSearch from '@/ui/Search/GlobalSearch.vue';
 import type { SearchResult } from '@/core/search/ConfigSearch';
 import { theme, setTheme } from '@/ui/Theme/theme';

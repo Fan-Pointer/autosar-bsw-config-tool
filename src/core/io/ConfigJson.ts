@@ -1,6 +1,7 @@
 import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
 import type { SerializedConfig, SerializedContainer } from './IoTypes';
+import { choiceSelectionError } from '../config/ChoiceSelection';
 
 export const MAX_IMPORT_BYTES = 50 * 1024 * 1024;
 
@@ -212,7 +213,7 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
           isConfigured: ref.isConfigured === undefined ? Boolean(targetUuid) : ref.isConfigured,
         });
       }
-      return {
+      const container = {
         uuid: identity(child.uuid, path + '.uuid'),
         definitionRef: definition.uuid,
         shortName: name,
@@ -224,6 +225,9 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
         references,
         subContainers: visit(child.subContainers, definition.subContainers, path, depth + 1),
       };
+      const choiceError = choiceSelectionError(container, definition);
+      if (choiceError) throw new Error(`${path}：${choiceError}`);
+      return container;
     });
   };
   return {

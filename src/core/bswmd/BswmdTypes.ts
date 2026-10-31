@@ -32,6 +32,8 @@ export interface BswmdModule {
  * BSWMD 容器定义
  */
 export interface BswmdContainer {
+  /** A choice group owns exactly one selected child; refs identify candidates in subContainers. */
+  choice?: { candidateRefs: string[] };
   /** Absolute source definition path, when imported from ECUC. */
   definitionPath?: string;
   uuid: string;

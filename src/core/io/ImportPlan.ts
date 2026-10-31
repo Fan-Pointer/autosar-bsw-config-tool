@@ -4,6 +4,7 @@ import { collectContainers } from '../config/ConfigTraversal';
 import { generateUUID } from '@/utils/uuid';
 import { hydrateConfig, serializeConfig } from './ConfigJson';
 import type { ConflictStrategy, ImportConflict, ImportPlan } from './IoTypes';
+import { choiceSelectionError } from '../config/ChoiceSelection';
 
 function display(value: unknown): string {
   return value === undefined ? '（未提供 / 未启用）' : String(value);
@@ -28,6 +29,9 @@ export function planImport(
     : { ...source, containers: [] };
   const oldEntries = collectContainers(result, module);
   const sourceEntries = collectContainers(source, module);
+  const sourceDefinitions = new Map(
+    sourceEntries.map((entry) => [entry.container.uuid, entry.definition])
+  );
   const oldByPath = new Map(oldEntries.map((entry) => [entry.path, entry]));
   const sourcePaths = new Map(sourceEntries.map((entry) => [entry.container.uuid, entry.path]));
   const oldPaths = new Map(oldEntries.map((entry) => [entry.container.uuid, entry.path]));
@@ -39,6 +43,17 @@ export function planImport(
     if (old.container.definitionRef !== entry.container.definitionRef)
       throw new Error(`${entry.path}：同路径容器的定义不同，请先重命名实例`);
     const before = conflicts.length;
+    if (entry.definition.choice) {
+      const file = entry.container.subContainers[0];
+      const project = old.container.subContainers[0];
+      if (file?.definitionRef !== project?.definitionRef || file?.shortName !== project?.shortName)
+        conflicts.push({
+          path: entry.path,
+          parameter: 'CHOICE 候选（替换原候选配置）',
+          fileValue: file?.shortName ?? '未选择',
+          projectValue: project?.shortName ?? '未选择',
+        });
+    }
     const params = new Set([
       ...entry.container.parameters.keys(),
       ...old.container.parameters.keys(),
@@ -126,7 +141,15 @@ export function planImport(
       old.references = item.references;
       old.description = item.description;
       copied.push(old);
-      merge(old.subContainers, item.subContainers, path);
+      const definition = sourceDefinitions.get(item.uuid)!;
+      if (
+        definition.choice &&
+        (old.subContainers[0]?.definitionRef !== item.subContainers[0]?.definitionRef ||
+          old.subContainers[0]?.shortName !== item.subContainers[0]?.shortName)
+      ) {
+        // A choice conflict replaces its subtree, never merges two alternatives together.
+        old.subContainers = item.subContainers.map((child) => copyTree(child, false));
+      } else merge(old.subContainers, item.subContainers, path);
     }
   };
   merge(result.containers, source.containers, '');
@@ -141,7 +164,11 @@ export function planImport(
         throw new Error(
           `${def.shortName}：导入结果超过实例上限 ${def.multiplicity.upper}，请调整冲突策略`
         );
-      for (const child of matching) bounds(child.subContainers, def.subContainers);
+      for (const child of matching) {
+        const choiceError = choiceSelectionError(child, def);
+        if (choiceError) throw new Error(choiceError);
+        bounds(child.subContainers, def.subContainers);
+      }
     }
   };
   bounds(result.containers, module.containers);
