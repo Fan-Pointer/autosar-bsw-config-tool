@@ -2,27 +2,29 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-3",
-  "stageName": "配置器可用化（配置集管理 + 实例生命周期 + 界面接线）",
+  "stage": "PHASE-4",
+  "stageName": "界面复刻（按用户截图对齐参考配置界面形态）",
 
   "task": {
-    "id": "TASK-003",
-    "title": "配置集管理、容器实例生命周期与界面接线",
+    "id": "TASK-004",
+    "title": "界面复刻：三栏骨架 + 两级页签 + 混排树 + 参数行 + 模块管理",
     "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "1b9d5d8cf09c4733f3ba28ab9097f6c76d9dfcbb1a3350d57b40af616ff8dafa",
+    "contractHash": "937a8377bcec7a9b26c72517627095faa24db089dc2a90cfeedd4f2c33d7c62a",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T00:52:00+08:00",
-    "reportPath": ".codex/reports/TASK-003-REPORT.md",
+    "contractBoundAt": "2026-11-01T02:10:00+08:00",
+    "reportPath": ".codex/reports/TASK-004-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
     "submissionCommit": null,
-    "createdAt": "2026-10-31T23:58:00+08:00",
+    "createdAt": "2026-11-01T02:10:00+08:00",
     "submittedAt": null,
-    "approvedAt": null
+    "approvedAt": null,
+    "specPath": "docs/UI-REPLICA-SPEC.md",
+    "visualEvidence": ".codex/references/easysar-2026-11-01/"
   },
 
   "statusLegend": {
@@ -69,6 +71,23 @@
         "CGenerator 宏名 P{idx}_/R{idx}_/C{idx}_ 前缀可读性差，建议改后缀序号",
         "ConfigInstanceManager 需调用方预置 definitions，属隐式契约，应写入开发者说明",
         "主包 1.18MB，Element Plus 全量引入，建议按需或 manualChunks"
+      ]
+    },
+    {
+      "taskId": "TASK-003",
+      "title": "配置集管理、容器实例生命周期与界面接线",
+      "finalStatus": "SUPERSEDED_BY_UI_REPLICA",
+      "rounds": [],
+      "closedAt": "2026-11-01T02:10:00+08:00",
+      "closureNote": "实现与报告已落盘但从未提交（STATE 保持 READY，无 submissionCommit），因而无法按契约判 APPROVED。评审方独立复核：npm run build 通过、npm test -- --run 75/75 通过（含新增 lifecycle.test.ts），自述属实。因用户在 2026-11-01 要求界面改为复刻参考截图，TASK-003 的界面形态被取代；其引擎/配置集/实例生命周期产物保留沿用于 TASK-004，不判通过也不判失败。",
+      "preservedArtifacts": [
+        ".codex/reports/TASK-003-REPORT.md（保留，不删改结论）",
+        "工作区未提交实现：src/、tests/、bswmd/ 增量",
+        "新增文件：src/core/config/ConfigClone.ts、src/ui/ConfigSets/、src/ui/ConfigTree/ContainerActions.vue、tests/lifecycle.test.ts"
+      ],
+      "blockersAtClosure": [
+        "Codex 侧：Local browser use is disabled in Work settings，无法完成真实浏览器验收",
+        "评审方侧：AUTODEV-REVIEW.md 未提交曾阻断其交付（已于 commit 0e29a67 解除）"
       ]
     }
   ],
