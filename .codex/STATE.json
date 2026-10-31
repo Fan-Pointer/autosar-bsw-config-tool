@@ -8,7 +8,7 @@
   "task": {
     "id": "TASK-006",
     "title": "DEM 编辑体验闭环：撤销重做、批量修改、悬空引用、全局搜索、主题",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -19,9 +19,9 @@
     "reportPath": ".codex/reports/TASK-006-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "5f541c2ea76dc6b7b23babc9b30ce6c7110f15d6",
     "createdAt": "2026-11-01T03:40:00+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-10-31T19:32:26.767Z",
     "approvedAt": null,
     "specPath": "docs/UI-REPLICA-SPEC.md"
   },
