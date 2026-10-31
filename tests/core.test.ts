@@ -167,7 +167,7 @@ describe('configuration instances and constraints', () => {
     engine.registerRules(DemConstraints);
     expect(
       engine.validate(config, module).filter((item) => item.ruleId === 'DEM-001')
-    ).toHaveLength(1);
+    ).toHaveLength(2);
   });
 
   it('enforces sibling bounds and parent definitions without mutating failed operations', () => {
@@ -276,8 +276,8 @@ describe('configuration instances and constraints', () => {
     second.shortName = 'SecondConfig';
     config.containers.push(second);
     const errors = engine.validate(config, module).filter((item) => item.ruleId === 'DEM-001');
-    expect(errors).toHaveLength(1);
-    expect(errors[0]).toMatchObject({
+    expect(errors).toHaveLength(2);
+    expect(errors[1]).toMatchObject({
       severity: 'ERROR',
       path: 'SecondConfig/DemDTC/DemDtcValue',
       containerUuid: second.subContainers[0].uuid,

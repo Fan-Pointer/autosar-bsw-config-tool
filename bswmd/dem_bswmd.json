@@ -53,6 +53,7 @@
       "subContainers": [
         {
           "uuid": "ecuc-dem-dtc-def",
+          "initialAddLabel": "添加第一条 DTC",
           "shortName": "DemDTC",
           "description": "Configuration of a Diagnostic Trouble Code",
           "multiplicity": { "lower": 0, "upper": "unbounded" },

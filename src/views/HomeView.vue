@@ -4,39 +4,27 @@
       <h1 class="title">AUTOSAR BSW Config Tool</h1>
       <p class="subtitle">基于网页的 AUTOSAR 基础软件配置工具</p>
 
-      <div class="actions">
-        <el-select v-model="selectedModule" aria-label="配置模块" style="width: 180px" size="large">
-          <el-option
-            v-for="module in store.modules"
-            :key="module.shortName"
-            :label="module.shortName"
-            :value="module.shortName"
-          />
-        </el-select>
-        <el-button type="primary" size="large" @click="createNewConfig">
-          <el-icon><Plus /></el-icon>
-          新建配置
-        </el-button>
-        <el-button size="large" @click="openExistingConfig">
-          <el-icon><FolderOpened /></el-icon>
-          打开配置
-        </el-button>
-      </div>
+      <ConfigSetManager @opened="router.push('/workspace')" />
+      <el-alert v-if="store.error" :title="store.error" type="error" :closable="false" />
     </div>
 
-    <div class="recent-section" v-if="recentConfigs.length > 0">
-      <h2>最近打开</h2>
-      <el-table :data="recentConfigs" style="width: 100%">
+    <div class="recent-section" v-if="store.summaries.length">
+      <h2>本机配置集</h2>
+      <el-table :data="store.summaries" style="width: 100%">
         <el-table-column prop="name" label="配置名称" />
         <el-table-column prop="module" label="模块" />
-        <el-table-column prop="lastModified" label="修改时间">
-          <template #default="{ row }">
-            {{ formatDate(row.lastModified) }}
-          </template>
+        <el-table-column label="修改时间">
+          <template #default="{ row }">{{
+            new Date(row.lastModified).toLocaleString('zh-CN')
+          }}</template>
         </el-table-column>
+        <el-table-column prop="containerCount" label="容器数" />
+        <el-table-column prop="errorCount" label="错误数" />
         <el-table-column label="操作" width="120">
-          <template #default>
-            <el-button link type="primary" @click="openExistingConfig">打开</el-button>
+          <template #default="{ row }">
+            <el-button link type="primary" :disabled="store.isLoading" @click="openSet(row.uuid)"
+              >打开</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -82,38 +70,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted } from 'vue';
+import { Edit, Document, Lock } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus';
 import { useConfigStore } from '@/stores/configStore';
+import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
 
 const router = useRouter();
 const store = useConfigStore();
-const selectedModule = ref(store.modules[0]?.shortName);
-
-// TODO: 从 localStorage 加载最近配置
-const recentConfigs = ref<
-  Array<{
-    id: string;
-    name: string;
-    module: string;
-    lastModified: number;
-  }>
->([]);
-
-const createNewConfig = () => {
-  store.createConfig(selectedModule.value);
-  router.push('/workspace');
-};
-
-const openExistingConfig = async () => {
-  if (await store.loadConfig()) router.push('/workspace');
-  else ElMessage.info(store.error ?? '本机还没有保存的配置');
-};
-
-const formatDate = (timestamp: number) => {
-  return new Date(timestamp).toLocaleString('zh-CN');
-};
+onMounted(() => {
+  void store.initialize();
+});
+async function openSet(uuid: string): Promise<void> {
+  if (await store.switchConfigSet(uuid)) await router.push('/workspace');
+}
 </script>
 
 <style scoped>

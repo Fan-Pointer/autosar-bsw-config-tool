@@ -45,12 +45,19 @@ export const DemConstraints: ConstraintRule[] = [
     severity: 'ERROR',
     scope: 'MODULE',
     check: (ctx) => {
-      const seen = new Set<number>();
+      const groups = new Map<number, ContainerEntry[]>();
       const violations: ConstraintViolation[] = [];
       for (const entry of entries(ctx, 'DemDTC')) {
         const value = parameter(entry, 'DemDtcValue');
         if (typeof value !== 'number') continue;
-        if (seen.has(value))
+        const group = groups.get(value) ?? [];
+        group.push(entry);
+        groups.set(value, group);
+      }
+      // Report every participant so each conflicting tree node and field can be navigated.
+      for (const [value, group] of groups) {
+        if (group.length < 2) continue;
+        for (const entry of group) {
           violations.push(
             violation(
               'DEM-001',
@@ -60,7 +67,7 @@ export const DemConstraints: ConstraintRule[] = [
               'Choose a unique DTC value'
             )
           );
-        seen.add(value);
+        }
       }
       return violations;
     },

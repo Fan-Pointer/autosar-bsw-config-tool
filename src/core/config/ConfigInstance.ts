@@ -12,6 +12,13 @@ import type {
 } from '@/core/bswmd/BswmdTypes';
 import { generateUUID } from '@/utils/uuid';
 import { indexDefinitions } from './ConfigTraversal';
+import { cloneContainers } from './ConfigClone';
+
+/** An allowed child definition and the core-owned reason it cannot currently be added. */
+export interface ContainerAddOption {
+  definition: BswmdContainer;
+  disabledReason?: string;
+}
 
 /**
  * 配置实例管理器
@@ -82,6 +89,15 @@ export class ConfigInstanceManager {
     parentContainerUuid: string | null,
     definitionUuid: string
   ): ConfigContainer {
+    const { definition, siblings } = this.addContext(instance, parentContainerUuid, definitionUuid);
+    const container = this.createContainerFromBswmd(definition);
+    container.shortName = this.uniqueName(definition.shortName, siblings);
+    siblings.push(container);
+    this.touch(instance);
+    return container;
+  }
+
+  private childContext(instance: ConfigInstance, parentContainerUuid: string | null) {
     const module = this.getModule(instance);
     const parent =
       parentContainerUuid === null ? null : this.findContainer(instance, parentContainerUuid);
@@ -91,28 +107,58 @@ export class ConfigInstanceManager {
     const definitions = parent
       ? indexDefinitions(module).get(parent.definitionRef)?.subContainers
       : module.containers;
-    const definition = definitions?.find((item) => item.uuid === definitionUuid);
+    return {
+      definitions: definitions ?? [],
+      siblings: parent ? parent.subContainers : instance.containers,
+    };
+  }
+
+  private upperReason(definition: BswmdContainer, siblings: ConfigContainer[]): string | undefined {
+    const count = siblings.filter((item) => item.definitionRef === definition.uuid).length;
+    return definition.multiplicity.upper !== 'unbounded' && count >= definition.multiplicity.upper
+      ? `${definition.shortName}: upper multiplicity ${definition.multiplicity.upper} reached`
+      : undefined;
+  }
+
+  private addContext(
+    instance: ConfigInstance,
+    parentContainerUuid: string | null,
+    definitionUuid: string
+  ) {
+    const { definitions, siblings } = this.childContext(instance, parentContainerUuid);
+    const definition = definitions.find((item) => item.uuid === definitionUuid);
     if (!definition) {
       throw new Error(
         `Definition ${definitionUuid} is not allowed under ${parentContainerUuid ?? 'module root'}`
       );
     }
-    const siblings = parent ? parent.subContainers : instance.containers;
-    const count = siblings.filter((item) => item.definitionRef === definitionUuid).length;
-    if (definition.multiplicity.upper !== 'unbounded' && count >= definition.multiplicity.upper) {
-      throw new Error(
-        `${definition.shortName}: upper multiplicity ${definition.multiplicity.upper} reached`
-      );
-    }
-    const container = this.createContainerFromBswmd(definition);
+    const reason = this.upperReason(definition, siblings);
+    if (reason) throw new Error(reason);
+    return { definition, siblings };
+  }
+
+  private uniqueName(base: string, siblings: ConfigContainer[]): string {
     const names = new Set(siblings.map((item) => item.shortName));
+    let name = base;
     // Count alone is insufficient after deletion: reusing it could duplicate a remaining name.
-    for (let suffix = 2; names.has(container.shortName); suffix++) {
-      container.shortName = `${definition.shortName}_${suffix}`;
+    for (let suffix = 2; names.has(name); suffix++) {
+      name = `${base}_${suffix}`;
     }
-    siblings.push(container);
-    this.touch(instance);
-    return container;
+    return name;
+  }
+
+  /**
+   * Query child choices using the same bounds enforced by addContainerInstance.
+   * @param instance Configuration with loaded definitions.
+   * @param parentUuid Parent UUID, or null for module roots.
+   * @returns Direct child definitions with disabled reasons.
+   */
+  getAddOptions(instance: ConfigInstance, parentUuid: string | null): ContainerAddOption[] {
+    const { definitions, siblings } = this.childContext(instance, parentUuid);
+    return definitions.map((definition) => ({
+      definition,
+      disabledReason: this.upperReason(definition, siblings),
+    }));
   }
 
   /**
@@ -123,6 +169,13 @@ export class ConfigInstanceManager {
    * @returns The removed container subtree; throws when missing or required by multiplicity.
    */
   removeContainerInstance(instance: ConfigInstance, containerUuid: string): ConfigContainer {
+    const { siblings, container } = this.removalContext(instance, containerUuid);
+    siblings.splice(siblings.indexOf(container), 1);
+    this.touch(instance);
+    return container;
+  }
+
+  private removalContext(instance: ConfigInstance, containerUuid: string) {
     const module = this.getModule(instance);
     const siblings = this.findContainerSiblings(instance.containers, containerUuid);
     const container = siblings?.find((item) => item.uuid === containerUuid);
@@ -135,9 +188,67 @@ export class ConfigInstanceManager {
         `${definition.shortName}: lower multiplicity ${definition.multiplicity.lower} required`
       );
     }
-    siblings.splice(siblings.indexOf(container), 1);
-    this.touch(instance);
-    return container;
+    return { siblings, container };
+  }
+
+  /**
+   * Query removal availability without mutating the instance.
+   * @param instance Configuration with loaded definitions.
+   * @param containerUuid Instance to remove.
+   * @returns Core validation reason, or undefined when removal is permitted.
+   */
+  getRemovalReason(instance: ConfigInstance, containerUuid: string): string | undefined {
+    try {
+      this.removalContext(instance, containerUuid);
+      return undefined;
+    } catch (reason) {
+      return reason instanceof Error ? reason.message : String(reason);
+    }
+  }
+
+  /**
+   * Find the parent used for insertion and selection fallback.
+   * @param instance Configuration to traverse.
+   * @param containerUuid Existing container UUID.
+   * @returns Parent container, or null for a root; throws if the UUID is absent.
+   */
+  findParent(instance: ConfigInstance, containerUuid: string): ConfigContainer | null {
+    const visit = (
+      children: ConfigContainer[],
+      parent: ConfigContainer | null
+    ): ConfigContainer | null | undefined => {
+      for (const child of children) {
+        if (child.uuid === containerUuid) return parent;
+        const found = visit(child.subContainers, child);
+        if (found !== undefined) return found;
+      }
+      return undefined;
+    };
+    const parent = visit(instance.containers, null);
+    if (parent === undefined) throw new Error(`Container not found: ${containerUuid}`);
+    return parent;
+  }
+
+  /**
+   * Clone a subtree under its existing parent, enforcing the ordinary insertion limit.
+   * @param instance Configuration to edit.
+   * @param containerUuid Subtree root to clone.
+   * @returns New subtree; internal targets are remapped and external targets are cleared.
+   */
+  cloneContainerInstance(instance: ConfigInstance, containerUuid: string): ConfigContainer {
+    const parent = this.findParent(instance, containerUuid);
+    const source = this.findContainer(instance, containerUuid)!;
+    const { siblings } = this.addContext(instance, parent?.uuid ?? null, source.definitionRef);
+    const clone = cloneContainers([source])[0];
+    clone.shortName = this.uniqueName(source.shortName, siblings);
+    // Insertion still goes through the public lifecycle API, so clone cannot bypass multiplicity.
+    const inserted = this.addContainerInstance(
+      instance,
+      parent?.uuid ?? null,
+      source.definitionRef
+    );
+    Object.assign(inserted, clone);
+    return inserted;
   }
 
   private findContainerSiblings(

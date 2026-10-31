@@ -5,6 +5,8 @@ import type { UUID } from '@/types/base';
  */
 export interface ConfigInstance {
   uuid: UUID;
+  /** User-visible set name; absent only in legacy saved configurations. */
+  name?: string;
   /** 引用 BswmdModule.shortName */
   moduleRef: string;
   version: string;

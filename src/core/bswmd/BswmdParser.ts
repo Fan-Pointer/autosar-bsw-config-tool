@@ -110,6 +110,7 @@ export class BswmdParser {
       const childPath = `${location} (${identity.shortName})`;
       return {
         ...identity,
+        initialAddLabel: optionalString(data.initialAddLabel, `${childPath}.initialAddLabel`),
         multiplicity: this.multiplicity(data.multiplicity, childPath),
         parameters: array(data.parameters, `${childPath}.parameters`).map((item, i) =>
           this.parameter(item, `${childPath}.parameters[${i}]`, ids)

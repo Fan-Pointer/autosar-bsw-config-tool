@@ -25,6 +25,8 @@ export interface BswmdContainer {
   uuid: string;
   shortName: string;
   description?: string;
+  /** Optional module-authored empty-state action label. */
+  initialAddLabel?: string;
   /**
    * 多重性定义
    * - lower: 最小出现次数
