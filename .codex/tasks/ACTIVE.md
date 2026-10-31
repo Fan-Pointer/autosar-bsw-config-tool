@@ -1,121 +1,125 @@
-# ACTIVE TASK — TASK-002
+# ACTIVE TASK — TASK-003
 
-> 本文件是**当前唯一有效任务契约**。`STATE.json.task.contractPath` 指向此处。
-> Codex 在 `task.status == "READY"` 时执行本文件。
+> 当前唯一有效契约。`STATE.json.task.contractPath` 指向此处。
+> 前一版契约已归档为 `.codex/tasks/TASK-002-CONTRACT.md`（内容未改）。
 
 ## 元信息
 
 | 项 | 值 |
 |---|---|
-| 任务 ID | `TASK-002` |
-| 阶段 | Phase 2 |
+| 任务 ID | `TASK-003` |
+| 阶段 | Phase 2 → Phase 3（配置器可用化） |
 | 优先级 | P0 |
-| 依赖 | TASK-001（已完成，骨架已就绪） |
+| 依赖 | TASK-002（APPROVED，引擎已就绪） |
 | 验收方 | 架构师 |
 
 ## 目标（一句话）
 
-把配置器从「硬编码 DEM 字段」改造为「**BSWMD 定义驱动**」——参数定义、表单渲染、约束校验、代码生成全部由数据决定，核心引擎与模块解耦。
+把已经正确的 BSWMD 引擎接到界面上，让工程师**在浏览器里真正配得起多条 DTC**——能建配置集、能加/删/克隆实例、能一眼看到哪里错了。
 
 ## 为什么现在做这个
 
-当前 `src/modules/dem/models/*.ts` 是手写模型，加一个模块就得抄一遍。BSW 有近百个模块，这条路走不通。必须先把「模块无关的核心引擎」立住，后续每加一个模块只写一份 `bswmd/*.json`。
+TASK-002 修正 `lower=0` 语义后，DEM 打开时 6 类子容器全为空，而 UI 层没有任何增删入口（`src/stores/configStore.ts`、`src/views/WorkspaceView.vue` 零调用 `addContainerInstance`/`removeContainerInstance`）。
 
-## 交付清单（14 个文件）
+**当前产品在浏览器里不可用**：看得见表单，配不了内容。这不是「已知限制」，是本轮必须清掉的阻塞项。引擎层已具备能力（`ConfigInstanceManager.addContainerInstance/removeContainerInstance` 含上下界保护），本轮只做接线与配置集管理。
 
-### A. BSWMD 层（纯 TS）
+## 交付清单
 
-| # | 文件 | 职责要点 |
+### A. 配置集管理（对应 `docs/REQUIREMENTS.md` FR-Core-001）
+
+| # | 内容 | 要点 |
 |---|---|---|
-| 1 | `src/core/bswmd/BswmdTypes.ts` | 参数类型枚举、模块/容器/参数/引用四类接口、`ConfigClass` 三态 |
-| 2 | `src/core/bswmd/BswmdParser.ts` | JSON → `BswmdModule`。必须**递归**处理 `subContainers`；缺 `uuid`/`shortName`/`type` 要抛带字段名的错误 |
-| 3 | `src/core/bswmd/BswmdLoader.ts` | 支持 `loadFromUrl` / `loadFromString` / `loadFromFile`，按 `shortName` 缓存，提供 `listModules` |
+| 1 | 新建 DemConfigSet | 输入名称 → 生成唯一 UUID → 自动切换为当前 |
+| 2 | 克隆配置集 | **深拷贝**全部容器/参数/引用；克隆后引用字段的 `targetUuid` 必须重映射到新副本内对应容器，不得指向原配置集 |
+| 3 | 删除配置集 | 二次确认；删除当前项后自动切到剩余第一项；无剩余则回到空态 |
+| 4 | 配置集切换 | 切换时不得丢失未保存改动（先落库或提示） |
+| 5 | 元数据展示 | 显示 `lastModified`、容器数、错误数 |
 
-### B. 配置实例层（纯 TS）
+### B. 容器实例生命周期（本轮核心）
 
-| # | 文件 | 职责要点 |
+| # | 内容 | 要点 |
 |---|---|---|
-| 4 | `src/core/config/ConfigTypes.ts` | `ConfigInstance` / `ConfigContainer` / `ConfigParameterValue` / `ConfigReferenceValue` |
-| 5 | `src/core/config/ConfigInstance.ts` | 从 BSWMD 建空实例（递归建容器）；`findContainer` 递归查；`setParameterValue` / `setReferenceTarget` |
+| 6 | 新增实例 | 从**定义树**选择「当前父容器下允许的子定义」→ `addContainerInstance`；受 `upper` 限制，达上限时按钮禁用并给出原因 |
+| 7 | 删除实例 | 受 `lower` 限制，必填项禁用删除并说明「lower multiplicity N required」；删除前确认 |
+| 8 | 克隆实例 | 深拷贝单个容器子树，名称按 `原名_2`/`_3` 递增去重，引用字段按规则重映射或置空 |
+| 9 | 实例树刷新 | 增删后配置树立即反映，当前选中节点不失效（被删则回退父级） |
 
-### C. 约束层（纯 TS）
+### C. 配置树状态与导航（FR-UI-002 的可验收子集）
 
-| # | 文件 | 职责要点 |
+| # | 内容 | 要点 |
 |---|---|---|
-| 6 | `src/core/constraint/ConstraintTypes.ts` | `ConstraintRule`（含 `scope`/`severity`/`check`）、`ConstraintViolation`、`ConstraintContext` |
-| 7 | `src/core/constraint/ConstraintEngine.ts` | 规则注册/注销/批量校验；单条规则抛异常时**捕获并转成 violation**，不能中断整体校验 |
-| 8 | `src/core/constraint/DemConstraints.ts` | DEM 内置规则，见下方「约束清单」 |
+| 10 | 节点状态标记 | 绿=已配置（必填齐全）、黄=有 WARNING、红=有 ERROR；状态由 `ConstraintEngine` 结果驱动，**不得**在 UI 另写一套判断 |
+| 11 | 错误定位 | 点击违规项 → 树选中对应容器、表单滚动并聚焦对应字段（TASK-002 已有字段级 `definitionRef`） |
+| 12 | 右键菜单 | 新增子项 / 删除 / 克隆 / 定位错误（不含拖拽排序，留 TASK-005） |
 
-### D. 生成层（纯 TS）
+### D. 导航与首页接线
 
-| # | 文件 | 职责要点 |
+| # | 内容 | 要点 |
 |---|---|---|
-| 9 | `src/core/generator/TemplateEngine.ts` | 封装 Handlebars：注册模板 + 编译输出；模板缺失抛明确错误 |
-| 10 | `src/core/generator/CGenerator.ts` | 生成 `Dem_Cfg.h` 与 `Dem_PBCfg.c`；整数走十进制、布尔走 `TRUE/FALSE`、枚举/字符串加引号 |
+| 13 | 首页 → 工作区 | 选模块 → 建或打开配置集 → 进工作区；不得再出现「点新建却落到空白无操作」的死路 |
+| 14 | 空态引导 | 无配置集时给「新建」主按钮；配置集内无子容器时给「添加第一条 DTC」引导 |
 
-### E. UI 层（Vue 3）
+## 约束（架构铁律，违反即打回）
 
-| # | 文件 | 职责要点 |
-|---|---|---|
-| 11 | `src/ui/FormEditor/DynamicForm.vue` | 按 `type` 自动选控件：INTEGER/FLOAT→`el-input-number`（带 min/max）、ENUM→`el-select`、BOOLEAN→`el-switch`、其余→`el-input`；`isOptional=false` 显示必填星号 |
-| 12 | `src/ui/ConfigTree/ConfigTree.vue` | 递归渲染容器树；容器节点显示 multiplicity（`1` / `0..1` / `0..n`）；参数/引用用不同图标 |
-| 13 | `src/ui/Validator/ValidationPanel.vue` | 展示 violations，按 ERROR/WARNING/INFO 三色区分；显示 ruleId、message、suggestion、path；点击可回跳 |
+1. `src/core/**` 仍必须是纯 TypeScript，**不得** import vue/pinia/element-plus。
+2. `src/ui/**` 与 `src/views/**` **不得**出现 DEM 专有字段名（`DemDtcValue` 等），一律由定义驱动。
+3. 禁止 `any`、`@ts-ignore`、关 strict、删测试。
+4. 增删必须走 `ConfigInstanceManager` 既有 API，**不得**在 store 里另写一套 multiplicity 判断（避免两处规则漂移）。
+5. 克隆的引用重映射必须有测试；不得只做浅拷贝后放任悬空引用。
+6. 不得改 `review/**`、`STATE.stage`、本契约文件。
+7. 不得顺手做导入导出 / undo / ARXML / 主题 / 搜索——那些是 TASK-004/005 的**明确范围**，不是可选。
 
-### F. 数据
+## 验收标准
 
-| # | 文件 | 职责要点 |
-|---|---|---|
-| 14 | `bswmd/dem_bswmd.json` | DEM 模块 BSWMD，覆盖 DemConfigSet / DemDTC / DemDTCAttributes / DemEventParameter / DemDebounceCounterBasedClass / DemDebounceTimeBasedClass / DemOperationCycle |
+### 功能（浏览器可复现）
 
-> 注：仓库中可能已有上述文件的早期版本（commit `019befc`）。**以本契约为准重写/校正**，发现与契约冲突以实现契约。
+- [ ] 打开 DEM 工作区：根 `DemConfigSet` 存在（lower=1），6 类子容器为空，显示「添加第一条 DTC」引导
+- [ ] 连续新增 3 条 DTC，名称为 `DemDTC`、`DemDTC_2`、`DemDTC_3`，三者 UUID 不同
+- [ ] 删除第 2 条后再新增，名称不与现存冲突（不得出现两个 `DemDTC_2`）
+- [ ] 对 `upper=1` 的定义，第 2 次新增按钮禁用并说明原因
+- [ ] 对 `lower=1` 的定义，删除按钮禁用并说明原因
+- [ ] 克隆配置集后，修改克隆内某条 DTC 的 Attributes 引用，原配置集不受影响（引用已重映射）
+- [ ] 删除配置集有二次确认，删除当前项后自动切换
+- [ ] 构造「两条 DTC 同值」，树上对应节点变红，点击违规项能定位到该字段
+- [ ] 刷新页面后配置集、容器实例、参数值全部恢复
 
-## 约束清单（DemConstraints.ts 必须实现）
+### 工程
 
-| 规则 ID | 校验内容 | 级别 |
-|---|---|---|
-| `DEM-001` | DemDtcValue 全模块唯一 | ERROR |
-| `DEM-002` | DemDtcValue ∈ [0x000001, 0xFFFFFF] 且 ≠ 0x000000 | ERROR |
-| `DEM-003` | CounterFailedThreshold > 0；CounterPassedThreshold < 0 | ERROR |
-| `DEM-006` | DemEventId ∈ [1,65535] 且唯一 | ERROR |
-| `DEM-008` | DemAgingAllowed=true 时 DemAgingCycleRef 必须已设置 | ERROR |
-
-## 验收标准（评审逐条对照）
-
-**功能**
-- [ ] `BswmdParser` 能解析 `bswmd/dem_bswmd.json`，得到含 7 个子容器的树
-- [ ] 解析器对缺失 `uuid` 的容器抛错，错误信息含容器名/索引
-- [ ] `ConfigInstanceManager.createFromBswmd()` 递归建出全部容器，参数带默认值
-- [ ] `ConstraintEngine` 在一条规则抛异常时仍返回其余规则结果
-- [ ] 构造「两个 DTC 同值」配置，`DEM-001` 必须报 ERROR
-- [ ] 构造 `DemAgingAllowed=true` 且无 AgingCycleRef，`DEM-008` 必须报 ERROR
-- [ ] `CGenerator.generateHeader()` 输出可直接编译的 `.h`（宏名不含中文、不含非法字符）
-- [ ] `DynamicForm` 对 ENUM 参数渲染下拉、对 BOOLEAN 渲染开关
-
-**工程**
 - [ ] `npm run build` 通过（含 `vue-tsc --noEmit`）
-- [ ] `src/core/**` 全目录 grep 不到 `from 'vue'` / `pinia` / `element-plus`
-- [ ] 全仓库 `: any` 出现次数为 0（`unknown` 不算）
-- [ ] 导出函数均有 JSDoc
-- [ ] 无 `@ts-ignore`
+- [ ] `npm test -- --run` 全绿，测试数 ≥ 60（当前 52 + 本轮新增）
+- [ ] `src/core/**` 无 vue/pinia/element-plus
+- [ ] `src/ui/**`、`src/views/**` 无 `Dem*` 字段名
+- [ ] 全仓无 `any`、无 `@ts-ignore`
+- [ ] 新增导出函数带 JSDoc
 
-**交付物**
-- [ ] `.codex/reports/TASK-002-REPORT.md` 已按模板填写
-- [ ] `.codex/STATE.json` 中 `task.status == "SUBMITTED"`
+### 交付物
 
-## 明确不做（避免范围蔓延）
-
-- ❌ 不做 ARXML 导入导出（Phase 4）
-- ❌ 不做 Vue Flow 引用图（Phase 3）
-- ❌ 不做 Python 约束运行时（Phase 3）
-- ❌ 不新增 DEM 以外的 BSW 模块
-- ❌ 不接后端、不改路由结构
+- [ ] `.codex/reports/TASK-003-REPORT.md` 按模板填写，含**可复现步骤清单**（每条给「点哪里 → 期望看到什么」）
+- [ ] `STATE.json`：`task.status = SUBMITTED`、`task.round` 保留 0、写入 `task.submissionCommit`（**先提交代码取完整 SHA，再改状态单独提交**）
 
 ## 自检命令
 
 ```bash
 cd "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool"
-npm install
 npm run build
-grep -rn "from 'vue'" src/core/ || echo "OK: core 无 Vue 依赖"
-grep -rn ": any" src/ || echo "OK: 无 any"
+npm test -- --run
+grep -rn "from 'vue'\|pinia\|element-plus" src/core/ || echo "OK: core 无 UI 依赖"
+grep -rn "Dem[A-Z]" src/ui/ src/views/ || echo "OK: UI 无 DEM 硬编码"
+grep -rn ": any\|@ts-ignore" src/ tests/ || echo "OK: 无 any"
 ```
+
+## 后续任务必须覆盖（不得声称已完成，也不得降级为可选）
+
+| 需求 | 归属 |
+|---|---|
+| JSON 导入导出、ARXML 导入导出、CSV 导出、导入预览与冲突解决、XXE 防护（`FR-Assist-005`、`NFR-SEC-002`） | TASK-004 |
+| 撤销/重做 20 步（`NFR-UX-001`）、批量修改（TC-003）、全局搜索（FR-UI-004）、暗色主题 | TASK-005 |
+| 引用关系图（`FR-Auto-002`）、悬空引用高亮 | TASK-005 |
+| 拖拽排序、自动保存 30s、新手引导、1000 DTC 性能（`NFR-PERF-003/004`） | TASK-006 |
+
+## 参考
+
+- 引擎 API：`src/core/config/ConfigInstance.ts`（`addContainerInstance` / `removeContainerInstance` / `findContainer`）
+- 定义树：`src/core/bswmd/BswmdTypes.ts`
+- 校验结果结构：`src/core/constraint/ConstraintTypes.ts`（含 `containerUuid`、`definitionRef`）
+- 需求原文：`docs/REQUIREMENTS.md` FR-Core-001、FR-UI-002、FR-UI-004

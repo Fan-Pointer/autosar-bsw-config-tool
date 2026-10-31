@@ -1,121 +1,142 @@
 # 产品规划与最终验收清单
 
-> 维护方：WorkBuddy（架构师）｜ 版本 v1.0 ｜ 2026-10-31
-> 依据：`SRS_AUTOSAR_DTC_ConfigTool.md`、`INSTRUCTION_AUTOSAR_DTC_ConfigTool.md`、`project-engineering-file.md`、`docs/ARCHITECTURE-v2.md` 内嵌 ADR
+> 维护方：WorkBuddy（架构师）｜ 版本 **v1.1**（2026-10-31 修正 v1.0 的范围错误）
+> 依据：`docs/REQUIREMENTS.md`（**仓内权威来源**）、`project-engineering-file.md`、`docs/ARCHITECTURE-v2.md`
+> 说明：v1.0 误引 `SRS_AUTOSAR_DTC_ConfigTool.md` / `INSTRUCTION_AUTOSAR_DTC_ConfigTool.md`——这两份在工作区上一级目录，**不在仓库内**，不作追溯依据。v1.1 全部改为引用仓内 `docs/REQUIREMENTS.md`。
 
 ---
 
 ## 一、产品定位（不扩张）
 
-**一句话**：面向汽车电子工程师的**网页版 AUTOSAR Classic BSW 配置工具**，首期只做 **DEM 模块**，覆盖「配置 → 校验 → 生成 C 配置代码 → 导出」闭环，纯前端离线运行。
+**一句话**：面向汽车电子工程师的**网页版 AUTOSAR Classic BSW 配置工具**，首期只做 **DEM 模块**，覆盖「配置 → 校验 → 生成 C 配置代码 → 导入导出」闭环，纯前端离线运行。
 
 **明确不是**：
-- ❌ 不是全 BSW 商业配置器（不做 RTE、不做 OS 调度配置、不做 MCAL 芯片级参数）
-- ❌ 不替代 DaVinci/ISOLAR 的全工程集成能力（不做系统描述导入、不做变体矩阵、不做多用户协作）
+- ❌ 不是全 BSW 商业配置器（不做 RTE、不做 OS 调度、不做 MCAL 芯片级参数）
+- ❌ 不替代 DaVinci/ISOLAR 的全工程集成（不做系统描述导入、不做变体矩阵、不做多用户协作）
 - ❌ 不做后端、不做账号、不做云端存储
 
-**首期价值主张**：把「手写 DTC 表 + 手写 `_Cfg.h` + 人工核对约束」的三件事，收成一个可视化界面，且约束由 AUTOSAR 规范固化，不靠工程师记忆。
+---
+
+## 二、首期需求清单（来源 `docs/REQUIREMENTS.md`，**全部必做**）
+
+> 此表取代 v1.0 中「已知限制」的错误归类。凡 REQUIREMENTS 列为 P0/P1 的，一律是**待实现需求**，不得移入「已知限制」后宣布完成。
+
+| 需求编号 | 内容 | 来源 | 归属任务 | 状态 |
+|---|---|---|---|---|
+| FR-Core-001 | 配置集创建/克隆/删除/切换、JSON 导入导出、版本时间戳 | REQUIREMENTS §2.1 | TASK-003（UI）、TASK-004（JSON） | 🔧 进行中 |
+| FR-Core-002 | DTC 完整表单、十六进制校验、唯一性 | §2.1 | TASK-002 引擎 ✅ / TASK-003 UI 🔧 | 🔧 |
+| FR-Core-003 | Attributes 分组表单与条件联动 | §2.1 | TASK-002 引擎 ✅ / TASK-003 UI 🔧 | 🔧 |
+| FR-Core-004 | EventParameter、EventId 自动生成与唯一性 | §2.1 | TASK-002 ✅ | ✅ |
+| FR-Core-005 | 计数器/时间去抖配置 | §2.1 | TASK-002 ✅ | ✅ |
+| FR-Core-006 | 冻结帧配置 | §2.1 | TASK-002 ✅（定义已含） | ✅ |
+| FR-Core-007 | 扩展数据配置 | §2.1 | TASK-002 ✅（定义已含） | ✅ |
+| FR-Core-008 | OperationCycle 配置 | §2.1 | TASK-002 ✅ | ✅ |
+| FR-Assist-004 | 配置验证 R-001~R-008 | §2.2 | TASK-002 ✅（DEM-001/002/003/006/008；R-007 由定义必填校验覆盖） | ✅ |
+| **FR-Assist-005** | **导出 JSON / ARXML(4.2.2) / CSV；导入 JSON / ARXML；导入预览与冲突解决** | §2.2 | **TASK-004（必做）** | ⬜ |
+| FR-Assist-001 | 配置向导（P1） | §2.2 | TASK-006 | ⬜ |
+| FR-Assist-002 | 引用关系管理、悬空引用警告、引用图 | §2.2 | TASK-005 | ⬜ |
+| FR-Assist-003 | 批量操作（P2，TC-003 有验收） | §2.2 | TASK-005 | ⬜ |
+| FR-Assist-006 | 配置模板（P2） | §2.2 | TASK-006 或后延 | ⬜ |
+| FR-UI-001 | 三栏布局、1366×768、暗色/亮色主题 | §2.3 | TASK-003（布局）/ TASK-005（主题） | 🔧 |
+| FR-UI-002 | 树形导航、状态标记、拖拽排序、右键菜单 | §2.3 | TASK-003（标记+右键）/ TASK-005（拖拽） | 🔧 |
+| FR-UI-003 | 按类型自动控件、字段帮助、分组折叠 | §2.3 | TASK-002 ✅ / TASK-003 补分组折叠 | 🔧 |
+| FR-UI-004 | 全局搜索、高级筛选、结果高亮 | §2.3 | TASK-005 | ⬜ |
+| FR-Auto-001 | Multiplicity/Scope/Dependency 可视化 | §3.4 | TASK-003（multiplicity 已可见） | 🔧 |
+| FR-Auto-002 | 引用完整性、引用图、孤立项 | §3.4 | TASK-005 | ⬜ |
+| FR-Auto-003 | 配置变体（Pre/Link/Post-build） | §3.4 | TASK-006（见歧义 #2） | ⬜ |
+| FR-Auto-004 | ARXML 合规导出（4.2.2、UUID、ECUC 前缀） | §3.4 | TASK-004 | ⬜ |
+| FR-Auto-005 | DaVinci 互操作 | §3.4 | TASK-006（需真实工具验证，见风险） | ⬜ |
+| FR-Auto-006 | DEM 规范内置规则 | §3.4 | TASK-002 ✅ | ✅ |
+| NFR-PERF-003/004 | 1000+ DTC 不卡顿、导出 ≤10s | §3.1 | TASK-006（必须实测，不得凭感觉） | ⬜ |
+| NFR-SEC-002 | ARXML 导入防 XXE | §3.3 | TASK-004（**安全红线，必做**） | ⬜ |
+| NFR-SEC-003 | 纯前端无后端 | §3.3 | ✅ 全程遵守 | ✅ |
+| NFR-UX-001 | 撤销/重做 Ctrl+Z/Y，20 步 | §3.4 | TASK-005（**必做**） | ⬜ |
+| NFR-UX-002/003/004 | 30s 自动保存、快捷键、新手引导 | §3.4 | TASK-006 | ⬜ |
+| NFR-COMP-001/003 | Chrome90+/Firefox88+/Edge90+、离线可用 | §3.2 | TASK-006 验收 | ⬜ |
 
 ---
 
-## 二、首期范围（DEM，冻结）
+## 三、任务序列（与 ACTIVE 契约一致）
 
-| 能力 | 说明 | 状态 |
-|---|---|---|
-| BSWMD 驱动 | 参数定义来自 `bswmd/*.json`，加模块不改核心 | ✅ TASK-002 |
-| 容器实例管理 | 按 multiplicity 建实例，支持新增/删除/克隆 | 🔧 TASK-003（阻塞项修复起） |
-| 参数编辑 | 按类型渲染控件，范围/枚举/必填即时校验 | ✅ TASK-002 |
-| 引用关系 | 引用字段按 `destinationContainerType` 选择目标 | ✅ TASK-002 |
-| 约束校验 | DEM-001/002/003/006/008 + 定义级校验 | ✅ TASK-002 |
-| C 代码生成 | `Dem_Cfg.h` / `Dem_PBCfg.c`，可被 GCC `-Werror` 编译 | ✅ TASK-002 |
-| 本地持久化 | IndexedDB/localStorage，刷新不丢 | ✅ TASK-002 |
-| ARXML 导入导出 | AUTOSAR 4.2.2 ECU Configuration | ⬜ TASK-004 |
-| 引用关系图 | Vue Flow 可视化 DTC→Attributes→Debounce | ⬜ TASK-005 |
-| 撤销/重做 | ≥20 步 | ⬜ TASK-005 |
-| 暗色主题 | — | ⬜ 可选 |
-
-**首期不做**：DCM/NvM/Can 等模块、变体管理、Python 约束运行时、多用户、后端。
-
----
-
-## 三、阶段路线（TASK 序列）
-
-| 任务 | 目标 | 验收要点 | 依赖 |
+| 任务 | 目标 | 关键验收 | 状态 |
 |---|---|---|---|
-| TASK-002 | BSWMD 引擎 + 动态 UI + 生成器 | 14 文件、35 测试、core 无 UI 依赖 | — |
-| **TASK-003** | **容器实例生命周期 + 校验信息质量** | 按 multiplicity 建实例；新增/删除/克隆 API 与 UI；缺失/非法/越界三类提示可操作 | TASK-002 APPROVED |
-| TASK-004 | ARXML 导出（先出后入） | 命名空间 4.2.2、UUID、`ECUC-MODULE-CONFIGURATION-VALUES` 结构；导出文件结构可被独立 XSD 子集校验 | TASK-003 |
-| TASK-005 | 引用关系图 + 撤销重做 | 悬空引用红色高亮；点击节点跳转；Ctrl+Z/Y 20 步 | TASK-004 |
-| TASK-006 | 产品化收口 | 运行方式、示例工程、操作说明、已知限制、独立评审 | TASK-005 |
+| TASK-001 | 项目骨架 | 可运行空壳 | ✅ |
+| TASK-002 | BSWMD 引擎 + 动态表单 + 约束 + C 生成 | 52 测试、core 零 UI 依赖、GCC 通过 | ✅ **APPROVED (round 1)** |
+| **TASK-003** | **配置集管理 + 实例增删克隆 + 界面接线** | 浏览器可连加 3 条 DTC、克隆引用重映射、树状态标记 | 🔧 **READY** |
+| TASK-004 | JSON / ARXML / CSV 导入导出 + 预览冲突 + XXE 防护 | round-trip 一致、ARXML 结构合规、XXE 用例不解析外部实体 | ⬜ |
+| TASK-005 | 引用图 + 撤销重做 20 步 + 批量修改 + 搜索 + 主题 | 悬空引用红标、Ctrl+Z/Y 生效、TC-003 通过 | ⬜ |
+| TASK-006 | 产品化收口 | 性能实测、跨浏览器、新手引导、交付文档 | ⬜ |
 
-> 顺序理由：先把「能配多条 DTC 并正确校验」这件最基础的事做扎实（TASK-003），再谈导出格式（TASK-004）。导出做早了，模型一改就要重导。
+> 顺序理由：先让界面可用（TASK-003），再做数据进出（TASK-004），最后补效率与可视化（TASK-005）。**顺序不等于降级**——表二里的每一项都必须在 TASK-006 结束前完成或由用户明确裁定后延。
 
 ---
 
-## 四、最终验收清单（交付给王上时逐项核）
+## 四、最终验收清单（交用户时逐项核）
 
 ### A. 可运行
 
-- [ ] `npm install` 在干净环境可完成，无缺失依赖
-- [ ] `npm run dev` 启动，浏览器打开即出现工作区，无控制台报错
+- [ ] `npm install` 干净环境可完成
+- [ ] `npm run dev` 打开即有可用界面，控制台无报错
 - [ ] `npm run build` 通过
-- [ ] 全程无后端、无网络请求（除加载本地 `bswmd/*.json`）
+- [ ] 全程无后端、无对外网络请求（仅加载本地 `bswmd/*.json`）
 
-### B. 核心场景走通（演示脚本）
+### B. 核心场景（演示脚本，必须在浏览器实走一遍）
 
-- [ ] 新建 DEM 配置 → 初始为 0 条 DTC（不残留预置实例）
-- [ ] 连续新增 3 条 DTC：`0x123456` / `0x123457` / `0x123456` → 第三条报「DTC 值重复」并定位到字段
-- [ ] 把第三条改成 `0x123458` → 错误消失
-- [ ] 新增 DTC Attributes，开启 Aging 但不选 Cycle → 报 R-008
-- [ ] 选一个 OperationCycle → 错误消失
-- [ ] 新增 Debounce，Failed 填 -5 / Passed 填 5 → 两条符号错误
-- [ ] 修正后校验全绿 → 可生成代码
-- [ ] 生成 `Dem_Cfg.h` + `Dem_PBCfg.c`，用 GCC `-std=c11 -Wall -Wextra -Werror` 语法检查通过
+- [ ] 新建配置集 → 初始 0 条 DTC，显示「添加第一条 DTC」引导
+- [ ] 连加 3 条 DTC `0x123456`/`0x123457`/`0x123456` → 第三条报「DTC 值重复」，树节点变红，点击可定位字段
+- [ ] 改第三条为 `0x123458` → 错误消失
+- [ ] 加 Attributes，开 Aging 不选 Cycle → 报 R-008；选一个 OperationCycle → 消失
+- [ ] 加 Debounce，Failed=-5 / Passed=5 → 两条符号错误；修正后全绿
+- [ ] 克隆配置集 → 改克隆内引用 → 原配置集不受影响
+- [ ] 导出 JSON → 清空 → 导入 → 结构完全一致（round-trip）
+- [ ] 导出 ARXML → 根节点命名空间为 4.2.2，容器含 UUID 与 `ECUC-MODULE-CONFIGURATION-VALUES`
+- [ ] 导入一个含外部实体的 ARXML → 被拒绝或实体未被展开（XXE 防护）
+- [ ] 导出 CSV → Excel 打开列对齐
+- [ ] 生成 `Dem_Cfg.h`/`Dem_PBCfg.c` → GCC `-std=c11 -Wall -Wextra -Werror -pedantic` 通过
+- [ ] Ctrl+Z 连续撤销 20 步、Ctrl+Y 重做
 - [ ] 刷新页面 → 配置恢复
-- [ ] 存在 ERROR 时生成按钮不可用
 
 ### C. 架构约束
 
-- [ ] `src/core/**` 无 `vue`/`pinia`/`element-plus` 引用
-- [ ] `src/ui/**` 无 DEM 专有字段名
-- [ ] 全仓无 `any`、无 `@ts-ignore`、无 `@ts-expect-error`
-- [ ] 新增一个模块只需增加 `bswmd/<module>_bswmd.json`，不改核心代码（用 Dcm 最小样本验证一次即可）
+- [ ] `src/core/**` 无 vue/pinia/element-plus
+- [ ] `src/ui/**`、`src/views/**` 无 DEM 专有字段名
+- [ ] 全仓无 `any`、`@ts-ignore`、`@ts-expect-error`
+- [ ] 新增模块只需加 `bswmd/<module>_bswmd.json`（用最小 Dcm 样本验证一次）
 
 ### D. 文档与可维护
 
-- [ ] `README.md` 含：运行方式、目录说明、核心操作三步、已知限制
-- [ ] `docs/ARCHITECTURE-v2.md` 与实现一致（发现漂移必须改文档或改代码，不许两头不一致）
-- [ ] `.codex/` 下有完整 TASK 记录：契约、报告、每轮评审、STATE 变更可追溯
-- [ ] 每个 TASK 至少一轮独立评审记录（🔴 全部关闭才 APPROVED）
+- [ ] `README.md`：运行方式、目录说明、三步上手、已知限制
+- [ ] `docs/ARCHITECTURE-v2.md` 与实现无漂移
+- [ ] `.codex/` 下每个 TASK 均有契约、报告、逐轮评审、STATE 历史可追溯
+- [ ] 每个 TASK 至少一轮独立评审，🔴 全关才 APPROVED
 
-### E. 已知限制必须如实写明（不许隐藏）
+### E. 已知限制（只有这些，其余一律是待办需求）
 
-- [ ] C 生成仅为配置宏与常量表，未对接任何供应商 BSW 库 ABI
-- [ ] 无 ARXML 导入（导出先做）
+- [ ] C 生成为配置宏与常量表，未对接任何供应商 BSW 库 ABI
 - [ ] 单模块单配置实例，无跨模块一致性校验
 - [ ] 无变体（PreCompile/LinkTime/PostBuild）区分能力
-- [ ] 大数据量（>1000 DTC）未压测
+- [ ] DaVinci 互操作未用真实工具验证（见风险 R-001）
+
+> ⚠️ 纪律：**不得**把「导入导出」「撤销重做」「批量修改」「搜索」「性能」写进本清单——它们是表二的待实现需求。
 
 ---
 
 ## 五、范围歧义（需王上裁定）
 
-| # | 歧义 | 选项 A | 选项 B | 我的建议 |
+| # | 歧义 | 选项 A | 选项 B | 建议 |
 |---|---|---|---|---|
-| 1 | 生成的 C 代码目标 | 仅生成配置宏/常量表（通用，不含结构体布局） | 绑定特定供应商（如普华/恒润）的 `_Cfg.h` 布局 | **A**。绑供应商会把工具变成定制项目，且无其头文件无法验证 |
-| 2 | ARXML 导出范围 | 只导 `ECUC-MODULE-CONFIGURATION-VALUES`（配置值） | 连同 `ECUC-MODULE-DEF` 一起导（自包含） | **A**。定义来自 AUTOSAR 标准文件，导出值是配置器本分 |
-| 3 | 是否做 ARXML 导入 | 暂不做（导出优先） | 同步做（需处理 OEM 系统描述兼容） | **A**，TASK-004 先出后入 |
-| 4 | 多模块扩展节奏 | DEM 收口后再扩 DCM | 引擎完成后即并行铺 5 个模块 | **A**。单模块打磨出模板，再复用 |
-| 5 | 是否需要中文界面 | 中文 | 中英双语 | 中文（当前已中文），双语进 TASK-006 可选 |
-| 6 | 部署形态 | 本地 `npm run dev` / 静态文件 | 需要在线可访问链接 | 待定，若不涉及外发则本地即可 |
+| 1 | 生成 C 代码的目标 | 仅配置宏/常量表（通用） | 绑定供应商（普华/恒润）`_Cfg.h` 布局 | **A**：无其头文件无法验证，绑死即变定制项目 |
+| 2 | 配置变体（FR-Auto-003） | 首期不做，明确后延 | 需在 TASK-006 前实现 | **A**（后延），但需王上确认，因它是 REQUIREMENTS P1 |
+| 3 | ARXML 导入深度 | 仅解析本工具导出的 ECUC 配置值结构 | 兼容 OEM 系统描述/第三方 arxml | **A** 起步，B 待真实样本 |
+| 4 | DaVinci 互操作验收 | 不做真机验证，仅保证结构合规 | 需王上提供 DaVinci 环境实测 | 需王上定 |
+| 5 | 界面语言 | 中文 | 中英双语 | 中文，双语视为新增需求 |
+| 6 | 部署形态 | 本地 `npm run dev` / 静态文件 | 需在线可访问链接 | 待定（外发需王上决定） |
 
 ---
 
 ## 六、自动开发停止条件
 
-满足全部条件后停止自动开发，交王上验收：
-
-1. 上表 A–E 全绿
-2. 至少 TASK-002 ~ TASK-006 均有 APPROVED 记录
-3. 范围歧义 1–6 有明确裁定
-4. 王上完成一次人工验收（按 B 节演示脚本亲自走一遍）
+1. 表二全部需求状态为 ✅，或经王上明确裁定后延并记录
+2. 第四节 A–E 全绿
+3. 歧义 1–6 有明确裁定
+4. 王上按 B 节演示脚本亲自走一遍并签字

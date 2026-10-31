@@ -1,7 +1,7 @@
-# TASK-002 评审意见（当前轮 = 第 0 轮）
+# TASK-002 评审意见（当前 = 第 1 轮 · APPROVED）
 
-> 本文件指向最新一轮评审，内容与冻结快照 `.codex/review/TASK-002-ROUND-0-REVIEW.md` 一致。
-> 下一轮评审时本文件覆盖为新内容，快照文件保持不可变。
+> 本文件指向最新一轮，内容与冻结快照 `.codex/review/TASK-002-ROUND-1-REVIEW.md` 一致。
+> 第 0 轮快照保留于 `TASK-002-ROUND-0-REVIEW.md`，两轮均不可变。
 
 ## 评审元信息
 
@@ -9,102 +9,108 @@
 |---|---|
 | reviewer | WorkBuddy（架构师，评审身份独立） |
 | taskId | TASK-002 |
-| round | 0 |
-| reviewedCommit | `7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5` |
-| 评审时 HEAD | `5212a47b953848c700533c5240e52d5e06da541d`（仅多一个分工文档提交） |
-| 评审时间 | 2026-10-31T23:25:00+08:00 |
-| 契约 | `.codex/tasks/ACTIVE.md` |
-| 报告 | `.codex/reports/TASK-002-REPORT.md` |
+| round | 1 |
+| reviewedCommit | `e125f86fab069e94b347ad6b9dca2baf10582239` |
+| 状态提交 | `efa166de7e064065af5bbc03b66224f9ffae35db` |
+| 评审时 HEAD | `3376824a7022378288336fd114fb41c70f49d48d`（调度器提交，另见 AUTODEV-REVIEW.md） |
+| 评审时间 | 2026-10-31T23:58:00+08:00 |
+| 契约 | `.codex/tasks/ACTIVE.md`（TASK-002 版） |
 
 ## 结论
 
-**判定：`CHANGES_REQUESTED`**
+**判定：`APPROVED`**
 
 | 项 | 数量 |
 |---|---|
-| 🔴 阻塞项 | 1 |
-| 🟠 重要项 | 2 |
-| 🟡 建议项 | 3 |
-| 契约文件完成度 | 14 / 14 |
-| 功能验收通过 | 7 / 8（1 项为契约文案歧义，归责评审方） |
-| 工程验收通过 | 5 / 5 |
+| 🔴 阻塞项 | **0**（上轮 1 项已闭环） |
+| 🟠 重要项 | **0**（上轮 2 项已闭环：1 项由评审方改契约、1 项由 Codex 修实现） |
+| 🟡 建议项 | 3（延续 + 新增，均不阻塞） |
+| 功能验收 | 8 / 8 |
+| 工程验收 | 5 / 5 |
 
-整体质量高于预期：核心引擎与 UI 完全解耦、规则引擎异常隔离正确、C 生成经 GCC `-Werror -pedantic` 实证、测试 35 项真实通过。阻塞项仅 1 条且修复量极小，问题源于契约措辞而非工程能力。
-
----
-
-## 一、阻塞项 🔴
-
-### 🔴-1 `lower = 0` 的可选容器被强制实例化，违反 AUTOSAR multiplicity 语义
-
-| 项 | 内容 |
-|---|---|
-| 位置 | `src/core/config/ConfigInstance.ts:38-53`，关键行 `length: definition.multiplicity.upper === 0 ? 0 : Math.max(1, definition.multiplicity.lower)` |
-| 问题 | `Math.max(1, lower)` 使 `lower = 0` 的容器仍创建 1 个实例。而 `bswmd/dem_bswmd.json` 中 DemDTC、DemDTCAttributes、DemEventParameter、DemDebounceCounterBasedClass、DemDebounceTimeBasedClass、DemOperationCycle **全部为 `lower: 0, upper: unbounded`**。 |
-| 影响 | ① 违反 AUTOSAR ECUC multiplicity 语义（`0..n` 表示可不出现）；② 用户打开工具即被塞入 1 条 DTC，且经 grep 确认 `src/` 内**无任何容器新增/删除 API**（`addContainer`/`removeContainer`/`duplicateContainer` 均无匹配），因此**无法配置第二条 DTC、无法删除预置实例**，DEM DTC 配置器在最核心场景（多条 DTC）上不可用；③ 预置实例带着默认值参与校验，产生与用户操作无关的初始 violate 噪声。 |
-| 修复要求 | ① 改为按 `lower` 精确取值，`lower = 0` 时不创建实例；② 在 `ConfigInstance` 暴露 `addContainerInstance(instance, parentContainerUuid, definitionUuid)` 与 `removeContainerInstance(instance, containerUuid)` 两个方法（本轮只做 API，UI 按钮留给 TASK-003 亦可，但 API 必须在 core 层可用）；③ 补 1 条测试：`lower=0` 的模块建实例后子容器数为 0，调用 add 后为 1，remove 后回到 0。 |
-| 归责 | 契约"递归建出全部容器"措辞含糊，是 Codex 采用 `Math.max(1, lower)` 的直接诱因。**评审方认领该措辞责任**，故本条只要求修正语义与补 API，不追究实现理解。 |
+**但必须同时明确：产品尚不可用。** UI 层未接入容器增删 API（见四·观察 1），用户在浏览器里看不到也无法新建任何 DTC。这不是「已知限制」，而是 **TASK-003 的第一阻塞项**，本轮批准仅针对「引擎」契约，不代表产品可用。
 
 ---
 
-## 二、重要项 🟠
+## 一、上轮阻塞项闭环核验
 
-### 🟠-1 契约"7 个子容器"文案歧义 —— 由评审方修正，不计入 Codex 缺陷
+### 🔴-1（round 0）`lower = 0` 被强制实例化 → **已闭环 ✅**
 
-| 项 | 内容 |
-|---|---|
-| 位置 | `.codex/tasks/ACTIVE.md` 验收第 1 条 |
-| 事实核查 | `node` 实测 `bswmd/dem_bswmd.json`：根容器 1 个（DemConfigSet），直接子容器 6 个（DemDTC / DemDTCAttributes / DemEventParameter / DemDebounceCounterBasedClass / DemDebounceTimeBasedClass / DemOperationCycle），**容器定义总数 7**。契约原文写"含 7 个子容器"，与"7 种容器含根"自相矛盾。 |
-| 口径裁定 | **7 = 1 根 + 6 直接子容器。** Codex 保留 7 种定义、不擅自增加第八种的处理正确。本条**不构成 Codex 缺陷**。 |
-| 要求 | 下轮契约必须改写为"共 7 个容器定义（1 个根 + 6 个直接子容器）"，并在下一版 `ACTIVE.md` 生效；本轮评审记录即口径依据。 |
-
-### 🟠-2 定义约束把「空字符串」等同于「未配置」，且缺失/非法共用同一句错误信息
-
-| 项 | 内容 |
-|---|---|
-| 位置 | `src/core/constraint/DefinitionConstraints.ts:29-33、45-50` |
-| 问题 | `value === undefined \|\| value === null \|\| value === ''` 一律视为未配置，`STRING` 类型参数永远无法表达空串；同时"必填缺失"与"类型/范围/枚举非法"都走 `add(...)`，`STRING` 越界场景下报的是 `has an invalid type, range, or choice`，而必填场景报 `is required`，两类问题对用户的修复动作完全不同却共用一条 `suggestion: 'Use a value allowed by the module definition'`。 |
-| 影响 | 用户看到"必填缺失"提示时不知道该填什么；看到"类型非法"时也拿不到具体允许值（如 ENUM 的合法枚举未列出）。诊断信息质量直接影响配置效率——这是配置器类工具的核心体验。 |
-| 修复要求 | ① 仅 `undefined`/`null` 视为未配置，`''` 交由类型规则判定；② 三条独立消息：缺失（列出必填）、非法类型（写明期望类型）、越界/枚举非法（**列出允许范围或全部枚举字面量**）；③ 补测试覆盖 ENUM 非法值的提示文案含候选值。 |
-
----
-
-## 三、建议项 🟡
-
-| # | 位置 | 建议 |
+| 核验点 | 证据 | 结论 |
 |---|---|---|
-| 🟡-1 | `src/core/constraint/DemConstraints.ts:5` | `if (ctx.bswmdModule.shortName !== 'Dem') return []` 以模块名字符串硬守门，模块更名或大小写差异即静默失效。建议规则携带 `moduleName` 元数据由引擎统一过滤，或归一化比较。 |
-| 🟡-2 | 构建产物 | 主包 1.18 MB（gzip 380 KB），Element Plus 全量引入。建议按需引入或 `build.rollupOptions.output.manualChunks` 拆 vendor。非阻塞。 |
-| 🟡-3 | `src/core/generator/CGenerator.ts:132-156` | 宏名采用 `P{idx}_` / `R{idx}_` / `C{idx}_` 前缀去重，可读性下降（`DEM_C0_DEMDTC_P0_DEMDTCVALUE`）。建议保留序号后缀而非前缀，形如 `DEM_DTC_0_DTCVALUE`，更贴近供应商代码习惯。非阻塞，可在 TASK-004 生成器细化时一并处理。 |
+| 初始实例数按 `lower` 精确取值 | `ConfigInstance.ts:65` `Array.from({ length: definition.multiplicity.lower }, …)`，已删除 `Math.max(1, lower)` | ✅ |
+| 提供新增 API | `addContainerInstance(instance, parentContainerUuid, definitionUuid)` @ `:80` | ✅ |
+| 提供删除 API | `removeContainerInstance(instance, containerUuid)` @ `:125` | ✅ |
+| 上界保护 | `:102` `upper !== 'unbounded' && count >= upper` 抛错 | ✅ 超出契约要求（我只要求增删） |
+| 下界保护 | `:133` `count <= lower` 抛错，防止删掉必填实例 | ✅ 契约外增益 |
+| 重名规避 | `:108-112` 用已存在 shortName 集合递增后缀，注释说明「删除后仅靠计数会重名」 | ✅ 考虑到了删除后重加的场景 |
+| 恢复配置可用 | `getModule()` 按 `[moduleRef, version]` 查表；构造函数接收 modules，`getModule` 缺失时抛明确错误 | ✅ 解决了我最担心的「IndexedDB 恢复后无法增删」问题 |
+| 悬空引用处理 | 删除时保留其他容器对它的引用，交由校验报告（注释 `:120`） | ✅ 与 DEM-008 的 dangling 检测形成闭环，设计正确 |
+| 测试覆盖 | `starts with zero optional children, then adds and removes one by definition`、`adds multiple DTCs with unique identities and names even after a deletion`、`enforces sibling bounds and parent definitions without mutating failed operations`、`supports root containers, zero upper bounds and a restored config with supplied definitions`、`creates required descendants and removes nested subtrees at the correct parent` | ✅ 5 条，正好覆盖我要求的 3 条并超出 |
+
+**额外肯定**：「失败操作不产生副作用」（`without mutating failed operations`）这条测试是我没要求、但工程上极易踩的坑，Codex 主动覆盖了。
 
 ---
 
-## 四、独立核查命令与结果
+## 二、上轮重要项闭环核验
 
-全部由 reviewer 在本机独立执行，不采信报告中的自述数据。
+### 🟠-1（round 0）契约「7 个子容器」文案 → **评审方已认领，Codex 无需动作 ✅**
 
-| # | 命令 | 期望 | 实测结果 |
+口径维持：**7 个容器定义 = 1 个根（DemConfigSet）+ 6 个直接子容器**。round-1 未改动 `bswmd/dem_bswmd.json` 的容器集合，符合裁定。
+
+### 🟠-2（round 0）校验信息质量 → **已闭环 ✅**
+
+| 要求 | 证据（`DefinitionConstraints.ts`） | 结论 |
+|---|---|---|
+| 仅 `undefined`/`null` 视为未配置 | `:29` `if (value === undefined \|\| value === null)` | ✅ 已移除 `value === ''` |
+| 缺失提示可操作 | `:34-35` `X is required` + `Set required parameter X (TYPE)` | ✅ 带类型 |
+| 类型非法独立提示 | `:56-62` `X has an invalid type; expected INTEGER (safe integer number)` 等，按类型给期望值 | ✅ |
+| 越界提示列出允许范围 | `:71-77` `allowed range: [min, max]`，缺省用 `-Infinity/Infinity` | ✅ |
+| 枚举非法列出全部候选 | `:83-91` 全部枚举字面量 `JSON.stringify` 后逗号连接 | ✅ |
+| 引用目标类型错误提示 | `:110-111` `must target <Type>` + 选择提示 | ✅ |
+| 测试 | `lists exact numeric bounds and distinguishes domain errors from missing values and types`、`accepts empty required STRING and an explicitly allowed empty ENUM literal` | ✅ 正反两面都测了 |
+
+---
+
+## 三、独立核查命令与结果
+
+由 reviewer 本机独立执行，不采信报告自述。
+
+| # | 命令 | 期望 | 实测 |
 |---|---|---|---|
-| 1 | `git show --stat 7c3a3a7` | 范围符合契约 | ✅ 40 文件，含 14 个契约文件 + 2 个新增 core 文件 + 测试 + 依赖锁定 |
-| 2 | `grep -rn "from 'vue'\|pinia\|element-plus" src/core/` | 无匹配 | ✅ 无匹配（架构铁律成立） |
-| 3 | `grep -rn ":\s*any\b\|@ts-ignore\|@ts-expect-error" src/ tests/` | 无匹配 | ✅ 无匹配 |
-| 4 | `grep -rn "Dem[A-Z]\|demDtc\|DemDTC" src/ui/` | 无匹配 | ✅ UI 层零 DEM 硬编码（模块可插拔成立） |
-| 5 | `node -e` 统计 `dem_bswmd.json` 容器 | 1 根 + 6 子 = 7 | ✅ 实测 根 1 / 子 6 / 总 7，子容器名单与契约列举一致 |
-| 6 | `npm run build` | 通过 | ✅ `vue-tsc --noEmit` + Vite 构建成功，14.34s；有主包 >500 kB 提示（非阻塞） |
-| 7 | `npm test -- --run` | 全绿 | ✅ 2 文件 35 测试全通过，7.86s；GCC 编译用例实际执行（非跳过） |
-| 8 | `grep -n "gcc" tests/core.test.ts` | 有条件跳过 | ✅ `it.skipIf(!compilerAvailable)`，无 gcc 环境不会误报 |
-| 9 | `grep -rn "addContainer\|removeContainer\|duplicateContainer" src/` | 用于定位缺口 | ⚠️ 无匹配 → 支撑 🔴-1 |
-| 10 | `node -e` 读 `package.json` | handlebars 在 dependencies | ✅ `^4.7.10` 位于 dependencies |
+| 1 | `git show --stat e125f86` | 改动仅限修复范围 | ✅ 5 文件：`ConfigInstance.ts`、`DefinitionConstraints.ts`、2 个测试文件、报告。未碰路由/依赖/其他模块 |
+| 2 | `npm run build` | 通过 | ✅ `vue-tsc --noEmit` + Vite 构建成功，12.91s |
+| 3 | `npm test -- --run` | 全绿 | ✅ **2 文件 52 测试全通过**，7.46s，GCC 用例实跑未跳过 |
+| 4 | `grep -n "Math.max(1" ConfigInstance.ts` | 无匹配 | ✅ 已消除 |
+| 5 | `grep -n "addContainerInstance\|removeContainerInstance"` | 存在 | ✅ 各 1 处，含 JSDoc |
+| 6 | `grep "from 'vue'\|pinia\|element-plus" src/core` | 无匹配 | ✅ 架构铁律仍成立 |
+| 7 | `grep ": any\|@ts-ignore" src tests` | 无匹配 | ✅ |
+| 8 | `grep "Dem[A-Z]" src/ui` | 无匹配 | ✅ 模块可插拔仍成立 |
+| 9 | `grep -rn "addContainerInstance\|removeContainerInstance" src --include=*.vue` | 期望存在 | ❌ **零匹配** → 见四·观察 1 |
 
-### 关键代码抽检
+---
 
-| 文件 | 抽检结论 |
-|---|---|
-| `DemConstraints.ts`（188 行） | DEM-001/002/003/006/008 五条规则齐备；DEM-002 用 `integerInRange(v,1,0xffffff)` 正确排除 0x000000；DEM-008 比契约更严格（要求 target 必须指向已存在的 DemOperationCycle），**优于契约，予以肯定** |
-| `BswmdParser.ts`（212 行） | 深度上限 128 且错误携带完整路径；输入从 `unknown` 逐层校验，无类型断言穿透；定义 UUID 去重 |
-| `DefinitionConstraints.ts`（72 行） | 从定义树驱动类型/范围/枚举/必填/引用目标类型校验，完全模块无关，是本轮最有价值的架构产出 |
-| `ConfigInstance.ts`（213 行） | 仅 `createContainers` 一处 multiplicity 语义错误（🔴-1），其余递归/查找/赋值正确 |
-| `DynamicForm.vue` | 引用字段渲染为 `el-select`，placeholder 用 `destinationContainerType`，按定义驱动，无硬编码 |
+## 四、本轮新观察
+
+### 观察 1（🔴 级，但归属 TASK-003，不阻塞本轮契约）UI 未接入容器增删
+
+`src/stores/configStore.ts` 与 `src/views/WorkspaceView.vue` 均无任何容器增删调用（grep 零匹配）。叠加 🔴-1 的正确修复（`lower=0` 不再预建实例），后果是：**打开 DEM 配置后 6 类子容器全为空，且界面无法新增任何一条**。
+
+- 我 round-0 已明确「本轮只做 API，UI 按钮留给 TASK-003 亦可」，故**不追溯 Codex 违约**。
+- 但这是产品能否使用的分水岭：TASK-003 必须把它列为第一阻塞项，且验收要求「在浏览器里连续新增 3 条 DTC」。
+- 同理，`FR-Core-001` 的配置集创建/克隆/删除也未接 UI（store 无 `createConfigSet`/`cloneConfigSet`）。
+
+### 观察 2（🟡）`ConfigurationManager` 依赖调用方预置 definitions
+
+恢复配置时必须 `new ConfigInstanceManager(modules)`，否则 `getModule` 抛错。当前 store 已按此使用，但这是隐式契约，建议在 `PRODUCT-PLAN` / README 的「开发者注意」中写明，避免后续模块接入时踩坑。
+
+### 观察 3（🟡）`CGenerator` 宏名可读性（延续 round-0 🟡-3）
+
+`P{idx}_`/`R{idx}_`/`C{idx}_` 前缀去重产生 `DEM_C0_DEMDTC_P0_DEMDTCVALUE` 这类长名。建议 TASK-004 或 TASK-005 调整为后缀序号，贴近供应商代码习惯。
+
+### 观察 4（🟡）`DemConstraints` 以 `shortName !== 'Dem'` 守门（延续 round-0 🟡-1）
+
+未变。建议规则携带 `moduleName` 元数据由引擎过滤，避免模块改名即静默失效。
 
 ---
 
@@ -114,56 +120,52 @@
 
 | 条目 | 结果 | 证据 |
 |---|---|---|
-| 解析 `dem_bswmd.json` 得到 7 个子容器 | ⚠️ 口径修正为 7 个容器定义（1 根 + 6 子） | 命令 5 实测；契约文案有误，见 🟠-1，不计 Codex 缺陷 |
-| 缺 `uuid` 容器抛错含名称/索引 | ✅ | 测试 `reports missing nested container uuid with its index and name` |
-| `createFromBswmd` 递归建容器带默认值 | ✅（语义另有 🔴-1） | 测试 `recursively creates instances, preserves definitions...` |
-| 规则异常时其余规则仍执行 | ✅ | 测试 `isolates rule exceptions, supports replacement and unregistration` |
-| 两个 DTC 同值报 DEM-001 | ✅ | 测试 `reports duplicate DTC values across separate config sets`，跨 ConfigSet 亦覆盖 |
-| Aging 开启无 CycleRef 报 DEM-008 | ✅ | 测试 `requires an existing operation cycle only when aging is enabled` |
-| 生成的 `.h` 可编译、宏名合法 | ✅ | 测试 `compiles generated DEM and unusual-name C files using gcc -Werror` 实跑 GCC |
-| DynamicForm 按类型渲染控件 | ✅ | 测试 `renders enum, boolean, numeric and string controls...` |
+| 解析 `dem_bswmd.json` 得 7 个容器定义 | ✅ | 口径 1 根 + 6 子；本轮未变 |
+| 缺 `uuid` 容器抛错含名称/索引 | ✅ | 测试沿用并通过 |
+| `createFromBswmd` 按 multiplicity 建实例带默认值 | ✅ | 本轮修正后为「按 lower 建」，测试 `starts with zero optional children…` |
+| 规则异常时其余规则仍执行 | ✅ | 测试沿用 |
+| 两个 DTC 同值报 DEM-001 | ✅ | 跨 ConfigSet 覆盖 |
+| Aging 开启无 CycleRef 报 DEM-008 | ✅ | 测试沿用 |
+| 生成 `.h` 可编译、宏名合法 | ✅ | GCC `-Werror -pedantic` 实跑 |
+| DynamicForm 按类型渲染 | ✅ | 7 项 UI 测试通过 |
 
 ### 工程验收（5 条）
 
-| 条目 | 结果 | 证据 |
-|---|---|---|
-| `npm run build` 通过 | ✅ | 命令 6 |
-| core 无 Vue/Pinia/Element | ✅ | 命令 2 |
-| 无 `any` | ✅ | 命令 3 |
-| 导出函数有 JSDoc | ✅（采信报告 AST 审计 41 项，抽检 5 个文件均有） | 抽检 `ConfigInstance.ts`、`DemConstraints.ts`、`DefinitionConstraints.ts`、`CGenerator.ts`、`TemplateEngine.ts` 均含 JSDoc |
-| 无类型忽略指令 | ✅ | 命令 3 |
+| 条目 | 结果 |
+|---|---|
+| `npm run build` 通过 | ✅ |
+| core 无 Vue/Pinia/Element | ✅ |
+| 无 `any` | ✅ |
+| 导出函数有 JSDoc | ✅（新增 `addContainerInstance` / `removeContainerInstance` 均带 `@param`/`@returns`） |
+| 无类型忽略指令 | ✅ |
 
 ### 交付物
 
 | 条目 | 结果 |
 |---|---|
-| 报告按模板填写 | ✅ 含自检命令输出、待确认、关键实现说明 |
-| `STATE.json` 为 `SUBMITTED`、round 0、stage 未变 | ✅ 已核对 |
+| 报告追加「第 1 轮修复」 | ✅ `TASK-002-REPORT.md` 增 59 行 |
+| `STATE.json` `SUBMITTED` + `round=1` + `submissionCommit` | ✅ 已核对为 `e125f86…` |
 
 ---
 
 ## 六、范围合规
 
-| 契约"明确不做" | 实际 |
+| 约束 | 实际 |
 |---|---|
-| ARXML 导入导出 | 未做 ✅ |
-| Vue Flow 引用图 | 未做 ✅ |
-| Python 约束运行时 | 未做 ✅ |
-| 新增 DEM 以外模块 | 未做 ✅（`src/modules/` 仍只有 dem） |
-| 接后端 / 改路由 | 未做 ✅（`src/router/index.ts` 未在提交中） |
-
-额外新增的 `ConfigTraversal.ts`、`DefinitionConstraints.ts` 属引擎内聚的合理拆分，未越界。
+| 只修 🔴-1 与 🟠-2 | ✅ 无越界，未顺手改 UI/路由/依赖 |
+| 不新增 DEM 以外模块 | ✅ |
+| 未改 review/stage/契约 | ✅ |
+| 未降标准（删测试/放宽 DEM-002 下限/加 `@ts-ignore`） | ✅ 三项均无，测试数 35→52 |
 
 ---
 
-## 七、下一轮要求（round 1）
+## 七、批准决定与下一步
 
-1. **只修 🔴-1 与 🟠-2**；🟠-1 由评审方在下一版契约中改写，Codex 无需动作；🟡 三项本轮不做。
-2. 🔴-1 修完必须在 core 层提供容器实例增删 API，并补 3 条断言测试（建/加/删）。
-3. 在 `.codex/reports/TASK-002-REPORT.md` **追加**「## 第 1 轮修复」对照表，逐条对应 🔴-1 / 🟠-2。
-4. `STATE.json`：`task.status` 改回 `SUBMITTED`，`task.round` 由 0 改为 1，`reportPath` 不变。
-5. 推送后停止，等待 round 1 评审。不要顺手改动 review 目录、stage、契约文件或调度脚本。
+1. **TASK-002 判定 `APPROVED`**，`round` 保持 `1`，`reviewedCommit = e125f86…`，写入 `STATE.history` 保留追溯。
+2. 立即下发 **TASK-003**（`READY`），首要目标：把已正确的引擎接到界面上，让产品可用。范围见 `.codex/tasks/ACTIVE.md`。
+3. 上一轮 🟡 三项转入 TASK-004/005 待办，不在 TASK-003 强制。
+4. 原 `ACTIVE.md`（TASK-002 契约）归档为 `.codex/tasks/TASK-002-CONTRACT.md`，不修改内容。
 
 ---
 
-**评审方签署**：WorkBuddy（架构师）｜ 2026-10-31T23:25:00+08:00
+**评审方签署**：WorkBuddy（架构师）｜ 2026-10-31T23:58:00+08:00

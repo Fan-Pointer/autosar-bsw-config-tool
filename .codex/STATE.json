@@ -2,23 +2,22 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.0",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-2",
-  "stageName": "BSWMD 解析器与动态配置引擎",
+  "stage": "PHASE-3",
+  "stageName": "配置器可用化（配置集管理 + 实例生命周期 + 界面接线）",
 
   "task": {
-    "id": "TASK-002",
-    "title": "BSWMD 解析器与动态配置引擎",
-    "status": "SUBMITTED",
-    "round": 1,
+    "id": "TASK-003",
+    "title": "配置集管理、容器实例生命周期与界面接线",
+    "status": "READY",
+    "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "reportPath": ".codex/reports/TASK-002-REPORT.md",
-    "reviewPath": ".codex/review/TASK-002-REVIEW.md",
-    "reviewSnapshotPath": ".codex/review/TASK-002-ROUND-0-REVIEW.md",
-    "reviewedCommit": "7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5",
-    "createdAt": "2026-10-31T22:35:00+08:00",
-    "submittedAt": "2026-10-31T15:46:44.360Z",
-    "submissionCommit": "e125f86fab069e94b347ad6b9dca2baf10582239",
+    "reportPath": ".codex/reports/TASK-003-REPORT.md",
+    "reviewPath": null,
+    "reviewSnapshotPath": null,
+    "submissionCommit": null,
+    "createdAt": "2026-10-31T23:58:00+08:00",
+    "submittedAt": null,
     "approvedAt": null
   },
 
@@ -32,17 +31,64 @@
 
   "queue": [],
 
+  "history": [
+    {
+      "taskId": "TASK-002",
+      "title": "BSWMD 解析器与动态配置引擎",
+      "finalStatus": "APPROVED",
+      "rounds": [
+        {
+          "round": 0,
+          "submissionCommit": "7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5",
+          "verdict": "CHANGES_REQUESTED",
+          "blockers": 1,
+          "majors": 2,
+          "minors": 3,
+          "reviewPath": ".codex/review/TASK-002-ROUND-0-REVIEW.md",
+          "at": "2026-10-31T23:25:00+08:00"
+        },
+        {
+          "round": 1,
+          "submissionCommit": "e125f86fab069e94b347ad6b9dca2baf10582239",
+          "stateCommit": "efa166de7e064065af5bbc03b66224f9ffae35db",
+          "verdict": "APPROVED",
+          "blockers": 0,
+          "majors": 0,
+          "minors": 4,
+          "reviewPath": ".codex/review/TASK-002-ROUND-1-REVIEW.md",
+          "at": "2026-10-31T23:58:00+08:00"
+        }
+      ],
+      "approvedAt": "2026-10-31T23:58:00+08:00",
+      "carriedOverMinors": [
+        "DemConstraints 以 shortName === 'Dem' 守门，建议改为规则元数据过滤",
+        "CGenerator 宏名 P{idx}_/R{idx}_/C{idx}_ 前缀可读性差，建议改后缀序号",
+        "ConfigInstanceManager 需调用方预置 definitions，属隐式契约，应写入开发者说明",
+        "主包 1.18MB，Element Plus 全量引入，建议按需或 manualChunks"
+      ]
+    }
+  ],
+
   "lastReview": {
     "reviewer": "WorkBuddy",
     "taskId": "TASK-002",
-    "round": 0,
-    "reviewedCommit": "7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5",
-    "at": "2026-10-31T23:25:00+08:00",
-    "verdict": "CHANGES_REQUESTED",
-    "blockers": 1,
-    "majors": 2,
-    "minors": 3,
+    "round": 1,
+    "reviewedCommit": "e125f86fab069e94b347ad6b9dca2baf10582239",
+    "at": "2026-10-31T23:58:00+08:00",
+    "verdict": "APPROVED",
+    "blockers": 0,
+    "majors": 0,
+    "minors": 4,
     "reviewPath": ".codex/review/TASK-002-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-002-ROUND-0-REVIEW.md"
+    "snapshotPath": ".codex/review/TASK-002-ROUND-1-REVIEW.md"
+  },
+
+  "autodevReview": {
+    "reviewer": "WorkBuddy",
+    "reviewedCommit": "3376824a7022378288336fd114fb41c70f49d48d",
+    "at": "2026-10-31T23:58:00+08:00",
+    "verdict": "PASS_WITH_MAJOR",
+    "path": ".codex/review/AUTODEV-REVIEW.md",
+    "openMajor": "契约文件未做哈希绑定校验，改小范围后可通过事件键变化重新派发"
   }
 }
