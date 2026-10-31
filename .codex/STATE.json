@@ -8,7 +8,7 @@
   "task": {
     "id": "TASK-005",
     "title": "导入导出：JSON / ARXML / CSV + 预览冲突 + XXE 防护",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -19,9 +19,9 @@
     "reportPath": ".codex/reports/TASK-005-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "f1a4a14ca59553738e129de7d1d67e59fc4f8d86",
     "createdAt": "2026-11-01T02:50:00+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-10-31T19:03:13.9502334+00:00",
     "approvedAt": null,
     "specPath": "docs/UI-REPLICA-SPEC.md"
   },
