@@ -3,14 +3,14 @@ import { generateUUID } from '@/utils/uuid';
 
 export enum DemEventKind {
   BSW = 'DEM_EVENT_KIND_BSW',
-  SWC = 'DEM_EVENT_KIND_SWC'
+  SWC = 'DEM_EVENT_KIND_SWC',
 }
 
 export enum DemDebounceType {
   NONE = 'NONE',
   COUNTER_BASED = 'COUNTER_BASED',
   TIME_BASED = 'TIME_BASED',
-  MONITOR_INTERNAL = 'MONITOR_INTERNAL'
+  MONITOR_INTERNAL = 'MONITOR_INTERNAL',
 }
 
 export interface DemEventParameter extends EcucElement {
@@ -32,10 +32,19 @@ export interface DemEventParameter extends EcucElement {
 
 let eventIdCounter = 1;
 
+/**
+ * Allocate the next event ID for the legacy model factories.
+ * @returns A sequential process-local event identifier.
+ */
 export function generateEventId(): number {
   return eventIdCounter++;
 }
 
+/**
+ * Create a legacy DemEventParameter value.
+ * @param shortName Initial shortName value.
+ * @returns The initialized DemEventParameter value.
+ */
 export function createDemEventParameter(shortName: string): DemEventParameter {
   return {
     uuid: generateUUID(),
@@ -46,6 +55,6 @@ export function createDemEventParameter(shortName: string): DemEventParameter {
     demEventAvailable: true,
     demEventFailureCycleCounterThreshold: 0,
     demFFPrestorageSupported: false,
-    demDebounceAlgorithm: { type: DemDebounceType.NONE }
+    demDebounceAlgorithm: { type: DemDebounceType.NONE },
   };
 }

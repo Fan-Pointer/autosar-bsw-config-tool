@@ -1,231 +1,181 @@
-import type { ConfigInstance } from '@/core/config/ConfigTypes';
-import type { BswmdModule, BswmdContainer, BswmdParameter } from '@/core/bswmd/BswmdTypes';
-import type { GeneratedFile, CodeTemplate } from './TemplateEngine';
+import type { ConfigInstance } from '../config/ConfigTypes';
+import type { BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
+import { collectContainers } from '../config/ConfigTraversal';
+import { TemplateEngine, type GeneratedFile } from './TemplateEngine';
 
-/**
- * C 代码生成器
- * 从配置实例生成符合 AUTOSAR 风格的 C 代码
- */
+interface GeneratedField {
+  name: string;
+  cType: string;
+  value: string;
+}
+
+interface GeneratedContainer {
+  name: string;
+  childCount: number;
+  fields: GeneratedField[];
+}
+
+function identifier(value: string): string {
+  const ascii = Array.from(value)
+    .map((char) => (/[A-Za-z0-9]/.test(char) ? char : `_U${char.codePointAt(0)?.toString(16)}_`))
+    .join('');
+  return /^[A-Za-z]/.test(ascii) ? ascii : `CFG${ascii}`;
+}
+
+function cString(value: string): string {
+  // Fixed-width octal escapes cannot consume the following digit as a hex escape would.
+  const escaped = Array.from(value)
+    .map((char) => {
+      const code = char.charCodeAt(0);
+      if (char === '"' || char === '\\') return `\\${char}`;
+      if (code < 32 || code === 127 || char === '?')
+        return `\\${code.toString(8).padStart(3, '0')}`;
+      return char;
+    })
+    .join('');
+  return `"${escaped}"`;
+}
+
+/** Generate standalone C configuration data from arbitrary module definitions. */
 export class CGenerator {
-  private templateEngine: { registerTemplate: (t: CodeTemplate) => void; registerTemplates: (t: CodeTemplate[]) => void; generate: (name: string, data: Record<string, unknown>) => Promise<{ filename: string; content: string; path: string }> };
+  private templateEngine = new TemplateEngine();
 
+  /** Register the module-independent templates. */
   constructor() {
-    // 延迟初始化模板引擎，避免循环依赖
-    this.templateEngine = {
-      registerTemplate: () => {},
-      registerTemplates: () => {},
-      generate: async () => ({ filename: '', content: '', path: '' })
+    this.templateEngine.registerTemplates([
+      {
+        name: 'c-header',
+        filePattern: '{module}_Cfg.h',
+        content: `/* Generated configuration: {{module}} */
+#ifndef {{moduleUpper}}_CFG_H
+#define {{moduleUpper}}_CFG_H
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#define {{moduleUpper}}_CFG_CONTAINER_COUNT {{containerCount}}
+{{#each containers}}
+#define {{name}}_CHILD_COUNT {{childCount}}
+{{#each fields}}
+#define {{../name}}_{{name}} {{value}}
+{{/each}}
+{{/each}}
+#endif /* {{moduleUpper}}_CFG_H */
+`,
+      },
+      {
+        name: 'c-source',
+        filePattern: '{module}_PBCfg.c',
+        content: `/* Generated configuration data: {{module}} */
+#include "{{module}}_Cfg.h"
+
+{{#each containers}}
+{{#if fields.length}}
+const struct {
+{{#each fields}}
+  {{cType}} {{name}};
+{{/each}}
+} {{name}}_CONFIG = {
+{{#each fields}}
+  .{{name}} = {{value}},
+{{/each}}
+};
+{{/if}}
+{{/each}}
+`,
+      },
+    ]);
+  }
+
+  /**
+   * Retained for callers that initialize the generator explicitly.
+   * @returns A resolved initialization promise.
+   */
+  async init(): Promise<void> {}
+
+  /**
+   * Generate the module header with unique ASCII macro names.
+   * @param config Configuration values.
+   * @param bswmd Module definition.
+   * @returns The generated module_Cfg.h file.
+   */
+  async generateHeader(config: ConfigInstance, bswmd: BswmdModule): Promise<GeneratedFile> {
+    return this.templateEngine.generate('c-header', this.context(config, bswmd));
+  }
+
+  /**
+   * Generate typed configuration constants, including post-build values.
+   * @param config Configuration values.
+   * @param bswmd Module definition.
+   * @returns The generated module_PBCfg.c file.
+   */
+  async generateSource(config: ConfigInstance, bswmd: BswmdModule): Promise<GeneratedFile> {
+    return this.templateEngine.generate('c-source', this.context(config, bswmd));
+  }
+
+  private context(config: ConfigInstance, bswmd: BswmdModule): Record<string, unknown> {
+    if (config.moduleRef !== bswmd.shortName)
+      throw new Error('Configuration moduleRef does not match BSWMD');
+    const module = identifier(bswmd.shortName);
+    const entries = collectContainers(config, bswmd);
+    const targets = new Map(entries.map((entry, index) => [entry.container.uuid, index]));
+    const containers: GeneratedContainer[] = entries.map((entry, index) => {
+      const fields: GeneratedField[] = entry.definition.parameters.map((parameter, fieldIndex) => {
+        const configured = entry.container.parameters.get(parameter.uuid);
+        if (!configured || configured.definitionRef !== parameter.uuid)
+          throw new Error(`${entry.path}: missing parameter ${parameter.shortName}`);
+        return {
+          name: `P${fieldIndex}_${identifier(parameter.shortName).toUpperCase()}`,
+          cType:
+            parameter.type === 'BOOLEAN'
+              ? 'int'
+              : parameter.type === 'INTEGER'
+                ? 'long long'
+                : parameter.type === 'FLOAT'
+                  ? 'double'
+                  : 'const char *',
+          value: this.formatValue(configured.value, parameter),
+        };
+      });
+      entry.definition.references.forEach((reference, referenceIndex) => {
+        const target = entry.container.references.get(reference.uuid)?.targetUuid;
+        if (target && !targets.has(target))
+          throw new Error(`${entry.path}/${reference.shortName}: unresolved target ${target}`);
+        fields.push({
+          name: `R${referenceIndex}_${identifier(reference.shortName).toUpperCase()}`,
+          cType: 'long long',
+          value: String(target ? targets.get(target) : -1),
+        });
+      });
+      // Ordinals disambiguate duplicate instance names and names that differ only in case.
+      return {
+        name: `${module.toUpperCase()}_C${index}_${identifier(entry.container.shortName).toUpperCase()}`,
+        childCount: entry.container.subContainers.length,
+        fields,
+      };
+    });
+    return {
+      module,
+      moduleUpper: module.toUpperCase(),
+      containerCount: containers.length,
+      containers,
     };
   }
 
-  /**
-   * 初始化模板引擎（需在首次使用前调用）
-   */
-  async init(): Promise<void> {
-    const { TemplateEngine } = await import('./TemplateEngine');
-    const engine = new TemplateEngine();
-    this.registerDefaultTemplates(engine);
-    this.templateEngine = engine;
-  }
-
-  /**
-   * 注册默认模板
-   */
-  private registerDefaultTemplates(engine: { registerTemplate: (t: CodeTemplate) => void }): void {
-    // C Header 模板
-    engine.registerTemplate({
-      name: 'c-header',
-      filePattern: '{module}_Cfg.h',
-      content: `/**
- * @file    {module}_Cfg.h
- * @brief   AUTOSAR {module} configuration
- * @note    Generated by AUTOSAR BSW Config Tool
- */
-
-#ifndef {moduleUpper}_CFG_H
-#define {moduleUpper}_CFG_H
-
-/*===========================================================================*/
-/* Module version information */
-/*===========================================================================*/
-#define {moduleUpper}_CFG_MAJOR_VERSION   1u
-#define {moduleUpper}_CFG_MINOR_VERSION   0u
-#define {moduleUpper}_CFG_PATCH_VERSION   0u
-
-/*===========================================================================*/
-/* General configuration */
-/*===========================================================================*/
-{generatedContent}
-
-#endif /* {moduleUpper}_CFG_H */
-`
-    });
-
-    // C Source 模板
-    engine.registerTemplate({
-      name: 'c-source',
-      filePattern: '{module}_PBCfg.c',
-      content: `/**
- * @file    {module}_PBCfg.c
- * @brief   AUTOSAR {module} post-build configuration
- * @note    Generated by AUTOSAR BSW Config Tool
- */
-
-#include "{module}_Cfg.h"
-
-/*===========================================================================*/
-/* Post-build configuration data */
-/*===========================================================================*/
-{generatedContent}
-`
-    });
-  }
-
-  /**
-   * 生成 C Header 文件
-   */
-  async generateHeader(config: ConfigInstance, bswmd: BswmdModule): Promise<GeneratedFile> {
-    await this.init();
-
-    const generatedContent = this.generateHeaderContent(config, bswmd);
-
-    return this.templateEngine.generate('c-header', {
-      module: bswmd.shortName,
-      moduleUpper: bswmd.shortName.toUpperCase(),
-      filePattern: `${bswmd.shortName}_Cfg.h`,
-      generatedContent
-    });
-  }
-
-  /**
-   * 生成 C Source 文件
-   */
-  async generateSource(config: ConfigInstance, bswmd: BswmdModule): Promise<GeneratedFile> {
-    await this.init();
-
-    const generatedContent = this.generateSourceContent(config, bswmd);
-
-    return this.templateEngine.generate('c-source', {
-      module: bswmd.shortName,
-      moduleUpper: bswmd.shortName.toUpperCase(),
-      filePattern: `${bswmd.shortName}_PBCfg.c`,
-      generatedContent
-    });
-  }
-
-  /**
-   * 生成 Header 内容
-   */
-  private generateHeaderContent(config: ConfigInstance, bswmd: BswmdModule): string {
-    const lines: string[] = [];
-
-    // 查找主容器
-    for (const container of config.containers) {
-      if (container.definitionRef === 'ecuc-dem-configset-def') {
-        // 生成容器宏
-        for (const subContainer of container.subContainers) {
-          lines.push(`/* ${subContainer.shortName} Configuration */`);
-          lines.push(`#define {subContainer.shortName.toUpperCase()}_COUNT ${subContainer.subContainers.length}`);
-          lines.push('');
-
-          // 生成参数宏
-          for (const [paramUuid, paramValue] of subContainer.parameters) {
-            const paramDef = this.findParameterDefinition(bswmd, paramUuid);
-            if (paramDef) {
-              const macroName = `${subContainer.shortName.toUpperCase()}_${paramDef.shortName.toUpperCase()}`;
-              const value = this.formatValue(paramValue.value, paramDef);
-              lines.push(`#define ${macroName} ${value}`);
-            }
-          }
-          lines.push('');
-        }
-        break;
-      }
-    }
-
-    return lines.join('\n');
-  }
-
-  /**
-   * 生成 Source 内容
-   */
-  private generateSourceContent(config: ConfigInstance, bswmd: BswmdModule): string {
-    const lines: string[] = [];
-
-    for (const container of config.containers) {
-      if (container.definitionRef === 'ecuc-dem-configset-def') {
-        for (const subContainer of container.subContainers) {
-          lines.push(`/* ${subContainer.shortName} configuration */`);
-
-          // 生成配置数组（示例）
-          lines.push(`static const ${bswmd.shortName}_ConfigType ${subContainer.shortName.toLowerCase()}_config = {`);
-
-          for (const [paramUuid, paramValue] of subContainer.parameters) {
-            const paramDef = this.findParameterDefinition(bswmd, paramUuid);
-            if (paramDef) {
-              const value = this.formatValue(paramValue.value, paramDef);
-              lines.push(`  .${paramDef.shortName.toLowerCase()} = ${value},`);
-            }
-          }
-
-          lines.push('};');
-          lines.push('');
-        }
-        break;
-      }
-    }
-
-    return lines.join('\n');
-  }
-
-  /**
-   * 查找参数定义
-   */
-  private findParameterDefinition(bswmd: BswmdModule, paramUuid: string): BswmdParameter | undefined {
-    for (const container of bswmd.containers) {
-      const found = this.findParameterInContainer(container, paramUuid);
-      if (found) return found;
-    }
-    return undefined;
-  }
-
-  /**
-   * 在容器中递归查找参数定义
-   */
-  private findParameterInContainer(container: BswmdContainer, paramUuid: string): BswmdParameter | undefined {
-    for (const param of container.parameters) {
-      if (param.uuid === paramUuid) {
-        return param;
-      }
-    }
-
-    for (const subContainer of container.subContainers) {
-      const found = this.findParameterInContainer(subContainer, paramUuid);
-      if (found) return found;
-    }
-
-    return undefined;
-  }
-
-  /**
-   * 格式化值为 C 代码字符串
-   */
-  private formatValue(value: unknown, param: BswmdParameter): string {
-    if (value === null || value === undefined) {
-      return param.defaultValue !== undefined ? String(param.defaultValue) : '0';
-    }
-
-    switch (param.type) {
-      case 'BOOLEAN':
-        return value ? 'TRUE' : 'FALSE';
-      case 'INTEGER':
-      case 'FLOAT':
-        return String(value);
-      case 'STRING':
-      case 'ENUM':
-        return `"${value}"`;
-      default:
-        return String(value);
-    }
+  private formatValue(value: unknown, parameter: BswmdParameter): string {
+    const actual = value ?? parameter.defaultValue;
+    if (parameter.type === 'BOOLEAN' && typeof actual === 'boolean')
+      return actual ? 'TRUE' : 'FALSE';
+    if (parameter.type === 'INTEGER' && typeof actual === 'number' && Number.isSafeInteger(actual))
+      return String(actual);
+    if (parameter.type === 'FLOAT' && typeof actual === 'number' && Number.isFinite(actual))
+      return String(actual);
+    if (!['BOOLEAN', 'INTEGER', 'FLOAT'].includes(parameter.type) && typeof actual === 'string')
+      return cString(actual);
+    throw new Error(`${parameter.shortName}: invalid ${parameter.type} value for C generation`);
   }
 }

@@ -4,18 +4,9 @@
  */
 
 export type EcucParameterType =
-  | 'INTEGER'
-  | 'FLOAT'
-  | 'BOOLEAN'
-  | 'STRING'
-  | 'ENUM'
-  | 'FUNCTION'
-  | 'REFERENCE';
+  'INTEGER' | 'FLOAT' | 'BOOLEAN' | 'STRING' | 'ENUM' | 'FUNCTION' | 'REFERENCE';
 
-export type ConfigClass =
-  | 'PRE_COMPILE'
-  | 'LINK_TIME'
-  | 'POST_BUILD';
+export type ConfigClass = 'PRE_COMPILE' | 'LINK_TIME' | 'POST_BUILD';
 
 /**
  * BSWMD 模块根节点
@@ -75,7 +66,7 @@ export interface BswmdReference {
   uuid: string;
   shortName: string;
   description?: string;
-  /** 引用目标容器类型 */
+  /** 引用目标容器定义的 shortName，与实例显示名称无关。 */
   destinationContainerType: string;
   isOptional: boolean;
 }

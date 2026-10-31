@@ -1,5 +1,13 @@
-import type { EcucElement, UUID } from '@/types/base';
+import type { EcucElement } from '@/types/base';
 import { generateUUID } from '@/utils/uuid';
+import type { DemDTC } from './DemDTC';
+import type { DemDTCAttributes } from './DemDTCAttributes';
+import type { DemEventParameter } from './DemEventParameter';
+import type { DemDebounceCounterBasedClass } from './DemDebounceCounterBasedClass';
+import type { DemDebounceTimeBasedClass } from './DemDebounceTimeBasedClass';
+import type { DemFreezeFrameClass } from './DemFreezeFrameClass';
+import type { DemExtendedDataClass } from './DemExtendedDataClass';
+import type { DemOperationCycle } from './DemOperationCycle';
 
 export interface DemConfigSet extends EcucElement {
   version: string;
@@ -14,6 +22,11 @@ export interface DemConfigSet extends EcucElement {
   demOperationCycles: DemOperationCycle[];
 }
 
+/**
+ * Create a legacy DemConfigSet value.
+ * @param shortName Initial shortName value.
+ * @returns The initialized DemConfigSet value.
+ */
 export function createDemConfigSet(shortName: string): DemConfigSet {
   return {
     uuid: generateUUID(),
@@ -28,6 +41,6 @@ export function createDemConfigSet(shortName: string): DemConfigSet {
     demDebounceTimeBasedClasses: [],
     demFreezeFrameClasses: [],
     demExtendedDataClasses: [],
-    demOperationCycles: []
+    demOperationCycles: [],
   };
 }

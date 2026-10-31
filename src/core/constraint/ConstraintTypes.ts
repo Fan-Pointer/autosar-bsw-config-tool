@@ -1,4 +1,9 @@
-import type { ConfigInstance, ConfigContainer, ConfigParameterValue } from '@/core/config/ConfigTypes';
+import type {
+  ConfigInstance,
+  ConfigContainer,
+  ConfigParameterValue,
+  ConfigReferenceValue,
+} from '@/core/config/ConfigTypes';
 import type { BswmdModule } from '@/core/bswmd/BswmdTypes';
 
 /**
@@ -15,6 +20,10 @@ export interface ConstraintViolation {
   message: string;
   /** 修复建议 */
   suggestion?: string;
+  /** Stable navigation target, even when instance names are duplicated. */
+  containerUuid?: string;
+  /** Parameter or reference definition to focus. */
+  definitionRef?: string;
 }
 
 /**
@@ -26,7 +35,7 @@ export interface ConstraintContext {
   /** BSWMD 模块定义 */
   bswmdModule: BswmdModule;
   /** 当前检查的目标（可选） */
-  target?: ConfigContainer | ConfigParameterValue;
+  target?: ConfigContainer | ConfigParameterValue | ConfigReferenceValue;
 }
 
 /**
@@ -39,7 +48,7 @@ export interface ConstraintRule {
   name: string;
   /** 严重程度 */
   severity: 'ERROR' | 'WARNING' | 'INFO';
-  /** 作用范围 */
+  /** 作用范围元数据；check 接收整模块上下文，规则自行选择匹配目标。 */
   scope: 'PARAMETER' | 'CONTAINER' | 'MODULE' | 'REFERENCE';
   /** 检查函数 */
   check: (context: ConstraintContext) => ConstraintViolation[];

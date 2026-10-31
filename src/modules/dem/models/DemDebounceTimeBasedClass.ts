@@ -1,5 +1,6 @@
 import type { EcucElement } from '@/types/base';
 import { generateUUID } from '@/utils/uuid';
+import { DemDebounceBehavior } from './DemDebounceCounterBasedClass';
 
 export interface DemDebounceTimeBasedClass extends EcucElement {
   demDebounceBehavior: DemDebounceBehavior;
@@ -11,15 +12,20 @@ export const DemDebounceTimeValidationRules = {
   demDebounceTimeFailedThreshold: {
     min: 0.001,
     max: 3600,
-    unit: 's'
+    unit: 's',
   },
   demDebounceTimePassedThreshold: {
     min: 0.001,
     max: 3600,
-    unit: 's'
-  }
+    unit: 's',
+  },
 };
 
+/**
+ * Create a legacy DemDebounceTimeBasedClass value.
+ * @param shortName Initial shortName value.
+ * @returns The initialized DemDebounceTimeBasedClass value.
+ */
 export function createDemDebounceTimeBasedClass(shortName: string): DemDebounceTimeBasedClass {
   return {
     uuid: generateUUID(),
@@ -27,6 +33,6 @@ export function createDemDebounceTimeBasedClass(shortName: string): DemDebounceT
     description: '',
     demDebounceBehavior: DemDebounceBehavior.FREEZE,
     demDebounceTimeFailedThreshold: 0.5,
-    demDebounceTimePassedThreshold: 0.5
+    demDebounceTimePassedThreshold: 0.5,
   };
 }

@@ -19,6 +19,7 @@
     "@vue-flow/core": "^1.41.2",
     "element-plus": "^2.8.7",
     "fast-xml-parser": "^4.5.0",
+    "handlebars": "^4.7.10",
     "localforage": "^1.10.0",
     "pinia": "^2.2.6",
     "uuid": "^11.0.3",

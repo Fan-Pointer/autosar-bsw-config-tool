@@ -14,11 +14,16 @@ export interface DemExtendedDataRecordClass {
   demDataElementClassRef?: UUID;
 }
 
+/**
+ * Create a legacy DemExtendedDataClass value.
+ * @param shortName Initial shortName value.
+ * @returns The initialized DemExtendedDataClass value.
+ */
 export function createDemExtendedDataClass(shortName: string): DemExtendedDataClass {
   return {
     uuid: generateUUID(),
     shortName,
     description: '',
-    demExtendedDataRecordClasses: []
+    demExtendedDataRecordClasses: [],
   };
 }

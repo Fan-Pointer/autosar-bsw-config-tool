@@ -159,7 +159,7 @@ export interface DemModule {
 interface FieldDependency {
   parent: string;           // 父字段名
   operator: 'eq' | 'neq' | 'in' | 'gt' | 'lt';
-  value: any;             // 触发值
+  value: unknown;         // 触发值
   children: string[];     // 受控子字段
   behavior: 'disable' | 'hide' | 'required' | 'optional';
 }

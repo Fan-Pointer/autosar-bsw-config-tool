@@ -1,152 +1,212 @@
-import type { BswmdModule, BswmdContainer, BswmdParameter, BswmdReference } from './BswmdTypes';
+import type {
+  BswmdModule,
+  BswmdContainer,
+  BswmdParameter,
+  BswmdReference,
+  ConfigClass,
+  EcucParameterType,
+} from './BswmdTypes';
 
-/**
- * BSWMD 解析器
- * 从 JSON 或 ARXML 格式解析为内存模型
- */
+const parameterTypes: readonly EcucParameterType[] = [
+  'INTEGER',
+  'FLOAT',
+  'BOOLEAN',
+  'STRING',
+  'ENUM',
+  'FUNCTION',
+  'REFERENCE',
+];
+const configClasses: readonly ConfigClass[] = ['PRE_COMPILE', 'LINK_TIME', 'POST_BUILD'];
+
+function object(value: unknown, path: string): Record<string, unknown> {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+    throw new Error(`${path}: expected an object`);
+  }
+  return value as Record<string, unknown>;
+}
+
+function requiredString(data: Record<string, unknown>, field: string, path: string): string {
+  const value = data[field];
+  if (typeof value !== 'string' || value.trim() === '') {
+    throw new Error(`${path}: missing or invalid required field ${field}`);
+  }
+  return value;
+}
+
+function optionalString(value: unknown, path: string): string | undefined {
+  if (value === undefined) return undefined;
+  if (typeof value !== 'string') throw new Error(`${path}: expected a string`);
+  return value;
+}
+
+function array(value: unknown, path: string): unknown[] {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) throw new Error(`${path}: expected an array`);
+  return value;
+}
+
+function optionalNumber(value: unknown, path: string): number | undefined {
+  if (value === undefined) return undefined;
+  if (typeof value !== 'number' || !Number.isFinite(value))
+    throw new Error(`${path}: expected a finite number`);
+  return value;
+}
+
+function optionalFlag(value: unknown, path: string): boolean {
+  if (value === undefined) return false;
+  if (typeof value !== 'boolean') throw new Error(`${path}: expected a boolean`);
+  return value;
+}
+
+/** Parse JSON module descriptions without depending on a UI framework. */
 export class BswmdParser {
   /**
-   * 从 JSON 字符串解析 BSWMD
+   * Parse and validate every definition, including nested containers.
+   * @param jsonString Serialized BSWMD definition.
+   * @returns A validated module tree.
    */
   parseFromJson(jsonString: string): BswmdModule {
     try {
-      const data = JSON.parse(jsonString) as Record<string, unknown>;
-      return this.parseModule(data);
+      const raw: unknown = JSON.parse(jsonString);
+      const data = object(raw, 'module');
+      const ids = new Set<string>();
+      return {
+        shortName: requiredString(data, 'shortName', 'module'),
+        version: optionalString(data.version, 'module.version') ?? 'unknown',
+        description: optionalString(data.description, 'module.description'),
+        containers: this.containers(data.containers, 'module.containers', ids, 0),
+      };
     } catch (error) {
-      throw new Error(`Failed to parse BSWMD JSON: ${(error as Error).message}`);
+      throw new Error(
+        `Failed to parse BSWMD JSON: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 
-  /**
-   * 解析模块根节点
-   */
-  private parseModule(data: Record<string, unknown>): BswmdModule {
-    if (!data.shortName || typeof data.shortName !== 'string') {
-      throw new Error('BSWMD module missing required field: shortName');
-    }
-
+  private identity(data: Record<string, unknown>, path: string, ids: Set<string>) {
+    const label = `${path}${typeof data.shortName === 'string' ? ` (${data.shortName})` : ''}`;
+    const uuid = requiredString(data, 'uuid', label);
+    if (ids.has(uuid)) throw new Error(`${label}: duplicate uuid ${uuid}`);
+    ids.add(uuid);
     return {
-      shortName: data.shortName as string,
-      version: (data.version as string) || 'unknown',
-      description: data.description as string | undefined,
-      containers: this.parseContainers(data.containers as unknown[] | undefined)
+      uuid,
+      shortName: requiredString(data, 'shortName', label),
+      description: optionalString(data.description, `${label}.description`),
     };
   }
 
-  /**
-   * 解析容器数组
-   */
-  private parseContainers(containers: unknown[] | undefined): BswmdContainer[] {
-    if (!Array.isArray(containers)) {
-      return [];
-    }
-
-    return containers.map((c, index) => this.parseContainer(c as Record<string, unknown>, index));
+  private containers(
+    value: unknown,
+    path: string,
+    ids: Set<string>,
+    depth: number
+  ): BswmdContainer[] {
+    // JSON cannot contain cycles, but excessively deep input can still exhaust the JS stack.
+    if (depth > 128) throw new Error(`${path}: maximum container depth 128 exceeded`);
+    return array(value, path).map((raw, index) => {
+      const location = `${path}[${index}]`;
+      const data = object(raw, location);
+      const identity = this.identity(data, location, ids);
+      const childPath = `${location} (${identity.shortName})`;
+      return {
+        ...identity,
+        multiplicity: this.multiplicity(data.multiplicity, childPath),
+        parameters: array(data.parameters, `${childPath}.parameters`).map((item, i) =>
+          this.parameter(item, `${childPath}.parameters[${i}]`, ids)
+        ),
+        references: array(data.references, `${childPath}.references`).map((item, i) =>
+          this.reference(item, `${childPath}.references[${i}]`, ids)
+        ),
+        subContainers: this.containers(
+          data.subContainers,
+          `${childPath}.subContainers`,
+          ids,
+          depth + 1
+        ),
+      };
+    });
   }
 
-  /**
-   * 递归解析单个容器
-   */
-  private parseContainer(data: Record<string, unknown>, index: number): BswmdContainer {
-    if (!data.uuid || typeof data.uuid !== 'string') {
-      throw new Error(`Container at index ${index} missing required field: uuid`);
+  private multiplicity(value: unknown, path: string): BswmdContainer['multiplicity'] {
+    if (value === undefined) return { lower: 1, upper: 1 };
+    const data = object(value, `${path}.multiplicity`);
+    const lower = optionalNumber(data.lower, `${path}.multiplicity.lower`) ?? 1;
+    const upper =
+      data.upper === 'unbounded'
+        ? 'unbounded'
+        : (optionalNumber(data.upper, `${path}.multiplicity.upper`) ?? 1);
+    if (
+      !Number.isSafeInteger(lower) ||
+      lower < 0 ||
+      (upper !== 'unbounded' && (!Number.isSafeInteger(upper) || upper < lower))
+    ) {
+      throw new Error(
+        `${path}.multiplicity: expected non-negative integer bounds with upper >= lower`
+      );
     }
-    if (!data.shortName || typeof data.shortName !== 'string') {
-      throw new Error(`Container missing required field: shortName`);
-    }
+    return { lower, upper };
+  }
 
+  private parameter(raw: unknown, path: string, ids: Set<string>): BswmdParameter {
+    const data = object(raw, path);
+    const identity = this.identity(data, path, ids);
+    const label = `${path} (${identity.shortName})`;
+    const rawType = requiredString(data, 'type', label);
+    const type = parameterTypes.find((item) => item === rawType);
+    if (!type) throw new Error(`${label}.type: unsupported parameter type ${rawType}`);
+    const configClass = configClasses.find((item) => item === (data.configClass ?? 'PRE_COMPILE'));
+    if (!configClass) throw new Error(`${label}.configClass: unsupported configuration class`);
+    const min = optionalNumber(data.min, `${label}.min`);
+    const max = optionalNumber(data.max, `${label}.max`);
+    if (min !== undefined && max !== undefined && min > max)
+      throw new Error(`${label}: min must be <= max`);
+    const enumValues =
+      data.enumValues === undefined
+        ? undefined
+        : array(data.enumValues, `${label}.enumValues`).map((item, i) => {
+            if (typeof item !== 'string')
+              throw new Error(`${label}.enumValues[${i}]: expected a string`);
+            return item;
+          });
+    if (type === 'ENUM' && !enumValues?.length)
+      throw new Error(`${label}.enumValues: ENUM requires choices`);
+    const defaultValue = data.defaultValue;
+    if (defaultValue !== undefined) {
+      const valid =
+        type === 'BOOLEAN'
+          ? typeof defaultValue === 'boolean'
+          : type === 'INTEGER'
+            ? typeof defaultValue === 'number' && Number.isSafeInteger(defaultValue)
+            : type === 'FLOAT'
+              ? typeof defaultValue === 'number' && Number.isFinite(defaultValue)
+              : typeof defaultValue === 'string' &&
+                (type !== 'ENUM' || enumValues?.includes(defaultValue));
+      if (
+        !valid ||
+        (typeof defaultValue === 'number' &&
+          ((min !== undefined && defaultValue < min) || (max !== undefined && defaultValue > max)))
+      ) {
+        throw new Error(`${label}.defaultValue: incompatible with type or bounds`);
+      }
+    }
     return {
-      uuid: data.uuid as string,
-      shortName: data.shortName as string,
-      description: data.description as string | undefined,
-      multiplicity: this.parseMultiplicity(data.multiplicity as Record<string, unknown> | undefined),
-      parameters: this.parseParameters(data.parameters as unknown[] | undefined),
-      references: this.parseReferences(data.references as unknown[] | undefined),
-      subContainers: this.parseContainers(data.subContainers as unknown[] | undefined)
+      ...identity,
+      type,
+      configClass,
+      defaultValue,
+      min,
+      max,
+      enumValues,
+      isOptional: optionalFlag(data.isOptional, `${label}.isOptional`),
     };
   }
 
-  /**
-   * 解析多重性定义
-   */
-  private parseMultiplicity(data: Record<string, unknown> | undefined): { lower: number; upper: number | 'unbounded' } {
-    if (!data || typeof data.lower !== 'number') {
-      return { lower: 1, upper: 1 }; // 默认值
-    }
-
+  private reference(raw: unknown, path: string, ids: Set<string>): BswmdReference {
+    const data = object(raw, path);
     return {
-      lower: data.lower,
-      upper: data.upper === 'unbounded' ? 'unbounded' : (data.upper as number) || 1
-    };
-  }
-
-  /**
-   * 解析参数数组
-   */
-  private parseParameters(parameters: unknown[] | undefined): BswmdParameter[] {
-    if (!Array.isArray(parameters)) {
-      return [];
-    }
-
-    return parameters.map((p, index) => this.parseParameter(p as Record<string, unknown>, index));
-  }
-
-  /**
-   * 解析单个参数
-   */
-  private parseParameter(data: Record<string, unknown>, index: number): BswmdParameter {
-    if (!data.uuid || typeof data.uuid !== 'string') {
-      throw new Error(`Parameter at index ${index} missing required field: uuid`);
-    }
-    if (!data.shortName || typeof data.shortName !== 'string') {
-      throw new Error(`Parameter missing required field: shortName`);
-    }
-    if (!data.type || typeof data.type !== 'string') {
-      throw new Error(`Parameter ${data.shortName} missing required field: type`);
-    }
-
-    return {
-      uuid: data.uuid as string,
-      shortName: data.shortName as string,
-      description: data.description as string | undefined,
-      type: data.type as import('./BswmdTypes').EcucParameterType,
-      configClass: (data.configClass as import('./BswmdTypes').ConfigClass) || 'PRE_COMPILE',
-      defaultValue: data.defaultValue,
-      min: data.min as number | undefined,
-      max: data.max as number | undefined,
-      enumValues: Array.isArray(data.enumValues) ? (data.enumValues as string[]) : undefined,
-      isOptional: data.isOptional === true
-    };
-  }
-
-  /**
-   * 解析引用数组
-   */
-  private parseReferences(references: unknown[] | undefined): BswmdReference[] {
-    if (!Array.isArray(references)) {
-      return [];
-    }
-
-    return references.map((r, index) => this.parseReference(r as Record<string, unknown>, index));
-  }
-
-  /**
-   * 解析单个引用
-   */
-  private parseReference(data: Record<string, unknown>, index: number): BswmdReference {
-    if (!data.uuid || typeof data.uuid !== 'string') {
-      throw new Error(`Reference at index ${index} missing required field: uuid`);
-    }
-    if (!data.shortName || typeof data.shortName !== 'string') {
-      throw new Error(`Reference missing required field: shortName`);
-    }
-
-    return {
-      uuid: data.uuid as string,
-      shortName: data.shortName as string,
-      description: data.description as string | undefined,
-      destinationContainerType: (data.destinationContainerType as string) || '',
-      isOptional: data.isOptional === true
+      ...this.identity(data, path, ids),
+      destinationContainerType: requiredString(data, 'destinationContainerType', path),
+      isOptional: optionalFlag(data.isOptional, `${path}.isOptional`),
     };
   }
 }

@@ -45,10 +45,7 @@
           "type": "ENUM",
           "configClass": "PRE_COMPILE",
           "defaultValue": "DEM_PROCESS_OCCCTR_CDTC",
-          "enumValues": [
-            "DEM_PROCESS_OCCCTR_CDTC",
-            "DEM_PROCESS_OCCCTR_TF"
-          ],
+          "enumValues": ["DEM_PROCESS_OCCCTR_CDTC", "DEM_PROCESS_OCCCTR_TF"],
           "isOptional": true
         }
       ],
@@ -66,7 +63,7 @@
               "description": "The DTC value (3 bytes hexadecimal)",
               "type": "INTEGER",
               "configClass": "PRE_COMPILE",
-              "defaultValue": 0,
+              "defaultValue": 1,
               "min": 1,
               "max": 16777215,
               "isOptional": false
@@ -166,14 +163,6 @@
               "isOptional": true
             },
             {
-              "uuid": "ecuc-dem-attr-aging-cycleref",
-              "shortName": "DemAgingCycleRef",
-              "description": "Reference to the operation cycle used for aging",
-              "type": "STRING",
-              "configClass": "PRE_COMPILE",
-              "isOptional": true
-            },
-            {
               "uuid": "ecuc-dem-attr-priority",
               "shortName": "DemDTCPriority",
               "description": "Priority of the DTC (lower value = higher priority)",
@@ -191,10 +180,7 @@
               "type": "ENUM",
               "configClass": "PRE_COMPILE",
               "defaultValue": "DEM_EVENT_SIGNIFICANCE_FAULT",
-              "enumValues": [
-                "DEM_EVENT_SIGNIFICANCE_FAULT",
-                "DEM_EVENT_SIGNIFICANCE_OCCURRENCE"
-              ],
+              "enumValues": ["DEM_EVENT_SIGNIFICANCE_FAULT", "DEM_EVENT_SIGNIFICANCE_OCCURRENCE"],
               "isOptional": true
             },
             {
@@ -218,6 +204,13 @@
             }
           ],
           "references": [
+            {
+              "uuid": "ecuc-dem-attr-aging-cycleref",
+              "shortName": "DemAgingCycleRef",
+              "description": "Reference to the operation cycle used for aging",
+              "destinationContainerType": "DemOperationCycle",
+              "isOptional": true
+            },
             {
               "uuid": "ecuc-dem-attr-ff-class-ref",
               "shortName": "DemFreezeFrameClassRef",
@@ -266,10 +259,7 @@
               "type": "ENUM",
               "configClass": "PRE_COMPILE",
               "defaultValue": "DEM_EVENT_KIND_SWC",
-              "enumValues": [
-                "DEM_EVENT_KIND_BSW",
-                "DEM_EVENT_KIND_SWC"
-              ],
+              "enumValues": ["DEM_EVENT_KIND_BSW", "DEM_EVENT_KIND_SWC"],
               "isOptional": false
             },
             {
@@ -310,9 +300,9 @@
             },
             {
               "uuid": "ecuc-dem-event-debounce-time-ref",
-              "shortName": "DemDebounceTimeBaseClassRef",
+              "shortName": "DemDebounceTimeBasedClassRef",
               "description": "Reference to time-based debounce",
-              "destinationContainerType": "DemDebounceTimeBaseClass",
+              "destinationContainerType": "DemDebounceTimeBasedClass",
               "isOptional": true
             }
           ],
@@ -331,10 +321,7 @@
               "type": "ENUM",
               "configClass": "PRE_COMPILE",
               "defaultValue": "DEM_DEBOUNCE_FREEZE",
-              "enumValues": [
-                "DEM_DEBOUNCE_FREEZE",
-                "DEM_DEBOUNCE_RESET"
-              ],
+              "enumValues": ["DEM_DEBOUNCE_FREEZE", "DEM_DEBOUNCE_RESET"],
               "isOptional": false
             },
             {
@@ -414,7 +401,7 @@
         },
         {
           "uuid": "ecuc-dem-debounce-time-def",
-          "shortName": "DemDebounceTimeBaseClass",
+          "shortName": "DemDebounceTimeBasedClass",
           "description": "Time based debounce algorithm",
           "multiplicity": { "lower": 0, "upper": "unbounded" },
           "parameters": [
@@ -425,10 +412,7 @@
               "type": "ENUM",
               "configClass": "PRE_COMPILE",
               "defaultValue": "DEM_DEBOUNCE_FREEZE",
-              "enumValues": [
-                "DEM_DEBOUNCE_FREEZE",
-                "DEM_DEBOUNCE_RESET"
-              ],
+              "enumValues": ["DEM_DEBOUNCE_FREEZE", "DEM_DEBOUNCE_RESET"],
               "isOptional": false
             },
             {

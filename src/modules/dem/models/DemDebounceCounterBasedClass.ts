@@ -3,7 +3,7 @@ import { generateUUID } from '@/utils/uuid';
 
 export enum DemDebounceBehavior {
   FREEZE = 'DEM_DEBOUNCE_FREEZE',
-  RESET = 'DEM_DEBOUNCE_RESET'
+  RESET = 'DEM_DEBOUNCE_RESET',
 }
 
 export interface DemDebounceCounterBasedClass extends EcucElement {
@@ -23,24 +23,31 @@ export const DemDebounceCounterValidationRules = {
   demDebounceCounterFailedThreshold: {
     min: 1,
     max: 32767,
-    mustBePositive: true
+    mustBePositive: true,
   },
   demDebounceCounterPassedThreshold: {
     min: -32768,
     max: -1,
-    mustBeNegative: true
+    mustBeNegative: true,
   },
   demDebounceCounterIncrementStepSize: {
     min: 1,
-    max: 32767
+    max: 32767,
   },
   demDebounceCounterDecrementStepSize: {
     min: 1,
-    max: 32768
-  }
+    max: 32768,
+  },
 };
 
-export function createDemDebounceCounterBasedClass(shortName: string): DemDebounceCounterBasedClass {
+/**
+ * Create a legacy DemDebounceCounterBasedClass value.
+ * @param shortName Initial shortName value.
+ * @returns The initialized DemDebounceCounterBasedClass value.
+ */
+export function createDemDebounceCounterBasedClass(
+  shortName: string
+): DemDebounceCounterBasedClass {
   return {
     uuid: generateUUID(),
     shortName,
@@ -52,6 +59,6 @@ export function createDemDebounceCounterBasedClass(shortName: string): DemDeboun
     demDebounceCounterDecrementStepSize: 1,
     demDebounceCounterJumpUp: false,
     demDebounceCounterJumpDown: false,
-    demDebounceCounterStorage: false
+    demDebounceCounterStorage: false,
   };
 }

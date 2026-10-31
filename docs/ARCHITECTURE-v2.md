@@ -127,7 +127,7 @@ interface BswmdParameter {
   shortName: string;
   type: 'INTEGER' | 'FLOAT' | 'BOOLEAN' | 'STRING' | 'ENUM' | 'FUNCTION';
   configClass: 'PRE_COMPILE' | 'LINK_TIME' | 'POST_BUILD';
-  defaultValue?: any;
+  defaultValue?: unknown;
   range?: { min: number; max: number };
   enumValues?: string[];
   isOptional: boolean;
@@ -165,7 +165,7 @@ interface ConfigContainer {
 
 interface ConfigParameter {
   definitionRef: string; // 引用 BswmdParameter
-  value: any;
+  value: unknown;
   isConfigured: boolean;
 }
 

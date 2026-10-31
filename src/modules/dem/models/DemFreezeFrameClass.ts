@@ -11,11 +11,16 @@ export interface DemPidClass {
   dataSource: 'CS' | 'SR' | 'Internal';
 }
 
+/**
+ * Create a legacy DemFreezeFrameClass value.
+ * @param shortName Initial shortName value.
+ * @returns The initialized DemFreezeFrameClass value.
+ */
 export function createDemFreezeFrameClass(shortName: string): DemFreezeFrameClass {
   return {
     uuid: generateUUID(),
     shortName,
     description: '',
-    demPidClasses: []
+    demPidClasses: [],
   };
 }

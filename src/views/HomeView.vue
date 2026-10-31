@@ -3,8 +3,16 @@
     <div class="hero-section">
       <h1 class="title">AUTOSAR BSW Config Tool</h1>
       <p class="subtitle">基于网页的 AUTOSAR 基础软件配置工具</p>
-      
+
       <div class="actions">
+        <el-select v-model="selectedModule" aria-label="配置模块" style="width: 180px" size="large">
+          <el-option
+            v-for="module in store.modules"
+            :key="module.shortName"
+            :label="module.shortName"
+            :value="module.shortName"
+          />
+        </el-select>
         <el-button type="primary" size="large" @click="createNewConfig">
           <el-icon><Plus /></el-icon>
           新建配置
@@ -27,8 +35,8 @@
           </template>
         </el-table-column>
         <el-table-column label="操作" width="120">
-          <template #default="{ row }">
-            <el-button link type="primary" @click="openConfig(row)">打开</el-button>
+          <template #default>
+            <el-button link type="primary" @click="openExistingConfig">打开</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -43,22 +51,22 @@
               <el-icon><Edit /></el-icon>
               可视化配置
             </template>
-            <p>支持 DEM、DCM、NvM 等 BSW 模块的可视化配置</p>
+            <p>从模块定义生成配置树、参数表单和引用选择</p>
           </el-card>
         </el-col>
         <el-col :span="8">
           <el-card>
             <template #header>
               <el-icon><Document /></el-icon>
-              ARXML 支持
+              C 代码生成
             </template>
-            <p>符合 AUTOSAR 4.2.2 规范的 ARXML 导入导出</p>
+            <p>校验配置后生成模块头文件和配置源文件</p>
           </el-card>
         </el-col>
         <el-col :span="8">
           <el-card>
             <template #header>
-              <el-icon><Shield /></el-icon>
+              <el-icon><Lock /></el-icon>
               纯前端实现
             </template>
             <p>无需后端，数据本地存储，离线可用</p>
@@ -76,28 +84,31 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus';
+import { useConfigStore } from '@/stores/configStore';
 
 const router = useRouter();
+const store = useConfigStore();
+const selectedModule = ref(store.modules[0]?.shortName);
 
 // TODO: 从 localStorage 加载最近配置
-const recentConfigs = ref<Array<{
-  id: string;
-  name: string;
-  module: string;
-  lastModified: number;
-}>>([]);
+const recentConfigs = ref<
+  Array<{
+    id: string;
+    name: string;
+    module: string;
+    lastModified: number;
+  }>
+>([]);
 
 const createNewConfig = () => {
-  // TODO: 弹窗选择模块类型，然后跳转到 workspace
+  store.createConfig(selectedModule.value);
   router.push('/workspace');
 };
 
-const openExistingConfig = () => {
-  // TODO: 实现文件选择
-};
-
-const openConfig = (config: any) => {
-  router.push('/workspace');
+const openExistingConfig = async () => {
+  if (await store.loadConfig()) router.push('/workspace');
+  else ElMessage.info(store.error ?? '本机还没有保存的配置');
 };
 
 const formatDate = (timestamp: number) => {

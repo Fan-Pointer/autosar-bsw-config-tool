@@ -46,6 +46,6 @@ export interface ConfigParameterValue {
 export interface ConfigReferenceValue {
   /** 引用 BswmdReference.uuid */
   definitionRef: string;
-  /** 引用的容器 UUID */
+  /** 引用的容器 UUID；空字符串表示尚未选择目标。 */
   targetUuid: UUID;
 }

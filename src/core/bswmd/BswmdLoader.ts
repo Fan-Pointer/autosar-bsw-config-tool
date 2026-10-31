@@ -11,6 +11,8 @@ export class BswmdLoader {
 
   /**
    * 从 URL 加载 BSWMD（使用 fetch）
+   * @param url Definition URL; only retrieves definitions, never sends configuration.
+   * @returns Parsed and cached module.
    */
   async loadFromUrl(url: string): Promise<BswmdModule> {
     try {
@@ -24,12 +26,16 @@ export class BswmdLoader {
       this.cacheModule(module);
       return module;
     } catch (error) {
-      throw new Error(`Failed to load BSWMD from URL: ${(error as Error).message}`);
+      throw new Error(
+        `Failed to load BSWMD from URL ${url}: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 
   /**
    * 从 JSON 字符串加载
+   * @param jsonString Serialized definition.
+   * @returns Parsed and cached module.
    */
   loadFromString(jsonString: string): BswmdModule {
     try {
@@ -37,12 +43,16 @@ export class BswmdLoader {
       this.cacheModule(module);
       return module;
     } catch (error) {
-      throw new Error(`Failed to load BSWMD from string: ${(error as Error).message}`);
+      throw new Error(
+        `Failed to load BSWMD from string: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 
   /**
    * 从 File 对象加载（浏览器文件选择）
+   * @param file Locally selected definition file.
+   * @returns Parsed and cached module.
    */
   async loadFromFile(file: File): Promise<BswmdModule> {
     try {
@@ -51,12 +61,16 @@ export class BswmdLoader {
       this.cacheModule(module);
       return module;
     } catch (error) {
-      throw new Error(`Failed to load BSWMD from file: ${(error as Error).message}`);
+      throw new Error(
+        `Failed to load BSWMD from file ${file.name}: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 
   /**
    * 获取已加载的模块
+   * @param name Module short name.
+   * @returns Cached module, if present.
    */
   getModule(name: string): BswmdModule | undefined {
     return this.loadedModules.get(name);
@@ -64,6 +78,7 @@ export class BswmdLoader {
 
   /**
    * 列出所有已加载模块的名称
+   * @returns Cached short names.
    */
   listModules(): string[] {
     return Array.from(this.loadedModules.keys());
@@ -71,6 +86,7 @@ export class BswmdLoader {
 
   /**
    * 获取所有已加载模块
+   * @returns Cached module definitions.
    */
   getAllModules(): BswmdModule[] {
     return Array.from(this.loadedModules.values());
@@ -78,6 +94,7 @@ export class BswmdLoader {
 
   /**
    * 清除缓存
+   * @returns Nothing.
    */
   clearCache(): void {
     this.loadedModules.clear();

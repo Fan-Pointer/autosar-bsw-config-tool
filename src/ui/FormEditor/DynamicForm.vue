@@ -1,144 +1,149 @@
 <template>
   <div class="dynamic-form">
     <el-form
-      :model="formData"
+      :model="configData"
       :label-width="labelWidth"
       label-position="top"
+      :disabled="readonly"
       @submit.prevent
     >
-      <template v-for="param in visibleParameters" :key="param.uuid">
-        <!-- INTEGER / FLOAT 类型 -->
-        <el-form-item
-          v-if="isNumberType(param.type)"
-          :label="param.shortName"
-          :required="!param.isOptional"
-        >
-          <el-input-number
-            :model-value="formData[param.uuid]"
-            :min="param.min"
-            :max="param.max"
-            :step="param.type === 'FLOAT' ? 0.1 : 1"
-            controls-position="right"
-            @update:model-value="onValueChange(param.uuid, $event)"
-          />
-          <div v-if="param.description" class="param-help">{{ param.description }}</div>
-        </el-form-item>
-
-        <!-- ENUM 类型 -->
-        <el-form-item
+      <el-form-item
+        v-for="param in container.parameters"
+        :id="`field-${param.uuid}`"
+        :key="param.uuid"
+        :label="param.shortName"
+        :required="!param.isOptional"
+        :data-field="param.uuid"
+      >
+        <el-input-number
+          v-if="param.type === 'INTEGER' || param.type === 'FLOAT'"
+          :model-value="numberValue(param)"
+          :min="param.min"
+          :max="param.max"
+          :step="param.type === 'FLOAT' ? 0.1 : 1"
+          :precision="param.type === 'INTEGER' ? 0 : undefined"
+          controls-position="right"
+          @update:model-value="onValueChange(param.uuid, $event)"
+        />
+        <el-select
           v-else-if="param.type === 'ENUM'"
-          :label="param.shortName"
-          :required="!param.isOptional"
+          :model-value="stringValue(param)"
+          :clearable="param.isOptional"
+          @update:model-value="onValueChange(param.uuid, $event)"
         >
-          <el-select
-            :model-value="formData[param.uuid]"
-            clearable
-            @update:model-value="onValueChange(param.uuid, $event)"
-          >
-            <el-option
-              v-for="val in param.enumValues"
-              :key="val"
-              :label="val"
-              :value="val"
-            />
-          </el-select>
-          <div v-if="param.description" class="param-help">{{ param.description }}</div>
-        </el-form-item>
-
-        <!-- BOOLEAN 类型 -->
-        <el-form-item
+          <el-option v-for="value in param.enumValues" :key="value" :label="value" :value="value" />
+        </el-select>
+        <el-switch
           v-else-if="param.type === 'BOOLEAN'"
-          :label="param.shortName"
-        >
-          <el-switch
-            :model-value="formData[param.uuid]"
-            @update:model-value="onValueChange(param.uuid, $event)"
-          />
-          <div v-if="param.description" class="param-help">{{ param.description }}</div>
-        </el-form-item>
-
-        <!-- STRING / FUNCTION / 其他 -->
-        <el-form-item
+          :model-value="rawValue(param) === true"
+          @update:model-value="onValueChange(param.uuid, $event)"
+        />
+        <el-input
           v-else
-          :label="param.shortName"
-          :required="!param.isOptional"
+          :model-value="stringValue(param)"
+          @update:model-value="onValueChange(param.uuid, $event)"
+        />
+        <div v-if="param.description" class="param-help">{{ param.description }}</div>
+      </el-form-item>
+      <el-form-item
+        v-for="reference in container.references"
+        :id="`field-${reference.uuid}`"
+        :key="reference.uuid"
+        :label="reference.shortName"
+        :required="!reference.isOptional"
+        :data-field="reference.uuid"
+      >
+        <el-select
+          :model-value="referenceData[reference.uuid] || ''"
+          clearable
+          filterable
+          :placeholder="`选择 ${reference.destinationContainerType}`"
+          @update:model-value="onReferenceChange(reference.uuid, $event)"
         >
-          <el-input
-            :model-value="formData[param.uuid]"
-            :placeholder="param.defaultValue !== undefined ? String(param.defaultValue) : ''"
-            @update:model-value="onValueChange(param.uuid, $event)"
+          <el-option
+            v-for="target in referenceOptions[reference.uuid] || []"
+            :key="target.uuid"
+            :label="target.label"
+            :value="target.uuid"
           />
-          <div v-if="param.description" class="param-help">{{ param.description }}</div>
-        </el-form-item>
-      </template>
-
-      <el-empty v-if="visibleParameters.length === 0" description="该容器没有可配置的参数" />
+        </el-select>
+        <div v-if="reference.description" class="param-help">{{ reference.description }}</div>
+      </el-form-item>
+      <el-empty
+        v-if="!container.parameters.length && !container.references.length"
+        description="该容器没有可配置的字段"
+      />
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import type { BswmdContainer, BswmdParameter } from '@/core/bswmd/BswmdTypes';
 
-interface Props {
-  /** 容器定义（来自 BSWMD） */
-  container: BswmdContainer;
-  /** 当前参数值（来自配置实例） */
-  configData?: Record<string, unknown>;
-  /** 表单标签宽度 */
-  labelWidth?: string;
-  /** 是否只读 */
-  readonly?: boolean;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  configData: () => ({}),
-  labelWidth: '120px',
-  readonly: false
-});
+const props = withDefaults(
+  defineProps<{
+    container: BswmdContainer;
+    configData?: Record<string, unknown>;
+    referenceData?: Record<string, string>;
+    referenceOptions?: Record<string, { uuid: string; label: string }[]>;
+    labelWidth?: string;
+    readonly?: boolean;
+  }>(),
+  {
+    configData: () => ({}),
+    referenceData: () => ({}),
+    referenceOptions: () => ({}),
+    labelWidth: '120px',
+    readonly: false,
+  }
+);
 
 const emit = defineEmits<{
   'update:configData': [data: Record<string, unknown>];
   'parameter-change': [paramUuid: string, value: unknown];
+  'reference-change': [refUuid: string, targetUuid: string];
 }>();
 
-const formData = ref<Record<string, unknown>>(props.configData);
-
-/**
- * 可见参数列表（可在此处扩展过滤逻辑）
- */
-const visibleParameters = computed(() => props.container.parameters);
-
-/**
- * 判断是否为数值类型
- */
-function isNumberType(type: string): boolean {
-  return type === 'INTEGER' || type === 'FLOAT';
+function rawValue(parameter: BswmdParameter): unknown {
+  return props.configData[parameter.uuid] ?? parameter.defaultValue;
 }
-
-/**
- * 参数值变化处理
- */
+function numberValue(parameter: BswmdParameter): number | undefined {
+  const value = rawValue(parameter);
+  return typeof value === 'number' ? value : undefined;
+}
+function stringValue(parameter: BswmdParameter): string {
+  const value = rawValue(parameter);
+  return typeof value === 'string' ? value : '';
+}
 function onValueChange(paramUuid: string, value: unknown): void {
-  formData.value[paramUuid] = value;
-  emit('update:configData', { ...formData.value });
+  if (props.readonly) return;
+  emit('update:configData', { ...props.configData, [paramUuid]: value });
   emit('parameter-change', paramUuid, value);
 }
-
-/**
- * 暴露方法：重置表单
- */
-function resetForm(): void {
-  formData.value = {};
-  emit('update:configData', {});
+function onReferenceChange(refUuid: string, value: unknown): void {
+  if (!props.readonly && typeof value === 'string') emit('reference-change', refUuid, value);
 }
 
 /**
- * 暴露方法：获取表单数据
+ * Return a snapshot without mutating the parent-owned configuration.
+ * @returns Current parameter values.
  */
 function getFormData(): Record<string, unknown> {
-  return { ...formData.value };
+  return { ...props.configData };
+}
+
+/**
+ * Restore defaults through the same edit events used by the controls.
+ * @returns Nothing.
+ */
+function resetForm(): void {
+  if (props.readonly) return;
+  const values: Record<string, unknown> = {};
+  for (const parameter of props.container.parameters) {
+    values[parameter.uuid] = parameter.defaultValue;
+    emit('parameter-change', parameter.uuid, parameter.defaultValue);
+  }
+  emit('update:configData', values);
 }
 
 defineExpose({ resetForm, getFormData });
@@ -148,18 +153,16 @@ defineExpose({ resetForm, getFormData });
 .dynamic-form {
   padding: 20px;
 }
-
 .param-help {
   font-size: 12px;
-  color: #909399;
+  color: #606266;
   margin-top: 4px;
   line-height: 1.4;
+  width: 100%;
 }
-
 .el-form-item {
   margin-bottom: 18px;
 }
-
 .el-input-number,
 .el-select,
 .el-input {

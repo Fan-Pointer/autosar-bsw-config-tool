@@ -5,7 +5,7 @@ export enum DemDTCSeverity {
   NO_SEVERITY = 'DEM_SEVERITY_NO_SEVERITY',
   CHECK_IMMEDIATELY = 'DEM_SEVERITY_CHECK_IMMEDIATELY',
   CHECK_AT_NEXT_HALT = 'DEM_SEVERITY_CHECK_AT_NEXT_HALT',
-  MAINTENANCE_ONLY = 'DEM_SEVERITY_MAINTENANCE_ONLY'
+  MAINTENANCE_ONLY = 'DEM_SEVERITY_MAINTENANCE_ONLY',
 }
 
 export enum DemWWHOBDDTCClass {
@@ -13,7 +13,7 @@ export enum DemWWHOBDDTCClass {
   CLASS_A = 'DEM_DTC_WWHOBD_CLASS_A',
   CLASS_B1 = 'DEM_DTC_WWHOBD_CLASS_B1',
   CLASS_B2 = 'DEM_DTC_WWHOBD_CLASS_B2',
-  CLASS_C = 'DEM_DTC_WWHOBD_CLASS_C'
+  CLASS_C = 'DEM_DTC_WWHOBD_CLASS_C',
 }
 
 export interface DemDTC extends EcucElement {
@@ -29,15 +29,20 @@ export interface DemDTC extends EcucElement {
 export const DemDTCValidationRules = {
   demDtcValue: {
     min: 0x000001,
-    max: 0xFFFFFF,
-    reserved: [0x000000]
+    max: 0xffffff,
+    reserved: [0x000000],
   },
   demDTCFunctionalUnit: {
     min: 0,
-    max: 255
-  }
+    max: 255,
+  },
 };
 
+/**
+ * Create a legacy DemDTC value.
+ * @param shortName Initial shortName value.
+ * @returns The initialized DemDTC value.
+ */
 export function createDemDTC(shortName: string): DemDTC {
   return {
     uuid: generateUUID(),
@@ -45,6 +50,6 @@ export function createDemDTC(shortName: string): DemDTC {
     description: '',
     demDtcValue: 0x000001,
     demDTCSeverity: DemDTCSeverity.NO_SEVERITY,
-    demDTCAttributesRef: '' as UUID
+    demDTCAttributesRef: '' as UUID,
   };
 }

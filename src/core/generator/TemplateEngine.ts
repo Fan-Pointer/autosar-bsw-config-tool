@@ -1,83 +1,67 @@
-/**
- * 模板引擎 - 基于 Handlebars
- */
+import Handlebars from 'handlebars';
 
-// 动态导入 Handlebars，避免 SSR 问题
-let Handlebars: any = null;
-
-async function getHandlebars() {
-  if (!Handlebars) {
-    try {
-      Handlebars = await import('handlebars');
-    } catch (error) {
-      throw new Error('Handlebars not installed. Run: npm install handlebars');
-    }
-  }
-  return Handlebars;
-}
-
-/**
- * 代码模板定义
- */
+/** A named source template and its output location. */
 export interface CodeTemplate {
-  /** 模板唯一名称 */
   name: string;
-  /** 输出文件名模式，如 "{module}_Cfg.h" */
+  /** Supports {module} placeholders in filenames. */
   filePattern: string;
-  /** 模板内容 */
   content: string;
-  /** 输出目录（相对路径） */
   outputDir?: string;
 }
 
-/**
- * 生成的文件
- */
+/** A generated file ready for download. */
 export interface GeneratedFile {
-  /** 文件名 */
   filename: string;
-  /** 文件内容 */
   content: string;
-  /** 相对路径 */
   path: string;
 }
 
+/** Compile code templates with Handlebars. */
 export class TemplateEngine {
-  private templates = new Map<string, string>();
+  private templates = new Map<string, CodeTemplate>();
 
   /**
-   * 注册模板
+   * Register or replace a template.
+   * @param template Template and output metadata.
+   * @returns Nothing.
    */
   registerTemplate(template: CodeTemplate): void {
-    this.templates.set(template.name, template.content);
+    this.templates.set(template.name, { ...template });
   }
 
   /**
-   * 批量注册模板
+   * Register templates in order.
+   * @param templates Templates to register.
+   * @returns Nothing.
    */
   registerTemplates(templates: CodeTemplate[]): void {
-    for (const template of templates) {
-      this.registerTemplate(template);
-    }
+    for (const template of templates) this.registerTemplate(template);
   }
 
   /**
-   * 生成文件
+   * Render a registered template.
+   * @param templateName Registered template name.
+   * @param data Template context; filePattern/outputPath may override metadata.
+   * @returns Rendered file with a relative output path.
    */
   async generate(templateName: string, data: Record<string, unknown>): Promise<GeneratedFile> {
-    const templateContent = this.templates.get(templateName);
-    if (!templateContent) {
-      throw new Error(`Template not found: ${templateName}`);
-    }
-
-    const Handlebars = await getHandlebars();
-    const compiled = Handlebars.compile(templateContent);
-    const content = compiled(data);
-
+    const template = this.templates.get(templateName);
+    if (!template) throw new Error(`Template not found: ${templateName}`);
+    // C source must preserve quotes and angle brackets rather than HTML-encode them.
+    const content = Handlebars.compile(template.content, { noEscape: true, strict: true })(data);
+    const pattern = typeof data.filePattern === 'string' ? data.filePattern : template.filePattern;
+    const filename = pattern.replace(/\{(\w+)\}/g, (_, key: string) => {
+      const value = data[key];
+      if (typeof value !== 'string' && typeof value !== 'number')
+        throw new Error(`Missing filename field: ${key}`);
+      return String(value);
+    });
+    const directory =
+      typeof data.outputPath === 'string' ? data.outputPath : (template.outputDir ?? '');
     return {
-      filename: data.filePattern as string || `output_${templateName}`,
+      filename,
       content,
-      path: data.outputPath as string || '/'
+      path: directory ? `${directory.replace(/\/$/, '')}/${filename}` : filename,
     };
   }
 }

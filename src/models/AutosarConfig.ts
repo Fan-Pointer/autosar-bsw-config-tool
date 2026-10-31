@@ -1,4 +1,4 @@
-import type { UUID } from '@/types/base';
+import type { DemConfigSet } from '@/modules/dem/models/DemConfigSet';
 
 export interface AutosarConfig {
   version: string;
@@ -14,6 +14,10 @@ export interface AutosarConfig {
   };
 }
 
+/**
+ * Create a legacy AutosarConfig value.
+ * @returns The initialized AutosarConfig value.
+ */
 export function createAutosarConfig(): AutosarConfig {
   const now = Date.now();
   return {
@@ -22,10 +26,10 @@ export function createAutosarConfig(): AutosarConfig {
       createdAt: now,
       lastModified: now,
       toolVersion: '0.1.0',
-      autosarVersion: '4.2.2'
+      autosarVersion: '4.2.2',
     },
     dem: {
-      configSets: []
-    }
+      configSets: [],
+    },
   };
 }

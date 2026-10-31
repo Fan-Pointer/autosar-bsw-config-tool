@@ -1,5 +1,15 @@
-import type { ConfigInstance, ConfigContainer, ConfigParameterValue, ConfigReferenceValue } from './ConfigTypes';
-import type { BswmdModule, BswmdContainer, BswmdParameter, BswmdReference } from '@/core/bswmd/BswmdTypes';
+import type {
+  ConfigInstance,
+  ConfigContainer,
+  ConfigParameterValue,
+  ConfigReferenceValue,
+} from './ConfigTypes';
+import type {
+  BswmdModule,
+  BswmdContainer,
+  BswmdParameter,
+  BswmdReference,
+} from '@/core/bswmd/BswmdTypes';
 import { generateUUID } from '@/utils/uuid';
 
 /**
@@ -9,6 +19,8 @@ import { generateUUID } from '@/utils/uuid';
 export class ConfigInstanceManager {
   /**
    * 从 BSWMD 创建空配置实例
+   * @param bswmd Module definition to instantiate.
+   * @returns Editable configuration with definition references and defaults.
    */
   createFromBswmd(bswmd: BswmdModule): ConfigInstance {
     const now = Date.now();
@@ -16,11 +28,28 @@ export class ConfigInstanceManager {
     return {
       uuid: generateUUID(),
       moduleRef: bswmd.shortName,
-      version: '1.0.0',
-      containers: bswmd.containers.map(c => this.createContainerFromBswmd(c)),
+      version: bswmd.version,
+      containers: this.createContainers(bswmd.containers),
       createdAt: now,
-      lastModified: now
+      lastModified: now,
     };
+  }
+
+  private createContainers(definitions: BswmdContainer[]): ConfigContainer[] {
+    // TASK-002 requires a starter instance for every definition, including optional containers.
+    return definitions.flatMap((definition) =>
+      Array.from(
+        {
+          length:
+            definition.multiplicity.upper === 0 ? 0 : Math.max(1, definition.multiplicity.lower),
+        },
+        (_, index) => {
+          const container = this.createContainerFromBswmd(definition);
+          if (index > 0) container.shortName += `_${index + 1}`;
+          return container;
+        }
+      )
+    );
   }
 
   /**
@@ -34,21 +63,23 @@ export class ConfigInstanceManager {
       description: bswmdContainer.description,
       parameters: this.createParametersFromBswmd(bswmdContainer.parameters),
       references: this.createReferencesFromBswmd(bswmdContainer.references),
-      subContainers: bswmdContainer.subContainers.map(sc => this.createContainerFromBswmd(sc))
+      subContainers: this.createContainers(bswmdContainer.subContainers),
     };
   }
 
   /**
    * 从 BSWMD 参数定义创建参数值 Map
    */
-  private createParametersFromBswmd(parameters: BswmdParameter[]): Map<string, ConfigParameterValue> {
+  private createParametersFromBswmd(
+    parameters: BswmdParameter[]
+  ): Map<string, ConfigParameterValue> {
     const map = new Map<string, ConfigParameterValue>();
 
     for (const param of parameters) {
       const value: ConfigParameterValue = {
         definitionRef: param.uuid,
         value: this.getDefaultValue(param),
-        isConfigured: false
+        isConfigured: false,
       };
       map.set(param.uuid, value);
     }
@@ -59,13 +90,15 @@ export class ConfigInstanceManager {
   /**
    * 从 BSWMD 引用定义创建引用值 Map
    */
-  private createReferencesFromBswmd(references: BswmdReference[]): Map<string, ConfigReferenceValue> {
+  private createReferencesFromBswmd(
+    references: BswmdReference[]
+  ): Map<string, ConfigReferenceValue> {
     const map = new Map<string, ConfigReferenceValue>();
 
     for (const ref of references) {
       const value: ConfigReferenceValue = {
         definitionRef: ref.uuid,
-        targetUuid: '' // 初始为空，需用户后续设置
+        targetUuid: '', // 初始为空，需用户后续设置
       };
       map.set(ref.uuid, value);
     }
@@ -104,6 +137,9 @@ export class ConfigInstanceManager {
 
   /**
    * 递归查找容器（按 UUID）
+   * @param instance Configuration to search.
+   * @param uuid Instance UUID.
+   * @returns Matching container, or null.
    */
   findContainer(instance: ConfigInstance, uuid: string): ConfigContainer | null {
     for (const container of instance.containers) {
@@ -131,15 +167,17 @@ export class ConfigInstanceManager {
 
   /**
    * 设置参数值
+   * @param container Container to edit.
+   * @param paramDefUuid Parameter definition UUID.
+   * @param value New parameter value.
+   * @returns Nothing; marks the parameter configured.
    */
-  setParameterValue(
-    container: ConfigContainer,
-    paramDefUuid: string,
-    value: unknown
-  ): void {
+  setParameterValue(container: ConfigContainer, paramDefUuid: string, value: unknown): void {
     const param = container.parameters.get(paramDefUuid);
     if (!param) {
-      throw new Error(`Parameter with definitionRef ${paramDefUuid} not found in container ${container.shortName}`);
+      throw new Error(
+        `Parameter with definitionRef ${paramDefUuid} not found in container ${container.shortName}`
+      );
     }
 
     param.value = value;
@@ -148,15 +186,17 @@ export class ConfigInstanceManager {
 
   /**
    * 设置引用目标
+   * @param container Container to edit.
+   * @param refDefUuid Reference definition UUID.
+   * @param targetUuid Target instance UUID, or an empty string to clear it.
+   * @returns Nothing; updates the reference in place.
    */
-  setReferenceTarget(
-    container: ConfigContainer,
-    refDefUuid: string,
-    targetUuid: string
-  ): void {
+  setReferenceTarget(container: ConfigContainer, refDefUuid: string, targetUuid: string): void {
     const ref = container.references.get(refDefUuid);
     if (!ref) {
-      throw new Error(`Reference with definitionRef ${refDefUuid} not found in container ${container.shortName}`);
+      throw new Error(
+        `Reference with definitionRef ${refDefUuid} not found in container ${container.shortName}`
+      );
     }
 
     ref.targetUuid = targetUuid;
@@ -164,6 +204,8 @@ export class ConfigInstanceManager {
 
   /**
    * 更新最后修改时间
+   * @param instance Modified configuration.
+   * @returns Nothing; refreshes its timestamp.
    */
   touch(instance: ConfigInstance): void {
     instance.lastModified = Date.now();

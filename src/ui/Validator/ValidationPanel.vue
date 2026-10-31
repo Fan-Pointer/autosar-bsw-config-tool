@@ -16,7 +16,7 @@
       <!-- 无错误 -->
       <div v-if="violations.length === 0 && !isValidating" class="empty-state">
         <el-icon :size="40" color="#67c23a"><SuccessFilled /></el-icon>
-        <p>验证通过</p>
+        <p>{{ validated ? '验证通过' : '尚未验证' }}</p>
       </div>
 
       <!-- 验证中 -->
@@ -28,11 +28,15 @@
       <!-- 验证结果列表 -->
       <div v-else class="violations-list">
         <div
-          v-for="violation in violations"
-          :key="`${violation.ruleId}-${violation.path}`"
+          v-for="(violation, index) in violations"
+          :key="`${violation.ruleId}-${violation.containerUuid}-${index}`"
           class="violation-item"
           :class="`severity-${violation.severity.toLowerCase()}`"
           @click="onViolationClick(violation)"
+          role="button"
+          tabindex="0"
+          @keydown.enter="onViolationClick(violation)"
+          @keydown.space.prevent="onViolationClick(violation)"
         >
           <div class="violation-header">
             <el-tag :type="getSeverityType(violation.severity)" size="small">
@@ -54,35 +58,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
+import { Refresh, SuccessFilled, Loading } from '@element-plus/icons-vue';
 import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 
 interface Props {
-  /** 验证规则列表 */
-  rules?: import('@/core/constraint/ConstraintTypes').ConstraintRule[];
+  violations?: ConstraintViolation[];
+  isValidating?: boolean;
+  validated?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  rules: () => []
+  violations: () => [],
+  isValidating: false,
+  validated: false,
 });
 
-const violations = ref<ConstraintViolation[]>([]);
-const isValidating = ref(false);
+const emit = defineEmits<{
+  validate: [];
+  navigate: [violation: ConstraintViolation];
+}>();
 
-const errorCount = computed(() => violations.value.filter(v => v.severity === 'ERROR').length);
-const warningCount = computed(() => violations.value.filter(v => v.severity === 'WARNING').length);
+const errorCount = computed(() => props.violations.filter((v) => v.severity === 'ERROR').length);
+const warningCount = computed(
+  () => props.violations.filter((v) => v.severity === 'WARNING').length
+);
 
 /**
  * 执行验证
+ * @returns Nothing; requests validation from the owning workspace.
  */
-async function runValidation(): Promise<void> {
-  // TODO: 实际验证逻辑
-  isValidating.value = true;
-
-  setTimeout(() => {
-    violations.value = [];
-    isValidating.value = false;
-  }, 500);
+function runValidation(): void {
+  emit('validate');
 }
 
 /**
@@ -90,9 +97,12 @@ async function runValidation(): Promise<void> {
  */
 function getSeverityType(severity: string): 'danger' | 'warning' | 'info' {
   switch (severity) {
-    case 'ERROR': return 'danger';
-    case 'WARNING': return 'warning';
-    default: return 'info';
+    case 'ERROR':
+      return 'danger';
+    case 'WARNING':
+      return 'warning';
+    default:
+      return 'info';
   }
 }
 
@@ -100,8 +110,7 @@ function getSeverityType(severity: string): 'danger' | 'warning' | 'info' {
  * 点击违规项
  */
 function onViolationClick(violation: ConstraintViolation): void {
-  // TODO: 高亮对应配置项
-  console.log('Violation clicked:', violation);
+  emit('navigate', violation);
 }
 
 defineExpose({ runValidation });
