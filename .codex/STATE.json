@@ -2,27 +2,28 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-6",
-  "stageName": "编辑体验闭环（撤销重做 · 批量修改 · 悬空引用 · 全局搜索 · 主题）",
+  "stage": "PHASE-7",
+  "stageName": "官方 ECUC 定义直读与第二模块闸门（可插拔性验证）",
 
   "task": {
-    "id": "TASK-006",
-    "title": "DEM 编辑体验闭环：撤销重做、批量修改、悬空引用、全局搜索、主题",
-    "status": "SUBMITTED",
+    "id": "TASK-007",
+    "title": "官方 ECUC ARXML 直读 BSWMD + 第二模块 NvM 跑通全链路",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "7781461877df218836c50800ad08fa32dad50922cc1c91b9be88cb0bfcd1aa2a",
+    "contractHash": "e12f42f98881c440520f6762a7c8bef43ac1b6a364eee5af386efab866a0f690",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T03:40:00+08:00",
-    "reportPath": ".codex/reports/TASK-006-REPORT.md",
+    "contractBoundAt": "2026-11-01T04:20:00+08:00",
+    "reportPath": ".codex/reports/TASK-007-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "5f541c2ea76dc6b7b23babc9b30ce6c7110f15d6",
-    "createdAt": "2026-11-01T03:40:00+08:00",
-    "submittedAt": "2026-10-31T19:32:26.767Z",
+    "submissionCommit": null,
+    "createdAt": "2026-11-01T04:20:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
+    "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "specPath": "docs/UI-REPLICA-SPEC.md"
   },
 
@@ -145,21 +146,50 @@
         "🟡-4 未知 definitionRef 错误信息缺期望值 -> 并入 TASK-006 E3",
         "🟡-5 参考图 870KB 二进制入库（承 TASK-004 🟡-4）"
       ]
+    },
+    {
+      "taskId": "TASK-006",
+      "title": "DEM 编辑体验闭环：撤销重做、批量修改、悬空引用、全局搜索、主题",
+      "finalStatus": "APPROVED",
+      "rounds": [
+        {
+          "round": 0,
+          "submissionCommit": "5f541c2ea76dc6b7b23babc9b30ce6c7110f15d6",
+          "stateCommit": "5dea0a70e557c085d688a0a75600cf94d004ae0a",
+          "verdict": "APPROVED",
+          "blockers": 0,
+          "majors": 1,
+          "minors": 4,
+          "reviewPath": ".codex/review/TASK-006-ROUND-0-REVIEW.md",
+          "at": "2026-11-01T04:10:00+08:00"
+        }
+      ],
+      "approvedAt": "2026-11-01T04:10:00+08:00",
+      "reviewerNotes": "19 条验收 18 通过 1 部分。评审方独立证据：164 用例全绿（+37），既有 8 个测试文件零改动；自建 21 项验证套件（跑完删除）：11 个 XXE 变体仍全拒、stripDoctype 引号内 > 正确、decodeXmlText 与 ARXML 值内实体无退化、20 步撤销/重做逐字节一致、悬空中间态可无损撤销、HistoryStack 容量/淘汰/redo 清空正确、批量交集 5/跨类 0、4047 行索引过滤 0.7ms。界面实测：撤销 label 四类操作均正确、输入框内 Ctrl+Z prevented=false 而全局 prevented=true、批量「成功1跳过1」带逐项原因、悬空引用树 status-error 与表单 rgb(179,38,50) 双处标红、清除引用后可撤销、撤销使 dangling 重现（校验刷新）、主题切换持久化且保留编辑、搜索 2 条结果点击跳转 iDemDTC_2。撤销选型为差量而非整库深拷贝，符合红线。",
+      "environmentNotes": "3 次运行有 1 次 EPERM 写 %TEMP%，收集 8->7 files，用例无一失败。E2 的 test.cacheDir 未覆盖 Vite 模块缓存写入点，需改根级 cacheDir 或 test.deps.cacheDir。",
+      "carriedOver": [
+        "🟠-1 cacheDir 层级错误，E2 未真正达成 -> 并入 TASK-007 D1",
+        "🟡-1 引用弹窗无候选时无空状态提示 -> 并入 TASK-007 D3",
+        "🟡-2 搜索索引每次全量重建，5000+ 实例需增量 -> 记入 TASK-009",
+        "🟡-3 主包 1159KB，Element Plus 全量引入 -> 记入 TASK-009",
+        "🟡-4 参考图 870KB 入库 / ARXML 单文件单模块（承前）",
+        "跨配置集搜索切换未构造验证（仅 1 个配置集）"
+      ]
     }
   ],
 
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-005",
+    "taskId": "TASK-006",
     "round": 0,
-    "reviewedCommit": "f1a4a14ca59553738e129de7d1d67e59fc4f8d86",
-    "at": "2026-11-01T03:36:00+08:00",
+    "reviewedCommit": "5f541c2ea76dc6b7b23babc9b30ce6c7110f15d6",
+    "at": "2026-11-01T04:10:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 1,
-    "minors": 5,
-    "reviewPath": ".codex/review/TASK-005-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-005-ROUND-0-REVIEW.md"
+    "minors": 4,
+    "reviewPath": ".codex/review/TASK-006-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-006-ROUND-0-REVIEW.md"
   },
 
   "autodevReview": {

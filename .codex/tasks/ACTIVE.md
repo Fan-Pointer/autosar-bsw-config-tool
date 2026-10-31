@@ -1,147 +1,157 @@
-# ACTIVE TASK — TASK-006
+# ACTIVE TASK — TASK-007
 
 > 本文件是 Codex 唯一的任务契约来源。开始实现前必须完整读取；**不得修改本文件**（含标题、编号、验收项）。
 > 契约哈希由评审方写入 `STATE.json` 的 `task.contractHash`，篡改会导致调度器拒绝派发。
 
 | 项 | 值 |
 |---|---|
-| 任务编号 | **TASK-006** |
-| 任务名 | DEM 编辑体验闭环：撤销重做 · 批量修改 · 悬空引用 · 全局搜索 · 主题 |
-| 阶段 | PHASE-6 |
+| 任务编号 | **TASK-007** |
+| 任务名 | 官方 ECUC ARXML 直读 BSWMD + 第二模块（NvM）跑通全链路 |
+| 阶段 | PHASE-7 |
 | 指派 | codex |
-| 前置 | TASK-005 APPROVED（commit `f1a4a14`），20/20 契约通过 |
-| 基线能力 | BSWMD 驱动配置树、动态表单、约束校验、C 生成、导入导出、三栏界面复刻 |
+| 前置 | TASK-006 APPROVED（commit `5f541c2`），19 条验收 18 通过 1 部分 |
+| 为什么现在做 | 见 §1 |
 
 ---
 
 ## 0. 本轮目标（一句话）
 
-让配置器从「能改」变成「敢改」：任何编辑可撤销、多个实例可批量改、坏引用一眼可见、任意参数可秒搜。
+让产品能吃 AUTOSAR **官方** `ECUC-MODULE-DEF` 定义文件，并据此跑通第二个模块（NvM）的「加载 → 编辑 → 校验 → 导出」全链路，且 `src/core` 不为 NvM 改动一行。
 
 ---
 
-## 1. 背景与边界
+## 1. 为什么这是当前最高优先级
 
-**已有**：`ConfigInstanceManager` 具备参数/引用/容器的增删改 API；`configStore` 以 `revision` 标记变更；`ConstraintEngine` 已能产出校验结果。
+现状：`bswmd/dem_bswmd.json` 是**手写**的自定义 JSON。这带来两个致命问题：
 
-**本轮不做**（不得顺手扩大范围）：
-- 引用关系图（Vue Flow）→ TASK-007
-- 自动计算、首页工程列表、多语言 → 后续
-- 第二个 BSW 模块（Dcm/NvM）→ TASK-008
-- 真实后端、云端协作、任何网络请求
+1. **产品无法使用真实工具链的定义文件**。用户的 `D:\ProFile\教培业务\配置器\AUTOSAR_MOD_ECUConfigurationParameters.arxml`（14.6 MB，含 **98 个 ECUC 模块**）至今**未被产品读取一次**。没有它，工具只能配一个 DEM，不能配真实 ECU。
+2. **"BSWMD 驱动"未经第二个模块检验**。所有模块相关代码只跑过 Dem 一个样本，抽象是否成立仍是假设。
+
+这是「通用 BSW 配置器」与「DEM 编辑器」的分水岭。**必须先过这道闸门，再做引用图和拖拽。**
 
 ---
 
-## 2. 交付清单（A/B/C/D 四组，共 18 项）
+## 2. 输入材料
 
-### A. 撤销 / 重做（A1–A6）
+| 材料 | 路径 | 说明 |
+|---|---|---|
+| 官方定义文件 | `D:\ProFile\教培业务\配置器\AUTOSAR_MOD_ECUConfigurationParameters.arxml` | 14.6 MB，AUTOSAR R21-11 之后版本，含 98 个 `ECUC-MODULE-DEF`。**项目外一层目录，只读，不要复制入库** |
+| 现有 BSWMD 类型 | `src/core/bswmd/BswmdTypes.ts` | 解析输出必须落到这套结构 |
+| 现有解析入口 | `src/core/bswmd/BswmdParser.ts` | 已有 `parseFromJson`，本轮新增 ARXML 入口，不要改动其既有语义 |
+
+已确认可用模块（不必再查）：`NvM`、`CanIf`、`Dcm`、`Com`、`EcuM`、`Can` 等均在其中。
+
+---
+
+## 3. 交付清单（A/B/C/D 四组，共 16 项）
+
+### A. ECUC ARXML 解析器（A1–A6）
 
 | 编号 | 交付内容 | 文件建议 |
 |---|---|---|
-| A1 | `src/core/history/HistoryStack.ts`：命令栈，`push/undo/redo/clear/canUndo/canRedo`，**容量 ≥ 20**，超出按 FIFO 淘汰最旧 | 新建 |
-| A2 | 每条记录含 `label`（中文操作名，如「修改 DemDtcValue」）与时间戳，供界面显示「撤销：修改 DemDtcValue」 | 同上 |
-| A3 | 参数值、引用目标、实例新增/删除、批量修改**四类操作全部入栈** | 改造 `configStore` |
-| A4 | 快捷键 `Ctrl+Z` / `Ctrl+Y`（macOS 兼容 `Cmd`），输入框内**不劫持**（`isComposing` 或 `target` 为 input/textarea 时放行） | 新建 `src/ui/History/useHistory.ts` 或等价 |
-| A5 | 工具栏「撤销 / 重做」按钮，无可撤销时禁用，`title` 显示待撤销操作名 | `WorkspaceView.vue` |
-| A6 | 撤销后必须**重新计算校验结果**并更新树状态点（不得沿用撤销前的违规列表） | `configStore` |
+| A1 | 新增 `src/core/bswmd/EcucArxmlImporter.ts`，函数 `importEcucModuleArxml(source, moduleShortName)` → `BswmdModule` | 新建 |
+| A2 | 解析 `ECUC-MODULE-DEF`：`SHORT-NAME`、`DESC`、`LOWER/UPPER-MULTIPLICITY`、`CONTAINERS` | 同上 |
+| A3 | 递归解析 `ECUC-PARAM-CONF-CONTAINER-DEF`：`SHORT-NAME`、`DESC`、multiplicity、`SUB-CONTAINERS`、`PARAMETER-DEFS`、`REFERENCE-DEFS` | 同上 |
+| A4 | 解析参数类型：`ECUC-BOOLEAN-PARAM-DEF`、`ECUC-INTEGER-PARAM-DEF`（含 `MIN`/`MAX`/`DEFAULT-VALUE`）、`ECUC-FLOAT-PARAM-DEF`、`ECUC-ENUMERATION-PARAM-DEF`（含 `LITERALS` 与默认字面量）、`ECUC-STRING-PARAM-DEF`（含 `MIN-LENGTH`/`MAX-LENGTH`/`REGULAR-EXPRESSION`）、`ECUC-FUNCTION-NAME-DEF` | 同上 |
+| A5 | 解析 `ECUC-REFERENCE-DEF`：`DESTINATION-REF`、multiplicity、是否必填 | 同上 |
+| A6 | **按模块名过滤后再解析**：不得把 14.6 MB 全量建成内存树。可用流式/分片定位 `ECUC-MODULE-DEF` 段后再局部解析 | 同上 |
 
-### B. 批量修改（B1–B4）
+### B. 抽取与固化为测试样本（B1–B2）
 
-| 编号 | 交付内容 | 文件建议 |
-|---|---|---|
-| B1 | 树容器节点支持多选（`Ctrl/Shift` 多选），选中 N 个实例时显示「已选 N 项」 | `ConfigTree`/`WorkspaceView` |
-| B2 | 「批量修改」面板：列出这些实例**共有的**参数（按 `definitionRef` 求交集），仅允许修改交集参数 | 新建 `src/ui/BatchEdit/BatchEditPanel.vue` |
-| B3 | 应用后逐实例写入，**不可写项（被禁用/只读/类型不符）跳过并汇总报告**「成功 N 项，跳过 M 项（原因）」 | 同上 |
-| B4 | 整次批量修改作为**一条**历史记录入栈，撤销一次全部还原 | 同上 |
+| 编号 | 交付内容 |
+|---|---|
+| B1 | 新增 `scripts/extract-ecuc-module.mjs`：从全量文件抽取指定模块（含其全部子容器/参数/引用）为独立、结构完整的 ARXML，保留命名空间与层级 |
+| B2 | 用它生成 `tests/fixtures/ecuc-nvm.arxml`（NvM）与 `tests/fixtures/ecuc-canif.arxml`（CanIf），**提交入库**，单个建议 ≤ 600 KB。全量文件不入库 |
 
-### C. 悬空引用（C1–C3）
+### C. 第二模块跑通全链路（C1–C5）
 
-| 编号 | 交付内容 | 文件建议 |
-|---|---|---|
-| C1 | `ConstraintEngine` 增加悬空引用规则：`targetUuid` 非空但目标实例不存在 → 违规（严重度 error），消息含引用参数名与目标 UUID 前 8 位 | `src/core/constraint/` |
-| C2 | 树节点与表单引用控件**同时**红色标记；引用控件旁显示「目标不存在」并可点击「清除引用」 | `DynamicForm` / 树节点样式 |
-| C3 | 校验面板点击该违规 → 定位到对应实例与参数行（复用既有 `navigate to field` 能力） | `ValidationPanel` |
+| 编号 | 交付内容 |
+|---|---|
+| C1 | 界面新增「导入模块定义（ARXML）」入口：放在「模块管理」弹窗内，选择 `.arxml` 文件后解析并列出该文件内的**所有**模块供勾选导入 |
+| C2 | 导入后模块进入 `BSW Modules` 树，可创建配置集（root 容器自动实例化，`lower=0` 仍不预建实例） |
+| C3 | 树、表单、参数类型、必填标记、范围校验、枚举下拉**全部由新模块的 BSWMD 元数据驱动**，无任何 NvM 专用代码 |
+| C4 | 约束校验：至少 2 条**由元数据自动派生**的通用规则对新模块生效（如必填未配、数值越界） |
+| C5 | 导出 ARXML：`DEFINITION-REF` 必须是 `/AUTOSAR/EcucDefs/NvM/...`，命名空间 r4.2.2，UUID 唯一；导入导出可往返 |
 
-### D. 全局搜索与主题（D1–D5）
-
-| 编号 | 交付内容 | 文件建议 |
-|---|---|---|
-| D1 | 顶栏全局搜索框：跨所有配置集搜索**参数名、参数值、实例路径**，结果分组显示并高亮命中片段 | 新建 `src/ui/Search/GlobalSearch.vue` |
-| D2 | 点击结果跳转到对应实例并选中该参数行；跨配置集时先切换配置集 | 同上 |
-| D3 | 500 个实例规模下，输入到出结果 **≤ 200 ms**（需在测试中构造 500 实例并断言耗时） | 同上 + 测试 |
-| D4 | 主题切换（浅色 / 深色），通过 CSS 变量实现，**不引入新依赖**；切换后不得丢失未保存编辑与当前选中项 | 新建 `src/ui/Theme/theme.ts` + 全量 CSS 变量化 |
-| D5 | 主题选择持久化到本机存储，刷新后保持 | 同上 |
-
-### E. 上一轮遗留修复（E1–E3，必须做）
+### D. 遗留修复（D1–D3，必须做）
 
 | 编号 | 来源 | 要求 |
 |---|---|---|
-| E1 | TASK-005 🟠-1 | 消除 `processEntities: true` 的单点防御：改为解析前**剥离 DOCTYPE 声明段**（或 `processEntities: false` 并手工还原 5 个内建实体），并补一条断言「剥离后再解析」的测试。11 个攻击变体必须仍全部拒绝 |
-| E2 | TASK-005 🟡-3 | 在 `vite.config.ts` 的 `test` 段显式设 `cacheDir`（项目内路径），消除宿主临时目录被拦导致的文件收集退化 |
-| E3 | TASK-005 🟡-4 | 未知 `definitionRef` 的错误信息补充「期望值」与「出现次数」 |
+| D1 | TASK-006 🟠-1 | `cacheDir` 层级修正：改为 Vite **根级** `cacheDir` 或 `test.deps.cacheDir`，使 vitest 缓存写入不再落到 `%TEMP%`。验收：连续 3 次 `npm test -- --run` 收集文件数一致 |
+| D2 | TASK-005 🟡-1 | 注释里出现 `<!DOCTYPE` 字样的**合法**文件不应被拒：前置检查改为跳过注释段后再匹配（或对命中位置做上下文判定），并补一条「注释提及 DOCTYPE 可正常导入」的测试 |
+| D3 | TASK-006 🟡-1 | 引用选择弹窗无候选时显示空状态：「暂无 <目标容器> 实例，请先新增」+ 快捷新增入口 |
 
 ---
 
-## 3. 验收标准
+## 4. 验收标准
 
-### 功能验收（10 条，缺一不可）
+### 功能（8 条）
 
-1. **撤销深度**：连续做 20 次参数修改，逐次撤销 20 次后，配置序列化文本与初始**逐字节相同**。
-2. **重做一致**：上述 20 步全部重做后，序列化文本与第 20 步状态**逐字节相同**。
-3. **跨类型撤销**：参数改值 → 新增实例 → 改引用 → 删实例，四次撤销后回到原点，且**引用不悬空**。
-4. **输入框不劫持**：在参数输入框内按 `Ctrl+Z` 执行的是**文本撤销**，配置不变。
-5. **撤销后校验刷新**：制造一条违规 → 修复 → 校验通过 → 撤销 → 违规**重新出现**在面板中。
-6. **批量修改交集**：选中 3 个 DTC 实例，面板只出现它们共有的参数；不共有参数不出现。
-7. **批量跳过汇总**：故意让其中 1 个实例的参数不可写，应用后提示「成功 2 项，跳过 1 项」并说明原因。
-8. **批量单步撤销**：批量改 3 个实例后按一次 `Ctrl+Z`，3 个实例**同时**回到原值。
-9. **悬空引用可见**：手工篡改 JSON 使某引用指向不存在的 UUID，导入后该引用在树与表单**同时标红**，校验面板出现 error，「清除引用」可一键置空。
-10. **搜索与跳转**：搜 `DemDtcValue` 命中多条，点击任一条能跳到对应实例并选中该行；跨配置集时先切换。
+1. **解析正确性**：`importEcucModuleArxml(ecuc-nvm.arxml, 'NvM')` 得到 ≥1 个根容器、递归子容器总数 ≥5、参数总数 ≥20、引用总数 ≥3；每个参数带 `type`，INTEGER 带 `min`/`max`（若源文件有）、ENUM 带字面量列表。
+2. **CanIf 亦可解析**：`ecuc-canif.arxml` → `CanIf` 模块容器数 ≥5，且不抛错（证明不是为 NvM 特调）。
+3. **界面导入闭环**：在模块管理弹窗导入 `ecuc-nvm.arxml` → 树中出现 `NvM` → 新建配置集 → 选中 root 实例 → 参数表单正常渲染（含枚举下拉、必填红标）。
+4. **编辑与持久化**：改一个 NvM 参数 → 保存 → 刷新页面后值仍在。
+5. **元数据驱动校验**：清空一个必填参数 → 校验面板报错并可定位；填超范围值 → 报范围错误。两条规则均**不得**写在 NvM 专用文件里。
+6. **ARXML 导出合规**：导出 NvM 配置后，独立 DOMParser 断言：命名空间 `http://autosar.org/schema/r4.2.2`、全部 UUID 唯一、全部 `DEFINITION-REF` 以 `/AUTOSAR/EcucDefs/NvM` 开头。
+7. **往返一致**：NvM 导出 → 导入到空库 → 容器/参数/引用逐项相等。
+8. **Dem 不退化**：原有 DEM 全部能力（配置、校验、C 生成、导入导出、撤销、批量、搜索、主题）行为不变。
 
-### 工程验收（7 条）
+### 工程（7 条）
 
-11. `npm run build` 通过，未关闭 strict / 未用 `any` / 未用 `@ts-ignore`。
-12. `npm test -- --run` 全绿，用例数 **≥ 127**（不得删减既有用例；两处既有断言若因功能演进需改，必须在报告里逐行说明理由）。
-13. `src/core/` 仍**零** vue / pinia / element-plus 依赖。
-14. `src/ui/`、`src/views/` 仍**零** `CanIf|DemDtc` 等具体模块字段硬编码（本轮新增 UI 同样适用）。
-15. 无新增运行时依赖（`package.json` 的 `dependencies` 不变）。
-16. 主题切换为 CSS 变量实现，提供 `--color-*` 变量清单；深浅两套均满足正文对比度 ≥ 4.5:1。
-17. E1 的 11 个攻击变体仍全部拒绝，且新增「声明剥离」断言。
+9. `npm run build` 通过。
+10. `npm test -- --run` 全绿，用例数 **≥ 164**；**既有 8 个测试文件不得删改用例**（如需调整必须在报告逐行说明并给等价覆盖）。
+11. `src/core/` **零** `NvM`/`CanIf`/`Dem` 等模块名硬编码（新增解析器同样适用；`EcucArxmlImporter` 只能通过入参模块名工作）。
+12. `src/core/` 仍零 vue/pinia/element-plus。
+13. 无新增运行时依赖。
+14. D1/D2/D3 三项修复各有对应测试。
+15. 全量 14.6 MB **不入库**；`tests/fixtures/` 新增文件合计 ≤ 1.2 MB。
 
-### 性能验收（2 条）
+### 性能（2 条）
 
-18. 500 实例下全局搜索 ≤ 200 ms（测试内计时断言）。
-19. 撤销 20 步后界面无卡顿（可用 `performance.now()` 记录总耗时 < 500 ms）。
+16. 从 14.6 MB 全量文件解析单个模块（NvM）**≤ 3 s**，且解析期间界面不白屏（可用 Web Worker、分片 yield 或进度提示；报告需说明选型）。
+17. 导入后首次渲染树 ≤ 500 ms（≥5 容器、≥20 参数规模）。
 
 ---
 
-## 4. 红线
+## 5. 红线
 
-1. **不得删改既有测试用例**来让新功能变绿；确需调整必须在报告「既有用例变更」一节逐条说明并给出等价覆盖。
-2. **不得**把撤销实现为「整库深拷贝快照数组」超过 20 份常驻（内存会爆）；建议命令模式或差量快照，并在报告说明选型。
-3. **不得**在 `src/core/` 引入任何 UI 框架依赖。
-4. **不得**在 UI 里写死 `Dem*` 字段名（搜索建议、批量面板都要由 BSWMD 元数据驱动）。
-5. **不得**声称完成真实浏览器验收除非实际执行；未执行就写「未执行」。
-6. **不得**修改 `STATE.json` 的 `stage`、`review/**`、本契约文件。
+1. **不得**把 14.6 MB 全量 ARXML 提交入库，也不得在测试中依赖它存在（测试只能用 `tests/fixtures/`）。
+2. **不得**为 NvM 写专用解析或专用表单分支；一切差异必须来自 BSWMD 元数据。
+3. **不得**删改既有测试用例变绿。
+4. **不得**在 `src/core/` 引入 UI 框架依赖或读取 DOM。
+5. **不得**声称完成真实浏览器验收除非实际执行。
+6. **不得**修改 `STATE.json` 的 `stage`、`review/**`、本契约。
+7. 若某一参数类型（如 `ECUC-FUNCTION-NAME-DEF`）在源文件中结构特殊导致无法完整解析，**允许降级为 STRING 并在报告显式列出**，不得静默丢弃。
 
 ---
 
-## 5. 报告要求
+## 6. 分批交付许可
 
-`.codex/reports/TASK-006-REPORT.md` 必须含：
+本任务允许**两轮交付**，但 **round 0 必须至少完成 A1–A6 + B1–B2 + C1–C3 + D1–D3**（即「能解析、能导入、能在树上看到、能编辑」）；C4/C5 与性能项可留至 round 1。
+若选择分批，在报告开头写明本轮覆盖到哪几项，**不得把未做项报告为已做**。
+
+---
+
+## 7. 报告要求
+
+`.codex/reports/TASK-007-REPORT.md` 必须含：
 
 | 章节 | 内容 |
 |---|---|
-| 交付对照 | A1–D5、E1–E3 逐项「文件 + 实现要点」 |
-| 撤销选型 | 为何选命令模式/差量快照，内存占用估算 |
-| 验收自检 | 19 条逐条给出「命令/测试名 + 实际输出」 |
+| 交付对照 | A1–D3 逐项「文件 + 实现要点」 |
+| 解析策略 | 如何按模块过滤、如何避免全量建树、14.6 MB 实测耗时 |
+| 元数据映射表 | ARXML 元素 → `BswmdTypes` 字段的对照，含缺失字段的降级说明 |
+| NvM 实测 | 容器数/参数数/引用数、界面截图路径（若有） |
+| 可插拔性证据 | `grep -rn 'NvM\|CanIf' src/core` 的输出（应为空） |
+| 遗留修复 | D1/D2/D3 各自的「改了什么 + 新测试名」 |
 | 既有用例变更 | 若有，逐行 diff 与理由 |
-| 未完成与限制 | 任何未做、未验证、降级的项，必须显式列出 |
+| 未完成与限制 | 未做、未验证、降级的项，必须显式列出 |
 | 自检日志 | build / test 原文关键行 |
 
 ---
 
-## 6. 完成后动作
+## 8. 完成后动作
 
-1. 提交代码与本报告（提交信息 `feat: TASK-006 ...`）。
+1. 提交代码、fixture 与本报告（提交信息 `feat: TASK-007 ...`）。
 2. 单独提交 `STATE.json`：`task.status = "SUBMITTED"`、`submittedAt`、`submissionCommit`（**指向代码提交的完整 SHA**）。
 3. 不修改 `stage`、不写 `review/**`、不发起下一任务。
