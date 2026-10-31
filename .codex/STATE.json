@@ -2,26 +2,26 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-9",
-  "stageName": "NvM CHOICE 全链路收口与必填项体验",
+  "stage": "PHASE-10",
+  "stageName": "ARXML 互操作校准与引用可视化",
 
   "task": {
-    "id": "TASK-009",
-    "title": "NvM CHOICE 容器全链路（解析/互斥/导出/往返）+ 必填项一键确认建议值",
-    "status": "SUBMITTED",
+    "id": "TASK-010",
+    "title": "ARXML 互操作校准（CHOICE 表达/顺序稳定）+ 引用关系图 + 拖拽排序",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "cf2a86f978694d46471354eca2d3617559fcac8e117d70fb2adc0bdfdc7fc0f0",
+    "contractHash": "fee8a937175253ebff06bfd54175ea821940f3a47338448b6a4eff0dfff1df62",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T06:05:00+08:00",
-    "reportPath": ".codex/reports/TASK-009-REPORT.md",
+    "contractBoundAt": "2026-11-01T06:55:00+08:00",
+    "reportPath": ".codex/reports/TASK-010-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "6812b39524cb15a723dcbdf74a742d2126b42464",
-    "createdAt": "2026-11-01T06:05:00+08:00",
-    "submittedAt": "2026-10-31T20:41:02.358Z",
+    "submissionCommit": null,
+    "createdAt": "2026-11-01T06:55:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "specPath": "docs/UI-REPLICA-SPEC.md"
@@ -230,21 +230,49 @@
         "🟡-2 NvM CHOICE 未做，仍不可导出，第二模块闸门只过一半 -> TASK-009 A1-B4",
         "🟡-3 首次渲染 ≤500ms 未做真实浏览器计时（三轮挂账）-> 产品化阶段"
       ]
+    },
+    {
+      "taskId": "TASK-009",
+      "title": "NvM CHOICE 容器全链路 + 必填项一键确认建议值",
+      "finalStatus": "APPROVED",
+      "rounds": [
+        {
+          "round": 0,
+          "submissionCommit": "6812b39524cb15a723dcbdf74a742d2126b42464",
+          "stateCommit": "ecbf747734404f9be10aca4e37fd0dafa65f7f15",
+          "verdict": "APPROVED",
+          "blockers": 0,
+          "majors": 1,
+          "minors": 3,
+          "reviewPath": ".codex/review/TASK-009-ROUND-0-REVIEW.md",
+          "at": "2026-11-01T06:50:00+08:00"
+        }
+      ],
+      "approvedAt": "2026-11-01T06:50:00+08:00",
+      "reviewerNotes": "252 用例全绿(+44)。独立实测：NvM arxmlExportBlockers 1→0；CHOICE 识别 NvMTargetBlockReference 2 个候选；互斥为硬拦截（addContainerInstance 直接拒绝第二个：CHOICE 只能选择一个候选）；空选+必选返回明确原因；NvM 选候选填必填后可导出 len=11602，回读候选子项=1 且 definitionRef 与选中候选一致；一键确认计划 11 项=独立统计有默认值 11 项、剩余 26=无默认值 26 项，RequiredDefaults 明确排除 fallback 值充数且排除只读；CanIf 全未配置仍拒绝导出（必填拦截未放宽，反而新增 choiceSelectionError 导出前校验）；Dem 15 配置→15 VALUE、往返 31 键内容差异 0。新增 ChoiceSelection/RequiredDefaults 均为通用模块，src/core 零模块名。",
+      "environmentNotes": "无抖动，单次 15 files/252 tests。",
+      "carriedOver": [
+        "🟠-1 CHOICE 值实例用 ECUC-CONTAINER-VALUE 却标 DEST=ECUC-CHOICE-CONTAINER-DEF，类型不对应，第三方工具可能拒收 -> TASK-010 A1",
+        "🟡-1 参数/引用顺序往返被打乱（内容无损，顺序变）-> TASK-010 A3",
+        "🟡-2 一键确认只覆盖 11/37，UI 需写明剩余需手填 -> TASK-010 A4",
+        "🟡-3 首次渲染 ≤500ms 与参考图 870KB（承前挂账）",
+        "未验：UI 层切换候选提示/可撤销/一键确认历史（本轮未开浏览器）"
+      ]
     }
   ],
 
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-008",
+    "taskId": "TASK-009",
     "round": 0,
-    "reviewedCommit": "4ef677d748310f4bfa5537b85f9a0cac144718d7",
-    "at": "2026-11-01T06:00:00+08:00",
+    "reviewedCommit": "6812b39524cb15a723dcbdf74a742d2126b42464",
+    "at": "2026-11-01T06:50:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
-    "majors": 0,
+    "majors": 1,
     "minors": 3,
-    "reviewPath": ".codex/review/TASK-008-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-008-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-009-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-009-ROUND-0-REVIEW.md"
   },
 
   "autodevReview": {

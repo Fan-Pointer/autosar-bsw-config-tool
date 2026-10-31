@@ -1,110 +1,109 @@
-# ACTIVE TASK — TASK-009
+# ACTIVE TASK — TASK-010
 
 > 本文件是 Codex 唯一的任务契约来源。开始实现前必须完整读取；**不得修改本文件**（含标题、编号、验收项）。
 > 契约哈希由评审方写入 `STATE.json` 的 `task.contractHash`，篡改会导致调度器拒绝派发。
 
 | 项 | 值 |
 |---|---|
-| 任务编号 | **TASK-009** |
-| 任务名 | NvM CHOICE 全链路收口 + 必填项一键确认建议值 |
-| 阶段 | PHASE-9 |
+| 任务编号 | **TASK-010** |
+| 任务名 | ARXML 互操作校准（P0）+ 引用关系图 + 拖拽排序 |
+| 阶段 | PHASE-10 |
 | 指派 | codex |
-| 前置 | TASK-008 APPROVED（commit `4ef677d`），A1–A5 + C1–C5 达成，B1–B4 按 §5 留至今轮 |
-| 为什么现在做 | NvM 现在**能读、能改、不能导出**，第二模块闸门只过一半 |
+| 前置 | TASK-009 APPROVED（commit `6812b39`），CHOICE 功能通、格式待校准 |
 
 ---
 
 ## 0. 本轮目标（一句话）
 
-让 NvM 也能完整导出并往返：CHOICE 容器按「选中一个候选」表达，`arxmlExportBlockers` 清空；
-同时给必填项一个「一键确认建议值」的入口，别让用户手填 37 个字段。
+先让导出的 ARXML **能被别人的工具认**（CHOICE 表达自洽、顺序稳定），再让配置**能看得见引用关系**（引用图 + 拖拽排序）。
 
 ---
 
-## 1. 现状（我实测，非推测）
+## 1. P0 问题（我实测，非推测）
 
-| 项 | 实测值 |
-|---|---|
-| NvM 解析 | 3 根 / 6 容器 / 51 参数 / 9 引用 |
-| `arxmlExportBlockers` | **1 条** |
-| 导出结果 | **被拒绝**：`该模块暂不能导出 ARXML：NvMTargetBlockReference：CHOICE 暂按编辑分组保留全部候选，互斥及 ARXML 选择容器语义尚未支持。` |
-| CHOICE 定义形式 | `<ECUC-CHOICE-CONTAINER-DEF>` 内含 `<CHOICES>`，候选是**内联的** `ECUC-PARAM-CONF-CONTAINER-DEF`（不是引用）；`lower=1, upper=1`，即**必须选且只能选一个** |
+导出的 CHOICE 实例：
+
+```xml
+<ECUC-CONTAINER-VALUE UUID="274c7741-…">
+  <SHORT-NAME>NvMTargetBlockReference</SHORT-NAME>
+  <DEFINITION-REF DEST="ECUC-CHOICE-CONTAINER-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference</DEFINITION-REF>
+```
+
+用 `ECUC-CONTAINER-VALUE` 承载，`DEST` 却标 `ECUC-CHOICE-CONTAINER-DEF` —— **元素类型与定义引用类型不对应**。
+我们自己能读回（自往返通过），但严格按 schema 校验的第三方工具可能拒收。
+
+依据：AUTOSAR TPS_ECUConfiguration §2.3.3.1（EcucChoiceContainerDef）——值描述里选择列表中**只出现其中一个实例**，候选 multiplicity 恒为 `0..1`。
 
 ---
 
-## 2. 交付清单（A/B/C 三组，共 13 项）
+## 2. 交付清单
 
-### A. CHOICE 元数据与编辑（A1–A4）
-
-| 编号 | 交付内容 | 文件建议 |
-|---|---|---|
-| A1 | 解析 `ECUC-CHOICE-CONTAINER-DEF` 的 `CHOICES`，得到候选列表（候选是内联容器定义，需保留其 `shortName`、`definitionPath`、multiplicity、参数/引用） | `src/core/bswmd/EcucArxmlImporter.ts`、`BswmdTypes.ts` |
-| A2 | `BswmdContainer` 增加可选字段表达「本容器是 CHOICE 分组 + 候选清单」；**不得**用 `arxmlExportBlockers` 兜底 | 同上 |
-| A3 | 编辑模型：CHOICE 分组下**同一时刻至多一个候选**被实例化。当前是「保留全部候选」，需改为互斥 | `ConfigInstance.ts` / `configStore` |
-| A4 | 切换候选时明确提示「原候选的配置将丢失」，并作为**一条**可撤销历史记录 | UI |
-
-### B. CHOICE 导出与往返（B1–B4）
+### A 组：互操作校准（P0，必做）
 
 | 编号 | 交付内容 |
 |---|---|
-| B1 | 导出按 AUTOSAR r4.2.2 值文件约定表达选择（只写被选中的候选实例，`DEFINITION-REF` 指向该候选路径） |
-| B2 | 移除 NvM 的 `arxmlExportBlockers`；保留该机制本身（未来其他模块仍可用） |
-| B3 | 导入时按 `DEFINITION-REF` 恢复「选中的是哪个候选」 |
-| B4 | NvM 往返：容器结构、**选中候选**、参数值、引用目标、`isConfigured` 全部一致 |
+| A1 | **校准 CHOICE 值实例表达**，使元素名与 `DEFINITION-REF` 的 `DEST` 自洽。二选一并说明依据：<br>① 用 `ECUC-CHOICE-CONTAINER-VALUE` 元素 + `DEST="ECUC-CHOICE-CONTAINER-DEF"`；<br>② 省略 CHOICE 层，直接在其父容器下写被选中的候选实例（依据 §2.3.3.1「值里只出现选中的那个容器」）。<br>**报告必须写明选了哪种、依据哪条规范/示例，并贴真实导出片段** |
+| A2 | 导入侧同步适配 A1 的新形式；旧形式（当前写法）**仍可读入**，避免自己历史文件打不开 |
+| A3 | **参数/引用顺序往返稳定**：`export → import` 后，每个容器内参数与引用的**顺序**与原配置一致（当前会被打乱：未配置项被排到末尾） |
+| A4 | 一键确认按钮与结果提示写明覆盖率：「已确认 N 项，仍有 M 项需手工填写」，并可跳转到第一个待填项 |
+| A5 | 导出文件的**独立校验入测试**：DOMParser 无错 + 元素名与 DEST 自洽断言 + UUID 唯一 + 命名空间 + DEFINITION-REF 前缀 |
 
-### C. 必填项 UX 与不退化（C1–C5）
+### B 组：引用图与拖拽（P1）
 
 | 编号 | 交付内容 |
 |---|---|
-| C1 | 「一键确认建议值」：把所有**带 `DEFAULT-VALUE` 的必填项**按建议值显式写入（`isConfigured = true`） |
-| C2 | 该操作作为**一条**历史记录，`Ctrl+Z` 一次全部还原 |
-| C3 | 没有 `DEFAULT-VALUE` 的必填项**不处理**，并在结果中提示还剩几项需手工填 |
-| C4 | Dem / CanIf 全链路不退化（配置、校验、C 生成、JSON/ARXML/CSV、撤销/批量/搜索/主题） |
-| C5 | `src/core` 仍零 `Dem`/`NvM`/`CanIf` 字面量、零 UI 依赖、无新增运行时依赖 |
+| B1 | **引用关系图**：节点=容器实例，边=引用；悬空引用画**红边**并在图上可辨认 |
+| B2 | 点击图上节点 → 定位到树与表单（复用既有 `navigate to field`）；点击红边 → 跳到该悬空引用 |
+| B3 | 图数据**全部由当前配置 + BSWMD 元数据推导**，不得写死任何模块名 |
+| B4 | **树节点拖拽排序**：同层容器可拖拽改序，顺序持久化，刷新后保持 |
+| B5 | 图组件**必须懒加载**（`dynamic import`），不得让主包体积明显增大 |
 
 ---
 
 ## 3. 验收标准
 
-### CHOICE（6 条）
+### A 组（7 条）
 
-1. **候选解析**：`NvMTargetBlockReference` 被识别为 CHOICE，候选数 **≥ 2**，每个候选带 `shortName` 与定义路径。
-2. **互斥**：选中候选 A 后，候选 B 不可同时被实例化；尝试添加 B 时被拒绝或有明确交互。
-3. **切换提示**：从 A 切到 B 时给出「将丢失 A 的配置」提示；确认后 A 的实例消失、B 出现。
-4. **可撤销**：切换后 `Ctrl+Z` 能恢复 A。
-5. **导出成功**：NvM `arxmlExportBlockers` 为空，导出不抛错；DOMParser 无错、命名空间 r4.2.2、UUID 唯一、`DEFINITION-REF` 全以 `/AUTOSAR/EcucDefs/NvM` 开头。
-6. **往返**：NvM `export → import` 后，选中候选、容器结构、参数值、`isConfigured` 集合全部一致。
+1. **自洽性**：导出文件中，凡 `DEFINITION-REF` 的 `DEST` 为 `ECUC-CHOICE-CONTAINER-DEF` 的元素，其元素名必须是 CHOICE 值元素（或按方案②不出现该层）；反之 `ECUC-CONTAINER-VALUE` 的 `DEST` 必须是 `ECUC-PARAM-CONF-CONTAINER-DEF`。**写成测试断言**。
+2. **NvM 往返**：选候选 → 导出 → 导入 → 选中候选、结构、参数值、`isConfigured` 一致。
+3. **向后兼容**：用**当前版本**（`6812b39`）导出的 ARXML 文件，新版本仍能导入成功。
+4. **顺序稳定**：`export → import` 后，同一容器内参数 `definitionRef` 序列完全相同。
+5. **一键确认提示**：NvM 场景显示「已确认 11 项，仍有 26 项需手工填写」（数字以实际为准，但必须给出两个数）。
+6. **导出独立校验入测试**：上述断言在测试中存在且通过。
+7. **Dem / CanIf / NvM 三者导出与往返均不退化**。
 
-### 必填 UX（3 条）
+### B 组（5 条）
 
-7. NvM 新建配置集（37 个必填）点「一键确认建议值」后，有 `DEFAULT-VALUE` 的项全部变为已配置，剩余项数量在提示中给出。
-8. 该操作产生**一条**历史记录；一次 `Ctrl+Z` 全部还原到操作前。
-9. 无 `DEFAULT-VALUE` 的必填项不被赋任意值（不得填 0/空串充数）。
+8. **引用图**：Dem 配置下渲染出节点与边；节点数 = 容器实例数；边数 = 非空引用数。
+9. **悬空红边**：构造一个悬空引用，图上该边为红色（可用 class/属性断言）。
+10. **点击定位**：点击节点后树选中对应实例；点击红边后定位到悬空引用所在参数行。
+11. **拖拽持久化**：同层两容器换序 → 刷新页面 → 顺序保持。
+12. **懒加载**：`npm run build` 后主包（`dist/assets/index-*.js`）体积**增幅 ≤ 50 KB**；图代码在独立 chunk。
 
-### 不退化（4 条）
+### 工程（4 条）
 
-10. `npm run build` 通过。
-11. `npm test -- --run` 全绿，用例数 **≥ 205**；既有用例调整须逐行说明理由（同 TASK-008 C3 标准）。
-12. Dem 与 CanIf：导出语义（未配置不导出、必填拦截）、`isConfigured` 往返、结构合规、XXE 防线全部保持。
-13. `src/core` 零模块名、零 UI 依赖、无新增依赖。
+13. `npm test -- --run` 全绿，用例数 **≥ 252**；既有用例调整须逐行说明理由。
+14. `src/core` 零 `Dem`/`NvM`/`CanIf` 字面量、零 UI 依赖。
+15. 新增运行时依赖**最多 1 个**（图库），且必须懒加载；报告给出体积实测。
+16. 不得修改 `STATE.json` 的 `stage`、`review/**`、本契约。
 
 ---
 
 ## 4. 红线
 
-1. **不得**为 NvM 写专用分支或 `NvM` 字面量；CHOICE 必须是通用元数据能力（未来 CanIf/Dcm 有 CHOICE 同样适用）。
-2. **不得**把 `arxmlExportBlockers` 改成「警告但照常导出」；要么正确导出，要么明确拒绝。
-3. **不得**用「填 0 / 空串」充数来满足 C1；只处理带 `DEFAULT-VALUE` 的项。
-4. **不得**删改既有测试用例变绿；调整须等价或更强并逐行说明。
-5. **不得**声称完成真实浏览器验收除非实际执行。
-6. **不得**修改 `STATE.json` 的 `stage`、`review/**`、本契约。
+1. **不得**用「两种元素都写一遍」来规避 A1；必须选定一种自洽表达。
+2. **不得**为了顺序稳定而改变参数的**语义顺序**（如擅自按字母排序）；必须是「按 BSWMD 定义顺序」或「保留原顺序」。
+3. **不得**把引用图做成需要后端的组件；纯前端，数据本地推导。
+4. **不得**让图库进主包；必须动态 import。
+5. **不得**删改既有测试用例变绿。
+6. **不得**声称完成真实浏览器验收除非实际执行。
 
 ---
 
 ## 5. 分批交付
 
-本轮允许两轮：**round 0 必须完成 A1–A4 + B1–B2 + C1–C3**（能选、能导、能一键确认）；
-B3–B4（导入恢复候选 + 完整往返）可留 round 1。若分批，报告开头写明覆盖范围，未做项不得报告为已做。
+**round 0 必须完成 A 组全部（A1–A5）**；B 组可留 round 1。
+理由：A 组是「文件能不能给别人用」，B 组是「用起来顺不顺手」。若 A 组任一项未完成，本轮不得声明「导出已可互操作」。
 
 ---
 
@@ -112,12 +111,12 @@ B3–B4（导入恢复候选 + 完整往返）可留 round 1。若分批，报�
 
 | 章节 | 内容 |
 |---|---|
-| 交付对照 | A1–C5 逐项「文件 + 实现要点」 |
-| CHOICE 值文件表达 | 选中的候选在 ARXML 里具体怎么写的（贴真实片段），依据哪条规范 |
-| NvM 前后对比 | 修前 `blockers=1/导出被拒` → 修后实体数据（候选数、导出长度、往返结果） |
-| 一键确认 | 覆盖了多少必填项、剩余多少、如何保证可一次撤销 |
-| 不退化证据 | Dem / CanIf 各自自检结果 |
-| 既有用例变更 | 若有，逐行 diff 与理由 |
+| A1 决策 | 选了方案①还是②、依据哪条规范/示例、真实导出片段 |
+| 兼容性 | 旧版本文件能否导入（给测试名） |
+| 顺序稳定 | 修前/修后的顺序对比证据 |
+| 引用图 | 节点/边数、红边判定方式、懒加载后的 chunk 与主包体积 |
+| 不退化 | Dem / CanIf / NvM 各自自检 |
+| 既有用例变更 | 若有，逐行说明 |
 | 未完成与限制 | 显式列出 |
 | 自检日志 | build / test 原文关键行 |
 
@@ -125,6 +124,6 @@ B3–B4（导入恢复候选 + 完整往返）可留 round 1。若分批，报�
 
 ## 7. 完成后动作
 
-1. 提交代码与本报告（`feat: TASK-009 ...`）。
+1. 提交代码与本报告（`feat: TASK-010 ...`）。
 2. 单独提交 `STATE.json`：`status = "SUBMITTED"`、`submittedAt`、`submissionCommit`（完整 SHA）。
 3. 不改 `stage`、不写 `review/**`、不发起下一任务。
