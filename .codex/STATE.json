@@ -8,12 +8,14 @@
   "task": {
     "id": "TASK-002",
     "title": "BSWMD 解析器与动态配置引擎",
-    "status": "SUBMITTED",
+    "status": "CHANGES_REQUESTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
     "reportPath": ".codex/reports/TASK-002-REPORT.md",
-    "reviewPath": null,
+    "reviewPath": ".codex/review/TASK-002-REVIEW.md",
+    "reviewSnapshotPath": ".codex/review/TASK-002-ROUND-0-REVIEW.md",
+    "reviewedCommit": "7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5",
     "createdAt": "2026-10-31T22:35:00+08:00",
     "submittedAt": "2026-10-31T22:53:45+08:00",
     "approvedAt": null
@@ -30,10 +32,16 @@
   "queue": [],
 
   "lastReview": {
-    "reviewer": "architect",
-    "at": null,
-    "verdict": null,
-    "blockers": 0,
-    "majors": 0
+    "reviewer": "WorkBuddy",
+    "taskId": "TASK-002",
+    "round": 0,
+    "reviewedCommit": "7c3a3a7f2cbcec6c84f89f2d6078e31ac093f7d5",
+    "at": "2026-10-31T23:25:00+08:00",
+    "verdict": "CHANGES_REQUESTED",
+    "blockers": 1,
+    "majors": 2,
+    "minors": 3,
+    "reviewPath": ".codex/review/TASK-002-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-002-ROUND-0-REVIEW.md"
   }
 }
