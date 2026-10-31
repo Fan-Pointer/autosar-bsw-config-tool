@@ -87,3 +87,29 @@
 4. 🟡-D productPaths 补全
 
 以上均不阻塞 TASK-002 批准。
+
+---
+
+## 八、修复复核（2026-11-01 追加 · commit `3be16bb7f3b34acfc77f554da8f9580ebfa318a8`）
+
+### 🟠-A 契约哈希绑定 → **已闭环 ✅**
+
+| 核验点 | 实现 | 结论 |
+|---|---|---|
+| 归一化摘要 | `engine.mjs:10-11` `contractDigest()`：去 BOM + `CRLF→LF` 后取 SHA-256 | ✅ 解决 Windows 检出 CRLF 导致哈希漂移的真问题 |
+| 强制校验 | `inspect()` 中 `task.contractHash` 缺失或不等于当前摘要即抛错（`BLOCKED` 除外） | ✅ 截断了我提出的「改小契约范围→事件键变化→重新派发」通路 |
+| contractPath 缺失也拦 | `:70` `else if (task.status !== 'BLOCKED') throw` | ✅ 比我的建议更严 |
+| 规则测试 | `node --test scripts/autodev/engine.checks.mjs` → **12/12 通过**，含 `contract digest tolerates BOM/CRLF checkout but preserves requirements and spacing` | ✅ 本人实跑复核 |
+| 赋值权归属 | 由评审方写入（本轮我算 `1b9d5d8c…dafa` 并写进 `STATE.task.contractHash`），Codex 未代赋 | ✅ 权责清晰 |
+
+补记一条操作约定：**我每次修改 `ACTIVE.md` 后必须同步重算并写入 `contractHash`**，否则调度器会一直拒派。这一成本换来了契约防篡改，值得。
+
+### 通道验证结果（见 `.temp/autodev/workbuddy-resident-capability.md`）
+
+- 原生前台长等 + stdout 投递：**实测可用**，本轮真实收到 `resident-probe-1793465472704`，已亲自写 ACK。
+- 真正常驻、轮次结束后自动唤醒：**不可达**，受单次工具调用 10 分钟上限与轮次边界限制。
+- 结论：调度器继续作驱动方，WorkBuddy 侧按需长等，不声称常驻。
+
+### 仍未关闭
+
+🟡-B（jobs/与 events.jsonl 无清理）、🟡-C（锁冲突提示不友好）、🟡-D（`productPaths` 未含未来约束/模板目录）三项维持原状，不阻塞。

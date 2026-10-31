@@ -1,6 +1,6 @@
 {
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
-  "protocolVersion": "1.0",
+  "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
   "stage": "PHASE-3",
   "stageName": "配置器可用化（配置集管理 + 实例生命周期 + 界面接线）",
@@ -12,6 +12,10 @@
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
+    "contractHash": "1b9d5d8cf09c4733f3ba28ab9097f6c76d9dfcbb1a3350d57b40af616ff8dafa",
+    "contractHashAlg": "sha256(utf8-no-bom, LF)",
+    "contractBoundBy": "WorkBuddy",
+    "contractBoundAt": "2026-11-01T00:52:00+08:00",
     "reportPath": ".codex/reports/TASK-003-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
@@ -86,9 +90,21 @@
   "autodevReview": {
     "reviewer": "WorkBuddy",
     "reviewedCommit": "3376824a7022378288336fd114fb41c70f49d48d",
-    "at": "2026-10-31T23:58:00+08:00",
-    "verdict": "PASS_WITH_MAJOR",
+    "reReviewedCommit": "3be16bb7f3b34acfc77f554da8f9580ebfa318a8",
+    "at": "2026-11-01T00:55:00+08:00",
+    "verdict": "PASS",
     "path": ".codex/review/AUTODEV-REVIEW.md",
-    "openMajor": "契约文件未做哈希绑定校验，改小范围后可通过事件键变化重新派发"
+    "closedMajor": "契约哈希绑定已实现(contractDigest 去BOM+CRLF→LF, inspect 强制校验), engine.checks 12/12 通过",
+    "openMinors": [
+      "jobs/ 与 events.jsonl 无清理策略",
+      "双调度器锁冲突错误提示不友好",
+      "productPaths 未包含未来 constraints/templates 目录"
+    ],
+    "channelVerification": {
+      "nativeForegroundWait": "available",
+      "trueResident": "not-achievable",
+      "evidence": ".temp/autodev/workbuddy-agent-ack.json, .temp/autodev/workbuddy-resident-capability.md",
+      "probeActionKey": "resident-probe-1793465472704"
+    }
   }
 }
