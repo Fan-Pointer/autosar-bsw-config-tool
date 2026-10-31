@@ -10,6 +10,34 @@
 | 阶段 | PHASE-10 |
 | 指派 | codex |
 | 前置 | TASK-009 APPROVED（commit `6812b39`），CHOICE 功能通、格式待校准 |
+| **契约修订** | **v2（2026-11-01 07:50）**：**A1 与验收 1 已撤销** —— 原要求基于评审方误判，官方规范证明现值侧写法正确。详见 §0 |
+
+---
+
+## 0. 契约修订记录（评审方认错）
+
+原 A1 要求「用 `ECUC-CHOICE-CONTAINER-VALUE` 元素，或省略 CHOICE 层」，理由是「`ECUC-CONTAINER-VALUE` 配 `DEST="ECUC-CHOICE-CONTAINER-DEF"` 类型不对应」。
+**该判断是错的。** 评审方核对 AUTOSAR CP R24-11 TPS_ECUConfiguration，印刷页 129、`[TPS_ECUC_03020]` 原文：
+
+> On the Value side a EcucChoiceContainerDef is treated as a usual container … **Which choice has been taken is defined by the `<DEFINITION-REF>` of the `<SUB-CONTAINER>`.**
+
+`Example 2.33` 的值侧片段即：
+
+```xml
+<ECUC-CONTAINER-VALUE>
+  <SHORT-NAME>myGwSource001</SHORT-NAME>
+  <DEFINITION-REF DEST="ECUC-CHOICE-CONTAINER-DEF">/AUTOSAR/EcucDefs/Com/…/ComGwSource</DEFINITION-REF>
+  <SUB-CONTAINERS> …
+```
+
+**与当前实现完全一致。** 值侧本就用普通容器元素 + `CHOICE-CONTAINER-DEF` 的 DEST，选中哪个候选由子容器的 `DEFINITION-REF` 表达。
+
+因此：
+- ❌ **A1 撤销**，不得改动现有的值侧表达；
+- ❌ **原验收 1 撤销**（不再要求元素名与 DEST 按 `PARAM-CONF` 对齐）；
+- ✅ 其余各项保留；A5 改为「对照官方 `Example 2.33` 结构做断言」，不是自创断言。
+
+Codex 在派发后即查规范并停在架构决策处、未擅改代码 —— **处理正确，此停工不计其责**。
 
 ---
 
@@ -19,34 +47,23 @@
 
 ---
 
-## 1. P0 问题（我实测，非推测）
+## 1. P0 问题（已撤销 — 见 §0）
 
-导出的 CHOICE 实例：
-
-```xml
-<ECUC-CONTAINER-VALUE UUID="274c7741-…">
-  <SHORT-NAME>NvMTargetBlockReference</SHORT-NAME>
-  <DEFINITION-REF DEST="ECUC-CHOICE-CONTAINER-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference</DEFINITION-REF>
-```
-
-用 `ECUC-CONTAINER-VALUE` 承载，`DEST` 却标 `ECUC-CHOICE-CONTAINER-DEF` —— **元素类型与定义引用类型不对应**。
-我们自己能读回（自往返通过），但严格按 schema 校验的第三方工具可能拒收。
-
-依据：AUTOSAR TPS_ECUConfiguration §2.3.3.1（EcucChoiceContainerDef）——值描述里选择列表中**只出现其中一个实例**，候选 multiplicity 恒为 `0..1`。
-
----
+原拟修「CHOICE 值实例元素名与 DEST 不匹配」，经核对官方规范**该写法即为标准写法**，无问题可修。
+本轮 P0 改为：**A3 顺序稳定**与**A4 覆盖率提示**两项体验缺陷（详见交付清单）。
 
 ## 2. 交付清单
 
-### A 组：互操作校准（P0，必做）
+### A 组：体验与稳健性（P0，必做）
 
 | 编号 | 交付内容 |
 |---|---|
-| A1 | **校准 CHOICE 值实例表达**，使元素名与 `DEFINITION-REF` 的 `DEST` 自洽。二选一并说明依据：<br>① 用 `ECUC-CHOICE-CONTAINER-VALUE` 元素 + `DEST="ECUC-CHOICE-CONTAINER-DEF"`；<br>② 省略 CHOICE 层，直接在其父容器下写被选中的候选实例（依据 §2.3.3.1「值里只出现选中的那个容器」）。<br>**报告必须写明选了哪种、依据哪条规范/示例，并贴真实导出片段** |
-| A2 | 导入侧同步适配 A1 的新形式；旧形式（当前写法）**仍可读入**，避免自己历史文件打不开 |
-| A3 | **参数/引用顺序往返稳定**：`export → import` 后，每个容器内参数与引用的**顺序**与原配置一致（当前会被打乱：未配置项被排到末尾） |
-| A4 | 一键确认按钮与结果提示写明覆盖率：「已确认 N 项，仍有 M 项需手工填写」，并可跳转到第一个待填项 |
-| A5 | 导出文件的**独立校验入测试**：DOMParser 无错 + 元素名与 DEST 自洽断言 + UUID 唯一 + 命名空间 + DEFINITION-REF 前缀 |
+| A1 | **参数/引用顺序往返稳定**：`export → import` 后，每个容器内参数与引用的**顺序**与原配置一致（当前未配置项会被排到末尾） |
+| A2 | 一键确认按钮与结果提示写明覆盖率：「已确认 N 项，仍有 M 项需手工填写」，并可一键跳到第一个待填项 |
+| A3 | 导出文件的**独立校验入测试**：对照官方 `Example 2.33` 的 CHOICE 结构做断言（分组层保留、选中候选由其 `DEFINITION-REF` 表达）+ UUID 唯一 + 命名空间 + DEFINITION-REF 前缀 |
+| A4 | 旧文件兼容：用 `6812b39` 版本导出的 ARXML 仍能导入成功（只验不回退，不要求改格式） |
+
+> 原 A1（改 CHOICE 元素名）与原验收 1 已按 §0 撤销。**不得**改动现有值侧表达。
 
 ### B 组：引用图与拖拽（P1）
 
@@ -62,15 +79,13 @@
 
 ## 3. 验收标准
 
-### A 组（7 条）
+### A 组（5 条）
 
-1. **自洽性**：导出文件中，凡 `DEFINITION-REF` 的 `DEST` 为 `ECUC-CHOICE-CONTAINER-DEF` 的元素，其元素名必须是 CHOICE 值元素（或按方案②不出现该层）；反之 `ECUC-CONTAINER-VALUE` 的 `DEST` 必须是 `ECUC-PARAM-CONF-CONTAINER-DEF`。**写成测试断言**。
-2. **NvM 往返**：选候选 → 导出 → 导入 → 选中候选、结构、参数值、`isConfigured` 一致。
-3. **向后兼容**：用**当前版本**（`6812b39`）导出的 ARXML 文件，新版本仍能导入成功。
-4. **顺序稳定**：`export → import` 后，同一容器内参数 `definitionRef` 序列完全相同。
-5. **一键确认提示**：NvM 场景显示「已确认 11 项，仍有 26 项需手工填写」（数字以实际为准，但必须给出两个数）。
-6. **导出独立校验入测试**：上述断言在测试中存在且通过。
-7. **Dem / CanIf / NvM 三者导出与往返均不退化**。
+1. **顺序稳定**：`export → import` 后，同一容器内参数 `definitionRef` 序列完全相同；引用同理。
+2. **一键确认提示**：NvM 场景同时给出「已确认 N 项」与「仍有 M 项需手工填写」两个数（数字以实际为准）。
+3. **CHOICE 结构断言**：导出文件中 CHOICE 分组保留为 `ECUC-CONTAINER-VALUE` + `DEST="ECUC-CHOICE-CONTAINER-DEF"`，选中候选出现在其 `SUB-CONTAINERS` 中且 `DEFINITION-REF` 指向候选定义 —— 与官方 `Example 2.33` 一致。
+4. **旧文件兼容**：`6812b39` 版本导出的 NvM 与 Dem 文件，新版本均能导入成功。
+5. **三模块不退化**：Dem / CanIf / NvM 导出与往返均正常；XXE 防线（注入 DOCTYPE 仍拒）保持。
 
 ### B 组（5 条）
 
@@ -91,7 +106,7 @@
 
 ## 4. 红线
 
-1. **不得**用「两种元素都写一遍」来规避 A1；必须选定一种自洽表达。
+1. **不得**改动现有 CHOICE 值侧表达（它是符合 `[TPS_ECUC_03020]` 与 `Example 2.33` 的）；不得引入 `ECUC-CHOICE-CONTAINER-VALUE` 等规范中不存在的元素名。
 2. **不得**为了顺序稳定而改变参数的**语义顺序**（如擅自按字母排序）；必须是「按 BSWMD 定义顺序」或「保留原顺序」。
 3. **不得**把引用图做成需要后端的组件；纯前端，数据本地推导。
 4. **不得**让图库进主包；必须动态 import。
@@ -102,8 +117,8 @@
 
 ## 5. 分批交付
 
-**round 0 必须完成 A 组全部（A1–A5）**；B 组可留 round 1。
-理由：A 组是「文件能不能给别人用」，B 组是「用起来顺不顺手」。若 A 组任一项未完成，本轮不得声明「导出已可互操作」。
+**round 0 必须完成 A 组全部（A1–A4）**；B 组可留 round 1。
+A 组现已不含格式改写，工作量小，应当一轮完成。
 
 ---
 
@@ -111,7 +126,7 @@
 
 | 章节 | 内容 |
 |---|---|
-| A1 决策 | 选了方案①还是②、依据哪条规范/示例、真实导出片段 |
+| 规范核对 | 确认 CHOICE 现值侧写法符合 `[TPS_ECUC_03020]`/`Example 2.33` 的证据（可只引用契约 §0） |
 | 兼容性 | 旧版本文件能否导入（给测试名） |
 | 顺序稳定 | 修前/修后的顺序对比证据 |
 | 引用图 | 节点/边数、红边判定方式、懒加载后的 chunk 与主包体积 |

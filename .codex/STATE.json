@@ -4,7 +4,6 @@
   "project": "autosar-bsw-config-tool",
   "stage": "PHASE-10",
   "stageName": "ARXML 互操作校准与引用可视化",
-
   "task": {
     "id": "TASK-010",
     "title": "ARXML 互操作校准（CHOICE 表达/顺序稳定）+ 引用关系图 + 拖拽排序",
@@ -12,10 +11,11 @@
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "fee8a937175253ebff06bfd54175ea821940f3a47338448b6a4eff0dfff1df62",
+    "contractHash": "197053e3bb8a232edb599306a7a8cc9c4a2274dcfdbd0e123b048506f76ff2e2",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T06:55:00+08:00",
+    "contractRevision": "v2 (2026-11-01 07:50): 撤销原 A1 与验收1 —— 评审方误判，官方 TPS_ECUC_03020 证明现值侧写法正确",
+    "contractBoundAt": "2026-11-01T07:50:00+08:00",
     "reportPath": ".codex/reports/TASK-010-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
@@ -26,7 +26,6 @@
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "specPath": "docs/UI-REPLICA-SPEC.md"
   },
-
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
     "SUBMITTED": "Codex 已交付，等待评审",
@@ -34,9 +33,7 @@
     "APPROVED": "已通过，可推进下一任务",
     "BLOCKED": "等待人工决策"
   },
-
   "queue": [],
-
   "history": [
     {
       "taskId": "TASK-002",
@@ -260,7 +257,6 @@
       ]
     }
   ],
-
   "lastReview": {
     "reviewer": "WorkBuddy",
     "taskId": "TASK-009",
@@ -274,7 +270,6 @@
     "reviewPath": ".codex/review/TASK-009-REVIEW.md",
     "snapshotPath": ".codex/review/TASK-009-ROUND-0-REVIEW.md"
   },
-
   "autodevReview": {
     "reviewer": "WorkBuddy",
     "reviewedCommit": "3376824a7022378288336fd114fb41c70f49d48d",
@@ -294,5 +289,15 @@
       "evidence": ".temp/autodev/workbuddy-agent-ack.json, .temp/autodev/workbuddy-resident-capability.md",
       "probeActionKey": "resident-probe-1793465472704"
     }
+  },
+  "blocker": {
+    "at": "2026-11-01T07:55:00+08:00",
+    "task": "TASK-010",
+    "status": "ENV_PERMISSION",
+    "summary": "Codex 侧 esbuild spawn EPERM 与 .git/index.lock Permission denied，测试/构建/暂存均无法执行。契约冲突已由评审方解决（A1 撤销，契约 v2）。",
+    "owner": "用户（Codex 桌面端执行权限）",
+    "recovery": "在 Codex 桌面端恢复子进程与 Git 索引写权限后，执行 dispatch.mjs recover 与 start.ps1",
+    "resolvedAt": null,
+    "note": "Codex 停工不计责：它按 AGENTS §7 停在架构决策处，未擅改代码。评审方误判已认领。"
   }
 }

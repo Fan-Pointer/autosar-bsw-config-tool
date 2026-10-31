@@ -13,6 +13,21 @@
 `outcome=stopped`：保持停止，不重新挂起。`timeout`/失败：记录原因并通知一次，不无休止重启等待。
 收到 request 才执行下述交接。脚本的 received 仅是传输凭据，不能当作真实模型 ACK。
 
+## 监听结束后必须先查三处（2026-11-01 补，吃过 3 小时空等的亏）
+
+`blocked` 与 `notice` **不会**触发 resident 投递，只有 `review` 请求才会。所以**每次监听结束**——不论是收到事件、`outcome=timeout` 还是进程失败——在决定"重新挂起"之前，必须先读：
+
+1. `.temp/autodev/attention.json`（是否有 `blocked-*` 待处理）
+2. `tail .temp/autodev/events.jsonl`（最近是否有 `notice` / `result.outcome=blocked`）
+3. `.codex/STATE.json` 的 `task.status`（是否仍停在派发前状态却已过去很久）
+
+三处任一显示异常（blocked / 契约冲突 / 环境权限），立即处理，**不得直接进入下一轮盲等**。
+实例：TASK-010 于 20:49 报 `blocked`（契约冲突），我却从 20:46 空等到 23:46 窗口到期才通过上述检查发现。
+
+`blocked` 的处置：读 `.codex/reports/<task>-REPORT.md` 与 `attention.json` 的 message，
+判断是「契约有误」「环境权限」还是「实现困难」——契约有误由我改契约并重算 `contractHash`；
+环境权限写清恢复条件交用户；实现困难则拆任务或给更具体的约束。处理后写澄清记录，不改评审结论。
+
 ## 每个事件
 
 1. 先亲自原子写 `.temp/autodev/workbuddy-agent-ack.json`：
