@@ -89,6 +89,12 @@ export interface BswmdParameter {
 export interface BswmdReference {
   multiplicity?: Multiplicity;
   destinationRef?: string;
+  /** 全部候选目标定义路径。普通引用 1 个；CHOICE 引用多个（来自 DESTINATION-REFS）。 */
+  destinationRefs?: string[];
+  /** 引用种类：普通 / 多候选（CHOICE） / 外部（FOREIGN） / 实例（INSTANCE）。 */
+  kind?: 'reference' | 'choice' | 'foreign' | 'instance';
+  /** 目标不在本模块内（外部或实例引用），编辑器不能从当前配置集挑选。 */
+  isExternal?: boolean;
   /** Optional relation role for the DTC CSV projection. */
   exportRole?: 'attributes' | 'dtc';
   uuid: string;

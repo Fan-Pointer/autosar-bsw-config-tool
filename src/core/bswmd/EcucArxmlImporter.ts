@@ -198,19 +198,63 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
   }
   function reference(data: Node, tag: string, parent: string): BswmdReference {
     const id = identity(data, parent);
-    if (tag !== 'ECUC-REFERENCE-DEF') throw new Error(`${id.shortName}: 不支持的引用类型 ${tag}`);
-    const destinationRef = required(data, 'DESTINATION-REF');
+    // Ordinary references carry one DESTINATION-REF; choice references carry a DESTINATION-REFS list.
+    // Foreign and instance references point outside this module and stay read-only in the editor.
+    const kind: BswmdReference['kind'] =
+      tag === 'ECUC-CHOICE-REFERENCE-DEF'
+        ? 'choice'
+        : tag === 'ECUC-FOREIGN-REFERENCE-DEF'
+          ? 'foreign'
+          : tag === 'ECUC-INSTANCE-REFERENCE-DEF'
+            ? 'instance'
+            : 'reference';
+    if (
+      tag !== 'ECUC-REFERENCE-DEF' &&
+      tag !== 'ECUC-CHOICE-REFERENCE-DEF' &&
+      tag !== 'ECUC-FOREIGN-REFERENCE-DEF' &&
+      tag !== 'ECUC-INSTANCE-REFERENCE-DEF'
+    )
+      throw new Error(`${id.shortName}: 不支持的引用类型 ${tag}`);
+
+    const destinations: string[] =
+      kind === 'choice'
+        ? array(node(data['DESTINATION-REFS'])['DESTINATION-REF']).map((item) =>
+            String(scalar(item) ?? '').trim()
+          )
+        : kind === 'reference'
+          ? [required(data, 'DESTINATION-REF')]
+          : // FOREIGN and INSTANCE references carry no static DESTINATION-REF in the official
+            // definitions; their target is resolved outside this module at runtime.
+            [];
+    const destinationRefs = destinations.filter((item) => item.length > 0);
+    // Choice references must name at least one candidate; ordinary ones a single target.
+    if (kind === 'reference' && !destinationRefs.length)
+      throw new Error(`${id.shortName}: 引用缺少目标定义`);
+    if (kind === 'choice' && !destinationRefs.length)
+      throw new Error(`${id.shortName}: CHOICE 引用缺少候选目标`);
+    const destinationRef = destinationRefs[0];
+    const isExternal =
+      kind === 'foreign' ||
+      kind === 'instance' ||
+      destinationRefs.some((target) => !target.startsWith(`/AUTOSAR/EcucDefs/${moduleShortName}/`));
+
     const bounds = multiplicity(data);
     if (bounds.upper === 'unbounded' || bounds.upper > 1)
       warnings.push(`${id.shortName}：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。`);
-    if (!destinationRef.startsWith(`/AUTOSAR/EcucDefs/${moduleShortName}/`))
-      warnings.push(
-        `${id.shortName}：目标 ${destinationRef} 位于其他模块；当前仅支持配置集内引用。`
-      );
+    if (!destinationRefs.length)
+      warnings.push(`${id.shortName}：${kind} 引用无静态目标（${kind === 'foreign' ? '跨模块' : '实例'}引用），编辑器只读展示。`);
+    else if (isExternal)
+      warnings.push(`${id.shortName}：目标 ${destinationRef} 位于本模块之外；编辑器只读展示。`);
+    else if (kind === 'choice')
+      warnings.push(`${id.shortName}：多候选引用，可在 ${destinationRefs.length} 个候选目标中选一个。`);
+
     return {
       ...id,
       destinationRef,
-      destinationContainerType: destinationRef.split('/').pop()!,
+      destinationRefs,
+      kind,
+      isExternal,
+      destinationContainerType: destinationRef ? destinationRef.split('/').pop()! : id.shortName,
       multiplicity: bounds,
       isOptional: bounds.lower === 0,
     };
