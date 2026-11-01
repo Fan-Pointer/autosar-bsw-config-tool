@@ -4,7 +4,7 @@
     "bytes": 15447041,
     "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf",
     "generator": "scripts/gen-bswmd-from-arxml.mjs",
-    "generatedAt": "2026-11-01T00:21:04.721Z",
+    "generatedAt": "2026-11-01T11:34:58.924Z",
     "descriptionLimit": 160
   },
   "shortName": "Dem",
@@ -150,7 +150,8 @@
               "isOptional": true,
               "min": 1,
               "max": 16777214,
-              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemDtcValue"
+              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemDtcValue",
+              "exportRole": "dtcValue"
             },
             {
               "uuid": "ECUC:ec5f19c2-2f59-4a05-a5a7-21fc4e8b49e3",
@@ -170,7 +171,8 @@
                 "DEM_SEVERITY_MAINTENANCE_ONLY",
                 "DEM_SEVERITY_NO_SEVERITY"
               ],
-              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemDTCSeverity"
+              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemDTCSeverity",
+              "exportRole": "severity"
             },
             {
               "uuid": "ECUC:f74c7e70-9b1f-4491-8a0d-73012526af46",
@@ -208,7 +210,8 @@
                 "DEM_DTC_WWHOBD_CLASS_C",
                 "DEM_DTC_WWHOBD_CLASS_NOCLASS"
               ],
-              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemWWHOBDDTCClass"
+              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemWWHOBDDTCClass",
+              "exportRole": "wwhObdClass"
             }
           ],
           "references": [
@@ -228,7 +231,8 @@
                 "upper": 1
               },
               "isOptional": false,
-              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemDTCAttributesRef"
+              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemDTC/DemDTCAttributesRef",
+              "exportRole": "attributes"
             },
             {
               "uuid": "ECUC:0feb1fea-d972-477f-ad0a-23fd0e391235",
@@ -991,7 +995,8 @@
               "isOptional": false,
               "min": 1,
               "max": 65535,
-              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter/DemEventId"
+              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter/DemEventId",
+              "exportRole": "eventId"
             },
             {
               "uuid": "ECUC:6b0b03bd-1d0c-47c8-b723-0bca376ea53a",
@@ -1131,7 +1136,8 @@
                 "upper": 1
               },
               "isOptional": true,
-              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter/DemDTCRef"
+              "definitionPath": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter/DemDTCRef",
+              "exportRole": "dtc"
             },
             {
               "uuid": "ECUC:6953a02d-6999-4d84-8c1d-daede62dfc77",

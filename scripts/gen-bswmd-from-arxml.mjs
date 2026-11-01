@@ -23,13 +23,32 @@ const output = process.argv[4] ?? resolve(ROOT, 'bswmd', `${moduleName.toLowerCa
 /** 描述裁剪上限：官方 DESC 含大量规范引用文本，界面只用于提示，保留首段足够。 */
 const DESC_LIMIT = 160;
 
+/**
+ * CSV 导出语义角色（源自手写版 dem_bswmd.legacy.json，按 shortName + 容器上下文迁移）。
+ * 官方 ARXML 无此编辑器扩展元数据，生成时在此处声明。
+ */
+const EXPORT_ROLES = [
+  { container: 'DemDTC', shortName: 'DemDtcValue', role: 'dtcValue' },
+  { container: 'DemDTC', shortName: 'DemDTCSeverity', role: 'severity' },
+  { container: 'DemDTC', shortName: 'DemWWHOBDDTCClass', role: 'wwhObdClass' },
+  { container: 'DemDTC', shortName: 'DemDTCAttributesRef', role: 'attributes' },
+  { container: 'DemEventParameter', shortName: 'DemEventId', role: 'eventId' },
+  { container: 'DemEventParameter', shortName: 'DemDTCRef', role: 'dtc' },
+];
+
+function roleOf(containerShortName, elementShortName) {
+  return EXPORT_ROLES.find(
+    (r) => r.container === containerShortName && r.shortName === elementShortName
+  )?.role;
+}
+
 function trim(text) {
   if (typeof text !== 'string') return text;
   const flat = text.replace(/\s+/g, ' ').trim();
   return flat.length <= DESC_LIMIT ? flat : `${flat.slice(0, DESC_LIMIT - 1)}…`;
 }
 
-function compact(container, parentPath) {
+function compact(container, parentPath, containerName = container.shortName) {
   const path = `${parentPath}/${container.shortName}`;
   return {
     ...(container.definitionPath ? { definitionPath: container.definitionPath } : {}),
@@ -41,14 +60,16 @@ function compact(container, parentPath) {
     parameters: (container.parameters ?? []).map((p) => ({
       ...p,
       definitionPath: `${path}/${p.shortName}`,
+      ...(roleOf(containerName, p.shortName) ? { exportRole: roleOf(containerName, p.shortName) } : {}),
       ...(p.description ? { description: trim(p.description) } : {}),
     })),
     references: (container.references ?? []).map((r) => ({
       ...r,
       definitionPath: `${path}/${r.shortName}`,
+      ...(roleOf(containerName, r.shortName) ? { exportRole: roleOf(containerName, r.shortName) } : {}),
       ...(r.description ? { description: trim(r.description) } : {}),
     })),
-    subContainers: (container.subContainers ?? []).map((c) => compact(c, path)),
+    subContainers: (container.subContainers ?? []).map((c) => compact(c, path, c.shortName)),
   };
 }
 

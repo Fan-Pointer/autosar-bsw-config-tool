@@ -8,6 +8,7 @@ import { exportJson, importJson, MAX_IMPORT_BYTES } from '../src/core/io/ConfigJ
 import ImportDialog from '../src/ui/ImportExport/ImportDialog.vue';
 import WorkspaceView from '../src/views/WorkspaceView.vue';
 import { completeDemArxml } from './helpers/completeDemArxml';
+import { legacy } from './helpers/definitionIndex';
 
 const local = vi.hoisted(() => ({
   saved: new Map<string, unknown>(),
@@ -36,12 +37,12 @@ async function fixture() {
   const store = useConfigStore();
   await store.createConfigSet('IO Project');
   const rootUuid = store.config!.containers[0].uuid;
-  store.addContainerInstance('ecuc-dem-dtc-def');
+  store.addContainerInstance(legacy('ecuc-dem-dtc-def'));
   const dtc = store.selectedEntry!.container;
-  store.setParameterValue('ecuc-dem-dtc-value', 1);
+  store.setParameterValue(legacy('ecuc-dem-dtc-value'), 1);
   await store.saveConfig();
   const incoming = importJson(store.exportConfig('json'), store.modules);
-  incoming.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-value')!.value = 42;
+  incoming.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-value'))!.value = 42;
   return { store, dtc, rootUuid, text: exportJson(incoming) };
 }
 
@@ -49,17 +50,17 @@ describe('transactional store IO', () => {
   it('allows a field removed by import to be explicitly enabled again without showing a phantom default', async () => {
     const { store, text, dtc } = await fixture();
     const file = importJson(text, store.modules);
-    file.containers[0].subContainers[0].parameters.delete('ecuc-dem-dtc-functional-unit');
-    file.containers[0].subContainers[0].references.delete('ecuc-dem-dtc-obd-ref');
+    file.containers[0].subContainers[0].parameters.delete(legacy('ecuc-dem-dtc-functional-unit'));
+    file.containers[0].subContainers[0].references.delete(legacy('ecuc-dem-dtc-obd-ref'));
     const session = store.prepareImport(exportJson(file), 'json');
     expect(store.previewImport(session, 'overwrite').deletedItems).toBe(2);
     expect(await store.applyImport(session, 'overwrite')).toBe(true);
     store.selectContainer(dtc.uuid);
-    expect(store.parameterData).toHaveProperty('ecuc-dem-dtc-functional-unit', undefined);
-    store.setParameterValue('ecuc-dem-dtc-functional-unit', 12);
-    store.setReferenceTarget('ecuc-dem-dtc-obd-ref', '');
-    expect(store.parameterData['ecuc-dem-dtc-functional-unit']).toBe(12);
-    expect(store.referenceData['ecuc-dem-dtc-obd-ref']).toBe('');
+    expect(store.parameterData).toHaveProperty(legacy('ecuc-dem-dtc-functional-unit'), undefined);
+    store.setParameterValue(legacy('ecuc-dem-dtc-functional-unit'), 12);
+    store.setReferenceTarget(legacy('ecuc-dem-dtc-obd-ref'), '');
+    expect(store.parameterData[legacy('ecuc-dem-dtc-functional-unit')]).toBe(12);
+    expect(store.referenceData[legacy('ecuc-dem-dtc-obd-ref')]).toBe('');
   });
   it('previews without mutation then commits one complete library and survives reload', async () => {
     const { store, text, dtc } = await fixture();
@@ -73,7 +74,7 @@ describe('transactional store IO', () => {
     expect(await store.applyImport(session, 'overwrite')).toBe(true);
     expect(local.setItem.mock.calls.length).toBe(calls + 1);
     expect(
-      store.config!.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-value')?.value
+      store.config!.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-value'))?.value
     ).toBe(42);
     expect(store.config!.containers[0].subContainers[0].uuid).toBe(dtc.uuid);
     const after = store.exportConfig('json');
@@ -106,8 +107,8 @@ describe('transactional store IO', () => {
   );
   it('leaves the exact original config, selection, dirty flag and storage after a failed write', async () => {
     const { store, text, dtc } = await fixture();
-    store.setParameterValue('ecuc-dem-dtc-value', 2);
-    store.selectContainer(dtc.uuid, 'ecuc-dem-dtc-value');
+    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 2);
+    store.selectContainer(dtc.uuid, legacy('ecuc-dem-dtc-value'));
     const before = store.exportConfig('json'),
       saved = JSON.stringify([...local.saved]);
     const selection = store.selectedKey;
@@ -125,7 +126,7 @@ describe('transactional store IO', () => {
     const before = store.exportConfig('json'),
       saved = JSON.stringify([...local.saved]);
     const session = store.prepareImport(text, 'json');
-    session.incoming.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-value')!.value = {
+    session.incoming.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-value'))!.value = {
       broken: true,
     };
     const calls = local.setItem.mock.calls.length;
@@ -141,10 +142,10 @@ describe('transactional store IO', () => {
     expect(() => store.prepareImport('{broken', 'json')).toThrow('导入失败');
     expect(store.exportConfig('json')).toBe(before);
     const session = store.prepareImport(text, 'json');
-    store.setParameterValue('ecuc-dem-dtc-value', 3);
+    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 3);
     expect(await store.applyImport(session, 'overwrite')).toBe(false);
     expect(store.error).toContain('工程已在预览后更改');
-    expect(store.selectedEntry!.container.parameters.get('ecuc-dem-dtc-value')?.value).toBe(3);
+    expect(store.selectedEntry!.container.parameters.get(legacy('ecuc-dem-dtc-value'))?.value).toBe(3);
   });
   it('does not publish staged state while writing and prevents concurrent editor actions', async () => {
     const { store, text } = await fixture();
@@ -162,7 +163,7 @@ describe('transactional store IO', () => {
     await flushPromises();
     expect(store.isImporting).toBe(true);
     expect(store.exportConfig('json')).toBe(before);
-    expect(() => store.setParameterValue('ecuc-dem-dtc-value', 5)).toThrow('正在应用导入');
+    expect(() => store.setParameterValue(legacy('ecuc-dem-dtc-value'), 5)).toThrow('正在应用导入');
     expect(await store.saveConfig()).toBe(false);
     fail(new Error('写入中断'));
     expect(await pending).toBe(false);
@@ -198,7 +199,7 @@ describe('import preview UI and project menus', () => {
   it('renders hostile file text literally in conflicts without creating HTML elements', async () => {
     const { store, text } = await fixture();
     const file = importJson(text, store.modules);
-    file.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-j1939-node-ref')!.value =
+    file.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-j1939-node-ref'))!.value =
       '<img src=x onerror=alert(1)>';
     await dialog(exportJson(file));
     expect(document.querySelector('.conflict-table')?.textContent).toContain(
@@ -236,7 +237,7 @@ describe('import preview UI and project menus', () => {
       button('应用导入').click();
       await flushPromises();
       expect(
-        store.config!.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-value')?.value
+        store.config!.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-value'))?.value
       ).toBe(strategy === 'overwrite' ? 42 : 1);
       expect(store.config!.containers[0].subContainers).toHaveLength(strategy === 'rename' ? 2 : 1);
     }
@@ -249,7 +250,7 @@ describe('import preview UI and project menus', () => {
     button('应用导入').click();
     await flushPromises();
     expect(
-      store.config!.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-value')?.value
+      store.config!.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-value'))?.value
     ).toBe(88);
   });
   it('rejects oversize files before FileReader and makes application unavailable', async () => {

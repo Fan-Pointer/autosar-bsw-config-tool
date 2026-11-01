@@ -24,6 +24,7 @@ import { useConfigStore } from '../src/stores/configStore';
 import rawDefinition from '../bswmd/dem_bswmd.json';
 import type { ConstraintViolation } from '../src/core/constraint/ConstraintTypes';
 import type { ConfigInstance } from '../src/core/config/ConfigTypes';
+import { legacy } from './helpers/definitionIndex';
 
 const local = vi.hoisted(() => ({
   saved: new Map<string, unknown>(),
@@ -76,7 +77,7 @@ describe('definition-driven components', () => {
       step: 1,
       precision: 0,
     });
-    expect(wrapper.get('[data-field="ecuc-dem-attr-aging-allowed"]').classes()).toContain(
+    expect(wrapper.get(`[data-field="${legacy('ecuc-dem-attr-aging-allowed')}"]`).classes()).toContain(
       'is-required'
     );
     const dtc = mount(DynamicForm, { props: { container: definition('DemDTC') }, global: ui });
@@ -85,9 +86,9 @@ describe('definition-driven components', () => {
   });
 
   it('uses float controls, emits edits without mutating props and follows container/value changes', async () => {
-    const data = { 'ecuc-dem-debounce-time-failed': 0.75 };
+    const data = { [legacy('ecuc-dem-debounce-time-failed')]: 0.75 };
     const wrapper = mount(DynamicForm, {
-      props: { container: definition('DemDebounceTimeBasedClass'), configData: data },
+      props: { container: definition('DemDebounceTimeBaseClass'), configData: data },
       global: ui,
     });
     wrappers.push(wrapper);
@@ -95,15 +96,15 @@ describe('definition-driven components', () => {
     expect(number.props()).toMatchObject({ min: 0.001, max: 3600, step: 0.1, modelValue: 0.75 });
     number.vm.$emit('update:modelValue', 1.25);
     expect(wrapper.emitted('parameter-change')?.[0]).toEqual([
-      'ecuc-dem-debounce-time-failed',
+      legacy('ecuc-dem-debounce-time-failed'),
       1.25,
     ]);
-    expect(data['ecuc-dem-debounce-time-failed']).toBe(0.75);
-    await wrapper.setProps({ configData: { 'ecuc-dem-debounce-time-failed': 2 } });
+    expect(data[legacy('ecuc-dem-debounce-time-failed')]).toBe(0.75);
+    await wrapper.setProps({ configData: { [legacy('ecuc-dem-debounce-time-failed')]: 2 } });
     expect(wrapper.findComponent(ElInputNumber).props('modelValue')).toBe(2);
     await wrapper.setProps({
       container: definition('DemDTCAttributes'),
-      configData: { 'ecuc-dem-attr-aging-allowed': true },
+      configData: { [legacy('ecuc-dem-attr-aging-allowed')]: true },
     });
     expect(wrapper.findComponent(ElSwitch).props('modelValue')).toBe(true);
     await wrapper.setProps({ readonly: true });
@@ -127,7 +128,7 @@ describe('definition-driven components', () => {
     expect(wrapper.emitted('node-click')?.[0]?.[0]).toMatchObject({
       type: 'parameter',
       containerUuid: config.containers[0].subContainers[1].uuid,
-      definitionRef: 'ecuc-dem-attr-aging-allowed',
+      definitionRef: legacy('ecuc-dem-attr-aging-allowed'),
     });
   });
 
@@ -166,15 +167,15 @@ describe('workspace integration and local persistence', () => {
       (entry) => entry.definition.shortName === 'DemOperationCycle'
     )!.container;
     store.selectContainer(attributes.uuid);
-    store.setParameterValue('ecuc-dem-attr-aging-allowed', true);
-    store.setReferenceTarget('ecuc-dem-attr-aging-cycleref', cycle.uuid);
+    store.setParameterValue(legacy('ecuc-dem-attr-aging-allowed'), true);
+    store.setReferenceTarget(legacy('ecuc-dem-attr-aging-cycleref'), cycle.uuid);
     expect(await store.saveConfig()).toBe(true);
     expect(store.isDirty).toBe(false);
     store.createConfig();
     expect(await store.loadConfig()).toBe(true);
     store.selectContainer(attributes.uuid);
-    expect(store.parameterData['ecuc-dem-attr-aging-allowed']).toBe(true);
-    expect(store.referenceData['ecuc-dem-attr-aging-cycleref']).toBe(cycle.uuid);
+    expect(store.parameterData[legacy('ecuc-dem-attr-aging-allowed')]).toBe(true);
+    expect(store.referenceData[legacy('ecuc-dem-attr-aging-cycleref')]).toBe(cycle.uuid);
     expect(store.selectedEntry?.container.parameters).toBeInstanceOf(Map);
     expect(store.selectedEntry?.container.references).toBeInstanceOf(Map);
   });
@@ -211,13 +212,13 @@ describe('workspace integration and local persistence', () => {
     await wrapper.get('.severity-error').trigger('click');
     await nextTick();
     expect(store.selectedEntry?.definition.shortName).toBe('DemDTC');
-    expect(store.selectedKey).toContain('ecuc-dem-dtc-attributes-ref');
+    expect(store.selectedKey).toContain(legacy('ecuc-dem-dtc-attributes-ref'));
     const attributes = store.entries.find(
       (entry) => entry.definition.shortName === 'DemDTCAttributes'
     )!.container;
     wrapper
       .findComponent(DynamicForm)
-      .vm.$emit('reference-change', 'ecuc-dem-dtc-attributes-ref', attributes.uuid);
+      .vm.$emit('reference-change', legacy('ecuc-dem-dtc-attributes-ref'), attributes.uuid);
     await nextTick();
     expect(store.violations).toEqual([]);
     const generate = wrapper
@@ -322,7 +323,7 @@ describe('TASK-003 user interactions', () => {
     const { store, wrapper } = await workspace();
     await store.createConfigSet('界面测试');
     const rootUuid = store.selectedEntry!.container.uuid;
-    store.addContainerInstance('ecuc-dem-dtc-def');
+    store.addContainerInstance(legacy('ecuc-dem-dtc-def'));
     await nextTick();
     const confirm = vi.spyOn(ElMessageBox, 'confirm');
     const button = () =>
@@ -368,9 +369,9 @@ describe('TASK-003 user interactions', () => {
     const { store, wrapper } = await workspace();
     await store.createConfigSet('界面测试');
     const rootUuid = store.selectedEntry!.container.uuid;
-    const first = store.addContainerInstance('ecuc-dem-dtc-def')!;
+    const first = store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!;
     store.selectContainer(rootUuid);
-    const second = store.addContainerInstance('ecuc-dem-dtc-def')!;
+    const second = store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!;
     await nextTick();
     for (const uuid of [first.uuid, second.uuid]) {
       expect(wrapper.get(`[data-node-id="${uuid}"]`).classes()).toContain('status-error');
@@ -383,7 +384,7 @@ describe('TASK-003 user interactions', () => {
     await nextTick();
     expect(store.selectedKey).toBe(`${first.uuid}:ecuc-dem-dtc-value`);
     expect(document.activeElement?.closest('[data-field]')?.getAttribute('data-field')).toBe(
-      'ecuc-dem-dtc-value'
+      legacy('ecuc-dem-dtc-value')
     );
     expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
   });
@@ -410,7 +411,7 @@ describe('TASK-003 user interactions', () => {
   it('saves edits when returning home and opens the persisted set through the home list', async () => {
     const { store, wrapper, router } = await workspace();
     await store.createConfigSet('首页恢复测试');
-    store.setParameterValue('ecuc-dem-general-max-number-event', 77);
+    store.setParameterValue(legacy('ecuc-dem-general-max-number-event'), 77);
     await router.push('/');
     await flushPromises();
     expect(wrapper.findComponent(HomeView).exists()).toBe(true);
@@ -422,7 +423,7 @@ describe('TASK-003 user interactions', () => {
       .trigger('click');
     await flushPromises();
     expect(router.currentRoute.value.path).toBe('/workspace');
-    expect(store.parameterData['ecuc-dem-general-max-number-event']).toBe(77);
+    expect(store.parameterData[legacy('ecuc-dem-general-max-number-event')]).toBe(77);
   });
 
   it('derives warning/error/green tree markers only from the supplied engine diagnostics', async () => {

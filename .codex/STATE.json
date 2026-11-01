@@ -7,9 +7,9 @@
   "task": {
     "id": "TASK-011",
     "title": "Dem 切换官方 ECUC 定义（67 容器全量界面）+ 右键添加容器体验优化",
-    "status": "READY",
+    "status": "IN_PROGRESS",
     "round": 0,
-    "assignedTo": "codex",
+    "assignedTo": "architect (user-directed), Codex may continue",
     "contractPath": ".codex/tasks/ACTIVE.md",
     "contractHash": "a1705058df714074cb9740d92e5daecd4b16f2a7f1a30bd4376229d61324f97f",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
@@ -24,7 +24,8 @@
     "approvedAt": null,
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "referenceBaseline": "819eb12",
-    "specPath": "docs/UI-REPLICA-SPEC.md"
+    "specPath": "docs/UI-REPLICA-SPEC.md",
+    "progressNote": "架构师按用户指令直接执行: 数据通路/右键优化/core 测试适配已完成(core 43 全绿, 全量 179/249)。剩余 70 失败的精确清单与修法见 .codex/reports/TASK-011-PARTIAL-HANDOVER.md。Codex 权限恢复后按该文档接手, 不重复已完成部分。"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",

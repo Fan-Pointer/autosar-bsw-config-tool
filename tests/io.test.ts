@@ -19,6 +19,7 @@ import {
 import { AUTOSAR_NAMESPACE, exportArxml, importArxml } from '../src/core/io/Arxml';
 import { exportCsv } from '../src/core/io/Csv';
 import { planImport } from '../src/core/io/ImportPlan';
+import { legacy } from './helpers/definitionIndex';
 
 function fixture() {
   const module = new BswmdParser().parseFromJson(JSON.stringify(raw));
@@ -29,10 +30,10 @@ function fixture() {
   for (const definition of module.containers[0].subContainers)
     manager.addContainerInstance(config, root.uuid, definition.uuid);
   const [dtc, attributes, event, , , cycle] = root.subContainers;
-  manager.setParameterValue(dtc, 'ecuc-dem-dtc-value', 0x1a2b3c);
-  manager.setReferenceTarget(dtc, 'ecuc-dem-dtc-attributes-ref', attributes.uuid);
-  manager.setReferenceTarget(attributes, 'ecuc-dem-attr-aging-cycleref', cycle.uuid);
-  manager.setReferenceTarget(event, 'ecuc-dem-event-dtc-ref', dtc.uuid);
+  manager.setParameterValue(dtc, legacy('ecuc-dem-dtc-value'), 0x1a2b3c);
+  manager.setReferenceTarget(dtc, legacy('ecuc-dem-dtc-attributes-ref'), attributes.uuid);
+  manager.setReferenceTarget(attributes, legacy('ecuc-dem-attr-aging-cycleref'), cycle.uuid);
+  manager.setReferenceTarget(event, legacy('ecuc-dem-event-dtc-ref'), dtc.uuid);
   return { module, manager, config, root, dtc, attributes, event };
 }
 function arxmlFixture() {
@@ -56,7 +57,7 @@ describe('lossless JSON import/export', () => {
   it('round-trips every metadata field, UUID, definitionRef, parameter state and reference through a new set', () => {
     const { module, config, root, manager, dtc } = fixture();
     manager.setParameterValue(root, module.containers[0].parameters[0].uuid, undefined);
-    manager.setParameterValue(dtc, 'ecuc-dem-dtc-j1939-node-ref', '中文 <节点> & "文本"');
+    manager.setParameterValue(dtc, legacy('ecuc-dem-dtc-j1939-node-ref'), '中文 <节点> & "文本"');
     const restored = importJson(exportJson(config), [module]);
     expect(restored).toEqual(config);
     const result = planImport(null, restored, module);
@@ -115,12 +116,12 @@ describe('lossless JSON import/export', () => {
     data.containers[0].parameters.push(data.containers[0].parameters[0]);
     expect(() => hydrateConfig(data, [module])).toThrow('重复');
     data.containers[0].parameters.pop();
-    data.containers[0].definitionRef = 'ecuc-dem-dtc-def';
+    data.containers[0].definitionRef = legacy('ecuc-dem-dtc-def');
     expect(() => hydrateConfig(data, [module])).toThrow('父容器');
   });
   it('accepts a UTF-8 BOM and retains dangling UUID references for existing validation', () => {
     const { config, module, dtc } = fixture();
-    dtc.references.get('ecuc-dem-dtc-attributes-ref')!.targetUuid = 'deleted-target';
+    dtc.references.get(legacy('ecuc-dem-dtc-attributes-ref'))!.targetUuid = 'deleted-target';
     expect(importJson('\uFEFF' + exportJson(config), [module])).toEqual(config);
   });
 });
@@ -199,12 +200,12 @@ describe('ARXML structure and security', () => {
   it('escapes and restores text including entities and whitespace without markup injection', () => {
     const { config, module, dtc, manager } = arxmlFixture();
     const value = '  中文 <img src=x> & "quoted" \'single\'\n末行  ';
-    manager.setParameterValue(dtc, 'ecuc-dem-dtc-j1939-node-ref', value);
+    manager.setParameterValue(dtc, legacy('ecuc-dem-dtc-j1939-node-ref'), value);
     const xml = exportArxml(config, module);
     expect(xml).not.toContain('<img');
     const restored = importArxml(xml, [module]);
     expect(
-      restored.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-j1939-node-ref')?.value
+      restored.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-j1939-node-ref'))?.value
     ).toBe(value);
   });
   it('accepts namespace-prefixed ARXML and generates missing UUIDs through the common utility', () => {
@@ -279,7 +280,7 @@ describe('conflict preview and immutable merge', () => {
     expect(
       incoming.containers[0].parameters.get(module.containers[0].parameters[0].uuid)?.value
     ).toBeUndefined();
-    incoming.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-value')!.value = 42;
+    incoming.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-value'))!.value = 42;
     const plan = planImport(config, incoming, module, 'rename');
     expect(plan.conflicts).toHaveLength(1);
     expect(
@@ -291,7 +292,7 @@ describe('conflict preview and immutable merge', () => {
     (strategy) => {
       const { config, module, dtc } = fixture();
       const incoming = importJson(exportJson(config), [module]);
-      incoming.containers[0].subContainers[0].parameters.get('ecuc-dem-dtc-value')!.value = 42;
+      incoming.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-value'))!.value = 42;
       const before = exportJson(config),
         fileBefore = exportJson(incoming);
       const plan = planImport(config, incoming, module, strategy);
@@ -306,7 +307,7 @@ describe('conflict preview and immutable merge', () => {
       const original = collectContainers(plan.result, module).find(
         (item) => item.container.uuid === dtc.uuid
       )!.container;
-      expect(original.parameters.get('ecuc-dem-dtc-value')?.value).toBe(
+      expect(original.parameters.get(legacy('ecuc-dem-dtc-value'))?.value).toBe(
         strategy === 'overwrite' ? 42 : 0x1a2b3c
       );
       const renamed = plan.result.containers[0].subContainers.find(
@@ -315,12 +316,12 @@ describe('conflict preview and immutable merge', () => {
       expect(Boolean(renamed)).toBe(strategy === 'rename');
       if (renamed) {
         expect(renamed.uuid).not.toBe(dtc.uuid);
-        expect(renamed.parameters.get('ecuc-dem-dtc-value')?.value).toBe(42);
-        expect(renamed.references.get('ecuc-dem-dtc-attributes-ref')?.targetUuid).toBe(
+        expect(renamed.parameters.get(legacy('ecuc-dem-dtc-value'))?.value).toBe(42);
+        expect(renamed.references.get(legacy('ecuc-dem-dtc-attributes-ref'))?.targetUuid).toBe(
           config.containers[0].subContainers[1].uuid
         );
         expect(
-          plan.result.containers[0].subContainers[2].references.get('ecuc-dem-event-dtc-ref')
+          plan.result.containers[0].subContainers[2].references.get(legacy('ecuc-dem-event-dtc-ref'))
             ?.targetUuid
         ).toBe(renamed.uuid);
       }
@@ -333,11 +334,11 @@ describe('conflict preview and immutable merge', () => {
   );
   it('compares reference paths instead of UUIDs and shows both file and project targets', () => {
     const { config, module, manager, root } = fixture();
-    manager.addContainerInstance(config, root.uuid, 'ecuc-dem-dtc-attributes-def');
+    manager.addContainerInstance(config, root.uuid, legacy('ecuc-dem-dtc-attributes-def'));
     const incoming = cloneConfiguration(config, 'copy');
     expect(planImport(config, incoming, module).conflicts).toHaveLength(0);
     incoming.containers[0].subContainers[0].references.get(
-      'ecuc-dem-dtc-attributes-ref'
+      legacy('ecuc-dem-dtc-attributes-ref')
     )!.targetUuid = incoming.containers[0].subContainers[6].uuid;
     expect(planImport(config, incoming, module).conflicts[0]).toMatchObject({
       parameter: 'DemDTCAttributesRef',
@@ -348,8 +349,8 @@ describe('conflict preview and immutable merge', () => {
   it('counts removed parameters/references only on overwritten instances and preserves unrelated children', () => {
     const { config, module } = fixture();
     const incoming = importJson(exportJson(config), [module]);
-    incoming.containers[0].subContainers[0].parameters.delete('ecuc-dem-dtc-functional-unit');
-    incoming.containers[0].subContainers[0].references.delete('ecuc-dem-dtc-obd-ref');
+    incoming.containers[0].subContainers[0].parameters.delete(legacy('ecuc-dem-dtc-functional-unit'));
+    incoming.containers[0].subContainers[0].references.delete(legacy('ecuc-dem-dtc-obd-ref'));
     incoming.containers[0].subContainers.pop();
     expect(planImport(config, incoming, module, 'overwrite').deletedItems).toBe(2);
     expect(planImport(config, incoming, module, 'skip').deletedItems).toBe(0);
@@ -373,11 +374,11 @@ describe('conflict preview and immutable merge', () => {
 describe('definition-driven DTC CSV', () => {
   it('exports BOM, one row per DTC, six-digit uppercase hex and referenced attributes / EventIds', () => {
     const { config, module, manager, root, dtc } = fixture();
-    const second = manager.addContainerInstance(config, root.uuid, 'ecuc-dem-dtc-def');
-    manager.setParameterValue(second, 'ecuc-dem-dtc-value', 1);
-    const event = manager.addContainerInstance(config, root.uuid, 'ecuc-dem-event-param-def');
-    manager.setParameterValue(event, 'ecuc-dem-event-id', 2);
-    manager.setReferenceTarget(event, 'ecuc-dem-event-dtc-ref', dtc.uuid);
+    const second = manager.addContainerInstance(config, root.uuid, legacy('ecuc-dem-dtc-def'));
+    manager.setParameterValue(second, legacy('ecuc-dem-dtc-value'), 1);
+    const event = manager.addContainerInstance(config, root.uuid, legacy('ecuc-dem-event-param-def'));
+    manager.setParameterValue(event, legacy('ecuc-dem-event-id'), 2);
+    manager.setReferenceTarget(event, legacy('ecuc-dem-event-dtc-ref'), dtc.uuid);
     const csv = exportCsv(config, module);
     expect(csv.charCodeAt(0)).toBe(0xfeff);
     const rows = csv.split('\r\n');
@@ -394,7 +395,7 @@ describe('definition-driven DTC CSV', () => {
     for (const p of module.containers[0].subContainers[0].parameters)
       p.shortName = 'Field' + p.exportRole;
     dtc.shortName = 'Renamed';
-    dtc.parameters.get('ecuc-dem-dtc-severity')!.value = '=HYPERLINK("bad")';
+    dtc.parameters.get(legacy('ecuc-dem-dtc-severity'))!.value = '=HYPERLINK("bad")';
     const csv = exportCsv(config, module);
     expect(csv).toContain('0x1A2B3C');
     expect(csv).toContain('\'=HYPERLINK(""bad"")');
