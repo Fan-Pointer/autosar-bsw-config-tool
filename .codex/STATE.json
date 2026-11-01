@@ -2,28 +2,28 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-10",
-  "stageName": "ARXML 互操作校准与引用可视化",
+  "stage": "PHASE-11",
+  "stageName": "Dem 官方定义全量界面（67 容器）与添加容器体验",
   "task": {
-    "id": "TASK-010",
-    "title": "ARXML 互操作校准（CHOICE 表达/顺序稳定）+ 引用关系图 + 拖拽排序",
+    "id": "TASK-011",
+    "title": "Dem 切换官方 ECUC 定义（67 容器全量界面）+ 右键添加容器体验优化",
     "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "197053e3bb8a232edb599306a7a8cc9c4a2274dcfdbd0e123b048506f76ff2e2",
+    "contractHash": "a1705058df714074cb9740d92e5daecd4b16f2a7f1a30bd4376229d61324f97f",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractRevision": "v2 (2026-11-01 07:50): 撤销原 A1 与验收1 —— 评审方误判，官方 TPS_ECUC_03020 证明现值侧写法正确",
-    "contractBoundAt": "2026-11-01T07:50:00+08:00",
-    "reportPath": ".codex/reports/TASK-010-REPORT.md",
+    "contractBoundAt": "2026-11-01T08:28:00+08:00",
+    "reportPath": ".codex/reports/TASK-011-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
     "submissionCommit": null,
-    "createdAt": "2026-11-01T06:55:00+08:00",
+    "createdAt": "2026-11-01T08:28:00+08:00",
     "submittedAt": null,
     "approvedAt": null,
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
+    "referenceBaseline": "819eb12",
     "specPath": "docs/UI-REPLICA-SPEC.md"
   },
   "statusLegend": {
@@ -33,7 +33,16 @@
     "APPROVED": "已通过，可推进下一任务",
     "BLOCKED": "等待人工决策"
   },
-  "queue": [],
+  "queue": [
+    {
+      "id": "TASK-010",
+      "title": "ARXML 互操作校准（顺序稳定/覆盖率提示/CHOICE 断言/旧文件兼容）+ 引用图 + 拖拽排序",
+      "contractPath": ".codex/tasks/TASK-010-CONTRACT.md",
+      "contractHash": "197053e3bb8a232edb599306a7a8cc9c4a2274dcfdbd0e123b048506f76ff2e2",
+      "reason": "用户于 2026-11-01 08:01 直接指令 Dem 完整容器界面优先（TASK-011 插队）",
+      "deferredAt": "2026-11-01T08:25:00+08:00"
+    }
+  ],
   "history": [
     {
       "taskId": "TASK-002",

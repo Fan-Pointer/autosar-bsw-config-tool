@@ -1,124 +1,120 @@
-# ACTIVE TASK — TASK-010
+# ACTIVE TASK — TASK-011
 
 > 本文件是 Codex 唯一的任务契约来源。开始实现前必须完整读取；**不得修改本文件**（含标题、编号、验收项）。
 > 契约哈希由评审方写入 `STATE.json` 的 `task.contractHash`，篡改会导致调度器拒绝派发。
 
 | 项 | 值 |
 |---|---|
-| 任务编号 | **TASK-010** |
-| 任务名 | ARXML 互操作校准（P0）+ 引用关系图 + 拖拽排序 |
-| 阶段 | PHASE-10 |
+| 任务编号 | **TASK-011** |
+| 任务名 | Dem 切换官方 ECUC 定义（67 容器全量界面）+ 右键添加容器体验优化 |
+| 阶段 | PHASE-11 |
 | 指派 | codex |
-| 前置 | TASK-009 APPROVED（commit `6812b39`），CHOICE 功能通、格式待校准 |
-| **契约修订** | **v2（2026-11-01 07:50）**：**A1 与验收 1 已撤销** —— 原要求基于评审方误判，官方规范证明现值侧写法正确。详见 §0 |
+| 用户指令 | 「模块的配置参数按照 AUTOSAR 的模块配置参数 XML 来；Dem 模块的容器不全；起码先把一个模块的完整容器界面搭建完成；容器右键添加容器的界面可以优化一下」 |
+| 前置 | 参考基线 `819eb12`（架构师已打通数据通路，见 §1） |
+| 与 TASK-010 的关系 | TASK-010（顺序稳定/覆盖率提示/引用图/拖拽）转入 `STATE.queue` 顺延，本轮不做 |
 
 ---
 
-## 0. 契约修订记录（评审方认错）
+## 1. 现状（架构师已于 `819eb12` 验证，可直接采信）
 
-原 A1 要求「用 `ECUC-CHOICE-CONTAINER-VALUE` 元素，或省略 CHOICE 层」，理由是「`ECUC-CONTAINER-VALUE` 配 `DEST="ECUC-CHOICE-CONTAINER-DEF"` 类型不对应」。
-**该判断是错的。** 评审方核对 AUTOSAR CP R24-11 TPS_ECUConfiguration，印刷页 129、`[TPS_ECUC_03020]` 原文：
+| 项 | 值 |
+|---|---|
+| 官方 Dem 规模 | 2 顶层（`DemConfigSet` + `DemGeneral`）/ **67 容器** / **162 参数** / **64 引用**，解析 273 ms |
+| `bswmd/dem_bswmd.json` | **已替换**为官方生成版（207 KB），每个参数/引用携带 `definitionPath`，`$source` 含溯源元数据（源文件 SHA-256、生成时间） |
+| 手写旧版 | 备份于 `.temp/dem_bswmd.legacy.json`（不入库） |
+| 生成脚本 | `scripts/gen-bswmd-from-arxml.mjs Dem` 可重跑 |
+| 导入器 | `EcucArxmlImporter.reference()` 已支持四类引用（见下表） |
+| 破坏面 | **252 测试中 112 失败**；200 处旧语义 id（`ecuc-dem-dtc-value` 等）在新定义中变为官方 `ECUC:guid`；**产品源码 `src/` 零依赖旧 id**，全部在 `tests/` |
 
-> On the Value side a EcucChoiceContainerDef is treated as a usual container … **Which choice has been taken is defined by the `<DEFINITION-REF>` of the `<SUB-CONTAINER>`.**
+四类引用的解析约定（已在 `819eb12` 实现，契约确认有效）：
 
-`Example 2.33` 的值侧片段即：
+| 标签 | 数量 | 目标表达 | 编辑器行为 |
+|---|---|---|---|
+| `ECUC-REFERENCE-DEF` | 47 | 单个 `<DESTINATION-REF>` | 复用现有引用选择器 |
+| `ECUC-CHOICE-REFERENCE-DEF` | 10 | `<DESTINATION-REFS>` 多候选（如 `DemMemoryDestinationRef` 含 `DemPrimaryMemory`/`DemUserDefinedMemory`） | 从全部候选目标的实例中选 |
+| `ECUC-FOREIGN-REFERENCE-DEF` | 4 | **无静态目标**（跨模块） | `isExternal=true`，只读展示 |
+| `ECUC-INSTANCE-REFERENCE-DEF` | 3 | **无静态目标**（实例引用） | `isExternal=true`，只读展示 |
 
-```xml
-<ECUC-CONTAINER-VALUE>
-  <SHORT-NAME>myGwSource001</SHORT-NAME>
-  <DEFINITION-REF DEST="ECUC-CHOICE-CONTAINER-DEF">/AUTOSAR/EcucDefs/Com/…/ComGwSource</DEFINITION-REF>
-  <SUB-CONTAINERS> …
-```
-
-**与当前实现完全一致。** 值侧本就用普通容器元素 + `CHOICE-CONTAINER-DEF` 的 DEST，选中哪个候选由子容器的 `DEFINITION-REF` 表达。
-
-因此：
-- ❌ **A1 撤销**，不得改动现有的值侧表达；
-- ❌ **原验收 1 撤销**（不再要求元素名与 DEST 按 `PARAM-CONF` 对齐）；
-- ✅ 其余各项保留；A5 改为「对照官方 `Example 2.33` 结构做断言」，不是自创断言。
-
-Codex 在派发后即查规范并停在架构决策处、未擅改代码 —— **处理正确，此停工不计其责**。
+4 个 CHOICE 容器：`DemDebounceAlgorithmClass`、`DemDataElementClass`、`DemDiagnosisScaling`、`DemSRDataElementClass`，均已在 TASK-009 的互斥机制覆盖内。
 
 ---
 
-## 0. 本轮目标（一句话）
+## 2. 交付清单（A/B/C 三组，共 12 项）
 
-先让导出的 ARXML **能被别人的工具认**（CHOICE 表达自洽、顺序稳定），再让配置**能看得见引用关系**（引用图 + 拖拽排序）。
-
----
-
-## 1. P0 问题（已撤销 — 见 §0）
-
-原拟修「CHOICE 值实例元素名与 DEST 不匹配」，经核对官方规范**该写法即为标准写法**，无问题可修。
-本轮 P0 改为：**A3 顺序稳定**与**A4 覆盖率提示**两项体验缺陷（详见交付清单）。
-
-## 2. 交付清单
-
-### A 组：体验与稳健性（P0，必做）
+### A. 测试适配（A1–A3，round 0 必做）
 
 | 编号 | 交付内容 |
 |---|---|
-| A1 | **参数/引用顺序往返稳定**：`export → import` 后，每个容器内参数与引用的**顺序**与原配置一致（当前未配置项会被排到末尾） |
-| A2 | 一键确认按钮与结果提示写明覆盖率：「已确认 N 项，仍有 M 项需手工填写」，并可一键跳到第一个待填项 |
-| A3 | 导出文件的**独立校验入测试**：对照官方 `Example 2.33` 的 CHOICE 结构做断言（分组层保留、选中候选由其 `DEFINITION-REF` 表达）+ UUID 唯一 + 命名空间 + DEFINITION-REF 前缀 |
-| A4 | 旧文件兼容：用 `6812b39` 版本导出的 ARXML 仍能导入成功（只验不回退，不要求改格式） |
+| A1 | 新建 `tests/helpers/definitionIndex.ts`：构建 `definitionPath → uuid` 与 `shortName → uuid`（参数/引用/容器三类）索引，导出 `byPath(path)`、`byShort(name, containerPath?)` 两个定位函数。**测试不得再出现任何 `ECUC:guid` 字面量** |
+| A2 | 修复 112 个失败用例：把 200 处旧语义 id 字符串替换为 helper 调用。**优先用 `byShort`**（可读），歧义时用 `byPath`。替换映射以 `.temp/dem_bswmd.legacy.json` 的 id→shortName 与新 JSON 的 shortName→uuid 自动生成，人工核对差异 |
+| A3 | 语义保持核查表：每个被改断言说明「旧断言意图 → 新断言意图」，覆盖面不得减少（沿用 TASK-008 C3 标准）。**特别注意**：新定义里 `DemDTC` 有 5 参数（旧 4）、`DemDTCAttributes` 有 6 参数 8 引用（旧 4 参数 4 引用），涉及数量断言的用例要按新定义重算，不是简单改数字 |
 
-> 原 A1（改 CHOICE 元素名）与原验收 1 已按 §0 撤销。**不得**改动现有值侧表达。
-
-### B 组：引用图与拖拽（P1）
+### B. 完整容器界面（B1–B5）
 
 | 编号 | 交付内容 |
 |---|---|
-| B1 | **引用关系图**：节点=容器实例，边=引用；悬空引用画**红边**并在图上可辨认 |
-| B2 | 点击图上节点 → 定位到树与表单（复用既有 `navigate to field`）；点击红边 → 跳到该悬空引用 |
-| B3 | 图数据**全部由当前配置 + BSWMD 元数据推导**，不得写死任何模块名 |
-| B4 | **树节点拖拽排序**：同层容器可拖拽改序，顺序持久化，刷新后保持 |
-| B5 | 图组件**必须懒加载**（`dynamic import`），不得让主包体积明显增大 |
+| B1 | 官方 Dem 创建配置集后：`DemConfigSet` 与 `DemGeneral`（均 lower=1）自动实例化为两个顶层分支，全部 **67 个容器定义可在树中导航** |
+| B2 | 表单渲染 162 个参数：六类控件（ENUM 下拉含 197 个字面量 / INTEGER 范围 / FLOAT / BOOLEAN / STRING / FUNCTION-NAME）全部由元数据驱动 |
+| B3 | 4 个 CHOICE 容器在表单中提供候选选择（复用 TASK-009 的互斥机制，不新写） |
+| B4 | 外部引用（`isExternal`）只读展示：显示目标路径或「外部引用」占位 + tooltip 说明，**不得**出现在可选目标列表里 |
+| B5 | 树性能：67 容器全展开渲染不卡顿（el-tree 懒渲染默认支持，验证即可）；配置集保存/加载含完整实例状态 |
+
+### C. 右键添加容器体验（C1–C4）
+
+| 编号 | 交付内容 |
+|---|---|
+| C1 | 「选择允许的子定义」弹窗改为**列表形态**：每行 = 名称 + 截断描述 + 约束徽标（`mult 0..65535`）+ 当前已实例数/上限（如 `3 / ∞`） |
+| C2 | 弹窗顶部**搜索框**（按名称/描述过滤，输入即筛） |
+| C3 | **必选未满足的候选置顶并标红**（lower>0 且当前实例数 < lower）；禁用原因 inline 显示，不再只靠 title |
+| C4 | 无新增依赖；键盘可达（搜索框自动聚焦，Enter 选中第一个可用项） |
 
 ---
 
 ## 3. 验收标准
 
-### A 组（5 条）
+### A 组（4 条）
 
-1. **顺序稳定**：`export → import` 后，同一容器内参数 `definitionRef` 序列完全相同；引用同理。
-2. **一键确认提示**：NvM 场景同时给出「已确认 N 项」与「仍有 M 项需手工填写」两个数（数字以实际为准）。
-3. **CHOICE 结构断言**：导出文件中 CHOICE 分组保留为 `ECUC-CONTAINER-VALUE` + `DEST="ECUC-CHOICE-CONTAINER-DEF"`，选中候选出现在其 `SUB-CONTAINERS` 中且 `DEFINITION-REF` 指向候选定义 —— 与官方 `Example 2.33` 一致。
-4. **旧文件兼容**：`6812b39` 版本导出的 NvM 与 Dem 文件，新版本均能导入成功。
-5. **三模块不退化**：Dem / CanIf / NvM 导出与往返均正常；XXE 防线（注入 DOCTYPE 仍拒）保持。
+1. `npm run build` 通过。
+2. `npm test -- --run` 全绿，用例数 **≥ 252**；旧语义 id 字符串在 `tests/` 中清零（`grep -r "ecuc-dem-" tests/ --include=*.ts` 仅允许出现在 helper 的映射注释里）。
+3. `ecuc.test.ts` 零删改（它测的是 NvM/CanIf，与本次无关）。
+4. 语义核查表完整（A3）。
 
-### B 组（5 条）
+### B 组（4 条）
 
-8. **引用图**：Dem 配置下渲染出节点与边；节点数 = 容器实例数；边数 = 非空引用数。
-9. **悬空红边**：构造一个悬空引用，图上该边为红色（可用 class/属性断言）。
-10. **点击定位**：点击节点后树选中对应实例；点击红边后定位到悬空引用所在参数行。
-11. **拖拽持久化**：同层两容器换序 → 刷新页面 → 顺序保持。
-12. **懒加载**：`npm run build` 后主包（`dist/assets/index-*.js`）体积**增幅 ≤ 50 KB**；图代码在独立 chunk。
+5. 界面创建 Dem 官方配置集：树中可达容器数 = 67（写测试断言 `collectContainers` 结果）。
+6. 参数总数 162、引用总数 64 全部可在界面呈现（CHOICE 内候选参数计入其定义，实例化后才出现）。
+7. 外部引用只读展示，不可选入目标列表。
+8. 保存 → 刷新 → 恢复完整。
 
-### 工程（4 条）
+### C 组（3 条）
 
-13. `npm test -- --run` 全绿，用例数 **≥ 252**；既有用例调整须逐行说明理由。
-14. `src/core` 零 `Dem`/`NvM`/`CanIf` 字面量、零 UI 依赖。
-15. 新增运行时依赖**最多 1 个**（图库），且必须懒加载；报告给出体积实测。
-16. 不得修改 `STATE.json` 的 `stage`、`review/**`、本契约。
+9. 右键添加弹窗具备搜索、约束徽标、已实例计数、必选置顶四项。
+10. 无新增运行时依赖。
+11. 主包体积增幅 ≤ 30 KB（本次不应有大依赖）。
+
+### 工程（3 条）
+
+12. `src/core` 零 `Dem`/`NvM`/`CanIf` 字面量、零 UI 依赖。
+13. 既有核心能力不退化：导入导出、XXE 防线、撤销重做、批量修改、悬空引用、全局搜索、主题（抽测即可）。
+14. 未修改 `STATE.json` 的 `stage`、`review/**`、本契约。
 
 ---
 
 ## 4. 红线
 
-1. **不得**改动现有 CHOICE 值侧表达（它是符合 `[TPS_ECUC_03020]` 与 `Example 2.33` 的）；不得引入 `ECUC-CHOICE-CONTAINER-VALUE` 等规范中不存在的元素名。
-2. **不得**为了顺序稳定而改变参数的**语义顺序**（如擅自按字母排序）；必须是「按 BSWMD 定义顺序」或「保留原顺序」。
-3. **不得**把引用图做成需要后端的组件；纯前端，数据本地推导。
-4. **不得**让图库进主包；必须动态 import。
-5. **不得**删改既有测试用例变绿。
-6. **不得**声称完成真实浏览器验收除非实际执行。
+1. **不得**回退 `bswmd/dem_bswmd.json` 到手写版；官方生成版是唯一事实来源（重跑生成脚本可再生）。
+2. **不得**删除或跳过既有测试来变绿；断言调整必须等价或更强并逐条说明（A3）。
+3. **不得**在 `src/core` 出现任何模块名或对旧语义 id 的兼容硬编码。
+4. **不得**为 67 容器写任何 Dem 专用 UI 分支；一切由元数据驱动。
+5. **不得**声称完成真实浏览器验收除非实际执行。
+6. **不得**修改 `STATE.json` 的 `stage`、`review/**`、本契约。
 
 ---
 
 ## 5. 分批交付
 
-**round 0 必须完成 A 组全部（A1–A4）**；B 组可留 round 1。
-A 组现已不含格式改写，工作量小，应当一轮完成。
+round 0 必须完成 **A 组全部 + B1–B3**（测试全绿 + 界面能配置）；
+B4–B5 与 C 组可留 round 1。若分批，报告开头写明覆盖范围，未做项不得报告为已做。
 
 ---
 
@@ -126,12 +122,13 @@ A 组现已不含格式改写，工作量小，应当一轮完成。
 
 | 章节 | 内容 |
 |---|---|
-| 规范核对 | 确认 CHOICE 现值侧写法符合 `[TPS_ECUC_03020]`/`Example 2.33` 的证据（可只引用契约 §0） |
-| 兼容性 | 旧版本文件能否导入（给测试名） |
-| 顺序稳定 | 修前/修后的顺序对比证据 |
-| 引用图 | 节点/边数、红边判定方式、懒加载后的 chunk 与主包体积 |
-| 不退化 | Dem / CanIf / NvM 各自自检 |
-| 既有用例变更 | 若有，逐行说明 |
+| 交付对照 | A1–C4 逐项「文件 + 实现要点」 |
+| 替换映射 | 200 处的替换统计：byShort 多少、byPath 多少、无法自动映射需人工的多少（列清单） |
+| 数量重算 | DemDTC 5 参数、DemDTCAttributes 6+8 等涉及的断言重算清单 |
+| 界面承载 | 树/表单/CHOICE/外部引用的实现要点与截图路径（若有） |
+| 右键优化 | C1–C4 各自的实现方式 |
+| 不退化 | 核心能力抽测结果 |
+| 既有用例变更 | 逐条说明（A3 核查表） |
 | 未完成与限制 | 显式列出 |
 | 自检日志 | build / test 原文关键行 |
 
@@ -139,6 +136,6 @@ A 组现已不含格式改写，工作量小，应当一轮完成。
 
 ## 7. 完成后动作
 
-1. 提交代码与本报告（`feat: TASK-010 ...`）。
+1. 提交代码与本报告（`feat: TASK-011 ...`）。
 2. 单独提交 `STATE.json`：`status = "SUBMITTED"`、`submittedAt`、`submissionCommit`（完整 SHA）。
 3. 不改 `stage`、不写 `review/**`、不发起下一任务。
