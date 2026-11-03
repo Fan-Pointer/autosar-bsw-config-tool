@@ -1,13 +1,20 @@
 # 产品规划与最终验收清单
 
-> 维护方：WorkBuddy（架构师）｜ 版本 **v2.0**（2026-11-03 重规划）
+> 维护方：WorkBuddy（架构师）｜ 版本 **v2.1**（2026-11-03 17:15 范围裁定并入）
+>
+> ⚡ **v2.1 增补（PRODUCT_REPLAN_SCOPE_20261103，用户裁定 + Codex 研究证据）**：
+> 1. **版本基线裁定**：CP **4.4.0** 发布版本 + `xmlns=http://autosar.org/schema/r4.0` 命名空间（两者不矛盾：r4.0 是命名空间、4.4.0 是发布版本；序列化规则 CP R19-11 TPS_ASR_00011/00017）。**撤回 v2.0 的「统一 r4.2.2」建议**。CHOICE 依据升级为 CP 4.4.0 版 TPS_ECUC_03020/Example 2.33。
+> 2. **P0 插队 S0：旧数据保护与恢复** —— Codex 实测旧 4.2.2 库整库打不开（`configStore.ts` loadConfig 单点强匹配抛错），且两条写路径会以空/残库覆盖原数据。设计见 `docs/product-design/S0-LEGACY-DATA-RECOVERY.md`（六道防线 + 7 条验收断言）。建议 S0 第一个下发 READY。
+> 3. **范围确认**：本期单一配置方案（变体后延）；无供应商环境，先验收标准文件 + 通用可编译代码；向导形态由设计裁量（保留新手引导目标）。
+> 4. 阶段顺序更新：**S0 数据保护 → S1 测试收口（250/0 fail）→ S2/S3/S4（待差异表定稿）**。namespace 改 r4.0 归 S4，与 S0 解耦。
+>
 > ⚡ **2026-11-03 重规划（PRODUCT_REPLAN_20261103，用户授权）**：
 > 1. **方向变更**：对标 https://config.gkanghui.com/home 的**能力与使用场景**，不再严格照抄布局/交互/视觉。`docs/UI-REPLICA-SPEC.md` v2 转为**历史参考**（其有效结论——三栏骨架、两级页签、参数行结构等——继续有效），后续设计以 `docs/product-design/` 为准。
 > 2. **协作模式**：Codex 负责 R1 研究（代码现状审计 + 参考站实测 → `docs/product-research/`）；评审方负责 R2 设计定稿（`docs/product-design/`）、阶段契约与评审；**双方均不写业务代码，直至设计定稿下发 READY**。
 > 3. **路线**：R1 研究 → R2 设计定稿 → R3 分阶段实现（草案 S1 测试收口 / S2 体验校准 / S3 信息架构 / S4 互操作加固，详见 `.codex/reports/PRODUCT-REPLAN-20261103-ACK.md` §3）。
 > 4. **口径更正**：TASK-011 契约「用例数 ≥252」为笔误；实测基线 **250 总数 = 179 pass + 70 fail + 1 pending**，新契约口径为 **0 fail 且 ≥249 pass**（1 pending 为 GCC skipIf）。不删测试、不削断言。
 > 5. **状态**：TASK-011 `IN_PROGRESS → BLOCKED(REPLAN_PENDING)`（IN_PROGRESS 非调度器合法态）；TASK-010 留在 queue，其 A 组并入 S4、引用图/拖拽并入 S3。
-> 6. **范围待王上裁定**：向导/变体/DaVinci 环境/schema 版本（r4.0|r4.2.2|4.4.0 三方不一致）/外部格式导入/云端能力/主包体积优先级 —— 见 ACK §五 Q1-Q7。
+> 6. **范围裁定结果**：见 ACK §七 —— Q2/Q3/Q4/Q1 均已裁定并记录；仅 Q5-Q7 维持默认（外部格式不做/云端不做/主包体积入 S4）。
 
 > 维护方：WorkBuddy（架构师）｜ 版本 **v1.1**（2026-10-31 修正 v1.0 的范围错误）
 > 依据：`docs/REQUIREMENTS.md`（**仓内权威来源**）、`project-engineering-file.md`、`docs/ARCHITECTURE-v2.md`
