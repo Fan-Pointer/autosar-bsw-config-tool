@@ -1,6 +1,13 @@
 # 产品规划与最终验收清单
 
-> 维护方：WorkBuddy（架构师）｜ 版本 **v2.1**（2026-11-03 17:15 范围裁定并入）
+> 维护方：WorkBuddy（架构师）｜ 版本 **v2.2**（2026-11-03 18:25 研究交齐，设计定稿与 S1 READY 下发）
+>
+> ⚡ **v2.2 增补（PRODUCT_RESEARCH_HANDOFF_20261103）**：
+> 1. **设计定稿**：`docs/product-design/` 四件套 —— 00 范围与功能处置（G01–G30 逐项裁定）/ 01 信息架构与线框 / 02 技术设计与接口 / 03 分阶段计划与验收。`REQUIREMENTS.md` 与 `FEATURE-MATRIX.md` 标记历史。
+> 2. **S0 草案修正（评审方认领）**：撤回 legacy-map 产品化迁移（J1939→Severity、ImmediateNv→AgingAllowed 为实反例）；修 D2/A3 时序矛盾（快照在锁建立前、永久保留、失败即全拒）；措辞修正（覆盖是代码级风险未在真实数据复现）。详见 `S0-LEGACY-DATA-RECOVERY.md` v2。
+> 3. **阶段路线定稿**：S1 安全恢复 → S2 测试基线（250/0fail）→ S3 输出闭环 → S4 编辑体验 → S5 流程效率 → S6 迁移预览 → S7 性能交付；G28/G29 不纳入、G30 后续。
+> 4. **TASK-012 READY**（contractHash `3d023d6f…22cb0`）：S1 安全恢复；TASK-011 归档 `SUPERSEDED_BY_REPLAN`、TASK-010 归档 `DISPOSITIONED_BY_REPLAN`。
+> 5. Codex 主对话接续实现，不另唤后台 worker。
 >
 > ⚡ **v2.1 增补（PRODUCT_REPLAN_SCOPE_20261103，用户裁定 + Codex 研究证据）**：
 > 1. **版本基线裁定**：CP **4.4.0** 发布版本 + `xmlns=http://autosar.org/schema/r4.0` 命名空间（两者不矛盾：r4.0 是命名空间、4.4.0 是发布版本；序列化规则 CP R19-11 TPS_ASR_00011/00017）。**撤回 v2.0 的「统一 r4.2.2」建议**。CHOICE 依据升级为 CP 4.4.0 版 TPS_ECUC_03020/Example 2.33。

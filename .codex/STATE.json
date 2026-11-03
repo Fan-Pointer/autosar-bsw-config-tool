@@ -2,31 +2,28 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-11",
-  "stageName": "Dem 官方定义全量界面（67 容器）与添加容器体验",
+  "stage": "PHASE-12",
+  "stageName": "R3-S1 旧数据安全恢复（重规划第一实现阶段）",
   "task": {
-    "id": "TASK-011",
-    "title": "Dem 切换官方 ECUC 定义（67 容器全量界面）+ 右键添加容器体验优化",
-    "status": "BLOCKED",
+    "id": "TASK-012",
+    "title": "S1 旧数据安全恢复：逐条隔离+永久快照+写锁+原样导出+准确旧定义只读打开",
+    "status": "READY",
     "round": 0,
-    "assignedTo": "architect (user-directed), Codex may continue",
+    "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "a1705058df714074cb9740d92e5daecd4b16f2a7f1a30bd4376229d61324f97f",
+    "contractHash": "3d023d6f8e270604cbe6ad89d506e370efdc4436408efe5864d10dd35db22cb0",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-01T08:28:00+08:00",
-    "reportPath": ".codex/reports/TASK-011-REPORT.md",
+    "contractBoundAt": "2026-11-03T18:22:00+08:00",
+    "reportPath": ".codex/reports/TASK-012-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
     "submissionCommit": null,
-    "createdAt": "2026-11-01T08:28:00+08:00",
+    "createdAt": "2026-11-03T18:22:00+08:00",
     "submittedAt": null,
     "approvedAt": null,
-    "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
-    "referenceBaseline": "819eb12",
-    "specPath": "docs/UI-REPLICA-SPEC.md",
-    "progressNote": "架构师按用户指令直接执行: 数据通路/右键优化/core 测试适配已完成(core 43 全绿, 全量 179/249)。剩余 70 失败的精确清单与修法见 .codex/reports/TASK-011-PARTIAL-HANDOVER.md。Codex 权限恢复后按该文档接手, 不重复已完成部分。",
-    "blockedReason": "PRODUCT_REPLAN_20261103: 等待产品重规划设计定稿与阶段契约。TASK-011 既有成果保留(参考基线 1e03827)，剩余 70 测试失败与 CHOICE 引用多候选挑选将并入重规划阶段契约，不在本任务继续。"
+    "designPath": "docs/product-design/S0-LEGACY-DATA-RECOVERY.md",
+    "sourceMaterial": "docs/product-research/00~04 (baseline 1e03827)"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
@@ -35,16 +32,7 @@
     "APPROVED": "已通过，可推进下一任务",
     "BLOCKED": "等待人工决策"
   },
-  "queue": [
-    {
-      "id": "TASK-010",
-      "title": "ARXML 互操作校准（顺序稳定/覆盖率提示/CHOICE 断言/旧文件兼容）+ 引用图 + 拖拽排序",
-      "contractPath": ".codex/tasks/TASK-010-CONTRACT.md",
-      "contractHash": "197053e3bb8a232edb599306a7a8cc9c4a2274dcfdbd0e123b048506f76ff2e2",
-      "reason": "用户于 2026-11-01 08:01 直接指令 Dem 完整容器界面优先（TASK-011 插队）",
-      "deferredAt": "2026-11-01T08:25:00+08:00"
-    }
-  ],
+  "queue": [],
   "history": [
     {
       "taskId": "TASK-002",
@@ -266,6 +254,20 @@
         "🟡-3 首次渲染 ≤500ms 与参考图 870KB（承前挂账）",
         "未验：UI 层切换候选提示/可撤销/一键确认历史（本轮未开浏览器）"
       ]
+    },
+    {
+      "taskId": "TASK-011",
+      "finalStatus": "SUPERSEDED_BY_REPLAN",
+      "closedAt": "2026-11-03T18:20:00+08:00",
+      "note": "架构师按用户指令直接执行部分完成(官方67容器界面/右键优化/core测试适配, 179/250)。剩余70失败与后续能力经 PRODUCT_REPLAN_20261103 重规划吸收进 S1-S7; 契约门槛>=252为笔误(实际250)。参考基线 1e03827 与交接文档 TASK-011-PARTIAL-HANDOVER.md 保留。",
+      "rounds": []
+    },
+    {
+      "taskId": "TASK-010",
+      "finalStatus": "DISPOSITIONED_BY_REPLAN",
+      "closedAt": "2026-11-03T18:20:00+08:00",
+      "note": "A组顺序稳定/A4旧文件兼容 -> S3; A2覆盖率提示已实现核销; A1(CHOICE格式)经官方规范核实为正确写法撤销; 引用图 -> S5(G22); 拖拽排序 -> S5(G23)。契约归档 TASK-010-CONTRACT.md。",
+      "rounds": []
     }
   ],
   "lastReview": {
@@ -302,13 +304,13 @@
     }
   },
   "blocker": {
-    "at": "2026-11-03T16:55:00+08:00",
-    "task": "TASK-011",
-    "status": "REPLAN_PENDING",
-    "summary": "产品重规划(对标能力不照抄)进行中: Codex 研究 docs/product-research/, 评审方设计 docs/product-design/。设计定稿后以新阶段契约恢复; 旧 TASK-011 契约的测试门槛笔误(>=252, 实际 250 总数)已在 ACK 更正。",
-    "owner": "WorkBuddy(规划) + Codex(研究) 并行",
-    "recovery": "研究证据交齐 -> 评审方定稿 docs/product-design/ -> 下发新 READY 契约(含测试口径 250 总数/0 fail) -> task.status=READY",
-    "resolvedAt": null,
-    "note": "ENV_PERMISSION 旧阻塞随 2026-11-03 build 恢复成功而失效, 由 REPLAN_PENDING 取代。"
+    "at": "2026-11-03T18:22:00+08:00",
+    "task": "TASK-012",
+    "status": "NONE",
+    "summary": "重规划设计定稿已下发 READY(S1); S0 草案两处错误(J1939/ImmediateNv 语义迁移、D2/A3 时序矛盾)已由评审方修正并认领。",
+    "owner": null,
+    "recovery": null,
+    "resolvedAt": "2026-11-03T18:22:00+08:00",
+    "note": "ENV_PERMISSION 与 REPLAN_PENDING 均已解除。"
   }
 }
