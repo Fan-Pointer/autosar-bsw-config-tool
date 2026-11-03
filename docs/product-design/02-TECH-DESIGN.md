@@ -7,18 +7,22 @@
 
 ## 1. 数据模型演进
 
-### 1.1 存储层（S1，详见 S0 设计 §D5）
+### 1.1 存储层（S1，详见 S0 设计 v3 §D2/D5）
 
-- `StoredLibrary` v3 → **v4**：加 `schemaVersion` / `quarantinedSets[]` / `dataSafety`；v3 就地升级（纯加字段，升级前出永久快照）
-- 新增键：`autosar-recovery-snapshot-<ts>`（永久）、`autosar-config-sets-v4-draft`（锁定态新集）、`autosar-backup-<ts>`（解锁后环形 3 份）、`autosar-backup-index`
-- `assertWritable()` 成为唯一写入口 guard（saveConfig / import-apply / 删除 / 清空 / 升级）
+- **v3 原库 key 在锁定期间完全冻结（零写入、零结构升级）**；新增状态走独立 sidecar
+- 新增键：`autosar-recovery-state`（sidecar：locked/reason/snapshotKey/quarantinedSets/draftKey）、`autosar-recovery-snapshot-<ts>`（永久快照）、`autosar-config-sets-v4-draft`（锁定态新集，**持久化并重启恢复**）、`autosar-backup-<ts>`（解锁后环形 3 份）、`autosar-backup-index`
+- `assertWritable()` 成为唯一写入口 guard（saveConfig / import-apply / 删除 / 清空 / 结构升级）
+- `schemaVersion` 附加属非破坏性：仅全兼容路径的常规保存写入（v3/v4 双向读取兼容，缺字段视为 v3）；锁定路径不写原库因此不涉及；解锁后首次写回原库前强制快照（S6 实现）
+- 导出包结构（raw 与索引/状态分离）：`{ kind, exportedAt, sourceKey, rawJson, recoveryState, snapshotKeys, backupIndex }`；断言口径为 `JSON.parse(rawJson)` 与原库值**深度相等**
 
 ### 1.2 配置实例层（既有结构保留，S3 扩充）
 
 现有 `ConfigInstance`（uuid/moduleRef/version/containers/引用 targetUuid）**结构保留**；S3 只增不改：
 
 ```ts
-// 输出有效性闸门（单一事实源，校验面板与全部输出共用）
+// 输出有效性闸门（单一事实源）。消费方：校验面板、ARXML 导出、CSV 导出、C 生成。
+// 明确不拦截：JSON 导出、整库备份/原始数据导出 —— 数据取回永远可走通（ADR-06 范围修订，
+// 采纳 TASK012_CONTRACT_CLARIFY 第 6 点：备份不应被"未完成配置"挡住，只附信息提示不阻止）。
 interface OutputCheckResult {
   ready: boolean;
   issues: Array<{ severity: 'ERROR' | 'WARNING'; path: string; reason: string;
@@ -71,9 +75,9 @@ declare function isOutputReady(config: ConfigInstance, module: BswmdModule): Out
 | # | 决策 | 理由 | 代价 |
 |---|---|---|---|
 | ADR-05 | 隔离而非迁移（S1） | legacy-map 两处反例证明自动映射会语义损坏；保护优先于升级 | 用户暂时不能用旧数据编辑，需 S6 |
-| ADR-06 | 单一输出闸门 `isOutputReady` | L08 证明校验/导出语义分裂；同源才能一致 | 校验面板需重构为消费同一结果 |
+| ADR-06 | 单一输出闸门 `isOutputReady`，**消费方仅限业务输出（ARXML/CSV/C）+ 校验面板；JSON 导出与整库备份永远可取回不拦截** | L08 证明校验/导出语义分裂；同源才能一致。备份被挡会剥夺用户取回数据的最后通道（澄清第 6 点） | 校验面板需重构为消费同一结果；JSON 可附未完成项提示但不阻止 |
 | ADR-07 | namespace 常量改 r4.0，输入兼容 r4.2.2 并警告 | CP4.4.0 序列化规则 TPS_ASR_00011；既有导出文件是错误口径 | 旧导出文件再导入会有警告（可接受） |
-| ADR-08 | 存储升级就地加字段 + 升级前永久快照 | 最小改动；保底可回 | 库体积略增（快照份） |
+| ADR-08 | **锁定态 sidecar 承载新增状态，v3 原库冻结零写入**；普通加载不写库；全兼容常规保存附加 schemaVersion 非破坏；解锁写回前强制快照（S6） | "原库逐字节不变"与"隔离状态持久化"天然矛盾，sidecar 是唯一同时满足两者的结构（澄清第 1/2 点） | 状态分散两处（sidecar+draft），需启动合并恢复逻辑 |
 | ADR-09 | 生成模板继续内嵌 TS 字符串（不外置模板文件） | 模板随程序版本受测试保护；用户自定义模板留待后续评估 | 用户不能热替换模板（本期接受） |
 
 ## 5. 测试与验收自动化策略

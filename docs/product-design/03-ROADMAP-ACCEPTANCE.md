@@ -20,7 +20,7 @@
 
 ## S3 核心输出闭环（G03/G04/G05/G06/G17）
 
-- `isOutputReady()` 单一闸门；校验面板、ARXML、JSON、CSV、C 生成全部消费同一结果
+- `isOutputReady()` 单一闸门，**消费方：校验面板、ARXML、CSV、C 生成**；JSON 导出与整库备份**永远可取回不拦截**（附未完成项提示，不阻止——数据取回优先于业务输出）
 - namespace `r4.0`（CP4.4.0 口径）；输入兼容 r4.2.2 显式警告；恶意实体防线不退化
 - 引用：全候选匹配、按 kind 生成 DEST、isExternal 只读并阻止有损导出（列具体原因）
 - C 生成：必填未配不生成、可选未配不写假值、不回退 defaultValue；gcc `-Werror` 实编译
