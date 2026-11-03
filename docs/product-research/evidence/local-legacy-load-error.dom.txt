@@ -1,0 +1,51 @@
+- banner:
+  - generic: ☷
+  - generic: BSW Configurator
+  - button "撤销" [disabled]: ↶
+  - button "重做" [disabled]: ↷
+  - button "保存到本机" [disabled]:
+  - button "代码验证" [disabled]:
+  - button "生成 C 代码" [disabled]:
+    - generic: 生成 C 代码
+  - button "配置集管理":
+  - button "模块管理":
+  - button "验证结果":
+  - button "返回配置集列表":
+  - textbox "全局搜索":
+    - /placeholder: 搜索参数、值或实例路径
+  - button "切换主题": 深色
+  - generic: 简体中文⌄
+  - generic: 配
+- alert:
+  - generic: "BSWMD module not found: Dem (4.2.2)"
+- main:
+  - complementary:
+    - generic: 🗂工程目录
+    - button "折叠工程目录": ‹
+    - generic: ▱
+    - generic: 本机工程
+    - generic: ⌃
+    - generic "⚙ 模块管理 ⌃":
+      - generic: ⚙
+      - text: 模块管理 ⌃
+    - generic "▱ BSW Modules ⌃":
+      - generic: ▱
+      - text: BSW Modules ⌃
+    - button "M Dem":
+      - generic: M
+      - text: Dem
+    - generic "▱ RTE ⌄":
+      - generic: ▱
+      - text: RTE ⌄
+    - generic "▱ AUTOSAR文件 ⌄":
+      - generic: ▱
+      - text: AUTOSAR文件 ⌄
+    - generic "▱ 输出文件 ⌄":
+      - generic: ▱
+      - text: 输出文件 ⌄
+    - generic "▱ 输入文件 ⌄":
+      - generic: ▱
+      - text: 输入文件 ⌄
+    - button "暂无配置集 · 点击创建"
+  - separator "工程目录宽度"
+  - tablist "模块"

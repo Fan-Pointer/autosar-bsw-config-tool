@@ -1,0 +1,338 @@
+- generic: EasySAR_Configurator
+- img "验证当前工程"
+- img "生成当前工程"
+- img "导出工程"
+- img "分享工程"
+- img "文件转换"
+- img "搜索"
+- img "案例工程"
+- button "帮助手册"
+- generic: 首页
+- generic: 公告
+- button "简体中文":
+  - text: 简体中文
+- button "高"
+- generic: 工程目录
+- menubar:
+  - menuitem "AUTOSAR_Dignostic_Demo" [expanded]:
+    - generic: AUTOSAR_Dignostic_Demo
+    - menu:
+      - menuitem "模块管理":
+        - generic: 模块管理
+      - menuitem "RTE":
+        - generic: RTE
+      - menuitem "AUTOSAR文件":
+        - generic: AUTOSAR文件
+      - menuitem "输出文件":
+        - generic: 输出文件
+      - menuitem "输入文件":
+        - generic: 输入文件
+- tablist:
+  - tab "错误日志" [selected]:
+    - generic: 错误日志
+- tabpanel "错误日志"
+- table:
+  - rowgroup:
+    - row "错误描述 错误类型 路径 工程名称":
+      - columnheader "错误描述":
+        - generic: 错误描述
+      - columnheader "错误类型":
+        - generic: 错误类型
+      - columnheader "路径":
+        - generic: 路径
+      - columnheader "工程名称":
+        - generic: 工程名称
+- table:
+  - rowgroup:
+    - row "错误 (0)":
+      - cell "错误 (0)":
+        - text: 错误
+        - generic: (0)
+      - cell
+      - cell
+      - cell
+    - row "警告 (0)":
+      - cell "警告 (0)":
+        - text: 警告
+        - generic: (0)
+      - cell
+      - cell
+      - cell
+- generic: 错误日志
+- generic: 详细信息
+- generic: 工程笔记
+- generic: 导入文件配置
+- dialog:
+  - banner:
+    - heading [level=2]
+    - button "el.dialog.close":
+  - generic: 模块管理
+  - checkbox "全部"
+  - generic: 全部
+  - generic: 0/32
+  - textbox "请输入模块名"
+  - tree:
+    - treeitem "System Services" [expanded]:
+      - checkbox
+      - generic: System Services
+      - treeitem "Os" [expanded]:
+        - checkbox
+        - generic: Os
+      - treeitem "Tm" [expanded]:
+        - checkbox
+        - generic: Tm
+    - treeitem "COM Stack" [expanded]:
+      - checkbox
+      - generic: COM Stack
+      - treeitem "Nm" [expanded]:
+        - checkbox
+        - generic: Nm
+      - treeitem "Com" [expanded]:
+        - checkbox
+        - generic: Com
+      - treeitem "Xcp" [expanded]:
+        - checkbox
+        - generic: Xcp
+    - treeitem "Mcal" [expanded]:
+      - checkbox
+      - generic: Mcal
+      - treeitem "Mcu" [expanded]:
+        - checkbox
+        - generic: Mcu
+      - treeitem "Gpt" [expanded]:
+        - checkbox
+        - generic: Gpt
+      - treeitem "Port" [expanded]:
+        - checkbox
+        - generic: Port
+      - treeitem "Spi" [expanded]:
+        - checkbox
+        - generic: Spi
+      - treeitem "Fls" [expanded]:
+        - checkbox
+        - generic: Fls
+      - treeitem "Pwm" [expanded]:
+        - checkbox
+        - generic: Pwm
+      - treeitem "Adc" [expanded]:
+        - checkbox
+        - generic: Adc
+      - treeitem "Wdg" [expanded]:
+        - checkbox
+        - generic: Wdg
+      - treeitem "Can" [expanded]:
+        - checkbox
+        - generic: Can
+      - treeitem "Lin" [expanded]:
+        - checkbox
+        - generic: Lin
+    - treeitem "Memory Services" [expanded]:
+      - checkbox
+      - generic: Memory Services
+      - treeitem "Fee" [expanded]:
+        - checkbox
+        - generic: Fee
+      - treeitem "MemIf" [expanded]:
+        - checkbox
+        - generic: MemIf
+      - treeitem "NvM" [expanded]:
+        - checkbox
+        - generic: NvM
+      - treeitem "Eep" [expanded]:
+        - checkbox
+        - generic: Eep
+      - treeitem "Ea" [expanded]:
+        - checkbox
+        - generic: Ea
+      - treeitem "CanTrcv" [expanded]:
+        - checkbox
+        - generic: CanTrcv
+    - treeitem "LIN COMM" [expanded]:
+      - checkbox
+      - generic: LIN COMM
+      - treeitem "LinIf" [expanded]:
+        - checkbox
+        - generic: LinIf
+      - treeitem "LinSM" [expanded]:
+        - checkbox
+        - generic: LinSM
+      - treeitem "LinTp" [expanded]:
+        - checkbox
+        - generic: LinTp
+    - treeitem "WDG COMM" [expanded]:
+      - checkbox
+      - generic: WDG COMM
+      - treeitem "WdgIf" [expanded]:
+        - checkbox
+        - generic: WdgIf
+      - treeitem "WdgM" [expanded]:
+        - checkbox
+        - generic: WdgM
+    - treeitem "CAN COMM" [expanded]:
+      - checkbox
+      - generic: CAN COMM
+      - treeitem "CanNm" [expanded]:
+        - checkbox
+        - generic: CanNm
+    - treeitem "LIBS" [expanded]:
+      - checkbox
+      - generic: LIBS
+      - treeitem "Crc" [expanded]:
+        - checkbox
+        - generic: Crc
+    - treeitem "J1939 COMM" [expanded]:
+      - checkbox
+      - generic: J1939 COMM
+      - treeitem "J1939Nm" [expanded]:
+        - checkbox
+        - generic: J1939Nm
+      - treeitem "J1939Rm" [expanded]:
+        - checkbox
+        - generic: J1939Rm
+      - treeitem "J1939Tp" [expanded]:
+        - checkbox
+        - generic: J1939Tp
+      - treeitem "J1939Dcm" [expanded]:
+        - checkbox
+        - generic: J1939Dcm
+  - button [disabled]:
+  - button [disabled]:
+  - generic: 0/11
+  - textbox "请输入模块名"
+  - table:
+    - rowgroup:
+      - row "模块名 生成 验证 定义路径":
+        - columnheader:
+          - checkbox
+        - columnheader "模块名":
+          - generic: 模块名
+        - columnheader "生成":
+          - generic: 生成
+        - columnheader "验证":
+          - generic: 验证
+        - columnheader "定义路径":
+          - generic: 定义路径
+    - rowgroup:
+      - row "ComM Autosar/ComM":
+        - cell:
+          - checkbox
+        - cell "ComM":
+          - generic: ComM
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/ComM":
+          - generic: Autosar/ComM
+      - row "EcuC Autosar/EcuC":
+        - cell:
+          - checkbox
+        - cell "EcuC":
+          - generic: EcuC
+        - cell:
+          - checkbox [disabled]
+        - cell:
+          - checkbox [disabled]
+        - cell "Autosar/EcuC":
+          - generic: Autosar/EcuC
+      - row "Det Autosar/Det":
+        - cell:
+          - checkbox
+        - cell "Det":
+          - generic: Det
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/Det":
+          - generic: Autosar/Det
+      - row "EcuM Autosar/EcuM":
+        - cell:
+          - checkbox
+        - cell "EcuM":
+          - generic: EcuM
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/EcuM":
+          - generic: Autosar/EcuM
+      - row "BswM Autosar/BswM":
+        - cell:
+          - checkbox
+        - cell "BswM":
+          - generic: BswM
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/BswM":
+          - generic: Autosar/BswM
+      - row "PduR Autosar/PduR":
+        - cell:
+          - checkbox
+        - cell "PduR":
+          - generic: PduR
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/PduR":
+          - generic: Autosar/PduR
+      - row "Dem Autosar/Dem":
+        - cell:
+          - checkbox
+        - cell "Dem":
+          - generic: Dem
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/Dem":
+          - generic: Autosar/Dem
+      - row "Dcm Autosar/Dcm":
+        - cell:
+          - checkbox
+        - cell "Dcm":
+          - generic: Dcm
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/Dcm":
+          - generic: Autosar/Dcm
+      - row "CanSM Autosar/CanSM":
+        - cell:
+          - checkbox
+        - cell "CanSM":
+          - generic: CanSM
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/CanSM":
+          - generic: Autosar/CanSM
+      - row "CanIf Autosar/CanIf":
+        - cell:
+          - checkbox
+        - cell "CanIf":
+          - generic: CanIf
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/CanIf":
+          - generic: Autosar/CanIf
+      - row "CanTp Autosar/CanTp":
+        - cell:
+          - checkbox
+        - cell "CanTp":
+          - generic: CanTp
+        - cell:
+          - checkbox [checked]
+        - cell:
+          - checkbox [checked]
+        - cell "Autosar/CanTp":
+          - generic: Autosar/CanTp
+  - button "确定":
+    - generic: 确定

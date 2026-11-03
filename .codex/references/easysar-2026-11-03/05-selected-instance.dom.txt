@@ -1,0 +1,74 @@
+- generic: 首页
+- generic: 公告
+- button "简体中文":
+  - text: 简体中文
+- button "高"
+- generic: 工程目录
+- menubar:
+  - menuitem "AUTOSAR_Dignostic_Demo" [expanded]:
+    - generic: AUTOSAR_Dignostic_Demo
+    - menu:
+      - menuitem "模块管理" [expanded]:
+        - generic: 模块管理
+        - menu:
+          - menuitem "CAN COMM" [expanded]:
+            - generic: CAN COMM
+            - menu:
+              - menuitem "CanIf":
+                - generic: CanIf
+              - menuitem "CanSM":
+                - generic: CanSM
+              - menuitem "CanTp":
+                - generic: CanTp
+          - menuitem "COM Stack":
+            - generic: COM Stack
+          - menuitem "System Services":
+            - generic: System Services
+          - menuitem "UDS":
+            - generic: UDS
+      - menuitem "RTE":
+        - generic: RTE
+      - menuitem "AUTOSAR文件":
+        - generic: AUTOSAR文件
+      - menuitem "输出文件":
+        - generic: 输出文件
+      - menuitem "输入文件":
+        - generic: 输入文件
+- generic: CanIf(AUTOSAR_Dignostic_Demo)
+- tablist:
+  - tab "CanIfCtrlDrvCfg" [selected]
+  - tab "CanIfDispatchCfg"
+  - tab "CanIfInitCfg"
+  - tab "CanIfPrivateCfg"
+  - tab "CanIfPublicCfg"
+  - tab "CanIfTrcvDrvCfg"
+  - button:
+- tabpanel "CanIfCtrlDrvCfg"
+- textbox "请输入文字搜索~"
+- button
+- tree:
+  - textbox "for screen reader"
+  - img "caret-down":
+  - generic: CanIfCtrlDrvCfg
+  - img "caret-down":
+  - generic: CanIfCtrlDrvCfg_0
+- navigation "Breadcrumb":
+  - link "CanIfCtrlDrvCfg":
+    - generic: CanIfCtrlDrvCfg
+  - link "CanIfCtrlDrvCfg_0":
+    - generic: CanIfCtrlDrvCfg_0
+- button
+- generic: CanIfCtrlDrvInitHohConfigRef
+- generic: 实例名称
+- textbox "实例名称": CanIfCtrlDrvCfg_0
+- separator
+- group "CanIfCtrlDrvInitHohConfigRef":
+  - generic: CanIfCtrlDrvInitHohConfigRef
+  - generic: "--"
+- group "CanIfCtrlDrvNameRef":
+  - generic: CanIfCtrlDrvNameRef
+  - generic: "--"
+- generic: 错误日志
+- generic: 详细信息
+- generic: 工程笔记
+- generic: 导入文件配置

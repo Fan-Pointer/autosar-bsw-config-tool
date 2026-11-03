@@ -1,0 +1,43 @@
+{
+  "source": "https://config.gkanghui.com/home",
+  "observedAt": "2026-11-03",
+  "observer": "Codex",
+  "evidenceType": "live-browser-observation-not-review",
+  "files": [
+    {
+      "file": "01-canif-open.jpg",
+      "bytes": 27063,
+      "sha256": "0e13577440912395183d2daeb2f292210d76e160aa3e32b4ab2ef3eadef68910"
+    },
+    {
+      "file": "02-instance-menu.jpg",
+      "bytes": 32456,
+      "sha256": "dff0b00b7ffd2acae1fc71c2cf1699746523a6edc4702c9c03d994fe7a21dc0d"
+    },
+    {
+      "file": "03-reference-picker.jpg",
+      "bytes": 14492,
+      "sha256": "9035fe74ff96084d680437068fb6362c727456608b9b6b12b6cb1aa99f8554f5"
+    },
+    {
+      "file": "04-project-management.dom.txt",
+      "bytes": 2886,
+      "sha256": "7068c17ec185f2f535b2ccfb5feafdc217507b5ab43e89362dea93159bd49c3c"
+    },
+    {
+      "file": "05-selected-instance.dom.txt",
+      "bytes": 2074,
+      "sha256": "a36c549637ec27275481c869f64d2ce0ed63fde881ec01cd7cda8d62125699ef"
+    },
+    {
+      "file": "05-selected-instance.jpg",
+      "bytes": 30250,
+      "sha256": "fbef93312cfa7fbc70308482b2d9c2ab589fa8a5daacd5499d52fb30c3664e85"
+    },
+    {
+      "file": "OBSERVATIONS.md",
+      "bytes": 6947,
+      "sha256": "5ee8fc30b462e965adcbfc3425990c669aed56e41d16992cc2f0a9cfe18921fa"
+    }
+  ]
+}

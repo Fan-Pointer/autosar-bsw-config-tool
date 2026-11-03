@@ -1,0 +1,232 @@
+- banner:
+  - generic: ☷
+  - generic: BSW Configurator
+  - button "撤销": ↶
+  - button "重做" [disabled]: ↷
+  - button "保存到本机":
+  - button "代码验证":
+  - button "生成 C 代码":
+    - generic: 生成 C 代码
+  - button "配置集管理":
+  - button "模块管理":
+  - button "验证结果":
+  - button "返回配置集列表":
+  - generic "配置有未保存修改": ●
+  - textbox "全局搜索":
+    - /placeholder: 搜索参数、值或实例路径
+  - button "切换主题": 深色
+  - generic: 简体中文⌄
+  - generic: 配
+- main:
+  - complementary:
+    - generic: 🗂工程目录
+    - button "折叠工程目录": ‹
+    - generic: ▱
+    - generic: 研究验证_20261103
+    - generic: ⌃
+    - generic "⚙ 模块管理 ⌃":
+      - generic: ⚙
+      - text: 模块管理 ⌃
+    - generic "▱ BSW Modules ⌃":
+      - generic: ▱
+      - text: BSW Modules ⌃
+    - button "M Dem":
+      - generic: M
+      - text: Dem
+    - generic "▱ RTE ⌄":
+      - generic: ▱
+      - text: RTE ⌄
+    - generic "▱ AUTOSAR文件 ⌄":
+      - generic: ▱
+      - text: AUTOSAR文件 ⌄
+    - generic "▱ 输出文件 ⌄":
+      - generic: ▱
+      - text: 输出文件 ⌄
+    - generic "▱ 输入文件 ⌄":
+      - generic: ▱
+      - text: 输入文件 ⌄
+  - separator "工程目录宽度"
+  - tablist "模块":
+    - tab "M Dem(研究验证_20261103)" [selected]:
+      - generic: M
+      - text: Dem(研究验证_20261103)
+    - button "关闭 Dem(研究验证_20261103)": ×
+  - region "必填建议值":
+    - button "一键确认建议值":
+      - generic: 一键确认建议值
+    - status: 本次已确认 10 项；剩余 28 个必填参数需手工填写（无默认值或只读）。引用目标需另行选择。
+  - complementary:
+    - tablist "顶级容器":
+      - tab "DemConfigSet"
+      - tab "DemGeneral" [selected]
+    - button "实例操作": ▤
+    - button "上移" [disabled]: ↑
+    - button "下移" [disabled]: ↓
+    - button "新增实例": ＋
+    - textbox "搜索配置树":
+      - /placeholder: 请输入文字搜索
+    - generic: ⌕
+    - tree:
+      - treeitem "已配置：必填齐全 ⊞ DemGeneral" [expanded]:
+        - generic "已配置：必填齐全"
+        - generic: ⊞
+        - generic: DemGeneral
+        - treeitem "已配置：必填齐全 i DemGeneral" [expanded]:
+          - generic "已配置：必填齐全"
+          - generic: i
+          - generic: DemGeneral
+          - treeitem "已配置：必填齐全 ⊞ DemClient" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemClient
+            - treeitem "已配置：必填齐全 i DemClient" [expanded]:
+              - generic "已配置：必填齐全"
+              - generic: i
+              - generic: DemClient
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackDTCStatusChanged" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackDTCStatusChanged
+          - treeitem "已配置：必填齐全 ⊞ DemDidClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDidClass
+          - treeitem "已配置：必填齐全 ⊞ DemEnableCondition" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemEnableCondition
+          - treeitem "已配置：必填齐全 ⊞ DemEnableConditionGroup" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemEnableConditionGroup
+          - treeitem "已配置：必填齐全 ⊞ DemEventMemorySet" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemEventMemorySet
+            - treeitem "已配置：必填齐全 i DemEventMemorySet" [expanded]:
+              - generic "已配置：必填齐全"
+              - generic: i
+              - generic: DemEventMemorySet
+              - treeitem "已配置：必填齐全 ⊞ DemClearDTCNotification" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemClearDTCNotification
+              - treeitem "已配置：必填齐全 ⊞ DemIndicator" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemIndicator
+              - treeitem "已配置：必填齐全 ⊞ DemMirrorMemory" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemMirrorMemory
+              - treeitem "已配置：必填齐全 ⊞ DemPrimaryMemory" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemPrimaryMemory
+                - treeitem "已配置：必填齐全 i DemPrimaryMemory" [expanded]:
+                  - generic "已配置：必填齐全"
+                  - generic: i
+                  - generic: DemPrimaryMemory
+                  - treeitem "已配置：必填齐全 ⊞ DemGroupOfDTC" [expanded]:
+                    - generic "已配置：必填齐全"
+                    - generic: ⊞
+                    - generic: DemGroupOfDTC
+              - treeitem "已配置：必填齐全 ⊞ DemUserDefinedMemory" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemUserDefinedMemory
+          - treeitem "已配置：必填齐全 ⊞ DemExtendedDataClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemExtendedDataClass
+          - treeitem "已配置：必填齐全 ⊞ DemExtendedDataRecordClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemExtendedDataRecordClass
+          - treeitem "已配置：必填齐全 ⊞ DemFreezeFrameClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemFreezeFrameClass
+          - treeitem "已配置：必填齐全 ⊞ DemFreezeFrameRecNumClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemFreezeFrameRecNumClass
+          - treeitem "已配置：必填齐全 ⊞ DemFreezeFrameRecordClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemFreezeFrameRecordClass
+          - treeitem "已配置：必填齐全 ⊞ DemGeneralJ1939" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemGeneralJ1939
+          - treeitem "已配置：必填齐全 ⊞ DemGeneralOBD" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemGeneralOBD
+          - treeitem "已配置：必填齐全 ⊞ DemNvRamBlockId" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemNvRamBlockId
+          - treeitem "已配置：必填齐全 ⊞ DemOperationCycle" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemOperationCycle
+            - treeitem "已配置：必填齐全 i DemOperationCycle" [expanded]:
+              - generic "已配置：必填齐全"
+              - generic: i
+              - generic: DemOperationCycle
+          - treeitem "已配置：必填齐全 ⊞ DemRatio" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemRatio
+          - treeitem "已配置：必填齐全 ⊞ DemStorageCondition" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemStorageCondition
+          - treeitem "已配置：必填齐全 ⊞ DemStorageConditionGroup" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemStorageConditionGroup
+          - treeitem "已配置：必填齐全 ⊞ DemDataElementClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDataElementClass
+    - generic "树状态图例":
+      - generic: 已选 1 项
+      - generic: 已配置
+      - generic: 警告
+      - generic: 错误
+      - generic: Ctrl / Cmd 切换选择 · Shift 连选
+  - separator "配置树宽度"
+  - navigation "实例路径":
+    - generic: ▱
+    - generic: Dem
+    - generic: ›
+    - generic: DemGeneral
+    - generic: ›
+    - generic: DemClient
+  - generic: 实例名称
+  - textbox "实例名称": DemClient
+  - region "参数":
+    - generic "Functionality provided by Dem for the DemClient.": DemClientFunctionality
+    - generic "必填参数": ⊗
+    - combobox "DemClientFunctionality"
+    - generic: DEM_CLIENT_USES_FULL_FUNCTIONALITY
+    - generic "Defines a unique identifier for a Dem client. This number is used by this client in the ClientID parameter in all API with this parameter.": DemClientId
+    - generic "必填参数": ⊗
+    - spinbutton "DemClientId": "0"
+    - combobox "DemClientId 进制":
+      - option "DEC" [selected]
+      - option "HEX"
+    - 'generic "If set to true, this client shall only use the DEM via RTE (Dem will provide the C/S interfaces: CddIf, EvMemOverflowIndication). The client must not do any C_…"': DemClientUsesRte
+    - generic "必填参数": ⊗
+    - switch "DemClientUsesRte"
+  - region "引用":
+    - generic "References to the client assigned event memory container that contains client specific settings and event memories.": DemEventMemorySetRef
+    - generic: ⊗
+    - textbox "DemEventMemorySetRef": DemGeneral/DemEventMemorySet
+    - generic "选择引用目标":
+      - button "选择 DemEventMemorySetRef": ▤
+  - generic "＋ 添加子容器"
+- alert:
+  - paragraph: ARXML 导出校验失败，必填项未配置（请显式设置，默认建议值不算配置）： DemConfigSet/DemEventParameter/DemEventId DemConfigSet/DemEventParameter/DemEventAvailable DemConfigSet/DemEventParameter/DemFFPrestorageSupported DemConfigSet/DemEventParameter/DemEventKind DemGeneral/DemAgingRequiresTestedCycle DemGeneral/DemDebounceCounterBasedSupport DemGeneral/DemDebounceTimeBasedSupport DemGeneral/DemGeneralInterfaceSupport DemGeneral/DemPTOSupport DemGeneral/DemStatusBitStorageTestFailed DemGeneral/DemTriggerFiMReports DemGeneral/DemTriggerMonitorInitBeforeClearOk DemGeneral/DemAvailabilitySupport DemGeneral/DemClearDTCBehavior DemGeneral/DemDataElementDefaultEndianness DemGeneral/DemEventCombinationSupport DemGeneral/DemOBDSupport DemGeneral/DemSuppressionSupport DemGeneral/DemMaxNumberPrestoredFF DemGeneral/DemClient/DemClientId DemGeneral/DemEventMemorySet/DemDtcStatusAvailabilityMask DemGeneral/DemEventMemorySet/DemMaxNumberEventEntryPermanent DemGeneral/DemEventMemorySet/DemTypeOfDTCSupported DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemEventDisplacementStrategy DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemOccurrenceCounterProcessing DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemTypeOfFreezeFrameRecordNumeration DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemMaxNumberEventEntryPrimary DemGeneral/DemOperationCycle/DemOperationCycleId
