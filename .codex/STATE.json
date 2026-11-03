@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-011",
     "title": "Dem 切换官方 ECUC 定义（67 容器全量界面）+ 右键添加容器体验优化",
-    "status": "IN_PROGRESS",
+    "status": "BLOCKED",
     "round": 0,
     "assignedTo": "architect (user-directed), Codex may continue",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -25,7 +25,8 @@
     "sourceMaterial": "D:/ProFile/教培业务/配置器/AUTOSAR_MOD_ECUConfigurationParameters.arxml (14.6MB, 98 modules)",
     "referenceBaseline": "819eb12",
     "specPath": "docs/UI-REPLICA-SPEC.md",
-    "progressNote": "架构师按用户指令直接执行: 数据通路/右键优化/core 测试适配已完成(core 43 全绿, 全量 179/249)。剩余 70 失败的精确清单与修法见 .codex/reports/TASK-011-PARTIAL-HANDOVER.md。Codex 权限恢复后按该文档接手, 不重复已完成部分。"
+    "progressNote": "架构师按用户指令直接执行: 数据通路/右键优化/core 测试适配已完成(core 43 全绿, 全量 179/249)。剩余 70 失败的精确清单与修法见 .codex/reports/TASK-011-PARTIAL-HANDOVER.md。Codex 权限恢复后按该文档接手, 不重复已完成部分。",
+    "blockedReason": "PRODUCT_REPLAN_20261103: 等待产品重规划设计定稿与阶段契约。TASK-011 既有成果保留(参考基线 1e03827)，剩余 70 测试失败与 CHOICE 引用多候选挑选将并入重规划阶段契约，不在本任务继续。"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
@@ -301,13 +302,13 @@
     }
   },
   "blocker": {
-    "at": "2026-11-01T07:55:00+08:00",
-    "task": "TASK-010",
-    "status": "ENV_PERMISSION",
-    "summary": "Codex 侧 esbuild spawn EPERM 与 .git/index.lock Permission denied，测试/构建/暂存均无法执行。契约冲突已由评审方解决（A1 撤销，契约 v2）。",
-    "owner": "用户（Codex 桌面端执行权限）",
-    "recovery": "在 Codex 桌面端恢复子进程与 Git 索引写权限后，执行 dispatch.mjs recover 与 start.ps1",
+    "at": "2026-11-03T16:55:00+08:00",
+    "task": "TASK-011",
+    "status": "REPLAN_PENDING",
+    "summary": "产品重规划(对标能力不照抄)进行中: Codex 研究 docs/product-research/, 评审方设计 docs/product-design/。设计定稿后以新阶段契约恢复; 旧 TASK-011 契约的测试门槛笔误(>=252, 实际 250 总数)已在 ACK 更正。",
+    "owner": "WorkBuddy(规划) + Codex(研究) 并行",
+    "recovery": "研究证据交齐 -> 评审方定稿 docs/product-design/ -> 下发新 READY 契约(含测试口径 250 总数/0 fail) -> task.status=READY",
     "resolvedAt": null,
-    "note": "Codex 停工不计责：它按 AGENTS §7 停在架构决策处，未擅改代码。评审方误判已认领。"
+    "note": "ENV_PERMISSION 旧阻塞随 2026-11-03 build 恢复成功而失效, 由 REPLAN_PENDING 取代。"
   }
 }

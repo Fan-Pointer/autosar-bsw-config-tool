@@ -1,5 +1,14 @@
 # 产品规划与最终验收清单
 
+> 维护方：WorkBuddy（架构师）｜ 版本 **v2.0**（2026-11-03 重规划）
+> ⚡ **2026-11-03 重规划（PRODUCT_REPLAN_20261103，用户授权）**：
+> 1. **方向变更**：对标 https://config.gkanghui.com/home 的**能力与使用场景**，不再严格照抄布局/交互/视觉。`docs/UI-REPLICA-SPEC.md` v2 转为**历史参考**（其有效结论——三栏骨架、两级页签、参数行结构等——继续有效），后续设计以 `docs/product-design/` 为准。
+> 2. **协作模式**：Codex 负责 R1 研究（代码现状审计 + 参考站实测 → `docs/product-research/`）；评审方负责 R2 设计定稿（`docs/product-design/`）、阶段契约与评审；**双方均不写业务代码，直至设计定稿下发 READY**。
+> 3. **路线**：R1 研究 → R2 设计定稿 → R3 分阶段实现（草案 S1 测试收口 / S2 体验校准 / S3 信息架构 / S4 互操作加固，详见 `.codex/reports/PRODUCT-REPLAN-20261103-ACK.md` §3）。
+> 4. **口径更正**：TASK-011 契约「用例数 ≥252」为笔误；实测基线 **250 总数 = 179 pass + 70 fail + 1 pending**，新契约口径为 **0 fail 且 ≥249 pass**（1 pending 为 GCC skipIf）。不删测试、不削断言。
+> 5. **状态**：TASK-011 `IN_PROGRESS → BLOCKED(REPLAN_PENDING)`（IN_PROGRESS 非调度器合法态）；TASK-010 留在 queue，其 A 组并入 S4、引用图/拖拽并入 S3。
+> 6. **范围待王上裁定**：向导/变体/DaVinci 环境/schema 版本（r4.0|r4.2.2|4.4.0 三方不一致）/外部格式导入/云端能力/主包体积优先级 —— 见 ACK §五 Q1-Q7。
+
 > 维护方：WorkBuddy（架构师）｜ 版本 **v1.1**（2026-10-31 修正 v1.0 的范围错误）
 > 依据：`docs/REQUIREMENTS.md`（**仓内权威来源**）、`project-engineering-file.md`、`docs/ARCHITECTURE-v2.md`
 > 说明：v1.0 误引 `SRS_AUTOSAR_DTC_ConfigTool.md` / `INSTRUCTION_AUTOSAR_DTC_ConfigTool.md`——这两份在工作区上一级目录，**不在仓库内**，不作追溯依据。v1.1 全部改为引用仓内 `docs/REQUIREMENTS.md`。
