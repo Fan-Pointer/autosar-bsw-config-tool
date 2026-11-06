@@ -11,10 +11,10 @@
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "cab3ff31db76fdb596958ba710c5a8fde67bb45509b9c657b855a6777bd4e2ec",
+    "contractHash": "6825d1066a0295c2bdf06df6e3900312ebe38e1b9449515718c0b0ca2c002874",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T09:46:30+08:00",
+    "contractBoundAt": "2026-11-06T09:53:42+08:00",
     "reportPath": ".codex/reports/TASK-014-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
@@ -22,7 +22,8 @@
     "createdAt": "2026-11-06T09:46:30+08:00",
     "submittedAt": null,
     "approvedAt": null,
-    "designPath": "docs/product-design/02-TECH-DESIGN.md"
+    "designPath": "docs/product-design/02-TECH-DESIGN.md",
+    "contractRevision": "v2 (2026-11-06 09:53): CONTRACT_CLARIFY 三项裁定 — R1 官方输出改集合恒等断言(废弃15->15旧口径,必填门槛不削弱) / R2 闸门纯函数重新求值语义(禁重复逻辑禁跨动作缓存, store 统一注入模块规则) / R3 Arxml.ts 白名单=路径取值接线+闸门消费接线, 结构生成仍归 TASK-015"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",

@@ -28,9 +28,16 @@ interface OutputCheckResult {
   issues: Array<{ severity: 'ERROR' | 'WARNING'; path: string; reason: string;
                   anchor: { containerUuid: string; definitionRef?: string } }>;
 }
-declare function isOutputReady(config: ConfigInstance, module: BswmdModule): OutputCheckResult;
+declare function evaluateOutputReadiness(
+  config: ConfigInstance, module: BswmdModule, extraRules?: ConstraintRule[]
+): OutputCheckResult;
 // 语义：isConfigured=false 的必填 → ERROR；CHOICE 未选 → ERROR；
 //       可选未配 → 不出现在输出（不是错误也不是建议值）；false/0 已配置不误报
+// 求值语义（2026-11-06 R2 裁定）：闸门是纯函数，各消费方在自己动作的事务点
+// 调用同一函数【重新求值】；禁止①入口另写校验逻辑（重复逻辑）②跨动作缓存复用
+// 结果对象（陈旧）。模块规则由 store 层统一注入（core 不知道模块名）；
+// 建议 store 提供唯一注入点薄封装（getOutputCheck(configId)）。
+// 官方输出验收为集合恒等（已配置集=ARXML VALUE 集=C 字段集），不预设数量（R1）。
 ```
 
 ### 1.3 引用模型（S3）
