@@ -2,27 +2,27 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-15",
-  "stageName": "R3-S3b ARXML 互操作（namespace/引用/顺序保真）— W6 插队完成后按队列恢复",
+  "stage": "PHASE-17",
+  "stageName": "R3-S4 编辑体验收尾（G09-G14/G20/G22 列表；W6 已由 TASK-016 交付；S5 多模块按 ADR-11 保留）",
   "task": {
-    "id": "TASK-015",
-    "title": "S3b ARXML 互操作：namespace r4.0 + 引用全候选/DEST 分类 + 往返保真顺序稳定",
-    "status": "SUBMITTED",
+    "id": "TASK-017",
+    "title": "S4 编辑体验收尾：术语/四态/入口收敛/CHOICE 预览/引用暂存/问题面板/撤销回归/引用列表",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "9f2bb2eba3b0663627f3fdd708810cb6f96f5f9132ddb69f86e48456f3fe200e",
+    "contractHash": "bce835ceef48686197370fae48ffce41f5561539d4838896ebcc4db79a2ec3a1",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T12:03:27+08:00",
-    "reportPath": ".codex/reports/TASK-015-REPORT.md",
+    "contractBoundAt": "2026-11-06T13:34:51+08:00",
+    "reportPath": ".codex/reports/TASK-017-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "d2606e790304738bf2da2eb49cb169a0095bac52",
-    "createdAt": "2026-11-06T12:03:27+08:00",
-    "submittedAt": "2026-11-06T13:23:56.3203332+08:00",
+    "submissionCommit": null,
+    "createdAt": "2026-11-06T13:34:51+08:00",
+    "submittedAt": null,
     "approvedAt": null,
-    "designPath": "docs/product-design/02-TECH-DESIGN.md"
+    "designPath": "docs/product-design/03-ROADMAP-ACCEPTANCE.md"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
@@ -320,6 +320,7 @@
       "closedAt": "2026-11-06T12:03:18+08:00",
       "submissionCommit": "341b05fdc2373ef2591fc455d2db9a550e9ab2d9",
       "note": "W6 右键紧凑菜单+子容器直选(用户指定优先插队) round 0 一次通过: 0 阻塞/0 重要/3 建议。独立复核: build 通过(12.87s); test:verify 19/19 收集守卫+289/289 全绿(277 基线+12 新增 ui7/定位5); src/core diff 0 行; 无 TASK-015 越权(namespace/DEST/changelog 零命中, fixtures/bswmd/scripts 无改动); 测试仅报告声明两处定位调整、断言未削。要点实证: ContainerContextMenu 独立竖向组件+inline 禁用原因(截图01); 右键显式 ContainerContextTarget 不再 select(node), 定义节点四项禁用, 用例 never-borrows/error-on-target 实证; 取消删除 config 逐字节不变+setItem 零调用断言; 多关闭时机(外点/工具栏弹窗/模块对话框/导入/配置集切换)用例; 键盘全路径+焦点恢复; placeContainerMenu 5 用例(1366/1400/683/700 翻转+负坐标)+edge-dom.json 实测(9,8,360,320.4); 弹窗打开右键浮层=0(截图03)。D1 裁定: 二级为单面板层级切换(父收起→子列表+返回), 满足契约『父收起/无叠层』语义, 据实认可, 与参考站并排式差异已由报告如实声明。🟡-1 typecheck.log 空文件清理/🟡-3 menu-arrow CSS 冗余: 择机就地清理; 🟡-2 配置集切换关菜单经间接路径(行为已实证), 显式 watch activeUuid 并入后续 UI 任务。",
+      "clarification": "2026-11-06T13:33 指针附录更正: 🟡-2 撤回(WorkspaceView 487 行已有 watch activeUuid 显式关菜单, 原说法不成立); 🟡-3 撤回(menu-arrow float 服务非 flex 关闭行、margin 服务 flex menu-label 行, 各司其职非冗余)。以 TASK-016-REVIEW.md 附录为准, 冻结快照不改。",
       "rounds": [
         {
           "round": 0,
@@ -328,20 +329,35 @@
           "reviewPath": ".codex/review/TASK-016-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-015",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-06T13:33:51+08:00",
+      "submissionCommit": "d2606e790304738bf2da2eb49cb169a0095bac52",
+      "note": "S3b ARXML 互操作 round 0 一次通过: 0 阻塞/0 重要/2 建议。独立复核: vue-tsc/build(15.34s)/test:verify 独立重跑 21/21 守卫+302/302 全绿(289 基线+13 新增: 互操作 10 含 it.each 展开+脚本 3); 首跑 EPERM 收集抖动(258 collected 全 pass 0 失败, 守卫按设计拒绝)归因环境。要点: namespace r4.0+LEGACY r4.2.2 兼容读入 onWarning→ImportSession.warnings→ImportDialog 黄条(截图03); ReferenceCandidates 纯 TS 全候选(destinationRefs 遍历/单ref/短名称三级兼容), store 候选/可创建目标/DefinitionConstraints 三消费方同源; DEST 按 kind 四类导出; 外部引用 UI disabled+store setReferenceTarget throw 双保险, INSTANCE-REFERENCE-VALUE 导入显式拒绝不静默丢; 导出按定义序 flatMap+导入按定义索引恢复, nonalphabetic 用例(reverse 后 Z 先于 A)实证无字母排序; serializeConfig 全字段+双重往返; ConfigOutputCheck 绑定 configUuid+lastModified+revision, validate 对过期/跨配置/同毫秒旧 revision throw; 非 DTC CSV 明确拒绝; gen 脚本评审方独立连跑两次 JSON 逐字节一致(713e7bd2), contentSha256 709cdde6 与报告一致(67/162/64), changelog bswmd-changelog/1 before/after。存储/恢复协议 0 diff; 无 XSD/供应商过度宣称(§限制显式)。ecuc-ui 外部引用用例按 B3 行为跟随且断言更强(exportJson 前后相等)。🟡-1 本地 instance 引用导出 VALUE 元素名与 DEST 潜在不匹配(当前不可达)→S5 前置清单; 🟡-2 changelog 非累积语义→S7 文档。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "d2606e790304738bf2da2eb49cb169a0095bac52",
+          "reviewPath": ".codex/review/TASK-015-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-016",
+    "taskId": "TASK-015",
     "round": 0,
-    "reviewedCommit": "341b05fdc2373ef2591fc455d2db9a550e9ab2d9",
-    "at": "2026-11-06T12:03:18+08:00",
+    "reviewedCommit": "d2606e790304738bf2da2eb49cb169a0095bac52",
+    "at": "2026-11-06T13:33:51+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
-    "minors": 3,
-    "reviewPath": ".codex/review/TASK-016-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-016-ROUND-0-REVIEW.md"
+    "minors": 2,
+    "reviewPath": ".codex/review/TASK-015-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-015-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
