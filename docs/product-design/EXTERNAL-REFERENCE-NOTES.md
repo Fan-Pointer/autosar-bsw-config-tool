@@ -18,7 +18,7 @@
 | # | 裁定 | 依据 |
 |---|---|---|
 | 1 | ❌ **38 份模块 JSON 不作为产品定义** | 版本冲突（4.2.2 vs 已裁定 4.4.0 基线）+ 结构不同（path 键 vs uuid+definitionPath、children vs subContainers）+ 单一事实源纪律；TASK-014 进行中不引入第二抽取管线 |
-| 2 | ✅ **吸收三点思路到我们的 `gen-bswmd-from-arxml.mjs`**（S3a 后小改动，非契约项）：确定性输出（无时间戳/键序固定，ARXML 不变→逐字节不变）+ `contentSha256` 比对跳过重建 + **changelog 字段级 diff** | 该实现的确定性设计成熟，直接增强我们的溯源与再生成体验 |
+| 2 | ✅ **吸收三点思路到我们的 `gen-bswmd-from-arxml.mjs`** —— **用户 2026-11-06 11:08 确认：「借鉴思路和脚本，实际的 arxml 版本以我们这边的为主」**，即：借鉴 MISAR 抽取器的工程手法（确定性输出/键序固定/changelog 字段级 diff/contentSha256），但数据源始终只用我们的官方 4.4.0 文件，不引入其 4.2.2 数据。执行时机：**TASK-014 收口后**（S3b 前后），避免本轮实现期间改动测试依赖的 `bswmd/dem_bswmd.json` 污染 265 基线 | 用户确认 + 单一事实源 |
 | 3 | 🔭 **S5（多模块，ADR-11）评估两项**：①厂商 ADMIN-DATA/SDGS 元数据提取（HIDE_FLAG/GROUP_NAME 等 16 种 → 界面分组/隐藏提示）②widget 命名体系（boolean/choiceContainer/choiceReference…，对齐 ORIENTAIS Unit 体系）作为 UI 提示元数据候选 | 属 UI 增强与多模块"厂商定义来源"范围，需王上届时裁定；不自动纳入 |
 | 4 | ⚠️ **边界提醒**：若王上未来想用 ORIENTAIS 厂商模块定义（如厂商特定参数），必须显式声明「定义来源=厂商包 4.2.2」并标注版本，与 4.4.0 官方定义并存时同名模块按版本区分——属范围决策，未经裁定不得混入 | 防止 4.2.2/4.4.0 静默混淆 |
 
