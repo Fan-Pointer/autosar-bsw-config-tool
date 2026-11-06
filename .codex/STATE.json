@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-015",
     "title": "S3b ARXML 互操作：namespace r4.0 + 引用全候选/DEST 分类 + 往返保真顺序稳定",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -18,9 +18,9 @@
     "reportPath": ".codex/reports/TASK-015-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "d2606e790304738bf2da2eb49cb169a0095bac52",
     "createdAt": "2026-11-06T12:03:27+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-06T13:23:56.3203332+08:00",
     "approvedAt": null,
     "designPath": "docs/product-design/02-TECH-DESIGN.md"
   },
