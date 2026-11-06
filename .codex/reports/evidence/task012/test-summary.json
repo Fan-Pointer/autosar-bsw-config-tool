@@ -1,0 +1,14 @@
+{
+  "total": 265,
+  "passed": 194,
+  "failed": 70,
+  "pending": 1,
+  "newFailures": [],
+  "newRecoveryTests": [
+    {
+      "status": "passed",
+      "count": 15
+    }
+  ],
+  "reportSha256": "086c66469dda9f604cc953901623dd6eccb8eb6cdbffd06052d2cd4f36920a16"
+}

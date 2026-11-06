@@ -285,11 +285,16 @@ function exclude(): void {
   rightSelected.value = [];
 }
 async function confirm(): Promise<void> {
+  try {
+    store.assertWritable();
+  } catch {
+    return;
+  }
   const previous = store.modulePreferences;
   store.modulePreferences = Object.fromEntries(
     Object.entries(draft.value).map(([name, value]) => [name, { ...value }])
   );
-  if (!(await store.saveConfig())) {
+  if (!(await store.saveConfig().catch(() => false))) {
     store.modulePreferences = previous;
     return;
   }

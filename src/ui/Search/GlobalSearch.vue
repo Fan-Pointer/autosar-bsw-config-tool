@@ -60,7 +60,11 @@ watch(query, () => {
 });
 async function choose(row: SearchResult): Promise<void> {
   if (store.isImporting) return;
-  if (row.setUuid !== store.activeUuid && !(await store.switchConfigSet(row.setUuid))) return;
+  if (
+    row.setUuid !== store.activeUuid &&
+    !(await store.switchConfigSet(row.setUuid).catch(() => false))
+  )
+    return;
   store.selectContainer(row.containerUuid, row.fieldUuid);
   emit('navigate', row);
   open.value = false;

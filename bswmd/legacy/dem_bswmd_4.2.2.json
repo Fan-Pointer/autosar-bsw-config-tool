@@ -1,0 +1,479 @@
+{
+  "shortName": "Dem",
+  "version": "4.2.2",
+  "description": "Diagnostic Event Manager - AUTOSAR Classic Platform",
+  "containers": [
+    {
+      "uuid": "ecuc-dem-configset-def",
+      "shortName": "DemConfigSet",
+      "description": "Contains the configuration parameters of the Dem module",
+      "multiplicity": { "lower": 1, "upper": 1 },
+      "parameters": [
+        {
+          "uuid": "ecuc-dem-general-dev-error-detect",
+          "shortName": "DemDevErrorDetect",
+          "description": "Switches the development error detection on or off",
+          "type": "BOOLEAN",
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "isOptional": true
+        },
+        {
+          "uuid": "ecuc-dem-general-version-info-api",
+          "shortName": "DemVersionInfoApi",
+          "description": "Switches the Dem_GetVersionInfo API on or off",
+          "type": "BOOLEAN",
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "isOptional": true
+        },
+        {
+          "uuid": "ecuc-dem-general-max-number-event",
+          "shortName": "DemMaxNumberEventEntry",
+          "description": "Maximum number of event entries",
+          "type": "INTEGER",
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 32,
+          "min": 1,
+          "max": 65535,
+          "isOptional": true
+        },
+        {
+          "uuid": "ecuc-dem-general-occurrence-counter-support",
+          "shortName": "DemOccurrenceCounterProcessing",
+          "description": "Processing of occurrence counter",
+          "type": "ENUM",
+          "configClass": "PRE_COMPILE",
+          "defaultValue": "DEM_PROCESS_OCCCTR_CDTC",
+          "enumValues": ["DEM_PROCESS_OCCCTR_CDTC", "DEM_PROCESS_OCCCTR_TF"],
+          "isOptional": true
+        }
+      ],
+      "references": [],
+      "subContainers": [
+        {
+          "uuid": "ecuc-dem-dtc-def",
+          "initialAddLabel": "添加第一条 DTC",
+          "shortName": "DemDTC",
+          "description": "Configuration of a Diagnostic Trouble Code",
+          "multiplicity": { "lower": 0, "upper": "unbounded" },
+          "parameters": [
+            {
+              "uuid": "ecuc-dem-dtc-value",
+              "shortName": "DemDtcValue",
+              "exportRole": "dtcValue",
+              "description": "The DTC value (3 bytes hexadecimal)",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "min": 1,
+              "max": 16777215,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-dtc-functional-unit",
+              "shortName": "DemDTCFunctionalUnit",
+              "description": "Functional unit of the DTC",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "min": 0,
+              "max": 255,
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-dtc-severity",
+              "shortName": "DemDTCSeverity",
+              "exportRole": "severity",
+              "description": "Severity of the DTC",
+              "type": "ENUM",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "DEM_SEVERITY_NO_SEVERITY",
+              "enumValues": [
+                "DEM_SEVERITY_NO_SEVERITY",
+                "DEM_SEVERITY_CHECK_IMMEDIATELY",
+                "DEM_SEVERITY_CHECK_AT_NEXT_HALT",
+                "DEM_SEVERITY_MAINTENANCE_ONLY"
+              ],
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-dtc-wwhobd-class",
+              "shortName": "DemWWHOBDDTCClass",
+              "exportRole": "wwhObdClass",
+              "description": "WWH-OBD classification of the DTC",
+              "type": "ENUM",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "DEM_DTC_WWHOBD_CLASS_NOCLASS",
+              "enumValues": [
+                "DEM_DTC_WWHOBD_CLASS_NOCLASS",
+                "DEM_DTC_WWHOBD_CLASS_A",
+                "DEM_DTC_WWHOBD_CLASS_B1",
+                "DEM_DTC_WWHOBD_CLASS_B2",
+                "DEM_DTC_WWHOBD_CLASS_C"
+              ],
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-dtc-j1939-node-ref",
+              "shortName": "DemJ1939DTC_J1939NodeRef",
+              "description": "Reference to J1939 node",
+              "type": "STRING",
+              "configClass": "PRE_COMPILE",
+              "isOptional": true
+            }
+          ],
+          "references": [
+            {
+              "uuid": "ecuc-dem-dtc-attributes-ref",
+              "shortName": "DemDTCAttributesRef",
+              "exportRole": "attributes",
+              "description": "Reference to the DTC attributes",
+              "destinationContainerType": "DemDTCAttributes",
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-dtc-obd-ref",
+              "shortName": "DemObdDTCRef",
+              "description": "Reference to OBD DTC (if applicable)",
+              "destinationContainerType": "DemObdDTC",
+              "isOptional": true
+            }
+          ],
+          "subContainers": []
+        },
+        {
+          "uuid": "ecuc-dem-dtc-attributes-def",
+          "shortName": "DemDTCAttributes",
+          "description": "Attributes shared by multiple DTCs",
+          "multiplicity": { "lower": 0, "upper": "unbounded" },
+          "parameters": [
+            {
+              "uuid": "ecuc-dem-attr-aging-allowed",
+              "shortName": "DemAgingAllowed",
+              "description": "Enables aging of the DTC",
+              "type": "BOOLEAN",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-attr-aging-counter-threshold",
+              "shortName": "DemAgingCycleCounterThreshold",
+              "description": "Number of aging cycles before DTC is aged out",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 40,
+              "min": 1,
+              "max": 256,
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-attr-priority",
+              "shortName": "DemDTCPriority",
+              "description": "Priority of the DTC (lower value = higher priority)",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 128,
+              "min": 1,
+              "max": 256,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-attr-significance",
+              "shortName": "DemDTCSignificance",
+              "description": "Significance of the DTC",
+              "type": "ENUM",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "DEM_EVENT_SIGNIFICANCE_FAULT",
+              "enumValues": ["DEM_EVENT_SIGNIFICANCE_FAULT", "DEM_EVENT_SIGNIFICANCE_OCCURRENCE"],
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-attr-immediate-nv",
+              "shortName": "DemImmediateNvStorage",
+              "description": "Immediate non-volatile storage",
+              "type": "BOOLEAN",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-attr-max-ff-records",
+              "shortName": "DemMaxNumberFreezeFrameRecords",
+              "description": "Maximum number of freeze frame records",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "min": 0,
+              "max": 255,
+              "isOptional": true
+            }
+          ],
+          "references": [
+            {
+              "uuid": "ecuc-dem-attr-aging-cycleref",
+              "shortName": "DemAgingCycleRef",
+              "description": "Reference to the operation cycle used for aging",
+              "destinationContainerType": "DemOperationCycle",
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-attr-ff-class-ref",
+              "shortName": "DemFreezeFrameClassRef",
+              "description": "Reference to freeze frame class",
+              "destinationContainerType": "DemFreezeFrameClass",
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-attr-extdata-ref",
+              "shortName": "DemExtendedDataClassRef",
+              "description": "Reference to extended data class",
+              "destinationContainerType": "DemExtendedDataClass",
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-attr-mem-dest-ref",
+              "shortName": "DemMemoryDestinationRef",
+              "description": "Reference to memory destination",
+              "destinationContainerType": "DemMemoryDestination",
+              "isOptional": true
+            }
+          ],
+          "subContainers": []
+        },
+        {
+          "uuid": "ecuc-dem-event-param-def",
+          "shortName": "DemEventParameter",
+          "description": "Configuration of a diagnostic event",
+          "multiplicity": { "lower": 0, "upper": "unbounded" },
+          "parameters": [
+            {
+              "uuid": "ecuc-dem-event-id",
+              "shortName": "DemEventId",
+              "exportRole": "eventId",
+              "description": "Unique event identifier",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "min": 1,
+              "max": 65535,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-event-kind",
+              "shortName": "DemEventKind",
+              "description": "Kind of the event (BSW or SWC)",
+              "type": "ENUM",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "DEM_EVENT_KIND_SWC",
+              "enumValues": ["DEM_EVENT_KIND_BSW", "DEM_EVENT_KIND_SWC"],
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-event-available",
+              "shortName": "DemEventAvailable",
+              "description": "Indicates whether the event is available",
+              "type": "BOOLEAN",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-event-failure-cycle-threshold",
+              "shortName": "DemEventFailureCycleCounterThreshold",
+              "description": "Number of failed cycles before the event is confirmed",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "min": 0,
+              "max": 255,
+              "isOptional": true
+            }
+          ],
+          "references": [
+            {
+              "uuid": "ecuc-dem-event-dtc-ref",
+              "shortName": "DemDTCRef",
+              "exportRole": "dtc",
+              "description": "Reference to the DTC",
+              "destinationContainerType": "DemDTC",
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-event-debounce-counter-ref",
+              "shortName": "DemDebounceCounterBasedClassRef",
+              "description": "Reference to counter-based debounce",
+              "destinationContainerType": "DemDebounceCounterBasedClass",
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-event-debounce-time-ref",
+              "shortName": "DemDebounceTimeBasedClassRef",
+              "description": "Reference to time-based debounce",
+              "destinationContainerType": "DemDebounceTimeBasedClass",
+              "isOptional": true
+            }
+          ],
+          "subContainers": []
+        },
+        {
+          "uuid": "ecuc-dem-debounce-counter-def",
+          "shortName": "DemDebounceCounterBasedClass",
+          "description": "Counter based debounce algorithm",
+          "multiplicity": { "lower": 0, "upper": "unbounded" },
+          "parameters": [
+            {
+              "uuid": "ecuc-dem-debounce-behavior",
+              "shortName": "DemDebounceBehavior",
+              "description": "Behavior when debounce condition is not met",
+              "type": "ENUM",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "DEM_DEBOUNCE_FREEZE",
+              "enumValues": ["DEM_DEBOUNCE_FREEZE", "DEM_DEBOUNCE_RESET"],
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-debounce-counter-failed-threshold",
+              "shortName": "DemDebounceCounterFailedThreshold",
+              "description": "Threshold for failed counter (must be positive)",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 127,
+              "min": 1,
+              "max": 32767,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-debounce-counter-passed-threshold",
+              "shortName": "DemDebounceCounterPassedThreshold",
+              "description": "Threshold for passed counter (must be negative)",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": -127,
+              "min": -32768,
+              "max": -1,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-debounce-counter-increment",
+              "shortName": "DemDebounceCounterIncrementStepSize",
+              "description": "Increment step size",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "min": 1,
+              "max": 32767,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-debounce-counter-decrement",
+              "shortName": "DemDebounceCounterDecrementStepSize",
+              "description": "Decrement step size",
+              "type": "INTEGER",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "min": 1,
+              "max": 32768,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-debounce-counter-jump-up",
+              "shortName": "DemDebounceCounterJumpUp",
+              "description": "Enables jump up behavior",
+              "type": "BOOLEAN",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-debounce-counter-jump-down",
+              "shortName": "DemDebounceCounterJumpDown",
+              "description": "Enables jump down behavior",
+              "type": "BOOLEAN",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "isOptional": true
+            },
+            {
+              "uuid": "ecuc-dem-debounce-counter-storage",
+              "shortName": "DemDebounceCounterStorage",
+              "description": "Enables non-volatile storage of the counter",
+              "type": "BOOLEAN",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "isOptional": true
+            }
+          ],
+          "references": [],
+          "subContainers": []
+        },
+        {
+          "uuid": "ecuc-dem-debounce-time-def",
+          "shortName": "DemDebounceTimeBasedClass",
+          "description": "Time based debounce algorithm",
+          "multiplicity": { "lower": 0, "upper": "unbounded" },
+          "parameters": [
+            {
+              "uuid": "ecuc-dem-debounce-time-behavior",
+              "shortName": "DemDebounceBehavior",
+              "description": "Behavior when debounce condition is not met",
+              "type": "ENUM",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "DEM_DEBOUNCE_FREEZE",
+              "enumValues": ["DEM_DEBOUNCE_FREEZE", "DEM_DEBOUNCE_RESET"],
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-debounce-time-failed",
+              "shortName": "DemDebounceTimeFailedThreshold",
+              "description": "Time threshold for failed state (seconds)",
+              "type": "FLOAT",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0.5,
+              "min": 0.001,
+              "max": 3600,
+              "isOptional": false
+            },
+            {
+              "uuid": "ecuc-dem-debounce-time-passed",
+              "shortName": "DemDebounceTimePassedThreshold",
+              "description": "Time threshold for passed state (seconds)",
+              "type": "FLOAT",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0.5,
+              "min": 0.001,
+              "max": 3600,
+              "isOptional": false
+            }
+          ],
+          "references": [],
+          "subContainers": []
+        },
+        {
+          "uuid": "ecuc-dem-operation-cycle-def",
+          "shortName": "DemOperationCycle",
+          "description": "Definition of an operation cycle",
+          "multiplicity": { "lower": 0, "upper": "unbounded" },
+          "parameters": [
+            {
+              "uuid": "ecuc-dem-opcycle-type",
+              "shortName": "DemOperationCycleType",
+              "description": "Type of the operation cycle",
+              "type": "ENUM",
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "DEM_OPCYC_IGNITION",
+              "enumValues": [
+                "DEM_OPCYC_IGNITION",
+                "DEM_OPCYC_OBD_DCY",
+                "DEM_OPCYC_WARMUP",
+                "DEM_OPCYC_POWER"
+              ],
+              "isOptional": false
+            }
+          ],
+          "references": [],
+          "subContainers": []
+        }
+      ]
+    }
+  ]
+}

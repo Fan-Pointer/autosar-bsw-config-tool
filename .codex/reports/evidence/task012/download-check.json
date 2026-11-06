@@ -1,0 +1,19 @@
+{
+  "sourceFile": "C:/Users/Pointer/Downloads/autosar-raw-recovery-1793703691806.json",
+  "sha256": "54f264c39b45df74127f784043750d345a11052741c2ae8d63a83698b8d9461a",
+  "bytes": 64879,
+  "kind": "autosar-bsw-raw-export",
+  "sourceKey": "autosar-config-sets-v3",
+  "originalSets": 2,
+  "versions": [
+    "4.2.2",
+    "4.4.0"
+  ],
+  "quarantinedOldRecordMatches": true,
+  "draftMatches": true,
+  "originalLibraryUnchanged": true,
+  "snapshotMatchesOriginal": true,
+  "extension": {
+    "note": "RETAIN_FIXTURE"
+  }
+}

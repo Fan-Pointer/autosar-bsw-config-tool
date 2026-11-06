@@ -22,6 +22,8 @@ import {
   importError,
   serializeConfig,
   hydrateConfig,
+  record,
+  string,
 } from '@/core/io/ConfigJson';
 import { exportArxml, importArxml } from '@/core/io/Arxml';
 import { exportCsv } from '@/core/io/Csv';
@@ -54,7 +56,28 @@ interface StoredConfig extends Omit<ConfigInstance, 'containers'> {
 const storage = localforage.createInstance({ name: 'AutosarBswConfigTool', storeName: 'config' });
 const STORAGE_KEY = 'autosar-config-v2';
 const LIBRARY_KEY = 'autosar-config-sets-v3';
+const RECOVERY_KEY = 'autosar-recovery-state';
+const DRAFT_KEY = 'autosar-config-sets-v4-draft';
+/** Original records are kept even when their structure cannot be interpreted. */
+export interface QuarantinedRecord {
+  kind: 'configuration' | 'module' | 'preference' | 'library' | 'draft';
+  raw: unknown;
+  name: string;
+  moduleRef: string;
+  version: string;
+  reason: string;
+  quarantinedAt: string;
+}
+interface DataSafety {
+  locked: boolean;
+  reason: string | null;
+  snapshotKey: string | null;
+}
 interface StoredLibrary {
+  [key: string]: unknown;
+  schemaVersion?: number;
+  quarantinedSets?: QuarantinedRecord[];
+  dataSafety?: DataSafety;
   importedModules?: BswmdModule[];
   sets: StoredConfig[];
   activeUuid?: string;
@@ -92,6 +115,59 @@ function deserialize(container: StoredContainer): ConfigContainer {
   };
 }
 
+function cloneData<T>(value: T): T {
+  return JSON.parse(JSON.stringify(value)) as T;
+}
+
+// Storage is untrusted too. Validate structure without rejecting an unfinished configuration
+// or normalizing away unknown fields: recovery must not turn an invalid value into a default.
+function restoreStored(raw: unknown, definitions: BswmdModule[]): ConfigInstance {
+  const data = record(raw, '配置集');
+  const moduleRef = string(data.moduleRef, 'moduleRef');
+  const version = string(data.version, 'version');
+  const definition = definitions.find(
+    (item) => item.shortName === moduleRef && item.version === version
+  );
+  if (!definition) throw new Error(`BSWMD module not found: ${moduleRef} (${version})`);
+  const ids = new Set([string(data.uuid, 'uuid')]);
+  const visit = (items: unknown, allowed: BswmdModule['containers'], depth = 0): void => {
+    if (!Array.isArray(items) || depth > 128) throw new Error('容器结构无效或嵌套过深');
+    const names = new Set<string>();
+    for (const item of items) {
+      const child = record(item, '容器');
+      const id = string(child.uuid, '容器 uuid');
+      const name = string(child.shortName, '容器名称');
+      if (ids.has(id) || names.has(name)) throw new Error('容器 UUID 或同级名称重复');
+      ids.add(id);
+      names.add(name);
+      const def = allowed.find((entry) => entry.uuid === child.definitionRef);
+      if (!def) throw new Error(`${name}: unknown definitionRef ${String(child.definitionRef)}`);
+      for (const field of ['parameters', 'references'] as const) {
+        const pairs = child[field];
+        if (!Array.isArray(pairs)) throw new Error(`${name}/${field}: 应为键值数组`);
+        const keys = new Set<string>();
+        for (const pair of pairs) {
+          if (!Array.isArray(pair) || pair.length !== 2)
+            throw new Error(`${name}/${field}: 键值无效`);
+          const key = string(pair[0], '字段键');
+          const value = record(pair[1], '字段');
+          if (
+            keys.has(key) ||
+            value.definitionRef !== key ||
+            !def[field].some((entry) => entry.uuid === key)
+          )
+            throw new Error(`${name}/${field}: 未知或重复字段 ${key}`);
+          keys.add(key);
+        }
+      }
+      visit(child.subContainers, def.subContainers, depth + 1);
+    }
+  };
+  visit(data.containers, definition.containers);
+  const saved = cloneData(data) as unknown as StoredConfig;
+  return { ...saved, name: saved.name ?? moduleRef, containers: saved.containers.map(deserialize) };
+}
+
 /**
  * Use the definition-driven editor store.
  * @returns Module definitions, current configuration, and editor actions.
@@ -124,6 +200,17 @@ export const useConfigStore = defineStore('config', () => {
     () => configSets.value.find((set) => set.uuid === activeUuid.value) ?? null
   );
   const initialized = ref(false);
+  const quarantinedSets = ref<QuarantinedRecord[]>([]);
+  const dataSafety = ref<DataSafety>({ locked: false, reason: null, snapshotKey: null });
+  const recoveryWarning = ref<string | null>(null);
+  const draftUuids = ref<string[]>([]);
+  let originalRaw: unknown = null;
+  let sourceKey = LIBRARY_KEY;
+  let storageInspected = false;
+  let recovering = false;
+  let libraryExtras: Record<string, unknown> = {};
+  let draftRaw: unknown = null;
+  let draftLocked = false;
   let initializing: Promise<boolean> | undefined;
   let revision = 0;
   let writes: Promise<unknown> = Promise.resolve();
@@ -277,7 +364,9 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function importModuleDefinitions(definitions: BswmdModule[]): Promise<boolean> {
     assertEditable();
+    assertWritable();
     if (!(await initialize())) return false;
+    assertWritable();
     const names = definitions.map((definition) => definition.shortName);
     if (
       new Set(names).size !== names.length ||
@@ -522,6 +611,7 @@ export const useConfigStore = defineStore('config', () => {
     if (!name.trim()) throw new Error('请输入配置集名称');
     if (!(await initialize()) || (isDirty.value && !(await saveConfig()))) return false;
     createConfig(moduleName, name);
+    if (dataSafety.value.locked) draftUuids.value.push(activeUuid.value!);
     return saveConfig();
   }
 
@@ -536,6 +626,10 @@ export const useConfigStore = defineStore('config', () => {
     activeUuid.value = uuid;
     selectContainer(config.value?.containers[0]?.uuid ?? '');
     revision++;
+    if (dataSafety.value.locked) {
+      validate();
+      return true;
+    }
     isDirty.value = true;
     validate();
     return saveConfig();
@@ -547,6 +641,7 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function cloneConfigSet(uuid: string): Promise<boolean> {
     assertEditable();
+    assertWritable();
     const source = configSets.value.find((set) => set.uuid === uuid);
     if (!source || (isDirty.value && !(await saveConfig()))) return false;
     const base = source.name ?? source.moduleRef;
@@ -567,6 +662,7 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function deleteConfigSet(uuid: string): Promise<boolean> {
     assertEditable();
+    assertWritable();
     const index = configSets.value.findIndex((set) => set.uuid === uuid);
     if (index < 0 || (isDirty.value && !(await saveConfig()))) return false;
     const previousActive = activeUuid.value;
@@ -759,24 +855,30 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function saveConfig(): Promise<boolean> {
     if (isImporting.value) return false;
+    const toDraft = Boolean(activeUuid.value && draftUuids.value.includes(activeUuid.value));
+    if (!toDraft) assertWritable();
     isLoading.value = true;
     error.value = null;
     const savedRevision = revision;
     try {
       const snapshot: StoredLibrary = {
+        ...(toDraft ? {} : libraryExtras),
+        schemaVersion: 4,
         importedModules: JSON.parse(JSON.stringify(importedModules.value)) as BswmdModule[],
         activeUuid: activeUuid.value,
         modulePreferences: JSON.parse(JSON.stringify(modulePreferences.value)) as Record<
           string,
           ModulePreference
         >,
-        sets: configSets.value.map((set) => ({
-          ...set,
-          containers: set.containers.map(serialize),
-        })),
+        sets: configSets.value
+          .filter((set) => toDraft === draftUuids.value.includes(set.uuid))
+          .map((set) => ({
+            ...set,
+            containers: set.containers.map(serialize),
+          })),
       };
       // Serialize writes so a slow earlier save cannot overwrite a newer library snapshot.
-      const write = writes.then(() => storage.setItem(LIBRARY_KEY, snapshot));
+      const write = writes.then(() => persistLibrary(snapshot, toDraft));
       writes = write.catch(() => undefined);
       await write;
       if (revision === savedRevision) isDirty.value = false;
@@ -793,40 +895,150 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether a saved configuration was restored.
    */
   async function loadConfig(): Promise<boolean> {
-    if (isImporting.value) return false;
+    if (isImporting.value || recovering) return false;
+    recovering = true;
     isLoading.value = true;
     error.value = null;
     try {
-      let library = await storage.getItem<StoredLibrary>(LIBRARY_KEY);
-      if (!library) {
-        const legacy = await storage.getItem<StoredConfig>(STORAGE_KEY);
-        if (legacy) library = { sets: [legacy], activeUuid: legacy.uuid };
+      sourceKey = LIBRARY_KEY;
+      originalRaw = (await storage.getItem<unknown>(LIBRARY_KEY)) ?? null;
+      if (originalRaw === null) {
+        const legacy = (await storage.getItem<unknown>(STORAGE_KEY)) ?? null;
+        if (legacy !== null) {
+          originalRaw = legacy;
+          sourceKey = STORAGE_KEY;
+        }
       }
-      const restoredModules = [...loader.getAllModules(), ...(library?.importedModules ?? [])];
-      if (new Set(restoredModules.map((item) => item.shortName)).size !== restoredModules.length)
-        throw new Error('已保存的模块定义名称冲突');
-      const restored = (library?.sets ?? []).map((saved) => {
-        const definition = restoredModules.find(
-          (item) => item.shortName === saved.moduleRef && item.version === saved.version
-        );
-        if (!definition)
-          throw new Error(`BSWMD module not found: ${saved.moduleRef} (${saved.version})`);
-        const set = {
-          ...saved,
-          name: saved.name ?? saved.moduleRef,
-          containers: saved.containers.map(deserialize),
-        };
-        collectContainers(set, definition);
-        return set;
-      });
+      storageInspected = true;
+      quarantinedSets.value = [];
+      recoveryWarning.value = null;
+      draftUuids.value = [];
+      draftLocked = false;
+      const isolate = (
+        raw: unknown,
+        kind: QuarantinedRecord['kind'],
+        reason: unknown,
+        name = ''
+      ): void => {
+        const data = raw && typeof raw === 'object' ? (raw as Record<string, unknown>) : {};
+        quarantinedSets.value.push({
+          raw: cloneData(raw),
+          kind,
+          name: name || String(data.name ?? data.shortName ?? data.uuid ?? '无法识别的条目'),
+          moduleRef: String(data.moduleRef ?? data.shortName ?? ''),
+          version: String(data.version ?? ''),
+          reason: reason instanceof Error ? reason.message : String(reason),
+          quarantinedAt: new Date().toISOString(),
+        });
+      };
+      let library: Record<string, unknown> = {};
+      try {
+        library =
+          sourceKey === STORAGE_KEY
+            ? { sets: [originalRaw] }
+            : originalRaw === null
+              ? { sets: [] }
+              : record(originalRaw, '配置库');
+        if (!Array.isArray(library.sets)) throw new Error('配置库 sets 应为数组');
+        if (
+          library.schemaVersion !== undefined &&
+          library.schemaVersion !== 4 &&
+          library.schemaVersion !== 3
+        )
+          throw new Error(`不支持的库版本 ${String(library.schemaVersion)}`);
+      } catch (reason) {
+        isolate(originalRaw, 'library', reason);
+        library = {};
+      }
+      libraryExtras = cloneData(library);
+      const restoredModules = [...loader.getAllModules()];
+      const restoredImports: BswmdModule[] = [];
+      const importDefinitions = (raw: unknown): void => {
+        if (raw === undefined) return;
+        if (!Array.isArray(raw)) {
+          isolate(raw, 'module', '模块定义列表无效');
+          return;
+        }
+        for (const item of raw) {
+          try {
+            // Parse for structural validation, retain original metadata (the parser normalizes some fields).
+            const checked = new BswmdLoader().loadFromString(JSON.stringify(item));
+            if (restoredModules.some((existing) => existing.shortName === checked.shortName))
+              throw new Error('已保存的模块定义名称冲突');
+            const definition = cloneData(item) as BswmdModule;
+            restoredModules.push(definition);
+            restoredImports.push(definition);
+          } catch (reason) {
+            isolate(item, 'module', reason);
+          }
+        }
+      };
+      importDefinitions(library.importedModules);
+      const restored: ConfigInstance[] = [];
+      const restoreSets = (raw: unknown, draft = false): void => {
+        if (!Array.isArray(raw)) return;
+        for (const item of raw) {
+          try {
+            const set = restoreStored(item, restoredModules);
+            if (restored.some((existing) => existing.uuid === set.uuid))
+              throw new Error('配置集 UUID 重复');
+            restored.push(set);
+            if (draft) draftUuids.value.push(set.uuid);
+          } catch (reason) {
+            isolate(item, draft ? 'draft' : 'configuration', reason);
+            if (draft) draftLocked = true;
+          }
+        }
+      };
+      restoreSets(library.sets);
+      const preferences: Record<string, ModulePreference> = Object.fromEntries(
+        restoredModules.map((item) => [
+          item.shortName,
+          { included: true, generation: true, validation: true },
+        ])
+      );
+      if (library.modulePreferences !== undefined) {
+        try {
+          for (const [name, value] of Object.entries(
+            record(library.modulePreferences, '模块偏好')
+          )) {
+            try {
+              const pref = record(value, name);
+              if (
+                !['included', 'generation', 'validation'].every(
+                  (key) => typeof pref[key] === 'boolean'
+                )
+              )
+                throw new Error('模块偏好开关应为布尔值');
+              preferences[name] = cloneData(pref) as unknown as ModulePreference;
+            } catch (reason) {
+              isolate(value, 'preference', reason, name);
+            }
+          }
+        } catch (reason) {
+          isolate(library.modulePreferences, 'preference', reason);
+        }
+      }
+      draftRaw = (await storage.getItem<unknown>(DRAFT_KEY)) ?? null;
+      if (draftRaw !== null) {
+        try {
+          const draft = record(draftRaw, '草稿库');
+          if (!Array.isArray(draft.sets)) throw new Error('草稿库 sets 应为数组');
+          restoreSets(draft.sets, true);
+        } catch (reason) {
+          draftLocked = true;
+          isolate(draftRaw, 'draft', reason);
+        }
+      }
+      if (quarantinedSets.value.length) await protectOriginal();
+      else dataSafety.value = { locked: false, reason: null, snapshotKey: null };
       modules.value = restoredModules;
-      importedModules.value = library?.importedModules ?? [];
+      importedModules.value = restoredImports;
       manager = new ConfigInstanceManager(modules.value);
       configSets.value = restored;
       histories.clear();
       historyRevision.value++;
-      if (library?.modulePreferences)
-        Object.assign(modulePreferences.value, library.modulePreferences);
+      modulePreferences.value = preferences;
       activeUuid.value =
         restored.find((set) => set.uuid === library?.activeUuid)?.uuid ?? restored[0]?.uuid;
       selectContainer(config.value?.containers[0]?.uuid ?? '');
@@ -837,10 +1049,187 @@ export const useConfigStore = defineStore('config', () => {
       return restored.length > 0;
     } catch (reason) {
       error.value = reason instanceof Error ? reason.message : String(reason);
+      dataSafety.value = {
+        locked: true,
+        reason: `读取配置库失败：${error.value}`,
+        snapshotKey: null,
+      };
       return false;
     } finally {
       isLoading.value = false;
+      recovering = false;
     }
+  }
+
+  /** Reject writes to the protected original library before touching memory or storage.
+   * @returns Nothing; throws a DATA_LOCKED error while recovery is pending.
+   */
+  function assertWritable(): void {
+    if (recovering) throw new Error('DATA_LOCKED：正在恢复原配置库，请稍后重试');
+    if (dataSafety.value.locked) {
+      error.value = `DATA_LOCKED：${dataSafety.value.reason}`;
+      throw new Error(error.value);
+    }
+  }
+
+  async function protectOriginal(): Promise<void> {
+    let snapshotKey: string | null = null;
+    try {
+      const previous = await storage.getItem<{
+        snapshotKey?: string;
+        quarantinedSets?: QuarantinedRecord[];
+      }>(RECOVERY_KEY);
+      if (
+        previous?.snapshotKey &&
+        JSON.stringify(await storage.getItem(previous.snapshotKey)) === JSON.stringify(originalRaw)
+      ) {
+        snapshotKey = previous.snapshotKey;
+        for (const item of quarantinedSets.value) {
+          const prior = previous.quarantinedSets?.find(
+            (p) => p.kind === item.kind && JSON.stringify(p.raw) === JSON.stringify(item.raw)
+          );
+          if (prior) item.quarantinedAt = prior.quarantinedAt;
+        }
+      }
+      if (!snapshotKey) {
+        snapshotKey = `autosar-recovery-snapshot-${new Date().toISOString()}-${generateUUID()}`;
+        await storage.setItem(snapshotKey, cloneData(originalRaw));
+      }
+    } catch (reason) {
+      snapshotKey = null;
+      recoveryWarning.value = `永久快照未能写入，请立即导出原始数据：${String(reason)}`;
+    }
+    // Even quota/read failures must establish the in-memory lock; no original write is attempted.
+    dataSafety.value = {
+      locked: true,
+      reason: `${quarantinedSets.value.length} 个条目无法安全恢复，原库已保护`,
+      snapshotKey,
+    };
+    try {
+      await storage.setItem(
+        RECOVERY_KEY,
+        cloneData({
+          schemaVersion: 1,
+          ...dataSafety.value,
+          sourceKey,
+          quarantinedSets: quarantinedSets.value,
+          draftKey: DRAFT_KEY,
+        })
+      );
+    } catch (reason) {
+      recoveryWarning.value = `${recoveryWarning.value ?? ''} 隔离状态未能持久化，原库仍受保护；下次启动会重新检测：${String(reason)}`;
+    }
+  }
+
+  async function persistLibrary(snapshot: StoredLibrary, toDraft = false): Promise<void> {
+    if (toDraft) {
+      if (draftLocked) throw new Error('DATA_LOCKED：草稿库也有未恢复条目，禁止覆盖');
+      if (JSON.stringify((await storage.getItem(DRAFT_KEY)) ?? null) !== JSON.stringify(draftRaw))
+        throw new Error('草稿库已在其他页面改变，请重新打开后再保存');
+      await storage.setItem(DRAFT_KEY, snapshot);
+      draftRaw = cloneData(snapshot);
+      return;
+    }
+    assertWritable();
+    const current = (await storage.getItem<unknown>(sourceKey)) ?? null;
+    // Protect callers that use createConfig directly without first loading an existing library.
+    if (
+      (!storageInspected && current !== null) ||
+      (storageInspected && JSON.stringify(current) !== JSON.stringify(originalRaw))
+    ) {
+      dataSafety.value = {
+        locked: true,
+        reason: '库尚未恢复或已在其他页面改变，请重新打开以保护原数据',
+        snapshotKey: null,
+      };
+      assertWritable();
+    }
+    if (!storageInspected && (await storage.getItem(STORAGE_KEY)) != null) {
+      dataSafety.value = {
+        locked: true,
+        reason: '存在尚未读取的旧配置，请先重新打开',
+        snapshotKey: null,
+      };
+      assertWritable();
+    }
+    await storage.setItem(LIBRARY_KEY, snapshot);
+    originalRaw = cloneData(snapshot);
+    sourceKey = LIBRARY_KEY;
+    storageInspected = true;
+    libraryExtras = cloneData(snapshot);
+  }
+
+  /** Retrieve raw storage independently of whether any configuration can be decoded.
+   * @returns Local-download Blob with rawJson separated from recovery metadata.
+   */
+  async function exportRawLibrary(): Promise<Blob> {
+    const raw = await storage.getItem<unknown>(sourceKey);
+    return new Blob(
+      [
+        JSON.stringify(
+          {
+            kind: 'autosar-bsw-raw-export',
+            exportedAt: new Date().toISOString(),
+            sourceKey,
+            rawJson: JSON.stringify(raw),
+            recoveryState: { ...dataSafety.value, quarantinedSets: quarantinedSets.value },
+            snapshotKeys: dataSafety.value.snapshotKey ? [dataSafety.value.snapshotKey] : [],
+            backupIndex: (await storage.getItem('autosar-backup-index')) ?? [],
+            draftLibrary: await storage.getItem(DRAFT_KEY),
+          },
+          null,
+          2
+        ),
+      ],
+      { type: 'application/json' }
+    );
+  }
+
+  /** Delete only the named recovery copy after explicit UI confirmation; the original stays locked.
+   * @param key Snapshot shown in the confirmation. @returns Nothing.
+   */
+  async function deleteRecoverySnapshot(key: string): Promise<void> {
+    if (
+      !key ||
+      key !== dataSafety.value.snapshotKey ||
+      !key.startsWith('autosar-recovery-snapshot-')
+    )
+      throw new Error('快照已改变，请重新查看详情');
+    const current = await storage.getItem(sourceKey);
+    if (JSON.stringify(current) !== JSON.stringify(originalRaw))
+      throw new Error('原库已变化，不能删除恢复副本');
+    await storage.removeItem(key);
+    dataSafety.value.snapshotKey = null;
+    await storage.setItem(
+      RECOVERY_KEY,
+      cloneData({
+        schemaVersion: 1,
+        ...dataSafety.value,
+        sourceKey,
+        quarantinedSets: quarantinedSets.value,
+        draftKey: DRAFT_KEY,
+      })
+    );
+  }
+
+  /** Decode an isolated record against an exact historical asset without registering it for editing.
+   * @param index Index of the isolated record. @returns Detached read-only view data.
+   */
+  async function openQuarantinedReadOnly(
+    index: number
+  ): Promise<{ config: ConfigInstance; module: BswmdModule }> {
+    const entry = quarantinedSets.value[index];
+    if (!entry || entry.kind !== 'configuration') throw new Error('请选择不兼容配置集');
+    const legacySources = import.meta.glob<string>('../../bswmd/legacy/*.json', {
+      query: '?raw',
+      import: 'default',
+    });
+    for (const read of Object.values(legacySources)) {
+      const definition = new BswmdLoader().loadFromString(await read());
+      if (definition.shortName === entry.moduleRef && definition.version === entry.version)
+        return { config: restoreStored(entry.raw, [definition]), module: definition };
+    }
+    throw new Error('没有匹配的准确历史定义；原始数据仍可导出取回');
   }
 
   function assertEditable(): void {
@@ -919,6 +1308,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether application succeeded; errors leave configuration, selection and dirty state intact.
    */
   async function applyImport(session: ImportSession, strategy: ConflictStrategy): Promise<boolean> {
+    assertWritable();
     if (isLoading.value || isImporting.value) {
       error.value = '正在保存配置，请稍后应用导入';
       return false;
@@ -940,15 +1330,19 @@ export const useConfigStore = defineStore('config', () => {
         ? configSets.value.map((set) => (set.uuid === session.targetUuid ? candidate : set))
         : [...configSets.value, candidate];
       const snapshot: StoredLibrary = {
+        ...libraryExtras,
+        schemaVersion: 4,
         importedModules: JSON.parse(JSON.stringify(importedModules.value)) as BswmdModule[],
-        sets: next.map((set) => ({ ...set, containers: set.containers.map(serialize) })),
+        sets: next
+          .filter((set) => !draftUuids.value.includes(set.uuid))
+          .map((set) => ({ ...set, containers: set.containers.map(serialize) })),
         activeUuid: candidate.uuid,
         modulePreferences: JSON.parse(JSON.stringify(modulePreferences.value)) as Record<
           string,
           ModulePreference
         >,
       };
-      const write = writes.then(() => storage.setItem(LIBRARY_KEY, snapshot));
+      const write = writes.then(() => persistLibrary(snapshot));
       writes = write.catch(() => undefined);
       await write;
       configSets.value = next;
@@ -985,6 +1379,14 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   return {
+    quarantinedSets,
+    dataSafety,
+    recoveryWarning,
+    draftUuids,
+    assertWritable,
+    exportRawLibrary,
+    deleteRecoverySnapshot,
+    openQuarantinedReadOnly,
     selectChoice,
     confirmRequiredDefaults,
     importModuleDefinitions,

@@ -18,14 +18,23 @@
       <el-button type="primary" :disabled="store.isLoading" @click="showCreate = true"
         >新建配置集</el-button
       >
-      <el-button :disabled="!store.config || store.isLoading" @click="cloneSet"
+      <el-button
+        :disabled="!store.config || store.isLoading || store.dataSafety.locked"
+        @click="cloneSet"
         >克隆配置集</el-button
       >
-      <el-button type="danger" plain :disabled="!store.config || store.isLoading" @click="deleteSet"
+      <el-button
+        type="danger"
+        plain
+        :disabled="!store.config || store.isLoading || store.dataSafety.locked"
+        @click="deleteSet"
         >删除配置集</el-button
       >
     </div>
     <p v-if="summary" class="set-metadata">
+      <strong v-if="store.activeUuid && store.draftUuids.includes(store.activeUuid)"
+        >独立草稿 ·
+      </strong>
       最后修改：{{ new Date(summary.lastModified).toLocaleString('zh-CN') }} ·
       {{ summary.containerCount }} 个容器 · {{ summary.errorCount }} 个错误
     </p>
@@ -70,17 +79,18 @@ const moduleName = ref(store.module?.shortName ?? store.modules[0]?.shortName);
 const summary = computed(() => store.summaries.find((set) => set.uuid === store.activeUuid));
 
 async function createSet(): Promise<void> {
-  if (await store.createConfigSet(name.value, moduleName.value)) {
+  if (await store.createConfigSet(name.value, moduleName.value).catch(() => false)) {
     showCreate.value = false;
     name.value = '';
     emit('opened');
   }
 }
 async function openSet(uuid: string): Promise<void> {
-  if (await store.switchConfigSet(uuid)) emit('opened');
+  if (await store.switchConfigSet(uuid).catch(() => false)) emit('opened');
 }
 async function cloneSet(): Promise<void> {
-  if (store.activeUuid && (await store.cloneConfigSet(store.activeUuid))) emit('opened');
+  if (store.activeUuid && (await store.cloneConfigSet(store.activeUuid).catch(() => false)))
+    emit('opened');
 }
 async function deleteSet(): Promise<void> {
   const uuid = store.activeUuid;
@@ -98,7 +108,7 @@ async function deleteSet(): Promise<void> {
   } catch {
     return;
   }
-  await store.deleteConfigSet(uuid);
+  await store.deleteConfigSet(uuid).catch(() => false);
 }
 </script>
 

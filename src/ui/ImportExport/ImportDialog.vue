@@ -191,7 +191,7 @@ async function readFile(event: Event): Promise<void> {
 }
 async function apply(): Promise<void> {
   if (!session.value || !preview.value.plan) return;
-  if (await store.applyImport(session.value, strategy.value)) {
+  if (await store.applyImport(session.value, strategy.value).catch(() => false)) {
     ElMessage.success('导入完成，已保存到本机');
     emit('imported');
     emit('update:modelValue', false);

@@ -109,6 +109,7 @@
       </button>
       <span class="language">简体中文⌄</span><span class="avatar">配</span>
     </header>
+    <RecoveryPanel />
     <el-alert v-if="store.error" :title="store.error" type="error" :closable="false" />
     <main class="workspace-main">
       <aside
@@ -407,6 +408,7 @@ import DynamicForm from '@/ui/FormEditor/DynamicForm.vue';
 import ContainerNavigator from '@/ui/ConfigTree/ContainerNavigator.vue';
 import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
+import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 import ContainerActions from '@/ui/ConfigTree/ContainerActions.vue';
 import ModuleManager from '@/ui/Modules/ModuleManager.vue';
 import ImportDialog from '@/ui/ImportExport/ImportDialog.vue';
@@ -488,7 +490,7 @@ onUnmounted(() => {
   window.removeEventListener('beforeunload', warnUnsaved);
   stopResize();
 });
-onBeforeRouteLeave(() => !store.isDirty || store.saveConfig());
+onBeforeRouteLeave(() => !store.isDirty || store.saveConfig().catch(() => false));
 function warnUnsaved(event: BeforeUnloadEvent): void {
   if (store.isDirty) {
     event.preventDefault();
@@ -536,16 +538,16 @@ function ioAction(action: string, format: ExportFormat): void {
 async function openModule(name: string): Promise<void> {
   const existing = store.configSets.find((item) => item.moduleRef === name);
   if (existing) {
-    if (!(await store.switchConfigSet(existing.uuid))) return;
-  } else if (!(await store.createConfigSet(name + ' 配置', name))) return;
+    if (!(await store.switchConfigSet(existing.uuid).catch(() => false))) return;
+  } else if (!(await store.createConfigSet(name + ' 配置', name).catch(() => false))) return;
   if (store.activeUuid && !opened.value.includes(store.activeUuid))
     opened.value.push(store.activeUuid);
 }
 async function closeTab(uuid: string): Promise<void> {
-  if (store.isDirty && !(await store.saveConfig())) return;
+  if (store.isDirty && !(await store.saveConfig().catch(() => false))) return;
   opened.value = opened.value.filter((id) => id !== uuid);
   if (store.activeUuid === uuid && opened.value.length)
-    await store.switchConfigSet(opened.value[opened.value.length - 1]);
+    await store.switchConfigSet(opened.value[opened.value.length - 1]).catch(() => false);
 }
 function reconcileModules(): void {
   opened.value = opened.value.filter((id) => {
@@ -590,7 +592,8 @@ async function projectAction(action?: string): Promise<void> {
   if (action === 'modules') showModules.value = true;
   if (action === 'validate' && operationEnabled('validation')) validate();
   if (action === 'generate' && operationEnabled('generation')) await generateCode();
-  if (action === 'close' && (!store.isDirty || (await store.saveConfig()))) opened.value = [];
+  if (action === 'close' && (!store.isDirty || (await store.saveConfig().catch(() => false))))
+    opened.value = [];
 }
 function validate(): void {
   store.validate();
@@ -619,7 +622,10 @@ function navigateSearch(result: SearchResult): void {
   void focusField(result.fieldUuid);
 }
 async function saveConfig(): Promise<void> {
-  if (await store.saveConfig()) ElMessage.success('已保存到本机');
+  if (await store.saveConfig().catch(() => false)) {
+    if (store.dataSafety.locked) ElMessage.info('独立草稿写入完成；原配置库仍锁定');
+    else ElMessage.success('已保存到本机');
+  }
 }
 async function generateCode(): Promise<void> {
   if (!store.config || !store.module) return;

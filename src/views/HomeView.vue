@@ -1,5 +1,6 @@
 <template>
   <div class="home-container">
+    <RecoveryPanel />
     <div class="hero-section">
       <h1 class="title">AUTOSAR BSW Config Tool</h1>
       <p class="subtitle">基于网页的 AUTOSAR 基础软件配置工具</p>
@@ -75,6 +76,7 @@ import { Edit, Document, Lock } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
 import { useConfigStore } from '@/stores/configStore';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
+import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 
 const router = useRouter();
 const store = useConfigStore();
@@ -82,7 +84,7 @@ onMounted(() => {
   void store.initialize();
 });
 async function openSet(uuid: string): Promise<void> {
-  if (await store.switchConfigSet(uuid)) await router.push('/workspace');
+  if (await store.switchConfigSet(uuid).catch(() => false)) await router.push('/workspace');
 }
 </script>
 
