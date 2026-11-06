@@ -32,3 +32,5 @@ coverage
 .cache
 .temp
 vite.config.ts.timestamp-*.mjs
+# Cleanup archive (do not scan/commit)
+_archive

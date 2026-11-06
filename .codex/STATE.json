@@ -2,25 +2,25 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-19",
-  "stageName": "S5 前置插队：工程向导（新建工程两步/内置模块 4.4.0/悬停直选，ADR-12）；S5 多模块顺延 TASK-020",
+  "stage": "PHASE-21",
+  "stageName": "S5 双版本全目录接入（manifest 完整可见/解析器逐类扩展/复合键/统一选择器/工程内增减模块）",
   "task": {
-    "id": "TASK-019",
-    "title": "工程向导优先插队：新建实例悬停展开 + 内置标准模块 4.4.0 + 新建工程两步向导（ADR-12）",
-    "status": "SUBMITTED",
+    "id": "TASK-021",
+    "title": "双版本全目录接入：manifest 完整可见 + 解析器逐类扩展（4.2.2 Dem 首批）+ 复合键 + 统一选择器 + 工程内增减模块",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "0bb62d5d2427cb0e85a6c0ab69ce9af826775e288c5333ccdce515aaa2c45c2b",
+    "contractHash": "91846569845ada0b2ced0ad553fe2c363c35cc2948e43161631b8f7f6d8b462d",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T15:28:26+08:00",
-    "reportPath": ".codex/reports/TASK-019-REPORT.md",
+    "contractBoundAt": "2026-11-06T16:47:19+08:00",
+    "reportPath": ".codex/reports/TASK-021-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "46a39e5a60bc6c80a6b175003a79e2ea938cd3df",
-    "createdAt": "2026-11-06T15:18:13+08:00",
-    "submittedAt": "2026-11-06T16:24:07.8051988+08:00",
+    "submissionCommit": null,
+    "createdAt": "2026-11-06T16:47:19+08:00",
+    "submittedAt": null,
     "approvedAt": null,
     "designPath": "docs/product-design/02-TECH-DESIGN.md"
   },
@@ -32,14 +32,6 @@
     "BLOCKED": "等待人工决策"
   },
   "queue": [
-    {
-      "taskId": "TASK-021",
-      "title": "双版本定义库接入：4.2.2 官方资产管线 + (shortName, release) 版本化加载 + 向导启用 4.2.2",
-      "stage": "PHASE-21（紧接 TASK-019 之后）",
-      "contractPath": ".codex/tasks/TASK-021-CONTRACT.md",
-      "contractHash": "恢复下发时以归档文件重算为准",
-      "note": "用户 2026-11-06 HOME-C-422 授权：4.2.2 官方完整源已取得并经评审方独立验证（ARXML SHA256 b5828bbd…8328c 与申报逐字一致；_readme.txt 'Part of AUTOSAR Release 4.2.2'；schemaLocation AUTOSAR_4-2-2.xsd）。ADR-13 登记：复合键 (shortName, release) 防同名混淆（预期触达 core，逐文件列报告）；内置目录逐步覆盖、解析失败如实禁用；起步集 Dem@4.2.2。TASK-019 期间向导 4.2.2 仍展示待接入态。前置=TASK-019 SUBMITTED/APPROVED。"
-    },
     {
       "taskId": "TASK-020",
       "title": "S5 首契约：多模块并存（ADR-11/12）——批量抽取 + 并存全链路 + 按工程导出 manifest + 跨模块边界",
@@ -391,20 +383,35 @@
           "reviewPath": ".codex/review/TASK-018-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-019",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-06T16:47:19+08:00",
+      "submissionCommit": "46a39e5a60bc6c80a6b175003a79e2ea938cd3df",
+      "note": "工程向导+内置模块4.4.0+悬停直选+首页EasySAR-C round 0 一次通过(隔离复跑口径): 0 阻塞/0 重要/3 建议。独立复核: build 13.12s; test:verify 23/23 守卫+327/327(首轮 editor-ui 撤销满载 502-532ms 超限, 单文件隔离 342.88ms 与 Codex 基线 352.86 一致→负载抖动非回归; 守卫多收集系评审方 _archive 备份污染, 已修复并 gitignore _archive); src/core 0 行; STATE 三字段合法。要点: A 悬停 pointerenter/leave 300ms+键盘共存+DOM 断言快移不关闭; B builtinCatalog 三模块 ?raw 独立 chunk 237/81/41kB 主包不含定义; C projectMetadata 侧表 assertWritable+孤儿可恢复双键写入如实声明+默认工程零迁移; D 盘点如实 4.2.2 84/20(Dem 枚举拒绝)+4.4.0 98/92+解析通过≠功能支持; E 首页截图亲核(航海科技/OneSAR/蓝白/真实入口/无二维码, 服务区 bottom599.69)。附加: 实例名 draft 修复(契约外真实缺陷, 显式声明)。诚实度: 旧截图标注压缩前不冒充+中途失败留痕。🟡-1 editor-ui 满载余量不足→S7(全量偶发超限按隔离复跑口径); 🟡-2 孤儿修复 UI 呈现→后续; 🟡-3 HANDOFF 未暂存正确, 019 过后评审方更新 v1.1。用户新增范围(完整双版本目录/统一选择器/工程内增减/4.2.2 Dem 枚举)已修订进 TASK-021 下发 READY; 4.4.4 文件名澄清采纳(内部 4.4.0)。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "46a39e5a60bc6c80a6b175003a79e2ea938cd3df",
+          "reviewPath": ".codex/review/TASK-019-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-018",
+    "taskId": "TASK-019",
     "round": 0,
-    "reviewedCommit": "65308eec999e6e230a511de5aec429890a82e382",
-    "at": "2026-11-06T14:48:27+08:00",
+    "reviewedCommit": "46a39e5a60bc6c80a6b175003a79e2ea938cd3df",
+    "at": "2026-11-06T16:47:19+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
-    "minors": 2,
-    "reviewPath": ".codex/review/TASK-018-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-018-ROUND-0-REVIEW.md"
+    "minors": 3,
+    "reviewPath": ".codex/review/TASK-019-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-019-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
