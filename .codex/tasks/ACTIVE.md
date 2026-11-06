@@ -1,73 +1,46 @@
-# ACTIVE TASK — TASK-012（v2，并入 CONTRACT_CLARIFY 六项裁定）
+# ACTIVE TASK — TASK-013
 
 > 本文件是 Codex 唯一的任务契约来源。开始实现前必须完整读取；**不得修改本文件**。
 > 契约哈希由评审方写入 `STATE.json` 的 `task.contractHash`，篡改会导致调度器拒绝派发。
-> 设计依据：`docs/product-design/S0-LEGACY-DATA-RECOVERY.md` **v3**（裁定已并入）+ `02-TECH-DESIGN.md` §1.1/§2/§3 + `01-IA-AND-SCREENS.md` §2.1/W1/W2。
-> 六项裁定摘要（详见 S0 v3 头部与 02 ADR-06/08）：
-> R1 普通加载不写库；R2 锁定状态走 sidecar（`autosar-recovery-state`），**v3 原库锁定期间完全冻结（零写入零升级）**；R3 导出包 rawJson 与索引/状态分离，断言为"反序列化后深度相等"；R4 fail ≤70；R5 允许范围含 `src/views/WorkspaceView.vue`、`HomeView.vue` 挂载点；R6 S3 闸门消费方仅业务输出，JSON/整库备份永远可取回。
+> 设计依据：`docs/product-design/00-SCOPE-AND-FEATURES.md`（G07）、`02-TECH-DESIGN.md` §5 测试策略。
 
 | 项 | 值 |
 |---|---|
-| 任务编号 | **TASK-012** |
-| 任务名 | S1 旧数据安全恢复：逐条隔离 + 永久快照 + sidecar 写锁 + 原样导出 + 准确旧定义只读打开 |
-| 阶段 | PHASE-12（R3-S1） |
-| 指派 | codex（主对话实现，不另唤后台 worker） |
-| 前置 | 用户已授权继续；研究基线 `1e03827`、规划链 `1b76986`→`715e2c7` |
-| 明确不含 | 跨版本迁移（S6）；namespace/输出闸门（S3）；解锁写回原库（S6）；环形常规备份可顺带实现但不属验收主线 |
+| 任务编号 | **TASK-013** |
+| 任务名 | S2 测试基线重建：265 项全绿（0 fail），语义适配不削弱 |
+| 阶段 | PHASE-13（R3-S2） |
+| 指派 | codex（主对话实现） |
+| 前置 | TASK-012 APPROVED（`ee843449`，评审快照 TASK-012-ROUND-0-REVIEW.md）；当前基线 265 总 = 195 pass + 70 fail（评审方实测；gcc skip 摊平） |
+| 明确不含 | 业务功能新增；core 架构语义变更（修复测试暴露的真实缺陷除外，逐条列明） |
 
 ---
 
-## 1. 交付清单（A/B/C 三组）
-
-### A. 核心机制（round 0 必做）
+## 1. 交付清单
 
 | 编号 | 交付内容 |
 |---|---|
-| A1 | `loadConfig()` 逐配置集 try/catch：兼容条目正常恢复；失配条目进隔离状态（raw 原样保底 + reason + moduleRef + version + quarantinedAt）；importedModules/modulePreferences 逐项隔离；名称冲突降为隔离条件。**不变式：原库记录 ⇔ 内存+隔离区一一对应，无丢弃。普通加载不写库（R1）** |
-| A2 | 锁定状态持久化于 sidecar `autosar-recovery-state`（locked/reason/snapshotKey/quarantinedSets/draftKey）；**检出隔离条目时先写永久快照 `autosar-recovery-snapshot-<ISO>`（JSON.parse 后与原库值深度相等）再建锁**；快照写入失败 → 照常建锁且本轮所有对原库写路径保持拒绝。**锁定期间 `LIBRARY_KEY` 零写入零结构升级（R2）** |
-| A3 | `assertWritable()` 唯一写入口 guard：saveConfig / import-apply / 删除配置集 / 清空 / 结构升级 全部前置；锁定时抛 `DATA_LOCKED{reason}`。新建配置集允许：写入 `autosar-config-sets-v4-draft`，**该 key 持久化且重启后恢复为草稿配置集（R2）**，绝不触 v3 原库 |
-| A4 | 全兼容路径：加载不写库；常规保存行为与现状一致，写入附加 `schemaVersion:4` 属非破坏性（读取 v3/v4 双向兼容，缺字段视为 v3），**不加快照**；"解锁写回前强制快照"为设计保留（S6 实现，本期不实现解锁写回）（R1/R3） |
-| A5 | `exportRawLibrary()` 导出包（结构分离，R3）：`{ kind:'autosar-bsw-raw-export', exportedAt, sourceKey, rawJson, recoveryState, snapshotKeys, backupIndex }`；断言口径 `JSON.parse(rawJson)` 与原库当前值**深度相等**（含隔离条目原字段/uuid/version） |
-
-### B. 界面（round 0 必做）
-
-| 编号 | 交付内容 |
-|---|---|
-| B1 | 数据安全横幅（W1）挂载于 `src/views/WorkspaceView.vue` 与 `HomeView.vue`（R5）：四动作 [导出原始数据][查看隔离详情][用旧版本定义只读打开][暂时搁置]；不阻塞兼容条目正常编辑 |
-| B2 | 隔离详情弹窗（W2）：逐条 名称/模块/版本/原因；含 [导出原始数据] 与快照信息；[删除快照] 需二次确认 |
-| B3 | 只读打开：用 `bswmd/legacy/dem_bswmd_4.2.2.json`（从 Git 历史 `819eb12^` 恢复的只读资产）加载隔离条目为只读视图——树/参数原样可见，编辑/保存/导出禁用；**零映射零改写** |
-| B4 | 锁定态不显示任何"已保存"类误导反馈；被拒写操作给出 `DATA_LOCKED` 原因 |
-| B5 | 刷新后锁定状态与隔离信息随 sidecar 仍在；**draft 草稿重启后恢复**（R2） |
-
-### C. 测试
-
-| 编号 | 交付内容 |
-|---|---|
-| C1 | 新增 S1 测试覆盖设计断言 A1–A8（S0 v3 §4）：混合库隔离且原库零写入/锁与深度相等/快照时序与永久性/快照失败拒写/导出包结构与 rawJson 深度相等/只读打开零映射/全兼容零快照零锁/draft 重启恢复/sidecar 刷新保持 |
-| C2 | 既有 250 项测试**不退化：pass ≥179、fail ≤70（R4）**；S1 新增用例全绿；不得删测试、不得削断言、不得沿用 legacy-map 错误映射 |
-
----
+| A1 | **70 项既有失败清零**。方法：合成定义测通用算法（实例管理/历史栈/约束引擎等核心行为），官方定义测集成（Dem 67 容器导入导出往返）。fixture 双轨分离后不再因定义切换整批红 |
+| A2 | **legacy-map 借位断言语义修正**：`ecuc-dem-dtc-j1939-node-ref` 字符串用例改走合成 STRING 参数；`ecuc-dem-attr-immediate-nv` 用例改走合成 BOOLEAN；**禁止映射到 DemDTCSeverity / DemAgingAllowed**（已核实反例）。每个保留的 legacy() 借用点须注释其非等价性 |
+| A3 | 语义核查表：每个被改断言「旧意图 → 新意图」逐条说明，覆盖面不得减少（沿用 TASK-008 C3 标准）；数量断言按官方定义重算（DemDTC 5 参数、DemDTCAttributes 6+8 等） |
+| A4 | 真实缺陷记录：若失败根因是产品缺陷（非测试过时），**不悄悄改测试迁就**——记入报告「真实缺陷清单」并给出 S3 修复建议；确属紧急且小者可修，逐条列明 |
+| A5 | 附带修复（TASK-012 评审 🟡）：🟡-2 导出包加 readme 字段说明三段数据语义；🟡-3 sidecar 写失败时横幅追加「请勿关闭页面前导出数据」 |
+| A6 | 🟡-4：`02-TECH-DESIGN.md` 补存储状态机小图（评审方文档，Codex 提出要点即可，不强制） |
 
 ## 2. 验收标准
 
 1. `npm run build` 通过。
-2. C1 全绿 + C2 达标（引用 `.temp` 新 JSON 报告原文）。
-3. 手工核验（真实浏览器，隔离 origin 或构造库，**绝不在用户真实 4.2.2 库上做破坏性操作**）：横幅四动作可用、导出包可解析且 rawJson 与库一致、只读视图可浏览、刷新与重启（draft）状态保持。证据截图+DOM 归 `evidence/`。
-4. **允许触碰**：`src/stores/configStore.ts`、`src/ui/**`、`src/views/WorkspaceView.vue` 与 `src/views/HomeView.vue`（仅横幅/入口挂载，R5）、`bswmd/legacy/*`（新增资产）、`tests/**`（新增 S1 用例）。**禁区**：`src/core/**`（S1 零改动）、`src/core/io/Arxml.ts`。
+2. **265 总数中 0 fail、pass ≥264（≤1 个明确编译器环境 skip，报告注明 gcc 可用性）**。
+3. 既有测试文件零删除；断言调整全部有语义核查表（A3）；`legacy-map` 无新增产品化引用。
+4. `src/core/**` 仅允许修复真实缺陷的改动且逐条列明（预期为空或极少）；`src/stores`、`src/ui`、`src/views` 允许测试配套小改。
 5. 未修改 `STATE.json` 的 `stage`、`review/**`、本契约。
 
 ## 3. 红线
 
-1. **禁止任何自动迁移与映射驱动改写**；`tests/helpers/legacy-map.json` 禁止产品化（已核实反例 J1939→Severity、ImmediateNv→AgingAllowed）。
-2. 禁止改版本号伪装匹配、清空存储、静默转换、反向迁移；**锁定态禁止对 v3 原库任何写入（含结构升级）**。
-3. 禁止在用户真实数据上故意复现覆盖路径；测试一律用构造库/隔离 origin。
-4. 本任务新增文案不出现"工程/自动计算"等未核实占位措辞。
-5. 不动 `src/core/**`、不动 namespace、不动输出闸门（S3 范围；JSON/备份不拦截已由 ADR-06 范围修订裁定，S3 实现时遵循）。
+1. 不删测试、不削断言、不用降低标准变绿（沿用历轮红线）。
+2. 禁止用 legacy-map 语义替换「修好」测试（J1939→Severity、ImmediateNv→AgingAllowed 为已核实反例）。
+3. 不动 namespace、不动输出闸门、不做迁移（S3/S6 范围）。
+4. S1 交付的安全机制（隔离/快照/写锁/草稿）不得回退；recovery 测试 15 项必须保持全绿。
 
-## 4. 分批交付
+## 4. 报告要求
 
-round 0 必须完成 A 全部 + B1/B2/B4/B5 + C 全部；B3（只读打开）可留 round 1（若留，报告写明，隔离区仍可导出取回，不构成交付阻塞）。
-
-## 5. 报告要求
-
-交付对照逐项文件+要点 / 存储路径梳理结论（sidecar/draft/快照键清单）/ 故障链修复前后对照（引用真实报错文本）/ 测试报告原文关键行 / 浏览器证据路径 / 未完成与限制显式列出 / 提交后单独提交 STATE（status=SUBMITTED、submittedAt、submissionCommit 完整 SHA）。
+失败清零对照（70 项逐条：修法归类 测试适配/语义重算/真实缺陷）/ 语义核查表 / gcc 可用性说明 / 恢复测试回归确认 / 自检原文关键行 / 未完成与限制显式列出 / 提交后单独提交 STATE（SUBMITTED + submissionCommit 完整 SHA）。
