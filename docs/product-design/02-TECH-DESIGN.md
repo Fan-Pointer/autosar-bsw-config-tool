@@ -44,6 +44,18 @@ declare function isOutputReady(config: ConfigInstance, module: BswmdModule): Out
 - `bswmd/legacy/dem_bswmd_4.2.2.json`：从 Git 历史（`819eb12^`）恢复，只读资产；仅用于隔离条目只读打开；**不注册**为可编辑定义
 - 模块分组元数据（协议栈分组，对标 B04）推迟到 S5 与 G21 一并设计；core 不感知分组
 
+### 1.5 多模块并存与边界（ADR-11，S5 前置小节）
+
+| 能力 | 设计 |
+|---|---|
+| 定义提取 | `scripts/gen-bswmd-from-arxml.mjs` 增批量模式（无参=列出可选模块；`--all` 或多模块名=一次抽取）；复用 `importEcucModuleArxml` 单一解析器；每份输出带 `$source`（源文件 SHA-256/提取时间）。运行时导入沿用 ModuleManager 现有多选 UI + Worker |
+| 并存与切换 | 同一 library 内多份已载入定义；模块面板按 moduleRef 分组；配置集绑定各自 moduleRef/version；切换不串字段（既有 openModule 语义） |
+| 保存恢复 | library 整体持久化（现状）；S1 的恢复保护按**库级**生效（任一定义失配条目隔离，其余照常）——多模块不引入新恢复路径 |
+| 整体备份 | 整库 raw 导出（S1 机制）天然覆盖全部模块；解锁后常规备份同理 |
+| 整体输出 | 「按工程导出」= 逐已包含模块生成 ARXML/C + `manifest.json`（模块清单/版本/定义来源 hash/生成时间）；单模块导出保留 |
+| 跨模块引用 | **本期边界**：引用目标解析限本配置集内；跨模块目标在候选列表中不出现或标记「跨模块（不支持）」，校验给具体原因——沿 G05「不静默丢失」红线；官方 ECUC 跨模块 REFERENCE-DEF 的真实语义留待后续立项 |
+| 验收基准 | Dem + CanIf（或 NvM）真实官方定义并存：添加/切换/独立编辑/保存刷新恢复/按工程导出 manifest 正确；无硬编码伪列表 |
+
 ## 2. 模块接口（新增/改动）
 
 | 接口 | 归属 | 签名要点 | 阶段 |
@@ -79,6 +91,7 @@ declare function isOutputReady(config: ConfigInstance, module: BswmdModule): Out
 | ADR-07 | namespace 常量改 r4.0，输入兼容 r4.2.2 并警告 | CP4.4.0 序列化规则 TPS_ASR_00011；既有导出文件是错误口径 | 旧导出文件再导入会有警告（可接受） |
 | ADR-08 | **锁定态 sidecar 承载新增状态，v3 原库冻结零写入**；普通加载不写库；全兼容常规保存附加 schemaVersion 非破坏；解锁写回前强制快照（S6） | "原库逐字节不变"与"隔离状态持久化"天然矛盾，sidecar 是唯一同时满足两者的结构（澄清第 1/2 点） | 状态分散两处（sidecar+draft），需启动合并恢复逻辑 |
 | ADR-09 | 生成模板继续内嵌 TS 字符串（不外置模板文件） | 模板随程序版本受测试保护；用户自定义模板留待后续评估 | 用户不能热替换模板（本期接受） |
+| ADR-11 | **多模块工作区采用演进式：工程身份 = 现有 library**（importedModules + sets 按 moduleRef 分组），不新造 WorkspaceProject 实体；整体备份=整库导出（复用 S1 raw 骨架）；整体输出=逐模块批量 ARXML/C + manifest 汇总；跨模块引用本期显式声明边界——目标解析按 G05 语义，跨配置集目标标记为不支持并给具体原因，不静默丢失 | 用户澄清「单一配置方案」仅排变体不限模块数（MULTI-MODULE.md）；ConfigInstance 天然单 moduleRef、library 天然多集，最小改动即可多模块并存；造工程实体会牵动存储/输出/恢复三层，收益不足 | 工程级版本管理/跨模块引用需待后续（S7 后按需立项）；界面分组视图为表现层工作 |
 
 ## 5. 测试与验收自动化策略
 

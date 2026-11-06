@@ -14,12 +14,12 @@
     "contractHash": "12046dc7f1450a49ff620bd2c4404e98f196523da08a8af141a98faca526483b",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T09:52:00+08:00",
+    "contractBoundAt": "2026-11-06T09:19:54+08:00",
     "reportPath": ".codex/reports/TASK-013-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
     "submissionCommit": null,
-    "createdAt": "2026-11-06T09:52:00+08:00",
+    "createdAt": "2026-11-06T09:19:54+08:00",
     "submittedAt": null,
     "approvedAt": null,
     "designPath": "docs/product-design/00-SCOPE-AND-FEATURES.md"
@@ -286,16 +286,16 @@
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-009",
+    "taskId": "TASK-012",
     "round": 0,
-    "reviewedCommit": "6812b39524cb15a723dcbdf74a742d2126b42464",
-    "at": "2026-11-01T06:50:00+08:00",
+    "reviewedCommit": "ee8434493b25ee67cc570eb02e50dc9d1b0976f3",
+    "at": "2026-11-06T09:19:54+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
-    "majors": 1,
-    "minors": 3,
-    "reviewPath": ".codex/review/TASK-009-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-009-ROUND-0-REVIEW.md"
+    "majors": 0,
+    "minors": 4,
+    "reviewPath": ".codex/review/TASK-012-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-012-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
@@ -326,5 +326,12 @@
     "recovery": null,
     "resolvedAt": "2026-11-03T18:22:00+08:00",
     "note": "ENV_PERMISSION 与 REPLAN_PENDING 均已解除。"
+  },
+  "timeCorrection": {
+    "at": "2026-11-06T09:25:00+08:00",
+    "issue": "TASK-012 评审快照与 TASK-013 契约/STATE 中写入的 09:40/09:50/09:52 均晚于真实操作时间。",
+    "groundTruth": "git log 654bd1f = 2026-11-06T09:19:54+08:00（评审提交）；评审实际执行于 09:05-09:19 区间。",
+    "correctedFields": "STATE.lastReview.at / task.contractBoundAt / task.createdAt 统一改为 09:19:54；冻结快照 TASK-012-ROUND-0-REVIEW.md 按约不覆盖，纠正说明见 TASK-012-REVIEW.md 指针文件附录。",
+    "effect": "仅元数据；判定结论/版本绑定/契约哈希均不受影响。"
   }
 }
