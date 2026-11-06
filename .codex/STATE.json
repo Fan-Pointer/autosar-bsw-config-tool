@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-016",
     "title": "W6 实例右键紧凑菜单 + 新建子容器全部直选（优先插队）",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -18,9 +18,9 @@
     "reportPath": ".codex/reports/TASK-016-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "341b05fdc2373ef2591fc455d2db9a550e9ab2d9",
     "createdAt": "2026-11-06T11:36:22+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-06T03:54:53.993Z",
     "approvedAt": null,
     "designPath": "docs/product-design/01-IA-AND-SCREENS.md"
   },
