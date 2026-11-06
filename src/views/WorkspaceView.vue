@@ -84,7 +84,7 @@
           class="tool-button"
           title="验证结果"
           aria-label="验证结果"
-          @click="showValidation = !showValidation"
+          @click="toggleValidation"
         >
           <el-icon><Search /></el-icon>
         </button>
@@ -247,13 +247,14 @@
                 :reference-options="store.referenceOptions"
                 :reference-add-options="store.referenceAddOptions"
                 :dangling-references="store.danglingReferences"
-                :selected-field-uuid="store.selectedFieldUuid"
+                :selected-field-uuid="helpFieldUuid ?? store.selectedFieldUuid"
                 :configured-fields="configuredFields"
                 :field-errors="selectedFieldErrors"
                 :readonly="store.isImporting || store.isLoading"
                 @parameter-change="store.setParameterValue"
                 @reference-change="store.setReferenceTarget"
                 @create-reference-target="store.createReferenceTarget"
+                @field-help="showFieldHelp"
               />
               <ReferenceRelations @navigate="navigateRelation" />
               <details
@@ -298,15 +299,32 @@
       </div>
       <ConfigSetManager @opened="showSets = false" />
     </section>
-    <section v-show="showValidation" class="validation-dock" aria-label="问题面板" @click.stop>
-      <ValidationPanel
-        :violations="store.violations"
-        :validated="store.validated"
-        :operation-error="outputError"
-        @validate="validate"
-        @navigate="navigateViolation"
+    <section v-show="showValidation" class="validation-dock" aria-label="编辑器信息" @click.stop>
+      <nav class="dock-tabs" role="tablist" aria-label="底部信息">
+        <button role="tab" :aria-selected="dockTab === 'help'" @click="dockTab = 'help'">
+          参数说明
+        </button>
+        <button role="tab" :aria-selected="dockTab === 'issues'" @click="dockTab = 'issues'">
+          问题（{{ store.violations.length + (outputError ? 1 : 0) }}）
+        </button>
+      </nav>
+      <FieldDescriptionPanel
+        v-show="dockTab === 'help'"
+        :field="helpField"
+        :path="helpPath"
+        class="dock-content"
         @collapse="showValidation = false"
       />
+      <div v-show="dockTab === 'issues'" class="dock-content" role="region" aria-label="问题面板">
+        <ValidationPanel
+          :violations="store.violations"
+          :validated="store.validated"
+          :operation-error="outputError"
+          @validate="validate"
+          @navigate="navigateViolation"
+          @collapse="showValidation = false"
+        />
+      </div>
     </section>
     <section
       v-show="showActions && activeOpen"
@@ -326,7 +344,6 @@
       :key="store.activeUuid"
       v-bind="contextMenu"
       @close="contextMenu = undefined"
-      @navigate="navigateViolation"
     />
     <div
       v-if="projectMenu"
@@ -403,6 +420,7 @@ import type { GeneratedFile } from '@/core/generator/TemplateEngine';
 import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 import { OutputValidationError } from '@/core/output/OutputGate';
 import DynamicForm from '@/ui/FormEditor/DynamicForm.vue';
+import FieldDescriptionPanel from '@/ui/FormEditor/FieldDescriptionPanel.vue';
 import ContainerNavigator from '@/ui/ConfigTree/ContainerNavigator.vue';
 import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
@@ -442,6 +460,28 @@ async function openAddChildren(): Promise<void> {
   actionsPanel.value?.openAdd();
 }
 const outputError = ref('');
+const dockTab = ref<'help' | 'issues'>('issues');
+const helpFieldUuid = ref<string>();
+const helpField = computed(() => {
+  const definition = store.selectedEntry?.definition;
+  return (
+    definition?.parameters.find((field) => field.uuid === helpFieldUuid.value) ??
+    definition?.references.find((field) => field.uuid === helpFieldUuid.value)
+  );
+});
+const helpPath = computed(() => {
+  const definition = store.selectedEntry?.definition;
+  return `${definition?.definitionPath ?? definition?.shortName ?? ''}/${helpField.value?.shortName ?? ''}`;
+});
+function showFieldHelp(uuid: string): void {
+  helpFieldUuid.value = uuid;
+  dockTab.value = 'help';
+  showValidation.value = true;
+}
+function toggleValidation(): void {
+  showValidation.value = !(showValidation.value && dockTab.value === 'issues');
+  dockTab.value = 'issues';
+}
 const configuredFields = computed(() =>
   Object.fromEntries([
     ...[...(store.selectedEntry?.container.parameters.values() ?? [])].map((value) => [
@@ -484,6 +524,13 @@ const importFormats: ImportFormat[] = ['json', 'arxml'];
 const exportFormats: ExportFormat[] = ['json', 'arxml', 'csv'];
 const activeOpen = computed(() =>
   Boolean(store.activeUuid && opened.value.includes(store.activeUuid))
+);
+// A selected field is view state, never a parameter edit or a persisted setting.
+watch(
+  () => [store.activeUuid, store.selectedEntry?.container.uuid, activeOpen.value],
+  () => {
+    helpFieldUuid.value = undefined;
+  }
 );
 const includedModules = computed(() =>
   store.modules.filter((item) => store.modulePreferences[item.shortName]?.included)
@@ -658,6 +705,7 @@ async function projectAction(action?: string): Promise<void> {
     opened.value = [];
 }
 function validate(): void {
+  dockTab.value = 'issues';
   outputError.value = '';
   store.validate();
   showValidation.value = true;
@@ -673,6 +721,8 @@ async function focusField(uuid?: string): Promise<void> {
   )?.focus();
 }
 function navigateViolation(violation: ConstraintViolation): void {
+  helpFieldUuid.value = undefined;
+  dockTab.value = 'issues';
   if (!violation.containerUuid) return;
   if (store.activeUuid && !opened.value.includes(store.activeUuid))
     opened.value.push(store.activeUuid);
@@ -684,6 +734,7 @@ function navigateRelation(uuid: string, fieldUuid?: string): void {
   void focusField(fieldUuid);
 }
 function showOutputFailure(reason: unknown): void {
+  dockTab.value = 'issues';
   // Validation has already populated the shared issue list; operational failures are shown separately.
   outputError.value =
     reason instanceof OutputValidationError
@@ -709,6 +760,7 @@ async function generateCode(): Promise<void> {
   const check = store.getOutputCheck();
   store.validate(check);
   if (!check.ready) {
+    dockTab.value = 'issues';
     ElMessage.warning('请先修复验证错误');
     showValidation.value = true;
     return;
@@ -1126,11 +1178,37 @@ function stopResize(): void {
   max-width: 720px;
 }
 .validation-dock {
+  display: flex;
+  flex-direction: column;
   height: min(260px, 34vh);
   min-height: 120px;
   flex-shrink: 0;
   border-top: 1px solid var(--color-border);
   background: var(--color-surface);
+  overflow: hidden;
+}
+.dock-tabs {
+  display: flex;
+  flex-shrink: 0;
+  gap: 16px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+.dock-tabs button {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 7px 0;
+  color: var(--color-muted);
+  background: transparent;
+  cursor: pointer;
+}
+.dock-tabs button[aria-selected='true'] {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+.dock-content {
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 .instance-actions {

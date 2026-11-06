@@ -412,12 +412,20 @@ describe('TASK-003 user interactions', () => {
     await root.trigger('contextmenu', { clientX: 100, clientY: 150 });
     await nextTick();
     expect(wrapper.find('.floating-menu').exists()).toBe(true);
-    expect(wrapper.get('.floating-menu').text()).toContain('定位错误');
+    expect(
+      wrapper
+        .get('.floating-menu')
+        .findAll('[role="menuitem"]')
+        .map((item) => item.text())
+    ).toEqual(['新建实例›', '克隆实例', '删除实例']);
     const remove = wrapper
       .get('.floating-menu')
       .findAll('button')
       .find((item) => item.text().includes('删除实例'))!;
-    expect(remove.attributes('disabled')).toBeDefined();
+    expect(remove.attributes('aria-disabled')).toBe('true');
+    expect(remove.attributes('title')).toBe(
+      store.containerActionsFor(store.selectedEntry!.container.uuid).removalReason
+    );
     expect(store.selectedEntry?.container.shortName).toBe('DemConfigSet');
     await wrapper.trigger('keydown', { key: 'Escape' });
     expect(wrapper.find('.floating-menu').exists()).toBe(false);
@@ -471,9 +479,13 @@ describe('TASK-003 user interactions', () => {
     await marker.trigger('contextmenu');
     await flushPromises();
     const menu = wrapper.findComponent(ContainerContextMenu);
-    expect(menu.text()).toContain('这是容器定义');
-    expect(menu.findAll('button:disabled')).toHaveLength(4);
-    for (const item of menu.findAll('button:disabled')) await item.trigger('click');
+    expect(menu.text()).not.toContain('这是容器定义');
+    expect(menu.findAll('button[aria-disabled="true"]')).toHaveLength(3);
+    for (const item of menu.findAll('button[aria-disabled="true"]')) {
+      expect(item.attributes('title')).toBe('请右键实例节点');
+      expect(item.attributes('aria-description')).toBe('请右键实例节点');
+      await item.trigger('click');
+    }
     expect(store.selectedEntry?.container.uuid).toBe(dtc.uuid);
     expect(JSON.stringify(store.config)).toBe(saved);
   });
@@ -537,7 +549,7 @@ describe('TASK-003 user interactions', () => {
     await menu.trigger('keydown', { key: 'ArrowLeft' });
     await flushPromises();
     await menu.trigger('keydown', { key: 'End' });
-    expect(document.activeElement?.textContent).toContain('关闭菜单');
+    expect(document.activeElement?.textContent).toContain('删除实例');
     await menu.trigger('keydown', { key: 'Home' });
     expect(document.activeElement?.textContent).toContain('新建');
     await menu.trigger('keydown', { key: 'ArrowDown' });
@@ -552,7 +564,7 @@ describe('TASK-003 user interactions', () => {
     expect(document.activeElement).toBe(node.element.closest('[role="treeitem"]'));
   });
 
-  it('locates the error on the context target rather than the selected form instance', async () => {
+  it('keeps error location in the problem panel after removing the context-menu shortcut', async () => {
     const { store, wrapper } = await workspace();
     await store.createConfigSet('错误定位目标');
     const root = store.config!.containers[0];
@@ -562,9 +574,13 @@ describe('TASK-003 user interactions', () => {
     await wrapper.get(`[data-container-id="${dtc.uuid}"]`).trigger('contextmenu');
     await flushPromises();
     const menu = wrapper.findComponent(ContainerContextMenu);
-    await menu
-      .findAll('button')
-      .find((item) => item.text().includes('定位错误'))!
+    expect(menu.text()).not.toContain('定位错误');
+    await menu.trigger('keydown', { key: 'Escape' });
+    await wrapper.get('[aria-label="代码验证"]').trigger('click');
+    await wrapper
+      .findAll('.violation-item')
+      .find((item) => item.text().includes('DemDTC'))!
+      .get('.locate-button')
       .trigger('click');
     await flushPromises();
     expect(store.selectedEntry?.container.uuid).toBe(dtc.uuid);
@@ -640,11 +656,18 @@ describe('TASK-003 user interactions', () => {
     expect(options.length).toBeGreaterThan(1);
     for (const option of options) {
       const row = menu.get(`[data-definition-id="${option.definition.uuid}"]`);
-      expect(row.attributes('disabled')).toBeDefined();
-      expect(row.text()).toContain(option.disabledReason);
+      expect(row.attributes('aria-disabled')).toBe('true');
+      expect(row.text()).toBe(option.definition.shortName);
+      expect(row.attributes('title')).toBe(option.disabledReason);
+      expect(row.attributes('aria-description')).toBe(option.disabledReason);
       expect(option.disabledReason).toContain('CHOICE');
     }
     const before = JSON.stringify(store.config);
+    await menu.trigger('keydown', { key: 'ArrowDown' });
+    expect(document.activeElement?.getAttribute('aria-disabled')).toBe('true');
+    expect(document.activeElement?.getAttribute('aria-description')).toContain('CHOICE');
+    await menu.trigger('keydown', { key: 'Enter' });
+    expect(JSON.stringify(store.config)).toBe(before);
     for (const row of menu.findAll('[data-definition-id]')) await row.trigger('click');
     expect(JSON.stringify(store.config)).toBe(before);
     store.isImporting = true;
@@ -655,8 +678,10 @@ describe('TASK-003 user interactions', () => {
     });
     await flushPromises();
     menu = wrapper.findComponent(ContainerContextMenu);
-    expect(menu.text()).toContain('正在应用导入，请稍后编辑');
-    expect(menu.get('[aria-haspopup="menu"]').attributes('disabled')).toBeDefined();
+    expect(menu.get('[aria-haspopup="menu"]').attributes('title')).toContain(
+      '正在应用导入，请稍后编辑'
+    );
+    expect(menu.get('[aria-haspopup="menu"]').attributes('aria-disabled')).toBe('true');
     expect(() =>
       store.addContainerInstance(group.definition.subContainers[0].uuid, group.container.uuid)
     ).toThrow('正在应用导入');

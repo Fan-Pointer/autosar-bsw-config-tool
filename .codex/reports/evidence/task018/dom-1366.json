@@ -1,0 +1,80 @@
+{
+  "bottomDocks": 1,
+  "dockBounds": {
+    "bottom": 768,
+    "height": 261,
+    "left": 0,
+    "right": 1366,
+    "top": 507,
+    "width": 1366,
+    "x": 0,
+    "y": 507
+  },
+  "documentOverflow": false,
+  "inlineHelpBlocks": 0,
+  "menu": [
+    {
+      "accessibleReason": null,
+      "disabled": null,
+      "text": "‹",
+      "title": "返回"
+    },
+    {
+      "accessibleReason": null,
+      "disabled": "false",
+      "text": "DemCallbackClearEventAllowed",
+      "title": "DemCallbackClearEventAllowed"
+    },
+    {
+      "accessibleReason": null,
+      "disabled": "false",
+      "text": "DemCallbackEventDataChanged",
+      "title": "DemCallbackEventDataChanged"
+    },
+    {
+      "accessibleReason": null,
+      "disabled": "false",
+      "text": "DemCallbackEventUdsStatusChanged",
+      "title": "DemCallbackEventUdsStatusChanged"
+    },
+    {
+      "accessibleReason": null,
+      "disabled": "false",
+      "text": "DemCallbackInitMForE",
+      "title": "DemCallbackInitMForE"
+    },
+    {
+      "accessibleReason": null,
+      "disabled": "false",
+      "text": "DemCallbackMonitorStatusChanged",
+      "title": "DemCallbackMonitorStatusChanged"
+    },
+    {
+      "accessibleReason": null,
+      "disabled": "false",
+      "text": "DemIndicatorAttribute",
+      "title": "DemIndicatorAttribute"
+    },
+    {
+      "accessibleReason": "DemDebounceAlgorithmClass: upper multiplicity 1 reached",
+      "disabled": "true",
+      "text": "DemDebounceAlgorithmClass",
+      "title": "DemDebounceAlgorithmClass: upper multiplicity 1 reached"
+    }
+  ],
+  "menuBounds": {
+    "bottom": 619,
+    "height": 271,
+    "left": 556,
+    "right": 916,
+    "top": 348,
+    "width": 360,
+    "x": 556,
+    "y": 348
+  },
+  "viewport": [
+    1366,
+    768
+  ],
+  "visibleHelp": "DemEventAvailable收起This parameter configures an Event as unavailable./AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter/DemEventAvailable 类型：BOOLEAN "
+}

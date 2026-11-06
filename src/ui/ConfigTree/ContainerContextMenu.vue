@@ -11,9 +11,17 @@
     @contextmenu.prevent.stop
     @keydown.stop="onKey"
   >
-    <div class="menu-caption">{{ title }}</div>
     <template v-if="childrenOpen">
-      <button role="menuitem" tabindex="-1" class="menu-back" @click="back">‹ 返回容器操作</button>
+      <button
+        role="menuitem"
+        tabindex="-1"
+        class="menu-back"
+        aria-label="返回容器操作"
+        title="返回"
+        @click="back"
+      >
+        ‹
+      </button>
       <p v-if="!actions.childOptions.length" class="menu-empty">此容器没有子定义</p>
       <button
         v-for="option in actions.childOptions"
@@ -21,16 +29,12 @@
         role="menuitem"
         tabindex="-1"
         :data-definition-id="option.definition.uuid"
-        :disabled="Boolean(actions.editReason || option.disabledReason)"
         :aria-disabled="Boolean(actions.editReason || option.disabledReason)"
+        :title="actions.editReason || option.disabledReason || option.definition.shortName"
+        :aria-description="actions.editReason || option.disabledReason"
         @click="add(option.definition.uuid)"
       >
-        <span class="menu-label"
-          ><span class="menu-icon">⊞</span>{{ option.definition.shortName }}</span
-        >
-        <small v-if="actions.editReason || option.disabledReason">{{
-          actions.editReason || option.disabledReason
-        }}</small>
+        {{ option.definition.shortName }}
       </button>
     </template>
     <template v-else>
@@ -39,46 +43,31 @@
         tabindex="-1"
         aria-haspopup="menu"
         :aria-disabled="Boolean(targetReason)"
-        :disabled="Boolean(targetReason)"
+        :title="targetReason"
+        :aria-description="targetReason"
         @click="openChildren"
       >
-        <span class="menu-label"
-          ><span class="menu-icon">＋</span>新建<span class="menu-arrow">›</span></span
-        >
-        <small v-if="targetReason">{{ targetReason }}</small>
+        新建实例<span class="menu-arrow" aria-hidden="true">›</span>
       </button>
       <button
         role="menuitem"
         tabindex="-1"
-        :disabled="Boolean(cloneReason)"
         :aria-disabled="Boolean(cloneReason)"
+        :title="cloneReason"
+        :aria-description="cloneReason"
         @click="clone"
       >
-        <span class="menu-label"><span class="menu-icon">⧉</span>克隆实例</span
-        ><small v-if="cloneReason">{{ cloneReason }}</small>
+        克隆实例
       </button>
       <button
         role="menuitem"
         tabindex="-1"
-        :disabled="Boolean(removalReason)"
         :aria-disabled="Boolean(removalReason)"
+        :title="removalReason"
+        :aria-description="removalReason"
         @click="remove"
       >
-        <span class="menu-label"><span class="menu-icon">×</span>删除实例</span
-        ><small v-if="removalReason">{{ removalReason }}</small>
-      </button>
-      <button
-        role="menuitem"
-        tabindex="-1"
-        :disabled="!firstError"
-        :aria-disabled="!firstError"
-        @click="locate"
-      >
-        <span class="menu-label"><span class="menu-icon">⌖</span>定位错误</span
-        ><small v-if="!firstError">{{ definitionReason || '此实例没有错误' }}</small>
-      </button>
-      <button role="menuitem" tabindex="-1" class="menu-back" @click="close(true)">
-        关闭菜单 <span class="menu-arrow">Esc</span>
+        删除实例
       </button>
     </template>
   </div>
@@ -87,7 +76,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 import { useConfigStore } from '@/stores/configStore';
 import { placeContainerMenu, type ContainerContextTarget } from './containerMenuPosition';
 
@@ -97,7 +85,7 @@ const props = defineProps<{
   y: number;
   returnFocus?: HTMLElement;
 }>();
-const emit = defineEmits<{ close: []; navigate: [violation: ConstraintViolation] }>();
+const emit = defineEmits<{ close: [] }>();
 const store = useConfigStore();
 const panel = ref<HTMLElement>();
 const childrenOpen = ref(false);
@@ -110,21 +98,11 @@ const actions = computed(() =>
   )
 );
 const definitionReason = computed(() =>
-  props.target.type === 'definition'
-    ? '这是容器定义；请使用树工具栏＋创建实例，或右键实例进行操作'
-    : undefined
+  props.target.type === 'definition' ? '请右键实例节点' : undefined
 );
 const targetReason = computed(() => definitionReason.value || actions.value.editReason);
 const cloneReason = computed(() => targetReason.value || actions.value.cloneReason);
 const removalReason = computed(() => targetReason.value || actions.value.removalReason);
-const title = computed(() => actions.value.entry?.container.shortName || '容器定义');
-const firstError = computed(() =>
-  props.target.type === 'instance'
-    ? store.violations.find(
-        (item) => item.severity === 'ERROR' && item.containerUuid === props.target.containerUuid
-      )
-    : undefined
-);
 
 function close(restoreFocus = false): void {
   const target = props.returnFocus;
@@ -132,7 +110,8 @@ function close(restoreFocus = false): void {
   if (restoreFocus) void nextTick(() => target?.isConnected && target.focus());
 }
 function focusItem(last = false): void {
-  const items = panel.value?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)');
+  // Disabled actions remain keyboard discoverable; action guards still reject all writes.
+  const items = panel.value?.querySelectorAll<HTMLButtonElement>('button');
   (items?.[last ? items.length - 1 : 0] ?? panel.value)?.focus();
 }
 async function reposition(): Promise<void> {
@@ -177,9 +156,7 @@ function onKey(event: KeyboardEvent): void {
     void openChildren();
     return;
   }
-  const items = [
-    ...(panel.value?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? []),
-  ];
+  const items = [...(panel.value?.querySelectorAll<HTMLButtonElement>('button') ?? [])];
   const index = items.indexOf(document.activeElement as HTMLButtonElement);
   if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
     event.preventDefault();
@@ -192,7 +169,7 @@ function onKey(event: KeyboardEvent): void {
     items[next]?.focus();
   } else if (event.key === 'Enter' || event.key === ' ') {
     event.preventDefault();
-    items[index]?.click();
+    if (items[index]?.getAttribute('aria-disabled') !== 'true') items[index]?.click();
   }
 }
 function outside(event: Event): void {
@@ -239,11 +216,6 @@ async function remove(): Promise<void> {
   }
   await perform(() => store.removeContainerInstance(uuid));
 }
-function locate(): void {
-  const violation = firstError.value;
-  close();
-  if (violation) emit('navigate', violation);
-}
 watch(
   () => [props.x, props.y, props.target],
   async () => {
@@ -271,7 +243,7 @@ onBeforeUnmount(() => {
   position: fixed;
   z-index: 2100;
   box-sizing: border-box;
-  width: 296px;
+  width: 180px;
   max-width: calc(100vw - 16px);
   max-height: calc(100vh - 16px);
   overflow: auto;
@@ -286,12 +258,6 @@ onBeforeUnmount(() => {
 .child-menu {
   width: 360px;
 }
-.menu-caption {
-  padding: 5px 8px;
-  color: var(--color-muted);
-  overflow-wrap: anywhere;
-  font-size: 12px;
-}
 button {
   display: block;
   width: 100%;
@@ -303,37 +269,24 @@ button {
   background: transparent;
   color: inherit;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-button:hover:not(:disabled),
+button:hover:not([aria-disabled='true']),
 button:focus-visible {
   background: var(--color-selected);
   outline: 2px solid var(--color-accent);
   outline-offset: -2px;
 }
-button:disabled {
+button[aria-disabled='true'] {
   color: var(--color-muted);
   cursor: not-allowed;
-}
-.menu-label {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  overflow-wrap: anywhere;
-}
-.menu-icon {
-  flex-shrink: 0;
-  width: 16px;
+  opacity: 0.6;
 }
 .menu-arrow {
   margin-left: auto;
   float: right;
-}
-small {
-  display: block;
-  margin: 3px 0 0 22px;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
-  font-size: 11px;
 }
 .menu-back {
   border-top: 1px solid var(--color-border);

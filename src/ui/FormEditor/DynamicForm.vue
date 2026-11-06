@@ -12,6 +12,7 @@
           'has-error': Boolean(fieldErrors[param.uuid]),
         }"
         :data-field="param.uuid"
+        @click="emit('field-help', param.uuid)"
       >
         <input
           v-if="param.isOptional"
@@ -23,7 +24,14 @@
           @change="toggle(param, ($event.target as HTMLInputElement).checked)"
         />
         <span v-else class="optional-space" />
-        <label :title="param.description" :for="'input-' + param.uuid">{{ param.shortName }}</label>
+        <button
+          class="parameter-name"
+          type="button"
+          :title="param.shortName"
+          :aria-label="'查看 ' + param.shortName + ' 说明'"
+        >
+          {{ param.shortName }}
+        </button>
         <FieldState
           :configured="configuredFields[param.uuid] === true"
           :optional="Boolean(param.isOptional)"
@@ -113,24 +121,6 @@
         <span v-if="fieldErrors[param.uuid]" class="field-error" role="alert">{{
           fieldErrors[param.uuid]
         }}</span>
-        <details class="field-help">
-          <summary :aria-label="param.shortName + ' 字段说明'">字段说明</summary>
-          <p>{{ param.description || '此字段未提供说明' }}</p>
-          <p>
-            {{
-              param.definitionPath ??
-              (container.definitionPath ?? container.shortName) + '/' + param.shortName
-            }}
-          </p>
-          <p>
-            类型：{{ param.type
-            }}<template v-if="param.min !== undefined || param.max !== undefined">
-              · 范围：{{ param.min ?? '不限' }} ～ {{ param.max ?? '不限' }}</template
-            ><template v-if="param.enumValues?.length">
-              · 选项：{{ param.enumValues.join('、') }}</template
-            >
-          </p>
-        </details>
       </div>
     </section>
     <section v-if="container.references.length" class="reference-section" aria-label="引用">
@@ -146,11 +136,17 @@
           'has-error': Boolean(fieldErrors[reference.uuid]),
         }"
         :data-field="reference.uuid"
+        @click="emit('field-help', reference.uuid)"
       >
         <span class="optional-space" />
-        <label :title="reference.description" :for="'input-' + reference.uuid">{{
-          reference.shortName
-        }}</label>
+        <button
+          class="parameter-name"
+          type="button"
+          :title="reference.shortName"
+          :aria-label="'查看 ' + reference.shortName + ' 说明'"
+        >
+          {{ reference.shortName }}
+        </button>
         <FieldState
           :configured="configuredFields[reference.uuid] === true"
           :optional="Boolean(reference.isOptional)"
@@ -192,23 +188,6 @@
         <span v-if="fieldErrors[reference.uuid]" class="field-error" role="alert">{{
           fieldErrors[reference.uuid]
         }}</span>
-        <details class="field-help">
-          <summary :aria-label="reference.shortName + ' 字段说明'">字段说明</summary>
-          <p>{{ reference.description || '此引用未提供说明' }}</p>
-          <p>
-            {{
-              reference.definitionPath ??
-              (container.definitionPath ?? container.shortName) + '/' + reference.shortName
-            }}
-          </p>
-          <p>
-            目标：{{
-              reference.destinationRefs?.join('、') ||
-              reference.destinationRef ||
-              reference.destinationContainerType
-            }}
-          </p>
-        </details>
       </div>
     </section>
     <p v-if="!container.parameters.length && !container.references.length" class="no-fields">
@@ -334,6 +313,7 @@ const props = withDefaults(
   }
 );
 const emit = defineEmits<{
+  'field-help': [fieldUuid: string];
   'update:configData': [data: Record<string, unknown>];
   'parameter-change': [paramUuid: string, value: unknown];
   'reference-change': [refUuid: string, targetUuid: string];
@@ -554,10 +534,20 @@ defineExpose({ resetForm, getFormData });
   gap: 8px;
   padding-left: 16px;
 }
-.parameter-row label {
+.parameter-name {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.parameter-name:focus-visible {
+  outline: 1px solid var(--color-accent);
 }
 .selected-field {
   background: var(--color-selected);
@@ -639,23 +629,8 @@ defineExpose({ resetForm, getFormData });
   color: var(--color-error);
   font-size: 12px;
 }
-.has-error > label {
+.has-error > .parameter-name {
   color: var(--color-error);
-}
-.field-help {
-  grid-column: 2 / -1;
-  font-size: 12px;
-  color: var(--color-muted);
-  padding-bottom: 8px;
-  overflow-wrap: anywhere;
-}
-.field-help summary {
-  cursor: pointer;
-  width: fit-content;
-}
-.field-help p {
-  margin: 8px 0;
-  white-space: normal;
 }
 .reference-candidates {
   max-height: 300px;

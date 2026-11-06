@@ -187,6 +187,52 @@ function messageBox() {
 }
 
 describe('TASK-017 editing workflows', () => {
+  it('shows clicked parameter help only in the bottom dock without editing a boolean or history', async () => {
+    const { store, wrapper } = await workspace();
+    const before = exportJson(store.config!),
+      history = store.undoLabel;
+    storage.write.mockClear();
+    expect(wrapper.find('.field-help').exists()).toBe(false);
+    await wrapper.get('[aria-label="查看 Enabled 说明"]').trigger('click');
+    const help = wrapper.get('[aria-label="参数说明面板"]');
+    expect(help.isVisible()).toBe(true);
+    expect(help.text()).toContain('False is an explicit, valid configured value.');
+    expect(help.text()).toContain('/AUTOSAR/EcucDefs/Edit/Root/Enabled');
+    expect(wrapper.get('[aria-label="问题面板"]').isVisible()).toBe(false);
+    await wrapper.get('[data-field="count"]').trigger('click');
+    expect(help.text()).toContain('范围：0 ～ 100');
+    expect(help.text()).not.toContain('False is an explicit');
+    await wrapper.get('[aria-label="收起参数说明"]').trigger('click');
+    expect(wrapper.get('[aria-label="编辑器信息"]').isVisible()).toBe(false);
+    await wrapper.get('[aria-label="查看 MemoryRef 说明"]').trigger('click');
+    expect(help.text()).toContain('/AUTOSAR/EcucDefs/Edit/First');
+    expect(help.text()).toContain('/AUTOSAR/EcucDefs/Edit/Second');
+    expect(exportJson(store.config!)).toBe(before);
+    expect(store.undoLabel).toBe(history);
+    expect(storage.write).not.toHaveBeenCalled();
+  });
+
+  it('switches help and issues in one dock, keeps issue location visible and clears help on instance/set changes', async () => {
+    const { store, wrapper } = await workspace();
+    await wrapper.get('[aria-label="查看 Enabled 说明"]').trigger('click');
+    await wrapper.get('[aria-label="代码验证"]').trigger('click');
+    expect(wrapper.get('[aria-label="问题面板"]').isVisible()).toBe(true);
+    expect(wrapper.get('[aria-label="参数说明面板"]').isVisible()).toBe(false);
+    await wrapper.get('.locate-button').trigger('click');
+    await flushPromises();
+    expect(wrapper.get('[aria-label="问题面板"]').isVisible()).toBe(true);
+    await wrapper.get('[aria-label="查看 Enabled 说明"]').trigger('click');
+    await wrapper.get('[role="tablist"][aria-label="底部信息"] [role="tab"]').trigger('click');
+    expect(wrapper.get('[aria-label="参数说明面板"]').isVisible()).toBe(true);
+    store.selectContainer(store.config!.containers[1].uuid);
+    await nextTick();
+    expect(wrapper.get('[aria-label="参数说明面板"]').text()).toContain('点击参数查看说明');
+    await store.createConfigSet('切集说明', 'Edit');
+    await flushPromises();
+    expect(wrapper.get('[aria-label="参数说明面板"]').text()).not.toContain('False is an explicit');
+    expect(wrapper.findAll('.validation-dock')).toHaveLength(1);
+  });
+
   it('includes an output operation failure in the visible problem and error counts', () => {
     const wrapper = mount(ValidationPanel, {
       props: { validated: true, operationError: '输出模板无法加载' },
