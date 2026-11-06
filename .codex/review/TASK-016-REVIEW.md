@@ -53,3 +53,12 @@
 - **TASK-016 round 0 = APPROVED**（绑定 `341b05fdc2373ef2591fc455d2db9a550e9ab2d9`）。
 - 🟡-1/🟡-3 就地择机清理即可，不另立任务；🟡-2 并入后续 UI 任务（可随 S4 剩余项）。
 - **按队列恢复 TASK-015（S3b）READY**：契约以归档 `TASK-015-CONTRACT.md` 恢复为 ACTIVE（哈希 `9f2bb2eb…fe200e` 实算一致），stage 回 PHASE-15；TASK-014 🟡-1/🟡-3 附带项随其恢复生效。
+
+---
+
+## 附录：建议项澄清更正（2026-11-06T13:25 后评审方补录，TASK-015 评审期间核对）
+
+1. **🟡-2 撤回**：经实读，`WorkspaceView.vue` 487 行**已有** `watch(() => store.activeUuid)` 显式执行 `contextMenu.value = undefined`（连同 showGenerated 关闭与页签清理）——「配置集切换关菜单经间接路径」的说法不成立，原建议（再显式 watch）作废。冻结快照按约不改，以本附录为准。
+2. **🟡-3 撤回**：`.menu-arrow` 的 `float: right` 服务于**非 flex** 的「关闭菜单 Esc」行（button 直接子文本）；`margin-left: auto` 服务于 **flex** 的 `.menu-label` 行（「新建 ›」）。两选择器同一 class 但布局上下文不同，各司其职，**非冗余**。
+3. 🟡-1（typecheck 空证据文件）维持原判；TASK-015 交付已改进（typecheck.txt 含实际内容）。
+4. 本附录不影响 TASK-016 APPROVED 结论与版本绑定。
