@@ -292,14 +292,14 @@ describe('D3 reference empty state', () => {
     store.selectContainer(entry.container.uuid);
     const wrapper = await workspace(),
       reference = entry.definition.references[0];
-    await wrapper.get(`[aria-label="选择 ${reference.shortName}"]`).trigger('click');
+    const before = exportJson(store.config!);
+    const picker = wrapper.get(`[aria-label="选择 ${reference.shortName}"]`);
+    expect(picker.attributes('disabled')).toBeDefined();
+    expect(wrapper.text()).toContain('外部引用只读：本期不支持跨模块目标');
+    await picker.trigger('click');
     await flushPromises();
-    expect(document.querySelector('.reference-empty')?.textContent).toContain(
-      `暂无 ${reference.destinationContainerType} 实例，请先新增`
-    );
-    expect(document.querySelector('.reference-empty')?.textContent).toContain(
-      '跨模块目标当前不可创建'
-    );
+    expect(document.querySelector('.reference-empty')).toBeNull();
     expect(document.querySelector('.reference-empty button')).toBeNull();
+    expect(exportJson(store.config!)).toBe(before);
   });
 });

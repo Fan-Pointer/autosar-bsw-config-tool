@@ -3,6 +3,7 @@ import { decodeXmlText, stripDoctype, withoutXmlComments } from './XmlSafety';
 import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
+import { referenceDefinitionDest } from '../config/ReferenceCandidates';
 import { createParameterValue } from '../config/ConfigValues';
 import {
   assertOutputReady,
@@ -13,7 +14,9 @@ import { generateUUID } from '@/utils/uuid';
 import { checkImportSize, hydrateConfig, record, serializeConfig, string } from './ConfigJson';
 import type { SerializedContainer } from './IoTypes';
 
-export const AUTOSAR_NAMESPACE = 'http://autosar.org/schema/r4.2.2';
+// AUTOSAR CP 4.4.0, TPS_ASR_00011/00017: the namespace is shared across compatible releases.
+export const AUTOSAR_NAMESPACE = 'http://autosar.org/schema/r4.0';
+const LEGACY_NAMESPACE = 'http://autosar.org/schema/r4.2.2';
 type XmlNode = Record<string, unknown>;
 const EDITOR_DATA_GID = 'AUTOSAR-BSW-CONFIG-TOOL-V1';
 
@@ -72,7 +75,7 @@ function parameterDest(type: BswmdParameter['type']): string {
  * @param config Configuration to export.
  * @param module Matching BSWMD module.
  * @param outputCheck Optional result evaluated in this same action (never cached across edits).
- * @returns Escaped AUTOSAR r4.2.2 XML.
+ * @returns Escaped AUTOSAR r4.0 XML using the loaded release's definitions.
  */
 export function exportArxml(
   config: ConfigInstance,
@@ -92,7 +95,11 @@ export function exportArxml(
     items
       .map((container) => {
         const definition = defs.find((item) => item.uuid === container.definitionRef)!;
-        const parameters = [...container.parameters.values()]
+        const parameters = definition.parameters
+          .flatMap((def) => {
+            const value = container.parameters.get(def.uuid);
+            return value ? [value] : [];
+          })
           .filter((p) => p.isConfigured === true && p.value !== undefined)
           .map((parameter) => {
             const def = definition.parameters.find(
@@ -104,12 +111,19 @@ export function exportArxml(
             return `<${kind} UUID="${generateUUID()}">${defRef(def.uuid, parameterDest(def.type))}${tag('VALUE', String(parameter.value))}</${kind}>`;
           })
           .join('');
-        const references = [...container.references.values()]
+        const references = definition.references
+          .flatMap((def) => {
+            const value = container.references.get(def.uuid);
+            return value ? [value] : [];
+          })
           .filter((ref) => ref.isConfigured === true && ref.targetUuid)
           .map((ref) => {
             const target = instancePaths.get(ref.targetUuid);
             if (!target) throw new Error(`${container.shortName}：引用目标不存在，无法导出 ARXML`);
-            return `<ECUC-REFERENCE-VALUE UUID="${generateUUID()}">${defRef(ref.definitionRef, 'ECUC-REFERENCE-DEF')}<VALUE-REF DEST="ECUC-CONTAINER-VALUE">${escapeXml(target)}</VALUE-REF></ECUC-REFERENCE-VALUE>`;
+            const refDefinition = definition.references.find(
+              (item) => item.uuid === ref.definitionRef
+            )!;
+            return `<ECUC-REFERENCE-VALUE UUID="${generateUUID()}">${defRef(ref.definitionRef, referenceDefinitionDest(refDefinition))}<VALUE-REF DEST="ECUC-CONTAINER-VALUE">${escapeXml(target)}</VALUE-REF></ECUC-REFERENCE-VALUE>`;
           })
           .join('');
         // ECUC absence cannot distinguish untouched suggestions from a deliberate disable.
@@ -261,9 +275,14 @@ function readValue(value: string, definition: BswmdParameter): unknown {
 /** Parse a single ECUC module, rejecting declarations before XML parsing.
  * @param source ARXML content (no DTD or entity declarations permitted).
  * @param modules Loaded BSWMD definitions.
+ * @param onWarning Receives compatibility warnings; the UI displays these before import.
  * @returns Validated standalone configuration with resolved forward references.
  */
-export function importArxml(source: string, modules: BswmdModule[]): ConfigInstance {
+export function importArxml(
+  source: string,
+  modules: BswmdModule[],
+  onWarning?: (message: string) => void
+): ConfigInstance {
   checkImportSize(new TextEncoder().encode(source).byteLength);
   source = withoutXmlComments(source);
   xmlPreflight(source);
@@ -288,8 +307,9 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
   if (!rootKey) throw new Error('缺少 AUTOSAR 根节点');
   const root = record(raw[rootKey], 'AUTOSAR');
   const prefix = rootKey.includes(':') ? ':' + rootKey.split(':')[0] : '';
-  if (root['@_xmlns' + prefix] !== AUTOSAR_NAMESPACE)
-    throw new Error('ARXML 命名空间须为 AUTOSAR r4.2.2');
+  const namespace = root['@_xmlns' + prefix];
+  if (namespace !== AUTOSAR_NAMESPACE && namespace !== LEGACY_NAMESPACE)
+    throw new Error('ARXML 命名空间须为 AUTOSAR r4.0（兼容旧工具 r4.2.2）');
   const autosar = record(normalize(root), 'AUTOSAR');
   const found: { node: XmlNode; packagePath: string }[] = [];
   const packages = (parent: XmlNode, path: string): void => {
@@ -364,19 +384,20 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
           value: readValue(text(p, 'VALUE'), def),
         };
       });
-      const references = nodes(single(node, 'REFERENCE-VALUES'), 'ECUC-REFERENCE-VALUE').map(
-        (r) => {
-          uuid(r);
-          const def = definition.references.find(
-            (item) => paths.get(item.uuid) === text(r, 'DEFINITION-REF').trim()
-          );
-          if (!def) throw new Error(`${path}：引用定义路径不匹配`);
-          if (emptyRefs.has(def.uuid)) throw new Error(`${path}：清空引用同时包含 VALUE-REF`);
-          const ref = { definitionRef: def.uuid, targetUuid: '', isConfigured: true };
-          pending.push({ ref, path: text(r, 'VALUE-REF').trim() });
-          return ref;
-        }
-      );
+      const referenceNodes = single(node, 'REFERENCE-VALUES');
+      if (nodes(referenceNodes, 'ECUC-INSTANCE-REFERENCE-VALUE').length)
+        throw new Error(`${path}：实例引用含上下文目标，本期不支持导入，未丢弃原始数据`);
+      const references = nodes(referenceNodes, 'ECUC-REFERENCE-VALUE').map((r) => {
+        uuid(r);
+        const def = definition.references.find(
+          (item) => paths.get(item.uuid) === text(r, 'DEFINITION-REF').trim()
+        );
+        if (!def) throw new Error(`${path}：引用定义路径不匹配`);
+        if (emptyRefs.has(def.uuid)) throw new Error(`${path}：清空引用同时包含 VALUE-REF`);
+        const ref = { definitionRef: def.uuid, targetUuid: '', isConfigured: true };
+        pending.push({ ref, path: text(r, 'VALUE-REF').trim() });
+        return ref;
+      });
       // Missing XML values remain unconfigured. Suggestions are editor-only and never exported as values.
       for (const def of definition.parameters) {
         if (!parameters.some((item) => item.definitionRef === def.uuid)) {
@@ -397,6 +418,16 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
             isConfigured: emptyRefs.get(def.uuid) ?? false,
           });
       }
+      // The XML object parser groups textual and numerical tags. Restore the definition's
+      // semantic order after filling absent fields; keep duplicates for hydrateConfig to reject.
+      const parameterOrder = new Map(definition.parameters.map((def, index) => [def.uuid, index]));
+      const referenceOrder = new Map(definition.references.map((def, index) => [def.uuid, index]));
+      parameters.sort(
+        (a, b) => parameterOrder.get(a.definitionRef)! - parameterOrder.get(b.definitionRef)!
+      );
+      references.sort(
+        (a, b) => referenceOrder.get(a.definitionRef)! - referenceOrder.get(b.definitionRef)!
+      );
       return {
         uuid: id,
         shortName: name,
@@ -428,7 +459,7 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
   }
   const now = Date.now();
   const metadata = editorData(moduleNode);
-  return hydrateConfig(
+  const result = hydrateConfig(
     {
       uuid: configUuid,
       name: metadata.get('name') ?? name,
@@ -440,4 +471,9 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
     },
     modules
   );
+  if (namespace === LEGACY_NAMESPACE)
+    onWarning?.(
+      '来源为旧版本命名空间 r4.2.2（旧工具格式）；已兼容读取，再次导出使用 r4.0，模块版本仍以已加载定义为准。'
+    );
+  return result;
 }

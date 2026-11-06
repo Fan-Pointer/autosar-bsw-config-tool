@@ -35,6 +35,8 @@ export interface ImportPlan {
 }
 export interface ImportSession {
   incoming: ConfigInstance;
+  /** Non-blocking parser diagnostics displayed before applying a file. */
+  warnings?: string[];
   targetUuid?: string;
   baseline: string;
 }

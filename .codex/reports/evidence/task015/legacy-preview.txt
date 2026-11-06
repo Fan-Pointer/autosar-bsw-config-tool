@@ -1,0 +1,156 @@
+- banner:
+  - generic: ☷
+  - generic: BSW Configurator
+  - button "撤销": ↶
+  - button "重做" [disabled]: ↷
+  - button "保存到本机":
+  - button "代码验证":
+  - button "生成 C 代码":
+    - generic: 生成 C 代码
+  - button "配置集管理":
+  - button "模块管理":
+  - button "验证结果":
+  - button "返回配置集列表":
+  - generic "配置有未保存修改": ●
+  - textbox "全局搜索":
+    - /placeholder: 搜索参数、值或实例路径
+  - button "切换主题": 深色
+  - generic: 简体中文⌄
+  - generic: 配
+- main:
+  - complementary:
+    - generic: 🗂工程目录
+    - button "折叠工程目录": ‹
+    - generic: ▱
+    - generic: TASK-015 隔离内存样例
+    - generic: ⌃
+    - generic "⚙ 模块管理 ⌃":
+      - generic: ⚙
+      - text: 模块管理 ⌃
+    - generic "▱ BSW Modules ⌃":
+      - generic: ▱
+      - text: BSW Modules ⌃
+    - button "M Dem":
+      - generic: M
+      - text: Dem
+    - button "M Interop":
+      - generic: M
+      - text: Interop
+    - generic "▱ RTE ⌄":
+      - generic: ▱
+      - text: RTE ⌄
+    - generic "▱ AUTOSAR文件 ⌄":
+      - generic: ▱
+      - text: AUTOSAR文件 ⌄
+    - generic "▱ 输出文件 ⌄":
+      - generic: ▱
+      - text: 输出文件 ⌄
+    - generic "▱ 输入文件 ⌄":
+      - generic: ▱
+      - text: 输入文件 ⌄
+  - separator "工程目录宽度"
+  - tablist "模块":
+    - tab "M Interop(TASK-015 隔离内存样例)" [selected]:
+      - generic: M
+      - text: Interop(TASK-015 隔离内存样例)
+    - button "关闭 Interop(TASK-015 隔离内存样例)": ×
+  - region "必填建议值":
+    - button "一键确认建议值":
+      - generic: 一键确认建议值
+    - generic: 仅确认当前配置集的必填默认值，可一次撤销
+  - complementary:
+    - tablist "顶级容器":
+      - tab "Root" [selected]
+      - tab "FirstMemory"
+      - button "更多顶级容器": …
+    - button "实例操作": ▤
+    - button "上移" [disabled]: ↑
+    - button "下移" [disabled]: ↓
+    - button "新增实例": ＋
+    - textbox "搜索配置树":
+      - /placeholder: 请输入文字搜索
+    - generic: ⌕
+    - tree:
+      - treeitem "已配置：必填齐全 ⊞ Root" [expanded]:
+        - generic "已配置：必填齐全"
+        - generic: ⊞
+        - generic: Root
+        - treeitem "已配置：必填齐全 i Root" [expanded]:
+          - generic "已配置：必填齐全"
+          - generic: i
+          - generic: Root
+    - generic "树状态图例":
+      - generic: 已选 1 项
+      - generic: 已配置
+      - generic: 警告
+      - generic: 错误
+      - generic: Ctrl / Cmd 切换选择 · Shift 连选
+  - separator "配置树宽度"
+  - navigation "实例路径":
+    - generic: ▱
+    - generic: Interop
+    - generic: ›
+    - generic: Root
+    - generic: ›
+    - generic: Root
+  - generic: 实例名称
+  - textbox "实例名称": Root
+  - region "参数"
+  - region "引用":
+    - generic: MemoryDestinationRef
+    - generic: ⊗
+    - textbox "MemoryDestinationRef": SecondMemory
+    - generic "选择引用目标":
+      - button "选择 MemoryDestinationRef": ▤
+- dialog "导入 ARXML":
+  - banner:
+    - heading "导入 ARXML" [level=2]
+    - button "Close this dialog":
+  - text: 配置文件（上限 50 MB）
+  - button "配置文件" [active]
+  - text: 导入到
+  - combobox "导入目标":
+    - option "当前配置集：TASK-015 隔离内存样例" [selected]
+    - option "新建配置集"
+  - paragraph: 文件仅在本机处理。预览后点击“应用导入”才会保存。未在文件中出现的工程容器会保留。
+  - group "冲突解决策略":
+    - generic: 冲突解决策略
+    - radio "覆盖" [checked]
+    - text: 覆盖
+    - radio "跳过"
+    - text: 跳过
+    - radio "重命名"
+    - text: 重命名
+  - paragraph: 覆盖同路径实例的参数和引用；文件缺少的字段将删除。子容器按路径合并。
+  - alert:
+    - generic: 来源为旧版本命名空间 r4.2.2（旧工具格式）；已兼容读取，再次导出使用 r4.0，模块版本仍以已加载定义为准。
+  - generic "导入预览统计":
+    - text: 新增容器数
+    - strong: "0"
+    - text: 新增参数数
+    - strong: "0"
+    - text: 冲突数
+    - strong: "1"
+    - text: 将被删除项数
+    - strong: "0"
+  - table:
+    - rowgroup:
+      - row "冲突实例路径 参数名 文件生成值 / 文件引用值 工程配置值 / 工程引用值":
+        - columnheader "冲突实例路径"
+        - columnheader "参数名"
+        - columnheader "文件生成值 / 文件引用值"
+        - columnheader "工程配置值 / 工程引用值"
+    - rowgroup:
+      - row "Root MemoryDestinationRef FirstMemory SecondMemory":
+        - cell "Root"
+        - cell "MemoryDestinationRef"
+        - cell "FirstMemory"
+        - cell "SecondMemory"
+  - contentinfo:
+    - button "取消":
+      - generic: 取消
+    - button "应用导入":
+      - generic: 应用导入
+- text: 仅内存测试 ·
+- link "下载旧命名空间测试文件":
+  - /url: blob:http://localhost:3001/3d92be59-e697-4a69-920c-c9d934caa497

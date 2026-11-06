@@ -1,0 +1,17 @@
+{
+  "format": "bswmd-changelog/1",
+  "modules": {
+    "NvM": {
+      "changes": [
+        {
+          "after": true,
+          "before": false,
+          "kind": "changed",
+          "path": "/containers/ECUC:592eb68c-8ec5-46e2-aa34-9d55999b105e/parameters/ECUC:0ff44e7b-65ca-4948-867e-d57ef3ef1902/defaultValue"
+        }
+      ],
+      "fromContentSha256": "73e054fc77f108ed64f1d9a2d29168bda21b2fb0c6eedc99cceafeae75f2b0ec",
+      "toContentSha256": "2b8c351024b6db51195b7d4ed645180845cc6a515ef27240eb00ef13014621cf"
+    }
+  }
+}

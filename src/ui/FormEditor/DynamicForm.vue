@@ -134,11 +134,12 @@
             :model-value="referenceLabel(reference.uuid)"
             readonly
           />
-          <span title="选择引用目标"
+          <span
+            :title="reference.isExternal ? '外部引用只读：本期不支持跨模块目标' : '选择引用目标'"
             ><button
               class="reference-picker"
               type="button"
-              :disabled="readonly"
+              :disabled="readonly || reference.isExternal"
               :aria-label="'选择 ' + reference.shortName"
               @click="referencePicker = reference.uuid"
             >
@@ -146,11 +147,14 @@
             </button></span
           >
         </div>
+        <small v-if="reference.isExternal" class="field-error"
+          >外部引用只读：本期不支持跨模块目标</small
+        >
         <span v-if="danglingReferences.includes(reference.uuid)" class="field-error" role="alert">
           目标不存在（{{ referenceData[reference.uuid]?.slice(0, 8) }}）
           <button
             class="clear-reference"
-            :disabled="readonly"
+            :disabled="readonly || reference.isExternal"
             @click="emit('reference-change', reference.uuid, '')"
           >
             清除引用
@@ -271,7 +275,11 @@ watch(
 );
 const referencePicker = ref<string>();
 function chooseReference(target: string | undefined): void {
-  if (referencePicker.value && !props.readonly)
+  if (
+    referencePicker.value &&
+    !props.readonly &&
+    !props.container.references.find((ref) => ref.uuid === referencePicker.value)?.isExternal
+  )
     emit('reference-change', referencePicker.value, target ?? '');
   referencePicker.value = undefined;
 }

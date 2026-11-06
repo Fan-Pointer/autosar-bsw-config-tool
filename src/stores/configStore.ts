@@ -44,6 +44,17 @@ import { configurationDelta } from '@/core/history/ConfigDelta';
 import { commonParameters, batchSkipReason } from '@/core/config/BatchEdit';
 import { planRequiredDefaults } from '@/core/config/RequiredDefaults';
 import { createParameterValue } from '@/core/config/ConfigValues';
+import {
+  matchesReferenceDefinition,
+  resolveReferenceCandidates,
+} from '@/core/config/ReferenceCandidates';
+
+/** Application-owned output result bound to the configuration state that was evaluated. */
+export interface ConfigOutputCheck extends OutputCheckResult {
+  readonly configUuid: string;
+  readonly lastModified: number;
+  readonly revision: number;
+}
 
 interface StoredContainer extends Omit<
   ConfigContainer,
@@ -296,16 +307,13 @@ export const useConfigStore = defineStore('config', () => {
     Object.fromEntries(
       (selectedEntry.value?.definition.references ?? []).map((reference) => [
         reference.uuid,
-        entries.value
-          .filter((entry) =>
-            reference.destinationRef
-              ? entry.definition.definitionPath === reference.destinationRef
-              : entry.definition.shortName === reference.destinationContainerType
-          )
-          .map((entry) => ({
-            uuid: entry.container.uuid,
-            label: entry.path,
-          })),
+        (config.value && module.value
+          ? resolveReferenceCandidates(reference, config.value, module.value)
+          : []
+        ).map((entry) => ({
+          uuid: entry.container.uuid,
+          label: entry.path,
+        })),
       ])
     )
   );
@@ -318,11 +326,7 @@ export const useConfigStore = defineStore('config', () => {
           ? [null, ...entries.value.map((entry) => entry.container.uuid)].flatMap((parentUuid) =>
               manager
                 .getAddOptions(config.value!, parentUuid)
-                .filter((option) =>
-                  reference.destinationRef
-                    ? option.definition.definitionPath === reference.destinationRef
-                    : option.definition.shortName === reference.destinationContainerType
-                )
+                .filter((option) => matchesReferenceDefinition(reference, option.definition))
                 .map((option) => ({
                   definitionUuid: option.definition.uuid,
                   parentUuid,
@@ -600,16 +604,29 @@ export const useConfigStore = defineStore('config', () => {
    * @param definition Matching definition, defaults to the active module.
    * @returns A same-action result; callers must never cache it across actions.
    */
-  function getOutputCheck(target = config.value, definition = module.value): OutputCheckResult {
+  function getOutputCheck(target = config.value, definition = module.value): ConfigOutputCheck {
     if (!target || !definition) throw new Error('请先打开配置集');
-    return evaluateOutputReadiness(target, definition, DemConstraints);
+    return {
+      ...evaluateOutputReadiness(target, definition, DemConstraints),
+      configUuid: target.uuid,
+      lastModified: target.lastModified,
+      revision,
+    };
   }
 
   /** Validate the active configuration.
    * @param check Optional result from the same immediate output action.
    * @returns The current violations.
    */
-  function validate(check?: OutputCheckResult): ConstraintViolation[] {
+  function validate(check?: ConfigOutputCheck): ConstraintViolation[] {
+    if (
+      check &&
+      (!config.value ||
+        check.configUuid !== config.value.uuid ||
+        check.lastModified !== config.value.lastModified ||
+        check.revision !== revision)
+    )
+      throw new Error('输出检查已过期或不属于当前配置集，请重新校验');
     violations.value =
       config.value && module.value ? outputViolations(check ?? getOutputCheck()) : [];
     validated.value = Boolean(config.value && module.value);
@@ -869,6 +886,11 @@ export const useConfigStore = defineStore('config', () => {
    */
   function setReferenceTarget(uuid: string, targetUuid: string): void {
     assertEditable();
+    if (
+      selectedEntry.value?.definition.references.find((reference) => reference.uuid === uuid)
+        ?.isExternal
+    )
+      throw new Error('外部引用只读：本期不支持跨模块目标');
     if (!selectedEntry.value) return;
     const entry = selectedEntry.value;
     const definition = entry.definition.references.find((r) => r.uuid === uuid);
@@ -1300,8 +1322,11 @@ export const useConfigStore = defineStore('config', () => {
     target: 'current' | 'new' = 'current'
   ): ImportSession {
     try {
+      const warnings: string[] = [];
       const incoming =
-        format === 'json' ? importJson(text, modules.value) : importArxml(text, modules.value);
+        format === 'json'
+          ? importJson(text, modules.value)
+          : importArxml(text, modules.value, (message) => warnings.push(message));
       if (
         target === 'current' &&
         config.value &&
@@ -1310,6 +1335,7 @@ export const useConfigStore = defineStore('config', () => {
         throw new Error('文件模块或版本与当前配置集不一致，请选择新建配置集');
       return {
         incoming,
+        warnings,
         targetUuid: target === 'current' ? config.value?.uuid : undefined,
         baseline: importBaseline(),
       };

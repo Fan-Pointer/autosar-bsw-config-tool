@@ -43,6 +43,14 @@
     <p class="import-help">{{ strategyHelp[strategy] }}</p>
     <p v-if="reading" role="status">正在读取文件…</p>
     <el-alert
+      v-for="warning in session?.warnings ?? []"
+      :key="warning"
+      :title="warning"
+      type="warning"
+      :closable="false"
+      show-icon
+    />
+    <el-alert
       v-if="error || preview.error"
       :title="error || preview.error"
       type="error"

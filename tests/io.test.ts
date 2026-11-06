@@ -127,7 +127,7 @@ describe('lossless JSON import/export', () => {
 });
 
 describe('ARXML structure and security', () => {
-  it('uses r4.2.2, ECUC hierarchy, UUIDs, definition paths, and correct reference paths', () => {
+  it('uses r4.0, ECUC hierarchy, UUIDs, definition paths, and correct reference paths', () => {
     const { config, module } = arxmlFixture();
     const xml = exportArxml(config, module);
     const document = new DOMParser().parseFromString(xml, 'application/xml');

@@ -1,6 +1,7 @@
 import type { ConstraintRule, ConstraintViolation } from './ConstraintTypes';
 import { collectContainers } from '../config/ConfigTraversal';
 import { choiceSelectionError } from '../config/ChoiceSelection';
+import { matchesReferenceDefinition } from '../config/ReferenceCandidates';
 
 /** Validate field types, bounds, choices, and reference targets directly from BSWMD. */
 export const DefinitionConstraints: ConstraintRule[] = [
@@ -117,16 +118,12 @@ export const DefinitionConstraints: ConstraintRule[] = [
                 containerUuid: entry.container.uuid,
                 definitionRef: reference.uuid,
               });
-            } else if (
-              reference.destinationRef
-                ? target.definition.definitionPath !== reference.destinationRef
-                : target.definition.shortName !== reference.destinationContainerType
-            ) {
+            } else if (!matchesReferenceDefinition(reference, target.definition)) {
               add(
                 reference.uuid,
                 reference.shortName,
-                `${reference.shortName} must target ${reference.destinationContainerType}`,
-                `Select an existing ${reference.destinationContainerType} container`
+                `${reference.shortName} must target ${reference.destinationRefs?.join(' | ') || reference.destinationContainerType}`,
+                `Select an existing ${reference.destinationRefs?.join(' | ') || reference.destinationContainerType} container`
               );
             }
           }
