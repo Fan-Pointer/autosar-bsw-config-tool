@@ -1,0 +1,148 @@
+
+> autosar-bsw-config-tool@0.1.0 test:verify
+> vitest run --reporter=default --reporter=./scripts/test-collection-guard.ts --maxWorkers=1 --minWorkers=1
+
+
+ RUN  v2.1.9 D:/ProFile/教培业务/配置器/autosar-bsw-config-tool
+
+stderr | tests/ui.test.ts > TASK-003 user interactions > saves edits when returning home and opens the persisted set through the home list
+[Vue Router warn]: No match found for location with path "/knowledge"
+[Vue Router warn]: No match found for location with path "/subscription"
+[Vue Router warn]: No match found for location with path "/subscription"
+[Vue Router warn]: No match found for location with path "/knowledge"
+
+ ✓ tests/ui.test.ts (24 tests) 9756ms
+   ✓ definition-driven components > renders enum, boolean, numeric and string controls with required markers and bounds 336ms
+   ✓ workspace integration and local persistence > navigates from a real violation to the field and generates C after fixing the reference 1571ms
+   ✓ TASK-003 user interactions > retains the instance name draft until change, persists it, and follows undo 315ms
+   ✓ TASK-003 user interactions > shows a real create action in the empty workspace and opens a named set with the DTC guide 441ms
+   ✓ TASK-003 user interactions > uses confirmation for instance deletion and immediately selects its surviving parent 433ms
+   ✓ TASK-003 user interactions > requires set deletion confirmation and switches to the first remaining set 388ms
+   ✓ TASK-003 user interactions > colors every conflicting node and focuses its exact field when a violation is clicked 521ms
+   ✓ TASK-003 user interactions > creates under the right-click instance without changing selection on open, lists every child, and supports undo/redo 736ms
+   ✓ TASK-003 user interactions > never borrows the previous instance for a definition context menu 462ms
+   ✓ TASK-003 user interactions > clones and deletes the explicit context target, closes before confirmation, and cancel writes nothing 635ms
+   ✓ TASK-003 user interactions > supports arrows, Home/End, Enter, Escape, empty children and focus restoration 381ms
+   ✓ TASK-003 user interactions > keeps error location in the problem panel after removing the context-menu shortcut 487ms
+   ✓ TASK-003 user interactions > closes on outside pointer, toolbar chooser opening, other dialogs, import, and configuration switch 655ms
+   ✓ TASK-003 user interactions > uses core CHOICE/upper-limit reasons and blocks writes while importing 743ms
+   ✓ TASK-003 user interactions > saves edits when returning home and opens the persisted set through the home list 470ms
+stderr | tests/projects.test.ts > project wizard and portal navigation > shows distinct start panels and opens a newly created project after its asynchronous save
+[Vue Router warn]: No match found for location with path "/"
+
+stderr | tests/projects.test.ts > project wizard and portal navigation > reports a workspace resource failure and allows retry without losing an existing project
+[Vue Router warn]: No match found for location with path "/"
+
+stderr | tests/projects.test.ts > project wizard and portal navigation > opens the start page without resuming an existing project and imports only into a new configuration
+[Vue Router warn]: No match found for location with path "/knowledge"
+[Vue Router warn]: No match found for location with path "/subscription"
+[Vue Router warn]: No match found for location with path "/subscription"
+[Vue Router warn]: No match found for location with path "/knowledge"
+
+stderr | tests/projects.test.ts > project wizard and portal navigation > opens the start page without resuming an existing project and imports only into a new configuration
+[Vue Router warn]: No match found for location with path "/knowledge"
+[Vue Router warn]: No match found for location with path "/subscription"
+[Vue Router warn]: No match found for location with path "/subscription"
+[Vue Router warn]: No match found for location with path "/knowledge"
+
+ ✓ tests/projects.test.ts (16 tests) 1284ms
+ ✓ tests/editing-experience.test.ts (15 tests) 2822ms
+   ✓ TASK-017 editing workflows > shows clicked parameter help only in the bottom dock without editing a boolean or history 423ms
+   ✓ TASK-017 editing workflows > combines twenty-step undo/redo, independent sets and per-instance batch skip reasons 331ms
+ ✓ tests/io.test.ts (27 tests) 249ms
+ ✓ tests/arxml-fidelity.test.ts (27 tests) 143ms
+stdout | tests/arxml-fidelity.test.ts > official module regressions > CanIf: 45 suggestions require confirmation and mandatory local/external references block output without blocking JSON
+CanIf: 45 suggestions blocked; 25 required parameters confirmed; three required references block output; JSON flags/timestamps/descriptions equal
+
+stdout | tests/editor.test.ts > bounded editor history > restores byte-identical JSON after twenty undo/redo steps, including timestamps and flags
+20-step undo: 7.48 ms
+
+stdout | tests/editor.test.ts > global search and local theme > indexes and searches 500 instances in at most 200 ms
+500-instance index + search: 8.63 ms
+
+ ✓ tests/editor.test.ts (28 tests) 240ms
+stdout | tests/ecuc.test.ts > official ECUC selected-module importer > preserves all containers, fields and source UUIDs for NvM
+NvM: 6 containers, 51 parameters, 9 references
+
+stdout | tests/ecuc.test.ts > official ECUC selected-module importer > preserves all containers, fields and source UUIDs for CanIf
+CanIf: 20 containers, 82 parameters, 16 references
+
+ ✓ tests/ecuc.test.ts (32 tests) 299ms
+ ✓ tests/io-ui.test.ts (17 tests) 2118ms
+   ✓ import preview UI and project menus > renders hostile file text literally in conflicts without creating HTML elements 443ms
+   ✓ import preview UI and project menus > opens import/export submenus, downloads all three formats and distinguishes module/set tooltips 876ms
+stdout | tests/output.test.ts > one output gate across actions > official Dem emits exactly the confirmed parameter set in ARXML and C after all mandatory choices and internal references are configured
+Official Dem gcc -std=c11 -Wall -Wextra -Werror -pedantic -fsyntax-only: exit=0
+Official Dem output identity: 40 configured = 40 VALUE = 40 C parameter fields
+
+ ✓ tests/output.test.ts (9 tests) 1208ms
+   ✓ one output gate across actions > official Dem emits exactly the confirmed parameter set in ARXML and C after all mandatory choices and internal references are configured 1079ms
+ ✓ tests/lifecycle.test.ts (15 tests) 131ms
+ ✓ tests/arxml-interoperability.test.ts (10 tests) 361ms
+ ✓ tests/recovery.test.ts (15 tests) 300ms
+stderr | tests/ecuc-ui.test.ts > official module manager and persisted editing > lists every file module, imports a selected definition and renders the official tree and form
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+stderr | tests/ecuc-ui.test.ts > official module manager and persisted editing > reports required and range errors and navigates from the real validation panel to the imported field
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+stdout | tests/ecuc-ui.test.ts > official module manager and persisted editing > renders the official definition tree within 500 ms
+official NvM first tree render (jsdom): 28.08 ms
+
+stderr | tests/ecuc-ui.test.ts > D3 reference empty state > names the missing target, creates and assigns it, and undoes the entire operation
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+stderr | tests/ecuc-ui.test.ts > D3 reference empty state > explains why cross-module targets cannot be created instead of making invalid local instances
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+ ✓ tests/ecuc-ui.test.ts (9 tests) 2674ms
+   ✓ official module manager and persisted editing > lists every file module, imports a selected definition and renders the official tree and form 1012ms
+   ✓ official module manager and persisted editing > reports required and range errors and navigates from the real validation panel to the imported field 474ms
+   ✓ D3 reference empty state > names the missing target, creates and assigns it, and undoes the entire operation 521ms
+stdout | tests/editor-ui.test.ts > TASK-006 workspace interactions > renders 500-instance search results within 200 ms from input
+500-instance input-to-render: 76.08 ms
+
+stdout | tests/editor-ui.test.ts > TASK-006 workspace interactions > renders twenty undo steps within 500 ms and restores the full configuration
+20-step undo with workspace rendering: 335.00 ms
+
+ ✓ tests/editor-ui.test.ts (9 tests) 3459ms
+   ✓ TASK-006 workspace interactions > uses toolbar and Ctrl/Cmd shortcuts but preserves native input/IME/contenteditable undo 569ms
+   ✓ TASK-006 workspace interactions > supports Ctrl/Shift selection, shared parameters, skip summaries and one-step batch undo 547ms
+   ✓ TASK-006 workspace interactions > marks imported dangling references in tree and form, navigates errors, clears and undoes them 397ms
+   ✓ TASK-006 workspace interactions > searches across sets, highlights literal matches and focuses the selected parameter after switching 638ms
+   ✓ TASK-006 workspace interactions > renders twenty undo steps within 500 ms and restores the full configuration 516ms
+stdout | tests/choice.test.ts > TASK-009 choice values and round trips > rejects actual NvM candidate 0 with a required external reference while preserving lossless JSON
+NvM candidate=NvMEaRef; defaults=11; manual=26; required external reference rejected; JSON roundTrip=equal
+
+stdout | tests/choice.test.ts > TASK-009 choice values and round trips > rejects actual NvM candidate 1 with a required external reference while preserving lossless JSON
+NvM candidate=NvMFeeRef; defaults=11; manual=26; required external reference rejected; JSON roundTrip=equal
+
+ ✓ tests/choice.test.ts (12 tests) 161ms
+ ✓ tests/catalog.test.ts (10 tests) 2970ms
+   ✓ TASK-021 real catalog and source semantics > covers every source module in 4.4.0, hashes every parsed asset and checks every selectable output boundary 2281ms
+   ✓ TASK-021 real catalog and source semantics > covers every source module in 4.2.2, hashes every parsed asset and checks every selectable output boundary 590ms
+ ✓ tests/replica.test.ts (8 tests) 794ms
+   ✓ screenshot replica interactions > closes a module to an empty editor and reopens its saved data 309ms
+stdout | tests/choice-ui.test.ts > TASK-009 UI selection and default confirmation > confirms only actual default values across all 37 required NvM parameters in one undo operation
+NvM defaults UI: required=37, confirmed=11, remaining=26, one Ctrl+Z restores exact JSON
+
+ ✓ tests/choice-ui.test.ts (4 tests) 951ms
+   ✓ TASK-009 UI selection and default confirmation > shows candidate buttons, confirms data loss, cancels safely and restores a switch with one Ctrl+Z 504ms
+   ✓ TASK-009 UI selection and default confirmation > confirms only actual default values across all 37 required NvM parameters in one undo operation 414ms
+ ✓ tests/arxml-editor.test.ts (3 tests) 34ms
+ ✓ tests/container-menu.test.ts (5 tests) 4ms
+ ✓ tests/core.test.ts (43 tests) 283ms
+ ✓ tests/generation-script.test.ts (4 tests) 12456ms
+   ✓ official 4.4.0 definition extraction CLI > repeats byte-for-byte, hashes content independently, and retains definition array order 3204ms
+   ✓ official 4.4.0 definition extraction CLI > records a field-level change with previous/current hashes and retains the last real change on repeat 4636ms
+   ✓ official 4.4.0 definition extraction CLI > extracts a real 4.2.2 official fragment and records its release 1603ms
+   ✓ official 4.4.0 definition extraction CLI > rejects an unsupported 4.5.0 definition before altering any existing generated artifact 3004ms
+ ✓ tests/definition-metadata.test.ts (3 tests) 11ms
+ ✓ tests/ecuc-cache.test.ts (1 test) 201ms
+
+ Test Files  24 passed (24)
+      Tests  346 passed (346)
+   Start at  18:16:49
+   Duration  109.73s (transform 3.30s, setup 0ms, collect 38.42s, tests 42.91s, environment 19.45s, prepare 3.58s)
+
+Test collection guard: 24/24 disk test files collected

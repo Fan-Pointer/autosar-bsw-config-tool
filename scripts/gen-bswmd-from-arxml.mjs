@@ -37,6 +37,8 @@ if (!output.endsWith('.json') || source === output) throw new Error('输出须�
 const raw = readFileSync(source);
 const loader = await createServer({
   root: ROOT,
+  cacheDir: `.temp/vite-extract-${process.pid}`,
+  optimizeDeps: { noDiscovery: true, include: [] },
   server: { middlewareMode: true, hmr: false, watch: null },
   appType: 'custom',
 });

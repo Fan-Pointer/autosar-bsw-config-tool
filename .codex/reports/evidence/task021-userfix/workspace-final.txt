@@ -1,0 +1,180 @@
+- banner:
+  - generic: ☷
+  - generic: OneSAR Configurator
+  - button "撤销" [disabled]: ↶
+  - button "重做" [disabled]: ↷
+  - button "保存到本机":
+  - button "代码验证":
+  - button "生成 C 代码":
+    - generic: 生成 C 代码
+  - button "配置集管理":
+  - button "模块管理":
+  - button "验证结果":
+  - button "返回配置集列表":
+    - generic: 返回主页面
+  - textbox "全局搜索":
+    - /placeholder: 搜索参数、值或实例路径
+  - button "切换主题": 深色
+  - generic: 简体中文⌄
+  - generic: 配
+- strong: 界面验证_20261106
+- generic: CP 4.4.0 · S32K1XX
+- button "工程列表"
+- button "＋ 新建工程"
+- main:
+  - complementary:
+    - generic: 配置集与模块
+    - button "折叠配置集目录": ‹
+    - generic: ▱
+    - generic: 界面验证_20261106
+    - generic: ⌃
+    - generic "⚙ 模块管理 ⌃":
+      - generic: ⚙
+      - text: 模块管理 ⌃
+    - generic "▱ BSW Modules ⌃":
+      - generic: ▱
+      - text: BSW Modules ⌃
+    - button "M Dem":
+      - generic: M
+      - text: Dem
+    - button "M CanTp":
+      - generic: M
+      - text: CanTp
+  - separator "配置集目录宽度"
+  - tablist "模块":
+    - tab "M Dem(界面验证_20261106 · Dem)" [selected]:
+      - generic: M
+      - text: Dem(界面验证_20261106 · Dem)
+    - button "关闭 Dem(界面验证_20261106 · Dem)": ×
+  - region "必填建议值":
+    - button "一键确认建议值":
+      - generic: 一键确认建议值
+    - generic: 仅确认当前配置集的必填默认值，可一次撤销
+  - complementary:
+    - tablist "顶级容器":
+      - tab "DemConfigSet" [selected]
+      - tab "DemGeneral"
+    - button "实例操作": ▤
+    - button "上移" [disabled]: ↑
+    - button "下移" [disabled]: ↓
+    - button "添加实例": ＋
+    - textbox "搜索配置树":
+      - /placeholder: 请输入文字搜索
+    - generic: ⌕
+    - tree:
+      - treeitem "有 ERROR ⊞ DemConfigSet" [expanded]:
+        - generic "有 ERROR"
+        - generic: ⊞
+        - generic: DemConfigSet
+        - treeitem "有 ERROR i DemConfigSet" [expanded]:
+          - generic "有 ERROR"
+          - generic: i
+          - generic: DemConfigSet
+          - treeitem "已配置：必填齐全 ⊞ DemComponent" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemComponent
+          - treeitem "已配置：必填齐全 ⊞ DemDTC" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDTC
+          - treeitem "已配置：必填齐全 ⊞ DemDTCAttributes" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDTCAttributes
+          - treeitem "已配置：必填齐全 ⊞ DemDebounceCounterBasedClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDebounceCounterBasedClass
+          - treeitem "已配置：必填齐全 ⊞ DemDebounceTimeBaseClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDebounceTimeBaseClass
+          - treeitem "已配置：必填齐全 ⊞ DemDtrs" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDtrs
+          - treeitem "有 ERROR ⊞ DemEventParameter" [expanded]:
+            - generic "有 ERROR"
+            - generic: ⊞
+            - generic: DemEventParameter
+            - treeitem "有 ERROR i DemEventParameter" [expanded]:
+              - generic "有 ERROR"
+              - generic: i
+              - generic: DemEventParameter
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackClearEventAllowed" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackClearEventAllowed
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackEventDataChanged" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackEventDataChanged
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackEventUdsStatusChanged" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackEventUdsStatusChanged
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackInitMForE" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackInitMForE
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackMonitorStatusChanged" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackMonitorStatusChanged
+              - treeitem "已配置：必填齐全 ⊞ DemIndicatorAttribute" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemIndicatorAttribute
+              - treeitem "有 ERROR ⊞ DemDebounceAlgorithmClass" [expanded]:
+                - generic "有 ERROR"
+                - generic: ⊞
+                - generic: DemDebounceAlgorithmClass
+                - treeitem "有 ERROR i DemDebounceAlgorithmClass" [expanded]:
+                  - generic "有 ERROR"
+                  - generic: i
+                  - generic: DemDebounceAlgorithmClass
+                  - treeitem "已配置：必填齐全 ⊞ DemDebounceCounterBased" [expanded]:
+                    - generic "已配置：必填齐全"
+                    - generic: ⊞
+                    - generic: DemDebounceCounterBased
+                  - treeitem "已配置：必填齐全 ⊞ DemDebounceMonitorInternal" [expanded]:
+                    - generic "已配置：必填齐全"
+                    - generic: ⊞
+                    - generic: DemDebounceMonitorInternal
+                  - treeitem "已配置：必填齐全 ⊞ DemDebounceTimeBase" [expanded]:
+                    - generic "已配置：必填齐全"
+                    - generic: ⊞
+                    - generic: DemDebounceTimeBase
+          - treeitem "已配置：必填齐全 ⊞ DemMultiEventTriggering" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemMultiEventTriggering
+          - treeitem "已配置：必填齐全 ⊞ DemObdDTC" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemObdDTC
+          - treeitem "已配置：必填齐全 ⊞ DemPidClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemPidClass
+    - generic "树状态图例":
+      - generic: 已选 1 项
+      - generic: 已配置
+      - generic: 警告
+      - generic: 错误
+      - generic: Ctrl / Cmd 切换选择 · Shift 连选
+  - separator "配置树宽度"
+  - navigation "实例路径":
+    - generic: ▱
+    - generic: Dem
+    - generic: ›
+    - generic: DemConfigSet
+    - generic: ›
+    - generic: DemConfigSet
+  - generic: 实例名称
+  - textbox "实例名称": DemConfigSet
+  - region "参数"
+  - paragraph: 该容器没有可配置的字段
+  - group "实例引用关系":
+    - generic "引用关系 · 入站 0 / 出站 0"

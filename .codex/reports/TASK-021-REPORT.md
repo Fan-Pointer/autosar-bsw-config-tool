@@ -104,3 +104,39 @@ ConfigInstanceManager 已有复合键直接复用，未修改。src/core 的实�
 - 未取得4.2.2规范原版逐条对照，历史类型依据版本与待核实事项在B2计划中声明。
 - 用户已恢复WorkBuddy操作；本报告提交时独立评审尚未发生，随后真实发送。当前是前台会话自动接续，未宣称已验证无人值守常驻。
 
+## 用户反馈修复：工程打开、起始页与选择器（2026-11-06）
+
+本节为用户在 TASK-021 首次提交后、WorkBuddy 尚未实际接收该版本评审前提出的三项明确修复。原提交 `73ee57a6221c9fb5ae136606a8cecef529149002` 及上文结果保留。按用户指令补充修复并重新绑定 submissionCommit；本次不是独立评审返工，round 保持 0，不修改契约、stage 或任何评审结论。
+
+### 实际故障与修复
+
+1. **现有与新建工程无法打开**：在真实 `localhost:3000` 点击既有 DEMO，路由停留在起始页，控制台记录 WorkspaceView 动态模块加载失败。只读递归检查其 99 个模块依赖，发现共享 Vite 缓存中的 `handlebars.js?v=81ff0635` 返回 HTTP 504。桌面运行实例与 ARXML 抽取脚本原先共享 `.temp/vite-cache`，脚本优化依赖会令运行中的依赖地址失效。桌面服务改为按端口独立缓存并预优化 handlebars；两个抽取入口按进程使用独立缓存且关闭无关浏览器依赖发现。没有删除配置库或用户缓存。
+2. 首页和起始页共用 `useProjectNavigation`，统一等待初始化、处理激活失败及路由资源失败、显示可理解的错误，并在失败后恢复重试能力。创建过程保留向导组件，避免保存时 isLoading 改变卸载向导、丢失成功跳转事件。
+3. **起始页显示**：新建直接显示两步表单；打开只显示本机工程及独立配置集；导入显示 JSON/ARXML 入口。左侧以单一选中状态标记当前页面，不再混用欢迎页内容。顶部与侧栏稳定保留，内容区独立滚动；内嵌选择器高度随窗口调整，1280×720 下创建按钮完整可见。
+4. **选择模块文字**：删除悬停时撑开列表的大段限制说明、已选项长 tooltip、向导底部验证统计段落。保留名称、数量及简短状态；不可选择模块保留原生提示和无障碍原因，未把尚不支持的模块伪装为可用。新建与模块管理仍共用组件，未改定义/选择资格或输出闸门。
+
+调整文件：`scripts/desktop/server.mjs`、两个 ARXML 抽取入口、`useProjectNavigation.ts`、`ConfiguratorStartView.vue`、`HomeView.vue`、`ProjectWizard.vue`、`ModuleSelector.vue`、`tests/projects.test.ts`、README。
+
+### 本机实际验证
+
+在用户使用的同一来源 `localhost:3000` 验证；只新增测试工程，不清空、迁移或覆盖既有工程内容：
+
+- 已有 DEMO（当前受控浏览器内为 Dem/Nm/PduR/SoAd 四模块）从起始页、首页卡片均能打开，截图 `01-existing-project-open.png`。用户截图所用浏览器的七模块 DEMO 未直接操作，不冒充其数据已逐项验证。
+- 创建 `界面验证_20261106`（CP 4.4.0 / S32K1XX，Dem + CanTp），成功自动进入工作区；刷新后名称、版本及两模块均恢复，再从打开列表进入也成功。截图 `04-created-project-reloaded.png`、`08-workspace-final.png`。
+- 旧独立配置集 `研究验证_20261103` 从打开列表进入成功。
+- 新建、打开、导入分别截取 `02-new-project.png`、`05-open-project.png`、`07-import-page.png`；`06-compact-selector.png` 为最终压缩布局及无长说明选择器。布局预览取消，未额外保存工程。
+- 抽取 CLI 的完整回归执行期间，桌面服务继续运行；测试后再次检查 WorkspaceView 的 99 个依赖，全部成功。浏览器最后一次刷新成功；`browser-errors.json` 仅保留修复前 10:03:38 UTC 的两条失败，修复后没有新增 error。
+- 桌面服务仅重启了通过命令行身份确认的本仓库原进程；使用原 `Start-Configurator.ps1 -NoBrowser` 恢复，地址仍为 localhost:3000。快捷方式入口未变，无需重装；没有修改系统执行策略。
+
+证据目录：`.codex/reports/evidence/task021-userfix/`。浏览器已留在可运行的新工程配置页。
+
+### 自动验证
+
+- 专项：projects + generation-script 共 **20/20** 通过；包含新建保存后跳转、三个入口各自内容/单选中状态、模拟路由资源失败显示提示/保留配置 JSON/允许重试。
+- 全量 `npm run test:verify -- --maxWorkers=1 --minWorkers=1`：**346/346** 通过、24/24 文件收集守卫通过，109.73s。原 344 项保留，新增 2 项；没有跳过测试或放宽性能门槛。
+- 最终 `npm run build`：严格类型检查及构建通过，18.61s；既有主包体积警告保留。
+- 本轮所有源文件 Prettier 检查通过，`git diff --check` 通过。最终布局高度调整仅 CSS，构建和浏览器实测已覆盖。
+- 本机网络诊断首次在受限 shell 中 fetch failed；经授权本机连接后重跑 99/99 成功。此失败不是应用回归，未隐藏或据此修改数据。
+
+本节结果为 Codex 实现与自检，不构成 WorkBuddy 通过结论；评审必须核对更新后的 submissionCommit。
+

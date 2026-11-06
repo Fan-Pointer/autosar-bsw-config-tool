@@ -1,16 +1,19 @@
 <template>
-  <el-dialog
+  <component
+    :is="inline ? 'section' : ElDialog"
     v-if="modelValue"
     :model-value="modelValue"
     title="新建工程"
     top="24px"
     width="min(960px, 94vw)"
     class="project-wizard"
+    :class="{ 'wizard-inline': inline }"
     :close-on-click-modal="!store.projectBusy"
     :close-on-press-escape="!store.projectBusy"
     :show-close="!store.projectBusy"
     @update:model-value="emit('update:modelValue', $event)"
   >
+    <h1 v-if="inline">新建工程</h1>
     <ol class="wizard-steps" aria-label="创建进度">
       <li :class="{ current: step === 1 }">01 工程属性</li>
       <li :class="{ current: step === 2 }">02 选择模块</li>
@@ -60,12 +63,6 @@
           <span>已选择 {{ selected.length }} 个模块</span>
         </div>
         <ModuleSelector v-model="selected" :entries="versionCatalog" :busy="store.projectBusy" />
-        <p class="wizard-hint catalog-hint">
-          CP {{ version }} 共 {{ versionCatalog.length }} 个标准模块，{{
-            versionCatalog.filter((entry) => entry.status !== 'unsupported').length
-          }}
-          个已通过当前配置与输出边界验证。有限制或待支持的模块可查看具体原因。
-        </p>
       </div>
       <p v-if="message" role="alert" class="wizard-error">{{ message }}</p>
       <div class="wizard-footer">
@@ -83,20 +80,23 @@
         <button
           type="submit"
           class="wizard-primary"
-          :disabled="store.projectBusy || (step === 1 ? !name.trim() : !selected.length)"
+          :disabled="
+            store.isLoading || store.projectBusy || (step === 1 ? !name.trim() : !selected.length)
+          "
         >
           {{ step === 1 ? '下一步 →' : store.projectBusy ? '正在创建…' : '创建并打开' }}
         </button>
       </div>
     </form>
-  </el-dialog>
+  </component>
 </template>
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import { ElDialog } from 'element-plus';
 import { useConfigStore } from '@/stores/configStore';
 import { builtinCatalog } from '@/modules/builtinCatalog';
 import ModuleSelector from '@/ui/Modules/ModuleSelector.vue';
-const props = defineProps<{ modelValue: boolean }>();
+const props = defineProps<{ modelValue: boolean; inline?: boolean }>();
 const emit = defineEmits<{ 'update:modelValue': [value: boolean]; opened: [] }>();
 const store = useConfigStore();
 const step = ref(1),
@@ -148,6 +148,16 @@ async function create(): Promise<void> {
 }
 </script>
 <style scoped>
+.wizard-inline {
+  --module-list-height: clamp(140px, calc(100dvh - 540px), 280px);
+  width: 100%;
+  min-width: 0;
+}
+.wizard-inline h1 {
+  margin: 0 0 24px;
+  font-size: 26px;
+  font-weight: 600;
+}
 .wizard-steps {
   display: flex;
   list-style: none;
@@ -229,7 +239,7 @@ button {
 }
 .wizard-primary {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
 }
 button:disabled {
@@ -270,9 +280,6 @@ h3 {
 </style>
 
 <style scoped>
-.catalog-hint {
-  margin-top: 12px;
-}
 :global(.project-wizard .el-dialog__body) {
   max-height: calc(100vh - 110px);
   overflow: auto;

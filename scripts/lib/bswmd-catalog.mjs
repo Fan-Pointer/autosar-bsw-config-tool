@@ -68,6 +68,8 @@ export async function generateCatalog(source, directory) {
     text.match(/AUTOSAR_(\d+-\d+-\d+)\.xsd/)?.[1].replaceAll('-', '.');
   if (!['4.2.2', '4.4.0'].includes(release)) throw new Error('无法从源内容确认支持的发布版本');
   const server = await createServer({
+    cacheDir: `.temp/vite-extract-${process.pid}`,
+    optimizeDeps: { noDiscovery: true, include: [] },
     server: { middlewareMode: true, hmr: false, watch: null },
     appType: 'custom',
   });

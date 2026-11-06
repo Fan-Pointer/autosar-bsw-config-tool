@@ -21,7 +21,8 @@
             :key="entry.shortName"
             class="module-option"
             :class="{ unavailable: entry.status === 'unsupported' }"
-            :title="entry.reason"
+            :title="entry.status === 'unsupported' ? entry.reason : undefined"
+            :aria-description="entry.status === 'unsupported' ? entry.reason : undefined"
             tabindex="0"
           >
             <label
@@ -36,7 +37,6 @@
               ><small v-if="entry.status === 'unsupported'">待支持</small
               ><small v-else-if="entry.status === 'limited'">有限制</small>
             </label>
-            <span v-if="entry.reason" class="module-reason">{{ entry.reason }}</span>
           </div>
         </details>
         <p v-if="!filtered.length" class="empty">没有匹配的模块</p>
@@ -94,7 +94,7 @@
                 <strong>{{ entry.shortName }}</strong
                 ><small>CP {{ entry.release }}</small>
               </td>
-              <td :title="entry.reason">
+              <td>
                 {{
                   entry.status === 'limited'
                     ? '有限制'
@@ -179,7 +179,7 @@ function exclude(): void {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
   gap: 12px;
-  min-height: calc(clamp(160px, 32vh, 280px) + 30px);
+  min-height: calc(var(--module-list-height, clamp(160px, 32vh, 280px)) + 30px);
   color: var(--color-text);
 }
 .selection-panel {
@@ -218,13 +218,13 @@ input[type='search'] {
   color: var(--color-muted);
 }
 .module-list {
-  height: clamp(160px, 32vh, 280px);
+  height: var(--module-list-height, clamp(160px, 32vh, 280px));
   overflow: auto;
   padding: 0 10px 10px;
   scrollbar-gutter: stable;
 }
 .selected-list {
-  height: calc(clamp(160px, 32vh, 280px) + 30px);
+  height: calc(var(--module-list-height, clamp(160px, 32vh, 280px)) + 30px);
 }
 summary {
   font-size: 12px;
@@ -257,18 +257,6 @@ summary {
 }
 .unavailable {
   color: var(--color-muted);
-}
-.module-reason {
-  display: none;
-  font-size: 11px;
-  line-height: 1.5;
-  padding: 5px 0 0 23px;
-  color: var(--color-muted);
-  overflow-wrap: anywhere;
-}
-.module-option:hover .module-reason,
-.module-option:focus-within .module-reason {
-  display: block;
 }
 .selection-actions {
   display: flex;

@@ -330,6 +330,90 @@ describe('project metadata with real shipped definitions', () => {
 });
 
 describe('project wizard and portal navigation', () => {
+  it('shows distinct start panels and opens a newly created project after its asynchronous save', async () => {
+    const store = useConfigStore();
+    const router = createRouter({
+      history: createMemoryHistory(),
+      routes: [
+        { path: '/configurator', component: ConfiguratorStartView },
+        { path: '/workspace', component: { template: '<h1>编辑工作区</h1>' } },
+      ],
+    });
+    await router.push('/configurator');
+    await router.isReady();
+    const wrapper = mount(
+      { template: '<router-view />' },
+      { attachTo: document.body, global: { plugins: [router, ElementPlus] } }
+    );
+    wrappers.push(wrapper);
+    await flushPromises();
+    const selectPanel = async (name: string) => {
+      await wrapper
+        .findAll('aside button')
+        .find((b) => b.text() === name)!
+        .trigger('click');
+      expect(wrapper.findAll('aside [aria-current="page"]')).toHaveLength(1);
+      expect(wrapper.get('h1').text()).toBe(name);
+    };
+    await selectPanel('打开工程');
+    expect(wrapper.find('form').exists()).toBe(false);
+    expect(wrapper.text()).toContain('尚无本机工程');
+    await selectPanel('导入工程');
+    expect(wrapper.find('.recent-projects').exists()).toBe(false);
+    await selectPanel('新建工程');
+    await wrapper.get('[aria-label="工程名称"]').setValue('新建后打开');
+    await wrapper.get('form').trigger('submit');
+    expect(wrapper.find('.catalog-hint').exists()).toBe(false);
+    expect(wrapper.find('.module-reason').exists()).toBe(false);
+    await wrapper.get('form').trigger('submit');
+    await flushPromises();
+    expect(router.currentRoute.value.path).toBe('/workspace');
+    expect(store.activeProject?.name).toBe('新建后打开');
+    expect(db.data.get(projectsKey)).toBeTruthy();
+  });
+
+  it('reports a workspace resource failure and allows retry without losing an existing project', async () => {
+    const store = useConfigStore();
+    await store.createProject({ ...input, moduleShortNames: ['Dem'] });
+    const saved = exportJson(store.config!);
+    const router = createRouter({
+      history: createMemoryHistory(),
+      routes: [
+        { path: '/configurator', component: ConfiguratorStartView },
+        { path: '/workspace', component: { template: '<h1>编辑工作区</h1>' } },
+      ],
+    });
+    let fail = true;
+    router.beforeEach((to) => {
+      if (to.path === '/workspace' && fail)
+        throw new Error('Failed to fetch dynamically imported module: WorkspaceView');
+    });
+    router.onError(() => undefined);
+    await router.push('/configurator');
+    await router.isReady();
+    const wrapper = mount(
+      { template: '<router-view />' },
+      { global: { plugins: [router, ElementPlus] } }
+    );
+    wrappers.push(wrapper);
+    await flushPromises();
+    await wrapper
+      .findAll('aside button')
+      .find((b) => b.text() === '打开工程')!
+      .trigger('click');
+    await wrapper.get('.recent-row').trigger('click');
+    await flushPromises();
+    expect(router.currentRoute.value.path).toBe('/configurator');
+    expect(wrapper.get('[role="alert"]').text()).toContain('配置页面加载失败');
+    expect(wrapper.get('.recent-row').attributes('disabled')).toBeUndefined();
+    expect(exportJson(store.config!)).toBe(saved);
+    fail = false;
+    await wrapper.get('.recent-row').trigger('click');
+    await flushPromises();
+    expect(router.currentRoute.value.path).toBe('/workspace');
+    expect(exportJson(store.config!)).toBe(saved);
+  });
+
   it('opens the start page without resuming an existing project and imports only into a new configuration', async () => {
     const store = useConfigStore();
     await store.createProject(input);
@@ -354,7 +438,9 @@ describe('project wizard and portal navigation', () => {
     await wrapper.get('.catalog-primary').trigger('click');
     await flushPromises();
     expect(router.currentRoute.value.path).toBe('/configurator');
-    expect(wrapper.get('h1').text()).toBe('从一个工程开始');
+    expect(wrapper.get('h1').text()).toBe('新建工程');
+    expect(wrapper.findAll('aside [aria-current="page"]')).toHaveLength(1);
+    expect(wrapper.find('.recent-projects').exists()).toBe(false);
     expect(store.activeUuid).toBe(active);
     expect(db.write).not.toHaveBeenCalled();
     await wrapper

@@ -9,20 +9,49 @@
     <div class="start-layout">
       <aside aria-label="工程操作">
         <p>工程</p>
-        <button :disabled="store.isLoading || store.dataSafety.locked" @click="showCreate = true">
+        <button
+          :class="{ selected: panel === 'new' }"
+          :aria-current="panel === 'new' ? 'page' : undefined"
+          :disabled="opening || store.projectBusy"
+          @click="selectPanel('new')"
+        >
           <el-icon><Plus /></el-icon>新建工程
         </button>
-        <button :class="{ selected: panel === 'import' }" @click="panel = 'import'">
+        <button
+          :class="{ selected: panel === 'import' }"
+          :aria-current="panel === 'import' ? 'page' : undefined"
+          :disabled="opening || store.projectBusy"
+          @click="selectPanel('import')"
+        >
           <el-icon><Upload /></el-icon>导入工程
         </button>
-        <button :class="{ selected: panel === 'open' }" @click="panel = 'open'">
+        <button
+          :class="{ selected: panel === 'open' }"
+          :aria-current="panel === 'open' ? 'page' : undefined"
+          :disabled="opening || store.projectBusy"
+          @click="selectPanel('open')"
+        >
           <el-icon><FolderOpened /></el-icon>打开工程
         </button>
       </aside>
       <main>
         <RecoveryPanel />
-        <template v-if="panel === 'import'">
-          <p class="eyebrow">IMPORT</p>
+        <p
+          v-if="navigationError || store.projectError || store.error"
+          role="alert"
+          class="open-error"
+        >
+          {{ navigationError || store.projectError || store.error }}
+        </p>
+        <p v-if="opening" role="status">正在打开工程…</p>
+        <ProjectWizard
+          v-if="panel === 'new' && !store.dataSafety.locked"
+          :model-value="true"
+          inline
+          @update:model-value="selectPanel('open')"
+          @opened="created"
+        />
+        <template v-else-if="panel === 'import'">
           <h1>导入工程</h1>
           <p class="lead">选择 JSON 或 ARXML 配置文件，预览后导入到默认工程。已有工程保持不变。</p>
           <div class="import-formats">
@@ -36,28 +65,16 @@
             </button>
           </div>
         </template>
-        <template v-else>
-          <p class="eyebrow">WORKSPACE</p>
-          <h1>{{ panel === 'open' ? '打开本机工程' : '从一个工程开始' }}</h1>
-          <p class="lead">新建工程、导入已有配置，或从下方选择要继续的工程。</p>
-          <div class="start-actions">
-            <button
-              class="primary"
-              :disabled="store.isLoading || store.dataSafety.locked"
-              @click="showCreate = true"
-            >
-              新建工程</button
-            ><button @click="panel = 'import'">导入工程</button>
-          </div>
-          <p v-if="store.projectError || store.error" role="alert">
-            {{ store.projectError || store.error }}
-          </p>
+        <template v-else-if="panel === 'open'">
+          <h1>打开工程</h1>
+          <p class="lead">选择本机保存的工程，继续配置。</p>
           <section class="recent-projects" aria-label="本机工程">
-            <h2>本机工程</h2>
+            <h2 v-if="store.projects.length">本机工程</h2>
             <button
               v-for="project in store.projects"
               :key="project.projectUuid"
               class="recent-row"
+              :disabled="opening || store.isLoading"
               @click="openProject(project.projectUuid)"
             >
               <el-icon><FolderOpened /></el-icon
@@ -69,16 +86,18 @@
                 ></span
               ><span aria-hidden="true">→</span>
             </button>
+            <h2 v-if="store.unassignedSets.length" class="standalone-title">独立配置集</h2>
             <button
               v-for="set in store.unassignedSets"
               :key="set.uuid"
               class="recent-row"
+              :disabled="opening || store.isLoading"
               @click="openSet(set.uuid)"
             >
               <el-icon><Document /></el-icon
               ><span
                 ><strong>{{ set.name ?? set.moduleRef }}</strong
-                ><small>默认工程 · {{ set.moduleRef }} · CP {{ set.version }}</small></span
+                ><small>{{ set.moduleRef }} · CP {{ set.version }}</small></span
               ><span aria-hidden="true">→</span>
             </button>
             <p v-if="!store.projects.length && !store.unassignedSets.length" class="empty">
@@ -88,30 +107,28 @@
         </template>
       </main>
     </div>
-    <ProjectWizard v-model="showCreate" @opened="router.push('/workspace')" />
     <ImportDialog
       v-if="showImport"
       v-model="showImport"
       :format="importFormat"
       new-only
-      @imported="router.push('/workspace')"
+      @imported="enterWorkspace"
     />
   </div>
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { Document, FolderOpened, HomeFilled, Plus, Upload } from '@element-plus/icons-vue';
 import { useConfigStore } from '@/stores/configStore';
 import ProjectWizard from '@/ui/Projects/ProjectWizard.vue';
+import { useProjectNavigation } from '@/ui/Projects/useProjectNavigation';
 import ImportDialog from '@/ui/ImportExport/ImportDialog.vue';
 import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 import type { ImportFormat } from '@/core/io/IoTypes';
-const store = useConfigStore(),
-  router = useRouter();
-const panel = ref<'welcome' | 'open' | 'import'>('welcome');
-const showCreate = ref(false),
-  showImport = ref(false),
+const store = useConfigStore();
+const { opening, navigationError, openProject, openSet, enterWorkspace } = useProjectNavigation();
+const panel = ref<'new' | 'open' | 'import'>('new');
+const showImport = ref(false),
   importFormat = ref<ImportFormat>('json');
 onMounted(() => {
   void store.initialize();
@@ -120,16 +137,21 @@ function openImport(format: ImportFormat): void {
   importFormat.value = format;
   showImport.value = true;
 }
-async function openProject(uuid: string): Promise<void> {
-  if (await store.openProject(uuid).catch(() => false)) await router.push('/workspace');
+function selectPanel(value: 'new' | 'open' | 'import'): void {
+  panel.value = value;
+  navigationError.value = '';
 }
-async function openSet(uuid: string): Promise<void> {
-  if (await store.switchConfigSet(uuid).catch(() => false)) await router.push('/workspace');
+async function created(): Promise<void> {
+  panel.value = 'open';
+  await enterWorkspace();
 }
 </script>
 <style scoped>
 .configurator-start {
-  min-height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background: var(--color-surface);
   color: var(--color-text);
 }
@@ -138,6 +160,7 @@ header {
   align-items: center;
   gap: 20px;
   height: 54px;
+  flex-shrink: 0;
   padding: 0 24px;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-panel);
@@ -157,9 +180,12 @@ header strong {
 .start-layout {
   display: grid;
   grid-template-columns: 208px minmax(0, 1fr);
-  min-height: calc(100vh - 54px);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 aside {
+  overflow: auto;
   padding: 24px 12px;
   border-right: 1px solid var(--color-border);
   background: var(--color-panel);
@@ -198,15 +224,19 @@ aside button {
   text-align: left;
   font-size: 14px;
 }
-aside button:hover,
 aside button.selected {
   color: var(--color-accent);
   background: var(--color-selected);
 }
+aside button:not(.selected):hover {
+  color: var(--color-accent);
+}
 main {
-  width: min(860px, 100%);
+  width: min(1080px, 100%);
   box-sizing: border-box;
-  padding: 48px 44px;
+  padding: 28px 32px;
+  min-width: 0;
+  overflow-y: auto;
 }
 .eyebrow {
   color: var(--color-accent);
@@ -214,28 +244,21 @@ main {
   letter-spacing: 0.15em;
 }
 h1 {
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 600;
-  margin: 10px 0;
+  margin: 0 0 12px;
 }
 .lead {
   font-size: 14px;
   line-height: 1.8;
   color: var(--color-muted);
 }
-.start-actions {
-  display: flex;
-  gap: 12px;
-  margin: 24px 0 36px;
-}
-.start-actions button {
-  padding: 10px 22px;
+.open-error {
+  color: var(--color-error);
   font-size: 14px;
 }
-.start-actions .primary {
-  color: var(--color-surface);
-  background: var(--color-accent);
-  border-color: var(--color-accent);
+.standalone-title {
+  margin-top: 28px;
 }
 h2 {
   font-size: 16px;
@@ -303,6 +326,7 @@ h2 {
 @media (max-width: 700px) {
   .start-layout {
     grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
   }
   aside {
     display: flex;

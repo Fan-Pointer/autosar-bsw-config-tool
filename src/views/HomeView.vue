@@ -129,8 +129,12 @@
         </h2>
         <span>保存在当前浏览器</span>
       </div>
-      <p v-if="store.error || store.projectError" role="alert" class="project-error">
-        {{ store.projectError || store.error }}
+      <p
+        v-if="navigationError || store.error || store.projectError"
+        role="alert"
+        class="project-error"
+      >
+        {{ navigationError || store.projectError || store.error }}
       </p>
       <p v-for="warning in store.projectWarnings" :key="warning" class="project-warning">
         {{ warning }}
@@ -192,7 +196,7 @@
         </button>
       </div>
     </section>
-    <ProjectWizard v-model="showCreate" @opened="router.push('/workspace')" />
+    <ProjectWizard v-model="showCreate" @opened="enterWorkspace" />
   </PortalLayout>
 </template>
 <script setup lang="ts">
@@ -203,19 +207,15 @@ import { SetUp, Tickets, Reading, FolderOpened, Document } from '@element-plus/i
 import { useConfigStore } from '@/stores/configStore';
 import PortalLayout from '@/ui/Portal/PortalLayout.vue';
 import ProjectWizard from '@/ui/Projects/ProjectWizard.vue';
+import { useProjectNavigation } from '@/ui/Projects/useProjectNavigation';
 import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 const router = useRouter(),
   store = useConfigStore(),
   showCreate = ref(false);
+const { navigationError, openProject, openSet, enterWorkspace } = useProjectNavigation();
 onMounted(() => {
   void store.initialize();
 });
-async function openSet(uuid: string): Promise<void> {
-  if (await store.switchConfigSet(uuid).catch(() => false)) await router.push('/workspace');
-}
-async function openProject(uuid: string): Promise<void> {
-  if (await store.openProject(uuid).catch(() => false)) await router.push('/workspace');
-}
 function openConfigurator(): void {
   void router.push('/configurator');
 }

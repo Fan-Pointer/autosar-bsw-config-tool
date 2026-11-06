@@ -1,0 +1,14 @@
+[
+  {
+    "level": "error",
+    "message": "TypeError: Failed to fetch dynamically imported module: http://localhost:3000/src/views/WorkspaceView.vue?t=1793958087220",
+    "timestamp": "2026-11-06T10:03:38.626Z",
+    "url": "http://localhost:3000/.temp/vite-cache/deps/vue-router.js?v=ab6db022"
+  },
+  {
+    "level": "error",
+    "message": "TypeError: Failed to fetch dynamically imported module: http://localhost:3000/src/views/WorkspaceView.vue?t=1793958087220",
+    "timestamp": "2026-11-06T10:03:38.628Z",
+    "url": "http://localhost:3000/configurator"
+  }
+]
