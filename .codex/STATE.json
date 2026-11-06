@@ -2,27 +2,27 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-13",
-  "stageName": "R3-S2 测试基线重建（265 全绿）",
+  "stage": "PHASE-14",
+  "stageName": "R3-S3a 输出同源闸门与 C 生成保真",
   "task": {
-    "id": "TASK-013",
-    "title": "S2 测试基线重建：265 项全绿（0 fail），语义适配不削弱",
-    "status": "SUBMITTED",
+    "id": "TASK-014",
+    "title": "S3a 输出同源闸门：isOutputReady + C 生成保真 + BswmdParser 元数据保留",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "12046dc7f1450a49ff620bd2c4404e98f196523da08a8af141a98faca526483b",
+    "contractHash": "cab3ff31db76fdb596958ba710c5a8fde67bb45509b9c657b855a6777bd4e2ec",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T09:19:54+08:00",
-    "reportPath": ".codex/reports/TASK-013-REPORT.md",
+    "contractBoundAt": "2026-11-06T09:46:30+08:00",
+    "reportPath": ".codex/reports/TASK-014-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "a15331500b46882c7591d17768d09b0ff4fc010e",
-    "createdAt": "2026-11-06T09:19:54+08:00",
-    "submittedAt": "2026-11-06T01:36:09.763Z",
+    "submissionCommit": null,
+    "createdAt": "2026-11-06T09:46:30+08:00",
+    "submittedAt": null,
     "approvedAt": null,
-    "designPath": "docs/product-design/00-SCOPE-AND-FEATURES.md"
+    "designPath": "docs/product-design/02-TECH-DESIGN.md"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
@@ -282,20 +282,35 @@
           "reviewPath": ".codex/review/TASK-012-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-013",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-06T09:45:30+08:00",
+      "submissionCommit": "a15331500b46882c7591d17768d09b0ff4fc010e",
+      "note": "S2 测试基线重建 round 0 一次通过: 0 阻塞/0 重要/3 建议。独立复核: 二跑 16 文件 265/265 全绿(首跑 JSON 宿主 EPERM 静默漏收 core.test.ts 43 项, 归因环境); 失败集合差分已无意义(全绿); vi.mock 仅定义资产与存量 localforage 注入, 无产品算法 mock; legacy() 调用清零且留警示注释; 合成 fixture TEST-SYNTHETIC-1(7 容器/31 参数含 STRING FixtureText)与官方集成分轨; 删2增2(重命名)零缺失; 官方语义重算(50+5 参数/实际必填); 空库导入用例构造空目标库未放宽 S1 保护; store 仅 7 行(=评审 A5 两项修复); S3 三真实缺陷如实记录并归属。🟡-1/2/3 入 TASK-014。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "a15331500b46882c7591d17768d09b0ff4fc010e",
+          "reviewPath": ".codex/review/TASK-013-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-012",
+    "taskId": "TASK-013",
     "round": 0,
-    "reviewedCommit": "ee8434493b25ee67cc570eb02e50dc9d1b0976f3",
-    "at": "2026-11-06T09:19:54+08:00",
+    "reviewedCommit": "a15331500b46882c7591d17768d09b0ff4fc010e",
+    "at": "2026-11-06T09:43:57+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
-    "minors": 4,
-    "reviewPath": ".codex/review/TASK-012-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-012-ROUND-0-REVIEW.md"
+    "minors": 3,
+    "reviewPath": ".codex/review/TASK-013-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-013-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
