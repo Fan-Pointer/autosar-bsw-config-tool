@@ -2,25 +2,25 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-21",
-  "stageName": "S5 双版本全目录接入（manifest 完整可见/解析器逐类扩展/复合键/统一选择器/工程内增减模块）",
+  "stage": "PHASE-22",
+  "stageName": "B2 批次一：4.2.2 规范原文核对 + SYMBOLIC 语义补齐 + 60 模块逐项资格化",
   "task": {
-    "id": "TASK-021",
-    "title": "双版本全目录接入：manifest 完整可见 + 解析器逐类扩展（4.2.2 Dem 首批）+ 复合键 + 统一选择器 + 工程内增减模块",
-    "status": "SUBMITTED",
+    "id": "TASK-022",
+    "title": "B2-SYMBOLIC 首批：4.2.2 规范原文核对 + symbolicNameValue 语义补齐 + 60 模块逐项资格化",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "df8251fbf0c518a78a5b61f191952ba8a5bc07e51569b2ed3d4230098dbeb68e",
+    "contractHash": "cb8537e217e6fd295a4438bdc0b85c37ccdc418071e142758de1ebba7857b811",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T16:53:30+08:00",
-    "reportPath": ".codex/reports/TASK-021-REPORT.md",
+    "contractBoundAt": "2026-11-06T17:55:00+08:00",
+    "reportPath": ".codex/reports/TASK-022-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "c9e35798380e55064877d166cf914258ac51f70e",
-    "createdAt": "2026-11-06T16:47:19+08:00",
-    "submittedAt": "2026-11-06T18:22:44.6602649+08:00",
+    "submissionCommit": null,
+    "createdAt": "2026-11-06T17:55:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
     "designPath": "docs/product-design/02-TECH-DESIGN.md"
   },
@@ -398,20 +398,35 @@
           "reviewPath": ".codex/review/TASK-019-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-021",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-06T17:55:00+08:00",
+      "submissionCommit": "c9e35798380e55064877d166cf914258ac51f70e",
+      "note": "双版本全目录+复合键+统一选择器+工程内增减模块+4.2.2 Dem 首批+用户三点修复 round 0 一次通过(隔离复跑口径): 0 阻塞/0 重要/3 建议。独立复核: build 17.04s; test:verify 默认并发仅 editor-ui 撤销 500.75ms(差 0.75ms, 既定口径场景)→隔离 445.39ms 9/9 通过; 24/24 守卫; core 9 文件+91/-26 与报告逐行一致无越权; 既有用例调整为口径跟随无删削。要点: manifest 4.4.0 98(7 avail/87 limited/4 unsup)可选 94、4.2.2 84(6/17/61)可选 23 满足≥93/≥21; moduleKey(name,release) 复合键双版本偏好互不污染+旧偏好仅内存转换; ModuleSelector 双入口同组件; 工程内增减真维护 moduleShortNames/detachedSetUuids+重加不借用他工程+lastModified 不变; 4.2.2 Dem 完整样本 JSON↔ARXML 逐字节+gcc -Werror 编译; 空配置双向矩阵(422:3/20, 440:6/88)未自动填充; 用户三点修复(①server.mjs 按端口独立缓存+预优化 handlebars 修 504 根因②useProjectNavigation 三入口独立页③删长说明)截图亲核(01 DEMO 四模块打开/03 96/98 选择器)。诚实度: 用户七模块 DEMO 不冒充验证+压缩前截图标注+B2 规范版本缺口自曝。🟡-1 撤销满载余量→S7 提级; 🟡-2 CP4.2.2 原文缺口→TASK-022 P1; 🟡-3 全局偏好非每工程→按需立项。线上部署仍为 TASK-019 基线未动。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "c9e35798380e55064877d166cf914258ac51f70e",
+          "reviewPath": ".codex/review/TASK-021-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-019",
+    "taskId": "TASK-021",
     "round": 0,
-    "reviewedCommit": "46a39e5a60bc6c80a6b175003a79e2ea938cd3df",
-    "at": "2026-11-06T16:47:19+08:00",
+    "reviewedCommit": "c9e35798380e55064877d166cf914258ac51f70e",
+    "at": "2026-11-06T17:55:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
     "minors": 3,
-    "reviewPath": ".codex/review/TASK-019-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-019-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-021-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-021-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
