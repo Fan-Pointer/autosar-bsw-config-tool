@@ -11,10 +11,10 @@
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "ae8df67bfc95c8315038c2d2f9251cae920425cf61388672b67b89b17938b1ad",
+    "contractHash": "0bb62d5d2427cb0e85a6c0ab69ce9af826775e288c5333ccdce515aaa2c45c2b",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T15:18:13+08:00",
+    "contractBoundAt": "2026-11-06T15:28:26+08:00",
     "reportPath": ".codex/reports/TASK-019-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
@@ -32,6 +32,14 @@
     "BLOCKED": "等待人工决策"
   },
   "queue": [
+    {
+      "taskId": "TASK-021",
+      "title": "双版本定义库接入：4.2.2 官方资产管线 + (shortName, release) 版本化加载 + 向导启用 4.2.2",
+      "stage": "PHASE-21（紧接 TASK-019 之后）",
+      "contractPath": ".codex/tasks/TASK-021-CONTRACT.md",
+      "contractHash": "恢复下发时以归档文件重算为准",
+      "note": "用户 2026-11-06 HOME-C-422 授权：4.2.2 官方完整源已取得并经评审方独立验证（ARXML SHA256 b5828bbd…8328c 与申报逐字一致；_readme.txt 'Part of AUTOSAR Release 4.2.2'；schemaLocation AUTOSAR_4-2-2.xsd）。ADR-13 登记：复合键 (shortName, release) 防同名混淆（预期触达 core，逐文件列报告）；内置目录逐步覆盖、解析失败如实禁用；起步集 Dem@4.2.2。TASK-019 期间向导 4.2.2 仍展示待接入态。前置=TASK-019 SUBMITTED/APPROVED。"
+    },
     {
       "taskId": "TASK-020",
       "title": "S5 首契约：多模块并存（ADR-11/12）——批量抽取 + 并存全链路 + 按工程导出 manifest + 跨模块边界",
