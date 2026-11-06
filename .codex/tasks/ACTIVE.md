@@ -1,4 +1,4 @@
-# ACTIVE TASK — TASK-014（v3，并入 REQUIRED-REF 裁定）
+# ACTIVE TASK — TASK-014（v4，并入 CANIF-LOWER 纠正）
 
 > 本文件是 Codex 唯一的任务契约来源。开始实现前必须完整读取；**不得修改本文件**。
 > 契约哈希由评审方写入 `STATE.json` 的 `task.contractHash`，篡改会导致调度器拒绝派发。
@@ -8,6 +8,7 @@
 > R1 验收 4 废弃「官方 15→15」旧合成口径 → 官方改为**集合恒等断言**（已配置集 = ARXML VALUE 集 = C 字段集）+ 必填门槛不削弱；合成 fixture 保留精确等式回归。
 > R2 闸门 = **纯函数重新求值**语义（见 A1/A2 修订）：禁止重复校验逻辑，也禁止跨动作复用结果对象（陈旧风险）；规则注入由 store 统一完成。
 > R3 Arxml.ts 允许**仅路径取值接线**白名单（definitionPath 优先、缺省回退）+ A2 闸门消费接线；namespace/引用候选/DEST/结构标签仍归 TASK-015。
+> **v4 修订（2026-11-06 10:14，CANIF-LOWER-CORRECTION，评审方认领）**：v3 的「CanIf 合法子集（删 lower=0 驱动实例）」**基于未核实事实，撤销**。实测 `tests/fixtures/ecuc-canif.arxml` 中 `CanIfCtrlDrvCfg` 的 `<LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>`（必选，upper=∞）——该实例不可移除，不存在"删实例即合法"的子集。**CanIf 完整成功输出明确标记未支持**（受跨模块必填引用阻塞，未完成状态记 G05）；CanIf 保留逐项拒绝断言 + JSON 全量取回。官方成功 ARXML/C 集合验收**用 Dem（含模块内合法目标）**；合成 CHOICE 两候选成功往返照常。
 > **v3 修订（2026-11-06 10:00，REQUIRED-REF 裁定）**：闸门拦截对象明确覆盖**必填引用**（不只参数）。旧官方成功导出用例建立在遗漏必填引用上（评审方已独立核实：CanIfCtrlDrvNameRef/CanIfCtrlCanCtrlRef 目标=/…/Can/**跨模块**；NvMNameOfEaBlock/FeeBlock 目标=/…/Ea、/…/Fee**跨模块**；CanIfCtrlDrvInitHohConfigRef 目标=本模块 CanIfInitHohCfg**模块内**）。拒绝原因分两类：**必填引用未配置（模块内可修复）**与**目标跨模块（本期不支持）**——均逐项列出，不静默、不伪造、不改官方 isOptional。详见 A4。
 
 | 项 | 值 |
@@ -60,12 +61,12 @@
 |---|---|---|
 | arxml-fidelity CanIf 45 参数往返 | **拒绝断言**：必填引用逐项列出——`CanIfCtrlDrvNameRef`/`CanIfCtrlCanCtrlRef` 原因=目标跨模块（/…/Can）；`CanIfCtrlDrvInitHohConfigRef` 原因=必填引用未配置（目标 /…/CanIf/CanIfInitCfg/CanIfInitHohCfg 为**模块内**，属可修复项） | JSON 全树无损往返（JSON 永不拦截，ADR-06） |
 | choice NvM 候选 0/1 | **拒绝断言**：选中候选后 NvMNameOfEaBlock（/…/Ea）/ NvMNameOfFeeBlock（/…/Fee）必填外部引用逐项拒绝，原因=跨模块；CHOICE 解析/互斥/切换的**解析级断言保留** | 既有合成 CHOICE 两候选 ARXML 成功往返 |
-| CanIf 合法子集（新增） | 构造**不含 lower=0 的 CanIfCtrlDrvCfg 实例**的合法 CanIf 配置 → 全部必填天然满足 → 45 参数中可输出部分继续成功导出，保留官方成功路径覆盖；**不改定义、不删容器定义** | 官方成功输出覆盖 |
-| 官方 Dem 两个模块内必填引用 | 构造合法 `DemOperationCycle`/`DemEventMemorySet` 目标并关联 → 保留官方成功往返 | 成功路径 |
+| ~~CanIf 合法子集~~ | **已撤销（v4）**：`CanIfCtrlDrvCfg` 实测 LOWER-MULTIPLICITY=1（必选），不可移除；**CanIf 完整成功输出 = 未支持**（跨模块必填引用阻塞），未完成状态记入报告与 00-SCOPE G05 | 官方成功输出覆盖改由 **Dem** 承担 ↓ |
+| 官方 Dem（官方成功 ARXML/C 集合验收的唯一载体） | 构造合法 `DemOperationCycle`/`DemEventMemorySet` 目标并关联两个模块内必填引用 → 官方 Dem 成功导出：**集合恒等断言**（已配置集 ≡ ARXML VALUE 集 ≡ C 字段集）+ gcc 实编译 | 官方成功路径 |
 
 **分层规则（其余 9 处采纳）**：格式编码边界测试（C 转义/CSV 转义/ARXML 格式编码）用**合成 fixture**（测编码能力，不经业务就绪）；业务就绪测试用官方定义；两者不得互相借用。CSV 转义用合成 STRING 语义；C 转义场景不再被无关的实例命名预校验误拦（预校验属业务就绪层）。
 
-**禁止**：伪造当前模块内目标冒充跨模块引用修复；修改官方定义 isOptional；绕过闸门维持旧"通过"；把跨模块成功导出记为已完成（未完成状态记入报告与 00-SCOPE G05，待跨模块方案立项后验收）。
+**禁止**：伪造当前模块内目标冒充跨模块引用修复；修改官方定义 isOptional；**删除必选容器实例（含 CanIfCtrlDrvCfg，lower=1）**伪造合法子集；绕过闸门维持旧"通过"；把 CanIf/NvM 跨模块成功导出记为已完成（未完成状态记入报告与 00-SCOPE G05，待跨模块方案立项后验收）。
 
 ## 2. 验收标准
 
