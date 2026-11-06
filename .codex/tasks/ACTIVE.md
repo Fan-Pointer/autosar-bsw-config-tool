@@ -3,7 +3,7 @@
 > 本文件是 Codex 唯一的任务契约来源。开始实现前必须完整读取；**不得修改本文件**。
 > 契约哈希由评审方写入 `STATE.json` 的 `task.contractHash`，篡改会导致调度器拒绝派发。
 > **范围修订（用户 2026-11-06 确定新增，USER-ADDENDUM 定稿）**：完整双版本目录、统一左右模块选择器、工程内真实增减模块、4.2.2 Dem 枚举修复——取代旧「三模块/Dem 起步即完成」口径；完成定义以 **§6 清单验收**收口。
-> 设计依据：`02-TECH-DESIGN.md` **ADR-13**、`.codex/reports/TASK-019-USER-ADDENDUM.md`（5 点定稿方案）、`evidence/task019/fullcatalog-source-inventory.json`（4.2.2: 84 总/20 解析；4.4.0: 98/92）。
+> 设计依据：`02-TECH-DESIGN.md` **ADR-13**、`.codex/reports/TASK-019-USER-ADDENDUM.md`（5 点定稿方案）、`evidence/task019/fullcatalog-source-inventory.json`（4.2.2: 84 总/20 解析；4.4.0: 98/92）、**`.codex/reports/evidence/task019-supplement/task019-parser-supplement.md`（ENUM 全量扫描补充：默认值越界三处、空枚举六处、4.2.2 Dem 含 4 个 SYMBOLIC-NAME-REFERENCE）**。
 > 前置：TASK-019 APPROVED（`46a39e5a60bc6c80a6b175003a79e2ea938cd3df`）；327 基线（23 文件）。
 > 源文件澄清：父目录 `*_4.4.4.arxml` 文件名带 4.4.4、**内部实为 4.4.0**（SHA256 `c01fbd950dfb…`）；4.2.2 官方源 SHA256 `b5828bbdbf09…`。版本一律以文件内容/资产 `$source` 为准，不得按文件名误标。
 
@@ -24,16 +24,21 @@
 
 | 编号 | 交付内容 |
 |---|---|
-| A1 | `builtinCatalog` 扩为**双版本完整 manifest**：覆盖 4.4.0 全部 98 个与 4.2.2 全部 84 个模块名称——每项含 shortName/release/分类/资产路径或「未生成」/资产哈希/可用状态/**具体不支持原因**（引盘点 JSON 逐项错误，如「AdcChannelRefVoltsrcHigh: 枚举列表或默认值无效」） |
+| A1 | `builtinCatalog` 扩为**双版本完整 manifest**：覆盖 4.4.0 全部 98 个与 4.2.2 全部 84 个模块名称——每项含 shortName/release/分类/资产路径或「未生成」/资产哈希/可用状态/**具体不支持原因**（引盘点 JSON 逐项错误，如「AdcChannelRefVoltsrcHigh: 枚举列表或默认值无效」）；并区分**可选模块**与**含硬件特定字段限制的模块**（空枚举/vendor-specific 字段，见 §B 处置原则②） |
 | A2 | manifest 为单一事实源：模块管理、工程向导、项目卡片均从它渲染；解析失败模块**如实禁用并显示原因**，但**不得永久以禁用代替实现**——禁用项全部进入 §6 批次计划 |
 | A3 | 抽取全库走 gen 脚本（不把完整 ARXML 塞进主包；每模块独立资源块按需加载，沿 TASK-019 B3 策略）；资产与 changelog 确定性输出 |
 
 ### B. 解析器逐类扩展（每类：标准依据 + 验收矩阵，逐批落地）
 
+> **处置原则（用户 2026-11-06 ENUM-SCAN 补充裁定）**：
+> ① **枚举默认值越界**（源 default 不在 literals 内：4.2.2 `DemDTCSeverity` default `DEM_DTC_SEV_NO_SEVERITY` vs literal `DEM_SEVERITY_NO_SEVERITY`、`DemEventMemoryEntryStorageTrigger`、`FrTrcvInitState`）：**保留源诊断（provenance）**、仅向用户提供合法 literals 选项，**不编造替代默认值、不预配芯片枚举**；越界事实入 manifest 诊断。
+> ② **空枚举**（两版本 Adc/Ocu 共六处）：`OcuClockSource` 源 DESC 明说 literals 由供应商定义——目录必须区分「可选模块」与「硬件特定字段限制」；空枚举不是解析错误，**严禁发明芯片枚举**。
+> ③ 首批错误清单（first-error）会随修复暴露后续问题，报告须按最新全量扫描更新计数。
+
 | 编号 | 交付内容 |
 |---|---|
-| B1 | **第一批（本契约必交）：枚举规则修复**——覆盖 4.2.2 Dem（`DemDTCSeverity`）与 4.4.0 Adc/Ocu 失败类；按官方 ECUC 规范列枚举/默认值解析依据；修复后 4.2.2 Dem 转 parsed，全库解析计数更新入 manifest |
-| B2 | 第二批起（**本契约只交计划表**，实施另立小任务）：`SYMBOLIC-NAME-REFERENCE`（4.2.2 大面积失败根因）、`ADD-INFO`（Dcm）、`MULTILINE-STRING`（MemMap）、`URI-REFERENCE`（Rte）、`LINKER-SYMBOL`（Xcp）——每类列：规范条款、涉及模块数、预期验收矩阵；**解析通过后仍须过配置/导出/生成验证才转「可用」** |
+| B1 | **第一批（本契约必交）**：① 枚举规则修复——覆盖 4.2.2 `DemDTCSeverity`/`DemEventMemoryEntryStorageTrigger`/`FrTrcvInitState` 默认值越界与 4.4.0 Adc/Ocu 枚举失败类，按官方 ECUC 规范列解析依据，处置沿上述原则；② **4.2.2 Dem 所需的 4 处 `ECUC-SYMBOLIC-NAME-REFERENCE-DEF` 最小正确支持**（解析 + 目标校验沿引用既有语义；事实依赖：无它则修完枚举 Dem 仍在下一错误处失败，F1 冒烟不可能通过；全库 247 处批量验证仍归 B2，不静默省略）。完成后 4.2.2 Dem 转 parsed，全库解析计数更新入 manifest |
+| B2 | 第二批起（**本契约只交计划表**，实施另立小任务）：`SYMBOLIC-NAME-REFERENCE` 全库余量（4.2.2 共 247 处，含非 Dem 模块）、`ADD-INFO`（Dcm，4.2.2 1/4.4.0 1）、`MULTILINE-STRING`（MemMap，各 2）、`URI-REFERENCE`（Rte，4.4.0 11）、`LINKER-SYMBOL`（4.2.2 5/4.4.0 4）、枚举越界其余模块——每类列：规范条款、涉及模块数、预期验收矩阵；**解析通过后仍须过配置/导出/生成验证才转「可用」** |
 | B3 | core 触达逐文件列出（BswmdParser/参数类型模型/输出规则）；每类扩展带独立单测（该类型合成定义 + 官方片段双证） |
 
 ### C. (shortName, release) 复合键（ADR-13）
