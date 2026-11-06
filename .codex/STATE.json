@@ -41,6 +41,14 @@
       "note": "需求源=EasySAR调研手册（用户 2026-11-06 指令纳入），对照裁定见 docs/product-design/04-EASYSAR-ABSORPTION.md 与 SCOPE G31-G37。A+B 最低必交可分两轮；TASK-022 交付的资格化状态是其数据前提。TASK-024（G34-G37 收尾）随 023 评审后另拟。禁止提前实施。"
     },
     {
+      "taskId": "TASK-025",
+      "title": "参考数据导入三批：DBC(首批)→LDF→CDD(存档级)（G38，ADR-14）",
+      "stage": "PHASE-25（TASK-024 之后）",
+      "contractPath": ".codex/tasks/TASK-025-CONTRACT.md",
+      "contractHash": "恢复下发时以归档文件重算为准",
+      "note": "用户 2026-11-06 裁定 G29 修订为 G38（推翻旧不纳入边界）。定位=只读参考数据层（ADR-14）：查看面板+配置参照，第一期不做→ECUC 自动生成、不进校验/闸门；CDD 专有二进制仅存档+识别+下载，不做伪造解析。A+B(DBC) 最低必交，C/D 可顺延。禁止提前实施。"
+    },
+    {
       "taskId": "TASK-020",
       "title": "S5 首契约：多模块并存（ADR-11/12）——批量抽取 + 并存全链路 + 按工程导出 manifest + 跨模块边界",
       "stage": "PHASE-19 之后",
