@@ -2,7 +2,6 @@
   <div
     ref="panel"
     class="container-context-menu floating-menu"
-    :class="{ 'child-menu': childrenOpen }"
     :style="{ left: position.left + 'px', top: position.top + 'px' }"
     role="menu"
     :aria-label="childrenOpen ? '新建子容器' : '容器操作'"
@@ -10,8 +9,18 @@
     @click.stop
     @contextmenu.prevent.stop
     @keydown.stop="onKey"
+    @pointerleave="scheduleCollapse"
   >
-    <template v-if="childrenOpen">
+    <div
+      v-if="childrenOpen"
+      ref="childPanel"
+      class="child-menu menu-surface"
+      role="menu"
+      aria-label="新建子容器"
+      :style="{ left: childPosition.left + 'px', top: childPosition.top + 'px' }"
+      @pointerenter="cancelCollapse"
+      @pointerleave="scheduleCollapse"
+    >
       <button
         role="menuitem"
         tabindex="-1"
@@ -36,16 +45,19 @@
       >
         {{ option.definition.shortName }}
       </button>
-    </template>
-    <template v-else>
+    </div>
+    <div class="parent-actions">
       <button
         role="menuitem"
         tabindex="-1"
         aria-haspopup="menu"
+        :aria-expanded="childrenOpen"
         :aria-disabled="Boolean(targetReason)"
         :title="targetReason"
         :aria-description="targetReason"
-        @click="openChildren"
+        @pointerenter="openChildren(false)"
+        @pointerleave="scheduleCollapse"
+        @click="openChildren(true)"
       >
         新建实例<span class="menu-arrow" aria-hidden="true">›</span>
       </button>
@@ -69,7 +81,7 @@
       >
         删除实例
       </button>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -88,9 +100,11 @@ const props = defineProps<{
 const emit = defineEmits<{ close: [] }>();
 const store = useConfigStore();
 const panel = ref<HTMLElement>();
+const childPanel = ref<HTMLElement>();
 const childrenOpen = ref(false);
 const position = ref({ left: 8, top: 8 });
-const origin = ref({ left: 8, top: 8, width: 0 });
+const childPosition = ref({ left: 8, top: 8 });
+let collapseTimer: ReturnType<typeof setTimeout> | undefined;
 const configUuid = store.activeUuid;
 const actions = computed(() =>
   store.containerActionsFor(
@@ -105,37 +119,54 @@ const cloneReason = computed(() => targetReason.value || actions.value.cloneReas
 const removalReason = computed(() => targetReason.value || actions.value.removalReason);
 
 function close(restoreFocus = false): void {
+  cancelCollapse();
   const target = props.returnFocus;
   emit('close');
   if (restoreFocus) void nextTick(() => target?.isConnected && target.focus());
 }
-function focusItem(last = false): void {
+function focusItem(last = false, child = childrenOpen.value): void {
   // Disabled actions remain keyboard discoverable; action guards still reject all writes.
-  const items = panel.value?.querySelectorAll<HTMLButtonElement>('button');
+  const items = child
+    ? childPanel.value?.querySelectorAll<HTMLButtonElement>('button')
+    : panel.value?.querySelectorAll<HTMLButtonElement>('.parent-actions button');
   (items?.[last ? items.length - 1 : 0] ?? panel.value)?.focus();
 }
 async function reposition(): Promise<void> {
   await nextTick();
   if (!panel.value) return;
   const size = panel.value.getBoundingClientRect();
-  const anchor = childrenOpen.value
-    ? { x: origin.value.left + origin.value.width, y: origin.value.top, left: origin.value.left }
-    : { x: props.x, y: props.y };
-  position.value = placeContainerMenu(anchor, size, {
+  const viewport = {
     width: window.innerWidth,
     height: window.innerHeight,
-  });
+  };
+  position.value = placeContainerMenu({ x: props.x, y: props.y }, size, viewport);
+  if (childPanel.value)
+    childPosition.value = placeContainerMenu(
+      { x: position.value.left + size.width, y: position.value.top, left: position.value.left },
+      childPanel.value.getBoundingClientRect(),
+      viewport
+    );
 }
-async function openChildren(): Promise<void> {
+function cancelCollapse(): void {
+  clearTimeout(collapseTimer);
+  collapseTimer = undefined;
+}
+function scheduleCollapse(): void {
+  cancelCollapse();
+  // The grace period bridges the parent/submenu boundary without flickering on fast moves.
+  collapseTimer = setTimeout(() => {
+    childrenOpen.value = false;
+  }, 300);
+}
+async function openChildren(moveFocus = false): Promise<void> {
+  cancelCollapse();
   if (targetReason.value || !panel.value) return;
-  const rect = panel.value.getBoundingClientRect();
-  origin.value = { left: position.value.left, top: position.value.top, width: rect.width };
-  // Only one panel stays mounted: the parent actions cannot overlay the child list or a dialog.
   childrenOpen.value = true;
   await reposition();
-  focusItem();
+  if (moveFocus) focusItem();
 }
 async function back(): Promise<void> {
+  cancelCollapse();
   childrenOpen.value = false;
   await reposition();
   focusItem();
@@ -151,12 +182,17 @@ function onKey(event: KeyboardEvent): void {
     void back();
     return;
   }
-  if (event.key === 'ArrowRight' && !childrenOpen.value) {
+  if (event.key === 'ArrowRight' && !childPanel.value?.contains(document.activeElement)) {
     event.preventDefault();
-    void openChildren();
+    void openChildren(true);
     return;
   }
-  const items = [...(panel.value?.querySelectorAll<HTMLButtonElement>('button') ?? [])];
+  const inChild = childrenOpen.value && childPanel.value?.contains(document.activeElement);
+  const items = [
+    ...(inChild
+      ? (childPanel.value?.querySelectorAll<HTMLButtonElement>('button') ?? [])
+      : (panel.value?.querySelectorAll<HTMLButtonElement>('.parent-actions button') ?? [])),
+  ];
   const index = items.indexOf(document.activeElement as HTMLButtonElement);
   if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
     event.preventDefault();
@@ -219,6 +255,7 @@ async function remove(): Promise<void> {
 watch(
   () => [props.x, props.y, props.target],
   async () => {
+    cancelCollapse();
     childrenOpen.value = false;
     await reposition();
     focusItem();
@@ -232,6 +269,7 @@ onMounted(async () => {
   focusItem();
 });
 onBeforeUnmount(() => {
+  cancelCollapse();
   document.removeEventListener('pointerdown', outside, true);
   document.removeEventListener('click', outside, true);
   window.removeEventListener('resize', reposition);
@@ -239,14 +277,14 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.container-context-menu {
+.container-context-menu,
+.menu-surface {
   position: fixed;
   z-index: 2100;
   box-sizing: border-box;
   width: 180px;
   max-width: calc(100vw - 16px);
   max-height: calc(100vh - 16px);
-  overflow: auto;
   padding: 4px;
   border: 1px solid var(--color-border);
   border-radius: 5px;
@@ -257,6 +295,7 @@ onBeforeUnmount(() => {
 }
 .child-menu {
   width: 360px;
+  overflow: auto;
 }
 button {
   display: block;

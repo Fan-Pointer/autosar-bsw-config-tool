@@ -1,0 +1,70 @@
+{
+  "format": "bswmd-changelog/1",
+  "modules": {
+    "Dem": {
+      "changes": [
+        {
+          "after": [],
+          "kind": "added",
+          "path": "/arxmlExportBlockers"
+        },
+        {
+          "after": "/AUTOSAR/EcucDefs/Dem",
+          "kind": "added",
+          "path": "/definitionPath"
+        },
+        {
+          "after": [
+            "DemImmediateChildComponentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemMemoryDestinationRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemMemoryDestinationRef：多候选引用，可在 3 个候选目标中选一个。",
+            "DemDebounceAlgorithmClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+            "DemMultiEventTriggeringSlaveEventRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemDidDataElementClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemEnableConditionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemExtendedDataRecordClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemDataElementClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemDidClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemFreezeFrameRecordClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemSPNClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemOBDInputAcceleratorPedalInformation：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDInputAmbientPressure：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDInputAmbientTemperature：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDInputDistanceInformation：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDInputEngineSpeed：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDInputEngineTemperature：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDInputProgrammingEvent：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDInputVehicleSpeed：多候选引用，可在 2 个候选目标中选一个。",
+            "DemOBDTimeSinceEngineStart：多候选引用，可在 3 个候选目标中选一个。",
+            "DemNvRamBlockIdRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+            "DemFunctionIdRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemFunctionIdRef：目标 /AUTOSAR/EcucDefs/FiM/FiMConfigSet/FiMFID 位于本模块之外；编辑器只读展示。",
+            "DemStorageConditionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+            "DemDataElementClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+            "DemDiagnosisScaling：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+            "DemDataElement：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+            "DemPortInterfaceMapping：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+            "DemApplicationDataType：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+            "DemDiagnosticDataElementRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+            "DemSRDataElementClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+            "DemDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+            "DemSubElementInDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+            "DemSubElementInImplDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。"
+          ],
+          "kind": "added",
+          "path": "/importWarnings"
+        },
+        {
+          "after": {
+            "lower": 0,
+            "upper": 1
+          },
+          "kind": "added",
+          "path": "/multiplicity"
+        }
+      ],
+      "fromContentSha256": "4706aa0832016e05863733e361f34de398920e7bbb84a2b4157c9a3735b4fa67",
+      "toContentSha256": "709cdde682d4a0f31f157cae3f8a0687f95f939c303e914c901d13816f72c23a"
+    }
+  }
+}

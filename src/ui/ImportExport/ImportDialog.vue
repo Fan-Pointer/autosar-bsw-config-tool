@@ -24,7 +24,7 @@
           :disabled="store.isImporting"
           @change="prepare"
         >
-          <option value="current" :disabled="!store.config">
+          <option v-if="!newOnly" value="current" :disabled="!store.config">
             当前配置集：{{ store.config?.name ?? '未打开' }}
           </option>
           <option value="new">新建配置集</option>
@@ -115,11 +115,11 @@ import { useConfigStore } from '@/stores/configStore';
 import { checkImportSize } from '@/core/io/ConfigJson';
 import type { ConflictStrategy, ImportFormat, ImportPlan, ImportSession } from '@/core/io/IoTypes';
 
-const props = defineProps<{ modelValue: boolean; format: ImportFormat }>();
+const props = defineProps<{ modelValue: boolean; format: ImportFormat; newOnly?: boolean }>();
 const emit = defineEmits<{ 'update:modelValue': [value: boolean]; imported: [] }>();
 const store = useConfigStore();
 const strategy = ref<ConflictStrategy>('overwrite');
-const target = ref<'current' | 'new'>(store.config ? 'current' : 'new');
+const target = ref<'current' | 'new'>(props.newOnly || !store.config ? 'new' : 'current');
 const session = shallowRef<ImportSession>();
 const error = ref(''),
   reading = ref(false);
@@ -150,7 +150,7 @@ watch(
     error.value = '';
     reading.value = false;
     strategy.value = 'overwrite';
-    target.value = store.config ? 'current' : 'new';
+    target.value = props.newOnly || !store.config ? 'new' : 'current';
   }
 );
 function prepare(): void {

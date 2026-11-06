@@ -1,0 +1,2878 @@
+{
+  "format": "bswmd-changelog/1",
+  "modules": {
+    "CanIf": {
+      "changes": [
+        {
+          "after": {
+            "arxmlExportBlockers": [],
+            "containers": [
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg",
+                "description": "Configuration parameters for all the underlying CAN Driver modules are aggregated under this container. For each CAN Driver module a seperate instance of this …",
+                "multiplicity": {
+                  "lower": 1,
+                  "upper": "unbounded"
+                },
+                "parameters": [],
+                "references": [
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlDrvInitHohConfigRef",
+                    "description": "Reference to the Init Hoh Configuration",
+                    "destinationContainerType": "CanIfInitHohCfg",
+                    "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg"
+                    ],
+                    "isExternal": false,
+                    "isOptional": false,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfCtrlDrvInitHohConfigRef",
+                    "uuid": "ECUC:7cc6ea68-c474-476c-bfa7-c708dc13b8e9"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlDrvNameRef",
+                    "description": "CAN Interface Driver Reference.",
+                    "destinationContainerType": "CanGeneral",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Can/CanGeneral",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Can/CanGeneral"
+                    ],
+                    "isExternal": true,
+                    "isOptional": false,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfCtrlDrvNameRef",
+                    "uuid": "ECUC:43775a13-040e-4111-8726-37ed6aaa2bad"
+                  }
+                ],
+                "shortName": "CanIfCtrlDrvCfg",
+                "subContainers": [
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg",
+                    "description": "This container contains the configuration (parameters) of an adressed CAN controller by an underlying CAN Driver module. This container is configurable per CAN…",
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": "unbounded"
+                    },
+                    "parameters": [
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg/CanIfCtrlId",
+                        "description": "This parameter abstracts from the CAN Driver specific parameter Controller. Each controller of all connected CAN Driver modules shall be assigned to one specif…",
+                        "isOptional": false,
+                        "max": 255,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfCtrlId",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:a8a153f3-d90b-4927-99eb-a14bf9c518e2"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg/CanIfCtrlWakeupSupport",
+                        "description": "This parameter defines if a respective controller of the referenced CAN Driver modules is queriable for wake up events.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfCtrlWakeupSupport",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:a822b4db-6043-422c-aa90-e16e7963d3fd"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg/CanIfCtrlCanCtrlRef",
+                        "description": "This parameter references to the logical handle of the underlying CAN controller from the CAN Driver module to be served by the CAN Interface module. The follo…",
+                        "destinationContainerType": "CanController",
+                        "destinationRef": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController",
+                        "destinationRefs": [
+                          "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController"
+                        ],
+                        "isExternal": true,
+                        "isOptional": false,
+                        "kind": "reference",
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfCtrlCanCtrlRef",
+                        "uuid": "ECUC:04062985-d3bb-4998-9129-485e796c0950"
+                      }
+                    ],
+                    "shortName": "CanIfCtrlCfg",
+                    "subContainers": [],
+                    "uuid": "ECUC:246d0d0a-4754-4319-bd38-a8b3c421e928"
+                  }
+                ],
+                "uuid": "ECUC:4ff0a387-1540-4a20-b4fd-7e4db255693c"
+              },
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg",
+                "description": "Callback functions provided by upper layer modules of the CanIf. The callback functions defined in this container are common to all configured CAN Driver / CAN…",
+                "multiplicity": {
+                  "lower": 1,
+                  "upper": 1
+                },
+                "parameters": [
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserCheckTrcvWakeFlagIndicationName",
+                    "description": "This parameter defines the name of <User_CheckTrcvWakeFlagIndication>.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserCheckTrcvWakeFlagIndicationName",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:b4cc3170-04f6-45b8-973b-353ede6489a7"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserClearTrcvWufFlagIndicationName",
+                    "description": "This parameter defines the name of <User_ClearTrcvWufFlagIndication>.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserClearTrcvWufFlagIndicationName",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:b0e98d0b-7b7f-42d7-accc-d19c2e52d62d"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserConfirmPnAvailabilityName",
+                    "description": "This parameter defines the name of <User_ConfirmPnAvailability>. If CanIfDispatchUserConfirmPnAvailabilityUL equals CAN_SM the name of <User_ConfirmPnAvailabil…",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserConfirmPnAvailabilityName",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:1956eddd-c62d-45f4-b50f-2836baf0b3b3"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserCtrlBusOffName",
+                    "description": "This parameter defines the name of <User_ControllerBusOff>.",
+                    "isOptional": true,
+                    "maxLength": 32,
+                    "minLength": 1,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserCtrlBusOffName",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:52c27ccd-402a-494b-bd19-307b4fe68bc7"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserCtrlModeIndicationName",
+                    "description": "This parameter defines the name of <User_ControllerModeIndication>.",
+                    "isOptional": true,
+                    "maxLength": 32,
+                    "minLength": 1,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserCtrlModeIndicationName",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:163858a2-5ab3-4b1e-979e-789380918c8d"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserTrcvModeIndicationName",
+                    "description": "This parameter defines the name of <User_TrcvModeIndication>.",
+                    "isOptional": true,
+                    "maxLength": 32,
+                    "minLength": 1,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserTrcvModeIndicationName",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:87fa49c3-2244-4fb9-9714-1ed1606100b8"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserValidateWakeupEventName",
+                    "description": "This parameter defines the name of <User_ValidateWakeupEvent>. This",
+                    "isOptional": true,
+                    "maxLength": 32,
+                    "minLength": 1,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserValidateWakeupEventName",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:06a66545-ca16-4f21-ad87-0e7b360f802a"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserCheckTrcvWakeFlagIndicationUL",
+                    "description": "This parameter defines the upper layer module to which the CheckTrcvWakeFlagIndication from the Driver modules have to be routed.",
+                    "enumValues": [
+                      "CAN_SM",
+                      "CDD"
+                    ],
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserCheckTrcvWakeFlagIndicationUL",
+                    "type": "ENUM",
+                    "uuid": "ECUC:0bbaf0c7-4bc2-4004-add9-2e41e44b0cb3"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserClearTrcvWufFlagIndicationUL",
+                    "description": "This parameter defines the upper layer module to which the ClearTrcvWufFlagIndication from the Driver modules have to be routed.",
+                    "enumValues": [
+                      "CAN_SM",
+                      "CDD"
+                    ],
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserClearTrcvWufFlagIndicationUL",
+                    "type": "ENUM",
+                    "uuid": "ECUC:9547aae5-127b-4d0d-90a2-3ba8a27fcd9c"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserConfirmPnAvailabilityUL",
+                    "description": "This parameter defines the upper layer module to which the ConfirmPnAvailability notification from the Driver modules have to be routed. If CanIfPublicPnSuppor…",
+                    "enumValues": [
+                      "CAN_SM",
+                      "CDD"
+                    ],
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserConfirmPnAvailabilityUL",
+                    "type": "ENUM",
+                    "uuid": "ECUC:e3ad75a1-387d-4959-a130-dbefbe31f022"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserCtrlBusOffUL",
+                    "description": "This parameter defines the upper layer (UL) module to which the notifications of all ControllerBusOff events from the CAN Driver modules have to be routed via …",
+                    "enumValues": [
+                      "CAN_SM",
+                      "CDD"
+                    ],
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserCtrlBusOffUL",
+                    "type": "ENUM",
+                    "uuid": "ECUC:8f40960d-471f-43b1-8ba4-02b4259d3ca5"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserCtrlModeIndicationUL",
+                    "description": "This parameter defines the upper layer (UL) module to which the notifications of all ControllerTransition events from the CAN Driver modules have to be routed",
+                    "enumValues": [
+                      "CAN_SM",
+                      "CDD"
+                    ],
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserCtrlModeIndicationUL",
+                    "type": "ENUM",
+                    "uuid": "ECUC:de1ff686-12ee-4ad7-9ec0-6be01bf31f78"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserTrcvModeIndicationUL",
+                    "description": "This parameter defines the upper layer (UL) module to which the notifications of all TransceiverTransition events from the CAN Transceiver Driver modules have …",
+                    "enumValues": [
+                      "CAN_SM",
+                      "CDD"
+                    ],
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserTrcvModeIndicationUL",
+                    "type": "ENUM",
+                    "uuid": "ECUC:239a6399-5602-4010-94b5-039c6223fed2"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfDispatchCfg/CanIfDispatchUserValidateWakeupEventUL",
+                    "description": "This parameter defines the upper layer (UL) module to which the notifications about positive former requested wake up sources have to be routed via <User_Valid…",
+                    "enumValues": [
+                      "CDD",
+                      "ECUM"
+                    ],
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDispatchUserValidateWakeupEventUL",
+                    "type": "ENUM",
+                    "uuid": "ECUC:59b203fd-969e-44cd-afab-698d689e3bcf"
+                  }
+                ],
+                "references": [],
+                "shortName": "CanIfDispatchCfg",
+                "subContainers": [],
+                "uuid": "ECUC:da4c74dd-cfdf-43a2-94c4-a32a24264e54"
+              },
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg",
+                "description": "This container contains the init parameters of the CAN Interface.",
+                "multiplicity": {
+                  "lower": 1,
+                  "upper": 1
+                },
+                "parameters": [
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitCfgSet",
+                    "description": "Selects the CAN Interface specific configuration setup. This type of the external data structure shall contain the post build initialization data for the CAN I…",
+                    "isOptional": false,
+                    "maxLength": 32,
+                    "minLength": 1,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfInitCfgSet",
+                    "type": "STRING",
+                    "uuid": "ECUC:f4e0b7a4-681f-4ad2-8372-a25c6eb1dae3"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfMaxBufferSize",
+                    "description": "Maximum total size of all Tx buffers. This parameter is needed only in case of post-build loadable implementation using static memory",
+                    "isOptional": true,
+                    "max": 18446744073709552000,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfMaxBufferSize",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:f1d558d6-5225-4b1d-bd11-5555f8d7193d"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfMaxRxPduCfg",
+                    "description": "Maximum number of Pdus. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+                    "isOptional": true,
+                    "max": 18446744073709552000,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfMaxRxPduCfg",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:b4718108-0363-4a69-8f5e-953c203b971f"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfMaxTxPduCfg",
+                    "description": "Maximum number of Pdus. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+                    "isOptional": true,
+                    "max": 18446744073709552000,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfMaxTxPduCfg",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:9f0fa701-4ec4-43c7-8078-356a4f7af689"
+                  }
+                ],
+                "references": [],
+                "shortName": "CanIfInitCfg",
+                "subContainers": [
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfBufferCfg",
+                    "description": "This container contains the Txbuffer configuration. Multiple buffers with different sizes could be configured. If CanIfBufferSize (ECUC_CanIf_00834) equals 0, …",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": "unbounded"
+                    },
+                    "parameters": [
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": 0,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfBufferCfg/CanIfBufferSize",
+                        "description": "This parameter defines the number of CanIf Tx L-PDUs which can be buffered in one Txbuffer. If this value equals 0, the CanIf does not perform Txbuffering for …",
+                        "isOptional": false,
+                        "max": 255,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfBufferSize",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:3e890c54-df3d-4d91-bee8-0f6ee7a81053"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfBufferCfg/CanIfBufferHthRef",
+                        "description": "Reference to HTH, that defines the hardware object or the pool of hardware objects configured for transmission. All the CanIf Tx L-PDUs refer via the CanIfBuff…",
+                        "destinationContainerType": "CanIfHthCfg",
+                        "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHthCfg",
+                        "destinationRefs": [
+                          "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHthCfg"
+                        ],
+                        "isExternal": false,
+                        "isOptional": false,
+                        "kind": "reference",
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfBufferHthRef",
+                        "uuid": "ECUC:fb6c787d-41aa-4920-8680-030a0a2e8bc2"
+                      }
+                    ],
+                    "shortName": "CanIfBufferCfg",
+                    "subContainers": [],
+                    "uuid": "ECUC:2541ff9b-ca8a-4388-b3e9-4e893a369d4e"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg",
+                    "description": "This container contains the references to the configuration setup of each underlying CAN Driver.",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": "unbounded"
+                    },
+                    "parameters": [],
+                    "references": [],
+                    "shortName": "CanIfInitHohCfg",
+                    "subContainers": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg",
+                        "description": "This container contains configuration parameters for each hardware receive object (HRH).",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": "unbounded"
+                        },
+                        "parameters": [
+                          {
+                            "configClass": "PRE_COMPILE",
+                            "defaultValue": true,
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhSoftwareFilter",
+                            "description": "Selects the hardware receive objects by using the HRH range/list from CAN Driver configuration to define, for which HRH a software filtering has to be performe…",
+                            "isOptional": false,
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfHrhSoftwareFilter",
+                            "type": "BOOLEAN",
+                            "uuid": "ECUC:60990db4-406e-4792-9c8f-82ebf55557e6"
+                          }
+                        ],
+                        "references": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhCanCtrlIdRef",
+                            "description": "Reference to controller Id to which the HRH belongs to. A controller can contain one or more HRHs.",
+                            "destinationContainerType": "CanIfCtrlCfg",
+                            "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg"
+                            ],
+                            "isExternal": false,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfHrhCanCtrlIdRef",
+                            "uuid": "ECUC:624b2048-16ec-4408-85dc-a82a5c93e09c"
+                          },
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhIdSymRef",
+                            "description": "The parameter refers to a particular HRH object in the CanDrv configuration (see CanHardwareObject ECUC_Can_00324).",
+                            "destinationContainerType": "CanHardwareObject",
+                            "destinationRef": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject"
+                            ],
+                            "isExternal": true,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfHrhIdSymRef",
+                            "uuid": "ECUC:1fbf0d02-5160-4182-b3bd-488d490d9c7a"
+                          }
+                        ],
+                        "shortName": "CanIfHrhCfg",
+                        "subContainers": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhRangeCfg",
+                            "description": "Defines the parameters required for configurating multiple CANID ranges for a given same HRH.",
+                            "multiplicity": {
+                              "lower": 0,
+                              "upper": "unbounded"
+                            },
+                            "parameters": [
+                              {
+                                "configClass": "PRE_COMPILE",
+                                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhRangeCfg/CanIfHrhRangeBaseId",
+                                "description": "CAN Identifier used as base value in combination with CanIfHrhRangeMask for a masked ID range in which all CAN Ids shall pass the software filtering. The size …",
+                                "isOptional": true,
+                                "max": 536870911,
+                                "min": 0,
+                                "multiplicity": {
+                                  "lower": 0,
+                                  "upper": 1
+                                },
+                                "shortName": "CanIfHrhRangeBaseId",
+                                "type": "INTEGER",
+                                "uuid": "ECUC:43486ba9-1998-4811-a755-7e8204346a89"
+                              },
+                              {
+                                "configClass": "PRE_COMPILE",
+                                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhRangeCfg/CanIfHrhRangeMask",
+                                "description": "Used as mask value in combination with CanIfHrhRangeBaseId for a masked ID range in which all CAN Ids shall pass the software filtering. The size of this param…",
+                                "isOptional": true,
+                                "max": 536870911,
+                                "min": 0,
+                                "multiplicity": {
+                                  "lower": 0,
+                                  "upper": 1
+                                },
+                                "shortName": "CanIfHrhRangeMask",
+                                "type": "INTEGER",
+                                "uuid": "ECUC:c89cc359-e688-45ea-b1cf-23f99ff1fb7c"
+                              },
+                              {
+                                "configClass": "PRE_COMPILE",
+                                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhRangeCfg/CanIfHrhRangeRxPduLowerCanId",
+                                "description": "Lower CAN Identifier of a receive CAN L-PDU for identifier range definition, in which all CAN Ids shall pass the software filtering.",
+                                "isOptional": true,
+                                "max": 536870911,
+                                "min": 0,
+                                "multiplicity": {
+                                  "lower": 0,
+                                  "upper": 1
+                                },
+                                "shortName": "CanIfHrhRangeRxPduLowerCanId",
+                                "type": "INTEGER",
+                                "uuid": "ECUC:c7e748c7-9dca-45e2-b11a-67d270c02581"
+                              },
+                              {
+                                "configClass": "PRE_COMPILE",
+                                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhRangeCfg/CanIfHrhRangeRxPduUpperCanId",
+                                "description": "Upper CAN Identifier of a receive CAN L-PDU for identifier range definition, in which all CAN Ids shall pass the software filtering.",
+                                "isOptional": true,
+                                "max": 536870911,
+                                "min": 0,
+                                "multiplicity": {
+                                  "lower": 0,
+                                  "upper": 1
+                                },
+                                "shortName": "CanIfHrhRangeRxPduUpperCanId",
+                                "type": "INTEGER",
+                                "uuid": "ECUC:a69ada24-f385-4751-96cd-05dd1b848ef5"
+                              },
+                              {
+                                "configClass": "PRE_COMPILE",
+                                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg/CanIfHrhRangeCfg/CanIfHrhRangeRxPduRangeCanIdType",
+                                "description": "Specifies whether a configured Range of CAN Ids shall only consider standard CAN Ids or extended CAN Ids.",
+                                "enumValues": [
+                                  "EXTENDED",
+                                  "STANDARD"
+                                ],
+                                "isOptional": false,
+                                "multiplicity": {
+                                  "lower": 1,
+                                  "upper": 1
+                                },
+                                "shortName": "CanIfHrhRangeRxPduRangeCanIdType",
+                                "type": "ENUM",
+                                "uuid": "ECUC:f99a4757-23c0-42fe-b751-733ccac9dc93"
+                              }
+                            ],
+                            "references": [],
+                            "shortName": "CanIfHrhRangeCfg",
+                            "subContainers": [],
+                            "uuid": "ECUC:ea579804-c8f4-484d-a3e7-da6a2b2e8e20"
+                          }
+                        ],
+                        "uuid": "ECUC:a98b1f9b-0224-4f3b-80fc-49dc63340626"
+                      },
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHthCfg",
+                        "description": "This container contains parameters related to each HTH.",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": "unbounded"
+                        },
+                        "parameters": [],
+                        "references": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHthCfg/CanIfHthCanCtrlIdRef",
+                            "description": "Reference to controller Id to which the HTH belongs to. A controller can contain one or more HTHs.",
+                            "destinationContainerType": "CanIfCtrlCfg",
+                            "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg"
+                            ],
+                            "isExternal": false,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfHthCanCtrlIdRef",
+                            "uuid": "ECUC:698f1110-fa03-4dd0-9eb2-035e074c3e3d"
+                          },
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHthCfg/CanIfHthIdSymRef",
+                            "description": "The parameter refers to a particular HTH object in the CanDrv configuration (see CanHardwareObject ECUC_Can_00324).",
+                            "destinationContainerType": "CanHardwareObject",
+                            "destinationRef": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject"
+                            ],
+                            "isExternal": true,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfHthIdSymRef",
+                            "uuid": "ECUC:993e2b0d-53d4-43e5-9ef8-3dffe7bcd33b"
+                          }
+                        ],
+                        "shortName": "CanIfHthCfg",
+                        "subContainers": [],
+                        "uuid": "ECUC:5e0633ce-3473-4f6e-b7d5-51210b9247ae"
+                      }
+                    ],
+                    "uuid": "ECUC:c2f0d182-e8ee-4d61-8286-d2eeadc94428"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg",
+                    "description": "This container contains the configuration (parameters) of each receive CAN L-PDU.",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": "unbounded"
+                    },
+                    "parameters": [
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduCanId",
+                        "description": "CAN Identifier of Receive CAN L-PDUs used by the CAN Interface. Exa: Software Filtering. This parameter is used if exactly one Can Identifier is assigned to th…",
+                        "isOptional": true,
+                        "max": 536870911,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduCanId",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:2db03b9b-a549-4a9e-bf76-578d1cf85678"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": 536870911,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduCanIdMask",
+                        "description": "Identifier mask which denotes relevant bits in the CAN Identifier. This parameter defines a CAN Identifier range in an alternative way to CanIfRxPduCanIdRange.…",
+                        "isOptional": true,
+                        "max": 536870911,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduCanIdMask",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:50131755-ddcd-45ca-bba4-e8fc8a8d3c73"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduDataLength",
+                        "description": "Data length of the received CAN L-PDUs used by the CAN Interface.",
+                        "isOptional": false,
+                        "max": 64,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduDataLength",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:53e64697-6612-4c0c-80f4-25f5a9bd40d7"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduId",
+                        "description": "ECU wide unique, symbolic handle for receive CAN L-SDU. It shall fulfill ANSI/AUTOSAR definitions for constant defines.",
+                        "isOptional": false,
+                        "max": 4294967295,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduId",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:c80d7823-4185-4880-b74b-37aa9539864c"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduCanIdType",
+                        "description": "CAN Identifier of receive CAN L-PDUs used by the CAN Driver for CAN L-PDU reception.",
+                        "enumValues": [
+                          "EXTENDED_CAN",
+                          "EXTENDED_FD_CAN",
+                          "EXTENDED_NO_FD_CAN",
+                          "STANDARD_CAN",
+                          "STANDARD_FD_CAN",
+                          "STANDARD_NO_FD_CAN"
+                        ],
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduCanIdType",
+                        "type": "ENUM",
+                        "uuid": "ECUC:b4e0eaf5-d039-4538-bb85-03228bf7a612"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduUserRxIndicationUL",
+                        "description": "This parameter defines the upper layer (UL) module to which the indication",
+                        "enumValues": [
+                          "CAN_NM",
+                          "CAN_TP",
+                          "CAN_TSYN",
+                          "CDD",
+                          "J1939NM",
+                          "J1939TP",
+                          "PDUR",
+                          "XCP"
+                        ],
+                        "isOptional": true,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduUserRxIndicationUL",
+                        "type": "ENUM",
+                        "uuid": "ECUC:835e1440-d156-40fa-95df-59a1e9611bc5"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": true,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduDataLengthCheck",
+                        "description": "This parameter switches the message specific data length check.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduDataLengthCheck",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:1de801f9-576a-4ac9-8d84-54b3db028c95"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduReadData",
+                        "description": "Enables and disables the Rx buffering for reading of received L-SDU data.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduReadData",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:033f6abe-47aa-459b-8fc6-188490b334a5"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduReadNotifyStatus",
+                        "description": "Enables and disables receive indication for each receive CAN L-SDU for reading its notification status.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduReadNotifyStatus",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:d5c19c95-670e-4b7f-a56c-cf2f455409ba"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduUserRxIndicationName",
+                        "description": "This parameter defines the name of the <User_RxIndication>.",
+                        "isOptional": true,
+                        "maxLength": 32,
+                        "minLength": 1,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduUserRxIndicationName",
+                        "type": "FUNCTION",
+                        "uuid": "ECUC:15d97844-3e67-4d9c-954e-4a9d5f077bc4"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduHrhIdRef",
+                        "description": "The HRH to which Rx L-PDU belongs to, is referred through this parameter.",
+                        "destinationContainerType": "CanIfHrhCfg",
+                        "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg",
+                        "destinationRefs": [
+                          "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfInitHohCfg/CanIfHrhCfg"
+                        ],
+                        "isExternal": false,
+                        "isOptional": false,
+                        "kind": "reference",
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduHrhIdRef",
+                        "uuid": "ECUC:a7fc2ca7-7ef3-4285-b179-359afe3ea369"
+                      },
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduRef",
+                        "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                        "destinationContainerType": "Pdu",
+                        "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                        "destinationRefs": [
+                          "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                        ],
+                        "isExternal": true,
+                        "isOptional": false,
+                        "kind": "reference",
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfRxPduRef",
+                        "uuid": "ECUC:6ec97ca8-68cc-4aee-8f58-0955fd67cce5"
+                      }
+                    ],
+                    "shortName": "CanIfRxPduCfg",
+                    "subContainers": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduCanIdRange",
+                        "description": "Optional container that allows to map a range of CAN Ids to one PduId.",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "parameters": [
+                          {
+                            "configClass": "PRE_COMPILE",
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduCanIdRange/CanIfRxPduCanIdRangeLowerCanId",
+                            "description": "Lower CAN Identifier of a receive CAN L-PDU for identifier range definition, in which all CAN Ids are mapped to one PduId.",
+                            "isOptional": false,
+                            "max": 536870911,
+                            "min": 0,
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfRxPduCanIdRangeLowerCanId",
+                            "type": "INTEGER",
+                            "uuid": "ECUC:c2e0f2db-8884-48ad-b435-c415923641fb"
+                          },
+                          {
+                            "configClass": "PRE_COMPILE",
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfRxPduCanIdRange/CanIfRxPduCanIdRangeUpperCanId",
+                            "description": "Upper CAN Identifier of a receive CAN L-PDU for identifier range definition, in which all CAN Ids are mapped to one PduId.",
+                            "isOptional": false,
+                            "max": 536870911,
+                            "min": 0,
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfRxPduCanIdRangeUpperCanId",
+                            "type": "INTEGER",
+                            "uuid": "ECUC:0add622f-4049-4d75-80a6-d49bbef3c636"
+                          }
+                        ],
+                        "references": [],
+                        "shortName": "CanIfRxPduCanIdRange",
+                        "subContainers": [],
+                        "uuid": "ECUC:4e391be4-9fc9-4eb0-9446-4c26dc19d1a5"
+                      },
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfTTRxFrameTriggering",
+                        "description": "CanIfTTRxFrameTriggering is specified in the SWS TTCAN Interface and defines Frame trigger for TTCAN reception.",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "parameters": [
+                          {
+                            "configClass": "PRE_COMPILE",
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfTTRxFrameTriggering/CanTTRxJoblistTimeMark",
+                            "description": "Defines the point in time, when the joblist execution funciton (JLEF) shall be called for the referenced rx trigger. Value is given in cycle time. This paramet…",
+                            "isOptional": true,
+                            "max": 65535,
+                            "min": 0,
+                            "multiplicity": {
+                              "lower": 0,
+                              "upper": 1
+                            },
+                            "shortName": "CanTTRxJoblistTimeMark",
+                            "type": "INTEGER",
+                            "uuid": "ECUC:6c211a8b-18cf-41b5-849d-67f232ff137d"
+                          }
+                        ],
+                        "references": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfRxPduCfg/CanIfTTRxFrameTriggering/CanIfTTRxHwObjectTriggerIdRef",
+                            "description": "This parameter refers to a particular TTCAN hardware receive object Trigger of a hardware object in the TTCAN Driver Module, which is referred via plain CAN pa…",
+                            "destinationContainerType": "CanTTHardwareObjectTrigger",
+                            "destinationRef": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger"
+                            ],
+                            "isExternal": true,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfTTRxHwObjectTriggerIdRef",
+                            "uuid": "ECUC:f7d39f69-3d75-4b01-95b9-6ff94ab8450f"
+                          }
+                        ],
+                        "shortName": "CanIfTTRxFrameTriggering",
+                        "subContainers": [],
+                        "uuid": "ECUC:ff49ad92-d7b2-4951-85f0-3a14bea08dc9"
+                      }
+                    ],
+                    "uuid": "ECUC:35904777-ce11-4a2b-afb3-88cc26d0aff8"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg",
+                    "description": "This container contains the configuration (parameters) of a transmit CAN L-PDU. It has to be configured as often as a transmit CAN L-PDU is needed.",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": "unbounded"
+                    },
+                    "parameters": [
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduCanId",
+                        "description": "CAN Identifier of transmit CAN L-PDUs used by the CAN Driver for CAN L-PDU transmission.",
+                        "isOptional": true,
+                        "max": 536870911,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduCanId",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:16f0cef0-b138-48c6-8afa-e89fbce39eca"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": 3758096383,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduCanIdMask",
+                        "description": "Identifier mask which denotes relevant bits in the CAN Identifier. This parameter may be used to keep parts of the CAN Identifier of dynamic transmit L-PDUs st…",
+                        "isOptional": true,
+                        "max": 3758096383,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduCanIdMask",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:4a46bf4e-58c4-4293-9dc2-4705b93b72a6"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduId",
+                        "description": "ECU wide unique, symbolic handle for transmit CAN L-SDU.",
+                        "isOptional": false,
+                        "max": 4294967295,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduId",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:c4a7fa6d-bcab-43c7-a46e-db0f7e5e5f8a"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduCanIdType",
+                        "description": "Type of CAN Identifier of the transmit CAN L-PDU used by the CAN Driver module for CAN L-PDU transmission.",
+                        "enumValues": [
+                          "EXTENDED_CAN",
+                          "EXTENDED_FD_CAN",
+                          "STANDARD_CAN",
+                          "STANDARD_FD_CAN"
+                        ],
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduCanIdType",
+                        "type": "ENUM",
+                        "uuid": "ECUC:72a33032-3f7d-4524-9650-fc37d465decd"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduType",
+                        "description": "Defines the type of each transmit CAN L-PDU.",
+                        "enumValues": [
+                          "DYNAMIC",
+                          "STATIC"
+                        ],
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduType",
+                        "type": "ENUM",
+                        "uuid": "ECUC:9bee54f7-968d-4c20-98c6-cc78191209bd"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduUserTxConfirmationUL",
+                        "description": "This parameter defines the upper layer (UL) module to which the confirmation of the successfully transmitted CanTxPduId has to be routed via the <User_TxConfir…",
+                        "enumValues": [
+                          "CAN_NM",
+                          "CAN_TP",
+                          "CAN_TSYN",
+                          "CDD",
+                          "J1939NM",
+                          "J1939TP",
+                          "PDUR",
+                          "XCP"
+                        ],
+                        "isOptional": true,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduUserTxConfirmationUL",
+                        "type": "ENUM",
+                        "uuid": "ECUC:5a98eb1e-b9af-441f-9726-b456b2d3c5a0"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduPnFilterPdu",
+                        "description": "If CanIfPublicPnFilterSupport is enabled, by this parameter PDUs could be configured which will pass the CanIfPnFilter.",
+                        "isOptional": true,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduPnFilterPdu",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:8337463d-2539-45a5-9a20-c81e10305546"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduReadNotifyStatus",
+                        "description": "Enables and disables transmit confirmation for each transmit CAN L-SDU for reading its notification status.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduReadNotifyStatus",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:019d12d4-5a3d-44df-a3a4-467cf0674e1b"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduTriggerTransmit",
+                        "description": "Determines if or if not CanIf shall use the trigger transmit API for this PDU.",
+                        "isOptional": true,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduTriggerTransmit",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:806a7d5f-9f31-4ff9-85e0-c106e1cf39f3"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": true,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduTruncation",
+                        "description": "Enables/disables truncation of PDUs that exceed the configured size.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduTruncation",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:f99fc5ef-40ed-4b76-bc9e-db3486b56f34"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduUserTriggerTransmitName",
+                        "description": "This parameter defines the name of the <User_TriggerTransmit>. This parameter depends on the parameter CanIfTxPduUserTxConfirmationUL. If CanIfTxPduUserTxConfi…",
+                        "isOptional": true,
+                        "maxLength": 32,
+                        "minLength": 1,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduUserTriggerTransmitName",
+                        "type": "FUNCTION",
+                        "uuid": "ECUC:1802274b-06b1-41fd-9db4-4ba757fdb198"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduUserTxConfirmationName",
+                        "description": "This parameter defines the name of the <User_TxConfirmation>.",
+                        "isOptional": true,
+                        "maxLength": 32,
+                        "minLength": 1,
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduUserTxConfirmationName",
+                        "type": "FUNCTION",
+                        "uuid": "ECUC:5d9ad8a6-ddcd-4e81-aae7-3c0b03321662"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduBufferRef",
+                        "description": "Configurable reference to a CanIf buffer configuration.",
+                        "destinationContainerType": "CanIfBufferCfg",
+                        "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfBufferCfg",
+                        "destinationRefs": [
+                          "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfBufferCfg"
+                        ],
+                        "isExternal": false,
+                        "isOptional": false,
+                        "kind": "reference",
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduBufferRef",
+                        "uuid": "ECUC:22c29721-2347-42d1-9d0f-5fdf9d5afd45"
+                      },
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTxPduRef",
+                        "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                        "destinationContainerType": "Pdu",
+                        "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                        "destinationRefs": [
+                          "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                        ],
+                        "isExternal": true,
+                        "isOptional": false,
+                        "kind": "reference",
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTxPduRef",
+                        "uuid": "ECUC:cf0ea2f5-ea57-4256-a638-2c19b5c65fee"
+                      }
+                    ],
+                    "shortName": "CanIfTxPduCfg",
+                    "subContainers": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTTTxFrameTriggering",
+                        "description": "CanIfTTTxFrameTriggering is specified in the SWS TTCAN Interface and defines Frame trigger for TTCAN transmission.",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "parameters": [
+                          {
+                            "configClass": "PRE_COMPILE",
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTTTxFrameTriggering/CanIfTTTxJoblistTimeMark",
+                            "description": "Defines the point in time, when the joblist execution funciton (JLEF) shall be called for the referenced tx frame trigger.",
+                            "isOptional": true,
+                            "max": 65535,
+                            "min": 0,
+                            "multiplicity": {
+                              "lower": 0,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfTTTxJoblistTimeMark",
+                            "type": "INTEGER",
+                            "uuid": "ECUC:a53187d3-37d7-469e-8a18-6bb564ded1bc"
+                          }
+                        ],
+                        "references": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfInitCfg/CanIfTxPduCfg/CanIfTTTxFrameTriggering/CanIfTTTxHwObjectTriggerIdRef",
+                            "description": "This parameter refers to a particular TTCAN hardware transmit object Trigger of a hardware object in the TTCAN Driver Module,",
+                            "destinationContainerType": "CanTTHardwareObjectTrigger",
+                            "destinationRef": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger"
+                            ],
+                            "isExternal": true,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "CanIfTTTxHwObjectTriggerIdRef",
+                            "uuid": "ECUC:e97b8ed4-bfb6-4964-adc0-5dc3f80cd53d"
+                          }
+                        ],
+                        "shortName": "CanIfTTTxFrameTriggering",
+                        "subContainers": [],
+                        "uuid": "ECUC:4e110edd-0521-4fe3-a213-8e2775651ecd"
+                      }
+                    ],
+                    "uuid": "ECUC:fbae4c0d-ab4e-4c56-b9c6-e9c0f26634a9"
+                  }
+                ],
+                "uuid": "ECUC:5f4506a5-be5f-497c-9349-d69427ba9d24"
+              },
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg",
+                "description": "This container contains the private configuration (parameters) of the CAN Interface.",
+                "multiplicity": {
+                  "lower": 1,
+                  "upper": 1
+                },
+                "parameters": [
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfFixedBuffer",
+                    "description": "This parameter defines if the buffer element length shall be fixed to 8 Bytes for buffers to which only PDUs < 8 Bytes are assigned.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfFixedBuffer",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:085cf624-ae56-4593-a176-306b6b4fe0af"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": true,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfPrivateDataLengthCheck",
+                    "description": "Selects whether Data Length Check is supported.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPrivateDataLengthCheck",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:9536b5c8-fdf5-47ae-8c8a-d74c2a2a28e6"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfSupportTTCAN",
+                    "description": "Defines whether TTCAN is supported.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfSupportTTCAN",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:25a3bdb6-1fef-4c52-9fdb-c6a7b85e3d7c"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfPrivateSoftwareFilterType",
+                    "description": "Selects the desired software filter mechanism for reception only.",
+                    "enumValues": [
+                      "BINARY",
+                      "INDEX",
+                      "LINEAR",
+                      "TABLE"
+                    ],
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPrivateSoftwareFilterType",
+                    "type": "ENUM",
+                    "uuid": "ECUC:6cc3af1f-c6f0-4c59-b350-91e27d0e27f9"
+                  }
+                ],
+                "references": [],
+                "shortName": "CanIfPrivateCfg",
+                "subContainers": [
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfTTGeneral",
+                    "description": "CanIfTTGeneral is specified in the SWS TTCAN Interface and defines if and in which way TTCAN is supported.",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "parameters": [
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfTTGeneral/CanIfTTJoblist",
+                        "description": "Defines whether TTCAN is processed via a joblist.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTTJoblist",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:e2966695-ae7f-4e4d-8449-32cdc08be5ce"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfTTGeneral/CanIfTTMaxIsrDelay",
+                        "description": "Defines the maximum delay for the execution of the joblist execution function JLEF. This parameter is only configurable if a joblist is enabled by parameter Ca…",
+                        "isOptional": false,
+                        "max": 65535,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTTMaxIsrDelay",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:5f0125fa-613b-4f80-bdc3-6f44ea1d156b"
+                      }
+                    ],
+                    "references": [],
+                    "shortName": "CanIfTTGeneral",
+                    "subContainers": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfTTGeneral/CanIfTTDemEventParameterRefs",
+                        "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "parameters": [],
+                        "references": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg/CanIfTTGeneral/CanIfTTDemEventParameterRefs/CANIF_TT_E_JLE_SYNC",
+                            "description": "Reference to configured DEM event to report that the JLEF lost synchronization to the local time of the TTCAN controller.",
+                            "destinationContainerType": "DemEventParameter",
+                            "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                            ],
+                            "isExternal": true,
+                            "isOptional": true,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 0,
+                              "upper": 1
+                            },
+                            "shortName": "CANIF_TT_E_JLE_SYNC",
+                            "uuid": "ECUC:e864134c-21c9-47e0-b916-81e38277b9e9"
+                          }
+                        ],
+                        "shortName": "CanIfTTDemEventParameterRefs",
+                        "subContainers": [],
+                        "uuid": "ECUC:cd6b252b-0b45-4d71-8242-b28cdc2636b0"
+                      }
+                    ],
+                    "uuid": "ECUC:21377386-cebf-4969-a0ce-c6ec4ac5a68e"
+                  }
+                ],
+                "uuid": "ECUC:01e44938-bbb9-43e3-aebe-49b1e30f3619"
+              },
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg",
+                "description": "This container contains the public configuration (parameters) of the CAN Interface.",
+                "multiplicity": {
+                  "lower": 1,
+                  "upper": 1
+                },
+                "parameters": [
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfBusMirroringSupport",
+                    "description": "Enable support for Bus Mirroring.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfBusMirroringSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:474aeb6e-13dd-495e-a632-a5089b3a8f77"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfDevErrorDetect",
+                    "description": "Switches the development error detection and notification on or off.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfDevErrorDetect",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:bda3c206-6356-44a5-b970-b4e664527452"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfMetaDataSupport",
+                    "description": "Enable support for dynamic ID handling using L-SDU MetaData.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfMetaDataSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:21d962b4-2353-4a4f-8539-8e174c239b3c"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicIcomSupport",
+                    "description": "Selects support of Pretended Network features in CanIf.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicIcomSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:5db0b091-b303-4889-911f-07925a8f9820"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": true,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicMultipleDrvSupport",
+                    "description": "Selects support for multiple CAN Drivers.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicMultipleDrvSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:35509619-6257-4662-ac03-646822b407e1"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicPnSupport",
+                    "description": "Selects support of Partial Network features in CanIf.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicPnSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:fff9c277-fd5b-4ad8-abe0-0d37c399e744"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicReadRxPduDataApi",
+                    "description": "Enables / Disables the API CanIf_ReadRxPduData() for reading received L-SDU data.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicReadRxPduDataApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:e15b356a-4f8b-45fb-a300-3e94fdacf384"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicReadRxPduNotifyStatusApi",
+                    "description": "Enables and disables the API for reading the notification status of receive L-PDUs.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicReadRxPduNotifyStatusApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:fa4c1be1-80a1-4f7a-a8bd-d3432310b57e"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicReadTxPduNotifyStatusApi",
+                    "description": "Enables and disables the API for reading the notification status of transmit L-PDUs.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicReadTxPduNotifyStatusApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:29f05183-12ad-4430-be8c-a14bee1b6fe2"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicSetDynamicTxIdApi",
+                    "description": "Enables and disables the API for reconfiguration of the CAN Identifier for each Transmit L-PDU.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicSetDynamicTxIdApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:c24ab666-772e-460e-b1cc-36b17d5dc2fe"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicTxBuffering",
+                    "description": "Enables and disables the buffering of transmit L-PDUs (rejected by the CanDrv) within the CAN Interface module.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicTxBuffering",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:389db7b3-a65d-45c4-975b-e3fcb0bcd720"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicTxConfirmPollingSupport",
+                    "description": "Configuration parameter to enable/disable the API to poll for Tx Confirmation state.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicTxConfirmPollingSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:e6648967-6f80-4706-b518-0294ac4290c9"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicWakeupCheckValidByNM",
+                    "description": "If enabled, only NM messages shall validate a detected wake-up event in CanIf.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicWakeupCheckValidByNM",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:f40bc487-2f36-4863-8c3a-5359040783d5"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicWakeupCheckValidSupport",
+                    "description": "Selects support for wake up validation",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicWakeupCheckValidSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:51a2279f-2c49-4c87-be76-120819310d0a"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfSetBaudrateApi",
+                    "description": "Configuration parameter to enable/disable the CanIf_SetBaudrate API to change the baud rate of a CAN Controller. If this parameter is set to true the CanIf_Set…",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfSetBaudrateApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:8a1bce2a-e8ed-4e93-83fc-d47cbaa81d87"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": true,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfTriggerTransmitSupport",
+                    "description": "Enables the CanIf_TriggerTransmit API at Pre-Compile-Time. Therefore, this parameter defines if there shall be support for trigger transmit transmissions.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfTriggerTransmitSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:8fa6ac55-6c51-4144-9522-528fde07b2cd"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfTxOfflineActiveSupport",
+                    "description": "Determines wether TxOffLineActive feature (see SWS_CANIF_00072) is supported by CanIf.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfTxOfflineActiveSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:e316ed2b-d507-4752-be6a-549eb01d68de"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfVersionInfoApi",
+                    "description": "Enables and disables the API for reading the version information about the CAN Interface.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfVersionInfoApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:0d9c523c-3ece-47aa-b2ad-2f68419e8511"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": true,
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfWakeupSupport",
+                    "description": "Enables the CanIf_CheckWakeup API at Pre-Compile-Time. Therefore, this parameter defines if there shall be support for wake-up.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfWakeupSupport",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:53df91c9-50e3-40bd-b080-82d76999435a"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicCddHeaderFile",
+                    "description": "Defines header files for callback functions which shall be included in case of CDDs. Range of characters is 1.. 32.",
+                    "isOptional": true,
+                    "maxLength": 32,
+                    "minLength": 1,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": "unbounded"
+                    },
+                    "shortName": "CanIfPublicCddHeaderFile",
+                    "type": "STRING",
+                    "uuid": "ECUC:5613df5e-6f7f-4078-af38-e014e8eac455"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfPublicCfg/CanIfPublicHandleTypeEnum",
+                    "description": "This parameter is used to configure the Can_HwHandleType. The Can_HwHandleType represents the hardware object handles of a CAN hardware unit. For CAN hardware …",
+                    "enumValues": [
+                      "UINT16",
+                      "UINT8"
+                    ],
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "CanIfPublicHandleTypeEnum",
+                    "type": "ENUM",
+                    "uuid": "ECUC:067ae4bf-e18b-4359-bfc4-75b0b4b6e95a"
+                  }
+                ],
+                "references": [],
+                "shortName": "CanIfPublicCfg",
+                "subContainers": [],
+                "uuid": "ECUC:502a51ce-f751-4c9b-924e-ffbae9900c8f"
+              },
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg",
+                "description": "This container contains the configuration (parameters) of all addressed CAN transceivers by each underlying CAN Transceiver Driver module. For each CAN transce…",
+                "multiplicity": {
+                  "lower": 0,
+                  "upper": "unbounded"
+                },
+                "parameters": [],
+                "references": [],
+                "shortName": "CanIfTrcvDrvCfg",
+                "subContainers": [
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg",
+                    "description": "This container contains the configuration (parameters) of one addressed CAN transceiver by the underlying CAN Transceiver Driver module. For each CAN transceiv…",
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": "unbounded"
+                    },
+                    "parameters": [
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg/CanIfTrcvId",
+                        "description": "This parameter abstracts from the CAN Transceiver Driver specific parameter Transceiver. Each transceiver of all connected CAN Transceiver Driver modules shall…",
+                        "isOptional": false,
+                        "max": 255,
+                        "min": 0,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTrcvId",
+                        "type": "INTEGER",
+                        "uuid": "ECUC:570cdbbe-8d21-4e58-8d5f-279580e40b03"
+                      },
+                      {
+                        "configClass": "PRE_COMPILE",
+                        "defaultValue": false,
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg/CanIfTrcvWakeupSupport",
+                        "description": "This parameter defines if a respective transceiver of the referenced CAN Transceiver Driver modules is queriable for wake up events.",
+                        "isOptional": false,
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTrcvWakeupSupport",
+                        "type": "BOOLEAN",
+                        "uuid": "ECUC:a8aa0764-c417-48b3-8130-29ebadf1928e"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg/CanIfTrcvCanTrcvRef",
+                        "description": "This parameter references to the logical handle of the underlying CAN",
+                        "destinationContainerType": "CanTrcvChannel",
+                        "destinationRef": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel",
+                        "destinationRefs": [
+                          "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel"
+                        ],
+                        "isExternal": true,
+                        "isOptional": false,
+                        "kind": "reference",
+                        "multiplicity": {
+                          "lower": 1,
+                          "upper": 1
+                        },
+                        "shortName": "CanIfTrcvCanTrcvRef",
+                        "uuid": "ECUC:8254f029-a3a6-4174-b799-60a500098c1e"
+                      }
+                    ],
+                    "shortName": "CanIfTrcvCfg",
+                    "subContainers": [],
+                    "uuid": "ECUC:cbf745e1-f2f4-44fa-8f5c-8b62c0aa1e7c"
+                  }
+                ],
+                "uuid": "ECUC:771f9925-1a46-450e-8781-b59e18884ef1"
+              }
+            ],
+            "definitionPath": "/AUTOSAR/EcucDefs/CanIf",
+            "description": "This container includes all necessary configuration sub-containers according the CAN Interface configuration structure.",
+            "importWarnings": [
+              "CanIfCtrlCanCtrlRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanController 位于本模块之外；编辑器只读展示。",
+              "CanIfCtrlDrvNameRef：目标 /AUTOSAR/EcucDefs/Can/CanGeneral 位于本模块之外；编辑器只读展示。",
+              "CanIfHrhIdSymRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject 位于本模块之外；编辑器只读展示。",
+              "CanIfHthIdSymRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject 位于本模块之外；编辑器只读展示。",
+              "CanIfTTRxHwObjectTriggerIdRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger 位于本模块之外；编辑器只读展示。",
+              "CanIfRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+              "CanIfTTTxHwObjectTriggerIdRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger 位于本模块之外；编辑器只读展示。",
+              "CanIfTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+              "CANIF_TT_E_JLE_SYNC：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+              "CanIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+              "CanIfTrcvCanTrcvRef：目标 /AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel 位于本模块之外；编辑器只读展示。"
+            ],
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            },
+            "shortName": "CanIf",
+            "version": "4.4.0"
+          },
+          "kind": "added",
+          "path": "/"
+        }
+      ],
+      "fromContentSha256": null,
+      "toContentSha256": "5d82f526175322e8901d3daa7b585ce0ab4c0d3b8863df16cea74dda751b4420"
+    },
+    "NvM": {
+      "changes": [
+        {
+          "after": {
+            "arxmlExportBlockers": [],
+            "containers": [
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+                "description": "Container for a management structure to configure the composition of a given NVRAM Block Management Type. Its multiplicity describes the number of configured N…",
+                "multiplicity": {
+                  "lower": 1,
+                  "upper": 65536
+                },
+                "parameters": [
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockCrcType",
+                    "description": "Defines CRC data width for the NVRAM block. Default: NVM_CRC16, i.e. CRC16 will be used if NVM_BLOCK_USE_CRC==true",
+                    "enumValues": [
+                      "NVM_CRC16",
+                      "NVM_CRC32",
+                      "NVM_CRC8"
+                    ],
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockCrcType",
+                    "type": "ENUM",
+                    "uuid": "ECUC:b7447ae4-f639-4432-9efb-cd26e048e87f"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockManagementType",
+                    "description": "Defines the block management type for the NVRAM block.[NVM137]",
+                    "enumValues": [
+                      "NVM_BLOCK_DATASET",
+                      "NVM_BLOCK_NATIVE",
+                      "NVM_BLOCK_REDUNDANT"
+                    ],
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockManagementType",
+                    "type": "ENUM",
+                    "uuid": "ECUC:d1b453dc-59c8-49c2-a231-ea5134267534"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockHeaderInclude",
+                    "description": "Defines the header file where the owner of the NVRAM block has the declarations of the permanent RAM data block, ROM data block (if configured) and the callbac…",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockHeaderInclude",
+                    "type": "STRING",
+                    "uuid": "ECUC:9728f9b6-285d-4bc5-83b7-2fe23a9ec4cb"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMRamBlockDataAddress",
+                    "description": "Defines the start address of the RAM block data.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMRamBlockDataAddress",
+                    "type": "STRING",
+                    "uuid": "ECUC:dad1e4d8-a71a-4307-938f-cebe91afb72b"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMRomBlockDataAddress",
+                    "description": "Defines the start address of the ROM block data.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMRomBlockDataAddress",
+                    "type": "STRING",
+                    "uuid": "ECUC:c211eaf4-e050-4bec-8a1b-3423cd203f7d"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockJobPriority",
+                    "description": "Defines the job priority for a NVRAM block (0 = Immediate priority).",
+                    "isOptional": false,
+                    "max": 255,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockJobPriority",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:1d526dbf-73e8-4c71-abfb-b1d9a2cfa016"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": 0,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMMaxNumOfReadRetries",
+                    "description": "Defines the maximum number of read retries.",
+                    "isOptional": false,
+                    "max": 7,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMMaxNumOfReadRetries",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:1031f94b-1419-4708-9937-a3edac24e9a7"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMMaxNumOfWriteRetries",
+                    "description": "Defines the maximum number of write retries for a NVRAM block with [ECUC_NvM_00061]. Regardless of configuration a consistency check (and maybe write retries) …",
+                    "isOptional": false,
+                    "max": 7,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMMaxNumOfWriteRetries",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:78e2ed49-7ea2-41fd-ac91-2f65c9cd8908"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvBlockBaseNumber",
+                    "description": "Configuration parameter to perform the link between the NVM_NVRAM_BLOCK_IDENTIFIER used by the SW-Cs and the FEE_BLOCK_NUMBER expected by the memory abstractio…",
+                    "isOptional": false,
+                    "max": 65534,
+                    "min": 1,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMNvBlockBaseNumber",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:087b96a3-afec-4a8f-b375-50fdeaa19b1c"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvBlockLength",
+                    "description": "Defines the NV block data length in bytes.",
+                    "isOptional": false,
+                    "max": 65535,
+                    "min": 1,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMNvBlockLength",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:60ef00b3-517e-49f5-8942-16bc295ac588"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvBlockNum",
+                    "description": "Defines the number of multiple NV blocks in a contiguous area according to the given block management type.",
+                    "isOptional": false,
+                    "max": 255,
+                    "min": 1,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMNvBlockNum",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:77ade3a7-ce59-440d-a7e7-15fd9adefe05"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvramBlockIdentifier",
+                    "description": "Identification of a NVRAM block via a unique block identifier.",
+                    "isOptional": false,
+                    "max": 65535,
+                    "min": 2,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMNvramBlockIdentifier",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:6ad9681e-a4cf-4630-96f8-0843c5a1f5ab"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvramDeviceId",
+                    "description": "Defines the NVRAM device ID where the NVRAM block is located.",
+                    "isOptional": false,
+                    "max": 1,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMNvramDeviceId",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:90f689ce-cc95-450a-a7d9-8a7044711d54"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMRomBlockNum",
+                    "description": "Defines the number of multiple ROM blocks in a contiguous area according to the given block management type.",
+                    "isOptional": false,
+                    "max": 254,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMRomBlockNum",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:ddfe3c46-ad54-463e-b8b4-1e15564ae1b8"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteVerificationDataSize",
+                    "description": "Defines the number of bytes to compare in each step when comparing the content of a RAM Block and a block read back.",
+                    "isOptional": false,
+                    "max": 65535,
+                    "min": 1,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMWriteVerificationDataSize",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:e044b935-bdee-42de-8b16-eda9a7279e49"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseAutoValidation",
+                    "description": "Defines whether the RAM Block shall be auto validated during shutdown phase.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockUseAutoValidation",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:0ff44e7b-65ca-4948-867e-d57ef3ef1902"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseCrc",
+                    "description": "Defines CRC usage for the NVRAM block, i.e. memory space for CRC is reserved in RAM and NV memory.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockUseCrc",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:8a736e46-360a-438b-9066-a9a52092e5eb"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseCRCCompMechanism",
+                    "description": "Defines whether the CRC of the RAM Block shall be compared during a write job with the CRC which was calculated during the last successful read or write job.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockUseCRCCompMechanism",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:6f8a842b-59e5-4acc-9617-231f69fdc50c"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseSetRamBlockStatus",
+                    "description": "Defines if NvMSetRamBlockStatusApi shall be used for this block or not.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockUseSetRamBlockStatus",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:fa2af381-8213-4500-a6de-9e8722792550"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseSyncMechanism",
+                    "description": "Defines whether an explicit synchronization mechanism with a RAM mirror and callback routines for transferring data to and from NvM module's RAM mirror is used…",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockUseSyncMechanism",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:17667a35-d32a-4544-85dc-32bd1dc2663f"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockWriteProt",
+                    "description": "Defines an initial write protection of the NV block",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBlockWriteProt",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:583499ba-6121-4c40-88ee-ef45f8ccc250"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBswMBlockStatusInformation",
+                    "description": "This parameter specifies whether BswM is informed about the current status of the specified block.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBswMBlockStatusInformation",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:eccb246d-a8a5-41a2-a478-f85dc807d31b"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMCalcRamBlockCrc",
+                    "description": "Defines CRC (re)calculation for the permanent RAM block or NVRAM blocks which are configured to use explicit synchronization mechanism.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMCalcRamBlockCrc",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:7a30fc79-9a8f-482f-ad77-0bbdaa443670"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMResistantToChangedSw",
+                    "description": "Defines whether a NVRAM block shall be treated resistant to configuration changes or not. If there is no default data available at configuration time then the …",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMResistantToChangedSw",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:b94632c6-fe1d-4b6f-9ba2-f39c2a5689f8"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSelectBlockForFirstInitAll",
+                    "description": "Defines whether a block will be processed or not by NvM_FirstInitAll. A block can be configured to be processed even if it doesn't have permanent RAM and/or ex…",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMSelectBlockForFirstInitAll",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:9c7e8e06-799b-4367-9a71-88518356a776"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSelectBlockForReadAll",
+                    "description": "Defines whether a NVRAM block shall be processed during NvM_ReadAll or not. This configuration parameter has only influence on those NVRAM blocks which are con…",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMSelectBlockForReadAll",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:863190d4-9883-4087-87c3-d2d52d03a810"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSelectBlockForWriteAll",
+                    "description": "Defines whether a NVRAM block shall be processed during NvM_WriteAll or not. This configuration parameter has only influence on those NVRAM blocks which are co…",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMSelectBlockForWriteAll",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:54fd91d0-941a-4b67-9cc6-3d54449cf164"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMStaticBlockIDCheck",
+                    "description": "Defines if the Static Block ID check is enabled.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMStaticBlockIDCheck",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:1a7d96ce-bcbe-4b69-8322-f18851048bdd"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteBlockOnce",
+                    "description": "Defines write protection after first write. The NVRAM manager sets the write protection bit either after the NV block was written the first time or if the bloc…",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMWriteBlockOnce",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:95a53ff9-d845-4bc8-9b07-cfe70a131869"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteVerification",
+                    "description": "Defines if Write Verification is enabled.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMWriteVerification",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:536e74a6-5a54-441f-8a7e-3a59ca814898"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMInitBlockCallback",
+                    "description": "Entry address of a block specific callback routine which shall be called if no ROM data is available for initialization of the NVRAM block.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMInitBlockCallback",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:22bf4a2c-db27-4831-9f50-dcebf7417aa8"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMReadRamBlockFromNvCallback",
+                    "description": "Entry address of a block specific callback routine which shall be called in order to let the application copy data from the NvM module's mirror to RAM block.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMReadRamBlockFromNvCallback",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:d3023e40-444d-4c8e-a1f0-0456f60dbf22"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSingleBlockCallback",
+                    "description": "Entry address of the block specific callback routine which shall be invoked on termination of each asynchronous single block request [NVM113].",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMSingleBlockCallback",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:a93648f0-18dc-4497-8e1f-0241129ae9d4"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteRamBlockToNvCallback",
+                    "description": "Entry address of a block specific callback routine which shall be called in order to let the application copy data from RAM block to NvM module's mirror.",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMWriteRamBlockToNvCallback",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:3b6b0539-92f3-4d2f-8d12-cbf3a056b262"
+                  }
+                ],
+                "references": [],
+                "shortName": "NvMBlockDescriptor",
+                "subContainers": [
+                  {
+                    "choice": {
+                      "candidateRefs": [
+                        "ECUC:90f4fd54-5801-429b-9642-06ef3acc3387",
+                        "ECUC:5c319a41-37d1-4b63-8011-c8bf807095f5"
+                      ]
+                    },
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference",
+                    "description": "This parameter is just a container for the parameters for EA and FEE",
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "parameters": [],
+                    "references": [],
+                    "shortName": "NvMTargetBlockReference",
+                    "subContainers": [
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMEaRef",
+                        "description": "EEPROM Abstraction",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "parameters": [],
+                        "references": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMEaRef/NvMNameOfEaBlock",
+                            "description": "reference to EaBlock",
+                            "destinationContainerType": "EaBlockConfiguration",
+                            "destinationRef": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration"
+                            ],
+                            "isExternal": true,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "NvMNameOfEaBlock",
+                            "uuid": "ECUC:378ccf77-6afa-4fb2-814c-d86e91c3bbc8"
+                          }
+                        ],
+                        "shortName": "NvMEaRef",
+                        "subContainers": [],
+                        "uuid": "ECUC:90f4fd54-5801-429b-9642-06ef3acc3387"
+                      },
+                      {
+                        "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMFeeRef",
+                        "description": "Flash EEPROM Emulation",
+                        "multiplicity": {
+                          "lower": 0,
+                          "upper": 1
+                        },
+                        "parameters": [],
+                        "references": [
+                          {
+                            "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMFeeRef/NvMNameOfFeeBlock",
+                            "description": "reference to FeeBlock",
+                            "destinationContainerType": "FeeBlockConfiguration",
+                            "destinationRef": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration",
+                            "destinationRefs": [
+                              "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration"
+                            ],
+                            "isExternal": true,
+                            "isOptional": false,
+                            "kind": "reference",
+                            "multiplicity": {
+                              "lower": 1,
+                              "upper": 1
+                            },
+                            "shortName": "NvMNameOfFeeBlock",
+                            "uuid": "ECUC:48167eeb-a01f-4420-a942-3a98967b1fbb"
+                          }
+                        ],
+                        "shortName": "NvMFeeRef",
+                        "subContainers": [],
+                        "uuid": "ECUC:5c319a41-37d1-4b63-8011-c8bf807095f5"
+                      }
+                    ],
+                    "uuid": "ECUC:bdbb119b-7ccd-46ea-9a91-2bfa0300418e"
+                  }
+                ],
+                "uuid": "ECUC:592eb68c-8ec5-46e2-aa34-9d55999b105e"
+              },
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon",
+                "description": "Container for common configuration options.",
+                "multiplicity": {
+                  "lower": 1,
+                  "upper": 1
+                },
+                "parameters": [
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMApiConfigClass",
+                    "description": "Preprocessor switch to enable some API calls which are related to NVM API configuration classes.",
+                    "enumValues": [
+                      "NVM_API_CONFIG_CLASS_1",
+                      "NVM_API_CONFIG_CLASS_2",
+                      "NVM_API_CONFIG_CLASS_3"
+                    ],
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMApiConfigClass",
+                    "type": "ENUM",
+                    "uuid": "ECUC:5b839f42-032f-48fd-9d5f-a80f7eaf4e60"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": true,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMBswMMultiBlockJobStatusInformation",
+                    "description": "This parameter specifies whether BswM is informed about the current status of the multiblock job.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMBswMMultiBlockJobStatusInformation",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:70475090-57ec-4ce9-afdc-d82075f01a78"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDevErrorDetect",
+                    "description": "Switches the development error detection and notification on or off.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMDevErrorDetect",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:d54c9a22-5fb3-489c-9a6d-bbd5d848859c"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDrvModeSwitch",
+                    "description": "Preprocessor switch to enable switching memory drivers to fast mode during performing NvM_ReadAll and NvM_WriteAll",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMDrvModeSwitch",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:e2f92e79-6cf7-433b-89c4-7453b7617a22"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDynamicConfiguration",
+                    "description": "Preprocessor switch to enable the dynamic configuration management handling by the NvM_ReadAll request.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMDynamicConfiguration",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:87a82f46-5ed9-45cb-909e-6d826c161f36"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMJobPrioritization",
+                    "description": "Preprocessor switch to enable job prioritization handling",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMJobPrioritization",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:8105b3ea-e773-4f2e-9f89-22e9e58f874b"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMPollingMode",
+                    "description": "Preprocessor switch to enable/disable the polling mode in the NVRAM Manager and at the same time disable/enable the callback functions useable by lower layers",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMPollingMode",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:053fb1f7-d703-4773-a004-87391a430d45"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMSetRamBlockStatusApi",
+                    "description": "Preprocessor switch to enable the API NvM_SetRamBlockStatus.",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMSetRamBlockStatusApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:6e124429-e18f-4b2c-b790-6cad1259de79"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": false,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMVersionInfoApi",
+                    "description": "Pre-processor switch to enable / disable the API to read out the modules version information [NVM285], [NVM286].",
+                    "isOptional": false,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMVersionInfoApi",
+                    "type": "BOOLEAN",
+                    "uuid": "ECUC:505b5889-cc12-4684-aef0-cf8c9d71176e"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMCompiledConfigId",
+                    "description": "Configuration ID regarding the NV memory layout. This configuration ID shall be published as e.g. a SW-C shall have the possibility to write it to NV memory.",
+                    "isOptional": false,
+                    "max": 65535,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMCompiledConfigId",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:5900b6cf-53e9-49d8-878f-65aed90f88f6"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMCrcNumOfBytes",
+                    "description": "If CRC is configured for at least one NVRAM block, this parameter defines the maximum number of bytes which shall be processed within one cycle of job processi…",
+                    "isOptional": false,
+                    "max": 65535,
+                    "min": 1,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMCrcNumOfBytes",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:18ffdb77-2c48-49d0-a34c-55bad1ed237c"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDatasetSelectionBits",
+                    "description": "Defines the number of least significant bits which shall be used to address a certain dataset of a NVRAM block within the interface to the memory hardware abst…",
+                    "isOptional": false,
+                    "max": 8,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMDatasetSelectionBits",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:c9acf3f3-3f67-48b6-99b6-61a6378e6ed1"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "defaultValue": 0,
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMRepeatMirrorOperations",
+                    "description": "Defines the number of retries to let the application copy data to or from the NvM module's mirror before postponing the current job.",
+                    "isOptional": false,
+                    "max": 7,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMRepeatMirrorOperations",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:51308b85-4893-4a39-a736-7283da5f78ca"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMSizeImmediateJobQueue",
+                    "description": "Defines the number of queue entries for the immediate priority job queue. If NVM_JOB_PRIORITIZATION is switched OFF this parameter shall be out of scope.",
+                    "isOptional": true,
+                    "max": 65535,
+                    "min": 1,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMSizeImmediateJobQueue",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:42bd46ac-fa9a-4160-8a9f-d6a3a223b3f2"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMSizeStandardJobQueue",
+                    "description": "Defines the number of queue entries for the standard job queue.",
+                    "isOptional": false,
+                    "max": 65535,
+                    "min": 1,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMSizeStandardJobQueue",
+                    "type": "INTEGER",
+                    "uuid": "ECUC:b6ee37b4-27bb-4334-8782-37a66ef6a5e5"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMMainFunctionPeriod",
+                    "description": "The period between successive calls to the main function in seconds.",
+                    "isOptional": false,
+                    "min": 0,
+                    "multiplicity": {
+                      "lower": 1,
+                      "upper": 1
+                    },
+                    "shortName": "NvMMainFunctionPeriod",
+                    "type": "FLOAT",
+                    "uuid": "ECUC:f5f461c3-4f1c-4a92-b0d4-d967c1d6f08e"
+                  },
+                  {
+                    "configClass": "PRE_COMPILE",
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMMultiBlockCallback",
+                    "description": "Entry address of the common callback routine which shall be invoked on termination of each asynchronous multi block request",
+                    "isOptional": true,
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NvMMultiBlockCallback",
+                    "type": "FUNCTION",
+                    "uuid": "ECUC:cd0e20fd-32f3-44cd-b73a-fed99a446e01"
+                  }
+                ],
+                "references": [],
+                "shortName": "NvMCommon",
+                "subContainers": [],
+                "uuid": "ECUC:629d2250-f495-4827-9660-195f8642e4fd"
+              },
+              {
+                "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs",
+                "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+                "multiplicity": {
+                  "lower": 0,
+                  "upper": 1
+                },
+                "parameters": [],
+                "references": [
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_HARDWARE",
+                    "description": "Reference to the DemEventParameter which shall be issued when the hardware error has occured.",
+                    "destinationContainerType": "DemEventParameter",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                    ],
+                    "isExternal": true,
+                    "isOptional": true,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NVM_E_HARDWARE",
+                    "uuid": "ECUC:24a2ee3b-2bc5-42a7-af5f-dc76873d64f4"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_INTEGRITY_FAILED",
+                    "description": "Reference to the DemEventParameter which shall be issued when the error \"API request integrity failed\" has occurred.",
+                    "destinationContainerType": "DemEventParameter",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                    ],
+                    "isExternal": true,
+                    "isOptional": true,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NVM_E_INTEGRITY_FAILED",
+                    "uuid": "ECUC:7ab1f486-d96b-41ca-bf55-ada6c06abd6d"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_LOSS_OF_REDUNDANCY",
+                    "description": "Reference to the DemEventParameter which shall be issued when the error \"loss of redundancy\" has occurred.",
+                    "destinationContainerType": "DemEventParameter",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                    ],
+                    "isExternal": true,
+                    "isOptional": true,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NVM_E_LOSS_OF_REDUNDANCY",
+                    "uuid": "ECUC:7ae40494-2a5b-4076-9cf0-055cc7917e05"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_REQ_FAILED",
+                    "description": "Reference to the DemEventParameter which shall be issued when the error \"API request failed\" has occurred.",
+                    "destinationContainerType": "DemEventParameter",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                    ],
+                    "isExternal": true,
+                    "isOptional": true,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NVM_E_REQ_FAILED",
+                    "uuid": "ECUC:e67d652c-67ff-419e-aa7f-3b2d7c38b2a5"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_VERIFY_FAILED",
+                    "description": "Reference to the DemEventParameter which shall be issued when the error \"Write Verification failed\" has occurred.",
+                    "destinationContainerType": "DemEventParameter",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                    ],
+                    "isExternal": true,
+                    "isOptional": true,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NVM_E_VERIFY_FAILED",
+                    "uuid": "ECUC:2b751628-9fc7-4bfb-b061-3c98d45ae44c"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_WRITE_PROTECTED",
+                    "description": "Reference to the DemEventParameter which shall be issued when the error \"write attempt to NVRAM block with write protection\" has occurred.",
+                    "destinationContainerType": "DemEventParameter",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                    ],
+                    "isExternal": true,
+                    "isOptional": true,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NVM_E_WRITE_PROTECTED",
+                    "uuid": "ECUC:83187ce0-6e2e-4905-94d0-8e924685ce3b"
+                  },
+                  {
+                    "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_WRONG_BLOCK_ID",
+                    "description": "Reference to the DemEventParameter which shall be issued when the error \"Static Block ID check failed\" has occurred.",
+                    "destinationContainerType": "DemEventParameter",
+                    "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                    "destinationRefs": [
+                      "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                    ],
+                    "isExternal": true,
+                    "isOptional": true,
+                    "kind": "reference",
+                    "multiplicity": {
+                      "lower": 0,
+                      "upper": 1
+                    },
+                    "shortName": "NVM_E_WRONG_BLOCK_ID",
+                    "uuid": "ECUC:76f309e7-892a-455a-87f2-2398607962ba"
+                  }
+                ],
+                "shortName": "NvmDemEventParameterRefs",
+                "subContainers": [],
+                "uuid": "ECUC:53c6dcf1-a51c-404e-9986-89750b749edb"
+              }
+            ],
+            "definitionPath": "/AUTOSAR/EcucDefs/NvM",
+            "description": "Configuration of the NvM (NvRam Manager) module.",
+            "importWarnings": [
+              "NvMTargetBlockReference：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+              "NvMNameOfEaBlock：目标 /AUTOSAR/EcucDefs/Ea/EaBlockConfiguration 位于本模块之外；编辑器只读展示。",
+              "NvMNameOfFeeBlock：目标 /AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration 位于本模块之外；编辑器只读展示。",
+              "NVM_E_HARDWARE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+              "NVM_E_INTEGRITY_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+              "NVM_E_LOSS_OF_REDUNDANCY：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+              "NVM_E_REQ_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+              "NVM_E_VERIFY_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+              "NVM_E_WRITE_PROTECTED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+              "NVM_E_WRONG_BLOCK_ID：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+            ],
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            },
+            "shortName": "NvM",
+            "version": "4.4.0"
+          },
+          "kind": "added",
+          "path": "/"
+        }
+      ],
+      "fromContentSha256": null,
+      "toContentSha256": "73e054fc77f108ed64f1d9a2d29168bda21b2fb0c6eedc99cceafeae75f2b0ec"
+    }
+  }
+}

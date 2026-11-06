@@ -3,6 +3,23 @@ import type { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
+    path: '/configurator',
+    name: 'ConfiguratorStart',
+    component: () => import('@/views/ConfiguratorStartView.vue'),
+  },
+  {
+    path: '/knowledge',
+    name: 'Knowledge',
+    component: () => import('@/views/PendingView.vue'),
+    props: { title: '知识库' },
+  },
+  {
+    path: '/subscription',
+    name: 'Subscription',
+    component: () => import('@/views/PendingView.vue'),
+    props: { title: '订阅中心' },
+  },
+  {
     path: '/',
     name: 'Home',
     component: () => import('@/views/HomeView.vue'),

@@ -13,7 +13,7 @@
     "
   >
     <header class="workspace-header">
-      <span class="brand-symbol">☷</span><span class="brand">BSW Configurator</span>
+      <span class="brand-symbol">☷</span><span class="brand">OneSAR Configurator</span>
       <div class="toolbar-group">
         <button
           class="tool-button"
@@ -90,11 +90,11 @@
         </button>
         <button
           class="tool-button"
-          title="返回配置集列表"
+          title="返回主页面"
           aria-label="返回配置集列表"
           @click="router.push('/')"
         >
-          <el-icon><Back /></el-icon>
+          <el-icon><HomeFilled /></el-icon><span class="sr-only">返回主页面</span>
         </button>
       </div>
       <span v-if="store.isDirty" class="dirty-indicator" title="配置有未保存修改">●</span>
@@ -109,6 +109,17 @@
       </button>
       <span class="language">简体中文⌄</span><span class="avatar">配</span>
     </header>
+    <div class="project-strip">
+      <strong>{{ store.activeProject?.name ?? '默认工程' }}</strong>
+      <span v-if="store.activeProject"
+        >CP {{ store.activeProject.autosarVersion }} · {{ store.activeProject.chip.family }}</span
+      >
+      <button @click="router.push('/')">工程列表</button
+      ><button :disabled="store.dataSafety.locked" @click="showProjectWizard = true">
+        ＋ 新建工程
+      </button>
+    </div>
+    <ProjectWizard v-model="showProjectWizard" />
     <RecoveryPanel />
     <el-alert v-if="store.error" :title="store.error" type="error" :closable="false" />
     <main class="workspace-main">
@@ -133,7 +144,9 @@
             @keydown.shift.f10.prevent="openProjectMenu"
           >
             <span class="folder">▱</span
-            ><span class="project-name">{{ store.config?.name ?? '本机配置集' }}</span
+            ><span class="project-name">{{
+              store.activeProject?.name ?? store.config?.name ?? '本机配置集'
+            }}</span
             ><span>⌃</span>
           </div>
           <details open>
@@ -234,8 +247,9 @@
                 <label for="instance-name">实例名称</label
                 ><el-input
                   id="instance-name"
-                  :model-value="store.selectedEntry.container.shortName"
+                  v-model="instanceNameDraft"
                   @change="rename"
+                  @blur="rename(instanceNameDraft)"
                 />
               </div>
               <ChoiceSelector />
@@ -406,7 +420,7 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import {
-  Back,
+  HomeFilled,
   CircleCheck,
   DocumentChecked,
   FolderOpened,
@@ -424,6 +438,7 @@ import FieldDescriptionPanel from '@/ui/FormEditor/FieldDescriptionPanel.vue';
 import ContainerNavigator from '@/ui/ConfigTree/ContainerNavigator.vue';
 import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
+import ProjectWizard from '@/ui/Projects/ProjectWizard.vue';
 import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 import ContainerActions from '@/ui/ConfigTree/ContainerActions.vue';
 import ContainerContextMenu from '@/ui/ConfigTree/ContainerContextMenu.vue';
@@ -445,8 +460,17 @@ import { theme, setTheme } from '@/ui/Theme/theme';
 const router = useRouter(),
   store = useConfigStore();
 useHistory();
+const instanceNameDraft = ref('');
+watch(
+  () => [store.selectedEntry?.container.uuid, store.selectedEntry?.container.shortName],
+  () => {
+    instanceNameDraft.value = store.selectedEntry?.container.shortName ?? '';
+  },
+  { immediate: true }
+);
 const generatedFiles = ref<GeneratedFile[]>([]),
   showGenerated = ref(false);
+const showProjectWizard = ref(false);
 const showSets = ref(false),
   showModules = ref(false),
   showValidation = ref(false),
@@ -533,7 +557,11 @@ watch(
   }
 );
 const includedModules = computed(() =>
-  store.modules.filter((item) => store.modulePreferences[item.shortName]?.included)
+  store.modules.filter(
+    (item) =>
+      store.modulePreferences[item.shortName]?.included &&
+      (!store.activeProject || store.activeProject.moduleShortNames.includes(item.shortName))
+  )
 );
 const breadcrumb = computed(() => {
   const entry = store.selectedEntry;
@@ -558,7 +586,11 @@ watch(
     outputError.value = '';
     contextMenu.value = undefined;
     showGenerated.value = false;
-    opened.value = opened.value.filter((id) => store.configSets.some((set) => set.uuid === id));
+    opened.value = opened.value.filter(
+      (id) =>
+        store.configSets.some((set) => set.uuid === id) &&
+        (!store.activeProject || store.activeProject.setUuids.includes(id))
+    );
     if (
       uuid &&
       store.module &&
@@ -628,7 +660,13 @@ function ioAction(action: string, format: ExportFormat): void {
   }
 }
 async function openModule(name: string): Promise<void> {
-  const existing = store.configSets.find((item) => item.moduleRef === name);
+  const existing = store.configSets.find(
+    (item) =>
+      item.moduleRef === name &&
+      (store.activeProject
+        ? store.activeProject.setUuids.includes(item.uuid)
+        : store.unassignedSets.some((set) => set.uuid === item.uuid))
+  );
   if (existing) {
     if (!(await store.switchConfigSet(existing.uuid).catch(() => false))) return;
   } else if (!(await store.createConfigSet(name + ' 配置', name).catch(() => false))) return;
@@ -656,10 +694,13 @@ async function addFirst(uuid: string): Promise<void> {
   }
 }
 function rename(name: string): void {
+  if (name === store.selectedEntry?.container.shortName) return;
   try {
     store.renameContainer(name);
   } catch (reason) {
     ElMessage.error(reason instanceof Error ? reason.message : String(reason));
+  } finally {
+    instanceNameDraft.value = store.selectedEntry?.container.shortName ?? '';
   }
 }
 function openContextMenu(event: MouseEvent, target: ContainerContextTarget): void {
@@ -809,6 +850,32 @@ function stopResize(): void {
 }
 </script>
 <style scoped>
+.project-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-panel);
+  font-size: 12px;
+}
+.project-strip strong {
+  color: var(--color-text);
+}
+.project-strip span {
+  color: var(--color-muted);
+}
+.project-strip button {
+  background: transparent;
+  border: 0;
+  color: var(--color-accent);
+  cursor: pointer;
+  font: inherit;
+}
+.project-strip button:first-of-type {
+  margin-left: auto;
+}
 .workspace-container {
   height: 100vh;
   display: flex;

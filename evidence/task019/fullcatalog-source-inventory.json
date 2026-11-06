@@ -1,0 +1,2232 @@
+[
+  {
+    "release": "4.2.2",
+    "sourcePath": "D:\\ProFile\\教培业务\\配置器\\AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "sourceSha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c",
+    "total": 84,
+    "parsed": 20,
+    "rows": [
+      {
+        "name": "Adc",
+        "result": "rejected",
+        "reason": "AdcChannelRefVoltsrcHigh: 枚举列表或默认值无效"
+      },
+      {
+        "name": "BswM",
+        "result": "rejected",
+        "reason": "BswMCanSMChannelRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Cal",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 27,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "Can",
+        "result": "rejected",
+        "reason": "CanWakeupSourceRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "CanIf",
+        "result": "rejected",
+        "reason": "CanIfCtrlCanCtrlRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "CanNm",
+        "result": "rejected",
+        "reason": "CanNmComMNetworkHandleRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "CanSM",
+        "result": "rejected",
+        "reason": "CanSMControllerId: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "CanTSyn",
+        "result": "rejected",
+        "reason": "CanTSynSynchronizedTimeBaseRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "CanTp",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "CanTpRxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpTxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpRxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpTxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpTxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CanTrcv",
+        "result": "rejected",
+        "reason": "CanTrcvSpiSequenceName: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Cdd",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 3,
+        "warnings": [
+          "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddComMLowerLayerChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CddGenericNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddComMLowerLayerChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CddGenericNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CddEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Com",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "ComGwDestination：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "ComGwSignalRef：多候选引用，可在 3 个候选目标中选一个。",
+          "ComGwSource：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "ComGwSignalRef：多候选引用，可在 3 个候选目标中选一个。",
+          "ComIPduReplicaRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComIPduReplicaRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "ComIPduGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComIPduSignalGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComIPduSignalRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComPduIdRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "ComIPduGroupGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComSystemTemplateSystemSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "ComSystemTemplateSystemSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "ComSystemTemplateSignalGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "ComUserCbkHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "ComM",
+        "result": "rejected",
+        "reason": "ComMPncComSignalRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "CorTst",
+        "result": "rejected",
+        "reason": "CORTST_E_CORE_FAILURE: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Crc",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 1,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "Csm",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 33,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "Dbg",
+        "result": "rejected",
+        "reason": "DbgComSignalRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Dcm",
+        "result": "rejected",
+        "reason": "DcmDslProtocolComMChannelRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Dem",
+        "result": "rejected",
+        "reason": "DemDTCSeverity: 枚举列表或默认值无效"
+      },
+      {
+        "name": "Det",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 3,
+        "warnings": [
+          "DetErrorHook：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Dio",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "Dlt",
+        "result": "rejected",
+        "reason": "DltGptChannel: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "DoIP",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "DoIPPduRRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPPduRTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPTargetAddressRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DoIPRoutingActivationRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DoIPHeaderFileInclusion：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Ea",
+        "result": "rejected",
+        "reason": "EaDeviceIndex: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "EcuC",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 6,
+        "warnings": [
+          "SysTPduToFrameTriggeringRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "SysTPduToPduTriggeringRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucCoreHwRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucPartitionBswModuleDistinguishedPartition：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucPartitionBswModuleDistinguishedPartition：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucPartitionSoftwareComponentInstanceRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucPartitionSoftwareComponentInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "EcucPostBuildVariantRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucPostBuildVariantRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucUnitGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucUnitGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "PredefinedVariantRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PredefinedVariantRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EcuM",
+        "result": "rejected",
+        "reason": "EcuMDefaultResetModeRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Eep",
+        "result": "rejected",
+        "reason": "EEP_E_COMPARE_FAILED: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Eth",
+        "result": "rejected",
+        "reason": "ETH_E_ACCESS: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "EthIf",
+        "result": "rejected",
+        "reason": "EthIfEthCtrlRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "EthSM",
+        "result": "rejected",
+        "reason": "ETHSM_E_LINK_DOWN: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "EthSwt",
+        "result": "rejected",
+        "reason": "ETHSWT_E_ACCESS: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "EthTSyn",
+        "result": "rejected",
+        "reason": "EthTSynSynchronizedTimeBaseRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "EthTrcv",
+        "result": "rejected",
+        "reason": "ETHTRCV_E_ACCESS: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Fee",
+        "result": "rejected",
+        "reason": "FeeDeviceIndex: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "FiM",
+        "result": "rejected",
+        "reason": "FiMInhEventRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Fls",
+        "result": "rejected",
+        "reason": "FLS_E_COMPARE_FAILED: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "FlsTst",
+        "result": "rejected",
+        "reason": "FLSTST_E_FLSTST_FAILURE: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Fr",
+        "result": "rejected",
+        "reason": "FR_E_CTRL_TESTRESULT: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "FrArTp",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "FrArTpRxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrArTpTxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrArTpPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrIf",
+        "result": "rejected",
+        "reason": "FRIF_E_ACS_CH_A: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "FrNm",
+        "result": "rejected",
+        "reason": "FrNmChannelHandle: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "FrSM",
+        "result": "rejected",
+        "reason": "FRSM_E_CLUSTER_STARTUP: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "FrTSyn",
+        "result": "rejected",
+        "reason": "FrTSynSynchronizedTimeBaseRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "FrTp",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "FrTpRxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTpTxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTpRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTpTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrTrcv",
+        "result": "rejected",
+        "reason": "FRTRCV_E_FR_BUSERROR_TRCV: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Gpt",
+        "result": "rejected",
+        "reason": "GptWakeupSourceRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Icu",
+        "result": "rejected",
+        "reason": "IcuChannelWakeupInfo: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "IpduM",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 3,
+        "warnings": [
+          "IpduMContainedRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMContainedTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMContainerRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMContainerTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMOutgoingDynamicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMOutgoingStaticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMRxIndicationPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMTxDynamicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMTxStaticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMOutgoingPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "J1939Dcm",
+        "result": "rejected",
+        "reason": "J1939DcmComMChannelRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "J1939Nm",
+        "result": "rejected",
+        "reason": "J1939NmComMNetworkHandleRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "J1939Rm",
+        "result": "rejected",
+        "reason": "J1939RmComMNetworkHandleRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "J1939Tp",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "J1939TpRxCmNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxDtNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxDirectNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxCmNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxDtNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxDirectNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "LdCom",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "LdComSystemTemplateSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "LdComPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Lin",
+        "result": "rejected",
+        "reason": "LIN_E_TIMEOUT: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "LinIf",
+        "result": "rejected",
+        "reason": "LinIfTrcvIdRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "LinNm",
+        "result": "rejected",
+        "reason": "LinNmComMNetworkHandleRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "LinSM",
+        "result": "rejected",
+        "reason": "LinSMScheduleIndexRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "LinTp",
+        "result": "rejected",
+        "reason": "LinTpChannelRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "LinTrcv",
+        "result": "rejected",
+        "reason": "LinTrcvSpiSequenceName: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Mcu",
+        "result": "rejected",
+        "reason": "MCU_E_CLOCK_FAILURE: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "MemIf",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 1,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "MemMap",
+        "result": "rejected",
+        "reason": "MemMapAddressingModeStart: 不支持的参数类型 ECUC-MULTILINE-STRING-PARAM-DEF"
+      },
+      {
+        "name": "Nm",
+        "result": "rejected",
+        "reason": "NmComMChannelRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "NvM",
+        "result": "rejected",
+        "reason": "NvMNameOfEaBlock: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Ocu",
+        "result": "rejected",
+        "reason": "OcuClockSource: 枚举列表或默认值无效"
+      },
+      {
+        "name": "Os",
+        "result": "rejected",
+        "reason": "OsApplicationCoreRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "PduR",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 3,
+        "warnings": [
+          "PduRBswModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "PduRDestPduRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PduRDestPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "PduRSrcPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Port",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 2,
+        "warnings": [
+          "PortPinMode：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Pwm",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 3,
+        "warnings": [
+          "PwmMcuClockReferencePoint：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "RamTst",
+        "result": "rejected",
+        "reason": "RAMTST_E_RAM_FAILURE: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Rte",
+        "result": "rejected",
+        "reason": "RteVfbTraceClientPrefix: 不支持的参数类型 ECUC-LINKER-SYMBOL-DEF"
+      },
+      {
+        "name": "Sd",
+        "result": "rejected",
+        "reason": "SdConsumedEventGroupMulticastActivationRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "SecOC",
+        "result": "rejected",
+        "reason": "SecOCNvMBlockDescriptor: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "SoAd",
+        "result": "rejected",
+        "reason": "SoAdSocketLocalAddressRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Spi",
+        "result": "rejected",
+        "reason": "SPI_E_HARDWARE_ERROR: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "StbM",
+        "result": "rejected",
+        "reason": "StbMSynchronizedTimeBaseRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "TcpIp",
+        "result": "rejected",
+        "reason": "TCPIP_E_CONNREFUSED: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Tm",
+        "result": "parsed",
+        "definitionRelease": "4.2.2",
+        "topContainers": 1,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "UdpNm",
+        "result": "rejected",
+        "reason": "UdpNmComMNetworkHandleRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Wdg",
+        "result": "rejected",
+        "reason": "WDG_E_DISABLE_REJECTED: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "WdgIf",
+        "result": "rejected",
+        "reason": "WdgIfDriverRef: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "WdgM",
+        "result": "rejected",
+        "reason": "WDGM_E_IMPROPER_CALLER: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      },
+      {
+        "name": "Xcp",
+        "result": "rejected",
+        "reason": "XcpOdtEntryAddress: 不支持的参数类型 ECUC-LINKER-SYMBOL-DEF"
+      },
+      {
+        "name": "Xfrm",
+        "result": "rejected",
+        "reason": "XFRM_E_MALFORMED_MESSAGE: 不支持的引用类型 ECUC-SYMBOLIC-NAME-REFERENCE-DEF"
+      }
+    ]
+  },
+  {
+    "release": "4.4.0",
+    "sourcePath": "D:\\ProFile\\教培业务\\配置器\\AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "sourceSha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf",
+    "total": 98,
+    "parsed": 92,
+    "rows": [
+      {
+        "name": "Adc",
+        "result": "rejected",
+        "reason": "AdcChannelRefVoltsrcHigh: 枚举列表或默认值无效"
+      },
+      {
+        "name": "Arti",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 6,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "ArtiGeneric",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "ArtiParameterTypeMapRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap 位于本模块之外；编辑器只读展示。",
+          "ArtiConstantRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiConstant 位于本模块之外；编辑器只读展示。",
+          "ArtiExpressionRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiExpression 位于本模块之外；编辑器只读展示。",
+          "ArtiGenericComponentClassParameterRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ArtiHookRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiHook 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "ArtiHardware",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "ArtiCurrentApplicationClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+          "ArtiCurrentTaskClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+          "ArtiLastErrorClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+          "ArtiCurrentApplicationInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。",
+          "ArtiCurrentTaskInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。",
+          "ArtiEcucCoreRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition 位于本模块之外；编辑器只读展示。",
+          "ArtiLastErrorInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "ArtiOs",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "ArtiOsAppModeClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+          "ArtiOsAppModeEcucRef：目标 /AUTOSAR/EcucDefs/Os/OsAppMode 位于本模块之外；编辑器只读展示。",
+          "ArtiOsAppModeInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。",
+          "ArtiOsEcucRef：目标 /AUTOSAR/EcucDefs/Os/OsOS 位于本模块之外；编辑器只读展示。",
+          "ArtiOsTaskHookRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ArtiOsTaskHookRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiHook 位于本模块之外；编辑器只读展示。",
+          "ArtiGenericComponentInstanceRef：目标 /AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance 位于本模块之外；编辑器只读展示。",
+          "ArtiOsTaskEcucRef：目标 /AUTOSAR/EcucDefs/Os/OsTask 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "BswM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "BswMEventRequestSource：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "BswMNmChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMWdgMRequestPartitionResetRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "BswMArgumentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMArgumentRef：多候选引用，可在 2 个候选目标中选一个。",
+          "BswMConditionValue：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "BswMCompuMethodRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMModeValueRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMConditionMode：多候选引用，可在 2 个候选目标中选一个。",
+          "BswMCompuMethodRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMModeRequestSource：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "BswMBswModeDeclarationGroupPrototypeRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMCanSMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMCanSMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMComMPncRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc 位于本模块之外；编辑器只读展示。",
+          "BswMDcmComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMEcuMWakeupSrcRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "BswMEthIfSwitchPortGroupRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup 位于本模块之外；编辑器只读展示。",
+          "BswMEthSMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMFrSMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMJ1939DcmChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMJ1939NmChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMJ1939NmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+          "BswMLinSMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMLinScheduleRef：目标 /AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMSchedule 位于本模块之外；编辑器只读展示。",
+          "BswMLinSMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMLinTpChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMNvMBlockRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "BswMSdClientMethodsRef：目标 /AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService 位于本模块之外；编辑器只读展示。",
+          "BswMSdConsumedEventGroupRef：目标 /AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup 位于本模块之外；编辑器只读展示。",
+          "BswMSdEventHandlerRef：目标 /AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler 位于本模块之外；编辑器只读展示。",
+          "BswMSwcModeNotificationModeDeclarationGroupPrototypeRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMSwcModeRequestVariableDataPrototypeRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMDataTypeMappingSetRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMDataTypeMappingSetRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMAvailableActions：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "BswMComMAllowChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMComMLimitChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMComMUserRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser 位于本模块之外；编辑器只读展示。",
+          "BswMTargetCoreRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition 位于本模块之外；编辑器只读展示。",
+          "BswMDisabledDMPduGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMDisabledDMPduGroupRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup 位于本模块之外；编辑器只读展示。",
+          "BswMEnabledDMPduGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMEnabledDMPduGroupRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup 位于本模块之外；编辑器只读展示。",
+          "BswMEcuMDriverInitListBswMRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMDriverInitListBswM 位于本模块之外；编辑器只读展示。",
+          "BswMEcuMUserIdRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig 位于本模块之外；编辑器只读展示。",
+          "BswMEcuMResetModeRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMResetMode 位于本模块之外；编辑器只读展示。",
+          "BswMEcuMSleepModeRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode 位于本模块之外；编辑器只读展示。",
+          "BswMEthIfSwitchPortGroupRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup 位于本模块之外；编辑器只读展示。",
+          "BswMFrSMAllSlotsNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMJ1939DcmChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMJ1939DcmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+          "BswMJ1939RmChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMJ1939RmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+          "BswMLinScheduleRef：目标 /AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMSchedule 位于本模块之外；编辑器只读展示。",
+          "BswMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "BswMDisabledPduGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMDisabledPduGroupRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup 位于本模块之外；编辑器只读展示。",
+          "BswMEnabledPduGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMEnabledPduGroupRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup 位于本模块之外；编辑器只读展示。",
+          "BswMPduRoutingPathGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMPduRoutingPathGroupRef：目标 /AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPathGroup 位于本模块之外；编辑器只读展示。",
+          "BswMRequestedModeRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMSwitchedMode：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMSchMModeDeclarationGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMSchMSwitchedMode：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMSdClientMethodsRef：目标 /AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService 位于本模块之外；编辑器只读展示。",
+          "BswMSdConsumedEventGroupRef：目标 /AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup 位于本模块之外；编辑器只读展示。",
+          "BswMSdServerMethodsRef：目标 /AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService 位于本模块之外；编辑器只读展示。",
+          "BswMSwitchIPduModeRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu 位于本模块之外；编辑器只读展示。",
+          "BswMTriggeredIPduRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "BswMTriggeredIPduRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu 位于本模块之外；编辑器只读展示。",
+          "BswMActionListItemRef：多候选引用，可在 3 个候选目标中选一个。",
+          "BswMRteModeRequestPortInterfaceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "BswMRteModeRequestVariableDataPrototypeSRRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMModeSwitchInterfaceRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "BswMPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "BswMUserIncludeFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Can",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "CanTTControllerEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CanControllerEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CanCpuClockRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。",
+          "CanWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "CanIcomSignalRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComSignal 位于本模块之外；编辑器只读展示。",
+          "CanEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "CanEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CanOsCounterRef：目标 /AUTOSAR/EcucDefs/Os/OsCounter 位于本模块之外；编辑器只读展示。",
+          "CanSupportTTCANRef：目标 /AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CanIf",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 6,
+        "warnings": [
+          "CanIfCtrlCanCtrlRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanController 位于本模块之外；编辑器只读展示。",
+          "CanIfCtrlDrvNameRef：目标 /AUTOSAR/EcucDefs/Can/CanGeneral 位于本模块之外；编辑器只读展示。",
+          "CanIfHrhIdSymRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject 位于本模块之外；编辑器只读展示。",
+          "CanIfHthIdSymRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject 位于本模块之外；编辑器只读展示。",
+          "CanIfTTRxHwObjectTriggerIdRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger 位于本模块之外；编辑器只读展示。",
+          "CanIfRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanIfTTTxHwObjectTriggerIdRef：目标 /AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger 位于本模块之外；编辑器只读展示。",
+          "CanIfTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CANIF_TT_E_JLE_SYNC：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "CanIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "CanIfTrcvCanTrcvRef：目标 /AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CanNm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 1,
+        "warnings": [
+          "CanNmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanNmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanNmTxUserDataPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CanNmPnEraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanNmPnEiraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CanSM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "CanSMControllerId：目标 /AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg 位于本模块之外；编辑器只读展示。",
+          "CANSM_E_BUS_OFF：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "CANSM_E_MODE_REQUEST_TIMEOUT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "CanSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CanSMTransceiverId：目标 /AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CanTSyn",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "CanTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CanTp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "CanTpRxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpTxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpRxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpTxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CanTpTxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CanTrcv",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "CanTrcvAccess：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "CanTrcvDioSymNameRef：目标 /AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel 位于本模块之外；编辑器只读展示。",
+          "CanTrcvSpiSequenceName：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "CanTrcvSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+          "CANTRCV_E_BUS_ERROR：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "CanTrcvChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CanTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。",
+          "CanTrcvPorWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "CanTrcvSyserrWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "CanTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "CanTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "CanTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Cdd",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddComMLowerLayerChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CddGenericNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "CddEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CddSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Com",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "ComGwDestination：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "ComGwSignalRef：多候选引用，可在 2 个候选目标中选一个。",
+          "ComGwSource：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "ComGwSignalRef：多候选引用，可在 2 个候选目标中选一个。",
+          "ComIPduReplicaRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComIPduReplicaRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "ComIPduGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComIPduSignalGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComIPduSignalRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComPduIdRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "ComIPduGroupGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComSystemTemplateSystemSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "ComSystemTemplateSystemSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "ComSystemTemplateSignalGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "ComUserCbkHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "ComM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "ComMPncComSignalRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComSignal 位于本模块之外；编辑器只读展示。",
+          "ComMChannelPerPnc：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComMPncEthIfSwitchPortGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComMPncEthIfSwitchPortGroupRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup 位于本模块之外；编辑器只读展示。",
+          "ComMUserPerPnc：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "ComMUserEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "ComMGlobalNvMBlockDescriptor：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "CorTst",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 5,
+        "warnings": [
+          "CorTstBackgroundEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CORTST_E_CORE_FAILURE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "CorTstForegroundEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CorTstEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "CorTstEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Crc",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 1,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "CryIf",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "CryIfDriverObjectRef：目标 /AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject 位于本模块之外；编辑器只读展示。",
+          "CryIfKeyRef：目标 /AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Crypto",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 6,
+        "warnings": [
+          "CryptoDriverObjectEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "CryptoDriverObjectEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CryptoPrimitiveRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "CryptoEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "CryptoEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "CryptoKeyElementRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Csm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 7,
+        "warnings": [
+          "CsmKeyRef：目标 /AUTOSAR/EcucDefs/CryIf/CryIfKey 位于本模块之外；编辑器只读展示。",
+          "CsmChannelRef：目标 /AUTOSAR/EcucDefs/CryIf/CryIfChannel 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Dcm",
+        "result": "rejected",
+        "reason": "DcmDspOdxDataDescription: 不支持的参数类型 ECUC-ADD-INFO-PARAM-DEF"
+      },
+      {
+        "name": "Dem",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "DemImmediateChildComponentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemMemoryDestinationRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemMemoryDestinationRef：多候选引用，可在 3 个候选目标中选一个。",
+          "DemDebounceAlgorithmClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "DemMultiEventTriggeringSlaveEventRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemDidDataElementClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemEnableConditionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemExtendedDataRecordClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemDataElementClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemDidClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemFreezeFrameRecordClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemSPNClassRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemOBDInputAcceleratorPedalInformation：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDInputAmbientPressure：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDInputAmbientTemperature：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDInputDistanceInformation：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDInputEngineSpeed：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDInputEngineTemperature：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDInputProgrammingEvent：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDInputVehicleSpeed：多候选引用，可在 2 个候选目标中选一个。",
+          "DemOBDTimeSinceEngineStart：多候选引用，可在 3 个候选目标中选一个。",
+          "DemNvRamBlockIdRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "DemFunctionIdRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemFunctionIdRef：目标 /AUTOSAR/EcucDefs/FiM/FiMConfigSet/FiMFID 位于本模块之外；编辑器只读展示。",
+          "DemStorageConditionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DemDataElementClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "DemDiagnosisScaling：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "DemDataElement：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "DemPortInterfaceMapping：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "DemApplicationDataType：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "DemDiagnosticDataElementRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "DemSRDataElementClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "DemDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "DemSubElementInDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "DemSubElementInImplDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Det",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "DetErrorHook：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "DetReportRuntimeErrorCallout：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "DetReportTransientFaultCallout：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Dio",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "DioChannelEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DioChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "DioChannelGroupEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DioChannelGroupEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "DioPortEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DioPortEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "DioEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DioEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Dlt",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "DltTxPduIdRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DltEcuId：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "DltRxPduIdRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DltGeneralGptChannelRef：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+          "DltGeneralNvRamRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "DltGeneralStbMTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "DoIP",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "DoIPPduRRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPPduRTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdTcpRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdTcpTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdUdpRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdUdpTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPSoAdUdpVehicleAnnouncementTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "DoIPTargetAddressRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "DoIPRoutingActivationRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Ea",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "EaDeviceIndex：目标 /AUTOSAR/EcucDefs/Eep/EepGeneral 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EcuC",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 6,
+        "warnings": [
+          "SysTPduToFrameTriggeringRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "SysTPduToPduTriggeringRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucCoreHwRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucPartitionBswModuleDistinguishedPartition：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucPartitionBswModuleDistinguishedPartition：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucPartitionSoftwareComponentInstanceRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucPartitionSoftwareComponentInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "EcucPostBuildVariantRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucPostBuildVariantRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcucUnitGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcucUnitGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "PredefinedVariantRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PredefinedVariantRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EcuM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcuMSleepModeMcuModeRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf 位于本模块之外；编辑器只读展示。",
+          "EcuMWakeupSourceMask：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcuMComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "EcuMComMPNCRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcuMComMPNCRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc 位于本模块之外；编辑器只读展示。",
+          "EcuMResetReasonRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcuMResetReasonRef：目标 /AUTOSAR/EcucDefs/Mcu/McuPublishedInformation/McuResetReasonConf 位于本模块之外；编辑器只读展示。",
+          "EcuMDefaultAppMode：目标 /AUTOSAR/EcucDefs/Os/OsAppMode 位于本模块之外；编辑器只读展示。",
+          "EcuMOSResource：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcuMOSResource：目标 /AUTOSAR/EcucDefs/Os/OsResource 位于本模块之外；编辑器只读展示。",
+          "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "EcuMFlexEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "EcuMGoDownAllowedUserRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcuMSetClockAllowedUserRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcuMNormalMcuModeRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf 位于本模块之外；编辑器只读展示。",
+          "EcuMPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EcuMPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Eep",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "EepEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "EEP_E_COMPARE_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EEP_E_ERASE_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EEP_E_READ_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EEP_E_WRITE_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EepSpiReference：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EepSpiReference：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Eth",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "EthCtrlConfigEgressFifoPriorityAssignment：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "EthCtrlConfigSchedulerPredecessorRef：多候选引用，可在 3 个候选目标中选一个。",
+          "EthCtrlConfigIngressFifoPriorityAssignment：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "ETH_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_ALIGNMENT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_CRC：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_LATECOLLISION：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_MULTIPLECOLLISION：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_OVERSIZEFRAME：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_RX_FRAMES_LOST：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_SINGLECOLLISION：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETH_E_UNDERSIZEFRAME：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EthCtrlEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "EthEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EthEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EthIf",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "EthIfSwitchRefOrPortGroupRef：多候选引用，可在 2 个候选目标中选一个。",
+          "EthIfPhysCtrlRxIngressFifoRef：目标 /AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlConfigIngress/EthCtrlConfigIngressFifo 位于本模块之外；编辑器只读展示。",
+          "EthIfEthCtrlRef：目标 /AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig 位于本模块之外；编辑器只读展示。",
+          "EthIfWEthCtrlRef：目标 /AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig 位于本模块之外；编辑器只读展示。",
+          "EthIfSwitchRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig 位于本模块之外；编辑器只读展示。",
+          "EthIfPortRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EthIfPortRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort 位于本模块之外；编辑器只读展示。",
+          "EthIfEthTrcvRef：目标 /AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig 位于本模块之外；编辑器只读展示。",
+          "EthIfWEthTrcvRef：目标 /AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig 位于本模块之外；编辑器只读展示。",
+          "EthIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EthSM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "ETHSM_E_LINK_DOWN：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EthSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "EthSMEthIfControllerRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EthSwt",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "ETHSWT_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "ETHSWT_E_SYNCPORT2PHY：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EthSwtConfigurationNvmBlockDescriptorRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "EthSwtTableNvmBlockDescriptorRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "EthSwtPortFifoTrafficClassAssignment：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "EthSwtPortEgressPredecessorRef：多候选引用，可在 3 个候选目标中选一个。",
+          "EthSwtPortRateVlanMembershipRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EthSwtPortPredefinedMacAddresses：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "EthSwtPortTrcvRef：目标 /AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig 位于本模块之外；编辑器只读展示。",
+          "EthSwtSpiSequenceName：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EthSwtSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+          "EthSwtConfigEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "EthSwtManagementEthCtrlRef：目标 /AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig 位于本模块之外；编辑器只读展示。",
+          "EthSwtPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "EthSwtEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EthSwtEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EthTSyn",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "EthTSynEthIfFrameType：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfFrameOwnerConfig 位于本模块之外；编辑器只读展示。",
+          "EthTSynPortRole：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "EthTSynGlobalTimeEthIfRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。",
+          "EthTSynSwitchManagementEthSwitchPortRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort 位于本模块之外；编辑器只读展示。",
+          "EthTSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "EthTrcv",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "ETHTRCV_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "EthTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "EthTrcvMgmtInterface：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "EthTrcvSwitchPortRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort 位于本模块之外；编辑器只读展示。",
+          "EthTrcvSwitchRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig 位于本模块之外；编辑器只读展示。",
+          "EthTrcvConfigEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "EthTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。",
+          "EthTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "EthTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Fee",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "FeeDeviceIndex：目标 /AUTOSAR/EcucDefs/Fls/FlsGeneral 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FiM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FiMInhComponentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "FiMInhComponentRef：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemComponent 位于本模块之外；编辑器只读展示。",
+          "FiMInhEventRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "FiMInhEventRef：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FiMInhSumRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "FiMInputEventRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "FiMInputEventRef：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Fls",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "FlsSpiReference：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "FlsSpiReference：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+          "FlsEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FlsTst",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "FLSTST_E_FLSTST_FAILURE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FlsTstEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Fr",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FrEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "FrEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "FR_E_CTRL_TESTRESULT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FrCtrlEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrArTp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FrArTpRxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrArTpTxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrArTpPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrIf",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FRIF_E_ACS_CH_A：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRIF_E_ACS_CH_B：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRIF_E_NIT_CH_A：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRIF_E_NIT_CH_B：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRIF_E_SW_CH_A：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRIF_E_SW_CH_B：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRIF_E_LPDU_SLOTSTATUS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FrIfFrTrcvChannelRef：目标 /AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel 位于本模块之外；编辑器只读展示。",
+          "FrIfFrCtrlRef：目标 /AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController 位于本模块之外；编辑器只读展示。",
+          "FrIfAbsTimerRef：目标 /AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrAbsoluteTimer 位于本模块之外；编辑器只读展示。",
+          "FrIfPduDirection：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "FrIfRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrIfTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrNm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FrNmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrNmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrNmTxUserDataPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrNmChannelHandle：目标 /AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster 位于本模块之外；编辑器只读展示。",
+          "FrNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "FrNmPnEraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrNmPnEiraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrSM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FRSM_E_CLUSTER_STARTUP：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRSM_E_CLUSTER_SYNC_LOSS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FrSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "FrSMFrIfClusterRef：目标 /AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrTSyn",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FrTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrTp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FrTpRxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTpTxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTpRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "FrTpTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "FrTrcv",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "FrTrcvAccess：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "FrTrcvDioSymNameRef：目标 /AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel 位于本模块之外；编辑器只读展示。",
+          "FrTrcvSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+          "FRTRCV_E_FR_BUSERROR_TRCV：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FRTRCV_E_FR_ERRN_TRCV：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "FrTrcvChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "FrTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。",
+          "FrTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "FrTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "FrTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Gpt",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "GptWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "GptChannelEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "GptChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "GptClockReference：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。",
+          "GptEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "GptEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "GptKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "HTTMS",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "Icu",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "IcuChannelWakeupInfo：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "IcuChannelEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "IcuChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "IcuEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "IcuEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "IcuKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "IpduM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "IpduMContainedRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMContainedTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMContainerRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMContainerTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMOutgoingDynamicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMOutgoingStaticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMRxIndicationPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMTxDynamicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMTxStaticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "IpduMOutgoingPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "J1939Dcm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "J1939DcmComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "J1939DcmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939DcmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939DcmSPNsInDataStream：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "J1939DcmDemClientRef：目标 /AUTOSAR/EcucDefs/Dem/DemGeneral/DemClient 位于本模块之外；编辑器只读展示。",
+          "J1939DcmNmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+          "J1939DcmNodeRmUserRef：目标 /AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmDcmUser 位于本模块之外；编辑器只读展示。",
+          "J1939DcmServiceOnlyDTCsMemoryDestinationRef：目标 /AUTOSAR/EcucDefs/Dem/DemGeneral/DemEventMemorySet/DemUserDefinedMemory 位于本模块之外；编辑器只读展示。",
+          "J1939DcmSwcSRDataElementValue：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "J1939DcmBswModeRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "J1939DcmSwcModeRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "J1939DcmArgumentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "J1939DcmArgumentRef：多候选引用，可在 2 个候选目标中选一个。",
+          "J1939DcmDspExternalSRDataElementClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "J1939DcmDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "J1939DcmSubElementInDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "J1939DcmSubElementInImplDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "J1939Nm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "J1939NM_E_ADDRESS_LOST：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "J1939NmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939NmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939NmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "J1939NmExternalNodeChannelRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "J1939NmExternalNodeGatewayedChannelRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "J1939NmNodeChannelRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "J1939NmSharedChannelRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "J1939Rm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "J1939RmAckmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939RmAckmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939RmRqst2RxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939RmRqst2TxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939RmRqstRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939RmRqstTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939RmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "J1939RmUser：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "J1939RmUserAckPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "J1939RmUserRequestPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "J1939RmUserCddRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "J1939RmComIPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939RmUserRequestPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "J1939RmUserAckPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "J1939RmUserRequestPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "J1939RmNmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+          "J1939RmNodeChannelRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "J1939Tp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "J1939TpRxCmNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxDtNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxDirectNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpRxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxCmNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxDtNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxDirectNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "J1939TpTxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "KeyM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "KeyMCertCertificateElementRuleRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "KeyMCertCsmSignatureVerifyJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "KeyMCertCsmSignatureVerifyKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "KeyMCertTimebaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。",
+          "KeyMCertificateElementConditionSenderReceiver：instance 引用无静态目标（实例引用），编辑器只读展示。",
+          "KeyMArgumentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "KeyMArgumentRef：多候选引用，可在 2 个候选目标中选一个。",
+          "KeyMNvmBlockDescriptorRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "KeyMCryptoKeyCsmKeySourceDeriveRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "KeyMCryptoKeyCsmKeyTargetRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "KeyMCryptoKeyCsmVerifyJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "LdCom",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "LdComPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "LdComSystemTemplateSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Lin",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "LIN_E_TIMEOUT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "LinEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "LinEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "LinChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "LinChannelEcuMWakeupSource：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "LinClockRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "LinIf",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "LinIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "LinIfPduDirection：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "LinIfRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "LinIfTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "LinIfTrcvIdRef：目标 /AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel 位于本模块之外；编辑器只读展示。",
+          "LinIfNodeType：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "LinIfResponseErrorSignal：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComSignal 位于本模块之外；编辑器只读展示。",
+          "LinIfCddRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "LinIfChannelRef：目标 /AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel 位于本模块之外；编辑器只读展示。",
+          "LinIfComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "LinNm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 1,
+        "warnings": [
+          "LinNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "LinSM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "LinSMScheduleIndexRef：目标 /AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable 位于本模块之外；编辑器只读展示。",
+          "LinSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "LinTp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "LinTpChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "LinTpRxNSduChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "LinTpRxNSduPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "LinTpTxNSduChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "LinTpTxNSduPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "LinTrcv",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "LinTrcvAccess：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "LinTrcvDioSymRefName：目标 /AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel 位于本模块之外；编辑器只读展示。",
+          "LinTrcvSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+          "LinTrcvChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "LinTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。",
+          "LinTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+          "LinTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "LinTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Mcu",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "McuEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "McuEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "MCU_E_CLOCK_FAILURE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "MemIf",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 1,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "MemMap",
+        "result": "rejected",
+        "reason": "MemMapAddressingModeStart: 不支持的参数类型 ECUC-MULTILINE-STRING-PARAM-DEF"
+      },
+      {
+        "name": "Mirror",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "MirrorDestNetwork：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "MirrorDestPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "MirrorComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "MirrorDestPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "MirrorComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "MirrorDestPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "MirrorComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "MirrorDestPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "MirrorComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "MirrorSourceNetwork：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "MirrorSourceCanFilter：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "MirrorComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "MirrorComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "MirrorSourceLinFilter：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "MirrorComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "MirrorStbRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Nm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "NmBusType：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "NmComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "NmStateReportSignalRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComSignal 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "NvM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "NvMTargetBlockReference：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "NvMNameOfEaBlock：目标 /AUTOSAR/EcucDefs/Ea/EaBlockConfiguration 位于本模块之外；编辑器只读展示。",
+          "NvMNameOfFeeBlock：目标 /AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration 位于本模块之外；编辑器只读展示。",
+          "NVM_E_HARDWARE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "NVM_E_INTEGRITY_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "NVM_E_LOSS_OF_REDUNDANCY：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "NVM_E_REQ_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "NVM_E_VERIFY_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "NVM_E_WRITE_PROTECTED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "NVM_E_WRONG_BLOCK_ID：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Ocu",
+        "result": "rejected",
+        "reason": "OcuClockSource: 枚举列表或默认值无效"
+      },
+      {
+        "name": "Os",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 13,
+        "warnings": [
+          "OsAlarmAction：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "OsAlarmAppModeRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsAlarmAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsMemoryMappingCodeLocationRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "OsAppAlarmRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsAppCounterRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsAppEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "OsAppIsrRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsApplicationCoreRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition 位于本模块之外；编辑器只读展示。",
+          "OsAppScheduleTableRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsAppTaskRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsGptChannelRef：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+          "OsCounterAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsIocDataTypeRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "OsIsrResourceRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsMemoryMappingCodeLocationRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "OsMemoryMappingCodeLocationRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "OsPeripheralAreaAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsResourceAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsScheduleTableAppModeRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsSchTblAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsSpinlockAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsTaskAppModeRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsMemoryMappingCodeLocationRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "OsTaskAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsTaskEventRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "OsTaskResourceRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "PduR",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "PduRBswModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "PduRDestPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "PduRDestTxBufferRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PduRSrcPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Port",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "PortPinMode：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "PortPinEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PortPinEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "PortEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PortEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Pwm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "PwmChannelEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PwmChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "PwmMcuClockReferencePoint：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。",
+          "PwmEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "PwmEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "PwmKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "RamTst",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "RamTstBlockParamsEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "RamTstEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "RamTstEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "RAMTST_E_RAM_FAILURE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Rte",
+        "result": "rejected",
+        "reason": "RteRipsFillRoutineRef: 不支持的引用类型 ECUC-URI-REFERENCE-DEF"
+      },
+      {
+        "name": "Sd",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "SdConsumedEventGroupMulticastActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdConsumedEventGroupMulticastGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "SdConsumedEventGroupMulticastGroupRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+          "SdConsumedEventGroupTcpActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdConsumedEventGroupUdpActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdClientServiceActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdClientServiceTcpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+          "SdClientServiceUdpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+          "SD_E_MALFORMED_MSG：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "SD_E_OUT_OF_RES：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "SD_E_SUBSCR_NACK_RECV：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "SdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SdTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SdEventActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdMulticastEventSoConRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection 位于本模块之外；编辑器只读展示。",
+          "SdEventActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdEventTriggeringRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdEventActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdEventTriggeringRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdServerServiceActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+          "SdServerServiceTcpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+          "SdServerServiceUdpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "SecOC",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "SecOCVerificationStatusCallout：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "SecOCRxAuthenticLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCRxSecuredPduLayer：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "SecOCRxSecuredLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCRxAuthenticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCRxCryptographicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCRxAuthServiceConfigRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "SecOCTxAuthenticLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCTxSecuredPduLayer：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "SecOCTxSecuredLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCTxAuthenticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCTxCryptographicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SecOCTxAuthServiceConfigRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "SoAd",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "SoAdBswModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "SoAdTxRoutingGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "SoAdTxSocketConnOrSocketConnBundleRef：多候选引用，可在 2 个候选目标中选一个。",
+          "SoAdTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SoAdSocketProtocol：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "SoAdSocketTCPOptionFilterRef：目标 /AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTcpConfig/TcpIpTcpConfigOptionFilter 位于本模块之外；编辑器只读展示。",
+          "SoAdSocketTcpTlsConnectionRef：目标 /AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTlsConfig/TcpIpTlsConnection 位于本模块之外；编辑器只读展示。",
+          "SoAdSocketLocalAddressRef：目标 /AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpLocalAddr 位于本模块之外；编辑器只读展示。",
+          "SoAdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SoAdRxRoutingGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "SoAdRxSocketConnOrSocketConnBundleRef：多候选引用，可在 2 个候选目标中选一个。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "SomeIpTp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "SomeIpTpRxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SomeIpTpRxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SomeIpTpTxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "SomeIpTpTxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Spi",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "SPI_E_HARDWARE_ERROR：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "SpiDeviceEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "SpiDeviceEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "SpiJobAssignment：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "SpiEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "SpiEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "SpiKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "StbM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "StbMGptTimerRef：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+          "StbMLocalTimeHardware：目标 /AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain 位于本模块之外；编辑器只读展示。",
+          "StbMOSScheduleTableRef：目标 /AUTOSAR/EcucDefs/Os/OsScheduleTable 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "TcpIp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "TcpIpIpVXCtrl：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "TcpIpEthIfCtrlRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。",
+          "TcpIpDhcpSwitchPortRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort 位于本模块之外；编辑器只读展示。",
+          "TcpIpDhcpEthIfSwitchRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitch 位于本模块之外；编辑器只读展示。",
+          "TcpIpIpV6ConfigExtHeaderFilterEntry：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "TcpIpNvmBlockDescriptorRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "TcpIpTcpConfigOptionFilterEntry：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+          "TcpIpTlsCipherKeyMLocalCertificate：目标 /AUTOSAR/EcucDefs/KeyM/KeyMCertificate 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherKeyMRemoteCertificate：目标 /AUTOSAR/EcucDefs/KeyM/KeyMCertificate 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmDecryptJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmDecryptKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmEncryptJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmEncryptKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmMacGenerateJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmMacGenerateKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmMacVerifyJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCipherCsmMacVerifyKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsConnectionHandshakeRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "TcpIpTlsCsmHashVerifyJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeCalcPubValJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeCalcSecretJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeDecryptJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeDecryptKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeEncryptJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeEncryptKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeSignatureGenerateJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeSignatureGenerateKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeSignatureVerifyJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmKeyExchangeSignatureVerifyKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmMasterSecretKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmPrfMacJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCsmPrfMacKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsPresharedKeyCsmKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+          "TcpIpTlsCertificateIdentityRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "TcpIpTlsConnectionCiphersuiteWorkerRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "TcpIpTlsConnectionGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "TcpIpTlsConnectionPskIdentityRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "TcpIpTlsCsmRandomGenerateJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Tm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 1,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "UdpNm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 1,
+        "warnings": [
+          "UdpNmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "UdpNmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "UdpNmTxUserDataPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "UdpNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+          "UdpNmPnEraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+          "UdpNmPnEiraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "V2xBtp",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "V2xFac",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 1,
+        "warnings": [],
+        "exportBlockers": []
+      },
+      {
+        "name": "V2xGn",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 3,
+        "warnings": [
+          "V2xGnEthIfRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "V2xM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "V2xMSecurityNvMBlockDescriptorLongTermCertificates：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "V2xMSecurityNvMBlockDescriptorPseudonymCertificates：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "V2xMSignatureGenerationConfigRef：目标 /AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig 位于本模块之外；编辑器只读展示。",
+          "V2xMSignatureVerifyConfigRef：目标 /AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig 位于本模块之外；编辑器只读展示。",
+          "V2xMEthIfCtrlRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。",
+          "V2xMGptChannelConfigurationRef：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+          "V2xMNvMBlockDescriptor：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+          "V2xMStbMSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "WEth",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "WETH_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "WEthCtrlEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "WEthEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "WEthEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "WEthTrcv",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "WETHTRCV_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "WEthTrcvConfigEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "WEthTrcvCtrlRef：目标 /AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig 位于本模块之外；编辑器只读展示。",
+          "WEthTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "WEthTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Wdg",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 4,
+        "warnings": [
+          "WDG_E_DISABLE_REJECTED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "WDG_E_MODE_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "WdgEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "WdgExternalContainerRef：目标 /AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "WdgIf",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "WdgIfDriverRef：目标 /AUTOSAR/EcucDefs/Wdg/WdgGeneral 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "WdgM",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "WDGM_E_SET_MODE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "WDGM_E_SUPERVISION：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "WdgMExternalCheckpointFinalRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "WdgMExternalCheckpointInitialRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "WdgMEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+          "WdgMInternalCheckpointInitialRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "WdgMInternallCheckpointFinalRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+          "WdgMOSCounter：目标 /AUTOSAR/EcucDefs/Os/OsCounter 位于本模块之外；编辑器只读展示。",
+          "WdgMWatchdogDeviceRef：目标 /AUTOSAR/EcucDefs/WdgIf/WdgIfDevice 位于本模块之外；编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      },
+      {
+        "name": "Xcp",
+        "result": "rejected",
+        "reason": "XcpOdtEntryAddress: 不支持的参数类型 ECUC-LINKER-SYMBOL-DEF"
+      },
+      {
+        "name": "Xfrm",
+        "result": "parsed",
+        "definitionRelease": "4.4.0",
+        "topContainers": 2,
+        "warnings": [
+          "XFRM_E_MALFORMED_MESSAGE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+          "XfrmSignalChoice：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+          "XfrmISignalGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "XfrmISignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "XfrmInvTransformerBswModuleEntryRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "XfrmTransformationTechnologyRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "XfrmTransformerBswModuleEntryRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+          "XfrmVariableDataPrototypeInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。"
+        ],
+        "exportBlockers": []
+      }
+    ]
+  }
+]

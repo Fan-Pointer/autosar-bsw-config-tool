@@ -1,4 +1,55 @@
-# AUTOSAR BSW Config Tool
+# 航海科技 · OneSAR Configurator
+
+## 当前使用入口（TASK-019）
+
+安装 Node.js 18+ 后执行 `npm install`、`npm run dev`，打开 `http://localhost:3000/`。
+首页采用蓝白产品目录，提供新建工程、本机工程列表以及知识库/订阅中心的「待更新」页面。
+首页「打开配置器」进入 `/configurator` 起始页，左侧提供新建、导入、打开工程；不自动续开上次工程。
+只有点选具体工程才进入 `/workspace`。工作区工具栏的房子图标返回首页。
+起始页导入目前接受 JSON/ARXML 配置文件，固定新建配置集并归入默认工程，不覆盖上次工程；完整工程包归后续 S5。
+Windows 桌面入口由 `scripts/desktop/Install-DesktopShortcut.ps1` 安装，双击已有的
+「BSW 配置器」快捷方式即可打开当前仓库的最新首页；启动器不会复制旧版本，也不修改系统执行策略。
+
+新建工程分两步：填写名称、AUTOSAR 版本、芯片与描述，然后勾选模块。
+本轮内置官方 CP **4.4.0 的 Dem / CanIf / NvM**，无需手工导入 ARXML。
+CP **4.2.2 定义库待接入**，已取得的官方源将在 TASK-021 接入；旧手写 4.2.2 资产仅用于只读恢复。
+S32K1XX、S32K3XX 是工程属性，不表示已实现 MCAL/芯片驱动适配。
+
+工程元信息保存在独立 `autosar-projects` 索引中；配置集沿用原来的 v3 库。
+旧配置集自动显示在「默认工程」，不进行迁移或覆盖。移除工程归属只移除索引关联，配置仍保留。
+数据属于当前浏览器及来源地址，请保持使用 `localhost:3000`；定期导出备份。
+本轮工程模块由创建时选择；模块管理仍管理本机定义和全局开关，新增手工定义在默认工程使用。
+按工程增减模块、工程整体导出与跨模块边界收口属于后续 S5；不宣称供应商 BSW 集成已验证。
+
+右键实例仅显示「新建实例、克隆实例、删除实例」。悬停新建即展开子容器名称，移出两级菜单
+300ms 后收起；键盘 ArrowRight/ArrowLeft/Esc 仍可使用。参数说明保留在底部说明区。
+
+### 重建内置定义
+
+官方源位于仓库父目录。当前用户提供的 `AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml`
+**内部声明为 CP 4.4.0**（SHA256 `c01fbd95…209bf`），以文件内容为准，执行：
+
+```powershell
+node scripts/gen-bswmd-from-arxml.mjs Dem ../AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml bswmd/dem_bswmd.json
+node scripts/gen-bswmd-from-arxml.mjs CanIf ../AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml bswmd/builtin/4.4.0/canif_bswmd.json
+node scripts/gen-bswmd-from-arxml.mjs NvM ../AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml bswmd/builtin/4.4.0/nvm_bswmd.json
+npm run build
+npm run test:verify
+```
+
+生成物带 `$source`、源 SHA256、内容 SHA256 和相邻 `changelog.json`，对象键稳定排序、数组保留定义顺序。
+三份定义分别构建为独立资源块；CanIf/NvM 在选择时加载，Dem 随配置 store 加载，不计入主 JS 包。
+用户已追加完整双版本模块目录及统一左右选择器要求。当前源清单实测为 84 / 98 个模块，
+现解析器读入 20 / 92 个；详细失败位置见 `evidence/task019/fullcatalog-source-inventory.json`。
+这不是最终支持数量；全量解析补齐与版本隔离待 WorkBuddy 更新后续契约，不把三模块版视为该要求完成。
+
+当前范围和阶段依据 [产品设计](docs/product-design/02-TECH-DESIGN.md) 与
+[任务状态](.codex/STATE.json)。下面保留早期项目说明以供追溯，其中路线表不是当前完成状态；
+变体、Python 插件和供应商集成不作为本轮已实现能力。
+
+---
+
+## 早期项目说明
 
 基于网页的 AUTOSAR Classic 基础软件（BSW）配置工具，对标 Vector DaVinci Configurator / ETAS ISOLAR。
 

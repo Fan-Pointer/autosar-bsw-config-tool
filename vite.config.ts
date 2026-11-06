@@ -16,6 +16,14 @@ export default defineConfig({
     open: true,
   },
   build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('/bswmd/') && id.endsWith('.json?raw'))
+            return 'definition-' + id.split('/').pop()!.split('_')[0];
+        },
+      },
+    },
     target: 'es2020',
     outDir: 'dist',
     sourcemap: true,

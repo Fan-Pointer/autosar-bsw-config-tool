@@ -6,7 +6,11 @@
     class="module-manager"
     @update:model-value="emit('update:modelValue', $event)"
   >
-    <section class="definition-import" aria-label="导入模块定义">
+    <p v-if="store.activeProject" class="library-scope-note">
+      此处管理本机模块定义与全局开关。当前工程使用创建时所选模块；新增定义可在默认工程中配置。
+    </p>
+    <details class="definition-import" aria-label="导入模块定义">
+      <summary>高级：手工导入模块定义 ARXML</summary>
       <label
         >导入模块定义（ARXML）
         <input
@@ -49,7 +53,7 @@
           >导入选中模块</el-button
         >
       </div>
-    </section>
+    </details>
     <div class="module-transfer">
       <section class="module-catalog">
         <header>
@@ -70,13 +74,13 @@
             clearable
           />
           <details open>
-            <summary>已加载 BSWMD</summary>
+            <summary>标准模块 · CP {{ store.activeProject?.autosarVersion ?? '4.4.0' }}</summary>
             <label v-for="item in filteredAvailable" :key="item.shortName" class="catalog-item">
               <input v-model="leftSelected" type="checkbox" :value="item.shortName" />
               {{ item.shortName }}
             </label>
           </details>
-          <p v-if="!available.length" class="empty-catalog">全部已加载模块均已加入</p>
+          <p v-if="!available.length" class="empty-catalog">全部可用模块均已加入</p>
         </div>
       </section>
       <div class="transfer-actions">
@@ -148,9 +152,18 @@ import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useConfigStore, type ModulePreference } from '@/stores/configStore';
 import type { BswmdModule } from '@/core/bswmd/BswmdTypes';
 import { EcucDefinitionSession } from './EcucDefinitionSession';
+import { builtinCatalog, readBuiltinModules } from '@/modules/builtinCatalog';
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{ 'update:modelValue': [value: boolean]; applied: [] }>();
 const store = useConfigStore();
+const catalog = computed(() => [
+  ...store.modules,
+  ...builtinCatalog.filter(
+    (m) =>
+      m.version === (store.activeProject?.autosarVersion ?? '4.4.0') &&
+      !store.modules.some((loaded) => loaded.shortName === m.shortName)
+  ),
+]);
 let definitionSession: EcucDefinitionSession | undefined;
 const fileModules = ref<string[]>([]),
   selectedDefinitions = ref<string[]>([]);
@@ -243,7 +256,16 @@ watch(
   (value) => {
     if (!value) return;
     draft.value = Object.fromEntries(
-      store.modules.map((item) => [item.shortName, { ...store.modulePreferences[item.shortName] }])
+      catalog.value.map((item) => [
+        item.shortName,
+        {
+          ...(store.modulePreferences[item.shortName] ?? {
+            included: false,
+            generation: true,
+            validation: true,
+          }),
+        },
+      ])
     );
     leftSelected.value = [];
     rightSelected.value = [];
@@ -253,10 +275,10 @@ watch(
   { immediate: true }
 );
 const available = computed(() =>
-  store.modules.filter((item) => !draft.value[item.shortName]?.included)
+  catalog.value.filter((item) => !draft.value[item.shortName]?.included)
 );
 const included = computed(() =>
-  store.modules.filter((item) => draft.value[item.shortName]?.included)
+  catalog.value.filter((item) => draft.value[item.shortName]?.included)
 );
 const filteredAvailable = computed(() =>
   available.value.filter((item) =>
@@ -290,6 +312,27 @@ async function confirm(): Promise<void> {
   } catch {
     return;
   }
+  definitionBusy.value = true;
+  try {
+    const missing = included.value.filter(
+      (m) => !store.modules.some((loaded) => loaded.shortName === m.shortName)
+    );
+    if (
+      missing.length &&
+      !(await store.importModuleDefinitions(
+        await readBuiltinModules(
+          missing.map((m) => m.shortName),
+          store.activeProject?.autosarVersion ?? '4.4.0'
+        )
+      ))
+    )
+      return;
+  } catch (error) {
+    definitionError.value = error instanceof Error ? error.message : String(error);
+    return;
+  } finally {
+    definitionBusy.value = false;
+  }
   const previous = store.modulePreferences;
   store.modulePreferences = Object.fromEntries(
     Object.entries(draft.value).map(([name, value]) => [name, { ...value }])
@@ -303,9 +346,19 @@ async function confirm(): Promise<void> {
 }
 </script>
 <style scoped>
+.library-scope-note {
+  margin: 0 20px 12px;
+  padding: 10px 12px;
+  background: var(--color-panel);
+  color: var(--color-muted);
+  font-size: 13px;
+}
 .definition-import {
   padding-bottom: 12px;
   font-size: 13px;
+}
+.definition-import > summary {
+  margin-bottom: 14px;
 }
 .definition-import input[type='file'] {
   margin-left: 12px;

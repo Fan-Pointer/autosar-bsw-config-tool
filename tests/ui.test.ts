@@ -278,6 +278,27 @@ describe('TASK-003 user interactions', () => {
     return { store, wrapper, router };
   }
 
+  it('retains the instance name draft until change, persists it, and follows undo', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('Rename verification');
+    await flushPromises();
+    const original = store.selectedEntry!.container.shortName;
+    const input = wrapper.get<HTMLInputElement>('#instance-name');
+    input.element.value = 'RenamedInstance';
+    await input.trigger('input');
+    await flushPromises();
+    expect(input.element.value).toBe('RenamedInstance');
+    expect(store.selectedEntry!.container.shortName).toBe(original);
+    await input.trigger('blur');
+    await flushPromises();
+    expect(store.selectedEntry!.container.shortName).toBe('RenamedInstance');
+    expect(await store.saveConfig()).toBe(true);
+    expect(JSON.stringify(local.saved.get('autosar-config-sets-v3'))).toContain('RenamedInstance');
+    await wrapper.get('[aria-label="撤销"]').trigger('click');
+    await flushPromises();
+    expect(input.element.value).toBe(original);
+  });
+
   it('shows a real create action in the empty workspace and opens a named set with the DTC guide', async () => {
     const { store, wrapper } = await workspace();
     expect(store.config).toBeNull();
@@ -448,7 +469,8 @@ describe('TASK-003 user interactions', () => {
     expect(
       menu.findAll('[data-definition-id]').map((item) => item.attributes('data-definition-id'))
     ).toEqual(module.containers[0].subContainers.map((item) => item.uuid));
-    expect(menu.text()).not.toContain('克隆实例'); // parent panel is removed, not stacked
+    expect(menu.get('.parent-actions').text()).toContain('克隆实例');
+    expect(menu.findAll('.child-menu')).toHaveLength(1); // one adjacent submenu, never duplicates
     await menu.get('[data-definition-id="fixture-dem-dtc-def"]').trigger('click');
     await flushPromises();
     const added = store.selectedEntry!.container.uuid;
@@ -467,6 +489,48 @@ describe('TASK-003 user interactions', () => {
       dtc.uuid,
       added,
     ]);
+  });
+
+  it('opens children on hover, bridges fast pointer movement and collapses after leaving both regions', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('悬停菜单');
+    await nextTick();
+    await wrapper
+      .get(`[data-container-id="${store.config!.containers[0].uuid}"]`)
+      .trigger('contextmenu');
+    await flushPromises();
+    const menu = wrapper.findComponent(ContainerContextMenu);
+    const parent = menu.get('[aria-haspopup="menu"]');
+    local.setItem.mockClear();
+    await parent.trigger('pointerenter');
+    await flushPromises();
+    expect(menu.findAll('.child-menu')).toHaveLength(1);
+    expect(parent.attributes('aria-expanded')).toBe('true');
+    vi.useFakeTimers();
+    try {
+      await parent.trigger('pointerleave');
+      await vi.advanceTimersByTimeAsync(200);
+      await menu.get('.child-menu').trigger('pointerenter');
+      await vi.advanceTimersByTimeAsync(400);
+      expect(menu.findAll('.child-menu')).toHaveLength(1);
+      await menu.get('.child-menu').trigger('pointerleave');
+      await vi.advanceTimersByTimeAsync(299);
+      expect(menu.find('.child-menu').exists()).toBe(true);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(menu.find('.child-menu').exists()).toBe(false);
+      expect(local.setItem).not.toHaveBeenCalled();
+    } finally {
+      vi.useRealTimers();
+    }
+    await parent.trigger('pointerenter');
+    await flushPromises();
+    await menu.trigger('keydown', { key: 'ArrowRight' });
+    await flushPromises();
+    expect(document.activeElement?.closest('.child-menu')).not.toBeNull();
+    await menu.trigger('keydown', { key: 'ArrowLeft' });
+    await flushPromises();
+    expect(menu.find('.child-menu').exists()).toBe(false);
+    expect(document.activeElement).toBe(parent.element);
   });
 
   it('never borrows the previous instance for a definition context menu', async () => {

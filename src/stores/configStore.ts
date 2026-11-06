@@ -39,6 +39,8 @@ import type {
   ImportSession,
 } from '@/core/io/IoTypes';
 import { generateUUID } from '@/utils/uuid';
+import { readBuiltinModules } from '@/modules/builtinCatalog';
+import { parseProjects, type ProjectMetadata, type ProjectInput } from './projectMetadata';
 import { HistoryStack } from '@/core/history/HistoryStack';
 import { configurationDelta } from '@/core/history/ConfigDelta';
 import { commonParameters, batchSkipReason } from '@/core/config/BatchEdit';
@@ -72,6 +74,7 @@ const STORAGE_KEY = 'autosar-config-v2';
 const LIBRARY_KEY = 'autosar-config-sets-v3';
 const RECOVERY_KEY = 'autosar-recovery-state';
 const DRAFT_KEY = 'autosar-config-sets-v4-draft';
+const PROJECTS_KEY = 'autosar-projects';
 /** Original records are kept even when their structure cannot be interpreted. */
 export interface QuarantinedRecord {
   kind: 'configuration' | 'module' | 'preference' | 'library' | 'draft';
@@ -208,6 +211,30 @@ export const useConfigStore = defineStore('config', () => {
   let manager = new ConfigInstanceManager(modules.value);
   const configSets = ref<ConfigInstance[]>([]);
   const activeUuid = ref<string>();
+  const projects = ref<ProjectMetadata[]>([]);
+  const projectError = ref<string | null>(null);
+  const projectBusy = ref(false);
+  let projectsRaw: unknown = null;
+  let projectsInspected = false;
+  let projectsLocked = false;
+  const activeProject = computed(() =>
+    projects.value.find((p) => p.setUuids.includes(activeUuid.value ?? ''))
+  );
+  const unassignedSets = computed(() =>
+    configSets.value.filter((set) => !projects.value.some((p) => p.setUuids.includes(set.uuid)))
+  );
+  const projectWarnings = computed(() =>
+    projects.value.flatMap((p) => {
+      const missing = p.setUuids.filter(
+        (uuid) => !configSets.value.some((set) => set.uuid === uuid)
+      );
+      return missing.length
+        ? [
+            `${p.name}：${missing.length} 个配置集暂不可用，请先检查恢复面板，或移除工程归属后重新整理。`,
+          ]
+        : [];
+    })
+  );
   const config = computed(
     () => configSets.value.find((set) => set.uuid === activeUuid.value) ?? null
   );
@@ -646,7 +673,10 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether initialization succeeded (including an empty library).
    */
   async function initialize(): Promise<boolean> {
-    if (initialized.value) return true;
+    if (initialized.value) {
+      await loadProjects();
+      return true;
+    }
     if (!initializing)
       initializing = loadConfig()
         .then(() => !error.value)
@@ -654,6 +684,162 @@ export const useConfigStore = defineStore('config', () => {
           initializing = undefined;
         });
     return initializing;
+  }
+
+  async function loadProjects(): Promise<void> {
+    if (projectsInspected) return;
+    try {
+      projectsRaw = (await storage.getItem<unknown>(PROJECTS_KEY)) ?? null;
+      projects.value = cloneData(parseProjects(projectsRaw));
+      projectsInspected = true;
+    } catch (reason) {
+      projectsLocked = true;
+      projectError.value = `工程索引读取失败：${reason instanceof Error ? reason.message : String(reason)}`;
+    }
+  }
+
+  async function writeProjectIndex(raw: unknown): Promise<void> {
+    assertWritable();
+    if (projectsLocked || !projectsInspected) throw new Error('工程索引受保护，请重新打开后重试');
+    if (
+      JSON.stringify((await storage.getItem(PROJECTS_KEY)) ?? null) !== JSON.stringify(projectsRaw)
+    )
+      throw new Error('工程索引已在其他页面改变，请重新打开后重试');
+    await storage.setItem(PROJECTS_KEY, cloneData(raw));
+    projectsRaw = cloneData(raw);
+  }
+
+  /** Create all selected configurations and their project association as a single UI action.
+   * @param input Validated wizard values; chip is metadata only. @returns Whether creation completed.
+   */
+  async function createProject(input: ProjectInput): Promise<boolean> {
+    if (projectBusy.value) return false;
+    if (!(await initialize())) return false;
+    assertEditable();
+    assertWritable();
+    if (!input.name.trim()) throw new Error('请输入工程名称');
+    if (input.autosarVersion !== '4.4.0') throw new Error('该版本定义库待接入');
+    if (!['S32K1XX', 'S32K3XX'].includes(input.chip.family)) throw new Error('请选择芯片型号');
+    const names = [...new Set(input.moduleShortNames)];
+    if (!names.length) throw new Error('请至少选择一个模块');
+    if (isDirty.value && !(await saveConfig())) return false;
+    projectBusy.value = true;
+    projectError.value = null;
+    const previous = {
+      sets: [...configSets.value],
+      modules: [...modules.value],
+      imports: [...importedModules.value],
+      preferences: { ...modulePreferences.value },
+      active: activeUuid.value,
+      selected: selectedContainerUuid.value,
+      projects: [...projects.value],
+      raw: cloneData(projectsRaw),
+    };
+    let indexWritten = false;
+    try {
+      const additions = await readBuiltinModules(
+        names.filter(
+          (name) =>
+            !modules.value.some((m) => m.shortName === name && m.version === input.autosarVersion)
+        ),
+        input.autosarVersion
+      );
+      if (additions.some((m) => modules.value.some((old) => old.shortName === m.shortName)))
+        throw new Error('同名模块版本冲突，请等待双版本定义库接入');
+      const all = [...modules.value, ...additions];
+      const nextManager = new ConfigInstanceManager(all);
+      const sets = names.map((name) => {
+        const definition = all.find(
+          (m) => m.shortName === name && m.version === input.autosarVersion
+        )!;
+        const set = nextManager.createFromBswmd(definition);
+        set.name = `${input.name.trim()} · ${name}`;
+        return set;
+      });
+      const project: ProjectMetadata = {
+        projectUuid: generateUUID(),
+        name: input.name.trim(),
+        autosarVersion: input.autosarVersion,
+        chip: { family: input.chip.family, note: input.chip.note?.trim() },
+        moduleShortNames: names,
+        setUuids: sets.map((s) => s.uuid),
+        createdAt: new Date().toISOString(),
+      };
+      const nextProjects = [...projects.value, project];
+      // Persist the complete association first. An interrupted second write is an explicit orphan,
+      // never a hidden configuration loss; ordinary failures compensate the sidecar below.
+      await writeProjectIndex({ schemaVersion: 1, projects: nextProjects });
+      indexWritten = true;
+      modules.value = all;
+      importedModules.value.push(...additions);
+      manager = nextManager;
+      for (const name of names)
+        modulePreferences.value[name] = { included: true, generation: true, validation: true };
+      configSets.value.push(...sets);
+      activeUuid.value = sets[0].uuid;
+      selectContainer(sets[0].containers[0]?.uuid ?? '');
+      changed();
+      if (!(await saveConfig())) throw new Error(error.value ?? '配置保存失败');
+      projects.value = nextProjects;
+      return true;
+    } catch (reason) {
+      configSets.value = previous.sets;
+      modules.value = previous.modules;
+      importedModules.value = previous.imports;
+      modulePreferences.value = previous.preferences;
+      activeUuid.value = previous.active;
+      manager = new ConfigInstanceManager(modules.value);
+      selectContainer(previous.selected ?? '');
+      isDirty.value = false;
+      projectError.value = reason instanceof Error ? reason.message : String(reason);
+      if (indexWritten) {
+        try {
+          await writeProjectIndex(previous.raw);
+        } catch {
+          projectError.value += '；工程归属回滚未完成，请重新打开检查索引，配置数据未删除。';
+        }
+      }
+      projects.value = previous.projects;
+      validate();
+      return false;
+    } finally {
+      projectBusy.value = false;
+    }
+  }
+
+  /** Activate a surviving set without rewriting project metadata.
+   * @param uuid Project UUID or "default" for unassigned configurations. @returns Success.
+   */
+  async function openProject(uuid: string): Promise<boolean> {
+    const sets =
+      uuid === 'default'
+        ? unassignedSets.value
+        : configSets.value.filter((set) =>
+            projects.value.find((p) => p.projectUuid === uuid)?.setUuids.includes(set.uuid)
+          );
+    if (!sets.length) {
+      projectError.value = '工程没有可打开的配置集，请检查恢复面板。';
+      return false;
+    }
+    return switchConfigSet(sets.find((set) => set.uuid === activeUuid.value)?.uuid ?? sets[0].uuid);
+  }
+
+  /** Remove only project grouping. All configuration records remain in the default project.
+   * @param uuid Confirmed project UUID. @returns Success.
+   */
+  async function removeProject(uuid: string): Promise<boolean> {
+    await loadProjects();
+    assertWritable();
+    if (projectBusy.value) return false;
+    const next = projects.value.filter((p) => p.projectUuid !== uuid);
+    try {
+      await writeProjectIndex({ schemaVersion: 1, projects: next });
+      projects.value = next;
+      return true;
+    } catch (reason) {
+      projectError.value = reason instanceof Error ? reason.message : String(reason);
+      return false;
+    }
   }
 
   /** Create and activate a named set after safely saving pending edits.
@@ -1108,6 +1294,7 @@ export const useConfigStore = defineStore('config', () => {
       revision++;
       isDirty.value = false;
       initialized.value = true;
+      await loadProjects();
       validate();
       return restored.length > 0;
     } catch (reason) {
@@ -1453,6 +1640,15 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   return {
+    projects,
+    activeProject,
+    unassignedSets,
+    projectWarnings,
+    projectError,
+    projectBusy,
+    createProject,
+    openProject,
+    removeProject,
     getOutputCheck,
     quarantinedSets,
     dataSafety,

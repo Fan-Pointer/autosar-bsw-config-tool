@@ -1,0 +1,1009 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "73e054fc77f108ed64f1d9a2d29168bda21b2fb0c6eedc99cceafeae75f2b0ec",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+      "description": "Container for a management structure to configure the composition of a given NVRAM Block Management Type. Its multiplicity describes the number of configured N…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 65536
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockCrcType",
+          "description": "Defines CRC data width for the NVRAM block. Default: NVM_CRC16, i.e. CRC16 will be used if NVM_BLOCK_USE_CRC==true",
+          "enumValues": [
+            "NVM_CRC16",
+            "NVM_CRC32",
+            "NVM_CRC8"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMBlockCrcType",
+          "type": "ENUM",
+          "uuid": "ECUC:b7447ae4-f639-4432-9efb-cd26e048e87f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockManagementType",
+          "description": "Defines the block management type for the NVRAM block.[NVM137]",
+          "enumValues": [
+            "NVM_BLOCK_DATASET",
+            "NVM_BLOCK_NATIVE",
+            "NVM_BLOCK_REDUNDANT"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockManagementType",
+          "type": "ENUM",
+          "uuid": "ECUC:d1b453dc-59c8-49c2-a231-ea5134267534"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockHeaderInclude",
+          "description": "Defines the header file where the owner of the NVRAM block has the declarations of the permanent RAM data block, ROM data block (if configured) and the callbac…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMBlockHeaderInclude",
+          "type": "STRING",
+          "uuid": "ECUC:9728f9b6-285d-4bc5-83b7-2fe23a9ec4cb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMRamBlockDataAddress",
+          "description": "Defines the start address of the RAM block data.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMRamBlockDataAddress",
+          "type": "STRING",
+          "uuid": "ECUC:dad1e4d8-a71a-4307-938f-cebe91afb72b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMRomBlockDataAddress",
+          "description": "Defines the start address of the ROM block data.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMRomBlockDataAddress",
+          "type": "STRING",
+          "uuid": "ECUC:c211eaf4-e050-4bec-8a1b-3423cd203f7d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockJobPriority",
+          "description": "Defines the job priority for a NVRAM block (0 = Immediate priority).",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockJobPriority",
+          "type": "INTEGER",
+          "uuid": "ECUC:1d526dbf-73e8-4c71-abfb-b1d9a2cfa016"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMMaxNumOfReadRetries",
+          "description": "Defines the maximum number of read retries.",
+          "isOptional": false,
+          "max": 7,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMMaxNumOfReadRetries",
+          "type": "INTEGER",
+          "uuid": "ECUC:1031f94b-1419-4708-9937-a3edac24e9a7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMMaxNumOfWriteRetries",
+          "description": "Defines the maximum number of write retries for a NVRAM block with [ECUC_NvM_00061]. Regardless of configuration a consistency check (and maybe write retries) …",
+          "isOptional": false,
+          "max": 7,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMMaxNumOfWriteRetries",
+          "type": "INTEGER",
+          "uuid": "ECUC:78e2ed49-7ea2-41fd-ac91-2f65c9cd8908"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvBlockBaseNumber",
+          "description": "Configuration parameter to perform the link between the NVM_NVRAM_BLOCK_IDENTIFIER used by the SW-Cs and the FEE_BLOCK_NUMBER expected by the memory abstractio…",
+          "isOptional": false,
+          "max": 65534,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMNvBlockBaseNumber",
+          "type": "INTEGER",
+          "uuid": "ECUC:087b96a3-afec-4a8f-b375-50fdeaa19b1c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvBlockLength",
+          "description": "Defines the NV block data length in bytes.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMNvBlockLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:60ef00b3-517e-49f5-8942-16bc295ac588"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvBlockNum",
+          "description": "Defines the number of multiple NV blocks in a contiguous area according to the given block management type.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMNvBlockNum",
+          "type": "INTEGER",
+          "uuid": "ECUC:77ade3a7-ce59-440d-a7e7-15fd9adefe05"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvramBlockIdentifier",
+          "description": "Identification of a NVRAM block via a unique block identifier.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 2,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMNvramBlockIdentifier",
+          "type": "INTEGER",
+          "uuid": "ECUC:6ad9681e-a4cf-4630-96f8-0843c5a1f5ab"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvramDeviceId",
+          "description": "Defines the NVRAM device ID where the NVRAM block is located.",
+          "isOptional": false,
+          "max": 1,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMNvramDeviceId",
+          "type": "INTEGER",
+          "uuid": "ECUC:90f689ce-cc95-450a-a7d9-8a7044711d54"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMRomBlockNum",
+          "description": "Defines the number of multiple ROM blocks in a contiguous area according to the given block management type.",
+          "isOptional": false,
+          "max": 254,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMRomBlockNum",
+          "type": "INTEGER",
+          "uuid": "ECUC:ddfe3c46-ad54-463e-b8b4-1e15564ae1b8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteVerificationDataSize",
+          "description": "Defines the number of bytes to compare in each step when comparing the content of a RAM Block and a block read back.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMWriteVerificationDataSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:e044b935-bdee-42de-8b16-eda9a7279e49"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseAutoValidation",
+          "description": "Defines whether the RAM Block shall be auto validated during shutdown phase.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockUseAutoValidation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0ff44e7b-65ca-4948-867e-d57ef3ef1902"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseCrc",
+          "description": "Defines CRC usage for the NVRAM block, i.e. memory space for CRC is reserved in RAM and NV memory.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockUseCrc",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8a736e46-360a-438b-9066-a9a52092e5eb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseCRCCompMechanism",
+          "description": "Defines whether the CRC of the RAM Block shall be compared during a write job with the CRC which was calculated during the last successful read or write job.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockUseCRCCompMechanism",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6f8a842b-59e5-4acc-9617-231f69fdc50c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseSetRamBlockStatus",
+          "description": "Defines if NvMSetRamBlockStatusApi shall be used for this block or not.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockUseSetRamBlockStatus",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fa2af381-8213-4500-a6de-9e8722792550"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockUseSyncMechanism",
+          "description": "Defines whether an explicit synchronization mechanism with a RAM mirror and callback routines for transferring data to and from NvM module's RAM mirror is used…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockUseSyncMechanism",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:17667a35-d32a-4544-85dc-32bd1dc2663f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockWriteProt",
+          "description": "Defines an initial write protection of the NV block",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBlockWriteProt",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:583499ba-6121-4c40-88ee-ef45f8ccc250"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBswMBlockStatusInformation",
+          "description": "This parameter specifies whether BswM is informed about the current status of the specified block.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBswMBlockStatusInformation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:eccb246d-a8a5-41a2-a478-f85dc807d31b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMCalcRamBlockCrc",
+          "description": "Defines CRC (re)calculation for the permanent RAM block or NVRAM blocks which are configured to use explicit synchronization mechanism.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMCalcRamBlockCrc",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7a30fc79-9a8f-482f-ad77-0bbdaa443670"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMResistantToChangedSw",
+          "description": "Defines whether a NVRAM block shall be treated resistant to configuration changes or not. If there is no default data available at configuration time then the …",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMResistantToChangedSw",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b94632c6-fe1d-4b6f-9ba2-f39c2a5689f8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSelectBlockForFirstInitAll",
+          "description": "Defines whether a block will be processed or not by NvM_FirstInitAll. A block can be configured to be processed even if it doesn't have permanent RAM and/or ex…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMSelectBlockForFirstInitAll",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9c7e8e06-799b-4367-9a71-88518356a776"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSelectBlockForReadAll",
+          "description": "Defines whether a NVRAM block shall be processed during NvM_ReadAll or not. This configuration parameter has only influence on those NVRAM blocks which are con…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMSelectBlockForReadAll",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:863190d4-9883-4087-87c3-d2d52d03a810"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSelectBlockForWriteAll",
+          "description": "Defines whether a NVRAM block shall be processed during NvM_WriteAll or not. This configuration parameter has only influence on those NVRAM blocks which are co…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMSelectBlockForWriteAll",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:54fd91d0-941a-4b67-9cc6-3d54449cf164"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMStaticBlockIDCheck",
+          "description": "Defines if the Static Block ID check is enabled.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMStaticBlockIDCheck",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1a7d96ce-bcbe-4b69-8322-f18851048bdd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteBlockOnce",
+          "description": "Defines write protection after first write. The NVRAM manager sets the write protection bit either after the NV block was written the first time or if the bloc…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMWriteBlockOnce",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:95a53ff9-d845-4bc8-9b07-cfe70a131869"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteVerification",
+          "description": "Defines if Write Verification is enabled.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMWriteVerification",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:536e74a6-5a54-441f-8a7e-3a59ca814898"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMInitBlockCallback",
+          "description": "Entry address of a block specific callback routine which shall be called if no ROM data is available for initialization of the NVRAM block.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMInitBlockCallback",
+          "type": "FUNCTION",
+          "uuid": "ECUC:22bf4a2c-db27-4831-9f50-dcebf7417aa8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMReadRamBlockFromNvCallback",
+          "description": "Entry address of a block specific callback routine which shall be called in order to let the application copy data from the NvM module's mirror to RAM block.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMReadRamBlockFromNvCallback",
+          "type": "FUNCTION",
+          "uuid": "ECUC:d3023e40-444d-4c8e-a1f0-0456f60dbf22"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMSingleBlockCallback",
+          "description": "Entry address of the block specific callback routine which shall be invoked on termination of each asynchronous single block request [NVM113].",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMSingleBlockCallback",
+          "type": "FUNCTION",
+          "uuid": "ECUC:a93648f0-18dc-4497-8e1f-0241129ae9d4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMWriteRamBlockToNvCallback",
+          "description": "Entry address of a block specific callback routine which shall be called in order to let the application copy data from RAM block to NvM module's mirror.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMWriteRamBlockToNvCallback",
+          "type": "FUNCTION",
+          "uuid": "ECUC:3b6b0539-92f3-4d2f-8d12-cbf3a056b262"
+        }
+      ],
+      "references": [],
+      "shortName": "NvMBlockDescriptor",
+      "subContainers": [
+        {
+          "choice": {
+            "candidateRefs": [
+              "ECUC:90f4fd54-5801-429b-9642-06ef3acc3387",
+              "ECUC:5c319a41-37d1-4b63-8011-c8bf807095f5"
+            ]
+          },
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference",
+          "description": "This parameter is just a container for the parameters for EA and FEE",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "NvMTargetBlockReference",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMEaRef",
+              "description": "EEPROM Abstraction",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMEaRef/NvMNameOfEaBlock",
+                  "description": "reference to EaBlock",
+                  "destinationContainerType": "EaBlockConfiguration",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "NvMNameOfEaBlock",
+                  "uuid": "ECUC:378ccf77-6afa-4fb2-814c-d86e91c3bbc8"
+                }
+              ],
+              "shortName": "NvMEaRef",
+              "subContainers": [],
+              "uuid": "ECUC:90f4fd54-5801-429b-9642-06ef3acc3387"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMFeeRef",
+              "description": "Flash EEPROM Emulation",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMTargetBlockReference/NvMFeeRef/NvMNameOfFeeBlock",
+                  "description": "reference to FeeBlock",
+                  "destinationContainerType": "FeeBlockConfiguration",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "NvMNameOfFeeBlock",
+                  "uuid": "ECUC:48167eeb-a01f-4420-a942-3a98967b1fbb"
+                }
+              ],
+              "shortName": "NvMFeeRef",
+              "subContainers": [],
+              "uuid": "ECUC:5c319a41-37d1-4b63-8011-c8bf807095f5"
+            }
+          ],
+          "uuid": "ECUC:bdbb119b-7ccd-46ea-9a91-2bfa0300418e"
+        }
+      ],
+      "uuid": "ECUC:592eb68c-8ec5-46e2-aa34-9d55999b105e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon",
+      "description": "Container for common configuration options.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMApiConfigClass",
+          "description": "Preprocessor switch to enable some API calls which are related to NVM API configuration classes.",
+          "enumValues": [
+            "NVM_API_CONFIG_CLASS_1",
+            "NVM_API_CONFIG_CLASS_2",
+            "NVM_API_CONFIG_CLASS_3"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMApiConfigClass",
+          "type": "ENUM",
+          "uuid": "ECUC:5b839f42-032f-48fd-9d5f-a80f7eaf4e60"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMBswMMultiBlockJobStatusInformation",
+          "description": "This parameter specifies whether BswM is informed about the current status of the multiblock job.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMBswMMultiBlockJobStatusInformation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:70475090-57ec-4ce9-afdc-d82075f01a78"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d54c9a22-5fb3-489c-9a6d-bbd5d848859c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDrvModeSwitch",
+          "description": "Preprocessor switch to enable switching memory drivers to fast mode during performing NvM_ReadAll and NvM_WriteAll",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMDrvModeSwitch",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e2f92e79-6cf7-433b-89c4-7453b7617a22"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDynamicConfiguration",
+          "description": "Preprocessor switch to enable the dynamic configuration management handling by the NvM_ReadAll request.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMDynamicConfiguration",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:87a82f46-5ed9-45cb-909e-6d826c161f36"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMJobPrioritization",
+          "description": "Preprocessor switch to enable job prioritization handling",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMJobPrioritization",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8105b3ea-e773-4f2e-9f89-22e9e58f874b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMPollingMode",
+          "description": "Preprocessor switch to enable/disable the polling mode in the NVRAM Manager and at the same time disable/enable the callback functions useable by lower layers",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMPollingMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:053fb1f7-d703-4773-a004-87391a430d45"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMSetRamBlockStatusApi",
+          "description": "Preprocessor switch to enable the API NvM_SetRamBlockStatus.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMSetRamBlockStatusApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6e124429-e18f-4b2c-b790-6cad1259de79"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information [NVM285], [NVM286].",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:505b5889-cc12-4684-aef0-cf8c9d71176e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMCompiledConfigId",
+          "description": "Configuration ID regarding the NV memory layout. This configuration ID shall be published as e.g. a SW-C shall have the possibility to write it to NV memory.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMCompiledConfigId",
+          "type": "INTEGER",
+          "uuid": "ECUC:5900b6cf-53e9-49d8-878f-65aed90f88f6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMCrcNumOfBytes",
+          "description": "If CRC is configured for at least one NVRAM block, this parameter defines the maximum number of bytes which shall be processed within one cycle of job processi…",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMCrcNumOfBytes",
+          "type": "INTEGER",
+          "uuid": "ECUC:18ffdb77-2c48-49d0-a34c-55bad1ed237c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMDatasetSelectionBits",
+          "description": "Defines the number of least significant bits which shall be used to address a certain dataset of a NVRAM block within the interface to the memory hardware abst…",
+          "isOptional": false,
+          "max": 8,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMDatasetSelectionBits",
+          "type": "INTEGER",
+          "uuid": "ECUC:c9acf3f3-3f67-48b6-99b6-61a6378e6ed1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMRepeatMirrorOperations",
+          "description": "Defines the number of retries to let the application copy data to or from the NvM module's mirror before postponing the current job.",
+          "isOptional": false,
+          "max": 7,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMRepeatMirrorOperations",
+          "type": "INTEGER",
+          "uuid": "ECUC:51308b85-4893-4a39-a736-7283da5f78ca"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMSizeImmediateJobQueue",
+          "description": "Defines the number of queue entries for the immediate priority job queue. If NVM_JOB_PRIORITIZATION is switched OFF this parameter shall be out of scope.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMSizeImmediateJobQueue",
+          "type": "INTEGER",
+          "uuid": "ECUC:42bd46ac-fa9a-4160-8a9f-d6a3a223b3f2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMSizeStandardJobQueue",
+          "description": "Defines the number of queue entries for the standard job queue.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMSizeStandardJobQueue",
+          "type": "INTEGER",
+          "uuid": "ECUC:b6ee37b4-27bb-4334-8782-37a66ef6a5e5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMMainFunctionPeriod",
+          "description": "The period between successive calls to the main function in seconds.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NvMMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:f5f461c3-4f1c-4a92-b0d4-d967c1d6f08e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvMCommon/NvMMultiBlockCallback",
+          "description": "Entry address of the common callback routine which shall be invoked on termination of each asynchronous multi block request",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NvMMultiBlockCallback",
+          "type": "FUNCTION",
+          "uuid": "ECUC:cd0e20fd-32f3-44cd-b73a-fed99a446e01"
+        }
+      ],
+      "references": [],
+      "shortName": "NvMCommon",
+      "subContainers": [],
+      "uuid": "ECUC:629d2250-f495-4827-9660-195f8642e4fd"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs",
+      "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_HARDWARE",
+          "description": "Reference to the DemEventParameter which shall be issued when the hardware error has occured.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NVM_E_HARDWARE",
+          "uuid": "ECUC:24a2ee3b-2bc5-42a7-af5f-dc76873d64f4"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_INTEGRITY_FAILED",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"API request integrity failed\" has occurred.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NVM_E_INTEGRITY_FAILED",
+          "uuid": "ECUC:7ab1f486-d96b-41ca-bf55-ada6c06abd6d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_LOSS_OF_REDUNDANCY",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"loss of redundancy\" has occurred.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NVM_E_LOSS_OF_REDUNDANCY",
+          "uuid": "ECUC:7ae40494-2a5b-4076-9cf0-055cc7917e05"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_REQ_FAILED",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"API request failed\" has occurred.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NVM_E_REQ_FAILED",
+          "uuid": "ECUC:e67d652c-67ff-419e-aa7f-3b2d7c38b2a5"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_VERIFY_FAILED",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"Write Verification failed\" has occurred.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NVM_E_VERIFY_FAILED",
+          "uuid": "ECUC:2b751628-9fc7-4bfb-b061-3c98d45ae44c"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_WRITE_PROTECTED",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"write attempt to NVRAM block with write protection\" has occurred.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NVM_E_WRITE_PROTECTED",
+          "uuid": "ECUC:83187ce0-6e2e-4905-94d0-8e924685ce3b"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/NvM/NvmDemEventParameterRefs/NVM_E_WRONG_BLOCK_ID",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"Static Block ID check failed\" has occurred.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NVM_E_WRONG_BLOCK_ID",
+          "uuid": "ECUC:76f309e7-892a-455a-87f2-2398607962ba"
+        }
+      ],
+      "shortName": "NvmDemEventParameterRefs",
+      "subContainers": [],
+      "uuid": "ECUC:53c6dcf1-a51c-404e-9986-89750b749edb"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/NvM",
+  "description": "Configuration of the NvM (NvRam Manager) module.",
+  "importWarnings": [
+    "NvMTargetBlockReference：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "NvMNameOfEaBlock：目标 /AUTOSAR/EcucDefs/Ea/EaBlockConfiguration 位于本模块之外；编辑器只读展示。",
+    "NvMNameOfFeeBlock：目标 /AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration 位于本模块之外；编辑器只读展示。",
+    "NVM_E_HARDWARE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "NVM_E_INTEGRITY_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "NVM_E_LOSS_OF_REDUNDANCY：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "NVM_E_REQ_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "NVM_E_VERIFY_FAILED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "NVM_E_WRITE_PROTECTED：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "NVM_E_WRONG_BLOCK_ID：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "NvM",
+  "version": "4.4.0"
+}

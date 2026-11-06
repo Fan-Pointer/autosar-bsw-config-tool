@@ -9,4 +9,4 @@ const server = await createServer({
   server: { host: '127.0.0.1', port, strictPort: true, open: false },
 });
 await server.listen();
-console.log(`BSW Configurator serving ${root} at http://localhost:${port}/workspace`);
+console.log(`OneSAR Configurator serving ${root} at http://localhost:${port}/`);

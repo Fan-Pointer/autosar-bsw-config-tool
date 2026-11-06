@@ -1,0 +1,56 @@
+/** Engineering metadata is stored separately; configuration records keep their existing schema. */
+export interface ProjectMetadata {
+  projectUuid: string;
+  name: string;
+  autosarVersion: string;
+  chip: { family: string; note?: string };
+  moduleShortNames: string[];
+  setUuids: string[];
+  createdAt: string;
+}
+export interface ProjectInput {
+  name: string;
+  autosarVersion: string;
+  chip: { family: string; note?: string };
+  moduleShortNames: string[];
+}
+
+/** Validate the sidecar without normalizing or rewriting the saved value.
+ * @param raw Untrusted saved metadata. @returns Valid project records; throws on malformed metadata.
+ */
+export function parseProjects(raw: unknown): ProjectMetadata[] {
+  if (raw === null || raw === undefined) return [];
+  if (typeof raw !== 'object') throw new Error('工程索引格式无法识别，原数据已保留');
+  const value = raw as Record<string, unknown>;
+  if (value.schemaVersion !== 1 || !Array.isArray(value.projects))
+    throw new Error('工程索引版本或列表无效，原数据已保留');
+  const ids = new Set<string>();
+  const setIds = new Set<string>();
+  for (const item of value.projects) {
+    if (!item || typeof item !== 'object') throw new Error('工程条目无效');
+    const p = item as Record<string, unknown>;
+    if (
+      !['projectUuid', 'name', 'autosarVersion', 'createdAt'].every(
+        (key) => typeof p[key] === 'string' && p[key]
+      )
+    )
+      throw new Error('工程属性缺失');
+    if (
+      !p.chip ||
+      typeof p.chip !== 'object' ||
+      typeof (p.chip as Record<string, unknown>).family !== 'string'
+    )
+      throw new Error('工程芯片属性无效');
+    for (const key of ['moduleShortNames', 'setUuids']) {
+      if (!Array.isArray(p[key]) || !(p[key] as unknown[]).every((id) => typeof id === 'string'))
+        throw new Error('工程模块或配置集关联无效');
+    }
+    if (ids.has(p.projectUuid as string)) throw new Error('工程 UUID 重复');
+    ids.add(p.projectUuid as string);
+    for (const id of p.setUuids as string[]) {
+      if (setIds.has(id)) throw new Error('配置集被重复关联至工程');
+      setIds.add(id);
+    }
+  }
+  return value.projects as ProjectMetadata[];
+}

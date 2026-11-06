@@ -31,3 +31,4 @@ coverage
 # Cache
 .cache
 .temp
+vite.config.ts.timestamp-*.mjs

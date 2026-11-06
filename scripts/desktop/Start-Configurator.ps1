@@ -2,7 +2,7 @@
 
 $ErrorActionPreference = 'Stop'
 $repoPath = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$appUrl = "http://localhost:$Port/workspace"
+$appUrl = "http://localhost:$Port/"
 $logDirectory = Join-Path $repoPath ".temp/desktop-launcher/$Port"
 $mutex = New-Object System.Threading.Mutex($false, "Local\AutosarBswConfiguratorLauncher$Port")
 $locked = $false
