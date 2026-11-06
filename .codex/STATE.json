@@ -33,6 +33,14 @@
   },
   "queue": [
     {
+      "taskId": "TASK-023",
+      "title": "EasySAR 吸收首批：多实例列表视图+列设置(G31)+多值参数增删行(G32)+进制切换(G33)",
+      "stage": "PHASE-23（TASK-022 之后）",
+      "contractPath": ".codex/tasks/TASK-023-CONTRACT.md",
+      "contractHash": "恢复下发时以归档文件重算为准",
+      "note": "需求源=EasySAR调研手册（用户 2026-11-06 指令纳入），对照裁定见 docs/product-design/04-EASYSAR-ABSORPTION.md 与 SCOPE G31-G37。A+B 最低必交可分两轮；TASK-022 交付的资格化状态是其数据前提。TASK-024（G34-G37 收尾）随 023 评审后另拟。禁止提前实施。"
+    },
+    {
       "taskId": "TASK-020",
       "title": "S5 首契约：多模块并存（ADR-11/12）——批量抽取 + 并存全链路 + 按工程导出 manifest + 跨模块边界",
       "stage": "PHASE-19 之后",
