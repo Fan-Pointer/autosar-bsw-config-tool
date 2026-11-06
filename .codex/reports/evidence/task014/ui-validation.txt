@@ -1,0 +1,453 @@
+- banner:
+  - generic: ☷
+  - generic: BSW Configurator
+  - button "撤销" [disabled]: ↶
+  - button "重做" [disabled]: ↷
+  - button "保存到本机":
+  - button "代码验证" [active]:
+  - button "生成 C 代码":
+    - generic: 生成 C 代码
+  - button "配置集管理":
+  - button "模块管理":
+  - button "验证结果":
+  - button "返回配置集列表":
+  - generic "配置有未保存修改": ●
+  - textbox "全局搜索":
+    - /placeholder: 搜索参数、值或实例路径
+  - button "切换主题": 深色
+  - generic: 简体中文⌄
+  - generic: 配
+- main:
+  - complementary:
+    - generic: 🗂工程目录
+    - button "折叠工程目录": ‹
+    - generic: ▱
+    - generic: TASK-014 未确认必填值样例（内存）
+    - generic: ⌃
+    - generic "⚙ 模块管理 ⌃":
+      - generic: ⚙
+      - text: 模块管理 ⌃
+    - generic "▱ BSW Modules ⌃":
+      - generic: ▱
+      - text: BSW Modules ⌃
+    - button "M Dem":
+      - generic: M
+      - text: Dem
+    - generic "▱ RTE ⌄":
+      - generic: ▱
+      - text: RTE ⌄
+    - generic "▱ AUTOSAR文件 ⌄":
+      - generic: ▱
+      - text: AUTOSAR文件 ⌄
+    - generic "▱ 输出文件 ⌄":
+      - generic: ▱
+      - text: 输出文件 ⌄
+    - generic "▱ 输入文件 ⌄":
+      - generic: ▱
+      - text: 输入文件 ⌄
+  - separator "工程目录宽度"
+  - tablist "模块":
+    - tab "M Dem(TASK-014 未确认必填值样例（内存）)" [selected]:
+      - generic: M
+      - text: Dem(TASK-014 未确认必填值样例（内存）)
+    - button "关闭 Dem(TASK-014 未确认必填值样例（内存）)": ×
+  - region "必填建议值":
+    - button "一键确认建议值":
+      - generic: 一键确认建议值
+    - generic: 仅确认当前配置集的必填默认值，可一次撤销
+  - complementary:
+    - tablist "顶级容器":
+      - tab "DemConfigSet" [selected]
+      - tab "DemGeneral"
+    - button "实例操作": ▤
+    - button "上移" [disabled]: ↑
+    - button "下移" [disabled]: ↓
+    - button "新增实例": ＋
+    - textbox "搜索配置树":
+      - /placeholder: 请输入文字搜索
+    - generic: ⌕
+    - tree:
+      - treeitem "有 ERROR ⊞ DemConfigSet" [expanded]:
+        - generic "有 ERROR"
+        - generic: ⊞
+        - generic: DemConfigSet
+        - treeitem "有 ERROR i DemConfigSet" [expanded]:
+          - generic "有 ERROR"
+          - generic: i
+          - generic: DemConfigSet
+          - treeitem "已配置：必填齐全 ⊞ DemComponent" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemComponent
+          - treeitem "已配置：必填齐全 ⊞ DemDTC" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDTC
+          - treeitem "已配置：必填齐全 ⊞ DemDTCAttributes" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDTCAttributes
+          - treeitem "已配置：必填齐全 ⊞ DemDebounceCounterBasedClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDebounceCounterBasedClass
+          - treeitem "已配置：必填齐全 ⊞ DemDebounceTimeBaseClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDebounceTimeBaseClass
+          - treeitem "已配置：必填齐全 ⊞ DemDtrs" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemDtrs
+          - treeitem "有 ERROR ⊞ DemEventParameter" [expanded]:
+            - generic "有 ERROR"
+            - generic: ⊞
+            - generic: DemEventParameter
+            - treeitem "有 ERROR i DemEventParameter" [expanded]:
+              - generic "有 ERROR"
+              - generic: i
+              - generic: DemEventParameter
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackClearEventAllowed" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackClearEventAllowed
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackEventDataChanged" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackEventDataChanged
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackEventUdsStatusChanged" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackEventUdsStatusChanged
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackInitMForE" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackInitMForE
+              - treeitem "已配置：必填齐全 ⊞ DemCallbackMonitorStatusChanged" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemCallbackMonitorStatusChanged
+              - treeitem "已配置：必填齐全 ⊞ DemIndicatorAttribute" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: DemIndicatorAttribute
+              - treeitem "有 ERROR ⊞ DemDebounceAlgorithmClass" [expanded]:
+                - generic "有 ERROR"
+                - generic: ⊞
+                - generic: DemDebounceAlgorithmClass
+                - treeitem "有 ERROR i DemDebounceAlgorithmClass" [expanded]:
+                  - generic "有 ERROR"
+                  - generic: i
+                  - generic: DemDebounceAlgorithmClass
+                  - treeitem "已配置：必填齐全 ⊞ DemDebounceCounterBased" [expanded]:
+                    - generic "已配置：必填齐全"
+                    - generic: ⊞
+                    - generic: DemDebounceCounterBased
+                  - treeitem "已配置：必填齐全 ⊞ DemDebounceMonitorInternal" [expanded]:
+                    - generic "已配置：必填齐全"
+                    - generic: ⊞
+                    - generic: DemDebounceMonitorInternal
+                  - treeitem "已配置：必填齐全 ⊞ DemDebounceTimeBase" [expanded]:
+                    - generic "已配置：必填齐全"
+                    - generic: ⊞
+                    - generic: DemDebounceTimeBase
+          - treeitem "已配置：必填齐全 ⊞ DemMultiEventTriggering" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemMultiEventTriggering
+          - treeitem "已配置：必填齐全 ⊞ DemObdDTC" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemObdDTC
+          - treeitem "已配置：必填齐全 ⊞ DemPidClass" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: DemPidClass
+    - generic "树状态图例":
+      - generic: 已选 1 项
+      - generic: 已配置
+      - generic: 警告
+      - generic: 错误
+      - generic: Ctrl / Cmd 切换选择 · Shift 连选
+  - separator "配置树宽度"
+  - navigation "实例路径":
+    - generic: ▱
+    - generic: Dem
+    - generic: ›
+    - generic: DemConfigSet
+    - generic: ›
+    - generic: DemConfigSet
+  - generic: 实例名称
+  - textbox "实例名称": DemConfigSet
+  - region "参数"
+  - paragraph: 该容器没有可配置的字段
+- text: 验证结果
+- button "关闭验证结果": ×
+- generic: 验证结果
+- button "验证":
+  - text: 验证
+- superscript: "44"
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemEventConfirmationThreshold is required 建议: Set required parameter DemEventConfirmationThreshold (INTEGER) DemConfigSet/DemEventParameter/DemEventConfirmationThreshold"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemEventConfirmationThreshold is required
+  - generic: "建议: Set required parameter DemEventConfirmationThreshold (INTEGER)"
+  - generic: DemConfigSet/DemEventParameter/DemEventConfirmationThreshold
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemEventId is required 建议: Set required parameter DemEventId (INTEGER) DemConfigSet/DemEventParameter/DemEventId"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemEventId is required
+  - generic: "建议: Set required parameter DemEventId (INTEGER)"
+  - generic: DemConfigSet/DemEventParameter/DemEventId
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemEventAvailable is required 建议: Set required parameter DemEventAvailable (BOOLEAN) DemConfigSet/DemEventParameter/DemEventAvailable"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemEventAvailable is required
+  - generic: "建议: Set required parameter DemEventAvailable (BOOLEAN)"
+  - generic: DemConfigSet/DemEventParameter/DemEventAvailable
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemFFPrestorageSupported is required 建议: Set required parameter DemFFPrestorageSupported (BOOLEAN) DemConfigSet/DemEventParameter/DemFFPrestorageSupported"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemFFPrestorageSupported is required
+  - generic: "建议: Set required parameter DemFFPrestorageSupported (BOOLEAN)"
+  - generic: DemConfigSet/DemEventParameter/DemFFPrestorageSupported
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemEventKind is required 建议: Set required parameter DemEventKind (ENUM) DemConfigSet/DemEventParameter/DemEventKind"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemEventKind is required
+  - generic: "建议: Set required parameter DemEventKind (ENUM)"
+  - generic: DemConfigSet/DemEventParameter/DemEventKind
+- 'button "ERROR BSWMD-FIELDS 必填引用未配置：DemOperationCycleRef is required 建议: Set required reference DemOperationCycleRef to an existing DemOperationCycle DemConfigSet/DemEventParameter/DemOperationCycleRef"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填引用未配置：DemOperationCycleRef is required
+  - generic: "建议: Set required reference DemOperationCycleRef to an existing DemOperationCycle"
+  - generic: DemConfigSet/DemEventParameter/DemOperationCycleRef
+- 'button "ERROR BSWMD-FIELDS DemDebounceAlgorithmClass：CHOICE 尚未选择候选 建议: 选择一个候选；切换候选可撤销 DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass/"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: DemDebounceAlgorithmClass：CHOICE 尚未选择候选
+  - generic: "建议: 选择一个候选；切换候选可撤销"
+  - generic: DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass/
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemAgingRequiresNotFailedCycle is required 建议: Set required parameter DemAgingRequiresNotFailedCycle (BOOLEAN) DemGeneral/DemAgingRequiresNotFailedCycle"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemAgingRequiresNotFailedCycle is required
+  - generic: "建议: Set required parameter DemAgingRequiresNotFailedCycle (BOOLEAN)"
+  - generic: DemGeneral/DemAgingRequiresNotFailedCycle
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemAgingRequiresTestedCycle is required 建议: Set required parameter DemAgingRequiresTestedCycle (BOOLEAN) DemGeneral/DemAgingRequiresTestedCycle"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemAgingRequiresTestedCycle is required
+  - generic: "建议: Set required parameter DemAgingRequiresTestedCycle (BOOLEAN)"
+  - generic: DemGeneral/DemAgingRequiresTestedCycle
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemDebounceCounterBasedSupport is required 建议: Set required parameter DemDebounceCounterBasedSupport (BOOLEAN) DemGeneral/DemDebounceCounterBasedSupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemDebounceCounterBasedSupport is required
+  - generic: "建议: Set required parameter DemDebounceCounterBasedSupport (BOOLEAN)"
+  - generic: DemGeneral/DemDebounceCounterBasedSupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemDebounceTimeBasedSupport is required 建议: Set required parameter DemDebounceTimeBasedSupport (BOOLEAN) DemGeneral/DemDebounceTimeBasedSupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemDebounceTimeBasedSupport is required
+  - generic: "建议: Set required parameter DemDebounceTimeBasedSupport (BOOLEAN)"
+  - generic: DemGeneral/DemDebounceTimeBasedSupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemDevErrorDetect is required 建议: Set required parameter DemDevErrorDetect (BOOLEAN) DemGeneral/DemDevErrorDetect"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemDevErrorDetect is required
+  - generic: "建议: Set required parameter DemDevErrorDetect (BOOLEAN)"
+  - generic: DemGeneral/DemDevErrorDetect
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemGeneralInterfaceSupport is required 建议: Set required parameter DemGeneralInterfaceSupport (BOOLEAN) DemGeneral/DemGeneralInterfaceSupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemGeneralInterfaceSupport is required
+  - generic: "建议: Set required parameter DemGeneralInterfaceSupport (BOOLEAN)"
+  - generic: DemGeneral/DemGeneralInterfaceSupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemPTOSupport is required 建议: Set required parameter DemPTOSupport (BOOLEAN) DemGeneral/DemPTOSupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemPTOSupport is required
+  - generic: "建议: Set required parameter DemPTOSupport (BOOLEAN)"
+  - generic: DemGeneral/DemPTOSupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemResetConfirmedBitOnOverflow is required 建议: Set required parameter DemResetConfirmedBitOnOverflow (BOOLEAN) DemGeneral/DemResetConfirmedBitOnOverflow"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemResetConfirmedBitOnOverflow is required
+  - generic: "建议: Set required parameter DemResetConfirmedBitOnOverflow (BOOLEAN)"
+  - generic: DemGeneral/DemResetConfirmedBitOnOverflow
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemStatusBitStorageTestFailed is required 建议: Set required parameter DemStatusBitStorageTestFailed (BOOLEAN) DemGeneral/DemStatusBitStorageTestFailed"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemStatusBitStorageTestFailed is required
+  - generic: "建议: Set required parameter DemStatusBitStorageTestFailed (BOOLEAN)"
+  - generic: DemGeneral/DemStatusBitStorageTestFailed
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemTriggerFiMReports is required 建议: Set required parameter DemTriggerFiMReports (BOOLEAN) DemGeneral/DemTriggerFiMReports"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemTriggerFiMReports is required
+  - generic: "建议: Set required parameter DemTriggerFiMReports (BOOLEAN)"
+  - generic: DemGeneral/DemTriggerFiMReports
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemTriggerMonitorInitBeforeClearOk is required 建议: Set required parameter DemTriggerMonitorInitBeforeClearOk (BOOLEAN) DemGeneral/DemTriggerMonitorInitBeforeClearOk"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemTriggerMonitorInitBeforeClearOk is required
+  - generic: "建议: Set required parameter DemTriggerMonitorInitBeforeClearOk (BOOLEAN)"
+  - generic: DemGeneral/DemTriggerMonitorInitBeforeClearOk
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemVersionInfoApi is required 建议: Set required parameter DemVersionInfoApi (BOOLEAN) DemGeneral/DemVersionInfoApi"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemVersionInfoApi is required
+  - generic: "建议: Set required parameter DemVersionInfoApi (BOOLEAN)"
+  - generic: DemGeneral/DemVersionInfoApi
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemAvailabilitySupport is required 建议: Set required parameter DemAvailabilitySupport (ENUM) DemGeneral/DemAvailabilitySupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemAvailabilitySupport is required
+  - generic: "建议: Set required parameter DemAvailabilitySupport (ENUM)"
+  - generic: DemGeneral/DemAvailabilitySupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemClearDTCBehavior is required 建议: Set required parameter DemClearDTCBehavior (ENUM) DemGeneral/DemClearDTCBehavior"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemClearDTCBehavior is required
+  - generic: "建议: Set required parameter DemClearDTCBehavior (ENUM)"
+  - generic: DemGeneral/DemClearDTCBehavior
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemClearDTCLimitation is required 建议: Set required parameter DemClearDTCLimitation (ENUM) DemGeneral/DemClearDTCLimitation"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemClearDTCLimitation is required
+  - generic: "建议: Set required parameter DemClearDTCLimitation (ENUM)"
+  - generic: DemGeneral/DemClearDTCLimitation
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemDataElementDefaultEndianness is required 建议: Set required parameter DemDataElementDefaultEndianness (ENUM) DemGeneral/DemDataElementDefaultEndianness"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemDataElementDefaultEndianness is required
+  - generic: "建议: Set required parameter DemDataElementDefaultEndianness (ENUM)"
+  - generic: DemGeneral/DemDataElementDefaultEndianness
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemEventCombinationSupport is required 建议: Set required parameter DemEventCombinationSupport (ENUM) DemGeneral/DemEventCombinationSupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemEventCombinationSupport is required
+  - generic: "建议: Set required parameter DemEventCombinationSupport (ENUM)"
+  - generic: DemGeneral/DemEventCombinationSupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemOBDSupport is required 建议: Set required parameter DemOBDSupport (ENUM) DemGeneral/DemOBDSupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemOBDSupport is required
+  - generic: "建议: Set required parameter DemOBDSupport (ENUM)"
+  - generic: DemGeneral/DemOBDSupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemStatusBitHandlingTestFailedSinceLastClear is required 建议: Set required parameter DemStatusBitHandlingTestFailedSinceLastClear (ENUM) DemGeneral/DemStatusBitHandlingTestFailedSinceLastClear"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemStatusBitHandlingTestFailedSinceLastClear is required
+  - generic: "建议: Set required parameter DemStatusBitHandlingTestFailedSinceLastClear (ENUM)"
+  - generic: DemGeneral/DemStatusBitHandlingTestFailedSinceLastClear
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemSuppressionSupport is required 建议: Set required parameter DemSuppressionSupport (ENUM) DemGeneral/DemSuppressionSupport"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemSuppressionSupport is required
+  - generic: "建议: Set required parameter DemSuppressionSupport (ENUM)"
+  - generic: DemGeneral/DemSuppressionSupport
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemMaxNumberPrestoredFF is required 建议: Set required parameter DemMaxNumberPrestoredFF (INTEGER) DemGeneral/DemMaxNumberPrestoredFF"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemMaxNumberPrestoredFF is required
+  - generic: "建议: Set required parameter DemMaxNumberPrestoredFF (INTEGER)"
+  - generic: DemGeneral/DemMaxNumberPrestoredFF
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemTaskTime is required 建议: Set required parameter DemTaskTime (FLOAT) DemGeneral/DemTaskTime"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemTaskTime is required
+  - generic: "建议: Set required parameter DemTaskTime (FLOAT)"
+  - generic: DemGeneral/DemTaskTime
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemClientFunctionality is required 建议: Set required parameter DemClientFunctionality (ENUM) DemGeneral/DemClient/DemClientFunctionality"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemClientFunctionality is required
+  - generic: "建议: Set required parameter DemClientFunctionality (ENUM)"
+  - generic: DemGeneral/DemClient/DemClientFunctionality
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemClientId is required 建议: Set required parameter DemClientId (INTEGER) DemGeneral/DemClient/DemClientId"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemClientId is required
+  - generic: "建议: Set required parameter DemClientId (INTEGER)"
+  - generic: DemGeneral/DemClient/DemClientId
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemClientUsesRte is required 建议: Set required parameter DemClientUsesRte (BOOLEAN) DemGeneral/DemClient/DemClientUsesRte"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemClientUsesRte is required
+  - generic: "建议: Set required parameter DemClientUsesRte (BOOLEAN)"
+  - generic: DemGeneral/DemClient/DemClientUsesRte
+- 'button "ERROR BSWMD-FIELDS 必填引用未配置：DemEventMemorySetRef is required 建议: Set required reference DemEventMemorySetRef to an existing DemEventMemorySet DemGeneral/DemClient/DemEventMemorySetRef"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填引用未配置：DemEventMemorySetRef is required
+  - generic: "建议: Set required reference DemEventMemorySetRef to an existing DemEventMemorySet"
+  - generic: DemGeneral/DemClient/DemEventMemorySetRef
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemDtcStatusAvailabilityMask is required 建议: Set required parameter DemDtcStatusAvailabilityMask (INTEGER) DemGeneral/DemEventMemorySet/DemDtcStatusAvailabilityMask"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemDtcStatusAvailabilityMask is required
+  - generic: "建议: Set required parameter DemDtcStatusAvailabilityMask (INTEGER)"
+  - generic: DemGeneral/DemEventMemorySet/DemDtcStatusAvailabilityMask
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemMaxNumberEventEntryPermanent is required 建议: Set required parameter DemMaxNumberEventEntryPermanent (INTEGER) DemGeneral/DemEventMemorySet/DemMaxNumberEventEntryPermanent"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemMaxNumberEventEntryPermanent is required
+  - generic: "建议: Set required parameter DemMaxNumberEventEntryPermanent (INTEGER)"
+  - generic: DemGeneral/DemEventMemorySet/DemMaxNumberEventEntryPermanent
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemTypeOfDTCSupported is required 建议: Set required parameter DemTypeOfDTCSupported (ENUM) DemGeneral/DemEventMemorySet/DemTypeOfDTCSupported"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemTypeOfDTCSupported is required
+  - generic: "建议: Set required parameter DemTypeOfDTCSupported (ENUM)"
+  - generic: DemGeneral/DemEventMemorySet/DemTypeOfDTCSupported
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemEventDisplacementStrategy is required 建议: Set required parameter DemEventDisplacementStrategy (ENUM) DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemEventDisplacementStrategy"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemEventDisplacementStrategy is required
+  - generic: "建议: Set required parameter DemEventDisplacementStrategy (ENUM)"
+  - generic: DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemEventDisplacementStrategy
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemEventMemoryEntryStorageTrigger is required 建议: Set required parameter DemEventMemoryEntryStorageTrigger (ENUM) DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemEventMemoryEntryStorageTrigger"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemEventMemoryEntryStorageTrigger is required
+  - generic: "建议: Set required parameter DemEventMemoryEntryStorageTrigger (ENUM)"
+  - generic: DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemEventMemoryEntryStorageTrigger
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemOccurrenceCounterProcessing is required 建议: Set required parameter DemOccurrenceCounterProcessing (ENUM) DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemOccurrenceCounterProcessing"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemOccurrenceCounterProcessing is required
+  - generic: "建议: Set required parameter DemOccurrenceCounterProcessing (ENUM)"
+  - generic: DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemOccurrenceCounterProcessing
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemTypeOfFreezeFrameRecordNumeration is required 建议: Set required parameter DemTypeOfFreezeFrameRecordNumeration (ENUM) DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemTypeOfFreezeFrameRecordNumeration"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemTypeOfFreezeFrameRecordNumeration is required
+  - generic: "建议: Set required parameter DemTypeOfFreezeFrameRecordNumeration (ENUM)"
+  - generic: DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemTypeOfFreezeFrameRecordNumeration
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemMaxNumberEventEntryPrimary is required 建议: Set required parameter DemMaxNumberEventEntryPrimary (INTEGER) DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemMaxNumberEventEntryPrimary"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemMaxNumberEventEntryPrimary is required
+  - generic: "建议: Set required parameter DemMaxNumberEventEntryPrimary (INTEGER)"
+  - generic: DemGeneral/DemEventMemorySet/DemPrimaryMemory/DemMaxNumberEventEntryPrimary
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemOperationCycleAutostart is required 建议: Set required parameter DemOperationCycleAutostart (BOOLEAN) DemGeneral/DemOperationCycle/DemOperationCycleAutostart"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemOperationCycleAutostart is required
+  - generic: "建议: Set required parameter DemOperationCycleAutostart (BOOLEAN)"
+  - generic: DemGeneral/DemOperationCycle/DemOperationCycleAutostart
+- 'button "ERROR BSWMD-FIELDS 必填项未配置：DemOperationCycleId is required 建议: Set required parameter DemOperationCycleId (INTEGER) DemGeneral/DemOperationCycle/DemOperationCycleId"':
+  - generic: ERROR
+  - generic: BSWMD-FIELDS
+  - generic: 必填项未配置：DemOperationCycleId is required
+  - generic: "建议: Set required parameter DemOperationCycleId (INTEGER)"
+  - generic: DemGeneral/DemOperationCycle/DemOperationCycleId
+- 'button "ERROR DEM-006 DemEventId must be an integer in [1, 65535] 建议: Use an Event ID between 1 and 65535 DemConfigSet/DemEventParameter/DemEventId"':
+  - generic: ERROR
+  - generic: DEM-006
+  - generic: DemEventId must be an integer in [1, 65535]
+  - generic: "建议: Use an Event ID between 1 and 65535"
+  - generic: DemConfigSet/DemEventParameter/DemEventId

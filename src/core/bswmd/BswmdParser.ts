@@ -80,6 +80,8 @@ export class BswmdParser {
       const ids = new Set<string>();
       return {
         shortName: requiredString(data, 'shortName', 'module'),
+        definitionPath: optionalString(data.definitionPath, 'module.definitionPath'),
+        $source: data.$source === undefined ? undefined : object(data.$source, 'module.$source'),
         version: optionalString(data.version, 'module.version') ?? 'unknown',
         description: optionalString(data.description, 'module.description'),
         containers: this.containers(data.containers, 'module.containers', ids, 0),
@@ -99,6 +101,7 @@ export class BswmdParser {
     return {
       uuid,
       shortName: requiredString(data, 'shortName', label),
+      definitionPath: optionalString(data.definitionPath, `${label}.definitionPath`),
       description: optionalString(data.description, `${label}.description`),
     };
   }
@@ -236,8 +239,26 @@ export class BswmdParser {
 
   private reference(raw: unknown, path: string, ids: Set<string>): BswmdReference {
     const data = object(raw, path);
+    const kinds = ['reference', 'choice', 'foreign', 'instance'] as const;
+    const kind = data.kind === undefined ? undefined : kinds.find((value) => value === data.kind);
+    if (data.kind !== undefined && kind === undefined)
+      throw new Error(`${path}.kind: unsupported reference kind`);
     return {
       ...this.identity(data, path, ids),
+      destinationRef: optionalString(data.destinationRef, `${path}.destinationRef`),
+      destinationRefs:
+        data.destinationRefs === undefined
+          ? undefined
+          : array(data.destinationRefs, `${path}.destinationRefs`).map((value, i) => {
+              const ref = optionalString(value, `${path}.destinationRefs[${i}]`);
+              if (!ref) throw new Error(`${path}.destinationRefs[${i}]: expected a nonempty path`);
+              return ref;
+            }),
+      kind,
+      isExternal:
+        data.isExternal === undefined
+          ? undefined
+          : optionalFlag(data.isExternal, `${path}.isExternal`),
       exportRole: this.exportRole(data.exportRole, ['attributes', 'dtc'] as const, path),
       destinationContainerType: requiredString(data, 'destinationContainerType', path),
       isOptional: optionalFlag(data.isOptional, `${path}.isOptional`),

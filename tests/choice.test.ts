@@ -11,6 +11,7 @@ import { DefinitionConstraints } from '../src/core/constraint/DefinitionConstrai
 import { exportArxml, importArxml, AUTOSAR_NAMESPACE } from '../src/core/io/Arxml';
 import { exportJson, importJson } from '../src/core/io/ConfigJson';
 import { planImport } from '../src/core/io/ImportPlan';
+import { evaluateOutputReadiness } from '../src/core/output/OutputGate';
 
 function nvm() {
   const module = importEcucModuleArxml(
@@ -180,7 +181,7 @@ describe('TASK-009 choice values and round trips', () => {
     }
   );
   it.each([0, 1])(
-    'exports and round-trips actual NvM candidate %s while retaining unset external references',
+    'rejects actual NvM candidate %s with a required external reference while preserving lossless JSON',
     (index) => {
       const { config, manager, group, module } = nvm();
       config.name = 'NvM round trip';
@@ -209,23 +210,27 @@ describe('TASK-009 choice values and round trips', () => {
           .flatMap((e) => e.definition.references)
           .every((r) => !r.destinationRef?.startsWith('/AUTOSAR/EcucDefs/NvM/'))
       ).toBe(true);
-      const xml = exportArxml(config, module);
-      const doc = new DOMParser().parseFromString(xml, 'application/xml');
-      expect(doc.querySelector('parsererror')).toBeNull();
-      expect(doc.documentElement.namespaceURI).toBe(AUTOSAR_NAMESPACE);
-      const ids = [...doc.querySelectorAll('[UUID]')].map((node) => node.getAttribute('UUID'));
-      expect(new Set(ids).size).toBe(ids.length);
-      expect(
-        [...doc.querySelectorAll('DEFINITION-REF')].every((node) =>
-          node.textContent?.startsWith('/AUTOSAR/EcucDefs/NvM')
-        )
-      ).toBe(true);
-      expect(doc.querySelectorAll('DEFINITION-REF[DEST="ECUC-CHOICE-CONTAINER-DEF"]')).toHaveLength(
-        1
+      // TASK-014 v3 A4: the former success silently omitted a mandatory Ea/Fee reference.
+      // Never fabricate a target or relax the official definition to preserve that invalid file.
+      const required = entries
+        .flatMap((entry) => entry.definition.references)
+        .filter((ref) => !ref.isOptional);
+      expect(required).toHaveLength(1);
+      expect(required[0].isExternal).toBe(true);
+      expect(required[0].shortName).toBe(index === 0 ? 'NvMNameOfEaBlock' : 'NvMNameOfFeeBlock');
+      const check = evaluateOutputReadiness(config, module);
+      expect(check.ready).toBe(false);
+      expect(check.issues).toHaveLength(1);
+      expect(check.issues[0].anchor.definitionRef).toBe(required[0].uuid);
+      expect(check.issues[0].reason).toContain('目标跨模块（本期不支持）');
+      expect(() => exportArxml(config, module)).toThrow(required[0].shortName);
+      expect(group.container.subContainers).toHaveLength(1);
+      expect(group.container.subContainers[0].definitionRef).toBe(
+        group.definition.subContainers[index].uuid
       );
-      expect(importArxml(xml, [module])).toEqual(config);
+      expect(importJson(exportJson(config), [module])).toEqual(config);
       console.info(
-        `NvM candidate=${group.definition.subContainers[index].shortName}; defaults=${assignments.length}; manual=${manual}; xml=${xml.length}; containers=${entries.length}; roundTrip=equal`
+        `NvM candidate=${group.definition.subContainers[index].shortName}; defaults=${assignments.length}; manual=${manual}; required external reference rejected; JSON roundTrip=equal`
       );
     }
   );

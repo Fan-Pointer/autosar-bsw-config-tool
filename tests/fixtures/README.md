@@ -5,7 +5,7 @@
 
 合成模型的形状取自过去手写的编辑器测试样本，重新使用 `fixture-*` 定义 ID；它保留 `Dem` 模块名及 DTC / Aging 等少量名称，专门让现有 Dem 插件规则参加 UI 集成测试。该名字不代表其余字段与官方 Dem 语义等价。
 
-`FixtureText` 是用于转义与批量编辑的普通 STRING；`FixtureToggle` 是可选 BOOLEAN。它们没有 J1939 / ImmediateNv 的产品语义，绝不映射为 Severity / AgingAllowed。`tests/helpers/legacy-map.json` 仅保留历史证据，已无测试加载入口；官方元素通过 `definitionIndex.ts` 的真实路径或名称查找。
+`FixtureText` 是用于转义与批量编辑的普通 STRING；`FixtureToggle` 是可选 BOOLEAN。它们没有 J1939 / ImmediateNv 的产品语义，绝不映射为 Severity / AgingAllowed。`tests/helpers/legacy-map.json` 已在 TASK-014 删除，历史证据保留在 Git；官方元素通过 `definitionIndex.ts` 的真实路径或名称查找。旧 `map-legacy-dem-ids.mjs` 是历史调查脚本，不是测试或产品流程，禁止重新生成并使用其语义映射。
 
 少量行为测试以 Vitest 的局部模块 mock 替换 `dem_bswmd.json?raw` **定义输入**。真实解析器、store、IO、历史栈、校验器、组件和保存故障路径均不 mock。测试隔离由 Vitest 文件隔离提供；官方测试文件不注册此替换。
 

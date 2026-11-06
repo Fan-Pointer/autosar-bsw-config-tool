@@ -1,0 +1,1224 @@
+{
+  "total": 277,
+  "passed": 277,
+  "failed": 0,
+  "pending": 0,
+  "files": [
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/arxml-editor.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "explicit configuration flags in editor history and storage confirms an unchanged suggestion, changes export semantics, and undoes/redoes/persists that choice"
+        },
+        {
+          "status": "passed",
+          "name": "explicit configuration flags in editor history and storage records reference selection and clearing flags in one-step undo/redo"
+        },
+        {
+          "status": "passed",
+          "name": "explicit configuration flags in editor history and storage restores pre-flag local storage by inferring only selected targets, without changing UUIDs"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/arxml-fidelity.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A1/A4/A5: all untouched suggestions stay absent, false, described and timestamp-stable"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A1: configured 0, false and empty string are all values, never mistaken for absence"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A3: disabled optional with isConfigured=true remains omitted and retains its state"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A3: disabled optional with isConfigured=false remains omitted and retains its state"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A1: an unconfigured reference with a cached target is not emitted or activated on import"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A1: selected references retain their target and flag, while clearing resets the flag"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A3: a legacy explicitly cleared optional reference retains its flag without a VALUE-REF"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A2: required defaults are rejected together with paths, before changing the source"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A2: required missing parameter cannot bypass export validation"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A2: required disabled parameter cannot bypass export validation"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A2: required suggested parameter cannot bypass export validation"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A2: explicitly confirming a required default permits it without confirming other suggestions"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A4: no DESC falls back to BSWMD for both containers and parameters"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A4: explicit empty/escaped container descriptions override BSWMD and survive another round trip"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A5: repeated round trips retain distinct timestamps including zero, even when the clock advances"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics A4: parameter DESC from an external file survives subsequent export, including empty overrides"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics imports ordinary third-party ARXML without editor SDGs as unconfigured and assigns an initial timestamp only once"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics rejects corrupt timestamp -1 instead of silently replacing it"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics rejects corrupt timestamp NaN instead of silently replacing it"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics rejects corrupt timestamp 1.5 instead of silently replacing it"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics rejects corrupt timestamp 9007199254740992 instead of silently replacing it"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics rejects contradictory editor disabled markers over an actual ECUC value"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics migrates legacy JSON reference flags and descriptions, then preserves explicit false flags"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-008 explicit ECUC configuration semantics clears the configured flag when a cloned subtree loses an external target"
+        },
+        {
+          "status": "passed",
+          "name": "official module regressions Dem 4.4.0: one configured DTC field still rejects the other mandatory suggestions"
+        },
+        {
+          "status": "passed",
+          "name": "official module regressions Dem 4.4.0: explicit false survives output after all other required fields are confirmed"
+        },
+        {
+          "status": "passed",
+          "name": "official module regressions CanIf: 45 suggestions require confirmation and mandatory local/external references block output without blocking JSON"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/choice-ui.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "TASK-009 UI selection and default confirmation shows candidate buttons, confirms data loss, cancels safely and restores a switch with one Ctrl+Z"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 UI selection and default confirmation confirms only actual default values across all 37 required NvM parameters in one undo operation"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 UI selection and default confirmation accepts explicit false/zero/empty defaults, preserves edits and optional fields, and creates no empty history entry"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 UI selection and default confirmation persists selected candidates and confirmed flags through local storage reload"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/choice.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "TASK-009 choice metadata and lifecycle retains the two inline candidates, paths, multiplicities and references without an export blocker"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice metadata and lifecycle does not instantiate all mandatory alternatives and validates an unselected group"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice metadata and lifecycle enforces exclusivity in add, clone, removal and switching; rejected operations do not mutate"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice metadata and lifecycle supports independent selections in repeated groups and never shares subtree identities"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice metadata and lifecycle retains choice metadata and paths when a definition is loaded from JSON"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice metadata and lifecycle rejects dual candidates from JSON or ARXML while leaving incomplete JSON editable"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice values and round trips round-trips selected A, custom parameters, UUIDs, references and flags"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice values and round trips round-trips selected B, custom parameters, UUIDs, references and flags"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice values and round trips rejects actual NvM candidate 0 with a required external reference while preserving lossless JSON"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice values and round trips rejects actual NvM candidate 1 with a required external reference while preserving lossless JSON"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice values and round trips still enforces explicit module export blockers"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-009 choice values and round trips previews changed selections as conflicts and overwrites/skips without ever merging alternatives"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/core.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader parses all seven listed container definitions, defaults and the aging reference"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader reports missing parameter uuid with its location"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader reports missing parameter shortName with its location"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader reports missing parameter type with its location"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader reports a missing nested container uuid with its index and name"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader rejects malformed root or array shapes: null"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader rejects malformed root or array shapes: []"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader rejects malformed root or array shapes: {\"shortName\":\"Dem\",\"containers\":{}}"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader rejects unsupported parameter types and duplicate definition UUIDs"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader preserves upper zero and rejects excessive nesting with a useful error"
+        },
+        {
+          "status": "passed",
+          "name": "BSWMD parser and loader loads string, File and URL sources into a shortName cache"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints starts with zero optional children, then adds and removes one by definition"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints adds multiple DTCs with unique identities and names even after a deletion"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints enforces sibling bounds and parent definitions without mutating failed operations"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints supports root containers, zero upper bounds and a restored config with supplied definitions"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints creates required descendants and removes nested subtrees at the correct parent"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints recursively creates instances, preserves definitions, and updates values and references"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints reports duplicate DTC values across separate config sets"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints rejects invalid DTC value 0"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints rejects invalid DTC value 16777216"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints rejects invalid DTC value 1.5"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints rejects invalid DTC value NaN"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints rejects invalid DTC value Infinity"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints rejects invalid DTC value 1"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints rejects invalid DTC value undefined"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints validates threshold signs and event ID bounds/uniqueness"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints requires an existing operation cycle only when aging is enabled"
+        },
+        {
+          "status": "passed",
+          "name": "configuration instances and constraints isolates rule exceptions, supports replacement and unregistration"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages accepts empty required STRING and an explicitly allowed empty ENUM literal"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages reports only missing required fields for undefined"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages reports only missing required fields for null"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages identifies the expected type for text = 1"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages identifies the expected type for count = "
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages identifies the expected type for count = 1.5"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages identifies the expected type for ratio = Infinity"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages identifies the expected type for enabled = false"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages identifies the expected type for mode = 1"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages lists exact numeric bounds and distinguishes domain errors from missing values and types"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages lists every ENUM candidate for invalid literal INVALID"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven diagnostic messages lists every ENUM candidate for invalid literal "
+        },
+        {
+          "status": "passed",
+          "name": "template and C generation renders Handlebars content and template metadata; accepts empty templates and rejects missing ones"
+        },
+        {
+          "status": "passed",
+          "name": "template and C generation generates complete recursive data, decimal integers and quoted/escaped strings"
+        },
+        {
+          "status": "passed",
+          "name": "template and C generation compiles generated DEM and unusual-name C files using gcc -Werror"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/definition-metadata.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "definition provenance and paths preserves official source metadata and every field definition path"
+        },
+        {
+          "status": "passed",
+          "name": "definition provenance and paths retains a non-default module path and rejects malformed provenance"
+        },
+        {
+          "status": "passed",
+          "name": "full-suite collection guard accepts the complete disk manifest and rejects missing, duplicate and unexpected files"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ecuc-cache.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "D1: resolves Vite root cache inside the workspace and removes the ignored test.cacheDir"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ecuc-ui.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "official module manager and persisted editing lists every file module, imports a selected definition and renders the official tree and form"
+        },
+        {
+          "status": "passed",
+          "name": "official module manager and persisted editing edits a newly imported parameter, saves, reconstructs the store, and restores definitions and values"
+        },
+        {
+          "status": "passed",
+          "name": "official module manager and persisted editing reports required and range errors and navigates from the real validation panel to the imported field"
+        },
+        {
+          "status": "passed",
+          "name": "official module manager and persisted editing retains imported definitions after configuration import and a fresh store reload"
+        },
+        {
+          "status": "passed",
+          "name": "official module manager and persisted editing rejects duplicate definitions and rolls back a failed definition save without disturbing edits"
+        },
+        {
+          "status": "passed",
+          "name": "official module manager and persisted editing renders the official definition tree within 500 ms"
+        },
+        {
+          "status": "passed",
+          "name": "official module manager and persisted editing terminates parser workers after dialog close and handles rejected sources"
+        },
+        {
+          "status": "passed",
+          "name": "D3 reference empty state names the missing target, creates and assigns it, and undoes the entire operation"
+        },
+        {
+          "status": "passed",
+          "name": "D3 reference empty state explains why cross-module targets cannot be created instead of making invalid local instances"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ecuc.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer D2: preserves comment-shaped literal CDATA while removing actual comments"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer preserves all containers, fields and source UUIDs for NvM"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer preserves all containers, fields and source UUIDs for CanIf"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer retains choice alternatives and cross-module destinations with visible export limitations"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer lists all modules without parsing trees and only passes the selected segment to the parser"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer uses stable generated definition UUIDs for sources without UUID attributes"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer supports prefixes, skips fake comment modules, and preserves package ancestry on extraction"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects absent and duplicate module names and malformed nesting"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects unsafe declarations before selected parsing: <!DOCTYPE AUTOSAR SYSTEM \"file:///secrets\">"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects unsafe declarations before selected parsing: <!ENTITY ext SYSTEM \"https://example.invalid\">"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects unsafe declarations before selected parsing: <xi:include href=\"file:///secrets\"/>"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer D2: accepts a legal comment mentioning DOCTYPE in both definitions and configuration imports"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps integer, hexadecimal bounds and numeric defaults"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps float defaults and unbounded multiplicity"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps official floating Inf/-Inf bounds to absent finite limits without losing them to JSON null"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps boolean literal true"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps boolean literal false"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps boolean literal 1"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps boolean literal 0"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps enumeration literal names and default"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps conditional string metadata for ECUC-STRING-PARAM-DEF"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer maps conditional string metadata for ECUC-FUNCTION-NAME-DEF"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer preserves reference requiredness, full target path and upper multiplicity"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects invalid definitions without silently dropping ECUC-BOOLEAN-PARAM-DEF"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects invalid definitions without silently dropping ECUC-INTEGER-PARAM-DEF"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects invalid definitions without silently dropping ECUC-INTEGER-PARAM-DEF"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects invalid definitions without silently dropping ECUC-ENUMERATION-PARAM-DEF"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer rejects invalid definitions without silently dropping ECUC-UNSUPPORTED-PARAM-DEF"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer derives required and range violations for official metadata without module-specific rules"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer instantiates mandatory roots only and preserves UUID definition links"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer keeps fixtures compact and structurally complete"
+        },
+        {
+          "status": "passed",
+          "name": "official ECUC selected-module importer preserves ordinary function parameters through generic ARXML export/import"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/editor-ui.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions uses toolbar and Ctrl/Cmd shortcuts but preserves native input/IME/contenteditable undo"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions supports Ctrl/Shift selection, shared parameters, skip summaries and one-step batch undo"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions marks imported dangling references in tree and form, navigates errors, clears and undoes them"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions refreshes both the validation panel and tree after undoing a repair"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions searches across sets, highlights literal matches and focuses the selected parameter after switching"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions changes theme with unsaved edits and keeps them through preference reload"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions renders 500-instance search results within 200 ms from input"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions exposes reference target choice through the form and records the selection"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-006 workspace interactions renders twenty undo steps within 500 ms and restores the full configuration"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/editor.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "bounded editor history evicts FIFO, preserves labels/timestamps and clears redo after a branch"
+        },
+        {
+          "status": "passed",
+          "name": "bounded editor history restores byte-identical JSON after twenty undo/redo steps, including timestamps and flags"
+        },
+        {
+          "status": "passed",
+          "name": "bounded editor history undoes value/add/reference/delete across types without dangling targets and replays exact UUIDs"
+        },
+        {
+          "status": "passed",
+          "name": "bounded editor history refreshes validation after undo, including invalid in-progress values"
+        },
+        {
+          "status": "passed",
+          "name": "bounded editor history isolates histories by configuration set and resets the imported/reloaded set history"
+        },
+        {
+          "status": "passed",
+          "name": "bounded editor history preserves ordered sibling deletion, cloning, renaming and disabled optionals through replay"
+        },
+        {
+          "status": "passed",
+          "name": "batch edits intersects by definition UUID, never by display name"
+        },
+        {
+          "status": "passed",
+          "name": "batch edits reports 2 successes/1 disabled skip and undoes the batch as exactly one step"
+        },
+        {
+          "status": "passed",
+          "name": "batch edits restores all three values on one undo and rejects non-common, readonly, wrong-type and out-of-range writes"
+        },
+        {
+          "status": "passed",
+          "name": "global search and local theme finds names, values and paths across sets, including case-insensitive literal characters"
+        },
+        {
+          "status": "passed",
+          "name": "global search and local theme indexes and searches 500 instances in at most 200 ms"
+        },
+        {
+          "status": "passed",
+          "name": "global search and local theme persists theme across initialization without changing dirty edits or selection"
+        },
+        {
+          "status": "passed",
+          "name": "global search and local theme keeps body, secondary and semantic text at WCAG contrast >= 4.5 in both palettes"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!DOCTYPE AUTOSAR [<!ENTITY x SYSTEM \"file:///secret\">]><AUTOSAR>&x;</AUTOSAR>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!doctype AUTOSAR SYSTEM \"file:///secret\"><AUTOSAR/>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!   DOCTYPE AUTOSAR SYSTEM \"file:///secret\"><AUTOSAR/>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!DOCTYPE AUTOSAR SYSTEM \"https://attacker.invalid/external.dtd\"><AUTOSAR/>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!DOCTYPE AUTOSAR [<!ENTITY % ext SYSTEM \"file:///secret\">%ext;]><AUTOSAR/>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!DOCTYPE AUTOSAR [<!ENTITY a \"aa\"><!ENTITY b \"&a;&a;\">]><AUTOSAR>&b;</AUTOSAR>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!ENTITY x SYSTEM \"file:///secret\"><AUTOSAR/>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!-- <!DOCTYPE AUTOSAR SYSTEM \"file:///secret\"> --><AUTOSAR/>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <!DOC​YPE AUTOSAR SYSTEM \"file:///secret\"><AUTOSAR/>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <AUTOSAR><![CDATA[<!ENTITY x SYSTEM \"file:///secret\">]]></AUTOSAR>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics rejects attack without file/network access: <AUTOSAR xmlns:xi=\"http://www.w3.org/2001/XInclude\"><xi:include href=\"file:///secret\"/></AUTOSAR>"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics strips a complete internal declaration before parsing and decodes only builtin entities once"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics reports actual/expected definition UUID and total occurrences for containers, parameters and references"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics preserves literal CDATA alongside ordinary builtin and numeric entities"
+        },
+        {
+          "status": "passed",
+          "name": "import hardening and diagnostics retains imported dangling UUIDs with field, instance and readable target prefix in violations"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/io-ui.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "transactional store IO allows a field removed by import to be explicitly enabled again without showing a phantom default"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO previews without mutation then commits one complete library and survives reload"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO restores the entire JSON into an empty library including metadata and references"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO persists the skip strategy from the same preview"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO persists the rename strategy from the same preview"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO leaves the exact original config, selection, dirty flag and storage after a failed write"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO rolls back a mid-plan failure injected after successful parsing without saving a partial tree"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO rejects malformed input with a readable error and protects edits made after preview"
+        },
+        {
+          "status": "passed",
+          "name": "transactional store IO does not publish staged state while writing and prevents concurrent editor actions"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus renders hostile file text literally in conflicts without creating HTML elements"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus reads an actual file, shows exactly four conflict columns in order, and cancels without saving"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus applies overwrite through the visible preview controls"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus applies skip through the visible preview controls"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus applies rename through the visible preview controls"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus imports ARXML through the same local file preview and renders file strings as text"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus rejects oversize files before FileReader and makes application unavailable"
+        },
+        {
+          "status": "passed",
+          "name": "import preview UI and project menus opens import/export submenus, downloads all three formats and distinguishes module/set tooltips"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/io.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export round-trips every metadata field, UUID, definitionRef, parameter state and reference through a new set"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export merges an export into a freshly initialized set with references remapped by path"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export rejects malformed JSON null"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export rejects malformed JSON []"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export rejects malformed JSON {}"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export rejects malformed JSON {broken"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export rejects incompatible module versions and duplicate identities without mutating its source"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export rejects wrong value types, duplicate fields and wrong-parent definitions"
+        },
+        {
+          "status": "passed",
+          "name": "lossless JSON import/export accepts a UTF-8 BOM and retains dangling UUID references for existing validation"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security uses r4.2.2, ECUC hierarchy, UUIDs, definition paths, and correct reference paths"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security escapes and restores text including entities and whitespace without markup injection"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security accepts namespace-prefixed ARXML and generates missing UUIDs through the common utility"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security rejects an external file entity before parser invocation, without reading or expanding the secret"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security rejects external DTDs, internal expansion and bare entities"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security rejects external DTDs, internal expansion and bare entities"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security rejects external DTDs, internal expansion and bare entities"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security rejects malformed XML, wrong namespaces, multiple modules, unresolved references and excessive nesting"
+        },
+        {
+          "status": "passed",
+          "name": "ARXML structure and security rejects oversized files before reading, and oversized JSON/ARXML strings before parsing"
+        },
+        {
+          "status": "passed",
+          "name": "conflict preview and immutable merge renames ARXML value conflicts without treating default/configured flags as value differences"
+        },
+        {
+          "status": "passed",
+          "name": "conflict preview and immutable merge applies overwrite with accurate conflicts, preserved originals and remapped references"
+        },
+        {
+          "status": "passed",
+          "name": "conflict preview and immutable merge applies skip with accurate conflicts, preserved originals and remapped references"
+        },
+        {
+          "status": "passed",
+          "name": "conflict preview and immutable merge applies rename with accurate conflicts, preserved originals and remapped references"
+        },
+        {
+          "status": "passed",
+          "name": "conflict preview and immutable merge compares reference paths instead of UUIDs and shows both file and project targets"
+        },
+        {
+          "status": "passed",
+          "name": "conflict preview and immutable merge counts removed parameters/references only on overwritten instances and preserves unrelated children"
+        },
+        {
+          "status": "passed",
+          "name": "conflict preview and immutable merge regenerates colliding UUIDs on new paths and prevents rename from exceeding multiplicity"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven DTC CSV exports BOM, one row per DTC, six-digit uppercase hex and referenced attributes / EventIds"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven DTC CSV keeps extracting values after definitions and instances are renamed, escaping spreadsheet text"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/lifecycle.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "core cloning and lifecycle availability deep-copies a complete set, regenerates every UUID and remaps forward/cyclic references"
+        },
+        {
+          "status": "passed",
+          "name": "core cloning and lifecycle availability clears out-of-subtree targets, preserves source references and creates independent Maps"
+        },
+        {
+          "status": "passed",
+          "name": "core cloning and lifecycle availability remaps self and descendant targets when cloning a nested subtree"
+        },
+        {
+          "status": "passed",
+          "name": "core cloning and lifecycle availability queries and enforces the same upper/lower limits for add, clone and delete"
+        },
+        {
+          "status": "passed",
+          "name": "core cloning and lifecycle availability uses only direct definitions and handles zero upper bounds without mutation"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions starts empty and creates named sets with unique identities and selected required roots"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions adds three uniquely named DTCs, selects them, falls back to parent on delete and reuses gaps safely"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions persists dirty outgoing edits before switching and restores all sets, Maps and active identity"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions does not switch or discard dirty edits when storage rejects the outgoing save"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions clones a set with remapped reference choices and leaves source edits isolated"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions deletes current sets with first-set fallback and persists a truly empty library"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions restores the deleted set and selection if persistence fails"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions reads the old single-config storage and does not resurrect it after deleting the migrated set"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions does not clear dirty state for edits made while an older snapshot is being saved"
+        },
+        {
+          "status": "passed",
+          "name": "configuration library and editor actions revalidates both duplicate nodes on edits and removes diagnostics after fixing the value"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/output.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "one output gate across actions the fixed synthetic definition emits exactly its 15 confirmed parameters in ARXML and C"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions does not let a module rule turn an optional untouched DTC value into a required field"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions rejects every untouched mandatory suggestion with the same four-output issues and preserves JSON retrieval"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions keeps confirmed zero and false, and omits optional suggestions and cached unconfigured references from every output"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions re-evaluates after edits instead of authorizing a new state with a previous pass"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions preserves module, container, parameter and reference paths through JSON definition parsing and value round trip"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions injects module rules without naming a module in core, then shares the same action result"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions L08: the official workspace reports required suggestions before any export, while JSON remains retrievable"
+        },
+        {
+          "status": "passed",
+          "name": "one output gate across actions official Dem emits exactly the confirmed parameter set in ARXML and C after all mandatory choices and internal references are configured"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/recovery.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "safe library recovery isolates one old set without rewriting it or losing the compatible set"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery writes the permanent snapshot before the lock sidecar and reuses it after refresh"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery rejects every original write before mutation, including import, delete and definition registration"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery locks even when snapshot and sidecar writes both fail"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery exports raw data separately from recovery metadata without normalizing original fields"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery opens exact historical values without registering an editable old module or mutating records"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery persists and restores new draft sets separately, including their subsequent edits"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery leaves a compatible library untouched on load and preserves additional fields on save"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery isolates malformed definitions, preferences and duplicate set identities without discarding other records"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery preserves malformed whole libraries and never overwrites an unreadable storage source"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery protects a legacy v2-only source and identifies the correct raw export key"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery refuses stale-tab and direct-create writes when existing storage was not safely loaded"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery never rotates or removes a recovery snapshot during repeated draft saves"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery blocks concurrent writes while the recovery snapshot is still pending"
+        },
+        {
+          "status": "passed",
+          "name": "safe library recovery rechecks the write lock after initialization before importing definitions"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/replica.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions preserves explicitly disabled optional values and enables through an edit event"
+        },
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions edits hexadecimal as a numeric value and refuses invalid or out of range input"
+        },
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions adds under a selected definition and filters mixed nodes by instance path"
+        },
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions moves a hidden top-level tab into view when selected from overflow"
+        },
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions transfers modules and persists independent validation and generation flags"
+        },
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions closes a module to an empty editor and reopens its saved data"
+        },
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions keeps unobserved context actions disabled and opens the module dialog"
+        },
+        {
+          "status": "passed",
+          "name": "screenshot replica interactions keeps disabled optional fields absent through save and restore"
+        }
+      ]
+    },
+    {
+      "file": "D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ui.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "status": "passed",
+          "name": "definition-driven components renders enum, boolean, numeric and string controls with required markers and bounds"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven components uses float controls, emits edits without mutating props and follows container/value changes"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven components renders recursive tree nodes, multiplicities and distinct parameter/reference icons"
+        },
+        {
+          "status": "passed",
+          "name": "definition-driven components displays all severities and emits navigation and validation events"
+        },
+        {
+          "status": "passed",
+          "name": "workspace integration and local persistence round-trips recursive Maps, references and values through local storage"
+        },
+        {
+          "status": "passed",
+          "name": "workspace integration and local persistence reports storage failures without claiming a save succeeded"
+        },
+        {
+          "status": "passed",
+          "name": "workspace integration and local persistence navigates from a real violation to the field and generates C after fixing the reference"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions shows a real create action in the empty workspace and opens a named set with the DTC guide"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions opens a child-definition chooser and disables upper-bound additions at the module root"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions uses confirmation for instance deletion and immediately selects its surviving parent"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions requires set deletion confirmation and switches to the first remaining set"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions colors every conflicting node and focuses its exact field when a violation is clicked"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions opens the context menu for the clicked container with the same lifecycle limits"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions saves edits when returning home and opens the persisted set through the home list"
+        },
+        {
+          "status": "passed",
+          "name": "TASK-003 user interactions derives warning/error/green tree markers only from the supplied engine diagnostics"
+        }
+      ]
+    }
+  ]
+}

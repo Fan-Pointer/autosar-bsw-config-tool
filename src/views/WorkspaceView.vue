@@ -629,7 +629,9 @@ async function saveConfig(): Promise<void> {
 }
 async function generateCode(): Promise<void> {
   if (!store.config || !store.module) return;
-  if (store.validate().some((item) => item.severity === 'ERROR')) {
+  const check = store.getOutputCheck();
+  store.validate(check);
+  if (!check.ready) {
     ElMessage.warning('请先修复验证错误');
     showValidation.value = true;
     return;
@@ -637,8 +639,8 @@ async function generateCode(): Promise<void> {
   try {
     const generator = new CGenerator();
     generatedFiles.value = await Promise.all([
-      generator.generateHeader(store.config, store.module),
-      generator.generateSource(store.config, store.module),
+      generator.generateHeader(store.config, store.module, check),
+      generator.generateSource(store.config, store.module, check),
     ]);
     showGenerated.value = true;
   } catch (reason) {

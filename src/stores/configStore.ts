@@ -13,8 +13,11 @@ import { BswmdLoader } from '@/core/bswmd/BswmdLoader';
 import { ConfigInstanceManager } from '@/core/config/ConfigInstance';
 import { cloneConfiguration } from '@/core/config/ConfigClone';
 import { collectContainers } from '@/core/config/ConfigTraversal';
-import { ConstraintEngine } from '@/core/constraint/ConstraintEngine';
-import { DefinitionConstraints } from '@/core/constraint/DefinitionConstraints';
+import {
+  evaluateOutputReadiness,
+  outputViolations,
+  type OutputCheckResult,
+} from '@/core/output/OutputGate';
 import { DemConstraints } from '@/modules/dem/DemConstraints';
 import {
   exportJson,
@@ -192,8 +195,6 @@ export const useConfigStore = defineStore('config', () => {
     )
   );
   let manager = new ConfigInstanceManager(modules.value);
-  const engine = new ConstraintEngine();
-  engine.registerRules([...DefinitionConstraints, ...DemConstraints]);
   const configSets = ref<ConfigInstance[]>([]);
   const activeUuid = ref<string>();
   const config = computed(
@@ -264,7 +265,10 @@ export const useConfigStore = defineStore('config', () => {
   const danglingReferences = computed(() => {
     const existing = new Set(entries.value.map((entry) => entry.container.uuid));
     return [...(selectedEntry.value?.container.references.values() ?? [])]
-      .filter((reference) => reference.targetUuid && !existing.has(reference.targetUuid))
+      .filter(
+        (reference) =>
+          reference.isConfigured && reference.targetUuid && !existing.has(reference.targetUuid)
+      )
       .map((reference) => reference.definitionRef);
   });
   const selectedKey = computed(() =>
@@ -406,7 +410,8 @@ export const useConfigStore = defineStore('config', () => {
         lastModified: set.lastModified,
         containerCount: definition ? collectContainers(set, definition).length : 0,
         errorCount: definition
-          ? engine.validate(set, definition).filter((item) => item.severity === 'ERROR').length
+          ? getOutputCheck(set, definition).issues.filter((item) => item.severity === 'ERROR')
+              .length
           : 0,
       };
     })
@@ -567,12 +572,23 @@ export const useConfigStore = defineStore('config', () => {
     error.value = null;
   }
 
+  /** Evaluate fresh output readiness with application-owned module rules.
+   * @param target Configuration, defaults to the active set.
+   * @param definition Matching definition, defaults to the active module.
+   * @returns A same-action result; callers must never cache it across actions.
+   */
+  function getOutputCheck(target = config.value, definition = module.value): OutputCheckResult {
+    if (!target || !definition) throw new Error('请先打开配置集');
+    return evaluateOutputReadiness(target, definition, DemConstraints);
+  }
+
   /** Validate the active configuration.
+   * @param check Optional result from the same immediate output action.
    * @returns The current violations.
    */
-  function validate(): ConstraintViolation[] {
+  function validate(check?: OutputCheckResult): ConstraintViolation[] {
     violations.value =
-      config.value && module.value ? engine.validate(config.value, module.value) : [];
+      config.value && module.value ? outputViolations(check ?? getOutputCheck()) : [];
     validated.value = Boolean(config.value && module.value);
     return violations.value;
   }
@@ -1330,7 +1346,7 @@ export const useConfigStore = defineStore('config', () => {
       const definition = modules.value.find(
         (item) => item.shortName === candidate.moduleRef && item.version === candidate.version
       )!;
-      const nextViolations = engine.validate(candidate, definition);
+      const nextViolations = outputViolations(getOutputCheck(candidate, definition));
       const next = session.targetUuid
         ? configSets.value.map((set) => (set.uuid === session.targetUuid ? candidate : set))
         : [...configSets.value, candidate];
@@ -1376,14 +1392,17 @@ export const useConfigStore = defineStore('config', () => {
    */
   function exportConfig(format: ExportFormat): string {
     if (!config.value || !module.value) throw new Error('请先打开配置集');
-    return format === 'json'
-      ? exportJson(config.value)
-      : format === 'arxml'
-        ? exportArxml(config.value, module.value)
-        : exportCsv(config.value, module.value);
+    // Retrieving user data is always possible, even when business outputs are not ready.
+    if (format === 'json') return exportJson(config.value);
+    const check = getOutputCheck();
+    validate(check);
+    return format === 'arxml'
+      ? exportArxml(config.value, module.value, check)
+      : exportCsv(config.value, module.value, check);
   }
 
   return {
+    getOutputCheck,
     quarantinedSets,
     dataSafety,
     recoveryWarning,

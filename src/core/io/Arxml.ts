@@ -4,7 +4,11 @@ import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/Bswmd
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
 import { createParameterValue } from '../config/ConfigValues';
-import { choiceSelectionError } from '../config/ChoiceSelection';
+import {
+  assertOutputReady,
+  evaluateOutputReadiness,
+  type OutputCheckResult,
+} from '../output/OutputGate';
 import { generateUUID } from '@/utils/uuid';
 import { checkImportSize, hydrateConfig, record, serializeConfig, string } from './ConfigJson';
 import type { SerializedContainer } from './IoTypes';
@@ -52,11 +56,11 @@ function definitionPaths(module: BswmdModule): Map<string, string> {
       const path = definition.definitionPath ?? `${parent}/${definition.shortName}`;
       paths.set(definition.uuid, path);
       for (const field of [...definition.parameters, ...definition.references])
-        paths.set(field.uuid, `${path}/${field.shortName}`);
+        paths.set(field.uuid, field.definitionPath ?? `${path}/${field.shortName}`);
       visit(definition.subContainers, path);
     }
   };
-  visit(module.containers, `/AUTOSAR/EcucDefs/${module.shortName}`);
+  visit(module.containers, module.definitionPath ?? `/AUTOSAR/EcucDefs/${module.shortName}`);
   return paths;
 }
 function parameterDest(type: BswmdParameter['type']): string {
@@ -67,28 +71,18 @@ function parameterDest(type: BswmdParameter['type']): string {
 /** Export the loaded ECUC value tree with definition paths and instance references.
  * @param config Configuration to export.
  * @param module Matching BSWMD module.
+ * @param outputCheck Optional result evaluated in this same action (never cached across edits).
  * @returns Escaped AUTOSAR r4.2.2 XML.
  */
-export function exportArxml(config: ConfigInstance, module: BswmdModule): string {
-  if (module.arxmlExportBlockers?.length)
-    throw new Error(`该模块暂不能导出 ARXML：${module.arxmlExportBlockers.join('；')}`);
+export function exportArxml(
+  config: ConfigInstance,
+  module: BswmdModule,
+  outputCheck?: OutputCheckResult
+): string {
+  assertOutputReady(outputCheck ?? evaluateOutputReadiness(config, module));
   const checked = hydrateConfig(serializeConfig(config), [module]);
   const definitions = definitionPaths(module);
   const entries = collectContainers(checked, module);
-  const missing: string[] = [];
-  for (const { container, definition, path } of entries) {
-    const choiceError = choiceSelectionError(container, definition, true);
-    if (choiceError) throw new Error(`ARXML 导出校验失败：${path}：${choiceError}`);
-    for (const def of definition.parameters) {
-      const field = container.parameters.get(def.uuid);
-      if (!def.isOptional && (!field?.isConfigured || field.value === undefined))
-        missing.push(`${path}/${def.shortName}`);
-    }
-  }
-  if (missing.length)
-    throw new Error(
-      `ARXML 导出校验失败，必填项未配置（请显式设置，默认建议值不算配置）：\n${missing.join('\n')}`
-    );
   const instancePaths = new Map(
     entries.map((entry) => [entry.container.uuid, `/Config/${module.shortName}/${entry.path}`])
   );
@@ -146,7 +140,7 @@ export function exportArxml(config: ConfigInstance, module: BswmdModule): string
     lastModified: String(checked.lastModified),
     name: checked.name,
   });
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<AUTOSAR xmlns="${AUTOSAR_NAMESPACE}"><AR-PACKAGES><AR-PACKAGE><SHORT-NAME>Config</SHORT-NAME><ELEMENTS><ECUC-MODULE-CONFIGURATION-VALUES UUID="${escapeXml(checked.uuid)}">${tag('SHORT-NAME', module.shortName)}${metadata}<DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/${escapeXml(module.shortName)}</DEFINITION-REF><IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT><CONTAINERS>${containers(checked.containers, module.containers)}</CONTAINERS></ECUC-MODULE-CONFIGURATION-VALUES></ELEMENTS></AR-PACKAGE></AR-PACKAGES></AUTOSAR>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<AUTOSAR xmlns="${AUTOSAR_NAMESPACE}"><AR-PACKAGES><AR-PACKAGE><SHORT-NAME>Config</SHORT-NAME><ELEMENTS><ECUC-MODULE-CONFIGURATION-VALUES UUID="${escapeXml(checked.uuid)}">${tag('SHORT-NAME', module.shortName)}${metadata}<DEFINITION-REF DEST="ECUC-MODULE-DEF">${escapeXml(module.definitionPath ?? `/AUTOSAR/EcucDefs/${module.shortName}`)}</DEFINITION-REF><IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT><CONTAINERS>${containers(checked.containers, module.containers)}</CONTAINERS></ECUC-MODULE-CONFIGURATION-VALUES></ELEMENTS></AR-PACKAGE></AR-PACKAGES></AUTOSAR>`;
 }
 
 function nodes(parent: XmlNode, key: string): XmlNode[] {
@@ -314,7 +308,9 @@ export function importArxml(source: string, modules: BswmdModule[]): ConfigInsta
   if (found.length !== 1) throw new Error('每次导入须包含且仅包含一个 ECUC 模块配置');
   const { node: moduleNode, packagePath } = found[0];
   const modulePath = text(moduleNode, 'DEFINITION-REF').trim();
-  const module = modules.find((item) => modulePath === `/AUTOSAR/EcucDefs/${item.shortName}`);
+  const module = modules.find(
+    (item) => modulePath === (item.definitionPath ?? `/AUTOSAR/EcucDefs/${item.shortName}`)
+  );
   if (!module) throw new Error(`未加载模块定义：${modulePath}`);
   const paths = definitionPaths(module);
   const targets = new Map<string, string>();

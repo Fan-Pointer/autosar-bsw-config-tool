@@ -11,6 +11,8 @@ import { collectContainers, indexDefinitions } from '../src/core/config/ConfigTr
 import { byPath } from './helpers/definitionIndex';
 import { exportArxml, importArxml, AUTOSAR_NAMESPACE } from '../src/core/io/Arxml';
 import { exportJson, importJson, serializeConfig } from '../src/core/io/ConfigJson';
+import { confirmOfficialRequiredReferences } from './helpers/officialDemOutput';
+import { evaluateOutputReadiness } from '../src/core/output/OutputGate';
 
 function sample() {
   const module: BswmdModule = {
@@ -307,6 +309,7 @@ describe('official module regressions', () => {
         requiredCount++;
       }
     }
+    confirmOfficialRequiredReferences(config, module);
     const xml = exportArxml(config, module),
       document = doc(xml);
     expect(document.querySelectorAll('VALUE')).toHaveLength(requiredCount);
@@ -326,7 +329,7 @@ describe('official module regressions', () => {
     expect(copy.createdAt).toBe(config.createdAt);
     expect(copy.lastModified).toBe(config.lastModified);
   });
-  it('CanIf: 45 untouched parameters are blocked with every required path, then only confirmed fields export', () => {
+  it('CanIf: 45 suggestions require confirmation and mandatory local/external references block output without blocking JSON', () => {
     const module = importEcucModuleArxml(
       readFileSync('tests/fixtures/ecuc-canif.arxml', 'utf8'),
       'CanIf'
@@ -350,18 +353,32 @@ describe('official module regressions', () => {
           def.uuid,
           entry.container.parameters.get(def.uuid)!.value
         );
-    const xml = exportArxml(config, module),
-      copy = importArxml(xml, [module]);
-    expect(doc(xml).querySelectorAll('VALUE')).toHaveLength(count);
+    // TASK-014 v3 A4: confirming parameters alone cannot satisfy mandatory references.
+    const check = evaluateOutputReadiness(config, module);
+    expect(check.ready).toBe(false);
+    expect(check.issues).toHaveLength(3);
+    for (const name of ['CanIfCtrlDrvNameRef', 'CanIfCtrlCanCtrlRef']) {
+      const issue = check.issues.find((item) => item.path.endsWith('/' + name))!;
+      expect(issue.reason).toContain('目标跨模块（本期不支持）');
+      expect(() => exportArxml(config, module)).toThrow(name);
+    }
+    const localIssue = check.issues.find((item) =>
+      item.path.endsWith('/CanIfCtrlDrvInitHohConfigRef')
+    )!;
+    expect(localIssue.reason).toContain('必填引用未配置');
+    expect(localIssue.reason).not.toContain('跨模块');
+    expect(() => exportArxml(config, module)).toThrow('CanIfCtrlDrvInitHohConfigRef');
+    const copy = importJson(exportJson(config), [module]);
+    expect(Object.values(flags(copy, module)).filter(Boolean)).toHaveLength(count);
     expect(flags(copy, module)).toEqual(flags(config, module));
     expect(copy.containers).toEqual(config.containers);
     expect(serializeConfig(copy).createdAt).toBe(config.createdAt);
     expect(copy.lastModified).toBe(config.lastModified);
-    expect(
-      new Set([...doc(xml).querySelectorAll('[UUID]')].map((n) => n.getAttribute('UUID'))).size
-    ).toBe(doc(xml).querySelectorAll('[UUID]').length);
+    expect(new Set(collectContainers(copy, module).map((e) => e.container.uuid)).size).toBe(
+      entries.length
+    );
     console.info(
-      `CanIf: 45 suggestions blocked; ${count} confirmed required parameters exported; flags/timestamps/descriptions equal`
+      `CanIf: 45 suggestions blocked; ${count} required parameters confirmed; three required references block output; JSON flags/timestamps/descriptions equal`
     );
   });
 });

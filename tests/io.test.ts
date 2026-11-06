@@ -19,6 +19,7 @@ import {
 import { AUTOSAR_NAMESPACE, exportArxml, importArxml } from '../src/core/io/Arxml';
 import { exportCsv } from '../src/core/io/Csv';
 import { planImport } from '../src/core/io/ImportPlan';
+import { completeDemArxml } from './helpers/completeDemArxml';
 
 function fixture() {
   const module = new BswmdParser().parseFromJson(JSON.stringify(raw));
@@ -378,6 +379,7 @@ describe('definition-driven DTC CSV', () => {
     const event = manager.addContainerInstance(config, root.uuid, 'fixture-dem-event-param-def');
     manager.setParameterValue(event, 'fixture-dem-event-id', 2);
     manager.setReferenceTarget(event, 'fixture-dem-event-dtc-ref', dtc.uuid);
+    completeDemArxml(config, module);
     const csv = exportCsv(config, module);
     expect(csv.charCodeAt(0)).toBe(0xfeff);
     const rows = csv.split('\r\n');
@@ -389,10 +391,21 @@ describe('definition-driven DTC CSV', () => {
   });
   it('keeps extracting values after definitions and instances are renamed, escaping spreadsheet text', () => {
     const { config, module, dtc } = fixture();
+    completeDemArxml(config, module);
     module.shortName = config.moduleRef = 'GenericModule';
     module.containers[0].subContainers[0].shortName = 'DiagnosticItem';
     for (const p of module.containers[0].subContainers[0].parameters)
       p.shortName = 'Field' + p.exportRole;
+    for (const definition of module.containers[0].subContainers)
+      for (const reference of definition.references)
+        if (reference.destinationContainerType === 'DemDTC')
+          reference.destinationContainerType = 'DiagnosticItem';
+    // Formula escaping is a free-text projection test, not an invalid ENUM bypass.
+    const severity = module.containers[0].subContainers[0].parameters.find(
+      (p) => p.exportRole === 'severity'
+    )!;
+    severity.type = 'STRING';
+    severity.enumValues = undefined;
     dtc.shortName = 'Renamed';
     dtc.parameters.get('fixture-dem-dtc-severity')!.value = '=HYPERLINK("bad")';
     const csv = exportCsv(config, module);

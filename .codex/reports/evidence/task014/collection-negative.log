@@ -1,0 +1,28 @@
+
+> autosar-bsw-config-tool@0.1.0 test
+> vitest --run tests/definition-metadata.test.ts --reporter=default --reporter=./scripts/test-collection-guard.ts
+
+
+ RUN  v2.1.9 D:/ProFile/教培业务/配置器/autosar-bsw-config-tool
+
+ ✓ tests/definition-metadata.test.ts (3 tests) 11ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  09:54:08
+   Duration  1.06s (transform 119ms, setup 0ms, collect 307ms, tests 11ms, environment 0ms, prepare 233ms)
+
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: TEST_COLLECTION_INCOMPLETE: expected 17, collected 1; missing: D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/arxml-editor.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/arxml-fidelity.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/choice-ui.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/choice.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/core.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ecuc-cache.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ecuc-ui.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ecuc.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/editor-ui.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/editor.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/io-ui.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/io.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/lifecycle.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/recovery.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/replica.test.ts, D:/ProFile/教培业务/配置器/autosar-bsw-config-tool/tests/ui.test.ts; unexpected:
+ ❯ assertTestCollection scripts/test-collection-guard.ts:19:11
+     18|  * @param actual Paths reported by the runner. @returns Nothing; throw…
+     19|  */
+     20| export function assertTestCollection(expected: string[], actual: strin…
+       |       ^
+     21|   const normalize = (path: string): string => resolve(path).replace(/\…
+     22|   const wanted = new Set(expected.map(normalize));
+ ❯ TestCollectionGuard.onFinished scripts/test-collection-guard.ts:31:7
+ ❯ ../../../%E6%95%99%E5%9F%B9%E4%B8%9A%E5%8A%A1/%E9%85%8D%E7%BD%AE%E5%99%A8/autosar-bsw-config-tool/node_modules/vitest/dist/chunks/cli-api.DqsSTaIi.js:11194:58
+ ❯ Vitest.report ../../../%E6%95%99%E5%9F%B9%E4%B8%9A%E5%8A%A1/%E9%85%8D%E7%BD%AE%E5%99%A8/autosar-bsw-config-tool/node_modules/vitest/dist/chunks/cli-api.DqsSTaIi.js:11194:38
+ ❯ ../../../%E6%95%99%E5%9F%B9%E4%B8%9A%E5%8A%A1/%E9%85%8D%E7%BD%AE%E5%99%A8/autosar-bsw-config-tool/node_modules/vitest/dist/chunks/cli-api.DqsSTaIi.js:10833:18

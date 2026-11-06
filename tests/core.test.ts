@@ -403,6 +403,8 @@ describe('configuration instances and constraints', () => {
     'rejects invalid DTC value %s',
     (value) => {
       const { module, config, find, engine } = fixture();
+      // Missing-value validation requires a mandatory field; optional unset values are valid.
+      module.containers[0].subContainers[0].parameters.find(p => p.uuid === 'syn-dtc-value')!.isOptional = false;
       manager.setParameterValue(find('DemDTC'), 'syn-dtc-value', value);
       expect(
         engine.validate(config, module).filter((item) => item.ruleId === 'DEM-002')
@@ -580,6 +582,21 @@ describe('definition-driven diagnostic messages', () => {
 });
 
 describe('template and C generation', () => {
+  function confirmGenerationValues(
+    config: ReturnType<typeof synthFixture>['config'],
+    module: BswmdModule
+  ): void {
+    // Generation now requires explicit confirmation; this test still exercises all old C values.
+    for (const entry of collectContainers(config, module))
+      for (const field of entry.definition.parameters)
+        if (!field.isOptional || field.uuid === 'syn-general-dev-error')
+          manager.setParameterValue(
+            entry.container,
+            field.uuid,
+            entry.container.parameters.get(field.uuid)!.value
+          );
+  }
+
   it('renders Handlebars content and template metadata; accepts empty templates and rejects missing ones', async () => {
     const engine = new TemplateEngine();
     engine.registerTemplate({
@@ -600,6 +617,7 @@ describe('template and C generation', () => {
 
   it('generates complete recursive data, decimal integers and quoted/escaped strings', async () => {
     const { module, config, find } = synthFixture();
+    confirmGenerationValues(config, module);
     manager.setParameterValue(find('DemDTC'), 'syn-dtc-severity', 'DEM_SEVERITY_NO_SEVERITY');
     manager.setParameterValue(find('DemDTC'), 'syn-dtc-value', 0x123456);
     manager.setParameterValue(find('DemDTC'), 'syn-dtc-j1939', 'quote" slash\\ line\n\u0001f');
@@ -625,6 +643,7 @@ describe('template and C generation', () => {
       mkdirSync(directory, { recursive: true });
       for (const unusual of [false, true]) {
         const { module, config, find } = synthFixture();
+        confirmGenerationValues(config, module);
         if (unusual) {
           module.shortName = '9模块-Alpha';
           config.moduleRef = module.shortName;

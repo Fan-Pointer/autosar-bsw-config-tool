@@ -17,6 +17,13 @@ function parameter(entry: ContainerEntry, name: string) {
   return definition ? entry.container.parameters.get(definition.uuid)?.value : undefined;
 }
 
+function optionalUnset(entry: ContainerEntry, name: string): boolean {
+  return (
+    entry.definition.parameters.some((field) => field.shortName === name && field.isOptional) &&
+    parameter(entry, name) === undefined
+  );
+}
+
 function violation(
   ruleId: string,
   entry: ContainerEntry,
@@ -83,6 +90,7 @@ export const DemConstraints: ConstraintRule[] = [
     scope: 'PARAMETER',
     check: (ctx) =>
       entries(ctx, 'DemDTC').flatMap((entry) =>
+        optionalUnset(entry, 'DemDtcValue') ||
         integerInRange(parameter(entry, 'DemDtcValue'), 1, 0xffffff)
           ? []
           : [
@@ -108,6 +116,7 @@ export const DemConstraints: ConstraintRule[] = [
           ['DemDebounceCounterFailedThreshold', true],
           ['DemDebounceCounterPassedThreshold', false],
         ] as const) {
+          if (optionalUnset(entry, field)) continue;
           const value = parameter(entry, field);
           if (
             typeof value !== 'number' ||
@@ -137,6 +146,7 @@ export const DemConstraints: ConstraintRule[] = [
       const seen = new Set<number>();
       const violations: ConstraintViolation[] = [];
       for (const entry of entries(ctx, 'DemEventParameter')) {
+        if (optionalUnset(entry, 'DemEventId')) continue;
         const value = parameter(entry, 'DemEventId');
         if (!integerInRange(value, 1, 65535)) {
           violations.push(

@@ -365,6 +365,9 @@ describe('import hardening and diagnostics', () => {
     incoming.containers[0].subContainers[0].references.get(
       'fixture-dem-dtc-attributes-ref'
     )!.targetUuid = 'deadbeef-missing-target';
+    incoming.containers[0].subContainers[0].references.get(
+      'fixture-dem-dtc-attributes-ref'
+    )!.isConfigured = true;
     const session = store.prepareImport(exportJson(incoming), 'json');
     expect(await store.applyImport(session, 'overwrite')).toBe(true);
     store.selectContainer(ids[0]);

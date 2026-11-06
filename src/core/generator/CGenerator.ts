@@ -2,6 +2,11 @@ import type { ConfigInstance } from '../config/ConfigTypes';
 import type { BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import { collectContainers } from '../config/ConfigTraversal';
 import { TemplateEngine, type GeneratedFile } from './TemplateEngine';
+import {
+  assertOutputReady,
+  evaluateOutputReadiness,
+  type OutputCheckResult,
+} from '../output/OutputGate';
 
 interface GeneratedField {
   name: string;
@@ -46,7 +51,11 @@ export class CGenerator {
       {
         name: 'c-header',
         filePattern: '{module}_Cfg.h',
-        content: `/* Generated configuration: {{module}} */
+        content: `/* Generated configuration: {{module}}
+ * Generic configuration data only; this is not a supplier BSW ABI.
+ * The integrating application must adapt these constants and initialize its BSW.
+ * Only explicitly configured values are included; omitted fields have no implied value.
+ */
 #ifndef {{moduleUpper}}_CFG_H
 #define {{moduleUpper}}_CFG_H
 
@@ -70,7 +79,10 @@ export class CGenerator {
       {
         name: 'c-source',
         filePattern: '{module}_PBCfg.c',
-        content: `/* Generated configuration data: {{module}} */
+        content: `/* Generated configuration data: {{module}}
+ * Generic data constants, not a supplier BSW implementation or initialization routine.
+ * The integrating application owns adaptation and BSW initialization.
+ */
 #include "{{module}}_Cfg.h"
 
 {{#each containers}}
@@ -101,9 +113,15 @@ const struct {
    * Generate the module header with unique ASCII macro names.
    * @param config Configuration values.
    * @param bswmd Module definition.
+   * @param outputCheck Optional fresh result from this same generation action.
    * @returns The generated module_Cfg.h file.
    */
-  async generateHeader(config: ConfigInstance, bswmd: BswmdModule): Promise<GeneratedFile> {
+  async generateHeader(
+    config: ConfigInstance,
+    bswmd: BswmdModule,
+    outputCheck?: OutputCheckResult
+  ): Promise<GeneratedFile> {
+    assertOutputReady(outputCheck ?? evaluateOutputReadiness(config, bswmd));
     return this.templateEngine.generate('c-header', this.context(config, bswmd));
   }
 
@@ -111,9 +129,15 @@ const struct {
    * Generate typed configuration constants, including post-build values.
    * @param config Configuration values.
    * @param bswmd Module definition.
+   * @param outputCheck Optional fresh result from this same generation action.
    * @returns The generated module_PBCfg.c file.
    */
-  async generateSource(config: ConfigInstance, bswmd: BswmdModule): Promise<GeneratedFile> {
+  async generateSource(
+    config: ConfigInstance,
+    bswmd: BswmdModule,
+    outputCheck?: OutputCheckResult
+  ): Promise<GeneratedFile> {
+    assertOutputReady(outputCheck ?? evaluateOutputReadiness(config, bswmd));
     return this.templateEngine.generate('c-source', this.context(config, bswmd));
   }
 
@@ -124,31 +148,34 @@ const struct {
     const entries = collectContainers(config, bswmd);
     const targets = new Map(entries.map((entry, index) => [entry.container.uuid, index]));
     const containers: GeneratedContainer[] = entries.map((entry, index) => {
-      const fields: GeneratedField[] = entry.definition.parameters.map((parameter, fieldIndex) => {
-        const configured = entry.container.parameters.get(parameter.uuid);
-        if (!configured || configured.definitionRef !== parameter.uuid)
-          throw new Error(`${entry.path}: missing parameter ${parameter.shortName}`);
-        return {
-          name: `P${fieldIndex}_${identifier(parameter.shortName).toUpperCase()}`,
-          cType:
-            parameter.type === 'BOOLEAN'
-              ? 'int'
-              : parameter.type === 'INTEGER'
-                ? 'long long'
-                : parameter.type === 'FLOAT'
-                  ? 'double'
-                  : 'const char *',
-          value: this.formatValue(configured.value, parameter),
-        };
-      });
+      const fields: GeneratedField[] = entry.definition.parameters.flatMap(
+        (parameter, fieldIndex) => {
+          const configured = entry.container.parameters.get(parameter.uuid);
+          if (!configured?.isConfigured || configured.value === undefined) return [];
+          return [
+            {
+              name: `P${fieldIndex}_${identifier(parameter.shortName).toUpperCase()}`,
+              cType:
+                parameter.type === 'BOOLEAN'
+                  ? 'int'
+                  : parameter.type === 'INTEGER'
+                    ? 'long long'
+                    : parameter.type === 'FLOAT'
+                      ? 'double'
+                      : 'const char *',
+              value: this.formatValue(configured.value, parameter),
+            },
+          ];
+        }
+      );
       entry.definition.references.forEach((reference, referenceIndex) => {
-        const target = entry.container.references.get(reference.uuid)?.targetUuid;
-        if (target && !targets.has(target))
-          throw new Error(`${entry.path}/${reference.shortName}: unresolved target ${target}`);
+        const configured = entry.container.references.get(reference.uuid);
+        if (!configured?.isConfigured || !configured.targetUuid) return;
+        const target = configured.targetUuid;
         fields.push({
           name: `R${referenceIndex}_${identifier(reference.shortName).toUpperCase()}`,
           cType: 'long long',
-          value: String(target ? targets.get(target) : -1),
+          value: String(targets.get(target)),
         });
       });
       // Ordinals disambiguate duplicate instance names and names that differ only in case.
@@ -167,7 +194,7 @@ const struct {
   }
 
   private formatValue(value: unknown, parameter: BswmdParameter): string {
-    const actual = value ?? parameter.defaultValue;
+    const actual = value;
     if (parameter.type === 'BOOLEAN' && typeof actual === 'boolean')
       return actual ? 'TRUE' : 'FALSE';
     if (parameter.type === 'INTEGER' && typeof actual === 'number' && Number.isSafeInteger(actual))

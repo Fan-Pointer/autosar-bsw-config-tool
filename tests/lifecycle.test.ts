@@ -308,8 +308,10 @@ describe('configuration library and editor actions', () => {
     store.createConfig();
     const root = store.config!.containers[0];
     const first = store.addContainerInstance('fixture-dem-dtc-def')!;
+    store.setParameterValue('fixture-dem-dtc-value', 1);
     store.selectContainer(root.uuid);
     const second = store.addContainerInstance('fixture-dem-dtc-def')!;
+    store.setParameterValue('fixture-dem-dtc-value', 1);
     expect(
       store.violations.filter((item) => item.ruleId === 'DEM-001').map((item) => item.containerUuid)
     ).toEqual([first.uuid, second.uuid]);

@@ -24,6 +24,7 @@ import { useConfigStore } from '../src/stores/configStore';
 import rawDefinition from './fixtures/synthetic-dem.json';
 import type { ConstraintViolation } from '../src/core/constraint/ConstraintTypes';
 import type { ConfigInstance } from '../src/core/config/ConfigTypes';
+import { completeDemArxml } from './helpers/completeDemArxml';
 
 const local = vi.hoisted(() => ({
   saved: new Map<string, unknown>(),
@@ -194,6 +195,13 @@ describe('workspace integration and local persistence', () => {
     const store = useConfigStore();
     store.createConfig();
     addOptionalContainers(store.config!);
+    completeDemArxml(store.config!, store.module!);
+    const incompleteDtc = store.config!.containers[0].subContainers[0];
+    new ConfigInstanceManager([store.module!]).setReferenceTarget(
+      incompleteDtc,
+      'fixture-dem-dtc-attributes-ref',
+      ''
+    );
     const router = createRouter({
       history: createMemoryHistory(),
       routes: [{ path: '/', component: WorkspaceView }],
@@ -371,8 +379,10 @@ describe('TASK-003 user interactions', () => {
     await store.createConfigSet('界面测试');
     const rootUuid = store.selectedEntry!.container.uuid;
     const first = store.addContainerInstance('fixture-dem-dtc-def')!;
+    store.setParameterValue('fixture-dem-dtc-value', 1);
     store.selectContainer(rootUuid);
     const second = store.addContainerInstance('fixture-dem-dtc-def')!;
+    store.setParameterValue('fixture-dem-dtc-value', 1);
     await nextTick();
     for (const uuid of [first.uuid, second.uuid]) {
       expect(wrapper.get(`[data-node-id="${uuid}"]`).classes()).toContain('status-error');

@@ -17,6 +17,10 @@ export interface Multiplicity {
  * BSWMD 模块根节点
  */
 export interface BswmdModule {
+  /** Absolute module definition path; omitted for legacy hand-authored descriptions. */
+  definitionPath?: string;
+  /** Provenance supplied with the definition asset, retained without interpretation. */
+  $source?: Record<string, unknown>;
   multiplicity?: Multiplicity;
   /** Explicit import limitations, shown before accepting a definition. */
   importWarnings?: string[];
@@ -59,6 +63,8 @@ export interface BswmdContainer {
  * BSWMD 参数定义
  */
 export interface BswmdParameter {
+  /** Absolute source definition path, independent of the editor's nesting. */
+  definitionPath?: string;
   multiplicity?: Multiplicity;
   minLength?: number;
   maxLength?: number;
@@ -87,6 +93,8 @@ export interface BswmdParameter {
  * BSWMD 引用定义
  */
 export interface BswmdReference {
+  /** Absolute source definition path, independent of the editor's nesting. */
+  definitionPath?: string;
   multiplicity?: Multiplicity;
   destinationRef?: string;
   /** 全部候选目标定义路径。普通引用 1 个；CHOICE 引用多个（来自 DESTINATION-REFS）。 */

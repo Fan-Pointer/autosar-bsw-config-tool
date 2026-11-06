@@ -1,6 +1,11 @@
 import type { BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import type { ConfigInstance } from '../config/ConfigTypes';
 import {
+  assertOutputReady,
+  evaluateOutputReadiness,
+  type OutputCheckResult,
+} from '../output/OutputGate';
+import {
   collectContainers,
   indexDefinitions,
   type ContainerEntry,
@@ -8,7 +13,8 @@ import {
 
 function value(entry: ContainerEntry, role: BswmdParameter['exportRole']): unknown {
   const field = entry.definition.parameters.find((parameter) => parameter.exportRole === role);
-  return field ? entry.container.parameters.get(field.uuid)?.value : undefined;
+  const configured = field ? entry.container.parameters.get(field.uuid) : undefined;
+  return configured?.isConfigured ? configured.value : undefined;
 }
 function cell(value: unknown): string {
   let text = value === undefined ? '' : String(value);
@@ -20,9 +26,15 @@ function cell(value: unknown): string {
 /** Project DTC rows using semantic roles authored in BSWMD, never instance names.
  * @param config Configuration to export.
  * @param module Module definitions with CSV role metadata.
+ * @param outputCheck Optional result evaluated in this same action, not cached.
  * @returns UTF-8 BOM-prefixed CSV; one row per DTC, multiple EventIds joined by semicolons.
  */
-export function exportCsv(config: ConfigInstance, module: BswmdModule): string {
+export function exportCsv(
+  config: ConfigInstance,
+  module: BswmdModule,
+  outputCheck?: OutputCheckResult
+): string {
+  assertOutputReady(outputCheck ?? evaluateOutputReadiness(config, module));
   if (
     ![...indexDefinitions(module).values()].some((def) =>
       def.parameters.some((p) => p.exportRole === 'dtcValue')
@@ -36,7 +48,8 @@ export function exportCsv(config: ConfigInstance, module: BswmdModule): string {
     const eventId = value(entry, 'eventId');
     if (eventId === undefined) continue;
     for (const def of entry.definition.references.filter((ref) => ref.exportRole === 'dtc')) {
-      const target = entry.container.references.get(def.uuid)?.targetUuid;
+      const reference = entry.container.references.get(def.uuid);
+      const target = reference?.isConfigured ? reference.targetUuid : undefined;
       if (target) events.set(target, [...(events.get(target) ?? []), String(eventId)]);
     }
   }
@@ -47,10 +60,13 @@ export function exportCsv(config: ConfigInstance, module: BswmdModule): string {
     item.definition.parameters.some((p) => p.exportRole === 'dtcValue')
   )) {
     const number = value(entry, 'dtcValue');
+    // An optional, unconfigured key contributes no row, just as it contributes no VALUE/C field.
+    if (number === undefined) continue;
     if (typeof number !== 'number' || !Number.isInteger(number) || number < 0 || number > 0xffffff)
       throw new Error(`${entry.path}：DTC 值须为 0x000000 至 0xFFFFFF`);
     const ref = entry.definition.references.find((item) => item.exportRole === 'attributes');
-    const target = ref ? entry.container.references.get(ref.uuid)?.targetUuid : undefined;
+    const configuredRef = ref ? entry.container.references.get(ref.uuid) : undefined;
+    const target = configuredRef?.isConfigured ? configuredRef.targetUuid : undefined;
     rows.push([
       `0x${number.toString(16).toUpperCase().padStart(6, '0')}`,
       value(entry, 'severity'),

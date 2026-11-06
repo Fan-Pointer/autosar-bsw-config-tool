@@ -146,10 +146,13 @@ describe('TASK-006 workspace interactions', () => {
     const { wrapper, store, ids } = await workspace();
     const raw = JSON.parse(exportJson(store.config!)) as {
       configuration: {
-        containers: { subContainers: { references: { targetUuid: string }[] }[] }[];
+        containers: {
+          subContainers: { references: { targetUuid: string; isConfigured: boolean }[] }[];
+        }[];
       };
     };
     raw.configuration.containers[0].subContainers[0].references[0].targetUuid = 'deadbeef-missing';
+    raw.configuration.containers[0].subContainers[0].references[0].isConfigured = true;
     expect(
       await store.applyImport(store.prepareImport(JSON.stringify(raw), 'json'), 'overwrite')
     ).toBe(true);
