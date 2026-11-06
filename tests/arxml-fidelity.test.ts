@@ -7,7 +7,8 @@ import { BswmdParser } from '../src/core/bswmd/BswmdParser';
 import { importEcucModuleArxml } from '../src/core/bswmd/EcucArxmlImporter';
 import { ConfigInstanceManager } from '../src/core/config/ConfigInstance';
 import { cloneContainers } from '../src/core/config/ConfigClone';
-import { collectContainers } from '../src/core/config/ConfigTraversal';
+import { collectContainers, indexDefinitions } from '../src/core/config/ConfigTraversal';
+import { byPath } from './helpers/definitionIndex';
 import { exportArxml, importArxml, AUTOSAR_NAMESPACE } from '../src/core/io/Arxml';
 import { exportJson, importJson, serializeConfig } from '../src/core/io/ConfigJson';
 
@@ -254,34 +255,71 @@ describe('TASK-008 explicit ECUC configuration semantics', () => {
 });
 
 describe('official module regressions', () => {
-  it('Dem: the original 31-field/one-configured reproduction now rejects the other mandatory suggestions', () => {
+  it('Dem 4.4.0: one configured DTC field still rejects the other mandatory suggestions', () => {
     const module = new BswmdParser().parseFromJson(JSON.stringify(raw));
     const manager = new ConfigInstanceManager([module]),
       config = manager.createFromBswmd(module);
-    const root = config.containers[0];
-    for (const def of module.containers[0].subContainers)
-      manager.addContainerInstance(config, root.uuid, def.uuid);
-    manager.setParameterValue(root.subContainers[0], 'ecuc-dem-dtc-value', 42);
+    expect(indexDefinitions(module).size).toBe(67);
+    const root = config.containers.find((c) => c.definitionRef === byPath('DemConfigSet'))!;
+    const dtc = manager.addContainerInstance(config, root.uuid, byPath('DemConfigSet/DemDTC'));
+    const choice = collectContainers(config, module).find((e) => e.definition.choice)!;
+    manager.selectChoice(
+      config,
+      choice.container.uuid,
+      byPath('DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass/DemDebounceMonitorInternal')
+    );
+    manager.setParameterValue(dtc, byPath('DemConfigSet/DemDTC/DemDtcValue'), 42);
+    expect(dtc.parameters.size).toBe(5);
     expect(
       collectContainers(config, module).flatMap((e) => [...e.container.parameters.values()])
-    ).toHaveLength(31);
+    ).toHaveLength(55); // Official required tree (50) + one DTC (5), not the old 31-field mock.
     const configured = Object.values(flags(config, module)).filter(Boolean);
     expect(configured).toHaveLength(1);
-    expect(() => exportArxml(config, module)).toThrow('DemConfigSet/DemDTC/DemDTCSeverity');
+    // Severity is optional in the official release; every actually required field must be listed.
+    for (const entry of collectContainers(config, module))
+      for (const p of entry.definition.parameters.filter((p) => !p.isOptional))
+        expect(() => exportArxml(config, module)).toThrow(`${entry.path}/${p.shortName}`);
   });
-  it('Dem: one explicitly configured root parameter produces one VALUE and leaves all other flags false', () => {
+  it('Dem 4.4.0: explicit false survives output after all other required fields are confirmed', () => {
     const module = new BswmdParser().parseFromJson(JSON.stringify(raw));
     const manager = new ConfigInstanceManager([module]),
       config = manager.createFromBswmd(module);
-    const root = config.containers[0],
-      field = module.containers[0].parameters[0];
-    manager.setParameterValue(root, field.uuid, false);
+    const entries = collectContainers(config, module);
+    const general = entries.find((e) => e.definition.shortName === 'DemGeneral')!;
+    const field = general.definition.parameters.find((p) => p.shortName === 'DemDevErrorDetect')!;
+    manager.setParameterValue(general.container, field.uuid, false);
+    expect(Object.values(flags(config, module)).filter(Boolean)).toHaveLength(1);
+    const choice = entries.find((e) => e.definition.choice)!;
+    manager.selectChoice(
+      config,
+      choice.container.uuid,
+      byPath('DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass/DemDebounceMonitorInternal')
+    );
+    expect(() => exportArxml(config, module)).toThrow('必填项未配置');
+    let requiredCount = 0;
+    for (const entry of collectContainers(config, module)) {
+      for (const p of entry.definition.parameters.filter((p) => !p.isOptional)) {
+        manager.setParameterValue(
+          entry.container,
+          p.uuid,
+          entry.container.parameters.get(p.uuid)!.value
+        );
+        requiredCount++;
+      }
+    }
     const xml = exportArxml(config, module),
       document = doc(xml);
-    expect(document.querySelectorAll('VALUE')).toHaveLength(1);
-    expect(document.querySelector('ECUC-NUMERICAL-PARAM-VALUE > DEFINITION-REF')?.textContent).toBe(
-      `/AUTOSAR/EcucDefs/Dem/DemConfigSet/${field.shortName}`
+    expect(document.querySelectorAll('VALUE')).toHaveLength(requiredCount);
+    const expectedPath = '/AUTOSAR/EcucDefs/Dem/DemGeneral/DemDevErrorDetect';
+    expect(
+      raw.containers
+        .find((c) => c.shortName === 'DemGeneral')!
+        .parameters.find((p) => p.shortName === 'DemDevErrorDetect')!.definitionPath
+    ).toBe(expectedPath);
+    const emitted = [...document.querySelectorAll('ECUC-NUMERICAL-PARAM-VALUE')].find(
+      (node) => node.querySelector('DEFINITION-REF')?.textContent === expectedPath
     );
+    expect(emitted?.querySelector('VALUE')?.textContent).toBe('false');
     const copy = importArxml(xml, [module]);
     expect(flags(copy, module)).toEqual(flags(config, module));
     expect(copy.containers).toEqual(config.containers);

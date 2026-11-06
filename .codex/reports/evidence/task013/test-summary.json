@@ -1,0 +1,718 @@
+{
+  "baseline": {
+    "commit": "09be0e0f238fc44c7ff0498469da6d863390ce21",
+    "total": 265,
+    "passed": 195,
+    "failed": 70,
+    "pending": 0
+  },
+  "final": {
+    "total": 265,
+    "passed": 265,
+    "failed": 0,
+    "pending": 0
+  },
+  "originalFailures": [
+    {
+      "number": 1,
+      "file": "arxml-editor.test.ts",
+      "name": "explicit configuration flags in editor history and storage confirms an unchanged suggestion, changes export semantics, and undoes/redoes/persists that choice",
+      "error": "TypeError: Cannot read properties of undefined (reading 'uuid')",
+      "currentName": "explicit configuration flags in editor history and storage confirms an unchanged suggestion, changes export semantics, and undoes/redoes/persists that choice",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 2,
+      "file": "arxml-editor.test.ts",
+      "name": "explicit configuration flags in editor history and storage records reference selection and clearing flags in one-step undo/redo",
+      "error": "Error: Definition ecuc-dem-dtc-def is not allowed under 21769a36-1770-47a7-8e49-faa3596118c2",
+      "currentName": "explicit configuration flags in editor history and storage records reference selection and clearing flags in one-step undo/redo",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 3,
+      "file": "arxml-editor.test.ts",
+      "name": "explicit configuration flags in editor history and storage restores pre-flag local storage by inferring only selected targets, without changing UUIDs",
+      "error": "Error: Definition ecuc-dem-dtc-def is not allowed under 4350f679-675d-4872-ba5c-548d99cbcdf8",
+      "currentName": "explicit configuration flags in editor history and storage restores pre-flag local storage by inferring only selected targets, without changing UUIDs",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 4,
+      "file": "arxml-fidelity.test.ts",
+      "name": "official module regressions Dem: the original 31-field/one-configured reproduction now rejects the other mandatory suggestions",
+      "error": "Error: Parameter with definitionRef ecuc-dem-dtc-value not found in container DemEventParameter",
+      "currentName": "official module regressions Dem 4.4.0: one configured DTC field still rejects the other mandatory suggestions",
+      "method": "官方语义重算：67 定义、初始化 50 参数 + DTC 5；实际必填逐条断言，明确 false 与其余必填确认后往返",
+      "result": "passed"
+    },
+    {
+      "number": 5,
+      "file": "arxml-fidelity.test.ts",
+      "name": "official module regressions Dem: one explicitly configured root parameter produces one VALUE and leaves all other flags false",
+      "error": "TypeError: Cannot read properties of undefined (reading 'uuid')",
+      "currentName": "official module regressions Dem 4.4.0: explicit false survives output after all other required fields are confirmed",
+      "method": "官方语义重算：67 定义、初始化 50 参数 + DTC 5；实际必填逐条断言，明确 false 与其余必填确认后往返",
+      "result": "passed"
+    },
+    {
+      "number": 6,
+      "file": "ecuc-ui.test.ts",
+      "name": "D3 reference empty state names the missing target, creates and assigns it, and undoes the entire operation",
+      "error": "Error: Definition ecuc-dem-dtc-def is not allowed under c3aa1457-d7a1-4e14-8e80-77ccde9968ca",
+      "currentName": "D3 reference empty state names the missing target, creates and assigns it, and undoes the entire operation",
+      "method": "官方路径定位 DTC 与引用，创建/赋值/单步撤销断言保留",
+      "result": "passed"
+    },
+    {
+      "number": 7,
+      "file": "ecuc.test.ts",
+      "name": "official ECUC selected-module importer retains choice alternatives and cross-module destinations with visible export limitations",
+      "error": "AssertionError: expected false to be true // Object.is equality",
+      "currentName": "official ECUC selected-module importer retains choice alternatives and cross-module destinations with visible export limitations",
+      "method": "能力演进：保留候选/外部目标检查，CHOICE 可导出但未选择仍拒绝；检查真实限制文案",
+      "result": "passed"
+    },
+    {
+      "number": 8,
+      "file": "editor-ui.test.ts",
+      "name": "TASK-006 workspace interactions supports Ctrl/Shift selection, shared parameters, skip summaries and one-step batch undo",
+      "error": "AssertionError: expected '成功 0 项，跳过 3 项 DemConfigSet/DemDTC：类型不…' to contain '成功 2 项，跳过 1 项'",
+      "currentName": "TASK-006 workspace interactions supports Ctrl/Shift selection, shared parameters, skip summaries and one-step batch undo",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 9,
+      "file": "editor-ui.test.ts",
+      "name": "TASK-006 workspace interactions marks imported dangling references in tree and form, navigates errors, clears and undoes them",
+      "error": "Error: Unable to get [data-field=\"ECUC:89db0687-72d2-47f9-9e6a-6bcf25fde654\"] within: <div data-v-f1666959=\"\" class=\"workspace-container el-loading-parent--relative\" element-loading-text=\"正在应用导入…\" loading-number=\"1\">",
+      "currentName": "TASK-006 workspace interactions marks imported dangling references in tree and form, navigates errors, clears and undoes them",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 10,
+      "file": "editor-ui.test.ts",
+      "name": "TASK-006 workspace interactions searches across sets, highlights literal matches and focuses the selected parameter after switching",
+      "error": "AssertionError: expected 'input-ECUC:5cfc0dc1-0382-486c-90e9-a4…' to be 'input-ecuc-dem-dtc-value' // Object.is equality",
+      "currentName": "TASK-006 workspace interactions searches across sets, highlights literal matches and focuses the selected parameter after switching",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 11,
+      "file": "editor-ui.test.ts",
+      "name": "TASK-006 workspace interactions renders twenty undo steps within 500 ms and restores the full configuration",
+      "error": "AssertionError: expected 704.0624000000025 to be less than 500",
+      "currentName": "TASK-006 workspace interactions renders twenty undo steps within 500 ms and restores the full configuration",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 12,
+      "file": "editor.test.ts",
+      "name": "batch edits intersects by definition UUID, never by display name",
+      "error": "AssertionError: expected [] to include 'ECUC:5cfc0dc1-0382-486c-90e9-a4db3dff…'",
+      "currentName": "batch edits intersects by definition UUID, never by display name",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 13,
+      "file": "editor.test.ts",
+      "name": "batch edits reports 2 successes/1 disabled skip and undoes the batch as exactly one step",
+      "error": "AssertionError: expected +0 to be 2 // Object.is equality",
+      "currentName": "batch edits reports 2 successes/1 disabled skip and undoes the batch as exactly one step",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 14,
+      "file": "editor.test.ts",
+      "name": "global search and local theme indexes and searches 500 instances in at most 200 ms",
+      "error": "AssertionError: expected [ …(507) ] to have a length of 500 but got 507",
+      "currentName": "global search and local theme indexes and searches 500 instances in at most 200 ms",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 15,
+      "file": "editor.test.ts",
+      "name": "import hardening and diagnostics strips a complete internal declaration before parsing and decodes only builtin entities once",
+      "error": "Error: Definition ecuc-dem-dtc-attributes-def is not allowed under c4641254-0093-4103-9c8a-bc9466d49dfa",
+      "currentName": "import hardening and diagnostics strips a complete internal declaration before parsing and decodes only builtin entities once",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 16,
+      "file": "editor.test.ts",
+      "name": "import hardening and diagnostics reports actual/expected definition UUID and total occurrences for containers, parameters and references",
+      "error": "AssertionError: expected [Function] to throw error matching /实际值 unknown.*期望值 ecuc-.*出现次数 2/ but got '/DemConfigSet/DemEventParameter：未知或不属…'",
+      "currentName": "import hardening and diagnostics reports actual/expected definition UUID and total occurrences for containers, parameters and references",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 17,
+      "file": "editor.test.ts",
+      "name": "import hardening and diagnostics preserves literal CDATA alongside ordinary builtin and numeric entities",
+      "error": "Error: Definition ecuc-dem-dtc-attributes-def is not allowed under 443032bf-1327-41a7-84ee-b801fe17439a",
+      "currentName": "import hardening and diagnostics preserves literal CDATA alongside ordinary builtin and numeric entities",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 18,
+      "file": "editor.test.ts",
+      "name": "import hardening and diagnostics retains imported dangling UUIDs with field, instance and readable target prefix in violations",
+      "error": "TypeError: Cannot set properties of undefined (setting 'targetUuid')",
+      "currentName": "import hardening and diagnostics retains imported dangling UUIDs with field, instance and readable target prefix in violations",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 19,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO allows a field removed by import to be explicitly enabled again without showing a phantom default",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO allows a field removed by import to be explicitly enabled again without showing a phantom default",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 20,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO previews without mutation then commits one complete library and survives reload",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO previews without mutation then commits one complete library and survives reload",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 21,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO restores the entire JSON into an empty library including metadata and references",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO restores the entire JSON into an empty library including metadata and references",
+      "method": "测试隔离：仅清空内存 mock 后模拟空目标库；S1 未读库写保护不变",
+      "result": "passed"
+    },
+    {
+      "number": 22,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO persists the skip strategy from the same preview",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO persists the skip strategy from the same preview",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 23,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO persists the rename strategy from the same preview",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO persists the rename strategy from the same preview",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 24,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO leaves the exact original config, selection, dirty flag and storage after a failed write",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO leaves the exact original config, selection, dirty flag and storage after a failed write",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 25,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO rolls back a mid-plan failure injected after successful parsing without saving a partial tree",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO rolls back a mid-plan failure injected after successful parsing without saving a partial tree",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 26,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO rejects malformed input with a readable error and protects edits made after preview",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO rejects malformed input with a readable error and protects edits made after preview",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 27,
+      "file": "io-ui.test.ts",
+      "name": "transactional store IO does not publish staged state while writing and prevents concurrent editor actions",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "transactional store IO does not publish staged state while writing and prevents concurrent editor actions",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 28,
+      "file": "io-ui.test.ts",
+      "name": "import preview UI and project menus renders hostile file text literally in conflicts without creating HTML elements",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "import preview UI and project menus renders hostile file text literally in conflicts without creating HTML elements",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 29,
+      "file": "io-ui.test.ts",
+      "name": "import preview UI and project menus reads an actual file, shows exactly four conflict columns in order, and cancels without saving",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "import preview UI and project menus reads an actual file, shows exactly four conflict columns in order, and cancels without saving",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 30,
+      "file": "io-ui.test.ts",
+      "name": "import preview UI and project menus applies overwrite through the visible preview controls",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "import preview UI and project menus applies overwrite through the visible preview controls",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 31,
+      "file": "io-ui.test.ts",
+      "name": "import preview UI and project menus applies skip through the visible preview controls",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "import preview UI and project menus applies skip through the visible preview controls",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 32,
+      "file": "io-ui.test.ts",
+      "name": "import preview UI and project menus applies rename through the visible preview controls",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "import preview UI and project menus applies rename through the visible preview controls",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 33,
+      "file": "io-ui.test.ts",
+      "name": "import preview UI and project menus imports ARXML through the same local file preview and renders file strings as text",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "import preview UI and project menus imports ARXML through the same local file preview and renders file strings as text",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 34,
+      "file": "io-ui.test.ts",
+      "name": "import preview UI and project menus opens import/export submenus, downloads all three formats and distinguishes module/set tooltips",
+      "error": "TypeError: Cannot set properties of undefined (setting 'value')",
+      "currentName": "import preview UI and project menus opens import/export submenus, downloads all three formats and distinguishes module/set tooltips",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 35,
+      "file": "io.test.ts",
+      "name": "lossless JSON import/export round-trips every metadata field, UUID, definitionRef, parameter state and reference through a new set",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "lossless JSON import/export round-trips every metadata field, UUID, definitionRef, parameter state and reference through a new set",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 36,
+      "file": "io.test.ts",
+      "name": "lossless JSON import/export merges an export into a freshly initialized set with references remapped by path",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "lossless JSON import/export merges an export into a freshly initialized set with references remapped by path",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 37,
+      "file": "io.test.ts",
+      "name": "lossless JSON import/export rejects incompatible module versions and duplicate identities without mutating its source",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "lossless JSON import/export rejects incompatible module versions and duplicate identities without mutating its source",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 38,
+      "file": "io.test.ts",
+      "name": "lossless JSON import/export rejects wrong value types, duplicate fields and wrong-parent definitions",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "lossless JSON import/export rejects wrong value types, duplicate fields and wrong-parent definitions",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 39,
+      "file": "io.test.ts",
+      "name": "lossless JSON import/export accepts a UTF-8 BOM and retains dangling UUID references for existing validation",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "lossless JSON import/export accepts a UTF-8 BOM and retains dangling UUID references for existing validation",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 40,
+      "file": "io.test.ts",
+      "name": "ARXML structure and security uses r4.2.2, ECUC hierarchy, UUIDs, definition paths, and correct reference paths",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "ARXML structure and security uses r4.2.2, ECUC hierarchy, UUIDs, definition paths, and correct reference paths",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 41,
+      "file": "io.test.ts",
+      "name": "ARXML structure and security escapes and restores text including entities and whitespace without markup injection",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "ARXML structure and security escapes and restores text including entities and whitespace without markup injection",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 42,
+      "file": "io.test.ts",
+      "name": "ARXML structure and security accepts namespace-prefixed ARXML and generates missing UUIDs through the common utility",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "ARXML structure and security accepts namespace-prefixed ARXML and generates missing UUIDs through the common utility",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 43,
+      "file": "io.test.ts",
+      "name": "ARXML structure and security rejects malformed XML, wrong namespaces, multiple modules, unresolved references and excessive nesting",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "ARXML structure and security rejects malformed XML, wrong namespaces, multiple modules, unresolved references and excessive nesting",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 44,
+      "file": "io.test.ts",
+      "name": "conflict preview and immutable merge renames ARXML value conflicts without treating default/configured flags as value differences",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "conflict preview and immutable merge renames ARXML value conflicts without treating default/configured flags as value differences",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 45,
+      "file": "io.test.ts",
+      "name": "conflict preview and immutable merge applies overwrite with accurate conflicts, preserved originals and remapped references",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "conflict preview and immutable merge applies overwrite with accurate conflicts, preserved originals and remapped references",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 46,
+      "file": "io.test.ts",
+      "name": "conflict preview and immutable merge applies skip with accurate conflicts, preserved originals and remapped references",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "conflict preview and immutable merge applies skip with accurate conflicts, preserved originals and remapped references",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 47,
+      "file": "io.test.ts",
+      "name": "conflict preview and immutable merge applies rename with accurate conflicts, preserved originals and remapped references",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "conflict preview and immutable merge applies rename with accurate conflicts, preserved originals and remapped references",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 48,
+      "file": "io.test.ts",
+      "name": "conflict preview and immutable merge compares reference paths instead of UUIDs and shows both file and project targets",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "conflict preview and immutable merge compares reference paths instead of UUIDs and shows both file and project targets",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 49,
+      "file": "io.test.ts",
+      "name": "conflict preview and immutable merge counts removed parameters/references only on overwritten instances and preserves unrelated children",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "conflict preview and immutable merge counts removed parameters/references only on overwritten instances and preserves unrelated children",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 50,
+      "file": "io.test.ts",
+      "name": "conflict preview and immutable merge regenerates colliding UUIDs on new paths and prevents rename from exceeding multiplicity",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "conflict preview and immutable merge regenerates colliding UUIDs on new paths and prevents rename from exceeding multiplicity",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 51,
+      "file": "io.test.ts",
+      "name": "definition-driven DTC CSV exports BOM, one row per DTC, six-digit uppercase hex and referenced attributes / EventIds",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "definition-driven DTC CSV exports BOM, one row per DTC, six-digit uppercase hex and referenced attributes / EventIds",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 52,
+      "file": "io.test.ts",
+      "name": "definition-driven DTC CSV keeps extracting values after definitions and instances are renamed, escaping spreadsheet text",
+      "error": "Error: Parameter with definitionRef ECUC:5cfc0dc1-0382-486c-90e9-a4db3dffae90 not found in container DemEventParameter",
+      "currentName": "definition-driven DTC CSV keeps extracting values after definitions and instances are renamed, escaping spreadsheet text",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 53,
+      "file": "lifecycle.test.ts",
+      "name": "core cloning and lifecycle availability deep-copies a complete set, regenerates every UUID and remaps forward/cyclic references",
+      "error": "AssertionError: expected undefined to be 'ff65dbf6-10a0-4943-8ec3-51e7b5482ace' // Object.is equality",
+      "currentName": "core cloning and lifecycle availability deep-copies a complete set, regenerates every UUID and remaps forward/cyclic references",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 54,
+      "file": "lifecycle.test.ts",
+      "name": "core cloning and lifecycle availability remaps self and descendant targets when cloning a nested subtree",
+      "error": "Error: Definition ECUC:10f37378-2b66-4089-aec4-382cb9316830 is not allowed under 01a00c4d-59d2-4e7a-8918-7fd566de6158",
+      "currentName": "core cloning and lifecycle availability remaps self and descendant targets when cloning a nested subtree",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 55,
+      "file": "lifecycle.test.ts",
+      "name": "core cloning and lifecycle availability uses only direct definitions and handles zero upper bounds without mutation",
+      "error": "AssertionError: expected [Function] to throw an error",
+      "currentName": "core cloning and lifecycle availability uses only direct definitions and handles zero upper bounds without mutation",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 56,
+      "file": "lifecycle.test.ts",
+      "name": "configuration library and editor actions starts empty and creates named sets with unique identities and selected required roots",
+      "error": "AssertionError: expected [ { …(7) } ] to have a length of +0 but got 1",
+      "currentName": "configuration library and editor actions starts empty and creates named sets with unique identities and selected required roots",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 57,
+      "file": "lifecycle.test.ts",
+      "name": "configuration library and editor actions adds three uniquely named DTCs, selects them, falls back to parent on delete and reuses gaps safely",
+      "error": "AssertionError: expected [ 'DemEventParameter', 'DemDTC', …(2) ] to deeply equal [ 'DemDTC', 'DemDTC_2', 'DemDTC_3' ]",
+      "currentName": "configuration library and editor actions adds three uniquely named DTCs, selects them, falls back to parent on delete and reuses gaps safely",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 58,
+      "file": "lifecycle.test.ts",
+      "name": "configuration library and editor actions does not switch or discard dirty edits when storage rejects the outgoing save",
+      "error": "AssertionError: expected '075f82f9-692d-4761-9497-58a92b2154fa' to be 'd9a50ea0-b743-46d5-8c6f-2d66d15871b7' // Object.is equality",
+      "currentName": "configuration library and editor actions does not switch or discard dirty edits when storage rejects the outgoing save",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 59,
+      "file": "lifecycle.test.ts",
+      "name": "configuration library and editor actions clones a set with remapped reference choices and leaves source edits isolated",
+      "error": "AssertionError: expected undefined to be '733e665d-1c98-4da1-af72-52c7b69c16d4' // Object.is equality",
+      "currentName": "configuration library and editor actions clones a set with remapped reference choices and leaves source edits isolated",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 60,
+      "file": "lifecycle.test.ts",
+      "name": "configuration library and editor actions does not clear dirty state for edits made while an older snapshot is being saved",
+      "error": "AssertionError: expected false to be true // Object.is equality",
+      "currentName": "configuration library and editor actions does not clear dirty state for edits made while an older snapshot is being saved",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 61,
+      "file": "replica.test.ts",
+      "name": "screenshot replica interactions adds under a selected definition and filters mixed nodes by instance path",
+      "error": "AssertionError: expected [ { …(7) }, { …(7) } ] to have a length of 1 but got 2",
+      "currentName": "screenshot replica interactions adds under a selected definition and filters mixed nodes by instance path",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 62,
+      "file": "replica.test.ts",
+      "name": "screenshot replica interactions keeps disabled optional fields absent through save and restore",
+      "error": "TypeError: Cannot read properties of undefined (reading 'uuid')",
+      "currentName": "screenshot replica interactions keeps disabled optional fields absent through save and restore",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 63,
+      "file": "ui.test.ts",
+      "name": "definition-driven components renders enum, boolean, numeric and string controls with required markers and bounds",
+      "error": "AssertionError: expected { …(23) } to match object { min: 1, max: 256, step: 1, …(1) }",
+      "currentName": "definition-driven components renders enum, boolean, numeric and string controls with required markers and bounds",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 64,
+      "file": "ui.test.ts",
+      "name": "definition-driven components renders recursive tree nodes, multiplicities and distinct parameter/reference icons",
+      "error": "AssertionError: expected 'DemDemDemConfigSet1DemEventParameter1…' to contain 'DemOperationCycleType'",
+      "currentName": "definition-driven components renders recursive tree nodes, multiplicities and distinct parameter/reference icons",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 65,
+      "file": "ui.test.ts",
+      "name": "workspace integration and local persistence navigates from a real violation to the field and generates C after fixing the reference",
+      "error": "AssertionError: expected 'DemEventParameter' to be 'DemDTC' // Object.is equality",
+      "currentName": "workspace integration and local persistence navigates from a real violation to the field and generates C after fixing the reference",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 66,
+      "file": "ui.test.ts",
+      "name": "TASK-003 user interactions shows a real create action in the empty workspace and opens a named set with the DTC guide",
+      "error": "AssertionError: expected '☷BSW Configurator ↶  ↷ 生成 C 代码深色简体中文⌄…' to contain '添加第一条 DTC'",
+      "currentName": "TASK-003 user interactions shows a real create action in the empty workspace and opens a named set with the DTC guide",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 67,
+      "file": "ui.test.ts",
+      "name": "TASK-003 user interactions opens a child-definition chooser and disables upper-bound additions at the module root",
+      "error": "TypeError: Cannot read properties of undefined (reading 'disabled')",
+      "currentName": "TASK-003 user interactions opens a child-definition chooser and disables upper-bound additions at the module root",
+      "method": "现有 DOM 定位：按 child-option-name 找行中的添加按钮，仍断言禁用与上限原因",
+      "result": "passed"
+    },
+    {
+      "number": 68,
+      "file": "ui.test.ts",
+      "name": "TASK-003 user interactions uses confirmation for instance deletion and immediately selects its surviving parent",
+      "error": "AssertionError: expected [ { container: { …(7) }, …(2) }, …(8) ] to have a length of 2 but got 9",
+      "currentName": "TASK-003 user interactions uses confirmation for instance deletion and immediately selects its surviving parent",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 69,
+      "file": "ui.test.ts",
+      "name": "TASK-003 user interactions colors every conflicting node and focuses its exact field when a violation is clicked",
+      "error": "AssertionError: expected '84759328-17df-410b-bf1f-db98a05e74e9:…' to be '84759328-17df-410b-bf1f-db98a05e74e9:…' // Object.is equality",
+      "currentName": "TASK-003 user interactions colors every conflicting node and focuses its exact field when a violation is clicked",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    },
+    {
+      "number": 70,
+      "file": "ui.test.ts",
+      "name": "TASK-003 user interactions saves edits when returning home and opens the persisted set through the home list",
+      "error": "AssertionError: expected undefined to be 77 // Object.is equality",
+      "currentName": "TASK-003 user interactions saves edits when returning home and opens the persisted set through the home list",
+      "method": "合成定义：保留断言行为，替换错误的官方 UUID 借位/旧层级输入",
+      "result": "passed"
+    }
+  ],
+  "missingOldTests": [],
+  "recovery": [
+    {
+      "name": "safe library recovery isolates one old set without rewriting it or losing the compatible set",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery writes the permanent snapshot before the lock sidecar and reuses it after refresh",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery rejects every original write before mutation, including import, delete and definition registration",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery locks even when snapshot and sidecar writes both fail",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery exports raw data separately from recovery metadata without normalizing original fields",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery opens exact historical values without registering an editable old module or mutating records",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery persists and restores new draft sets separately, including their subsequent edits",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery leaves a compatible library untouched on load and preserves additional fields on save",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery isolates malformed definitions, preferences and duplicate set identities without discarding other records",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery preserves malformed whole libraries and never overwrites an unreadable storage source",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery protects a legacy v2-only source and identifies the correct raw export key",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery refuses stale-tab and direct-create writes when existing storage was not safely loaded",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery never rotates or removes a recovery snapshot during repeated draft saves",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery blocks concurrent writes while the recovery snapshot is still pending",
+      "status": "passed"
+    },
+    {
+      "name": "safe library recovery rechecks the write lock after initialization before importing definitions",
+      "status": "passed"
+    }
+  ],
+  "compiler": [
+    {
+      "name": "template and C generation compiles generated DEM and unusual-name C files using gcc -Werror",
+      "status": "passed"
+    }
+  ],
+  "rawReport": ".temp/task013-final-tests.json",
+  "rawSha256": "753259814f6472cc289a3d35de6d8761911518074a9c2c381105b9aa24764c57"
+}

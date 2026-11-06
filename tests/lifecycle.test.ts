@@ -5,8 +5,7 @@ import { ConfigInstanceManager } from '../src/core/config/ConfigInstance';
 import { cloneConfiguration } from '../src/core/config/ConfigClone';
 import { collectContainers } from '../src/core/config/ConfigTraversal';
 import { useConfigStore } from '../src/stores/configStore';
-import raw from '../bswmd/dem_bswmd.json';
-import { legacy } from './helpers/definitionIndex';
+import raw from './fixtures/synthetic-dem.json';
 
 const local = vi.hoisted(() => ({
   saved: new Map<string, unknown>(),
@@ -30,9 +29,13 @@ function fixture() {
   const manager = new ConfigInstanceManager([module]);
   const config = manager.createFromBswmd(module);
   const root = config.containers[0];
-  const dtc = manager.addContainerInstance(config, root.uuid, legacy('ecuc-dem-dtc-def'));
-  const attributes = manager.addContainerInstance(config, root.uuid, legacy('ecuc-dem-dtc-attributes-def'));
-  manager.setReferenceTarget(dtc, legacy('ecuc-dem-dtc-attributes-ref'), attributes.uuid);
+  const dtc = manager.addContainerInstance(config, root.uuid, 'fixture-dem-dtc-def');
+  const attributes = manager.addContainerInstance(
+    config,
+    root.uuid,
+    'fixture-dem-dtc-attributes-def'
+  );
+  manager.setReferenceTarget(dtc, 'fixture-dem-dtc-attributes-ref', attributes.uuid);
   return { module, manager, config, root, dtc, attributes };
 }
 
@@ -52,14 +55,14 @@ describe('core cloning and lifecycle availability', () => {
     const originalIds = new Set(originalEntries.map((entry) => entry.container.uuid));
     expect(copiedEntries.every((entry) => !originalIds.has(entry.container.uuid))).toBe(true);
     const [newDtc, newAttributes] = copy.containers[0].subContainers;
-    expect(newDtc.references.get(legacy('ecuc-dem-dtc-attributes-ref'))?.targetUuid).toBe(
+    expect(newDtc.references.get('fixture-dem-dtc-attributes-ref')?.targetUuid).toBe(
       newAttributes.uuid
     );
     expect(newAttributes.references.get('test-back')?.targetUuid).toBe(newDtc.uuid);
-    newDtc.parameters.get(legacy('ecuc-dem-dtc-value'))!.value = 123;
-    newDtc.references.get(legacy('ecuc-dem-dtc-attributes-ref'))!.targetUuid = '';
-    expect(dtc.parameters.get(legacy('ecuc-dem-dtc-value'))?.value).toBe(1);
-    expect(dtc.references.get(legacy('ecuc-dem-dtc-attributes-ref'))?.targetUuid).toBe(attributes.uuid);
+    newDtc.parameters.get('fixture-dem-dtc-value')!.value = 123;
+    newDtc.references.get('fixture-dem-dtc-attributes-ref')!.targetUuid = '';
+    expect(dtc.parameters.get('fixture-dem-dtc-value')?.value).toBe(1);
+    expect(dtc.references.get('fixture-dem-dtc-attributes-ref')?.targetUuid).toBe(attributes.uuid);
     expect(copiedEntries.map((entry) => entry.container.definitionRef)).toEqual(
       originalEntries.map((entry) => entry.container.definitionRef)
     );
@@ -69,10 +72,10 @@ describe('core cloning and lifecycle availability', () => {
     const { manager, config, dtc, attributes } = fixture();
     const clone = manager.cloneContainerInstance(config, dtc.uuid);
     expect(clone.shortName).toBe('DemDTC_2');
-    expect(clone.references.get(legacy('ecuc-dem-dtc-attributes-ref'))?.targetUuid).toBe('');
-    expect(dtc.references.get(legacy('ecuc-dem-dtc-attributes-ref'))?.targetUuid).toBe(attributes.uuid);
-    clone.parameters.get(legacy('ecuc-dem-dtc-value'))!.value = 5;
-    expect(dtc.parameters.get(legacy('ecuc-dem-dtc-value'))?.value).toBe(1);
+    expect(clone.references.get('fixture-dem-dtc-attributes-ref')?.targetUuid).toBe('');
+    expect(dtc.references.get('fixture-dem-dtc-attributes-ref')?.targetUuid).toBe(attributes.uuid);
+    clone.parameters.get('fixture-dem-dtc-value')!.value = 5;
+    expect(dtc.parameters.get('fixture-dem-dtc-value')?.value).toBe(1);
     expect(manager.cloneContainerInstance(config, dtc.uuid).shortName).toBe('DemDTC_3');
   });
 
@@ -81,14 +84,14 @@ describe('core cloning and lifecycle availability', () => {
     const dtcDefinition = module.containers[0].subContainers[0];
     dtcDefinition.subContainers = [module.containers[0].subContainers[1]];
     const nested = manager.addContainerInstance(config, dtc.uuid, attributes.definitionRef);
-    manager.setReferenceTarget(dtc, legacy('ecuc-dem-dtc-attributes-ref'), nested.uuid);
+    manager.setReferenceTarget(dtc, 'fixture-dem-dtc-attributes-ref', nested.uuid);
     nested.references.set('self', {
       definitionRef: 'self',
       targetUuid: nested.uuid,
       isConfigured: true,
     });
     const clone = manager.cloneContainerInstance(config, dtc.uuid);
-    expect(clone.references.get(legacy('ecuc-dem-dtc-attributes-ref'))?.targetUuid).toBe(
+    expect(clone.references.get('fixture-dem-dtc-attributes-ref')?.targetUuid).toBe(
       clone.subContainers[0].uuid
     );
     expect(clone.subContainers[0].references.get('self')?.targetUuid).toBe(
@@ -152,7 +155,7 @@ describe('configuration library and editor actions', () => {
     const ids: string[] = [];
     for (let i = 0; i < 3; i++) {
       store.selectContainer(root.uuid);
-      ids.push(store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!.uuid);
+      ids.push(store.addContainerInstance('fixture-dem-dtc-def')!.uuid);
     }
     expect(root.subContainers.map((item) => item.shortName)).toEqual([
       'DemDTC',
@@ -163,7 +166,7 @@ describe('configuration library and editor actions', () => {
     store.selectContainer(ids[1]);
     store.removeContainerInstance(ids[1]);
     expect(store.selectedEntry?.container.uuid).toBe(root.uuid);
-    store.addContainerInstance(legacy('ecuc-dem-dtc-def'));
+    store.addContainerInstance('fixture-dem-dtc-def');
     expect(new Set(root.subContainers.map((item) => item.shortName)).size).toBe(3);
   });
 
@@ -172,17 +175,17 @@ describe('configuration library and editor actions', () => {
     await store.createConfigSet('A');
     const first = store.config!.uuid;
     const root = store.config!.containers[0];
-    const dtc = store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!;
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 27);
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
+    store.setParameterValue('fixture-dem-dtc-value', 27);
     store.selectContainer(root.uuid);
-    const attributes = store.addContainerInstance(legacy('ecuc-dem-dtc-attributes-def'))!;
+    const attributes = store.addContainerInstance('fixture-dem-dtc-attributes-def')!;
     store.selectContainer(dtc.uuid);
-    store.setReferenceTarget(legacy('ecuc-dem-dtc-attributes-ref'), attributes.uuid);
+    store.setReferenceTarget('fixture-dem-dtc-attributes-ref', attributes.uuid);
     await store.createConfigSet('B');
     const second = store.config!.uuid;
     await store.switchConfigSet(first);
     store.selectContainer(dtc.uuid);
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 42);
+    store.setParameterValue('fixture-dem-dtc-value', 42);
     await store.switchConfigSet(second);
     setActivePinia(createPinia());
     const restored = useConfigStore();
@@ -191,11 +194,11 @@ describe('configuration library and editor actions', () => {
     expect(restored.configSets).toHaveLength(2);
     await restored.switchConfigSet(first);
     restored.selectContainer(dtc.uuid);
-    expect(restored.parameterData[legacy('ecuc-dem-dtc-value')]).toBe(42);
-    expect(restored.referenceData[legacy('ecuc-dem-dtc-attributes-ref')]).toBe(attributes.uuid);
+    expect(restored.parameterData['fixture-dem-dtc-value']).toBe(42);
+    expect(restored.referenceData['fixture-dem-dtc-attributes-ref']).toBe(attributes.uuid);
     expect(restored.selectedEntry?.container.parameters).toBeInstanceOf(Map);
     restored.selectContainer(root.uuid);
-    expect(restored.addContainerInstance(legacy('ecuc-dem-dtc-def'))?.shortName).toBe('DemDTC_2');
+    expect(restored.addContainerInstance('fixture-dem-dtc-def')?.shortName).toBe('DemDTC_2');
   });
 
   it('does not switch or discard dirty edits when storage rejects the outgoing save', async () => {
@@ -204,12 +207,12 @@ describe('configuration library and editor actions', () => {
     const first = store.activeUuid!;
     await store.createConfigSet('B');
     const current = store.activeUuid;
-    store.setParameterValue(legacy('ecuc-dem-general-max-number-event'), 44);
+    store.setParameterValue('fixture-dem-general-max-number-event', 44);
     local.setItem.mockRejectedValueOnce(new Error('quota exceeded'));
     expect(await store.switchConfigSet(first)).toBe(false);
     expect(store.activeUuid).toBe(current);
     expect(store.isDirty).toBe(true);
-    expect(store.parameterData[legacy('ecuc-dem-general-max-number-event')]).toBe(44);
+    expect(store.parameterData['fixture-dem-general-max-number-event']).toBe(44);
     expect(store.error).toBe('quota exceeded');
   });
 
@@ -218,22 +221,22 @@ describe('configuration library and editor actions', () => {
     await store.createConfigSet('A');
     const sourceId = store.activeUuid!;
     const root = store.config!.containers[0];
-    const dtc = store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!;
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
     store.selectContainer(root.uuid);
-    const attributes = store.addContainerInstance(legacy('ecuc-dem-dtc-attributes-def'))!;
+    const attributes = store.addContainerInstance('fixture-dem-dtc-attributes-def')!;
     store.selectContainer(dtc.uuid);
-    store.setReferenceTarget(legacy('ecuc-dem-dtc-attributes-ref'), attributes.uuid);
+    store.setReferenceTarget('fixture-dem-dtc-attributes-ref', attributes.uuid);
     expect(await store.cloneConfigSet(sourceId)).toBe(true);
     const copyDtc = store.config!.containers[0].subContainers[0];
     const copyAttributes = store.config!.containers[0].subContainers[1];
-    expect(copyDtc.references.get(legacy('ecuc-dem-dtc-attributes-ref'))?.targetUuid).toBe(
+    expect(copyDtc.references.get('fixture-dem-dtc-attributes-ref')?.targetUuid).toBe(
       copyAttributes.uuid
     );
     store.selectContainer(copyDtc.uuid);
-    store.setReferenceTarget(legacy('ecuc-dem-dtc-attributes-ref'), '');
+    store.setReferenceTarget('fixture-dem-dtc-attributes-ref', '');
     await store.switchConfigSet(sourceId);
     store.selectContainer(dtc.uuid);
-    expect(store.referenceData[legacy('ecuc-dem-dtc-attributes-ref')]).toBe(attributes.uuid);
+    expect(store.referenceData['fixture-dem-dtc-attributes-ref']).toBe(attributes.uuid);
   });
 
   it('deletes current sets with first-set fallback and persists a truly empty library', async () => {
@@ -293,24 +296,30 @@ describe('configuration library and editor actions', () => {
     );
     const saving = store.saveConfig();
     await vi.waitFor(() => expect(release).toBeDefined());
-    store.setParameterValue(legacy('ecuc-dem-general-max-number-event'), 99);
+    store.setParameterValue('fixture-dem-general-max-number-event', 99);
     release!();
     await saving;
     expect(store.isDirty).toBe(true);
-    expect(store.parameterData[legacy('ecuc-dem-general-max-number-event')]).toBe(99);
+    expect(store.parameterData['fixture-dem-general-max-number-event']).toBe(99);
   });
 
   it('revalidates both duplicate nodes on edits and removes diagnostics after fixing the value', () => {
     const store = useConfigStore();
     store.createConfig();
     const root = store.config!.containers[0];
-    const first = store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!;
+    const first = store.addContainerInstance('fixture-dem-dtc-def')!;
     store.selectContainer(root.uuid);
-    const second = store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!;
+    const second = store.addContainerInstance('fixture-dem-dtc-def')!;
     expect(
       store.violations.filter((item) => item.ruleId === 'DEM-001').map((item) => item.containerUuid)
     ).toEqual([first.uuid, second.uuid]);
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 2);
+    store.setParameterValue('fixture-dem-dtc-value', 2);
     expect(store.violations.filter((item) => item.ruleId === 'DEM-001')).toEqual([]);
   });
 });
+
+// Only the input definition is replaced. Store, parser, IO, history and UI remain real.
+// Official 4.4.0 integration is covered separately by core/ecuc/choice/recovery tests.
+vi.mock('../bswmd/dem_bswmd.json?raw', async () => ({
+  default: JSON.stringify((await import('./fixtures/synthetic-dem.json')).default),
+}));

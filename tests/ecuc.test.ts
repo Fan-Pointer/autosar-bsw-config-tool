@@ -82,8 +82,14 @@ describe('official ECUC selected-module importer', () => {
         .flatMap((item) => item.references)
         .every((item) => item.destinationRef?.startsWith('/AUTOSAR/EcucDefs/'))
     ).toBe(true);
-    expect(module.importWarnings?.some((item) => item.includes('CHOICE'))).toBe(true);
-    expect(module.importWarnings?.some((item) => item.includes('其他模块'))).toBe(true);
+    // TASK-009 implemented inline CHOICE support; an empty mandatory choice still blocks output.
+    const choice = defs.find((item) => item.shortName === 'NvMTargetBlockReference')!;
+    expect(choice.choice?.candidateRefs).toEqual(choice.subContainers.map((item) => item.uuid));
+    expect(module.arxmlExportBlockers).toEqual([]);
+    expect(
+      module.importWarnings?.some((item) => item.includes('CHOICE 分组需选择一个候选后导出'))
+    ).toBe(true);
+    expect(module.importWarnings?.some((item) => /位于本模块之外|跨模块/.test(item))).toBe(true);
     expect(() => exportArxml(new ConfigInstanceManager().createFromBswmd(module), module)).toThrow(
       'CHOICE'
     );

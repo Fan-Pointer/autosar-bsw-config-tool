@@ -13,6 +13,7 @@ import ConfigTree from '../src/ui/ConfigTree/ConfigTree.vue';
 import WorkspaceView from '../src/views/WorkspaceView.vue';
 import { EcucDefinitionSession } from '../src/ui/Modules/EcucDefinitionSession';
 import { exportJson } from '../src/core/io/ConfigJson';
+import { byPath } from './helpers/definitionIndex';
 
 const nvm = readFileSync('tests/fixtures/ecuc-nvm.arxml', 'utf8');
 const canif = readFileSync('tests/fixtures/ecuc-canif.arxml', 'utf8');
@@ -264,7 +265,7 @@ describe('D3 reference empty state', () => {
   it('names the missing target, creates and assigns it, and undoes the entire operation', async () => {
     const store = useConfigStore();
     await store.createConfigSet('Reference test');
-    store.addContainerInstance('ecuc-dem-dtc-def');
+    store.addContainerInstance(byPath('DemConfigSet/DemDTC'));
     const wrapper = await workspace();
     await wrapper.get('[aria-label="选择 DemDTCAttributesRef"]').trigger('click');
     await flushPromises();
@@ -273,7 +274,7 @@ describe('D3 reference empty state', () => {
     const before = exportJson(store.config!);
     (dialog.querySelector('button') as HTMLButtonElement).click();
     await nextTick();
-    expect(store.referenceData['ecuc-dem-dtc-attributes-ref']).not.toBe('');
+    expect(store.referenceData[byPath('DemConfigSet/DemDTC/DemDTCAttributesRef')]).not.toBe('');
     expect(store.entries.some((entry) => entry.definition.shortName === 'DemDTCAttributes')).toBe(
       true
     );

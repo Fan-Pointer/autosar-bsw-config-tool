@@ -13,7 +13,6 @@ import { collectContainers } from '../src/core/config/ConfigTraversal';
 import { commonParameters, batchSkipReason } from '../src/core/config/BatchEdit';
 import { initializeTheme, setTheme } from '../src/ui/Theme/theme';
 import { completeDemArxml } from './helpers/completeDemArxml';
-import { legacy } from './helpers/definitionIndex';
 
 const saved = vi.hoisted(() => new Map<string, unknown>());
 vi.mock('localforage', () => ({
@@ -43,7 +42,7 @@ function fixture(count = 1) {
   const ids: string[] = [];
   for (let i = 0; i < count; i++) {
     store.selectContainer(root.uuid);
-    ids.push(store.addContainerInstance(legacy('ecuc-dem-dtc-def'))!.uuid);
+    ids.push(store.addContainerInstance('fixture-dem-dtc-def')!.uuid);
   }
   store.selectContainer(ids[0]);
   return { store, root, ids };
@@ -82,7 +81,7 @@ describe('bounded editor history', () => {
   it('restores byte-identical JSON after twenty undo/redo steps, including timestamps and flags', () => {
     const { store } = fixture();
     const initial = exportJson(store.config!);
-    for (let i = 1; i <= 20; i++) store.setParameterValue(legacy('ecuc-dem-dtc-value'), i + 1);
+    for (let i = 1; i <= 20; i++) store.setParameterValue('fixture-dem-dtc-value', i + 1);
     const final = exportJson(store.config!);
     const start = performance.now();
     for (let i = 0; i < 20; i++) store.undo();
@@ -97,11 +96,11 @@ describe('bounded editor history', () => {
   it('undoes value/add/reference/delete across types without dangling targets and replays exact UUIDs', () => {
     const { store, root, ids } = fixture();
     const initial = exportJson(store.config!);
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 42);
+    store.setParameterValue('fixture-dem-dtc-value', 42);
     store.selectContainer(root.uuid);
-    const target = store.addContainerInstance(legacy('ecuc-dem-dtc-attributes-def'))!;
+    const target = store.addContainerInstance('fixture-dem-dtc-attributes-def')!;
     store.selectContainer(ids[0]);
-    store.setReferenceTarget(legacy('ecuc-dem-dtc-attributes-ref'), target.uuid);
+    store.setReferenceTarget('fixture-dem-dtc-attributes-ref', target.uuid);
     store.removeContainerInstance(target.uuid);
     expect(store.violations.some((v) => v.ruleId === 'BSWMD-DANGLING-REFERENCE')).toBe(true);
     const final = exportJson(store.config!);
@@ -114,28 +113,28 @@ describe('bounded editor history', () => {
 
   it('refreshes validation after undo, including invalid in-progress values', () => {
     const { store } = fixture();
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), -1);
-    expect(store.violations.some((v) => v.definitionRef === legacy('ecuc-dem-dtc-value'))).toBe(true);
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 42);
-    expect(store.violations.some((v) => v.definitionRef === legacy('ecuc-dem-dtc-value'))).toBe(false);
+    store.setParameterValue('fixture-dem-dtc-value', -1);
+    expect(store.violations.some((v) => v.definitionRef === 'fixture-dem-dtc-value')).toBe(true);
+    store.setParameterValue('fixture-dem-dtc-value', 42);
+    expect(store.violations.some((v) => v.definitionRef === 'fixture-dem-dtc-value')).toBe(false);
     store.undo();
-    expect(store.violations.some((v) => v.definitionRef === legacy('ecuc-dem-dtc-value'))).toBe(true);
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 'unfinished');
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 42);
+    expect(store.violations.some((v) => v.definitionRef === 'fixture-dem-dtc-value')).toBe(true);
+    store.setParameterValue('fixture-dem-dtc-value', 'unfinished');
+    store.setParameterValue('fixture-dem-dtc-value', 42);
     store.undo();
-    expect(store.parameterData[legacy('ecuc-dem-dtc-value')]).toBe('unfinished');
+    expect(store.parameterData['fixture-dem-dtc-value']).toBe('unfinished');
   });
 
   it('isolates histories by configuration set and resets the imported/reloaded set history', async () => {
     const { store, ids } = fixture();
     const first = store.activeUuid!;
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 42);
+    store.setParameterValue('fixture-dem-dtc-value', 42);
     await store.createConfigSet('Second');
     expect(store.canUndo).toBe(false);
     await store.switchConfigSet(first);
     store.undo();
     store.selectContainer(ids[0]);
-    expect(store.parameterData[legacy('ecuc-dem-dtc-value')]).toBe(1);
+    expect(store.parameterData['fixture-dem-dtc-value']).toBe(1);
     store.redo();
     const session = store.prepareImport(store.exportConfig('json'), 'json');
     expect(await store.applyImport(session, 'overwrite')).toBe(true);
@@ -152,7 +151,7 @@ describe('bounded editor history', () => {
     store.selectContainer(ids[0]);
     store.cloneContainerInstance();
     store.renameContainer('CustomCopy');
-    store.setParameterValue(legacy('ecuc-dem-dtc-j1939-node-ref'), undefined);
+    store.setParameterValue('fixture-text-payload', undefined);
     const final = exportJson(store.config!);
     for (let i = 0; i < 4; i++) store.undo();
     expect(exportJson(store.config!)).toBe(initial);
@@ -165,7 +164,7 @@ describe('batch edits', () => {
   it('intersects by definition UUID, never by display name', () => {
     const { store } = fixture(3);
     const entries = store.entries.slice(1);
-    expect(commonParameters(entries).map((p) => p.uuid)).toContain(legacy('ecuc-dem-dtc-value'));
+    expect(commonParameters(entries).map((p) => p.uuid)).toContain('fixture-dem-dtc-value');
     const other = {
       ...entries[1],
       definition: {
@@ -174,14 +173,14 @@ describe('batch edits', () => {
       },
     };
     expect(commonParameters([entries[0], other]).map((p) => p.uuid)).not.toContain(
-      legacy('ecuc-dem-dtc-value')
+      'fixture-dem-dtc-value'
     );
     expect(commonParameters([store.entries[0], entries[0]])).toEqual([]);
   });
 
   it('reports 2 successes/1 disabled skip and undoes the batch as exactly one step', () => {
     const { store, ids } = fixture(3);
-    const field = legacy('ecuc-dem-dtc-j1939-node-ref');
+    const field = 'fixture-text-payload';
     store.selectContainer(ids[2]);
     store.setParameterValue(field, undefined);
     store.selectedContainerUuids = ids;
@@ -190,7 +189,7 @@ describe('batch edits', () => {
     expect(result.success).toBe(2);
     expect(result.skipped).toHaveLength(1);
     expect(result.skipped[0]).toContain('已禁用');
-    expect(store.undoLabel).toBe('批量修改 DemJ1939DTC_J1939NodeRef');
+    expect(store.undoLabel).toBe('批量修改 FixtureText');
     store.undo();
     expect(exportJson(store.config!)).toBe(initial);
     store.redo();
@@ -205,12 +204,12 @@ describe('batch edits', () => {
     const { store, ids } = fixture(3);
     store.selectedContainerUuids = ids;
     const initial = exportJson(store.config!);
-    expect(store.batchSetParameter(legacy('ecuc-dem-dtc-value'), 25).success).toBe(3);
+    expect(store.batchSetParameter('fixture-dem-dtc-value', 25).success).toBe(3);
     store.undo();
     expect(exportJson(store.config!)).toBe(initial);
     expect(() => store.batchSetParameter('absent', 1)).toThrow('共有');
-    expect(store.batchSetParameter(legacy('ecuc-dem-dtc-value'), '25').skipped).toHaveLength(3);
-    expect(store.batchSetParameter(legacy('ecuc-dem-dtc-value'), -1).skipped[0]).toContain('超出范围');
+    expect(store.batchSetParameter('fixture-dem-dtc-value', '25').skipped).toHaveLength(3);
+    expect(store.batchSetParameter('fixture-dem-dtc-value', -1).skipped[0]).toContain('超出范围');
     const entry = store.selectedEntries[0],
       def = entry.definition.parameters[0];
     expect(batchSkipReason(entry, { ...def, readOnly: true }, 25)).toBe('只读');
@@ -223,11 +222,11 @@ describe('batch edits', () => {
 describe('global search and local theme', () => {
   it('finds names, values and paths across sets, including case-insensitive literal characters', () => {
     const { store } = fixture();
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 123456);
+    store.setParameterValue('fixture-dem-dtc-value', 123456);
     store.createConfig(undefined, 'Another');
     const index = buildSearchIndex(store.configSets, store.modules);
     expect(searchConfigurations(index, 'demdtcvalue')).toHaveLength(1);
-    expect(searchConfigurations(index, '123456')[0].fieldUuid).toBe(legacy('ecuc-dem-dtc-value'));
+    expect(searchConfigurations(index, '123456')[0].fieldUuid).toBe('fixture-dem-dtc-value');
     expect(searchConfigurations(index, 'DemConfigSet/DemDTC').length).toBeGreaterThan(1);
     expect(searchConfigurations(index, '.*')).toEqual([]);
     expect(searchConfigurations(index, '')).toEqual([]);
@@ -237,7 +236,7 @@ describe('global search and local theme', () => {
     const { store, root } = fixture();
     const manager = new ConfigInstanceManager(store.modules);
     for (let i = 0; i < 498; i++)
-      manager.addContainerInstance(store.config!, root.uuid, legacy('ecuc-dem-dtc-def'));
+      manager.addContainerInstance(store.config!, root.uuid, 'fixture-dem-dtc-def');
     expect(collectContainers(store.config!, store.module!)).toHaveLength(500);
     const start = performance.now();
     const matches = searchConfigurations(
@@ -252,7 +251,7 @@ describe('global search and local theme', () => {
 
   it('persists theme across initialization without changing dirty edits or selection', () => {
     const { store } = fixture();
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 99);
+    store.setParameterValue('fixture-dem-dtc-value', 99);
     const initial = exportJson(store.config!),
       selected = store.selectedKey;
     setTheme('dark');
@@ -343,13 +342,13 @@ describe('import hardening and diagnostics', () => {
         else item.references[0].definitionRef = 'unknown';
       }
       expect(() => hydrateConfig(raw, store.modules)).toThrow(
-        /实际值 unknown.*期望值 ecuc-.*出现次数 2/
+        /实际值 unknown.*期望值 fixture-.*出现次数 2/
       );
     }
   });
   it('preserves literal CDATA alongside ordinary builtin and numeric entities', () => {
     const { store } = fixture();
-    store.setParameterValue(legacy('ecuc-dem-dtc-j1939-node-ref'), 'CDATA_SENTINEL');
+    store.setParameterValue('fixture-text-payload', 'CDATA_SENTINEL');
     completeDemArxml(store.config!, store.module!);
     const xml = exportArxml(store.config!, store.module!).replace(
       '>CDATA_SENTINEL<',
@@ -357,28 +356,34 @@ describe('import hardening and diagnostics', () => {
     );
     const restored = importArxml(xml, store.modules);
     expect(
-      restored.containers[0].subContainers[0].parameters.get(legacy('ecuc-dem-dtc-j1939-node-ref'))?.value
+      restored.containers[0].subContainers[0].parameters.get('fixture-text-payload')?.value
     ).toBe('literal &amp; <text> & A');
   });
   it('retains imported dangling UUIDs with field, instance and readable target prefix in violations', async () => {
     const { store, ids } = fixture();
     const incoming = importJson(exportJson(store.config!), store.modules);
     incoming.containers[0].subContainers[0].references.get(
-      legacy('ecuc-dem-dtc-attributes-ref')
+      'fixture-dem-dtc-attributes-ref'
     )!.targetUuid = 'deadbeef-missing-target';
     const session = store.prepareImport(exportJson(incoming), 'json');
     expect(await store.applyImport(session, 'overwrite')).toBe(true);
     store.selectContainer(ids[0]);
-    expect(store.danglingReferences).toContain(legacy('ecuc-dem-dtc-attributes-ref'));
+    expect(store.danglingReferences).toContain('fixture-dem-dtc-attributes-ref');
     expect(store.violations.find((v) => v.ruleId === 'BSWMD-DANGLING-REFERENCE')).toMatchObject({
       severity: 'ERROR',
       containerUuid: ids[0],
-      definitionRef: legacy('ecuc-dem-dtc-attributes-ref'),
+      definitionRef: 'fixture-dem-dtc-attributes-ref',
       message: 'DemDTCAttributesRef：目标不存在（deadbeef）',
     });
-    store.setReferenceTarget(legacy('ecuc-dem-dtc-attributes-ref'), '');
+    store.setReferenceTarget('fixture-dem-dtc-attributes-ref', '');
     expect(store.danglingReferences).toEqual([]);
     store.undo();
     expect(store.danglingReferences).toHaveLength(1);
   });
 });
+
+// Only the input definition is replaced. Store, parser, IO, history and UI remain real.
+// Official 4.4.0 integration is covered separately by core/ecuc/choice/recovery tests.
+vi.mock('../bswmd/dem_bswmd.json?raw', async () => ({
+  default: JSON.stringify((await import('./fixtures/synthetic-dem.json')).default),
+}));

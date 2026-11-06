@@ -1117,7 +1117,7 @@ export const useConfigStore = defineStore('config', () => {
         })
       );
     } catch (reason) {
-      recoveryWarning.value = `${recoveryWarning.value ?? ''} 隔离状态未能持久化，原库仍受保护；下次启动会重新检测：${String(reason)}`;
+      recoveryWarning.value = `${recoveryWarning.value ?? ''} 隔离状态未能持久化，原库仍受保护；下次启动会重新检测。请先导出原始数据，再关闭页面：${String(reason)}`;
     }
   }
 
@@ -1169,6 +1169,11 @@ export const useConfigStore = defineStore('config', () => {
         JSON.stringify(
           {
             kind: 'autosar-bsw-raw-export',
+            readme: {
+              rawJson: '原配置库的原样 JSON 字符串，包含尚未恢复的条目；请保留完整内容。',
+              recoveryState: '隔离原因、写锁与快照索引，仅用于说明恢复状态，不替代原配置数据。',
+              draftLibrary: '锁定期间单独保存的新配置草稿，与原配置库分离；可能为空。',
+            },
             exportedAt: new Date().toISOString(),
             sourceKey,
             rawJson: JSON.stringify(raw),

@@ -244,3 +244,9 @@ describe('screenshot replica interactions', () => {
     expect(store.selectedEntry!.container.parameters.get(optional.uuid)?.isConfigured).toBe(true);
   });
 });
+
+// Only the input definition is replaced. Store, parser, IO, history and UI remain real.
+// Official 4.4.0 integration is covered separately by core/ecuc/choice/recovery tests.
+vi.mock('../bswmd/dem_bswmd.json?raw', async () => ({
+  default: JSON.stringify((await import('./fixtures/synthetic-dem.json')).default),
+}));

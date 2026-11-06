@@ -12,7 +12,6 @@ import { ConfigInstanceManager } from '../src/core/config/ConfigInstance';
 import { isHistoryShortcut } from '../src/ui/History/useHistory';
 import { exportJson } from '../src/core/io/ConfigJson';
 import { initializeTheme, setTheme } from '../src/ui/Theme/theme';
-import { legacy } from './helpers/definitionIndex';
 
 const saved = vi.hoisted(() => new Map<string, unknown>());
 vi.mock('localforage', () => ({
@@ -47,7 +46,7 @@ async function workspace(count = 1) {
   const manager = new ConfigInstanceManager(store.modules);
   const ids: string[] = [];
   for (let i = 0; i < count; i++)
-    ids.push(manager.addContainerInstance(store.config!, root.uuid, legacy('ecuc-dem-dtc-def')).uuid);
+    ids.push(manager.addContainerInstance(store.config!, root.uuid, 'fixture-dem-dtc-def').uuid);
   store.selectContainer(ids[0]);
   store.validate();
   const router = createRouter({
@@ -69,7 +68,7 @@ describe('TASK-006 workspace interactions', () => {
   it('uses toolbar and Ctrl/Cmd shortcuts but preserves native input/IME/contenteditable undo', async () => {
     const { wrapper, store } = await workspace();
     expect(wrapper.get('[aria-label="撤销"]').attributes('disabled')).toBeDefined();
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 42);
+    store.setParameterValue('fixture-dem-dtc-value', 42);
     await nextTick();
     expect(wrapper.get('[aria-label="撤销"]').attributes('title')).toBe('撤销：修改 DemDtcValue');
     const before = exportJson(store.config!);
@@ -105,20 +104,20 @@ describe('TASK-006 workspace interactions', () => {
       new KeyboardEvent('keydown', { key: 'z', metaKey: true, bubbles: true, cancelable: true })
     );
     await nextTick();
-    expect(store.parameterData[legacy('ecuc-dem-dtc-value')]).toBe(1);
+    expect(store.parameterData['fixture-dem-dtc-value']).toBe(1);
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'y', ctrlKey: true, bubbles: true }));
     await nextTick();
-    expect(store.parameterData[legacy('ecuc-dem-dtc-value')]).toBe(42);
+    expect(store.parameterData['fixture-dem-dtc-value']).toBe(42);
     await wrapper.get('[aria-label="撤销"]').trigger('click');
-    expect(store.parameterData[legacy('ecuc-dem-dtc-value')]).toBe(1);
+    expect(store.parameterData['fixture-dem-dtc-value']).toBe(1);
     await wrapper.get('[aria-label="重做"]').trigger('click');
-    expect(store.parameterData[legacy('ecuc-dem-dtc-value')]).toBe(42);
+    expect(store.parameterData['fixture-dem-dtc-value']).toBe(42);
   });
 
   it('supports Ctrl/Shift selection, shared parameters, skip summaries and one-step batch undo', async () => {
     const { wrapper, store, ids } = await workspace(3);
     store.selectContainer(ids[2]);
-    store.setParameterValue(legacy('ecuc-dem-dtc-j1939-node-ref'), undefined);
+    store.setParameterValue('fixture-text-payload', undefined);
     await nextTick();
     const node = (id: string) => wrapper.get(`[data-container-id="${id}"] .node-label`);
     await node(ids[0]).trigger('click');
@@ -132,7 +131,7 @@ describe('TASK-006 workspace interactions', () => {
       .findAll('[aria-label="批量参数"] option')
       .map((option) => option.attributes('value'));
     expect(options).toEqual(store.batchParameters.map((p) => p.uuid));
-    await wrapper.get('[aria-label="批量参数"]').setValue(legacy('ecuc-dem-dtc-j1939-node-ref'));
+    await wrapper.get('[aria-label="批量参数"]').setValue('fixture-text-payload');
     await wrapper.get('[aria-label="批量值"]').setValue('Updated');
     const before = exportJson(store.config!);
     await wrapper.get('[aria-label="批量修改"] .el-button').trigger('click');
@@ -163,12 +162,12 @@ describe('TASK-006 workspace interactions', () => {
     expect(violation.exists()).toBe(true);
     await violation.trigger('click');
     await flushPromises();
-    const field = wrapper.get(`[data-field="${legacy('ecuc-dem-dtc-attributes-ref')}"]`);
+    const field = wrapper.get(`[data-field="${'fixture-dem-dtc-attributes-ref'}"]`);
     expect(field.classes()).toContain('dangling-reference');
     expect(field.classes()).toContain('selected-field');
     expect(field.text()).toContain('目标不存在');
     await field.get('button.clear-reference').trigger('click');
-    expect(store.referenceData[legacy('ecuc-dem-dtc-attributes-ref')]).toBe('');
+    expect(store.referenceData['fixture-dem-dtc-attributes-ref']).toBe('');
     expect(wrapper.find('.dangling-reference').exists()).toBe(false);
     await wrapper.get('[aria-label="撤销"]').trigger('click');
     expect(wrapper.find('.dangling-reference').exists()).toBe(true);
@@ -177,8 +176,8 @@ describe('TASK-006 workspace interactions', () => {
 
   it('refreshes both the validation panel and tree after undoing a repair', async () => {
     const { wrapper, store, ids } = await workspace();
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), -1);
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 42);
+    store.setParameterValue('fixture-dem-dtc-value', -1);
+    store.setParameterValue('fixture-dem-dtc-value', 42);
     await wrapper.get('[aria-label="验证结果"]').trigger('click');
     expect(wrapper.findAll('.violation-item').some((v) => v.text().includes('out of range'))).toBe(
       false
@@ -194,7 +193,7 @@ describe('TASK-006 workspace interactions', () => {
     const { wrapper, store, ids } = await workspace();
     const first = store.activeUuid;
     await store.createConfigSet('Second set');
-    store.addContainerInstance(legacy('ecuc-dem-dtc-def'));
+    store.addContainerInstance('fixture-dem-dtc-def');
     await flushPromises();
     const input = wrapper.get('[aria-label="全局搜索"]');
     await input.setValue('DemDtcValue');
@@ -206,13 +205,15 @@ describe('TASK-006 workspace interactions', () => {
     await flushPromises();
     expect(store.activeUuid).toBe(first);
     expect(store.selectedEntry?.container.uuid).toBe(ids[0]);
-    expect(wrapper.get(`[data-field="${legacy('ecuc-dem-dtc-value')}"]`).classes()).toContain('selected-field');
-    expect(document.activeElement?.id).toBe('input-ecuc-dem-dtc-value');
+    expect(wrapper.get(`[data-field="${'fixture-dem-dtc-value'}"]`).classes()).toContain(
+      'selected-field'
+    );
+    expect(document.activeElement?.id).toBe('input-fixture-dem-dtc-value');
   });
 
   it('changes theme with unsaved edits and keeps them through preference reload', async () => {
     const { wrapper, store } = await workspace();
-    store.setParameterValue(legacy('ecuc-dem-dtc-value'), 99);
+    store.setParameterValue('fixture-dem-dtc-value', 99);
     const before = exportJson(store.config!),
       selected = store.selectedKey;
     await wrapper.get('[aria-label="切换主题"]').trigger('click');
@@ -228,7 +229,7 @@ describe('TASK-006 workspace interactions', () => {
     const root = store.config!.containers[0],
       manager = new ConfigInstanceManager(store.modules);
     for (let i = 0; i < 499; i++)
-      manager.addContainerInstance(store.config!, root.uuid, legacy('ecuc-dem-dtc-def'));
+      manager.addContainerInstance(store.config!, root.uuid, 'fixture-dem-dtc-def');
     const wrapper = mount(GlobalSearch, { global: { plugins: [ElementPlus] } });
     wrappers.push(wrapper);
     const start = performance.now();
@@ -243,7 +244,7 @@ describe('TASK-006 workspace interactions', () => {
   it('exposes reference target choice through the form and records the selection', async () => {
     const { wrapper, store, ids, root } = await workspace();
     store.selectContainer(root.uuid);
-    const target = store.addContainerInstance(legacy('ecuc-dem-dtc-attributes-def'))!;
+    const target = store.addContainerInstance('fixture-dem-dtc-attributes-def')!;
     store.selectContainer(ids[0]);
     await nextTick();
     await wrapper.get('[aria-label="选择 DemDTCAttributesRef"]').trigger('click');
@@ -255,13 +256,13 @@ describe('TASK-006 workspace interactions', () => {
     expect(select).toBeDefined();
     select!.vm.$emit('update:modelValue', target.uuid);
     await nextTick();
-    expect(store.referenceData[legacy('ecuc-dem-dtc-attributes-ref')]).toBe(target.uuid);
+    expect(store.referenceData['fixture-dem-dtc-attributes-ref']).toBe(target.uuid);
     expect(store.undoLabel).toBe('修改引用 DemDTCAttributesRef');
   });
   it('renders twenty undo steps within 500 ms and restores the full configuration', async () => {
     const { store } = await workspace();
     const initial = exportJson(store.config!);
-    for (let i = 2; i <= 21; i++) store.setParameterValue(legacy('ecuc-dem-dtc-value'), i);
+    for (let i = 2; i <= 21; i++) store.setParameterValue('fixture-dem-dtc-value', i);
     await nextTick();
     const start = performance.now();
     for (let i = 0; i < 20; i++) {
@@ -274,3 +275,9 @@ describe('TASK-006 workspace interactions', () => {
     console.info(`20-step undo with workspace rendering: ${elapsed.toFixed(2)} ms`);
   });
 });
+
+// Only the input definition is replaced. Store, parser, IO, history and UI remain real.
+// Official 4.4.0 integration is covered separately by core/ecuc/choice/recovery tests.
+vi.mock('../bswmd/dem_bswmd.json?raw', async () => ({
+  default: JSON.stringify((await import('./fixtures/synthetic-dem.json')).default),
+}));

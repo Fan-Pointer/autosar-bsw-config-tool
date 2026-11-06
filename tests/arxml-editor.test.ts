@@ -47,11 +47,11 @@ describe('explicit configuration flags in editor history and storage', () => {
     const store = useConfigStore();
     store.createConfig();
     const root = store.config!.containers[0];
-    const dtc = store.addContainerInstance('ecuc-dem-dtc-def')!;
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
     store.selectContainer(root.uuid);
-    const attributes = store.addContainerInstance('ecuc-dem-dtc-attributes-def')!;
+    const attributes = store.addContainerInstance('fixture-dem-dtc-attributes-def')!;
     store.selectContainer(dtc.uuid);
-    const id = 'ecuc-dem-dtc-attributes-ref';
+    const id = 'fixture-dem-dtc-attributes-ref';
     store.setReferenceTarget(id, attributes.uuid);
     expect(store.selectedEntry!.container.references.get(id)?.isConfigured).toBe(true);
     store.setReferenceTarget(id, '');
@@ -71,11 +71,11 @@ describe('explicit configuration flags in editor history and storage', () => {
     const store = useConfigStore();
     store.createConfig();
     const root = store.config!.containers[0],
-      dtc = store.addContainerInstance('ecuc-dem-dtc-def')!;
+      dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
     store.selectContainer(root.uuid);
-    const attributes = store.addContainerInstance('ecuc-dem-dtc-attributes-def')!;
+    const attributes = store.addContainerInstance('fixture-dem-dtc-attributes-def')!;
     store.selectContainer(dtc.uuid);
-    store.setReferenceTarget('ecuc-dem-dtc-attributes-ref', attributes.uuid);
+    store.setReferenceTarget('fixture-dem-dtc-attributes-ref', attributes.uuid);
     await store.saveConfig();
     const stripReferenceFlags = (value: unknown): void => {
       if (!value || typeof value !== 'object') return;
@@ -90,10 +90,16 @@ describe('explicit configuration flags in editor history and storage', () => {
     await restored.initialize();
     restored.selectContainer(dtc.uuid);
     expect(
-      restored.selectedEntry!.container.references.get('ecuc-dem-dtc-attributes-ref')
+      restored.selectedEntry!.container.references.get('fixture-dem-dtc-attributes-ref')
     ).toMatchObject({ targetUuid: attributes.uuid, isConfigured: true });
     expect(
-      restored.selectedEntry!.container.references.get('ecuc-dem-dtc-obd-ref')?.isConfigured
+      restored.selectedEntry!.container.references.get('fixture-dem-dtc-obd-ref')?.isConfigured
     ).toBe(false);
   });
 });
+
+// Only the input definition is replaced. Store, parser, IO, history and UI remain real.
+// Official 4.4.0 integration is covered separately by core/ecuc/choice/recovery tests.
+vi.mock('../bswmd/dem_bswmd.json?raw', async () => ({
+  default: JSON.stringify((await import('./fixtures/synthetic-dem.json')).default),
+}));
