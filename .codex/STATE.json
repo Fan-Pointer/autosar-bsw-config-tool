@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-017",
     "title": "S4 编辑体验收尾：术语/四态/入口收敛/CHOICE 预览/引用暂存/问题面板/撤销回归/引用列表",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -18,9 +18,9 @@
     "reportPath": ".codex/reports/TASK-017-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "b268625f618ee64fdb243ebf79ff243f99bb3480",
     "createdAt": "2026-11-06T13:34:51+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-06T06:06:38.504Z",
     "approvedAt": null,
     "designPath": "docs/product-design/03-ROADMAP-ACCEPTANCE.md"
   },
