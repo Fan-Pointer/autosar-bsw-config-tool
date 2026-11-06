@@ -2,27 +2,27 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-16",
-  "stageName": "R3-S4 W6 实例右键紧凑菜单（用户 2026-11-06 指定优先插队；S3b 让位顺延）",
+  "stage": "PHASE-15",
+  "stageName": "R3-S3b ARXML 互操作（namespace/引用/顺序保真）— W6 插队完成后按队列恢复",
   "task": {
-    "id": "TASK-016",
-    "title": "W6 实例右键紧凑菜单 + 新建子容器全部直选（优先插队）",
-    "status": "SUBMITTED",
+    "id": "TASK-015",
+    "title": "S3b ARXML 互操作：namespace r4.0 + 引用全候选/DEST 分类 + 往返保真顺序稳定",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "80a0946e22521ecc40545fdf479bccc6d1eeab6955ffbf37a3215cb422dfff07",
+    "contractHash": "9f2bb2eba3b0663627f3fdd708810cb6f96f5f9132ddb69f86e48456f3fe200e",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T11:36:22+08:00",
-    "reportPath": ".codex/reports/TASK-016-REPORT.md",
+    "contractBoundAt": "2026-11-06T12:03:27+08:00",
+    "reportPath": ".codex/reports/TASK-015-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "341b05fdc2373ef2591fc455d2db9a550e9ab2d9",
-    "createdAt": "2026-11-06T11:36:22+08:00",
-    "submittedAt": "2026-11-06T03:54:53.993Z",
+    "submissionCommit": null,
+    "createdAt": "2026-11-06T12:03:27+08:00",
+    "submittedAt": null,
     "approvedAt": null,
-    "designPath": "docs/product-design/01-IA-AND-SCREENS.md"
+    "designPath": "docs/product-design/02-TECH-DESIGN.md"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
@@ -31,16 +31,7 @@
     "APPROVED": "已通过，可推进下一任务",
     "BLOCKED": "等待人工决策"
   },
-  "queue": [
-    {
-      "taskId": "TASK-015",
-      "title": "S3b ARXML 互操作：namespace r4.0 + 引用全候选/DEST 分类 + 往返保真顺序稳定",
-      "stage": "PHASE-15",
-      "contractPath": ".codex/tasks/TASK-015-CONTRACT.md",
-      "contractHash": "9f2bb2eba3b0663627f3fdd708810cb6f96f5f9132ddb69f86e48456f3fe200e",
-      "note": "用户 2026-11-06 指定 W6 右键优先，TASK-015 让位顺延（契约 READY→排队）。恢复下发时契约以归档文件为准并重算哈希核对一致；TASK-014 🟡-1/🟡-3 随其顺延，🟡-2 记 S7 不变。禁止提前实施。"
-    }
-  ],
+  "queue": [],
   "history": [
     {
       "taskId": "TASK-002",
@@ -322,20 +313,35 @@
           "reviewPath": ".codex/review/TASK-014-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-016",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-06T12:03:18+08:00",
+      "submissionCommit": "341b05fdc2373ef2591fc455d2db9a550e9ab2d9",
+      "note": "W6 右键紧凑菜单+子容器直选(用户指定优先插队) round 0 一次通过: 0 阻塞/0 重要/3 建议。独立复核: build 通过(12.87s); test:verify 19/19 收集守卫+289/289 全绿(277 基线+12 新增 ui7/定位5); src/core diff 0 行; 无 TASK-015 越权(namespace/DEST/changelog 零命中, fixtures/bswmd/scripts 无改动); 测试仅报告声明两处定位调整、断言未削。要点实证: ContainerContextMenu 独立竖向组件+inline 禁用原因(截图01); 右键显式 ContainerContextTarget 不再 select(node), 定义节点四项禁用, 用例 never-borrows/error-on-target 实证; 取消删除 config 逐字节不变+setItem 零调用断言; 多关闭时机(外点/工具栏弹窗/模块对话框/导入/配置集切换)用例; 键盘全路径+焦点恢复; placeContainerMenu 5 用例(1366/1400/683/700 翻转+负坐标)+edge-dom.json 实测(9,8,360,320.4); 弹窗打开右键浮层=0(截图03)。D1 裁定: 二级为单面板层级切换(父收起→子列表+返回), 满足契约『父收起/无叠层』语义, 据实认可, 与参考站并排式差异已由报告如实声明。🟡-1 typecheck.log 空文件清理/🟡-3 menu-arrow CSS 冗余: 择机就地清理; 🟡-2 配置集切换关菜单经间接路径(行为已实证), 显式 watch activeUuid 并入后续 UI 任务。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "341b05fdc2373ef2591fc455d2db9a550e9ab2d9",
+          "reviewPath": ".codex/review/TASK-016-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-014",
+    "taskId": "TASK-016",
     "round": 0,
-    "reviewedCommit": "ccb8f12832ba76512d749203eefe2da98c516a58",
-    "at": "2026-11-06T11:28:59+08:00",
+    "reviewedCommit": "341b05fdc2373ef2591fc455d2db9a550e9ab2d9",
+    "at": "2026-11-06T12:03:18+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
     "minors": 3,
-    "reviewPath": ".codex/review/TASK-014-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-014-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-016-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-016-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
