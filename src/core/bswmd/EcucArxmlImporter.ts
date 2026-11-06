@@ -169,11 +169,18 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
         : numeric(constraints.MAX, id.shortName);
     if (min !== undefined && max !== undefined && min > max)
       throw new Error(`${id.shortName}: MIN > MAX`);
-    if (
-      type === 'ENUM' &&
-      (!enumValues?.length || (rawDefault !== undefined && !enumValues.includes(rawDefault)))
-    )
-      throw new Error(`${id.shortName}: 枚举列表或默认值无效`);
+    const vendorSpecific = type === 'ENUM' && !enumValues?.length;
+    const invalidDefault =
+      type === 'ENUM' && rawDefault !== undefined && !enumValues?.includes(rawDefault);
+    const definitionIssue = vendorSpecific
+      ? '标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。'
+      : invalidDefault
+        ? `源默认值 ${rawDefault} 不在合法枚举中；请手动选择，不自动替换。`
+        : undefined;
+    // Standard ECUC files may deliberately leave hardware enums open or contain obsolete defaults.
+    // Preserve that source fact without manufacturing choices or silently selecting another value.
+    if (definitionIssue) warnings.push(`${id.shortName}：${definitionIssue}`);
+    if (invalidDefault) defaultValue = undefined;
     if (
       typeof defaultValue === 'number' &&
       ((type === 'INTEGER' && !Number.isSafeInteger(defaultValue)) ||
@@ -191,6 +198,9 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
       min,
       max,
       enumValues,
+      ...(vendorSpecific ? { vendorSpecific: true, readOnly: true } : {}),
+      ...(invalidDefault ? { sourceDefaultValue: rawDefault } : {}),
+      ...(definitionIssue ? { definitionIssue } : {}),
       minLength: numeric(constraints['MIN-LENGTH'], id.shortName),
       maxLength: numeric(constraints['MAX-LENGTH'], id.shortName),
       regularExpression: scalar(constraints['REGULAR-EXPRESSION']),
@@ -205,13 +215,16 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
         ? 'choice'
         : tag === 'ECUC-FOREIGN-REFERENCE-DEF'
           ? 'foreign'
-          : tag === 'ECUC-INSTANCE-REFERENCE-DEF'
-            ? 'instance'
-            : 'reference';
+          : tag === 'ECUC-SYMBOLIC-NAME-REFERENCE-DEF'
+            ? 'symbolic'
+            : tag === 'ECUC-INSTANCE-REFERENCE-DEF'
+              ? 'instance'
+              : 'reference';
     if (
       tag !== 'ECUC-REFERENCE-DEF' &&
       tag !== 'ECUC-CHOICE-REFERENCE-DEF' &&
       tag !== 'ECUC-FOREIGN-REFERENCE-DEF' &&
+      tag !== 'ECUC-SYMBOLIC-NAME-REFERENCE-DEF' &&
       tag !== 'ECUC-INSTANCE-REFERENCE-DEF'
     )
       throw new Error(`${id.shortName}: 不支持的引用类型 ${tag}`);
@@ -221,14 +234,14 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
         ? array(node(data['DESTINATION-REFS'])['DESTINATION-REF']).map((item) =>
             String(scalar(item) ?? '').trim()
           )
-        : kind === 'reference'
+        : kind === 'reference' || kind === 'symbolic'
           ? [required(data, 'DESTINATION-REF')]
           : // FOREIGN and INSTANCE references carry no static DESTINATION-REF in the official
             // definitions; their target is resolved outside this module at runtime.
             [];
     const destinationRefs = destinations.filter((item) => item.length > 0);
     // Choice references must name at least one candidate; ordinary ones a single target.
-    if (kind === 'reference' && !destinationRefs.length)
+    if ((kind === 'reference' || kind === 'symbolic') && !destinationRefs.length)
       throw new Error(`${id.shortName}: 引用缺少目标定义`);
     if (kind === 'choice' && !destinationRefs.length)
       throw new Error(`${id.shortName}: CHOICE 引用缺少候选目标`);
@@ -242,11 +255,15 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
     if (bounds.upper === 'unbounded' || bounds.upper > 1)
       warnings.push(`${id.shortName}：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。`);
     if (!destinationRefs.length)
-      warnings.push(`${id.shortName}：${kind} 引用无静态目标（${kind === 'foreign' ? '跨模块' : '实例'}引用），编辑器只读展示。`);
+      warnings.push(
+        `${id.shortName}：${kind} 引用无静态目标（${kind === 'foreign' ? '跨模块' : '实例'}引用），编辑器只读展示。`
+      );
     else if (isExternal)
       warnings.push(`${id.shortName}：目标 ${destinationRef} 位于本模块之外；编辑器只读展示。`);
     else if (kind === 'choice')
-      warnings.push(`${id.shortName}：多候选引用，可在 ${destinationRefs.length} 个候选目标中选一个。`);
+      warnings.push(
+        `${id.shortName}：多候选引用，可在 ${destinationRefs.length} 个候选目标中选一个。`
+      );
 
     return {
       ...id,

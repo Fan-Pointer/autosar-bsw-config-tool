@@ -150,6 +150,7 @@ export function exportArxml(
       })
       .join('');
   const metadata = adminData({
+    release: checked.version,
     createdAt: String(checked.createdAt),
     lastModified: String(checked.lastModified),
     name: checked.name,
@@ -328,10 +329,13 @@ export function importArxml(
   if (found.length !== 1) throw new Error('每次导入须包含且仅包含一个 ECUC 模块配置');
   const { node: moduleNode, packagePath } = found[0];
   const modulePath = text(moduleNode, 'DEFINITION-REF').trim();
+  const release = editorData(moduleNode).get('release') ?? '4.4.0';
   const module = modules.find(
-    (item) => modulePath === (item.definitionPath ?? `/AUTOSAR/EcucDefs/${item.shortName}`)
+    (item) =>
+      item.version === release &&
+      modulePath === (item.definitionPath ?? `/AUTOSAR/EcucDefs/${item.shortName}`)
   );
-  if (!module) throw new Error(`未加载模块定义：${modulePath}`);
+  if (!module) throw new Error(`未加载模块定义：${modulePath} (${release})；不能跨版本套用定义`);
   const paths = definitionPaths(module);
   const targets = new Map<string, string>();
   const pending: { ref: { definitionRef: string; targetUuid: string }; path: string }[] = [];

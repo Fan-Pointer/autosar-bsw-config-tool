@@ -274,7 +274,10 @@ describe('official ECUC selected-module importer', () => {
     ['ECUC-BOOLEAN-PARAM-DEF', '<DEFAULT-VALUE>yes</DEFAULT-VALUE>'],
     ['ECUC-INTEGER-PARAM-DEF', '<MIN>9</MIN><MAX>1</MAX>'],
     ['ECUC-INTEGER-PARAM-DEF', '<DEFAULT-VALUE>1.5</DEFAULT-VALUE>'],
-    ['ECUC-ENUMERATION-PARAM-DEF', ''],
+    [
+      'ECUC-ENUMERATION-PARAM-DEF',
+      '<LITERALS><ECUC-ENUMERATION-LITERAL-DEF><DESC>missing name</DESC></ECUC-ENUMERATION-LITERAL-DEF></LITERALS>',
+    ],
     ['ECUC-UNSUPPORTED-PARAM-DEF', ''],
   ])('rejects invalid definitions without silently dropping %s', (tag, body) => {
     expect(() => importedParameter(tag, body)).toThrow();

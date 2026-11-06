@@ -40,6 +40,7 @@ import type {
 } from '@/core/io/IoTypes';
 import { generateUUID } from '@/utils/uuid';
 import { readBuiltinModules } from '@/modules/builtinCatalog';
+import { moduleKey } from '@/core/bswmd/ModuleKey';
 import { parseProjects, type ProjectMetadata, type ProjectInput } from './projectMetadata';
 import { HistoryStack } from '@/core/history/HistoryStack';
 import { configurationDelta } from '@/core/history/ConfigDelta';
@@ -141,7 +142,7 @@ function cloneData<T>(value: T): T {
 function restoreStored(raw: unknown, definitions: BswmdModule[]): ConfigInstance {
   const data = record(raw, '配置集');
   const moduleRef = string(data.moduleRef, 'moduleRef');
-  const version = string(data.version, 'version');
+  const version = string(data.version ?? '4.4.0', 'version');
   const definition = definitions.find(
     (item) => item.shortName === moduleRef && item.version === version
   );
@@ -182,7 +183,12 @@ function restoreStored(raw: unknown, definitions: BswmdModule[]): ConfigInstance
   };
   visit(data.containers, definition.containers);
   const saved = cloneData(data) as unknown as StoredConfig;
-  return { ...saved, name: saved.name ?? moduleRef, containers: saved.containers.map(deserialize) };
+  return {
+    ...saved,
+    version,
+    name: saved.name ?? moduleRef,
+    containers: saved.containers.map(deserialize),
+  };
 }
 
 /**
@@ -203,11 +209,21 @@ export const useConfigStore = defineStore('config', () => {
   const modulePreferences = ref<Record<string, ModulePreference>>(
     Object.fromEntries(
       modules.value.map((item) => [
-        item.shortName,
+        moduleKey(item.shortName, item.version),
         { included: true, generation: true, validation: true },
       ])
     )
   );
+  /** Read version-scoped preferences. @param name Module. @param release Release. @returns Current flags. */
+  function getModulePreference(name: string, release = '4.4.0'): ModulePreference {
+    return (
+      modulePreferences.value[moduleKey(name, release)] ?? {
+        included: false,
+        generation: true,
+        validation: true,
+      }
+    );
+  }
   let manager = new ConfigInstanceManager(modules.value);
   const configSets = ref<ConfigInstance[]>([]);
   const activeUuid = ref<string>();
@@ -217,8 +233,13 @@ export const useConfigStore = defineStore('config', () => {
   let projectsRaw: unknown = null;
   let projectsInspected = false;
   let projectsLocked = false;
+  const emptyProjectUuid = ref<string>();
   const activeProject = computed(() =>
-    projects.value.find((p) => p.setUuids.includes(activeUuid.value ?? ''))
+    projects.value.find((p) =>
+      activeUuid.value
+        ? p.setUuids.includes(activeUuid.value)
+        : p.projectUuid === emptyProjectUuid.value
+    )
   );
   const unassignedSets = computed(() =>
     configSets.value.filter((set) => !projects.value.some((p) => p.setUuids.includes(set.uuid)))
@@ -402,10 +423,14 @@ export const useConfigStore = defineStore('config', () => {
     assertWritable();
     if (!(await initialize())) return false;
     assertWritable();
-    const names = definitions.map((definition) => definition.shortName);
+    const names = definitions.map((definition) =>
+      moduleKey(definition.shortName, definition.version)
+    );
     if (
       new Set(names).size !== names.length ||
-      names.some((name) => modules.value.some((item) => item.shortName === name))
+      names.some((name) =>
+        modules.value.some((item) => moduleKey(item.shortName, item.version) === name)
+      )
     )
       throw new Error('模块已加载或名称重复；为保留现有配置的定义绑定，不覆盖已加载模块');
     const previousModules = [...modules.value],
@@ -414,7 +439,7 @@ export const useConfigStore = defineStore('config', () => {
     modules.value.push(...definitions);
     importedModules.value.push(...definitions);
     for (const definition of definitions)
-      modulePreferences.value[definition.shortName] = {
+      modulePreferences.value[moduleKey(definition.shortName, definition.version)] = {
         included: true,
         generation: true,
         validation: true,
@@ -614,9 +639,17 @@ export const useConfigStore = defineStore('config', () => {
    * @param name Optional set name; interactive callers use createConfigSet to persist first.
    * @returns Nothing.
    */
-  function createConfig(moduleName = modules.value[0]?.shortName, name?: string): void {
+  function createConfig(
+    moduleName = modules.value[0]?.shortName,
+    name?: string,
+    release?: string
+  ): void {
     assertEditable();
-    const definition = modules.value.find((item) => item.shortName === moduleName);
+    const candidates = modules.value.filter((item) => item.shortName === moduleName);
+    const definition = release
+      ? candidates.find((item) => item.version === release)
+      : (candidates.find((item) => item.version === '4.4.0') ??
+        (candidates.length === 1 ? candidates[0] : undefined));
     if (!definition) throw new Error('No BSWMD module is available');
     const created = manager.createFromBswmd(definition);
     created.name = name?.trim() || `${definition.shortName} 配置 ${configSets.value.length + 1}`;
@@ -718,7 +751,7 @@ export const useConfigStore = defineStore('config', () => {
     assertEditable();
     assertWritable();
     if (!input.name.trim()) throw new Error('请输入工程名称');
-    if (input.autosarVersion !== '4.4.0') throw new Error('该版本定义库待接入');
+    if (!['4.4.0', '4.2.2'].includes(input.autosarVersion)) throw new Error('该版本定义库待接入');
     if (!['S32K1XX', 'S32K3XX'].includes(input.chip.family)) throw new Error('请选择芯片型号');
     const names = [...new Set(input.moduleShortNames)];
     if (!names.length) throw new Error('请至少选择一个模块');
@@ -744,8 +777,6 @@ export const useConfigStore = defineStore('config', () => {
         ),
         input.autosarVersion
       );
-      if (additions.some((m) => modules.value.some((old) => old.shortName === m.shortName)))
-        throw new Error('同名模块版本冲突，请等待双版本定义库接入');
       const all = [...modules.value, ...additions];
       const nextManager = new ConfigInstanceManager(all);
       const sets = names.map((name) => {
@@ -774,7 +805,11 @@ export const useConfigStore = defineStore('config', () => {
       importedModules.value.push(...additions);
       manager = nextManager;
       for (const name of names)
-        modulePreferences.value[name] = { included: true, generation: true, validation: true };
+        modulePreferences.value[moduleKey(name, input.autosarVersion)] = {
+          included: true,
+          generation: true,
+          validation: true,
+        };
       configSets.value.push(...sets);
       activeUuid.value = sets[0].uuid;
       selectContainer(sets[0].containers[0]?.uuid ?? '');
@@ -807,6 +842,137 @@ export const useConfigStore = defineStore('config', () => {
     }
   }
 
+  /** Apply an explicitly confirmed module selection, retaining removed configurations.
+   * @param uuid Project identity. @param selected Module names for the project's release.
+   * @param preferences Optional version-scoped generation/validation flags. @returns Success.
+   */
+  async function updateProjectModules(
+    uuid: string,
+    selected: string[],
+    preferences: Record<string, ModulePreference> = {}
+  ): Promise<boolean> {
+    if (projectBusy.value || !(await initialize())) return false;
+    assertEditable();
+    assertWritable();
+    const project = projects.value.find((item) => item.projectUuid === uuid);
+    if (!project) throw new Error('工程不存在，请重新打开');
+    if (isDirty.value && !(await saveConfig())) return false;
+    const names = [...new Set(selected)];
+    const previous = {
+      sets: [...configSets.value],
+      modules: [...modules.value],
+      imports: [...importedModules.value],
+      preferences: { ...modulePreferences.value },
+      projects: [...projects.value],
+      raw: cloneData(projectsRaw),
+      active: activeUuid.value,
+      selected: selectedContainerUuid.value,
+      empty: emptyProjectUuid.value,
+    };
+    projectBusy.value = true;
+    projectError.value = null;
+    let indexWritten = false;
+    try {
+      const release = project.autosarVersion;
+      const additions = await readBuiltinModules(
+        names.filter(
+          (name) => !modules.value.some((m) => m.shortName === name && m.version === release)
+        ),
+        release
+      );
+      const all = [...modules.value, ...additions];
+      const nextManager = new ConfigInstanceManager(all);
+      const own = configSets.value.filter((set) => project.setUuids.includes(set.uuid));
+      if (own.length !== project.setUuids.length)
+        throw new Error('工程含不可用配置集，请先检查恢复面板，不能覆盖原关联');
+      if (own.some((set) => set.version !== release))
+        throw new Error('工程关联了不同版本的配置集，请先修复工程关联');
+      const retained = own.filter((set) => names.includes(set.moduleRef));
+      const detached = new Set([
+        ...(project.detachedSetUuids ?? []),
+        ...own.filter((set) => !names.includes(set.moduleRef)).map((set) => set.uuid),
+      ]);
+      const created: ConfigInstance[] = [];
+      for (const name of names) {
+        if (retained.some((set) => set.moduleRef === name)) continue;
+        // Only recover records previously detached from this project and still unassigned.
+        // A same-name record owned by another project must never be silently borrowed.
+        const recovered = configSets.value.filter(
+          (set) =>
+            detached.has(set.uuid) &&
+            set.moduleRef === name &&
+            set.version === release &&
+            !projects.value.some((p) => p.setUuids.includes(set.uuid))
+        );
+        if (recovered.length) {
+          retained.push(...recovered);
+          recovered.forEach((set) => detached.delete(set.uuid));
+        } else {
+          const definition = all.find((m) => m.shortName === name && m.version === release)!;
+          const set = nextManager.createFromBswmd(definition);
+          set.name = `${project.name} · ${name}`;
+          created.push(set);
+          retained.push(set);
+        }
+      }
+      const updated = {
+        ...project,
+        moduleShortNames: names,
+        setUuids: retained.map((set) => set.uuid),
+        detachedSetUuids: [...detached],
+      };
+      const nextProjects = projects.value.map((p) => (p.projectUuid === uuid ? updated : p));
+      await writeProjectIndex({ schemaVersion: 1, projects: nextProjects });
+      indexWritten = true;
+      modules.value = all;
+      importedModules.value.push(...additions);
+      manager = nextManager;
+      configSets.value.push(...created);
+      for (const name of names) {
+        const key = moduleKey(name, release);
+        modulePreferences.value[key] = {
+          ...(preferences[key] ?? getModulePreference(name, release)),
+          included: true,
+        };
+      }
+      projects.value = nextProjects;
+      activeUuid.value = retained.some((set) => set.uuid === previous.active)
+        ? previous.active
+        : retained[0]?.uuid;
+      emptyProjectUuid.value = activeUuid.value ? undefined : uuid;
+      selectContainer(config.value?.containers[0]?.uuid ?? '');
+      // Membership changes do not modify the retained configuration's content or timestamp.
+      isDirty.value = true;
+      revision++;
+      validate();
+      if (!(await saveConfig())) throw new Error(error.value ?? '模块变更保存失败');
+      return true;
+    } catch (reason) {
+      configSets.value = previous.sets;
+      modules.value = previous.modules;
+      importedModules.value = previous.imports;
+      modulePreferences.value = previous.preferences;
+      projects.value = previous.projects;
+      activeUuid.value = previous.active;
+      emptyProjectUuid.value = previous.empty;
+      manager = new ConfigInstanceManager(modules.value);
+      selectContainer(previous.selected ?? '');
+      isDirty.value = false;
+      projectError.value = reason instanceof Error ? reason.message : String(reason);
+      if (indexWritten) {
+        try {
+          await writeProjectIndex(previous.raw);
+        } catch {
+          projectError.value += '；工程关联回滚未完成，请重新打开检查。原配置数据未删除。';
+        }
+      }
+      validate();
+      return false;
+    } finally {
+      projectBusy.value = false;
+    }
+  }
+
   /** Activate a surviving set without rewriting project metadata.
    * @param uuid Project UUID or "default" for unassigned configurations. @returns Success.
    */
@@ -818,6 +984,14 @@ export const useConfigStore = defineStore('config', () => {
             projects.value.find((p) => p.projectUuid === uuid)?.setUuids.includes(set.uuid)
           );
     if (!sets.length) {
+      const empty = projects.value.find((p) => p.projectUuid === uuid && !p.setUuids.length);
+      if (empty) {
+        if (isDirty.value && !(await saveConfig())) return false;
+        activeUuid.value = undefined;
+        emptyProjectUuid.value = uuid;
+        selectContainer('');
+        return true;
+      }
       projectError.value = '工程没有可打开的配置集，请检查恢复面板。';
       return false;
     }
@@ -849,12 +1023,13 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function createConfigSet(
     name: string,
-    moduleName = modules.value[0]?.shortName
+    moduleName = modules.value[0]?.shortName,
+    release?: string
   ): Promise<boolean> {
     assertEditable();
     if (!name.trim()) throw new Error('请输入配置集名称');
     if (!(await initialize()) || (isDirty.value && !(await saveConfig()))) return false;
-    createConfig(moduleName, name);
+    createConfig(moduleName, name, release);
     if (dataSafety.value.locked) draftUuids.value.push(activeUuid.value!);
     return saveConfig();
   }
@@ -1212,9 +1387,14 @@ export const useConfigStore = defineStore('config', () => {
           try {
             // Parse for structural validation, retain original metadata (the parser normalizes some fields).
             const checked = new BswmdLoader().loadFromString(JSON.stringify(item));
-            if (restoredModules.some((existing) => existing.shortName === checked.shortName))
+            if (
+              restoredModules.some(
+                (existing) =>
+                  existing.shortName === checked.shortName && existing.version === checked.version
+              )
+            )
               throw new Error('已保存的模块定义名称冲突');
-            const definition = cloneData(item) as BswmdModule;
+            const definition = { ...(cloneData(item) as BswmdModule), version: checked.version };
             restoredModules.push(definition);
             restoredImports.push(definition);
           } catch (reason) {
@@ -1242,7 +1422,7 @@ export const useConfigStore = defineStore('config', () => {
       restoreSets(library.sets);
       const preferences: Record<string, ModulePreference> = Object.fromEntries(
         restoredModules.map((item) => [
-          item.shortName,
+          moduleKey(item.shortName, item.version),
           { included: true, generation: true, validation: true },
         ])
       );
@@ -1259,7 +1439,17 @@ export const useConfigStore = defineStore('config', () => {
                 )
               )
                 throw new Error('模块偏好开关应为布尔值');
-              preferences[name] = cloneData(pref) as unknown as ModulePreference;
+              // Legacy short-name preferences belong only to the 4.4.0 baseline, never both releases.
+              const key = name.startsWith('[') ? name : moduleKey(name, '4.4.0');
+              if (
+                !name.startsWith('[') &&
+                Object.prototype.hasOwnProperty.call(
+                  record(library.modulePreferences, '模块偏好'),
+                  key
+                )
+              )
+                continue;
+              preferences[key] = cloneData(pref) as unknown as ModulePreference;
             } catch (reason) {
               isolate(value, 'preference', reason, name);
             }
@@ -1683,6 +1873,8 @@ export const useConfigStore = defineStore('config', () => {
     exportConfig,
     modules,
     modulePreferences,
+    getModulePreference,
+    updateProjectModules,
     configSets,
     activeUuid,
     summaries,

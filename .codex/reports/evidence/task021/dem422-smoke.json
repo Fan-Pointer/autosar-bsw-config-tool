@@ -1,0 +1,416 @@
+{
+  "format": "autosar-bsw-config",
+  "formatVersion": 1,
+  "configuration": {
+    "uuid": "8058221d-d133-4542-a183-b193d001b66b",
+    "name": "TASK021_Dem422_smoke",
+    "moduleRef": "Dem",
+    "version": "4.2.2",
+    "createdAt": 1793957491671,
+    "lastModified": 1793957491672,
+    "containers": [
+      {
+        "uuid": "c620cefe-9c8a-447f-9df3-08278d624a26",
+        "definitionRef": "ECUC:e85440ff-d0a6-4001-bcfc-aa36b340c94a",
+        "shortName": "DemConfigSet",
+        "description": "This container contains the configuration parameters and sub containers of the Dem module supporting multiple configuration sets.",
+        "parameters": [],
+        "references": [],
+        "subContainers": [
+          {
+            "uuid": "4295d69a-7acd-455b-844c-a737a655720c",
+            "definitionRef": "ECUC:17edd206-934c-420b-a50a-75aef6269ac7",
+            "shortName": "DemEventParameter",
+            "description": "This container contains the configuration (parameters) for events.",
+            "parameters": [
+              {
+                "definitionRef": "ECUC:0b4d35ff-ac0e-4307-a23e-3f7638726669",
+                "description": "Specifies the priority within the component. A lower value means higher priority.",
+                "value": 0,
+                "isConfigured": false
+              },
+              {
+                "definitionRef": "ECUC:6506cb9d-36d0-4f67-89f7-266b9f4cbc3a",
+                "description": "Defines the number of failure cycles for the event based fault confirmation.",
+                "value": 1,
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:a42e4864-6ec3-4459-ae25-2a314d4a0e42",
+                "description": "Unique identifier of a diagnostic event.",
+                "value": 1,
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:6b0b03bd-1d0c-47c8-b723-0bca376ea53a",
+                "description": "This parameter configures an Event as unavailable.",
+                "value": false,
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:998abc59-21d6-4f48-98d2-f84c83c31b9e",
+                "description": "If this parameter is set to true, then the Prestorage of FreezeFrames is supported by the assigned event. This parameter is useful to calculate the buffer size.",
+                "value": false,
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:44e8a61c-a95b-487d-908b-0ca87be434d4",
+                "description": "This parameter is used to distinguish between SW-C and BSW events. SW-C events are reported by Dem_SetEventStatus API and BSW events are reported by Dem_Report…",
+                "value": "DEM_EVENT_KIND_BSW",
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:4416b605-5243-4880-ade1-68360587bda5",
+                "description": "Indicates the reporting behavior of the BSW Module (DemEventKind == DEM_EVENT_KIND_BSW) in order to determine the size of the reporting queue.",
+                "value": "REPORT_BEFORE_INIT",
+                "isConfigured": false
+              }
+            ],
+            "references": [
+              {
+                "definitionRef": "ECUC:7edbca2c-83b6-4732-b41c-d04e581f7730",
+                "targetUuid": "",
+                "isConfigured": false
+              },
+              {
+                "definitionRef": "ECUC:2a3a846f-c833-4b16-ae1e-d5aa319be012",
+                "targetUuid": "",
+                "isConfigured": false
+              },
+              {
+                "definitionRef": "ECUC:6953a02d-6999-4d84-8c1d-daede62dfc77",
+                "targetUuid": "",
+                "isConfigured": false
+              },
+              {
+                "definitionRef": "ECUC:e6a5765e-f9e2-43d8-9b3e-23b46ec06e7a",
+                "targetUuid": "",
+                "isConfigured": false
+              },
+              {
+                "definitionRef": "ECUC:fc68bc01-d147-4b6d-95a2-36cfa577cacf",
+                "targetUuid": "d80c71cd-bdb5-426d-b10e-13ff6c923cdb",
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:92052d72-8af4-4f08-9d1f-2a901238caf9",
+                "targetUuid": "",
+                "isConfigured": false
+              }
+            ],
+            "subContainers": [
+              {
+                "uuid": "ebb0f35b-8f99-4122-a8d9-ff93197e942a",
+                "definitionRef": "ECUC:98a5d79e-8975-48e4-bbc8-a174596e2dbb",
+                "shortName": "DemDebounceAlgorithmClass",
+                "description": "Debounce algorithm class: counter based, time based, or monitor internal.",
+                "parameters": [],
+                "references": [],
+                "subContainers": [
+                  {
+                    "uuid": "13a10205-4d24-4642-bb3a-3fc93fb4cf2c",
+                    "definitionRef": "ECUC:cc0801d6-d390-4989-80bf-e5bf1d2832b6",
+                    "shortName": "DemDebounceMonitorInternal",
+                    "description": "This container contains the configuration (parameters) for monitor internal debouncing.",
+                    "parameters": [],
+                    "references": [],
+                    "subContainers": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "uuid": "226a0495-68fb-4475-a4aa-1dcb0d97e07a",
+        "definitionRef": "ECUC:6ca017f1-d32b-49c2-9624-9c1a628401c2",
+        "shortName": "DemGeneral",
+        "description": "This container contains the configuration (parameters) of the BSW Dem",
+        "parameters": [
+          {
+            "definitionRef": "ECUC:cf65f678-2be0-4cd4-91bb-8023cce9e2ff",
+            "description": "This configuration switch defines, whether the aging counter is calculated Dem-internally or provided via Dem_SetAgingCycleCounterValue. Tags: atp.Status=obsol…",
+            "value": "DEM_PROCESS_AGINGCTR_EXTERN",
+            "isConfigured": false
+          },
+          {
+            "definitionRef": "ECUC:04f071cf-22a9-4382-97a2-cecb921f771b",
+            "description": "This configuration switch defines, whether support for availability is enabled or not.",
+            "value": "DEM_EVENT_AVAILABILITY",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:e0481c61-58b6-42ce-af08-899ebe9c41d8",
+            "description": "Defines the clearing process of diagnostic information for volatile and non-volatile memory and the positive response handling for the Dcm module.",
+            "value": "DEM_CLRRESP_NONVOLATILE_FINISH",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:27cbd13d-d1aa-4038-b93c-c83a0474cd1e",
+            "description": "Defines the supported Dem_<...>ClearDTC API scope.",
+            "value": "DEM_ALL_SUPPORTED_DTCS",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:2c01e075-aad4-4de0-9d3e-801945176c2c",
+            "description": "Defines the default endianness of the data belonging to a data element which is applicable if the DemExternalSRDataElementClass does not define a endianness.",
+            "value": "BIG_ENDIAN",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:b16d7d19-1266-4bc4-a08a-009b1c215be2",
+            "description": "DemEnvironmentDataCapture defines the point in time, when the data actually is captured.",
+            "value": "DEM_CAPTURE_ASYNCHRONOUS_TO_REPORTING",
+            "isConfigured": false
+          },
+          {
+            "definitionRef": "ECUC:f3fe6a87-b322-467a-aa77-e49d9ce66490",
+            "description": "This parameter defines the type of event combination supported by the Dem.",
+            "value": "DEM_EVCOMB_DISABLED",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:6108bc87-5feb-439d-8100-cb20505e7e0e",
+            "description": "This configuration switch defines, whether support for event displacement is enabled or not, and which displacement strategy is followed.",
+            "value": "DEM_DISPLACEMENT_FULL",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:b074dc99-92e8-425c-bfa2-d900a2a78862",
+            "description": "Configures the primary trigger to allocate an event memory entry.",
+            "value": "DEM_TRIGGER_ON_CONFIRMED",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:8e668bd5-8855-4f56-a1b2-9dd2da07c076",
+            "description": "This configuration switch defines OBD support and kind of OBD ECU.",
+            "value": "DEM_OBD_DEP_SEC_ECU",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:ce89a944-4a2a-4473-ad59-f307a8e9103e",
+            "description": "This configuration switch defines the consideration of the fault confirmation process for the occurrence counter. For OBD and mixed systems (OBD/non OBD, refer…",
+            "value": "DEM_PROCESS_OCCCTR_CDTC",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:bcf344c1-e4b6-47b2-836b-93bda8616623",
+            "description": "This configuration switch defines, whether the aging and displacement mechanism shall be applied to the \"TestFailedSinceLastClear\" status bits.",
+            "value": "DEM_STATUS_BIT_AGING_AND_DISPLACEMENT",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:b22c10e5-1781-4d5a-9320-781d8d6b2480",
+            "description": "This configuration switch defines, whether support for suppression is enabled or not.",
+            "value": "DEM_DTC_SUPPRESSION",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:2e118358-e52d-474d-95d0-6a4807a3bcbf",
+            "description": "This parameter defines the format returned by Dem_DcmGetTranslationType and does not relate to/influence the supported Dem functionality.",
+            "value": "DEM_DTC_TRANSLATION_ISO11992_4",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:3855ce15-b738-467e-a342-7ae2499366bd",
+            "description": "This parameter defines the type of assigning freeze frame record numbers for event-specific freeze frame records.",
+            "value": "DEM_FF_RECNUM_CALCULATED",
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:a3bd8297-60fe-44db-9094-40808a08b5f4",
+            "description": "Defines if the aging cycle counter is processed every aging cycles or if only tested aging cycle are considered.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:6d308999-a425-4904-aef3-a55c5e5db5e6",
+            "description": "This configuration switch defines, whether support for counter based debouncing is enabled or not.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:306ac5ba-3e68-40cc-a248-b1bde6637e36",
+            "description": "This configuration switch defines, whether support for time based debouncing is enabled or not.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:21da3508-a0a5-4ecb-994e-b8378d8bcc8a",
+            "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:088bfcc2-3ffe-426c-9182-db21e7c3b259",
+            "description": "The interfaces GeneralEvtInfo, GeneralCallbackEventDataChanged and GeneralCallbackEventStatusChange are provided if DemGeneralInterfaceSupport is equal to true.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:06baac28-6a64-46c0-b468-2b6e5f2571bc",
+            "description": "Defines if the operation cycle state is available over the power cycle (stored non-volatile) or not.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:40aaf4a3-811c-4ed4-b5ed-c364b32c4193",
+            "description": "This configuration switch defines, whether PTO support (and therefore PID $1E support) is enabled or not.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:af5bbe02-f227-411a-b071-9b9a5b48bf52",
+            "description": "This configuration switch defines, whether the confirmed bit is reset or not while an event memory entry will be displaced.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:b8232040-8309-438b-b16d-3bbf911191b0",
+            "description": "Activate/Deactivate the permanent storage of the \"TestFailed\" status bits.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:0b862943-7dc6-4a4e-9a7b-4b9cf27a0d19",
+            "description": "Activate/Deactivate the notification to the Diagnostic Communication Manager for ROE processing.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:1aae8fc4-5b22-4a6c-8744-a125dbf06efe",
+            "description": "Activate/Deactivate the notification to the Diagnostic Log and Trace.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:ffa4e7ab-5a53-4aab-89d5-faab430e6007",
+            "description": "Activate/Deactivate the notification to the Function Inhibition Manager.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:5fcadaa0-df21-4e86-ab87-636545aafe14",
+            "description": "Defines if the monitor re-initialization has to be triggered before or after the Dem module returns DEM_CLEAR_OK.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:2236d8b8-2712-47f4-9d0b-b77e5b5df6d7",
+            "description": "Activate/Deactivate the version information API.",
+            "value": false,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:6388fad6-ff27-41e9-bc9e-fa9d41faf0df",
+            "description": "Maximum number of elements in buffer for handling of BSW errors (ref. to SWS_Dem_00207).",
+            "value": 0,
+            "isConfigured": false
+          },
+          {
+            "definitionRef": "ECUC:4a2afd78-57fb-4c89-a156-eae8fc5dcf37",
+            "description": "Mask for the supported DTC status bits by the Dem. This mask is used by UDS service 0x19.",
+            "value": 1,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:8a2b8a2b-cffb-4401-8732-5de196039921",
+            "description": "This parameter defines the maximum number of occurrences, a specific event memory entry is allowed, to be stored in NVRAM immediately (refer to DemImmediateNvS…",
+            "value": 1,
+            "isConfigured": false
+          },
+          {
+            "definitionRef": "ECUC:aeca263e-de4e-4319-a6a7-c877fb0a2268",
+            "description": "Specifies the size of the buffer for storing environmental data (freezeframes and extended data) until they are processed and stored to the event memory.",
+            "value": 1,
+            "isConfigured": false
+          },
+          {
+            "definitionRef": "ECUC:cd9f6fcb-2134-4e0b-95fb-833dfca769bb",
+            "description": "Maximum number of events which can be stored in the permanent memory.",
+            "value": 1,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:a9b9d119-6ddf-46f6-93bd-5a990016cf70",
+            "description": "Defines the maximum number for prestored freeze frames.",
+            "value": 1,
+            "isConfigured": true
+          },
+          {
+            "definitionRef": "ECUC:0d15ce1a-85f5-49a6-8e19-d6ef5c19fbf9",
+            "description": "Name of the header file(s) to be included by the Dem module containing the used C-callback declarations.",
+            "value": "",
+            "isConfigured": false
+          },
+          {
+            "definitionRef": "ECUC:2109a155-8685-4f62-9f8d-1df661889043",
+            "description": "Allow to configure the time for the periodic cyclic task. Please note: This configuration value shall be equal to the value in the Basic Software Scheduler con…",
+            "value": 0.01,
+            "isConfigured": true
+          }
+        ],
+        "references": [
+          {
+            "definitionRef": "ECUC:32b33d8d-7755-49f6-8db4-6b12faef15fe",
+            "targetUuid": "",
+            "isConfigured": false
+          }
+        ],
+        "subContainers": [
+          {
+            "uuid": "d80c71cd-bdb5-426d-b10e-13ff6c923cdb",
+            "definitionRef": "ECUC:edf2c803-842d-44ee-91cf-76c67f209935",
+            "shortName": "DemOperationCycle",
+            "description": "This container holds all parameters that are relevant to configure an operation cycle.",
+            "parameters": [
+              {
+                "definitionRef": "ECUC:bd53f3b5-1f03-41df-b65a-5a892484e08c",
+                "description": "If DemOperationCycleAutomaticEnd is configured to TRUE, Dem shall automatically end the driving cycle at either Dem_Shutdown() or Dem_Init().",
+                "value": false,
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:99ec8223-f61d-498a-b636-fdd2b87159a9",
+                "description": "The autostart property defines if the operation cycles is automatically (re-)started during Dem_PreInit.",
+                "value": false,
+                "isConfigured": true
+              },
+              {
+                "definitionRef": "ECUC:0f954275-b8ea-4b72-8db7-11445e07943a",
+                "description": "This parameter’s value is used, together with the aggregating container, to define a symbolic name of the operation cycle.",
+                "value": 0,
+                "isConfigured": false
+              },
+              {
+                "definitionRef": "ECUC:7544f8ce-f35f-4335-b2da-a0144b7c0dce",
+                "description": "Operation cycles types for the Dem to be supported by cycle-state APIs.",
+                "value": "DEM_OPCYC_IGNITION",
+                "isConfigured": true
+              }
+            ],
+            "references": [],
+            "subContainers": []
+          },
+          {
+            "uuid": "8b5e5e4c-e6eb-4889-a42c-045b285c252f",
+            "definitionRef": "ECUC:a2b003e7-7872-46cc-87e2-fd828f2b62b1",
+            "shortName": "DemPrimaryMemory",
+            "description": "This container contains the primary event memory specific parameters of the Dem module.",
+            "parameters": [
+              {
+                "definitionRef": "ECUC:7fad4aa0-c3ce-4005-bb7f-dfb8b1a1172a",
+                "description": "Maximum number of events which can be stored in the primary memory",
+                "value": 1,
+                "isConfigured": true
+              }
+            ],
+            "references": [],
+            "subContainers": []
+          }
+        ]
+      }
+    ]
+  }
+}

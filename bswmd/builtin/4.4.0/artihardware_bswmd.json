@@ -1,0 +1,185 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "475f51c51b966ea3e46fd51fc68855c09aa8bce2ce2ac6751ae4f73156ed77ef",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreClass",
+      "description": "Contains the layout of an ARTI \"Core\" object, extending the EcucCoreDefinition. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreClass/ArtiCurrentApplicationClassRef",
+          "description": "Refers to the ArtiObjectClassParameter that defines the ArtiCurrentApplicationInstance parameter. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectClassParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiCurrentApplicationClassRef",
+          "uuid": "ECUC:36f89e39-a933-428e-b126-c64841317313"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreClass/ArtiCurrentTaskClassRef",
+          "description": "Refers to the ArtiObjectClassParameter that defines the ArtiCurrentTaskInstance parameter. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectClassParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiCurrentTaskClassRef",
+          "uuid": "ECUC:708bb30c-2a67-4c71-903c-d9c6bf6ff762"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreClass/ArtiLastErrorClassRef",
+          "description": "Refers to the ArtiObjectClassParameter that defines the ArtiLastErrorInstance parameter. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectClassParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiLastErrorClassRef",
+          "uuid": "ECUC:1b65f6e9-3208-4cf1-acb8-bbffeb3991b2"
+        }
+      ],
+      "shortName": "ArtiHwCoreClass",
+      "subContainers": [],
+      "uuid": "ECUC:2857607a-8c82-4f33-bb04-8ab37a2d358b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreInstance",
+      "description": "Represents an instance of an ARTI \"Core\" object, extending the EcucCoreDefinition. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreInstance/ArtiCurrentApplicationInstanceRef",
+          "description": "Refers to the ArtiObjectInstanceParameter that contains the evaluation for the \"current application\" that is running on this core. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectInstanceParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiCurrentApplicationInstanceRef",
+          "uuid": "ECUC:9a7fdd04-1dcf-4728-97f5-28418182e5a2"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreInstance/ArtiCurrentTaskInstanceRef",
+          "description": "Refers to the ArtiObjectInstanceParameter that contains the evaluation for the \"current task\" that is running on this core. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectInstanceParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiCurrentTaskInstanceRef",
+          "uuid": "ECUC:59402b5a-a0bd-4cb0-8aea-00334d1c529f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreInstance/ArtiEcucCoreRef",
+          "description": "Refers to the EcucCoreDefinition of this core.</L-2> Tags: atp.Status=draft",
+          "destinationContainerType": "EcucCoreDefinition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiEcucCoreRef",
+          "uuid": "ECUC:47b50d4e-d888-4937-bab8-115f1d9387e5"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware/ArtiHwCoreInstance/ArtiLastErrorInstanceRef",
+          "description": "Refers to the ArtiObjectInstanceParameter that contains the evaluation for the \"last error\" that happened on this core. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectInstanceParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiLastErrorInstanceRef",
+          "uuid": "ECUC:4286f213-38f7-475a-9d2c-4188a8ac75ba"
+        }
+      ],
+      "shortName": "ArtiHwCoreInstance",
+      "subContainers": [],
+      "uuid": "ECUC:18bd11ce-a56f-4567-9063-0de14da10d07"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/ArtiHardware",
+  "description": "The ArtiHardware Module contains ARTI extensions to the EcucHardware module. Tags: atp.Status=draft",
+  "importWarnings": [
+    "ArtiCurrentApplicationClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+    "ArtiCurrentTaskClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+    "ArtiLastErrorClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+    "ArtiCurrentApplicationInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。",
+    "ArtiCurrentTaskInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。",
+    "ArtiEcucCoreRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition 位于本模块之外；编辑器只读展示。",
+    "ArtiLastErrorInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "ArtiHardware",
+  "version": "4.4.0"
+}

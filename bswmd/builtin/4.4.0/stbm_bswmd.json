@@ -1,0 +1,686 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "0b163d02ef9408f88e64e45e6daf643f90cd9f3baa643c0df8f83f8748559739",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral",
+      "description": "This container holds the general parameters of the Synchronized Time-base Manager",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral/StbMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7a01b1fa-4807-49ad-84ba-511286993060"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral/StbMGetCurrentTimeExtendedAvailable",
+          "description": "This allows to define whether an additional variant of the API GetCurrentTime with a 64 bit argument is provided.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMGetCurrentTimeExtendedAvailable",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c433c237-94b3-452b-9e71-63fd3700849a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral/StbMTimeRecordingSupport",
+          "description": "Enables/Disables the usage of the recording functionality for Synchronized and Offset timebases for Global Time precision measurement purpose.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMTimeRecordingSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:581861fb-8d14-4e49-8e38-74b7266d8b46"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral/StbMVersionInfoApi",
+          "description": "Activate/Deactivate the version information API (StbM_GetVersionInfo). True: version information API activated False: version information API deactivated.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:16c0bfdf-bfa8-4261-b458-2efa197b30d0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral/StbMMainFunctionPeriod",
+          "description": "Schedule period of the main function StbM_MainFunction. Unit: [s].",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:1d28d937-66d3-458b-9843-0e21ea280db6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral/StbMTimerStartThreshold",
+          "description": "This interval defines, when a GPT Timer shall be started for Time Notification Customers for which the corresponding Customer Timer is running [unit: seconds].",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMTimerStartThreshold",
+          "type": "FLOAT",
+          "uuid": "ECUC:da9f7a43-396f-46c6-a53e-4df7895539c7"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMGeneral/StbMGptTimerRef",
+          "description": "This represents an optional sub-container in case any Time Notification Customer is configured.",
+          "destinationContainerType": "GptChannelConfiguration",
+          "destinationRef": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMGptTimerRef",
+          "uuid": "ECUC:0cdc6dd0-fd5a-492d-bace-768bf495e607"
+        }
+      ],
+      "shortName": "StbMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:e3062823-830e-401e-ab3f-102908ca5111"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+      "description": "Synchronized time.base collects the information about a specific time-base provider within the system.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMAllowSystemWideGlobalTimeMaster",
+          "description": "For postbuild variant of the StbM this parameter has to be set to true for a Global Time Master that may act as a system-wide source of time. Otherwise no corr…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMAllowSystemWideGlobalTimeMaster",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:cb072c54-dffe-4a81-9232-4584c0a7b4db"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMIsSystemWideGlobalTimeMaster",
+          "description": "This parameter shall be set to true for a Global Time Master that acts as a system-wide source of time information with respect to Global Time.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMIsSystemWideGlobalTimeMaster",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a4bd47a0-95aa-405b-8752-8bd48af3d145"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1,
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMClearTimeleapCount",
+          "description": "This attribute describes the required number of updates to the Time Base where the time difference to the previous value has to remain below StbMTimeLeapPastTh…",
+          "isOptional": true,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMClearTimeleapCount",
+          "type": "INTEGER",
+          "uuid": "ECUC:d2af0f71-daf1-499e-8286-f15c0f436252"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMStatusNotificationMask",
+          "description": "The parameter defines the initial value for NotificationMask mask, which defines the events for which the event notification callback function shall be called.",
+          "isOptional": true,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMStatusNotificationMask",
+          "type": "INTEGER",
+          "uuid": "ECUC:6bce2c95-96d5-428d-badf-a1541e69ff3a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMSynchronizedTimeBaseIdentifier",
+          "description": "Identification of a Synchronized TimeBase via a unique identifier.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMSynchronizedTimeBaseIdentifier",
+          "type": "INTEGER",
+          "uuid": "ECUC:3f37a751-19db-46c2-8fe8-727675c83547"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMNotificationInterface",
+          "description": "The parameter defines what type of interface shall be used to notify a customer of a status event.",
+          "enumValues": [
+            "CALLBACK",
+            "CALLBACK_AND_SR_INTERFACE",
+            "NO_NOTIFICATION",
+            "SR_INTERFACE"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMNotificationInterface",
+          "type": "ENUM",
+          "uuid": "ECUC:46d95c77-eb83-4a0e-888a-da8f6dab1606"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMStoreTimebaseNonVolatile",
+          "description": "This allows for specifying that the Time Base shall be stored in the NvRam.",
+          "enumValues": [
+            "NO_STORAGE",
+            "STORAGE_AT_SHUTDOWN"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMStoreTimebaseNonVolatile",
+          "type": "ENUM",
+          "uuid": "ECUC:10043553-7e9d-48cd-b52b-d4a6ed064dd9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMStatusNotificationCallback",
+          "description": "Name of the customer specific status notification callback function, which shall be called, if a non-masked status event occurs.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMStatusNotificationCallback",
+          "type": "FUNCTION",
+          "uuid": "ECUC:39782520-9fd9-4107-b204-1e3e19253cee"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMSyncLossTimeout",
+          "description": "This attribute describes the timeout for the situation that the time synchronization gets lost in the scope of the time domain. Unit: seconds",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMSyncLossTimeout",
+          "type": "FLOAT",
+          "uuid": "ECUC:a27afdc4-309a-499d-ac82-c95edcb1f5b1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeLeapFutureThreshold",
+          "description": "This represents the maximum allowed positive difference between a newly received Global Time Base value and the current Local Time Base value [unit: seconds].",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMTimeLeapFutureThreshold",
+          "type": "FLOAT",
+          "uuid": "ECUC:6e77c22f-0aa9-4a6a-b38a-2202357ebd44"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeLeapPastThreshold",
+          "description": "This represents the maximum allowed negative difference between the current Local Time Base value and a newly received Global Time Base value [unit: seconds].",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMTimeLeapPastThreshold",
+          "type": "FLOAT",
+          "uuid": "ECUC:d7d8c5ff-6f13-4558-8c42-66b829b422e9"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMOffsetTimeBase",
+          "description": "This is the reference to the Synchronized Time-Base this Offset Time-Base is based on. This reference makes the containing StbMSynchronizedTimeBase an Offset T…",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "StbMOffsetTimeBase",
+          "uuid": "ECUC:7b397fdd-c1dc-41ae-bce8-46f3949cd47d"
+        }
+      ],
+      "shortName": "StbMSynchronizedTimeBase",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMLocalTimeClock",
+          "description": "References the hardware reference clock of this Synchronized Time Base.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMLocalTimeClock/StbMClockFrequency",
+              "description": "Represents the frequency [Hz] of the HW reference clock used by the StbM.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMClockFrequency",
+              "type": "INTEGER",
+              "uuid": "ECUC:8f90dad1-1648-4e13-a1a0-fdb54dc30e51"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMLocalTimeClock/StbMClockPrescaler",
+              "description": "Represents the prescaler to calculate the resulting frequency of the HW reference clock used by the StbM.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMClockPrescaler",
+              "type": "INTEGER",
+              "uuid": "ECUC:77a2eb1e-2e6d-422c-9ce3-5f5f7016432a"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMLocalTimeClock/StbMLocalTimeHardware",
+              "description": "Reference to the local time hardware.",
+              "destinationContainerType": "EthTSynGlobalTimeDomain",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain",
+                "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration",
+                "/AUTOSAR/EcucDefs/Os/OsCounter"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "choice",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "StbMLocalTimeHardware",
+              "uuid": "ECUC:99851e3c-5734-4f0a-9509-d90a8a1434b2"
+            }
+          ],
+          "shortName": "StbMLocalTimeClock",
+          "subContainers": [],
+          "uuid": "ECUC:fa6338a8-afbe-4f71-86e8-2dc16d94e81d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMNotificationCustomer",
+          "description": "This container holds the configuration of a notification customer, which is notified is informed about the occurance of a Time-base related event.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMNotificationCustomer/StbMNotificationCustomerId",
+              "description": "Identification of a event notification customer.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "StbMNotificationCustomerId",
+              "type": "INTEGER",
+              "uuid": "ECUC:8887ed5a-f808-4a63-b669-1f2798058a58"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMNotificationCustomer/StbMTimeNotificationCallback",
+              "description": "Name of the customer specific notification callback function, which shall be called, if the time previously set by the customer is reached.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMTimeNotificationCallback",
+              "type": "FUNCTION",
+              "uuid": "ECUC:8cf64d77-c567-4c56-8f3f-f61eb597a8a6"
+            }
+          ],
+          "references": [],
+          "shortName": "StbMNotificationCustomer",
+          "subContainers": [],
+          "uuid": "ECUC:af461e1b-abdf-4e1b-9382-cbfe1705b9c2"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeCorrection",
+          "description": "Collects the information relevant for the rate- and offset correction of a Time Base.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeCorrection/StbMAllowMasterRateCorrection",
+              "description": "This attribute describes whether the rate correction value of a Time Base can be set by StbM_SetRateCorrection():",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMAllowMasterRateCorrection",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b2e9cbf0-a6cc-4df7-bc43-72d64ecb83b1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeCorrection/StbMMasterRateDeviationMax",
+              "description": "This attribute describes the maximum allowed absolute value of the rate deviation value to be set by StbM_SetRateCorrection() [unit: ppm].",
+              "isOptional": true,
+              "max": 32000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMMasterRateDeviationMax",
+              "type": "INTEGER",
+              "uuid": "ECUC:a807fe9b-0e6d-43ff-bb74-6cff7ce4d07d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeCorrection/StbMRateCorrectionsPerMeasurementDuration",
+              "description": "Number of simultaneous rate measurements to determine the current rate deviation.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMRateCorrectionsPerMeasurementDuration",
+              "type": "INTEGER",
+              "uuid": "ECUC:f3168974-38ae-4164-9d56-8ebab743042e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeCorrection/StbMOffsetCorrectionAdaptionInterval",
+              "description": "Defines the interval during which the adaptive rate correction cancels out the rate- and time deviation [unit: seconds].",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMOffsetCorrectionAdaptionInterval",
+              "type": "FLOAT",
+              "uuid": "ECUC:1d86529a-589b-410b-b435-2fcf4aad9012"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeCorrection/StbMOffsetCorrectionJumpThreshold",
+              "description": "Threshold for the correction method. Deviations below this value will be corrected by a linear reduction over a defined timespan. Values equal- and greater tha…",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMOffsetCorrectionJumpThreshold",
+              "type": "FLOAT",
+              "uuid": "ECUC:6bd98c9d-622d-46ab-a0b8-115607bbc6ea"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeCorrection/StbMRateCorrectionMeasurementDuration",
+              "description": "Definition of the time span [s] which is used to calculate the rate deviation.",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMRateCorrectionMeasurementDuration",
+              "type": "FLOAT",
+              "uuid": "ECUC:89193384-5b70-44d3-bd65-ec80b1d2e55c"
+            }
+          ],
+          "references": [],
+          "shortName": "StbMTimeCorrection",
+          "subContainers": [],
+          "uuid": "ECUC:470ce21a-f5a3-44c7-8b8a-e9c04f5619e3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeRecording",
+          "description": "Collects the information relevant for configuration of the precision measurement of a Time Base.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeRecording/StbMOffsetTimeRecordBlockCallback",
+              "description": "Name of the customer specific callback function, which shall be called, if a measurement data for a Offset Time Base are available.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMOffsetTimeRecordBlockCallback",
+              "type": "FUNCTION",
+              "uuid": "ECUC:e90d79c5-0e03-41c2-be6a-b0ebc038143e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeRecording/StbMSyncTimeRecordBlockCallback",
+              "description": "Name of the customer specific callback function, which shall be called, if a measurement data for a Synchronized Time Base are available.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "StbMSyncTimeRecordBlockCallback",
+              "type": "FUNCTION",
+              "uuid": "ECUC:394d1251-9b73-43d0-9324-d73636ba28b3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeRecording/StbMOffsetTimeRecordTableBlockCount",
+              "description": "Represents the number of Blocks used for queing time measurement events for the Offset Time Base Record Table.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "StbMOffsetTimeRecordTableBlockCount",
+              "type": "INTEGER",
+              "uuid": "ECUC:638d4d87-9937-4298-9e81-b24e064b73fa"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase/StbMTimeRecording/StbMSyncTimeRecordTableBlockCount",
+              "description": "Represents the number of Blocks used for queing time measurement events for the Synchronized Time Base Record Table.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "StbMSyncTimeRecordTableBlockCount",
+              "type": "INTEGER",
+              "uuid": "ECUC:88d10345-6f2a-4656-b8b3-8bb070a4138c"
+            }
+          ],
+          "references": [],
+          "shortName": "StbMTimeRecording",
+          "subContainers": [],
+          "uuid": "ECUC:b0120a44-ce38-4aff-9773-85b00de861b1"
+        }
+      ],
+      "uuid": "ECUC:0eb5422e-e6ba-4303-8c41-1f56ad5d2f52"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMTriggeredCustomer",
+      "description": "The triggered customer is directly triggered by the Synchronized Time-base Manager by getting synchronized with the current (global) definition of time and pas…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMTriggeredCustomer/StbMTriggeredCustomerPeriod",
+          "description": "The triggering period of the triggered customer, called by the StbM_MainFunction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMTriggeredCustomerPeriod",
+          "type": "INTEGER",
+          "uuid": "ECUC:66300845-e1f9-4af6-be9e-6bd32cd2e858"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMTriggeredCustomer/StbMOSScheduleTableRef",
+          "description": "Mandatory reference to synchronized OS ScheduleTable, which will be explicitly synchronized by the StbM.",
+          "destinationContainerType": "OsScheduleTable",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsScheduleTable",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsScheduleTable"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMOSScheduleTableRef",
+          "uuid": "ECUC:489979ba-a412-4da4-a60c-363cf7aec241"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/StbM/StbMTriggeredCustomer/StbMSynchronizedTimeBaseRef",
+          "description": "Mandatory reference to the required synchronized time-base.",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": false,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "StbMSynchronizedTimeBaseRef",
+          "uuid": "ECUC:265babaa-6c72-4d8f-b6fe-f4cd7ac08b90"
+        }
+      ],
+      "shortName": "StbMTriggeredCustomer",
+      "subContainers": [],
+      "uuid": "ECUC:19e45c71-41c9-4253-a241-102f47f74b40"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/StbM",
+  "description": "Configuration of the Synchronized Time-base Manager (StbM) module.",
+  "importWarnings": [
+    "StbMGptTimerRef：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+    "StbMLocalTimeHardware：目标 /AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain 位于本模块之外；编辑器只读展示。",
+    "StbMOSScheduleTableRef：目标 /AUTOSAR/EcucDefs/Os/OsScheduleTable 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "StbM",
+  "version": "4.4.0"
+}

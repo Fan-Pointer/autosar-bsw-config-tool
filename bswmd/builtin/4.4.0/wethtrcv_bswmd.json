@@ -1,0 +1,660 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "6953f65965fb729589f40c5e4d0e1e93c8e3f3ff4950f46903ed2bd843bf9429",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvAntennaConfigSet",
+      "description": "This container contains the antenna configurations.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "WEthTrcvAntennaConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvAntennaConfigSet/WEthTrcvAntennaConfig",
+          "description": "Configuration of the individual antenna.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvAntennaConfigSet/WEthTrcvAntennaConfig/WEthTrcvAntennaId",
+              "description": "Specifies the instance ID of the configured antenna.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvAntennaId",
+              "type": "INTEGER",
+              "uuid": "ECUC:393c6616-87f0-4ccf-bf56-b35d29490edb"
+            }
+          ],
+          "references": [],
+          "shortName": "WEthTrcvAntennaConfig",
+          "subContainers": [],
+          "uuid": "ECUC:d5659aa8-b612-4196-b7a9-4f669fae6ee6"
+        }
+      ],
+      "uuid": "ECUC:b8f29b16-9d64-4309-b505-6945a39fc43e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR WEthTrcv module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "WEthTrcvConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig",
+          "description": "Configuration of the individual transceiver",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvBusId",
+              "description": "Specifies the hardware id used for lower level bus interface access (e.g. MII/SPI) to the transceiver's hardware module. For example the MII index if MII would…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvBusId",
+              "type": "INTEGER",
+              "uuid": "ECUC:fa863213-2fb7-419b-949c-8a690e415a03"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvId",
+              "description": "Specifies the instance ID of the configured transceiver.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvId",
+              "type": "INTEGER",
+              "uuid": "ECUC:1fa7606e-b2fd-4dd6-aab9-fae0af0f61a3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvPhysLayerType",
+              "description": "Specifies the physical layer type of the Wireless Ethernet transceiver link.",
+              "enumValues": [
+                "TRCV_PHYS_LAYER_TYPE_80211_P"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvPhysLayerType",
+              "type": "ENUM",
+              "uuid": "ECUC:64803bff-5116-4770-9a6c-f437703ab74e"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvConfigEcucPartitionRef",
+              "description": "Maps one Wireless Ethernet transceiver to zero or one ECUC partitions. The ECUC partition referenced is a subset of the ECUC partitions where the Wireless Ethe…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvConfigEcucPartitionRef",
+              "uuid": "ECUC:08ed095d-c7c6-4f01-a474-31850f7ee80d"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvCtrlRef",
+              "description": "Specifies a reference to the wireless ethernet controller used for lower layer bus interface access to the transceiver.",
+              "destinationContainerType": "WEthCtrlConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvCtrlRef",
+              "uuid": "ECUC:586844e3-91c9-4590-844e-10664b830b31"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvRadioConfigSetRef",
+              "description": "Reference to a WEthTrcvRadioConfigSet.",
+              "destinationContainerType": "WEthTrcvRadioConfigSet",
+              "destinationRef": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioConfigSetRef",
+              "uuid": "ECUC:c3dd024e-15f5-4fbf-ac7e-8036128698e8"
+            }
+          ],
+          "shortName": "WEthTrcvConfig",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig/WEthTrcvDemEventParameterRefs/WETHTRCV_E_ACCESS",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Transceiver access failed\" has occurred.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "WETHTRCV_E_ACCESS",
+                  "uuid": "ECUC:174ded1d-1093-4030-b56b-ea3d698beadc"
+                }
+              ],
+              "shortName": "WEthTrcvDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:4879edc8-7614-44dd-811c-30dd6bf3f867"
+            }
+          ],
+          "uuid": "ECUC:29453c46-8a11-4daf-a9bc-f32dd86fc394"
+        }
+      ],
+      "uuid": "ECUC:6f7e82a7-96fd-4030-aeee-662b573e3f05"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral",
+      "description": "General configuration of Wireless Ethernet Transceiver Driver module",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c289a1a9-9de0-4d80-b637-e040c1cf693f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvGetLinkStateApi",
+          "description": "Enables / Disables WEthTrcv_GetLinkState API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvGetLinkStateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3618dacd-0b32-4ec7-9cff-5acebb4127d9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvGetTransceiverModeApi",
+          "description": "Enables / Disables WEthTrcv_GetTransceiverMode API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvGetTransceiverModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9a1be9cb-4329-42d5-ab68-0008d5d5d4fd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvSetTransceiverModeApi",
+          "description": "Enables / Disables WEthTrcv_SetTransceiverMode API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvSetTransceiverModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2dad7c4b-547e-40df-8a49-6a9e35920515"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvVersionInfoApi",
+          "description": "Enables / Disables version info API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d880cbee-bcf3-4ea0-bc5b-d807e54d89a0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvVersionInfoApiMacro",
+          "description": "Enables / Disables version info API macro implementation",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvVersionInfoApiMacro",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:00a4bef3-a357-46ca-9288-418154a32dfa"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:8c53a62c-21f6-4ec1-9c27-e84f41d69818"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1,
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvMaxTrcvsSupported",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvMaxTrcvsSupported",
+          "type": "INTEGER",
+          "uuid": "ECUC:c0ff37fd-4d29-4ab1-868d-41e91fc915d6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvMainFunctionPeriod",
+          "description": "Specifies the period of main function WEthTrcv_MainFunction in seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "WEthTrcvMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:584986a5-766c-4304-ace0-281f70fdb4a3"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvGeneral/WEthTrcvEcucPartitionRef",
+          "description": "Maps the Wireless Ethernet transceiver driver to zero or multiple ECUC partitions to make the modules API available in this partition. The Wireless Ethernet tr…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "WEthTrcvEcucPartitionRef",
+          "uuid": "ECUC:0494932c-262d-4f8b-b76b-513c40635b58"
+        }
+      ],
+      "shortName": "WEthTrcvGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:855e3333-ebb9-4959-829f-26dec99043ae"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet",
+      "description": "This container contains the radio configurations.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "WEthTrcvRadioConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig",
+          "description": "Configuration of the individual radio (PHY + MAC).",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelBandwidth",
+              "description": "Specifies the bandwidth of the physical channel.",
+              "enumValues": [
+                "BW_10MHZ",
+                "BW_20MHZ",
+                "BW_40MHZ",
+                "BW_5MHZ"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioChannelBandwidth",
+              "type": "ENUM",
+              "uuid": "ECUC:50d6eb08-4f30-429a-9b58-91572f6f303f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioMode",
+              "description": "Specifies the mode of the radio within a WEthTrcvRadioConfig. Inside of a WEthTrcvRadioConfigSet different modes for the respective WEthTrcvRadioConfigs are po…",
+              "enumValues": [
+                "OFF",
+                "RX_ON",
+                "RX_TX_ON",
+                "TX_ON",
+                "USED_FOR_CHANNEL_SWITCHING"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioMode",
+              "type": "ENUM",
+              "uuid": "ECUC:b71ea315-1f79-4acf-97d7-822c67265657"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelCsPowerThreshold",
+              "description": "Specifies the threshold for carrier sense (CS) power of the physical channel [dBm].",
+              "isOptional": false,
+              "max": 100,
+              "min": -100,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioChannelCsPowerThreshold",
+              "type": "FLOAT",
+              "uuid": "ECUC:1ea31cd5-c2df-4df5-9ce6-b2578c8ac04b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelMaxTxPower",
+              "description": "Specifies the transmit power of the physical channel [dBm].",
+              "isOptional": false,
+              "max": 100,
+              "min": -100,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioChannelMaxTxPower",
+              "type": "FLOAT",
+              "uuid": "ECUC:4c1ba4d6-ef2e-4115-80bf-0365e8d2084e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxDatarate",
+              "description": "Specifies the transmit datarate of the physical channel. [bit/s]",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioChannelTxDatarate",
+              "type": "FLOAT",
+              "uuid": "ECUC:79b3f5a7-1c8f-4e66-8f95-85ea779f2b57"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelFreq",
+              "description": "Specifies the frequency of the physical channel [Hz].",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioChannelFreq",
+              "type": "INTEGER",
+              "uuid": "ECUC:20627be3-2c42-4e44-a889-b5e3721694cf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioId",
+              "description": "Specifies the instance ID of the configured radio.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioId",
+              "type": "INTEGER",
+              "uuid": "ECUC:bfe7d458-8e40-4bfd-97a6-648d1cd42685"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelRxAntenna",
+              "description": "Specifies the antenna used for reception of packets of the physical channel.",
+              "destinationContainerType": "WEthTrcvAntennaConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvAntennaConfigSet/WEthTrcvAntennaConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvAntennaConfigSet/WEthTrcvAntennaConfig"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioChannelRxAntenna",
+              "uuid": "ECUC:d2ce4514-e171-440d-98fe-f35a64c34fce"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxAntenna",
+              "description": "Specifies the antenna used for transmission of packets to the physical channel.",
+              "destinationContainerType": "WEthTrcvAntennaConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvAntennaConfigSet/WEthTrcvAntennaConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvAntennaConfigSet/WEthTrcvAntennaConfig"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "WEthTrcvRadioChannelTxAntenna",
+              "uuid": "ECUC:3c38ec96-3a95-480f-82e5-04ffbf88a38e"
+            }
+          ],
+          "shortName": "WEthTrcvRadioConfig",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxQueueConfig",
+              "description": "Configuration of the individual EDCA transmit queue of a channel.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxQueueConfig/WEthTrcvRadioChannelTxQueueAifsn",
+                  "description": "Specifies the arbitration inter frame space number (AIFSN) of the queue.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "WEthTrcvRadioChannelTxQueueAifsn",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:e918cb98-28b4-477c-ba10-864d885dfe11"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxQueueConfig/WEthTrcvRadioChannelTxQueueCwMax",
+                  "description": "Specifies the maximum size of the contention windows (CW) of the queue.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "WEthTrcvRadioChannelTxQueueCwMax",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:5b5fa966-a8b1-4b48-b910-17cd8d46ce3b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxQueueConfig/WEthTrcvRadioChannelTxQueueCwMin",
+                  "description": "Specifies the minimum size of the contention windows (CW) of the queue.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "WEthTrcvRadioChannelTxQueueCwMin",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:48e585ba-a239-4e58-aee2-4402976aeed8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxQueueConfig/WEthTrcvRadioChannelTxQueueId",
+                  "description": "Specifies the ID (equals priority) of the queue.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "WEthTrcvRadioChannelTxQueueId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:5821d009-b36e-4d44-b9a4-acacef44d728"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvRadioConfigSet/WEthTrcvRadioConfig/WEthTrcvRadioChannelTxQueueConfig/WEthTrcvRadioChannelTxQueueTxOpDurationLimit",
+                  "description": "Specifies the transmit operation duration limit of the queue in [s].",
+                  "isOptional": false,
+                  "max": 0.00816,
+                  "min": 0.000032,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "WEthTrcvRadioChannelTxQueueTxOpDurationLimit",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:93a6e954-5282-462a-bc11-f479d2873b5b"
+                }
+              ],
+              "references": [],
+              "shortName": "WEthTrcvRadioChannelTxQueueConfig",
+              "subContainers": [],
+              "uuid": "ECUC:68b25623-54d0-4e93-b70e-daf36c90d892"
+            }
+          ],
+          "uuid": "ECUC:adcbcfa2-7d30-4f9c-a1fc-7cfb20ba0e2a"
+        }
+      ],
+      "uuid": "ECUC:05571f60-43ac-49e1-a9c4-e14ffa5b2800"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/WEthTrcv",
+  "description": "Configuration of Ethernet Transceiver Driver module",
+  "importWarnings": [
+    "WETHTRCV_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "WEthTrcvConfigEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "WEthTrcvCtrlRef：目标 /AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig 位于本模块之外；编辑器只读展示。",
+    "WEthTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "WEthTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "WEthTrcv",
+  "version": "4.4.0"
+}

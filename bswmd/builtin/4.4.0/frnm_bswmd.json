@@ -1,0 +1,1046 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "8eb89860f90e34984f0a17aaccc36905a698e3e543caec34850c0837b3a36228",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig",
+      "description": "This container contains the configuration parameters for all FlexRay NM channels.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "FrNmChannelConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel",
+          "description": "This container contains the configuration parameters for a FlexRay NM Channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "FrNmChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers",
+              "description": "This container contains instance specific identifiers related to the respective FlexRay Channel.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmActiveWakeupBitEnabled",
+                  "description": "Enables/Disables the handling of the Active Wakeup Bit in the FrNm module.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmActiveWakeupBitEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:e820dac6-c370-4a46-83bf-662f04593b5d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmCarWakeUpFilterEnabled",
+                  "description": "If CWU filtering is supported, only the CWU bit within the NM message with source node identifier",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmCarWakeUpFilterEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:11e654c1-51b4-49c6-81f8-55ce807fcf71"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmCarWakeUpRxEnabled",
+                  "description": "Enables or disables support of CarWakeUp bit evaluation in received NM messages.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmCarWakeUpRxEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:26b48e2c-d069-4791-8ad8-2dd5841736d6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmNodeDetectionEnabled",
+                  "description": "This parameter is used to enable or disable node detection support for a FrNm Channel.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmNodeDetectionEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:d66d3c6a-9be5-4476-922e-f236679e4f5f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmPnEnabled",
+                  "description": "Enables or disables support of partial networking.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmPnEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:349def50-5c4c-494f-b926-68c7f7ac48dd"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmPnEraCalcEnabled",
+                  "description": "Specifies if FrNm calculates the PN request information for external requests. (ERA)",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmPnEraCalcEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:526200f2-436e-48a5-8c28-65a323bbdddc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmSourceNodeIdentifierEnabled",
+                  "description": "This parameter is used to enable or disable SourceNodeIdentifier support for a FrNm Channel.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmSourceNodeIdentifierEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:10efad84-28a1-440b-bb0f-c4b79a5971b4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmSynchronizationPointEnabled",
+                  "description": "This parameter defines if this channel shall provide the synchronization point indication to the NM Interface.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmSynchronizationPointEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:c151df15-fc03-40c4-9285-aae0f136d924"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmCarWakeUpBitPosition",
+                  "description": "Specifies the Bit position of the CWU within the NM-Message.",
+                  "isOptional": true,
+                  "max": 7,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmCarWakeUpBitPosition",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:46c00b05-85d3-4b39-8872-173d65b1c644"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmCarWakeUpBytePosition",
+                  "description": "Specifies the Byte position of the CWU within the NM-Message.",
+                  "isOptional": true,
+                  "max": 7,
+                  "min": 2,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmCarWakeUpBytePosition",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:9e73c3fd-aee1-4205-92d6-dd243caeabef"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmCarWakeUpFilterNodeId",
+                  "description": "Source node identifier for CWU filtering. If CWU filtering is supported, only the CWU bit within the NM",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmCarWakeUpFilterNodeId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:dc72fdd9-ddf9-4609-8a69-47c570140089"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmNodeId",
+                  "description": "NM node identifier configured for the respective FlexRay Channel.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmNodeId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:1336f412-cc1a-4792-90bc-1b4a097aeb23"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmPduScheduleVariant",
+                  "description": "This parameter defines the PDU scheduling variant that should be used for this channel.",
+                  "enumValues": [
+                    "FRNM_PDU_SCHEDULE_VARIANT_1",
+                    "FRNM_PDU_SCHEDULE_VARIANT_2",
+                    "FRNM_PDU_SCHEDULE_VARIANT_3",
+                    "FRNM_PDU_SCHEDULE_VARIANT_4",
+                    "FRNM_PDU_SCHEDULE_VARIANT_5",
+                    "FRNM_PDU_SCHEDULE_VARIANT_6",
+                    "FRNM_PDU_SCHEDULE_VARIANT_7"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmPduScheduleVariant",
+                  "type": "ENUM",
+                  "uuid": "ECUC:96d8cf2f-2ba5-4983-aa99-178b623a4e19"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmChannelHandle",
+                  "description": "Channel identifier configured for the respective instance of the NM.",
+                  "destinationContainerType": "FrIfCluster",
+                  "destinationRef": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmChannelHandle",
+                  "uuid": "ECUC:d88b8b09-0d28-40bb-89e5-84fefce71b68"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmComMNetworkHandleRef",
+                  "description": "This reference points to the unique channel defined by the ComMChannel and provides access to the unique channel index value in ComMChannelId.",
+                  "destinationContainerType": "ComMChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmComMNetworkHandleRef",
+                  "uuid": "ECUC:ddb2fe63-3279-4fb4-bb06-2f8e9cdf0615"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmPnEraRxNSduRef",
+                  "description": "Reference to a global Pdu. The SduRef is required for every FrNm Channel, because ERA is reported per channel.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmPnEraRxNSduRef",
+                  "uuid": "ECUC:ff73aa08-9564-4998-9da8-b7206971ecac"
+                }
+              ],
+              "shortName": "FrNmChannelIdentifiers",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmRxPdu",
+                  "description": "This container describes the FlexRay NM RX PDU:s.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmRxPdu/FrNmRxPduContainsData",
+                      "description": "This parameter defines if the PDU contains NM Data.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmRxPduContainsData",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:7f31b219-7c94-4c4e-85be-eb7fc3c12e67"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmRxPdu/FrNmRxPduContainsVote",
+                      "description": "This parameter defines if the PDU contains NM Vote information.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmRxPduContainsVote",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:55b5885d-6ec5-4dd2-bcdf-24c305343e53"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmRxPdu/FrNmRxPduId",
+                      "description": "PDU identifier configured for the respective FlexRay Channel.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmRxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:7cd2b9bd-afa1-43c8-97ff-11ca0d0d8b85"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmRxPdu/FrNmRxPduRef",
+                      "description": "The reference to a PDU in the global PDU structure described in the AUTOSAR ECU Configuration Specification. This reference will be used by the FrIf module to …",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmRxPduRef",
+                      "uuid": "ECUC:7da7bb4c-20d1-4236-a079-9444644d5e91"
+                    }
+                  ],
+                  "shortName": "FrNmRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:63cf01ce-91f9-4153-816e-f9bfd840a359"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmTxPdu",
+                  "description": "This container describes the FlexRay NM TX PDU:s.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 4
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmTxPdu/FrNmTxConfirmationPduId",
+                      "description": "Handle Id used by the Lower Layer when calling FrNm_TriggerTransmit() or FrNm_TxConfirmation().",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmTxConfirmationPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:98bb1321-c1ec-4d09-94dd-d436b09a40e7"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmTxPdu/FrNmTxPduContainsData",
+                      "description": "This parameted defines if the PDU contains NM Data.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmTxPduContainsData",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:8dd21f51-d00e-4530-8a8e-c29ffd4fde38"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmTxPdu/FrNmTxPduContainsVote",
+                      "description": "This parameted defines if the PDU contains NM Vote information.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmTxPduContainsVote",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:62201e56-78be-4224-9dec-ba8319e9c3d8"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmTxPdu/FrNmTxPduRef",
+                      "description": "The reference to a PDU in the global PDU structure described in the AUTOSAR ECU Configuration Specification. This reference is used to derive the PDU Id that i…",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmTxPduRef",
+                      "uuid": "ECUC:a6fbc267-d93c-49b9-87fb-672ddc7d41a1"
+                    }
+                  ],
+                  "shortName": "FrNmTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:3efcbe06-052f-466f-9a7d-6b0210483245"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmUserDataTxPdu",
+                  "description": "This optional container is used to configure the UserNm PDU. This container is only available if FrNmComUserDataSupport is enabled.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmUserDataTxPdu/FrNmTxUserDataPduId",
+                      "description": "This parameter defines the Handle ID of the NM User Data I-PDU.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmTxUserDataPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f668be4e-b74c-4470-a577-d9e4cdb7804f"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelIdentifiers/FrNmUserDataTxPdu/FrNmTxUserDataPduRef",
+                      "description": "Reference to the NM User Data I-PDU in the global PDU collection.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmTxUserDataPduRef",
+                      "uuid": "ECUC:97285808-d295-4a50-b81f-188ec22b0b9f"
+                    }
+                  ],
+                  "shortName": "FrNmUserDataTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:4d810673-368e-4375-bc96-e41197a52b50"
+                }
+              ],
+              "uuid": "ECUC:392d860d-8822-4778-be94-d9cbed0b21ee"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming",
+              "description": "This container contains instance-specific timing related to the respective FlexRay Channel.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmDataCycle",
+                  "description": "Number of FlexRay Schedule Cycles needed to transmit the NM Data of all ECUs on the FlexRay bus",
+                  "enumValues": [
+                    "FRNM_CYCLE_VALUE_1",
+                    "FRNM_CYCLE_VALUE_16",
+                    "FRNM_CYCLE_VALUE_2",
+                    "FRNM_CYCLE_VALUE_32",
+                    "FRNM_CYCLE_VALUE_4",
+                    "FRNM_CYCLE_VALUE_64",
+                    "FRNM_CYCLE_VALUE_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmDataCycle",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1cf96def-c175-476e-971f-d65c5034e9f0"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmRepetitionCycle",
+                  "description": "Number of Flexray Schedule Cycles used to repeat the transmission of the Nm vote of all ECUs on the Flexray Bus.",
+                  "enumValues": [
+                    "FRNM_CYCLE_VALUE_1",
+                    "FRNM_CYCLE_VALUE_16",
+                    "FRNM_CYCLE_VALUE_2",
+                    "FRNM_CYCLE_VALUE_32",
+                    "FRNM_CYCLE_VALUE_4",
+                    "FRNM_CYCLE_VALUE_64",
+                    "FRNM_CYCLE_VALUE_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmRepetitionCycle",
+                  "type": "ENUM",
+                  "uuid": "ECUC:db5217ed-e261-4a17-9816-14bb85964dac"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmVotingCycle",
+                  "description": "Number of FlexRay Schedule Cycles needed to transmit the Nm vote of all ECUs on the FlexRay Bus.",
+                  "enumValues": [
+                    "FRNM_CYCLE_VALUE_1",
+                    "FRNM_CYCLE_VALUE_16",
+                    "FRNM_CYCLE_VALUE_2",
+                    "FRNM_CYCLE_VALUE_32",
+                    "FRNM_CYCLE_VALUE_4",
+                    "FRNM_CYCLE_VALUE_64",
+                    "FRNM_CYCLE_VALUE_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmVotingCycle",
+                  "type": "ENUM",
+                  "uuid": "ECUC:ed9e0181-e5db-440b-92d9-bdacf0c385e2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmMainFunctionPeriod",
+                  "description": "This parameter defines the processing cycle of the main function of FrNm module in seconds.",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmMainFunctionPeriod",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:58d441c8-743c-4926-b25c-71caf8e00134"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmRemoteSleepIndTime",
+                  "description": "Timeout for Remote Sleep Indication. It defines the time in seconds how long it shall take to recognize that all other nodes are ready to sleep.",
+                  "isOptional": false,
+                  "max": 65.535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmRemoteSleepIndTime",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:9b7ae88e-33fb-4927-95e9-f4441d6bf81a"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmRepeatMessageTime",
+                  "description": "Timeout for Repeat Message State. Defines the time in seconds how long the NM shall stay in the Repeat Message State.",
+                  "isOptional": false,
+                  "max": 65.535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmRepeatMessageTime",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:9abb6684-afa7-4305-8dbe-72b1f8d86950"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmReadySleepCnt",
+                  "description": "FrNm switches to bus sleep mode at the end of the FrNmReadySleepCnt+1 repetition cycle without any NM vote. E.g. on a value of \"1\", the NM-State Machine will l…",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmReadySleepCnt",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a9817d84-0c8f-4a31-8040-f27af96ef907"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmChannelConfig/FrNmChannel/FrNmChannelTiming/FrNmVoteInhibitionEnabled",
+                  "description": "Pre-processor switch for enabling the inhibition of vote changes from the next-to-last repetition cycle to the last repetition cycle before the Ready Sleep Cou…",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmVoteInhibitionEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:07bc7e1b-0745-4b11-aee0-b57f63a5a0ce"
+                }
+              ],
+              "references": [],
+              "shortName": "FrNmChannelTiming",
+              "subContainers": [],
+              "uuid": "ECUC:2356fc9a-7552-44bd-b5b4-179696eb1a91"
+            }
+          ],
+          "uuid": "ECUC:05184f67-a45b-4cfe-9bb8-de642badc1a1"
+        }
+      ],
+      "uuid": "ECUC:1e8c6f6c-4887-43c7-89d0-bd5fab7cf16e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig",
+      "description": "This container contains all global configuration parameters for the FrNm module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "FrNmGlobalConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures",
+          "description": "This container contains module features related to the FlexRay NM functionality.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmBusSynchronizationEnabled",
+              "description": "Pre-processor switch for enabling the bus synchronization.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmBusSynchronizationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:9a3e0c9a-a50d-4019-be35-1059c3dd79fd"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmComUserDataSupport",
+              "description": "Preprocessor switch for enabling the Tx path of Com User Data.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmComUserDataSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:17000d55-c5bd-4ac5-9efe-e2c4e5052983"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmCoordinatorSyncSupport",
+              "description": "Enables/disables the coordinator synchronization support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmCoordinatorSyncSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:c05a9f18-421f-4c84-bd1e-5af35deaa75e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmCycleCounterEmulation",
+              "description": "Pre-processor switch for enabling the cycle counter emulation.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmCycleCounterEmulation",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:71df21c0-cd59-494f-9f4a-124cd48f5f7a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmDualChannelPduEnable",
+              "description": "Pre-processor switch for enabling the support of dual channel transmission and reception of NM messages.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmDualChannelPduEnable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:15847d6a-d301-4daf-a454-a315119f6d9b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmHwVoteEnable",
+              "description": "Pre-processor switch for enabling the processing of FlexRay Hardware aggregated NM-Votes. This switch enables/disables the optional API FrIf_GetNmVector.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmHwVoteEnable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:e02357fd-fd64-49a4-bee0-000f5961eeb2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPassiveModeEnabled",
+              "description": "Pre-processor switch for enabling Passive Node Configuration support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmPassiveModeEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:40eea516-843f-45bd-b78f-d15727841c63"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPduRxIndicationEnabled",
+              "description": "Pre-processor switch for enabling PDU reception indication.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmPduRxIndicationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:a099b8ce-748d-4d14-b589-53b45c2af30c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnEiraCalcEnabled",
+              "description": "Specifies if FrNm calculates the PN request information for internal an external requests. (EIRA)",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrNmPnEiraCalcEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:08325234-1f20-4c36-af9c-69a50a057b17"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmRemoteSleepIndicationEnabled",
+              "description": "Pre-processor switch for enabling remote sleep indication.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmRemoteSleepIndicationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:a870374a-2eec-49b1-96fa-26e1eb75db29"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmStateChangeIndicationEnabled",
+              "description": "Pre-processor switch for enabling state change indication.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmStateChangeIndicationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f1c0e977-487b-4d8e-9dac-e6543fee8e90"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmUserDataEnabled",
+              "description": "Pre-processor switch for enabling user data support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmUserDataEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:02def680-51fd-441e-ad69-204a40f17680"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmVotingNextToLastRepetitionCycleDisable",
+              "description": "Pre-processor switch for disabling vote changes in the last two",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmVotingNextToLastRepetitionCycleDisable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:37b00527-fec3-43ff-92c6-07b2439173d3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnResetTime",
+              "description": "Specifies the runtime of the reset timer in seconds. This reset time is valid for the reset of PN requests in the EIRA and in the ERA. The value shall be the s…",
+              "isOptional": true,
+              "max": 65.535,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrNmPnResetTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:1d9f1e60-fd35-45bc-babc-64a9be8fae74"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnEiraRxNSduRef",
+              "description": "Reference to a Pdu in the COM-Stack.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrNmPnEiraRxNSduRef",
+              "uuid": "ECUC:debf2dcf-ce84-4c52-af2b-642dbffb8346"
+            }
+          ],
+          "shortName": "FrNmGlobalFeatures",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnInfo",
+              "description": "PN information configuration",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 1,
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnInfo/FrNmPnInfoLength",
+                  "description": "Specifies the length of the PN request information in the NM message.",
+                  "isOptional": false,
+                  "max": 7,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmPnInfoLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:40000c94-20d8-4ed6-846a-871548acdae4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 1,
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnInfo/FrNmPnInfoOffset",
+                  "description": "Specifies the offset of the PN request information in the NM message.",
+                  "isOptional": false,
+                  "max": 7,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrNmPnInfoOffset",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ee5f3372-e457-432f-85d7-4d2d91c3aedd"
+                }
+              ],
+              "references": [],
+              "shortName": "FrNmPnInfo",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnInfo/FrNmPnFilterMaskByte",
+                  "description": "Filter mask byte configuration",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 7
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnInfo/FrNmPnFilterMaskByte/FrNmPnFilterMaskByteIndex",
+                      "description": "Index of the filter mask byte. Specifies the position within the filter mask byte array.",
+                      "isOptional": false,
+                      "max": 6,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmPnFilterMaskByteIndex",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:4adc8277-4162-45d5-9f9e-abc1ef4db5c9"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": 0,
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalFeatures/FrNmPnInfo/FrNmPnFilterMaskByte/FrNmPnFilterMaskByteValue",
+                      "description": "Parameter to configure the filter mask byte.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrNmPnFilterMaskByteValue",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:5c21384c-6bf7-4bcf-b7e5-07c82b0f5e84"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "FrNmPnFilterMaskByte",
+                  "subContainers": [],
+                  "uuid": "ECUC:91459ad1-8fd1-4332-8c12-48678acedb89"
+                }
+              ],
+              "uuid": "ECUC:c9c3ed55-f3ee-4f54-8a6b-bd2e106b0dc7"
+            }
+          ],
+          "uuid": "ECUC:616c80a9-5f86-46e8-a7ba-78508b63d5d4"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalProperties",
+          "description": "This container contains module properties related to the FlexRay NM functionality.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalProperties/FrNmDevErrorDetect",
+              "description": "Switches the development error detection and notification on or off.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmDevErrorDetect",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:655ce540-eff7-4d25-a44f-e77db6f2ba9e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalProperties/FrNmMainAcrossFrCycle",
+              "description": "If the FlexRay NM MainFunction is executed completely within the FlexRay communication cycle where the last NM vote of the current vote cycle is received, the …",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmMainAcrossFrCycle",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f92b6421-10d1-4982-85a8-397e63bb89b9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/FrNm/FrNmGlobalConfig/FrNmGlobalProperties/FrNmVersionInfoApi",
+              "description": "Pre-processor switch for enabling version info API support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrNmVersionInfoApi",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:59f1cf7c-7889-4ace-aa12-38016361dc4e"
+            }
+          ],
+          "references": [],
+          "shortName": "FrNmGlobalProperties",
+          "subContainers": [],
+          "uuid": "ECUC:68a43ddd-1574-4f64-acd3-76b9e1cf8c05"
+        }
+      ],
+      "uuid": "ECUC:7edc1874-5801-4b83-b345-19f2142af522"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/FrNm",
+  "description": "The Flexray Nm module",
+  "importWarnings": [
+    "FrNmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrNmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrNmTxUserDataPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrNmChannelHandle：目标 /AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster 位于本模块之外；编辑器只读展示。",
+    "FrNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "FrNmPnEraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrNmPnEiraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "FrNm",
+  "version": "4.4.0"
+}

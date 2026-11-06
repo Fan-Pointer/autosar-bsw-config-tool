@@ -1,0 +1,725 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "cc88262d7347d2df1d9f4d5bb151cc61f6ff0bbbacdcf59de28cf8619d3fa028",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet",
+      "description": "Container for runtime configuration parameters of the flash driver.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsAcErase",
+          "description": "Address offset in RAM to which the erase flash access code shall be loaded.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsAcErase",
+          "type": "INTEGER",
+          "uuid": "ECUC:2a204be2-76ae-465c-b358-c7c06f4d42ce"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsAcWrite",
+          "description": "Address offset in RAM to which the write flash access code shall be loaded.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsAcWrite",
+          "type": "INTEGER",
+          "uuid": "ECUC:326f888f-0676-4eec-a10e-f8159c0655ee"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsMaxReadFastMode",
+          "description": "The maximum number of bytes to read or compare in one cycle of the flash driver's job processing function in fast mode.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsMaxReadFastMode",
+          "type": "INTEGER",
+          "uuid": "ECUC:1095bfd8-716a-4dfb-a62d-89ee6d513df9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsMaxReadNormalMode",
+          "description": "The maximum number of bytes to read or compare in one cycle of the flash driver's job processing function in normal mode.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsMaxReadNormalMode",
+          "type": "INTEGER",
+          "uuid": "ECUC:fc26eec9-3ec1-4860-a1e2-905f73d14265"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsMaxWriteFastMode",
+          "description": "The maximum number of bytes to write in one cycle of the flash driver's job processing function in fast mode.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsMaxWriteFastMode",
+          "type": "INTEGER",
+          "uuid": "ECUC:006f40ff-e794-490e-9ec6-057e04aada0c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsMaxWriteNormalMode",
+          "description": "The maximum number of bytes to write in one cycle of the flash driver's job processing function in normal mode.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsMaxWriteNormalMode",
+          "type": "INTEGER",
+          "uuid": "ECUC:b03a7114-6d17-46c2-9f4b-2853f0e44291"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsProtection",
+          "description": "Erase/write protection settings. Only relevant if supported by hardware.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsProtection",
+          "type": "INTEGER",
+          "uuid": "ECUC:78d9a61d-5c1e-494b-95b2-09349577769b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsCallCycle",
+          "description": "Cycle time of calls of the flash driver's main function (in seconds).",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsCallCycle",
+          "type": "FLOAT",
+          "uuid": "ECUC:cec56299-7876-4cfc-9811-10a8cdc9b035"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": "MEMIF_MODE_SLOW",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsDefaultMode",
+          "description": "This parameter is the default FLS device mode after initialization.",
+          "enumValues": [
+            "MEMIF_MODE_FAST",
+            "MEMIF_MODE_SLOW"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsDefaultMode",
+          "type": "ENUM",
+          "uuid": "ECUC:f72e69f0-f52b-4383-9077-224b9258cf31"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsJobEndNotification",
+          "description": "Mapped to the job end notification routine provided by some upper layer module, typically the Fee module.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FlsJobEndNotification",
+          "type": "FUNCTION",
+          "uuid": "ECUC:01bf35d4-f65a-4e62-8fcb-bc18bb89b960"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsJobErrorNotification",
+          "description": "Mapped to the job error notification routine provided by some upper layer module, typically the Fee module.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FlsJobErrorNotification",
+          "type": "FUNCTION",
+          "uuid": "ECUC:da44a748-916b-4a62-a4cf-44f5fbb45d0c"
+        }
+      ],
+      "references": [],
+      "shortName": "FlsConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsExternalDriver",
+          "description": "This container is present for external Flash drivers only. Internal Flash drivers do not use the parameter listed in this container, hence its multiplicity is …",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsExternalDriver/FlsSpiReference",
+              "description": "Reference to SPI sequence (required for external Flash drivers).",
+              "destinationContainerType": "SpiSequence",
+              "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "FlsSpiReference",
+              "uuid": "ECUC:0124051e-19cb-4f30-8c5a-476d3847afb6"
+            }
+          ],
+          "shortName": "FlsExternalDriver",
+          "subContainers": [],
+          "uuid": "ECUC:81c36c86-d308-47d4-bc55-a02b401446e0"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsSectorList",
+          "description": "List of flashable sectors and pages.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "FlsSectorList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsSectorList/FlsSector",
+              "description": "Configuration description of a flashable sector",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsSectorList/FlsSector/FlsNumberOfSectors",
+                  "description": "Number of continuous sectors with identical values for FlsSectorSize and",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FlsNumberOfSectors",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:182b2aa9-9cd0-4305-91a4-e9a69decf610"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsSectorList/FlsSector/FlsPageSize",
+                  "description": "Size of one page of this sector.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FlsPageSize",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ad1fae4e-3ea1-4584-a148-c8669780a684"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsSectorList/FlsSector/FlsSectorSize",
+                  "description": "Size of this sector.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FlsSectorSize",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:3994527a-0bfb-4ec5-8864-374a51cade70"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsConfigSet/FlsSectorList/FlsSector/FlsSectorStartaddress",
+                  "description": "Start address of this sector.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FlsSectorStartaddress",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:61630dd0-0649-4365-ad45-d691f452ce17"
+                }
+              ],
+              "references": [],
+              "shortName": "FlsSector",
+              "subContainers": [],
+              "uuid": "ECUC:4a46d887-b3be-41a3-aa7b-031bfa23ac7c"
+            }
+          ],
+          "uuid": "ECUC:48a5cfc6-7ab9-44e4-a3eb-9e4eb901c845"
+        }
+      ],
+      "uuid": "ECUC:3d6f9ca5-bb01-4ee7-bd4f-253b60f2cc46"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral",
+      "description": "Container for general parameters of the flash driver. These parameters are always pre-compile.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsAcLoadOnJobStart",
+          "description": "The flash driver shall load the flash access code to RAM whenever an erase or write job is started and unload (overwrite) it after that job has been finished o…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsAcLoadOnJobStart",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:622bd1f2-a9e0-4043-9b1a-8baa38771911"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsBlankCheckApi",
+          "description": "Compile switch to enable/disable the Fls_BlankCheck function.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsBlankCheckApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:42263743-7eb8-48f0-9feb-b4fd15246438"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsCancelApi",
+          "description": "Compile switch to enable and disable the Fls_Cancel function.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsCancelApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:893eebfb-c839-4cbf-8310-bdb18b1a08e5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsCompareApi",
+          "description": "Compile switch to enable and disable the Fls_Compare function.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsCompareApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b694dc7a-1a2c-45f5-84df-452bb9b75354"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6f390fca-9815-44eb-91ab-841f2b962337"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsEraseVerificationEnabled",
+          "description": "Compile switch to enable erase verification.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsEraseVerificationEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7492de0e-cba5-41c3-8b2e-122ea04f9a2f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsGetJobResultApi",
+          "description": "Compile switch to enable and disable the Fls_GetJobResult function.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsGetJobResultApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:760f215b-bb6c-4810-950c-be3df14fa844"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsGetStatusApi",
+          "description": "Compile switch to enable and disable the Fls_GetStatus function.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsGetStatusApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e5af54cf-a0b9-49e0-87a3-044cafdfe2c1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsSetModeApi",
+          "description": "Compile switch to enable and disable the Fls_SetMode function.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsSetModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b5756f12-6f52-4348-9416-7cf894e79a8d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsTimeoutSupervisionEnabled",
+          "description": "Compile switch to enable timeout supervision.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsTimeoutSupervisionEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a560f8f9-8ac7-4bfa-bcb1-73f789850011"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsUseInterrupts",
+          "description": "Job processing triggered by hardware interrupt.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsUseInterrupts",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:88a2d255-2439-43a9-888a-c21a750ac380"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b18ae536-69a0-4336-a3ca-9d170d7b33d9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsWriteVerificationEnabled",
+          "description": "Compile switch to enable write verification.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsWriteVerificationEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4b155410-eac4-42a4-a8b2-b032bd732b50"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsBaseAddress",
+          "description": "The flash memory start address (see also SWS_Fls_00208 and SWS_Fls_00209).",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsBaseAddress",
+          "type": "INTEGER",
+          "uuid": "ECUC:ea05556a-aa1f-4a79-8824-757f1614471c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsDriverIndex",
+          "description": "Index of the driver, used by FEE.",
+          "isOptional": false,
+          "max": 254,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsDriverIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:24f7c0cd-07e7-40be-82f4-001abe599d00"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsTotalSize",
+          "description": "The total amount of flash memory in bytes (see also SWS_Fls_00208 and SWS_Fls_00209).",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsTotalSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:a8cdc4a9-dcbe-4c4e-82e9-d76da4755fe2"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsGeneral/FlsEcucPartitionRef",
+          "description": "Maps the Flash driver to zero or one ECUC partition to make the driver API available in this partition. Tags: atp.Status=draft",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FlsEcucPartitionRef",
+          "uuid": "ECUC:c043d369-3431-4f5f-94c2-f4b9f652c900"
+        }
+      ],
+      "shortName": "FlsGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:3091e295-abe7-43a0-98f4-e60da9dc4945"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation",
+      "description": "Additional published parameters not covered by CommonPublishedInformation container.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsAcLocationErase",
+          "description": "Position in RAM, to which the erase flash access code has to be loaded.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsAcLocationErase",
+          "type": "INTEGER",
+          "uuid": "ECUC:2ed61e35-84bc-47f4-9c77-22b984edd9ba"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsAcLocationWrite",
+          "description": "Position in RAM, to which the write flash access code has to be loaded.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsAcLocationWrite",
+          "type": "INTEGER",
+          "uuid": "ECUC:a5573b35-3446-4cb4-8396-4c7db3aa207a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsAcSizeErase",
+          "description": "Number of bytes in RAM needed for the erase flash access code.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsAcSizeErase",
+          "type": "INTEGER",
+          "uuid": "ECUC:b60ed9c5-bf85-4cb5-84ed-a9de40ed10a6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsAcSizeWrite",
+          "description": "Number of bytes in RAM needed for the write flash access code.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsAcSizeWrite",
+          "type": "INTEGER",
+          "uuid": "ECUC:06a20d0b-9d96-42d3-96e2-e2eb5171101f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsErasedValue",
+          "description": "The contents of an erased flash memory cell.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsErasedValue",
+          "type": "INTEGER",
+          "uuid": "ECUC:4b2ea1ec-cdcb-4ba5-b243-4ec4a94fe866"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsSpecifiedEraseCycles",
+          "description": "Number of erase cycles specified for the flash device (usually given in the device data sheet).",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsSpecifiedEraseCycles",
+          "type": "INTEGER",
+          "uuid": "ECUC:0fed8a26-c89e-4a57-9a52-08d5e936bc27"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsEraseTime",
+          "description": "Maximum time to erase one complete flash sector.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsEraseTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:9854b5e9-7313-45e6-b78e-52fa98bd13d8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsWriteTime",
+          "description": "Maximum time to program one complete flash page.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsWriteTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:61ce65fd-81a1-4a8e-93b4-9ab14d046848"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fls/FlsPublishedInformation/FlsExpectedHwId",
+          "description": "Unique identifier of the hardware device that is expected by this driver (the device for which this driver has been implemented).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FlsExpectedHwId",
+          "type": "STRING",
+          "uuid": "ECUC:b75b0b3e-e68a-4a74-984c-875387d3aa04"
+        }
+      ],
+      "references": [],
+      "shortName": "FlsPublishedInformation",
+      "subContainers": [],
+      "uuid": "ECUC:8e0d2c5d-45de-462e-ba90-f372ccf8e6de"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Fls",
+  "description": "Configuration of the Fls (internal or external flash driver) module.",
+  "importWarnings": [
+    "FlsSpiReference：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "FlsSpiReference：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+    "FlsEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Fls",
+  "version": "4.4.0"
+}

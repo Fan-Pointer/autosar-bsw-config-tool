@@ -1,0 +1,113 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "96c3f1c1cc94c315f7f9417c0695ca7635029d0c551dee751cff9c60ee5f1500",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/WdgIf/WdgIfDevice",
+      "description": "It contains the information for the selection of a particular Watchdog device in case multiple Watchdog drivers are connected.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WdgIf/WdgIfDevice/WdgIfDeviceIndex",
+          "description": "Represents the watchdog interface ID so that it can be referenced by the watchdog manager.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WdgIfDeviceIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:41e5cd64-56e8-4593-b945-b615918cd5a7"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/WdgIf/WdgIfDevice/WdgIfDriverRef",
+          "description": "Reference to the watchdog drivers that are controlled by the watchdog interface.",
+          "destinationContainerType": "WdgGeneral",
+          "destinationRef": "/AUTOSAR/EcucDefs/Wdg/WdgGeneral",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Wdg/WdgGeneral"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WdgIfDriverRef",
+          "uuid": "ECUC:c18b762d-1ffc-4203-9936-4e4539c6fea6"
+        }
+      ],
+      "shortName": "WdgIfDevice",
+      "subContainers": [],
+      "uuid": "ECUC:b5418b77-eccf-4831-acdd-b50dbb01413b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/WdgIf/WdgIfGeneral",
+      "description": "This container collects all generic watchdog interface parameters.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WdgIf/WdgIfGeneral/WdgIfDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WdgIfDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4363aa34-c419-4350-b2cb-75ec7dfda67f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/WdgIf/WdgIfGeneral/WdgIfVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the service returning the version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "WdgIfVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:313c10c6-c907-4f72-a6d8-722b8886775b"
+        }
+      ],
+      "references": [],
+      "shortName": "WdgIfGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:2199b96d-33aa-488f-a1ae-99f6d4bd3c6a"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/WdgIf",
+  "description": "Configuration of the WdgIf (Watchdog Interface) module.",
+  "importWarnings": [
+    "WdgIfDriverRef：目标 /AUTOSAR/EcucDefs/Wdg/WdgGeneral 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "WdgIf",
+  "version": "4.2.2"
+}

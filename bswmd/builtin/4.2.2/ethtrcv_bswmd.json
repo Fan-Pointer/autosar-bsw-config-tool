@@ -1,0 +1,509 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "ac83a79101d07da50d9fee0ec61d3c1ee20c684b7d13b18ffe9b7a2a87237e99",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR EthTrcv module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "EthTrcvConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig",
+          "description": "Configuration of the individual transceiver",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvAutoNegotiationEnabled",
+              "description": "Specifies if Auto-Negotiation is enabled (TRUE) or disabled (FALSE) for determination of the Ethernet transceiver speed.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTrcvAutoNegotiationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:90e21e15-d837-4125-9d89-59ecb4250959"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvConnNeg",
+              "description": "Specifies the connection negotiation of the Ethernet transceiver link.",
+              "enumValues": [
+                "TRCV_CONN_NEG_AUTO",
+                "TRCV_CONN_NEG_MASTER",
+                "TRCV_CONN_NEG_SLAVE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTrcvConnNeg",
+              "type": "ENUM",
+              "uuid": "ECUC:9c0b90fa-2691-481b-af25-f3afc1e15cc2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvDuplexMode",
+              "description": "Specifies the duplex mode of the Ethernet transceiver link if Auto-Negotiation is disabled. This parameter is ignored if Auto-Negotiation is enabled.",
+              "enumValues": [
+                "ETHTRCV_DUPLEX_MODE_FULL",
+                "ETHTRCV_DUPLEX_MODE_HALF"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTrcvDuplexMode",
+              "type": "ENUM",
+              "uuid": "ECUC:333302ac-659a-4f79-a5c8-db6bbb2be7f6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvPhysLayerType",
+              "description": "Specifies the physical layer type of the Ethernet transceiver link.",
+              "enumValues": [
+                "TRCV_PHYS_LAYER_TYPE_BASE_T",
+                "TRCV_PHYS_LAYER_TYPE_BROADR_REACH"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthTrcvPhysLayerType",
+              "type": "ENUM",
+              "uuid": "ECUC:3a1e81f9-1eeb-4739-b998-b0dbad2cff0a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvSpeed",
+              "description": "Specifies the speed of the Ethernet transceiver link in [MBit/s]. If AutoNegotiation is enabled this is the maximum speed advertised for Auto-Negotiation.",
+              "enumValues": [
+                "TRCV_SPEED_10",
+                "TRCV_SPEED_100",
+                "TRCV_SPEED_1000"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTrcvSpeed",
+              "type": "ENUM",
+              "uuid": "ECUC:590693dd-4179-4283-b0c4-5ce0e3df301c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvCtrlIdx",
+              "description": "Specifies the controller used for MII access to the transceiver",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTrcvCtrlIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:a9f1668e-9b43-4f20-8336-f4620d06cb77"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvIdx",
+              "description": "Specifies the instance ID of the configured transceiver.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTrcvIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:263fe8ad-020a-41f7-84a2-83f5c4c9183c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvMiiIdx",
+              "description": "Specifies the transceiver index used for MII access to the transceiver",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTrcvMiiIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:44681cf8-9a5a-481c-a8a8-6d3689cd8c16"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvWakeUpCallout",
+              "description": "Configuration of the call-out name.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthTrcvWakeUpCallout",
+              "type": "FUNCTION",
+              "uuid": "ECUC:3d3741d5-2c53-4f99-bc70-9a545b32597a"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvIcuChannelRef",
+              "description": "Reference to the IcuChannel to enable/disable the interrupts for wakeups.",
+              "destinationContainerType": "IcuChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthTrcvIcuChannelRef",
+              "uuid": "ECUC:f5163cbd-523b-4a23-bcf7-76170d3cd0e9"
+            }
+          ],
+          "shortName": "EthTrcvConfig",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occur…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvDemEventParameterRefs/ETHTRCV_E_ACCESS",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Transceiver access failed\" has occurred.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETHTRCV_E_ACCESS",
+                  "uuid": "ECUC:a5dcc018-60fd-4aeb-9e03-8206f2fc7688"
+                }
+              ],
+              "shortName": "EthTrcvDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:10b3c818-b338-4fd9-a41d-ea351fb84cb1"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvWakeupMap",
+              "description": "Container for the mapping of wake up reasons to wake up sources. At least one container is needed if EthTrcvWakeUpSupport is not ETHTRCV_WAKEUP_NOT_SUPPORTED.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 7
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvWakeupMap/EthTrcvWakeupReason",
+                  "description": "This parameter defines the transceiver wake up reasons.",
+                  "enumValues": [
+                    "ETHTRCV_WUR_BUS",
+                    "ETHTRCV_WUR_GENERAL",
+                    "ETHTRCV_WUR_INTERNAL",
+                    "ETHTRCV_WUR_PIN",
+                    "ETHTRCV_WUR_POWER_ON",
+                    "ETHTRCV_WUR_RESET",
+                    "ETHTRCV_WUR_SYSERR"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTrcvWakeupReason",
+                  "type": "ENUM",
+                  "uuid": "ECUC:986957f9-4b35-43b9-be69-f99f8e32f724"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvWakeupMap/EthTrcvWakeupSourceRef",
+                  "description": "Configures the wake-up source defined in EcuM.",
+                  "destinationContainerType": "EcuMWakeupSource",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTrcvWakeupSourceRef",
+                  "uuid": "ECUC:d34f9f28-3c41-4dfd-bb66-653c3b84401d"
+                }
+              ],
+              "shortName": "EthTrcvWakeupMap",
+              "subContainers": [],
+              "uuid": "ECUC:edf4b11c-e1c0-4623-a2ed-0dd25cfa2b9c"
+            }
+          ],
+          "uuid": "ECUC:d73b4a97-6573-48c2-9220-27f3cbd1c8b9"
+        }
+      ],
+      "uuid": "ECUC:9ae2997a-58f0-41bb-9d5e-0ca61818ef46"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral",
+      "description": "General configuration of Ethernet Transceiver Driver module",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2b1fefe7-0a85-4d66-b9b0-1967fcf3150d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvGetBaudRateApi",
+          "description": "Enables / Disables EthTrcv_GetBaudRate API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvGetBaudRateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:94c93620-cb83-4164-a9cc-99e7ef6fec09"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvGetDuplexModeApi",
+          "description": "Enables / Disables EthTrcv_GetDuplexMode API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvGetDuplexModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c507c2fa-9b22-47bc-9dd8-c20bcb67303f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvGetLinkStateApi",
+          "description": "Enables / Disables EthTrcv_GetLinkState API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvGetLinkStateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:78915de9-b681-473c-bca0-3a774a77cc61"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvGetTransceiverModeApi",
+          "description": "Enables / Disables EthTrcv_GetTransceiverMode API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvGetTransceiverModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3ef394b1-05e6-4e5c-8c27-6ff875c95e3f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvGetTransceiverWakeupModeApi",
+          "description": "Enables / Disables EthTrcv_GetTransceiverWakeupMode API",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthTrcvGetTransceiverWakeupModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6b2bd7ab-93a0-47a2-9f89-e0f87b1e92c3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvSetTransceiverModeApi",
+          "description": "Enables / Disables EthTrcv_SetTransceiverMode API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvSetTransceiverModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d3a5ce17-1c57-48b3-bfa6-29ff7ce4b14e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvStartAutoNegotiationApi",
+          "description": "Enables / Disables EthTrcv_StartAutoNegotiation API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvStartAutoNegotiationApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:255ab38d-b416-4252-9f2c-74cbc6e19fb1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvVersionInfoApi",
+          "description": "Enables / Disables version info API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b5e403a5-ecce-425e-b641-5f1de9a2b30a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvVersionInfoApiMacro",
+          "description": "Enables / Disables version info API macro implementation",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvVersionInfoApiMacro",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:56d5fcd3-0662-4ee5-bbbc-f15a5edb0f95"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:a09d571b-f281-410f-9854-ab60d9e99820"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvMaxTrcvsSupported",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvMaxTrcvsSupported",
+          "type": "INTEGER",
+          "uuid": "ECUC:f912f21a-b10e-40c9-b18e-1827e6835c2c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvMainFunctionPeriod",
+          "description": "Specifies the period of main function EthTrcv_MainFunction in seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthTrcvMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:dbc4e5bc-ea84-4872-bfce-9b0939d20433"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvGeneral/EthTrcvWakeUpSupport",
+          "description": "Configures wake-up to polling or interrupt or to not used/not supported. In case no wake up is supported by the hardware, the BSWMD pre-configuration shall be …",
+          "enumValues": [
+            "ETHTRCV_WAKEUP_BY_INTERRUPT",
+            "ETHTRCV_WAKEUP_BY_POLLING",
+            "ETHTRCV_WAKEUP_NOT_SUPPORTED"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTrcvWakeUpSupport",
+          "type": "ENUM",
+          "uuid": "ECUC:2906b28a-56d2-42e4-b090-35c9cc671503"
+        }
+      ],
+      "references": [],
+      "shortName": "EthTrcvGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:03f52c10-8440-4280-94f9-f2c30bc12ef9"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EthTrcv",
+  "description": "Configuration of Ethernet Transceiver Driver module",
+  "importWarnings": [
+    "ETHTRCV_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "EthTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "EthTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "EthTrcv",
+  "version": "4.2.2"
+}

@@ -1,0 +1,93 @@
+{
+  "4.2.2": {
+    "ECUC-SYMBOLIC-NAME-REFERENCE-DEF": {
+      "BswM": 47,
+      "Can": 1,
+      "CanIf": 5,
+      "CanNm": 1,
+      "CanSM": 4,
+      "CanTSyn": 1,
+      "CanTrcv": 3,
+      "ComM": 2,
+      "CorTst": 1,
+      "Dbg": 2,
+      "Dcm": 5,
+      "Dem": 4,
+      "Dlt": 2,
+      "Ea": 1,
+      "EcuM": 16,
+      "Eep": 5,
+      "Eth": 9,
+      "EthIf": 3,
+      "EthSM": 3,
+      "EthSwt": 4,
+      "EthTSyn": 1,
+      "EthTrcv": 3,
+      "Fee": 1,
+      "FiM": 2,
+      "Fls": 6,
+      "FlsTst": 1,
+      "Fr": 1,
+      "FrIf": 10,
+      "FrNm": 2,
+      "FrSM": 4,
+      "FrTSyn": 1,
+      "FrTrcv": 4,
+      "Gpt": 1,
+      "Icu": 1,
+      "J1939Dcm": 3,
+      "J1939Nm": 2,
+      "J1939Rm": 2,
+      "Lin": 2,
+      "LinIf": 3,
+      "LinNm": 1,
+      "LinSM": 2,
+      "LinTp": 3,
+      "LinTrcv": 3,
+      "Mcu": 1,
+      "Nm": 2,
+      "NvM": 10,
+      "Os": 1,
+      "RamTst": 1,
+      "Rte": 1,
+      "Sd": 14,
+      "SecOC": 1,
+      "SoAd": 1,
+      "Spi": 1,
+      "StbM": 1,
+      "TcpIp": 8,
+      "UdpNm": 3,
+      "Wdg": 2,
+      "WdgIf": 1,
+      "WdgM": 19,
+      "Xcp": 1,
+      "Xfrm": 1
+    },
+    "ECUC-LINKER-SYMBOL-DEF": {
+      "Dbg": 1,
+      "Rte": 3,
+      "Xcp": 1
+    },
+    "ECUC-ADD-INFO-PARAM-DEF": {
+      "Dcm": 1
+    },
+    "ECUC-MULTILINE-STRING-PARAM-DEF": {
+      "MemMap": 2
+    }
+  },
+  "4.4.0": {
+    "ECUC-ADD-INFO-PARAM-DEF": {
+      "Dcm": 1
+    },
+    "ECUC-MULTILINE-STRING-PARAM-DEF": {
+      "MemMap": 2
+    },
+    "ECUC-URI-REFERENCE-DEF": {
+      "Rte": 11
+    },
+    "ECUC-LINKER-SYMBOL-DEF": {
+      "Rte": 3,
+      "Xcp": 1
+    }
+  }
+}

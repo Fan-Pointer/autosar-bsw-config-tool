@@ -1,0 +1,252 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "4712a800c22ef6c99f811eb524576080b766dc0ccd67c44cec9a70b7f73b6d50",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR LinSm module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMModeRequestRepetitionMax",
+          "description": "Specifies the maximal amount of mode request repetitions without a respective mode indication from the LinIf module until the LinSM module reports a Developmen…",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinSMModeRequestRepetitionMax",
+          "type": "INTEGER",
+          "uuid": "ECUC:972d37f5-9b42-4f2c-85b0-330e7a5e981b"
+        }
+      ],
+      "references": [],
+      "shortName": "LinSMConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel",
+          "description": "Describes each LIN channel the LinSM is connected to.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMConfirmationTimeout",
+              "description": "Timeout in seconds for the goto sleep, wakeup and schedule request calls to LinIf. The timeout must be longer than a goto-sleep command on the bus (i.e. it is …",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinSMConfirmationTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:f789b753-d4a6-41c6-858d-74962c64921e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMSilenceAfterWakeupTimeout",
+              "description": "Timeout in seconds after a failed wakeup sequence until a new wakeup process is started.",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinSMSilenceAfterWakeupTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:edb7d391-02ad-4c16-aa54-d89b207083f9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMNodeType",
+              "description": "Specifies the LIN node type of this channel.",
+              "enumValues": [
+                "MASTER",
+                "SLAVE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinSMNodeType",
+              "type": "ENUM",
+              "uuid": "ECUC:7ba44b49-1c25-467f-ae15-bfd3246e3091"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMTransceiverPassiveMode",
+              "description": "Selects STANDBY (true) or SLEEP (false) transceiver mode when entering LINSM_NO_COM.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinSMTransceiverPassiveMode",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:725086a2-39ce-474c-8be0-51d4f15000cb"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMComMNetworkHandleRef",
+              "description": "Unique handle to identify one certain LIN network. Reference to one of the network handles configured in the ComM.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinSMComMNetworkHandleRef",
+              "uuid": "ECUC:da189e8d-231d-4b36-8d21-f413789897a0"
+            }
+          ],
+          "shortName": "LinSMChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMSchedule",
+              "description": "The schedule references to a schedule that is located in the LinIf configuration. Moreover, the PDU groups are located in the COM configuration. Note that ther…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMSchedule/LinSMScheduleIndex",
+                  "description": "This index parameter can be used by the BswM as a SymbolicNameReference target. The LinSM just forwards the request from the BswM to LinIf. Note that the value…",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinSMScheduleIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:f5c68884-c8e8-4f73-93dd-92f3e25b8532"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMConfigSet/LinSMChannel/LinSMSchedule/LinSMScheduleIndexRef",
+                  "description": "Reference to a schedule table in the LinIf configuration",
+                  "destinationContainerType": "LinIfScheduleTable",
+                  "destinationRef": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinSMScheduleIndexRef",
+                  "uuid": "ECUC:9627768d-4365-4d19-8861-3d50af9d645c"
+                }
+              ],
+              "shortName": "LinSMSchedule",
+              "subContainers": [],
+              "uuid": "ECUC:822d7642-7685-45cb-a7f9-6438539a9b18"
+            }
+          ],
+          "uuid": "ECUC:8a11f492-22a7-4281-9060-5dae0f844c5a"
+        }
+      ],
+      "uuid": "ECUC:e7feb268-3b18-485b-a48b-efc93ff35bec"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMGeneral",
+      "description": "This container contains general parameters of LIN State Manager module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMGeneral/LinSMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinSMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:720778ca-0908-4c9a-b0f7-b3f7e2258bb1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMGeneral/LinSMVersionInfoApi",
+          "description": "Switches the LinSM_GetVersionInfo function ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinSMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ef96408d-a53b-442d-87f2-d537f8761957"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinSM/LinSMGeneral/LinSMMainProcessingPeriod",
+          "description": "Fixed period that the MainFunction shall be called.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinSMMainProcessingPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:a7cedc57-8695-465d-8362-47dc7178afee"
+        }
+      ],
+      "references": [],
+      "shortName": "LinSMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:d2be68b0-eae8-4082-b021-e1c67fdc3a4b"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/LinSM",
+  "description": "Configuration of the Lin State Manager module.",
+  "importWarnings": [
+    "LinSMScheduleIndexRef：目标 /AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable 位于本模块之外；编辑器只读展示。",
+    "LinSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "LinSM",
+  "version": "4.4.0"
+}

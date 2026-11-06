@@ -1,0 +1,797 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "ba25783dbc207c439f6a2b6d0ac41354009afdfd7b4a984efa9664a89e57e866",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR WdgM module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvSPICommRetries",
+          "description": "Indicates the maximum number of communication retries in case of a failed SPI communication (applies both to timed out communication and to errors/NACK in the …",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTrcvSPICommRetries",
+          "type": "INTEGER",
+          "uuid": "ECUC:093c3711-8c92-4094-994a-a67de25b2cea"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvSPICommTimeout",
+          "description": "Indicates the maximum time allowed to the CanTrcv for replying (either positively or negatively) to a SPI command.",
+          "isOptional": false,
+          "max": 100,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTrcvSPICommTimeout",
+          "type": "INTEGER",
+          "uuid": "ECUC:a8bda218-8bf9-4dc0-86b1-cb9fa70fd9df"
+        }
+      ],
+      "references": [],
+      "shortName": "CanTrcvConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel",
+          "description": "Container gives CAN transceiver driver information about a single CAN",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvChannelId",
+              "description": "Unique identifier of the CAN Transceiver Channel.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTrcvChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:f1f3dba5-d4d7-43d3-8d03-2e0bb504e860"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvMaxBaudrate",
+              "description": "Indicates the data transfer rate in kbps.",
+              "isOptional": false,
+              "max": 12000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTrcvMaxBaudrate",
+              "type": "INTEGER",
+              "uuid": "ECUC:b89bc632-1e2a-4709-ab62-957c7252e0fe"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvChannelUsed",
+              "description": "Shall the related CAN transceiver channel be used?",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTrcvChannelUsed",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:88536366-15ed-4967-80dd-9974891b652e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvControlsPowerSupply",
+              "description": "Is ECU power supply controlled by this transceiver?",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTrcvControlsPowerSupply",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:1ab6ed3e-bf66-41ba-b2f6-a4d964b54744"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvHwPnSupport",
+              "description": "Indicates whether the HW supports the selective wake-up function",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTrcvHwPnSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:ad140e6f-373b-4f3e-a7a5-87ba8b29e7e3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvWakeupByBusUsed",
+              "description": "Is wake up by bus supported? If CAN transceiver hardware does not support wake up by bus value is always FALSE. If CAN transceiver hardware supports wake up by…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanTrcvWakeupByBusUsed",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:52db1d3e-02dd-4437-a377-00108ef8a886"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "CANTRCV_OP_MODE_NORMAL",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvInitState",
+              "description": "State of CAN transceiver after call to CanTrcv_Init.",
+              "enumValues": [
+                "CANTRCV_OP_MODE_NORMAL",
+                "CANTRCV_OP_MODE_SLEEP",
+                "CANTRCV_OP_MODE_STANDBY"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTrcvInitState",
+              "type": "ENUM",
+              "uuid": "ECUC:8e511d66-410f-4c0c-8540-01776a793337"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvChannelEcucPartitionRef",
+              "description": "Maps the CAN transceiver channel to zero or one ECUC partitions. The ECUC partition referenced is a subset of the ECUC partitions where the CAN transceiver dri…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanTrcvChannelEcucPartitionRef",
+              "uuid": "ECUC:ef79fb65-16bd-422b-9980-92704822e296"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvIcuChannelRef",
+              "description": "Reference to the IcuChannel to enable/disable the interrupts",
+              "destinationContainerType": "IcuChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanTrcvIcuChannelRef",
+              "uuid": "ECUC:48ecab98-2903-4a77-928b-7e25ca8db5f9"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPorWakeupSourceRef",
+              "description": "Symbolic name reference to specify the wakeup sources that should be used in the calls to EcuM_SetWakeupEvent as specified in [SWS_CanTrcv_00183] and [SWS_CanT…",
+              "destinationContainerType": "EcuMWakeupSource",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanTrcvPorWakeupSourceRef",
+              "uuid": "ECUC:3c27835c-3aa5-4f75-99ab-9057175882a3"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvSyserrWakeupSourceRef",
+              "description": "Symbolic name reference to specify the wakeup sources that should be used in the calls to EcuM_SetWakeupEvent as specified in [SWS_CanTrcv_00183] and [SWS_CanT…",
+              "destinationContainerType": "EcuMWakeupSource",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanTrcvSyserrWakeupSourceRef",
+              "uuid": "ECUC:06352f6c-b381-4050-9a16-0ee4e98bfd2e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvWakeupSourceRef",
+              "description": "Reference to a wakeup source in the EcuM configuration.",
+              "destinationContainerType": "EcuMWakeupSource",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanTrcvWakeupSourceRef",
+              "uuid": "ECUC:b00d0abd-0eaa-4026-9ec9-b035bb76ae17"
+            }
+          ],
+          "shortName": "CanTrcvChannel",
+          "subContainers": [
+            {
+              "choice": {
+                "candidateRefs": [
+                  "ECUC:1d8e654e-9746-428f-929d-ddefe3a44578",
+                  "ECUC:6fc13cdf-28b9-463d-8789-df298ca055bb"
+                ]
+              },
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess",
+              "description": "Container gives CanTrcv Driver information about access to a single CAN transceiver.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CanTrcvAccess",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvDioAccess",
+                  "description": "Container gives CAN transceiver driver information about accessing ports and port pins. In addition relation between CAN transceiver hardware pin names and Dio…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "CanTrcvDioAccess",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvDioAccess/CanTrcvDioChannelAccess",
+                      "description": "Container gives DIO channel access by single Can transceiver channel.",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvDioAccess/CanTrcvDioChannelAccess/CanTrcvHardwareInterfaceName",
+                          "description": "CAN transceiver hardware interface name. It is typically the name of a pin. From a Dio point of view it is either a port, a single channel or a channel group. …",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "CanTrcvHardwareInterfaceName",
+                          "type": "STRING",
+                          "uuid": "ECUC:0ec03d65-0055-4853-8dc8-5fcd1ef5a43e"
+                        }
+                      ],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvDioAccess/CanTrcvDioChannelAccess/CanTrcvDioSymNameRef",
+                          "description": "Choice Reference to a DIO Port, DIO Channel or DIO Channel Group. This reference replaces the CANTRCV_DIO_PORT_SYM_NAME, CANTRCV_DIO_CHANNEL_SYM_NAME and CANTR…",
+                          "destinationContainerType": "DioChannel",
+                          "destinationRef": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel",
+                            "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup",
+                            "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort"
+                          ],
+                          "isExternal": true,
+                          "isOptional": false,
+                          "kind": "choice",
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "CanTrcvDioSymNameRef",
+                          "uuid": "ECUC:1e464264-ce16-4a16-87d1-89aab53d6a2b"
+                        }
+                      ],
+                      "shortName": "CanTrcvDioChannelAccess",
+                      "subContainers": [],
+                      "uuid": "ECUC:f3735ce7-dc10-4544-b55e-626808f713e0"
+                    }
+                  ],
+                  "uuid": "ECUC:1d8e654e-9746-428f-929d-ddefe3a44578"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvSpiAccess",
+                  "description": "Container gives CAN transceiver driver information about accessing Spi. If a CAN transceiver hardware has no Spi interface, there is no instance of this contai…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "CanTrcvSpiAccess",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvSpiAccess/CanTrcvSpiSequence",
+                      "description": "Container gives CAN transceiver driver information about one SPI sequence.",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvSpiAccess/CanTrcvSpiSequence/CanTrcvSpiAccessSynchronous",
+                          "description": "This parameter is used to define whether the access to the Spi sequence is synchronous or asynchronous.",
+                          "isOptional": true,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "CanTrcvSpiAccessSynchronous",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:7bcf2b70-75a7-41b5-ad47-bc7bfd282257"
+                        }
+                      ],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvAccess/CanTrcvSpiAccess/CanTrcvSpiSequence/CanTrcvSpiSequenceName",
+                          "description": "Reference to a Spi sequence configuration container.",
+                          "destinationContainerType": "SpiSequence",
+                          "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "reference",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": "unbounded"
+                          },
+                          "shortName": "CanTrcvSpiSequenceName",
+                          "uuid": "ECUC:67fba62d-4920-4112-80e9-839907bcc46a"
+                        }
+                      ],
+                      "shortName": "CanTrcvSpiSequence",
+                      "subContainers": [],
+                      "uuid": "ECUC:9b42b06c-0a7a-45e1-bd04-40ea181004db"
+                    }
+                  ],
+                  "uuid": "ECUC:6fc13cdf-28b9-463d-8789-df298ca055bb"
+                }
+              ],
+              "uuid": "ECUC:9175045e-5280-4caf-a0c4-9033cb129316"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvDemEventParameterRefs/CANTRCV_E_BUS_ERROR",
+                  "description": "Reference to the DemEventParameter which shall be issued when bus error has occurred.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CANTRCV_E_BUS_ERROR",
+                  "uuid": "ECUC:1e290b8e-041e-46cf-841e-6ed13488287a"
+                }
+              ],
+              "shortName": "CanTrcvDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:e99decc0-3e63-41f8-8d65-49e10979c5e7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork",
+              "description": "Container gives CAN transceiver driver information about the configuration of Partial Networking functionality.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvBaudRate",
+                  "description": "Indicates the data transfer rate in kbps.",
+                  "isOptional": false,
+                  "max": 12000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvBaudRate",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:9ab3dac1-5cd1-4a6b-a556-dbcb6bf39ff5"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnFrameCanId",
+                  "description": "CAN ID of the Wake-up Frame (WUF).",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvPnFrameCanId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:4eadd3d6-3770-462b-a515-9a677fe5d057"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnFrameCanIdMask",
+                  "description": "ID Mask for the selective activation of the transceiver. It is used to enableFrame Wake-up (WUF) on a group of IDs.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvPnFrameCanIdMask",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:138f069a-dcc3-403d-9398-9d247ccefbf8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnFrameDlc",
+                  "description": "Data Length of the Wake-up Frame (WUF).",
+                  "isOptional": false,
+                  "max": 8,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvPnFrameDlc",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:35e1b603-21c3-4bad-aca7-ff1081d6f632"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvBusErrFlag",
+                  "description": "Indicates if the Bus Error (BUSERR) flag is managed by the BSW. This flag is set if a bus failure is detected by the transceiver.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvBusErrFlag",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:e7104ca6-1fad-4cfd-92c2-b18fac5c8a05"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnCanIdIsExtended",
+                  "description": "Indicates whether extended or standard ID is used.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvPnCanIdIsExtended",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:bce803d7-e415-4177-a29f-ff17bdac4793"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnEnabled",
+                  "description": "Indicates whether the selective wake-up function is enabled or disabled in HW.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvPnEnabled",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:a5cd2332-0b8f-4e8b-93f0-8c20e953d527"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPowerOnFlag",
+                  "description": "Description: Indicates if the Power On Reset (POR) flag is available and is managed by the transceiver.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTrcvPowerOnFlag",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:869324cb-1350-4b1c-b366-5b8b609b4ffc"
+                }
+              ],
+              "references": [],
+              "shortName": "CanTrcvPartialNetwork",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec",
+                  "description": "Defines data payload mask to be used on the received payload in order to determine if the transceiver must be woken up by the received Wake-up Frame (WUF).",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 8
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec/CanTrcvPnFrameDataMask",
+                      "description": "Defines the n byte (Byte0 = LSB) of the data payload mask to be used on the received payload in order to determine if the transceiver must be woken up by the r…",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTrcvPnFrameDataMask",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:656a6966-3a40-4948-9b0a-562933acdeb9"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvConfigSet/CanTrcvChannel/CanTrcvPartialNetwork/CanTrcvPnFrameDataMaskSpec/CanTrcvPnFrameDataMaskIndex",
+                      "description": "holds the position n in frame of the mask-part",
+                      "isOptional": false,
+                      "max": 7,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTrcvPnFrameDataMaskIndex",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:9693190e-eb2c-4688-a833-a834acc4d8d2"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanTrcvPnFrameDataMaskSpec",
+                  "subContainers": [],
+                  "uuid": "ECUC:a8cf14ab-3c00-4929-adf3-38a776992bf6"
+                }
+              ],
+              "uuid": "ECUC:ca5b30fc-a757-4af2-bd25-7f0bf8a13690"
+            }
+          ],
+          "uuid": "ECUC:4e6513a4-4c5a-4486-a836-f269d7e92dd9"
+        }
+      ],
+      "uuid": "ECUC:c20cd1af-0232-48fa-9f0b-f3d531f2fe20"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral",
+      "description": "Container gives CAN transceiver driver basic information.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTrcvDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:305a9a10-11cc-4baf-a909-107f41bc5ad4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvVersionInfoApi",
+          "description": "Switches version information API on and off. If switched off, function need not be present in compiled code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTrcvVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2d33aa8f-dca2-4d91-bad7-b9cd268b182e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTrcvIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:a6124181-f0a6-4cfb-aa36-84c0ba86cc0b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvMainFunctionDiagnosticsPeriod",
+          "description": "This parameter describes the period for cyclic call to CanTrcv_MainFunctionDiagnostics. Unit is seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTrcvMainFunctionDiagnosticsPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:55d3de41-e38f-42ae-8081-37a9385fde8f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvMainFunctionPeriod",
+          "description": "This parameter describes the period for cyclic call to CanTrcv_MainFunction. Unit is seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTrcvMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:ed82ca57-c973-4968-9127-b9a25d11b517"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvWaitTime",
+          "description": "Wait time for transceiver state changes in seconds.",
+          "isOptional": true,
+          "max": 0.000255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTrcvWaitTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:ad3eac7a-29c4-4c59-a87b-da7e551c3403"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvTimerType",
+          "description": "Type of the Time Service Predefined Timer.",
+          "enumValues": [
+            "None",
+            "Timer_1us16bit"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTrcvTimerType",
+          "type": "ENUM",
+          "uuid": "ECUC:73e00676-a32a-4bba-be49-bd8fdc8464d5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvWakeUpSupport",
+          "description": "Informs whether wake up is supported by polling or not supported. In case no",
+          "enumValues": [
+            "CANTRCV_WAKEUP_BY_POLLING",
+            "CANTRCV_WAKEUP_NOT_SUPPORTED"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTrcvWakeUpSupport",
+          "type": "ENUM",
+          "uuid": "ECUC:95db2b45-712c-42e8-88d9-8ca25bf4cd4d"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv/CanTrcvGeneral/CanTrcvEcucPartitionRef",
+          "description": "Maps the CAN transceiver driver to zero or multiple ECUC partitions to make the modules API available in this partition. The module will operate as an independ…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "CanTrcvEcucPartitionRef",
+          "uuid": "ECUC:2bf2f51f-2425-405b-b54a-b585bd18f612"
+        }
+      ],
+      "shortName": "CanTrcvGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:fce14966-e5e5-4705-80b8-c0fedce975d9"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/CanTrcv",
+  "description": "Configuration of the CanTrcv (CAN Transceiver driver) module.",
+  "importWarnings": [
+    "CanTrcvAccess：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "CanTrcvDioSymNameRef：目标 /AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel 位于本模块之外；编辑器只读展示。",
+    "CanTrcvSpiSequenceName：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "CanTrcvSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+    "CANTRCV_E_BUS_ERROR：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "CanTrcvChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "CanTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。",
+    "CanTrcvPorWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "CanTrcvSyserrWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "CanTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "CanTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "CanTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "CanTrcv",
+  "version": "4.4.0"
+}

@@ -1,0 +1,725 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "4fe95aa4cdc1339cb60aa3ceb998d9bac43c838eac306ab89fdc18b802c64b84",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR ComM module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPncEnabled",
+          "description": "Defines whether in this configuration set the partial networking is enabled.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMPncEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f1435a9f-e043-47f2-8b3d-f55d9e9a9609"
+        }
+      ],
+      "references": [],
+      "shortName": "ComMConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+          "description": "This container contains the configuration (parameters) of the bus channel(s). The channel parameters shall be harmonized within the whole communication stack.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 256
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMBusType",
+              "description": "Identifies the bus type of the channel.",
+              "enumValues": [
+                "COMM_BUS_TYPE_CAN",
+                "COMM_BUS_TYPE_CDD",
+                "COMM_BUS_TYPE_ETH",
+                "COMM_BUS_TYPE_FR",
+                "COMM_BUS_TYPE_INTERNAL",
+                "COMM_BUS_TYPE_LIN"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMBusType",
+              "type": "ENUM",
+              "uuid": "ECUC:65ce688f-3deb-4005-832a-8ee8283a38c8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMPncGatewayType",
+              "description": "Identifies the Partial Network Gateway behaviour of a ComMChannel.",
+              "enumValues": [
+                "COMM_GATEWAY_TYPE_ACTIVE",
+                "COMM_GATEWAY_TYPE_PASSIVE"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComMPncGatewayType",
+              "type": "ENUM",
+              "uuid": "ECUC:b0f7f164-57d2-47c8-8167-1bba23ba1cd8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMCDDBusPrefix",
+              "description": "Prefix to be used for API calls to CDD.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComMCDDBusPrefix",
+              "type": "STRING",
+              "uuid": "ECUC:50ca2f58-6059-4ee9-ba5e-7066c3d8a7ec"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMChannelId",
+              "description": "Channel identification number of the corresponding channel.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:cb043376-bcae-41fa-991d-de06f78c3aaf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMFullCommRequestNotificationEnabled",
+              "description": "Defines if the optional SenderReceiver Port of Interface ComM_CurrentChannelRequest will be provided for this channel.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMFullCommRequestNotificationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:5fc93aa9-f6aa-44c3-89de-82c4f5707088"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMNoCom",
+              "description": "Not allowed to change state of ComM channel to COMM_SILENT_COMMUNICATION or COMM_FULL_COMMUNICATION.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMNoCom",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:17917b15-1312-4f24-82d0-b7a10bb15f1b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMNoWakeUpInhibitionNvmStorage",
+              "description": "If this parameter is set to \"true\", the NoWakeUp inhibition state of the channel shall be stored (in some implementation specific way) in the block pointed to …",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMNoWakeUpInhibitionNvmStorage",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:caf4d31a-18b3-4294-a662-c1d088e5ecf5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMNoWakeup",
+              "description": "Defines if an ECU is not allowed to wake-up the channel.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMNoWakeup",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:a0280203-5946-4765-a644-7bd991eefc77"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0.02,
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMMainFunctionPeriod",
+              "description": "Specifies the period in seconds that the MainFunction has to be triggered with.",
+              "isOptional": false,
+              "max": 0.1,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMMainFunctionPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:2bdc3b86-fad7-4474-a8c8-6b0186779b9f"
+            }
+          ],
+          "references": [],
+          "shortName": "ComMChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMNetworkManagement",
+              "description": "This container contains the configuration parameters of the networkmanagement.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 10,
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMNetworkManagement/ComMNmLightTimeout",
+                  "description": "Defines the timeout (in seconds) after COMM_FULL_COMMUNICATION sub-state COMM_FULL_COM_READY_SLEEP is left.",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComMNmLightTimeout",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:d4d7b08e-0dbf-4558-bad7-70c29e72889a"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "FULL",
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMNetworkManagement/ComMNmVariant",
+                  "description": "Defines the functionality of the networkmanagement.",
+                  "enumValues": [
+                    "FULL",
+                    "LIGHT",
+                    "NONE",
+                    "PASSIVE"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComMNmVariant",
+                  "type": "ENUM",
+                  "uuid": "ECUC:26eeb597-a431-438b-bf4b-e3e94b449731"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMNetworkManagement/ComMPncNmRequest",
+                  "description": "If this parameter equals true then every time a FULL Communication is requested due to a change in the PNC state machine to PNC_REQUESTED Nm shall be called us…",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComMPncNmRequest",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:effa8797-5912-4db6-96f1-ebb32ff15a4e"
+                }
+              ],
+              "references": [],
+              "shortName": "ComMNetworkManagement",
+              "subContainers": [],
+              "uuid": "ECUC:fe18e019-1dc0-4fcb-818a-6e88f759c44f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMUserPerChannel",
+              "description": "This container contains a list of identifiers that are needed to refer to a user in the system which is linked to a channel.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 255
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel/ComMUserPerChannel/ComMUserChannel",
+                  "description": "Reference to the ComMUser that corresponds to this channel user.",
+                  "destinationContainerType": "ComMUser",
+                  "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComMUserChannel",
+                  "uuid": "ECUC:6b08cbd2-a09b-40fb-9872-291825c1f312"
+                }
+              ],
+              "shortName": "ComMUserPerChannel",
+              "subContainers": [],
+              "uuid": "ECUC:58549c51-4697-4a43-b94d-6417b3e4fa46"
+            }
+          ],
+          "uuid": "ECUC:90795662-87ac-4770-b3db-ea5b1b699d62"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc",
+          "description": "This container contains the configuration of the partial network cluster (PNC).",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 56
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMPncId",
+              "description": "Partial network cluster identification number.",
+              "isOptional": false,
+              "max": 63,
+              "min": 8,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMPncId",
+              "type": "INTEGER",
+              "uuid": "ECUC:1643dcc8-5f57-4824-9f2b-3cb688295e53"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMChannelPerPnc",
+              "description": "Reference to the ComMChannel that is required for this PNC.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 256
+              },
+              "shortName": "ComMChannelPerPnc",
+              "uuid": "ECUC:6da71784-b6df-457d-b8b1-c366ff0552fa"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMUserPerPnc",
+              "description": "Reference to the ComMUsers that correspond to this PNC.",
+              "destinationContainerType": "ComMUser",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 255
+              },
+              "shortName": "ComMUserPerPnc",
+              "uuid": "ECUC:12a13260-51e1-45fd-83ba-c07fdf38d1d7"
+            }
+          ],
+          "shortName": "ComMPnc",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMPncComSignal",
+              "description": "Represents the PncComSignals which are used to communicate the EIRA and ERA status of this PNC.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMPncComSignal/ComMPncComSignalDirection",
+                  "description": "Indicates the communication direction of this PncComSignal.",
+                  "enumValues": [
+                    "RX",
+                    "TX"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComMPncComSignalDirection",
+                  "type": "ENUM",
+                  "uuid": "ECUC:57a6e338-45b6-4f13-aaee-957a757b025e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMPncComSignal/ComMPncComSignalKind",
+                  "description": "Indicates whether this PncComSignal represents EIRA or ERA PNC information.",
+                  "enumValues": [
+                    "EIRA",
+                    "ERA"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComMPncComSignalKind",
+                  "type": "ENUM",
+                  "uuid": "ECUC:67c219de-2c8a-40f8-9ebe-3d220e8d9e20"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMPncComSignal/ComMPncComSignalChannelRef",
+                  "description": "Reference to the ComMChannel which is used to determine whether this PncComSignal shall participate in the active or passive role (via the parameter ComMPncGat…",
+                  "destinationContainerType": "ComMChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+                  ],
+                  "isExternal": false,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComMPncComSignalChannelRef",
+                  "uuid": "ECUC:a1ef1f83-6722-4a5b-b52f-a4826cf9fc27"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc/ComMPncComSignal/ComMPncComSignalRef",
+                  "description": "Reference to the ComSignal which is used to transport the partial network channel request information.",
+                  "destinationContainerType": "ComSignal",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComMPncComSignalRef",
+                  "uuid": "ECUC:e12a1731-6f7b-498e-824b-4fb8dc4fd033"
+                }
+              ],
+              "shortName": "ComMPncComSignal",
+              "subContainers": [],
+              "uuid": "ECUC:4cc8713c-1b73-42c8-99cf-78a4661ae670"
+            }
+          ],
+          "uuid": "ECUC:17e918b2-c76d-4759-bcf8-d21a596a0889"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser",
+          "description": "This container contains a list of identifiers that are needed to refer to a user in the system which is designated to request Communication modes.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 255
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser/ComMUserIdentifier",
+              "description": "An identifier that is needed to refer to a user in the system which is designated to request Communication Modes.",
+              "isOptional": false,
+              "max": 254,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComMUserIdentifier",
+              "type": "INTEGER",
+              "uuid": "ECUC:0793657a-b528-43bb-bd2d-69b50cdd52cf"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMUser/ComMUserEcucPartitionRef",
+              "description": "Denotes in which \"EcucPartition\" the requester is executed. When the partition is stopped, the communication request shall be cancelled in the ComM",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComMUserEcucPartitionRef",
+              "uuid": "ECUC:819cb3d5-38e8-4899-9c4b-ed41a0003895"
+            }
+          ],
+          "shortName": "ComMUser",
+          "subContainers": [],
+          "uuid": "ECUC:ad498327-129b-4e5e-b929-99d087791ccd"
+        }
+      ],
+      "uuid": "ECUC:b99721da-102c-4cc0-9c83-c98463c2e955"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral",
+      "description": "General configuration parameters of the Communication Manager.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0d223c34-88b4-4953-b63d-178406689302"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMDirectUserMapping",
+          "description": "If this parameter is set to true the configuration tool shall automatically create a ComMUser per ComMPnc and a ComMUser per ComMChannel.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMDirectUserMapping",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a4afa581-00d4-4e58-bcc3-4b9290cacd24"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMModeLimitationEnabled",
+          "description": "true if mode limitation functionality shall be enabled.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMModeLimitationEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:971d7f76-156e-4c9f-9505-96e129ac1dc0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMNmPassiveModeEnable",
+          "description": "Enables support of Passive Mode.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMNmPassiveModeEnable",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2fb54b9e-6c21-4135-b29c-e871319c3e18"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMPncGatewayEnabled",
+          "description": "Enables or disables support of Partial Network Gateway.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMPncGatewayEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e0289a33-1330-4699-98a8-2c8ddb9a5caf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMPncSupport",
+          "description": "Enables or disables support of partial networking.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMPncSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c49308fd-bcec-4897-b490-792c801843a2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMResetAfterForcingNoComm",
+          "description": "ComM shall perform a reset after entering \"No Communication\" mode because of an active mode limitation to \"No Communication\" mode.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMResetAfterForcingNoComm",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:341c2dc9-b712-4783-9f7c-a5248add0108"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMSynchronousWakeUp",
+          "description": "Wake up of one channel shall lead to a wake up of all channels if true.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMSynchronousWakeUp",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:35235a58-2a7e-4268-a93a-37dc5d45746e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMVersionInfoApi",
+          "description": "Switches the possibility to read the published information with the service ComM_GetPublishedInformation().",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2639fcad-20af-4d85-aa2d-ce65ecec04ad"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMWakeupInhibitionEnabled",
+          "description": "true if wake up inhibition functionality enabled.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMWakeupInhibitionEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7d54078b-b946-4024-ba5c-43ab7cdb93bd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 3,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMEcuGroupClassification",
+          "description": "Defines whether a mode inhibition affects the ECU or not.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMEcuGroupClassification",
+          "type": "INTEGER",
+          "uuid": "ECUC:d34d3082-5711-4aa4-b750-071f85ef3eba"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMPncPrepareSleepTimer",
+          "description": "Time in seconds the PNC state machine shall wait in PNC_PREPARE_SLEEP.",
+          "isOptional": true,
+          "max": 63,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMPncPrepareSleepTimer",
+          "type": "FLOAT",
+          "uuid": "ECUC:1cbe2590-ca34-4d84-985b-39a0fab8df28"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 5,
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMTMinFullComModeDuration",
+          "description": "Minimum time duration in seconds, spent in the COMM_FULL_COMMUNICATION sub-state COMM_FULL_COM_NETWORK_REQUESTED.",
+          "isOptional": false,
+          "max": 65,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComMTMinFullComModeDuration",
+          "type": "FLOAT",
+          "uuid": "ECUC:a03ca45f-4cb6-4775-8311-909b855c5f10"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ComM/ComMGeneral/ComMGlobalNvMBlockDescriptor",
+          "description": "Reference to NVRAM block containing the none volatile data. If this parameter is not configured it means that no NVRam is used at all.",
+          "destinationContainerType": "NvMBlockDescriptor",
+          "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMGlobalNvMBlockDescriptor",
+          "uuid": "ECUC:31ffd67e-427e-4a21-b549-99d95768dd2d"
+        }
+      ],
+      "shortName": "ComMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:c129122f-1f78-42ac-8b31-1eb279dc2894"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/ComM",
+  "description": "Configuration of the ComM (Communications Manager) module.",
+  "importWarnings": [
+    "ComMPncComSignalRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComSignal 位于本模块之外；编辑器只读展示。",
+    "ComMChannelPerPnc：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ComMUserPerPnc：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ComMUserEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "ComMGlobalNvMBlockDescriptor：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "ComM",
+  "version": "4.2.2"
+}

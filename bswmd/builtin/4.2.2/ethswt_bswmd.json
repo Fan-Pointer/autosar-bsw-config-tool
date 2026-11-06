@@ -1,0 +1,992 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "b2db8fc8c500328ffc108b3b90a715cc64b9ae6f317cdebf665994513c508b15",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig",
+      "description": "Configuration of one Ethernet Switch.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtIdx",
+          "description": "Specifies the instance ID of the configured Ethernet Switch.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtIdx",
+          "type": "INTEGER",
+          "uuid": "ECUC:666187aa-c9d0-4ff8-9b55-50a3526b0ced"
+        }
+      ],
+      "references": [],
+      "shortName": "EthSwtConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtDemEventParameterRefs",
+          "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus in case the corresponding error occurs. T…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtDemEventParameterRefs/ETHSWT_E_ACCESS",
+              "description": "Reference to the DemEventParameter which shall be issued when the error \"Ethernet Switch Access Failure\" has occurred.",
+              "destinationContainerType": "DemEventParameter",
+              "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ETHSWT_E_ACCESS",
+              "uuid": "ECUC:6d0e97ed-01b9-4f47-b005-2742bb9752b8"
+            }
+          ],
+          "shortName": "EthSwtDemEventParameterRefs",
+          "subContainers": [],
+          "uuid": "ECUC:d9439cbe-74df-469f-9869-1e59b2158ca8"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtNvm",
+          "description": "Configuration of one Ethernet Switch Nvm usage in case the module requires non volatile memory in the Ecu to store switch configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtNvm/EthSwtNvmBlockDescriptorRef",
+              "description": "Reference to the Nvm block description in the Nvm module configuration.",
+              "destinationContainerType": "NvMBlockDescriptor",
+              "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthSwtNvmBlockDescriptorRef",
+              "uuid": "ECUC:d80a068c-a983-4a55-9329-88e4e7488c1f"
+            }
+          ],
+          "shortName": "EthSwtNvm",
+          "subContainers": [],
+          "uuid": "ECUC:d7833215-cb74-44be-9b61-ac433690ccf7"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort",
+          "description": "Configuration of one Ethernet Switch Port.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEnableLinkDownCallback",
+              "description": "Enables the callback <User>_LinkDown for this EthSwtPort if an IEEE802.1X link loss is detected.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthSwtPortEnableLinkDownCallback",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:ef9ae984-adc2-43f9-bb45-398f6a12e6f2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIdx",
+              "description": "Specifies the instance ID of the configured Ethernet Switch Port.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthSwtPortIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:01e9df96-9db2-47ba-9086-9aa958cf08c4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortPhysicalLayerType",
+              "description": "Defines the physical layer type on this EthSwtPort.",
+              "enumValues": [
+                "ETHSWT_PORT_BASE_T",
+                "ETHSWT_PORT_BROAD_R_REACH",
+                "ETHSWT_PORT_RTPGE",
+                "ETHSWT_PORT_X_MII"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthSwtPortPhysicalLayerType",
+              "type": "ENUM",
+              "uuid": "ECUC:0ba2ef58-bb99-4b33-a847-bd2c6dfa503b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortSpeed",
+              "description": "Defines the communication speed in Mbit per second on this EthSwtPort in case no EthSwtPortTrcvRef is defined.",
+              "enumValues": [
+                "ETHSWT_PORT_SPEED_10",
+                "ETHSWT_PORT_SPEED_100",
+                "ETHSWT_PORT_SPEED_1000"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthSwtPortSpeed",
+              "type": "ENUM",
+              "uuid": "ECUC:d91d6ae3-d025-4366-a127-fe31196c8183"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortPredefinedMacAddresses",
+              "description": "Specifies a list of 48-bit physical addresses (MAC addresses) which can be reached via this port in network byte order.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "regularExpression": "[0-9a-fA-F]{2}[[:-][0-9a-fA-F]{2}]{5}",
+              "shortName": "EthSwtPortPredefinedMacAddresses",
+              "type": "STRING",
+              "uuid": "ECUC:144e0e11-79ac-4473-9457-b4203cc98786"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortTrcvRef",
+              "description": "Reference to the ethernet transceiver driver this EthSwtPort is connected with.",
+              "destinationContainerType": "EthTrcvConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthSwtPortTrcvRef",
+              "uuid": "ECUC:87a2557d-4030-4760-b6ad-713aad1cfcca"
+            }
+          ],
+          "shortName": "EthSwtPort",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress",
+              "description": "Configuration of one Ethernet Switch Port Egress behavior.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortEgressLastSchedulerRef",
+                  "description": "Reference to the port scheduler which is the last in the egress port structure.",
+                  "destinationContainerType": "EthSwtPortScheduler",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthSwtPortEgressLastSchedulerRef",
+                  "uuid": "ECUC:cea09fae-5a0f-486e-b7cc-4f3db96b65fa"
+                }
+              ],
+              "shortName": "EthSwtPortEgress",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo",
+                  "description": "Represents a Fifo in the egress port.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo/EthSwtPortFifoTrafficClassAssignment",
+                      "description": "Defines which traffic classes are assigned to this Fifo.",
+                      "isOptional": true,
+                      "max": 7,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 8
+                      },
+                      "shortName": "EthSwtPortFifoTrafficClassAssignment",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:68706570-2b3c-4981-b961-8cc4c6d1c36d"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "EthSwtPortFifo",
+                  "subContainers": [],
+                  "uuid": "ECUC:79e247c0-ddf3-45c7-b51a-fefa41629204"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler",
+                  "description": "Represents a Scheduler in the egress port.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler/EthSwtPortSchedulerAlgorithm",
+                      "description": "Defines the scheduler algorithm.",
+                      "enumValues": [
+                        "ETHSWT_SCHEDULER_DEFICIT_ROUND_ROBIN",
+                        "ETHSWT_SCHEDULER_STRICT_PRIORITY",
+                        "ETHSWT_SCHEDULER_WEIGHTED_ROUND_ROBIN"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPortSchedulerAlgorithm",
+                      "type": "ENUM",
+                      "uuid": "ECUC:d39b10ea-dd5f-4ceb-ab57-145f22eec37c"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "EthSwtPortScheduler",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler/EthSwtPortSchedulerPredecessor",
+                      "description": "Defines an ordered list of predecessors for this scheduler.",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler/EthSwtPortSchedulerPredecessor/EthSwtPortSchedulerPredecessorOrder",
+                          "description": "Defines the order of the scheduler predecessors.",
+                          "isOptional": false,
+                          "max": 18446744073709552000,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthSwtPortSchedulerPredecessorOrder",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:452dd519-f0b5-4a80-a860-f7d0dd679034"
+                        }
+                      ],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler/EthSwtPortSchedulerPredecessor/EthSwtPortEgressPredecessorRef",
+                          "description": "Choice reference to the scheduler predecessor.",
+                          "destinationContainerType": "EthSwtPortFifo",
+                          "destinationRef": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo",
+                            "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortScheduler",
+                            "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortShaper"
+                          ],
+                          "isExternal": false,
+                          "isOptional": false,
+                          "kind": "choice",
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthSwtPortEgressPredecessorRef",
+                          "uuid": "ECUC:15fd9ee4-6e23-44a6-9243-51481779d06c"
+                        }
+                      ],
+                      "shortName": "EthSwtPortSchedulerPredecessor",
+                      "subContainers": [],
+                      "uuid": "ECUC:6d84c3e2-51aa-4c9d-b19b-7d4244143ba4"
+                    }
+                  ],
+                  "uuid": "ECUC:bbb43a98-8b9c-4764-acbc-cc9802fab490"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortShaper",
+                  "description": "Represents a Shaper in the egress port.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortShaper/EthSwtPortShaperIdleSlope",
+                      "description": "Defines the increase of credit in bits per second for the AVB shaper.",
+                      "isOptional": true,
+                      "max": 18446744073709552000,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPortShaperIdleSlope",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c3e7b5a1-91a9-4e1d-882c-ab494f6fcac6"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortShaper/EthSwtPortEgressPredecessorFifoRef",
+                      "description": "Reference to the fifo which is the predecessor for this shaper.",
+                      "destinationContainerType": "EthSwtPortFifo",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortFifo"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPortEgressPredecessorFifoRef",
+                      "uuid": "ECUC:cbe06380-bb22-4f68-b4fe-ab4a25574793"
+                    }
+                  ],
+                  "shortName": "EthSwtPortShaper",
+                  "subContainers": [],
+                  "uuid": "ECUC:dde897f6-7f5d-4d5d-aa27-3a650416db47"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortVlanForwarding",
+                  "description": "Defines how messages with a specific VLAN Id shall be handled at this egress port wrt. their VLAN Id.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortVlanForwarding/EthSwtPortVlanDefaultPriority",
+                      "description": "Determines the standard output-priority outgoing messages will be tagged with.",
+                      "isOptional": false,
+                      "max": 7,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPortVlanDefaultPriority",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:bd79d7ea-4554-4ea8-854f-3be9beea261e"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortVlanForwarding/EthSwtPortVlanForwardingId",
+                      "description": "Determines the VLAN Id the VlanForwarding shall apply to.",
+                      "isOptional": false,
+                      "max": 4094,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPortVlanForwardingId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:da2b6dd7-513d-451c-b6a7-b652af979ace"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortEgress/EthSwtPortVlanForwarding/EthSwtPortVlanForwardingType",
+                      "description": "Defines how the message with a specific VLAN Id shall be handled.",
+                      "enumValues": [
+                        "ETHSWT_NOT_SENT",
+                        "ETHSWT_SENT_TAGGED",
+                        "ETHSWT_SENT_UNTAGGED"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPortVlanForwardingType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:4e0b90c2-142f-4599-9ac1-b77f78c77b4c"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "EthSwtPortVlanForwarding",
+                  "subContainers": [],
+                  "uuid": "ECUC:e2b2252c-6874-4b5b-a5f7-3fe9b374750f"
+                }
+              ],
+              "uuid": "ECUC:c6580740-35c3-4d5f-89a3-e3e5f39d23ef"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress",
+              "description": "Configuration of one Ethernet Switch Port ingress behavior.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPortIngressVlanModification",
+                  "description": "If this parameter is defined all messages which arrive at this ingress port will be tagged with this VLAN Id. This tagging happen also if the arriving message …",
+                  "isOptional": true,
+                  "max": 4094,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EthSwtPortIngressVlanModification",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fb3ff4fc-7e38-4211-a5ef-e4de2de24e19"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPortTrafficClassAssignment",
+                  "description": "If this parameter is defined all arriving messages at this ingress port shall be assigned this traffic class.",
+                  "isOptional": true,
+                  "max": 7,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EthSwtPortTrafficClassAssignment",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:dfae6cad-011a-422c-b718-6c61c19a5607"
+                }
+              ],
+              "references": [],
+              "shortName": "EthSwtPortIngress",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPriorityRegeneration",
+                  "description": "Defines a priority regeneration where the EthSwtPriorityRegenerationIngressPriority is replaced by EthSwtPriorityRegenerationRegeneratedPriority.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 8
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPriorityRegeneration/EthSwtPriorityRegenerationIngressPriority",
+                      "description": "Message priority of the incoming message.",
+                      "isOptional": false,
+                      "max": 7,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPriorityRegenerationIngressPriority",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f991d5ac-24d3-43a6-81e1-5368c7df2b7f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPriorityRegeneration/EthSwtPriorityRegenerationRegeneratedPriority",
+                      "description": "Message priority the incoming message will be tagged with.",
+                      "isOptional": false,
+                      "max": 7,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPriorityRegenerationRegeneratedPriority",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:ed4e5a31-7f83-4c6a-9725-e59f7a500303"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "EthSwtPriorityRegeneration",
+                  "subContainers": [],
+                  "uuid": "ECUC:8a1a555a-1e95-45e3-bc8f-e9414c3363d1"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPriorityTrafficClassAssignment",
+                  "description": "Defines a priority based traffic class assignment. All messages with a specific priority (EthSwtPriorityTrafficClassAssignmentPriority) arriving at this ingres…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 8
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPriorityTrafficClassAssignment/EthSwtPriorityTrafficClassAssignmentPriority",
+                      "description": "Message priority.",
+                      "isOptional": false,
+                      "max": 7,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPriorityTrafficClassAssignmentPriority",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:806b5fe1-238e-4332-aeca-a209cc150a6a"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort/EthSwtPortIngress/EthSwtPriorityTrafficClassAssignment/EthSwtPriorityTrafficClassAssignmentTrafficClass",
+                      "description": "Traffic Class value.",
+                      "isOptional": false,
+                      "max": 7,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthSwtPriorityTrafficClassAssignmentTrafficClass",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:8e1ada3b-fe7e-4632-b7a5-40284b38abb3"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "EthSwtPriorityTrafficClassAssignment",
+                  "subContainers": [],
+                  "uuid": "ECUC:ebce6c0b-f226-42e1-82eb-f26ad54d1a75"
+                }
+              ],
+              "uuid": "ECUC:6201a610-faee-41a6-b33f-1055b2dc404e"
+            }
+          ],
+          "uuid": "ECUC:60c612bd-d595-4d5e-80cc-0b360b27db11"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtSpi",
+          "description": "Configuration of one Ethernet Switch SPI access (if SPI is used).",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "EthSwtSpi",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtSpi/EthSwtSpiSequence",
+              "description": "Container gives EthSwt driver information about one SPI sequence.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtSpi/EthSwtSpiSequence/EthSwtSpiAccessSynchronous",
+                  "description": "This parameter is used to define whether the access to the Spi sequence is synchronous or asynchronous.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EthSwtSpiAccessSynchronous",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:d73351bc-6c36-4ba9-8fc7-b907d1ee6787"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtSpi/EthSwtSpiSequence/EthSwtSpiSequenceName",
+                  "description": "Reference to a Spi sequence configuration container.",
+                  "destinationContainerType": "SpiSequence",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "EthSwtSpiSequenceName",
+                  "uuid": "ECUC:203cb639-e275-46ff-ac61-574e4e9d48cc"
+                }
+              ],
+              "shortName": "EthSwtSpiSequence",
+              "subContainers": [],
+              "uuid": "ECUC:b08a8fff-5509-479d-b072-f6441b4c9aaf"
+            }
+          ],
+          "uuid": "ECUC:c613caa3-1ff6-49c8-99cc-5883e9aeaef5"
+        }
+      ],
+      "uuid": "ECUC:022b64c0-dcee-45d9-8dab-0ec9632c50ec"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral",
+      "description": "General configuration of Ethernet Switch Driver module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:df00580a-6987-4b2d-a90f-46da57fbc3a8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtEnableVlanApi",
+          "description": "Enables / Disables EthSwt_EnableVLAN API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtEnableVlanApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bd96990d-3af9-4d53-b41e-b6d34720b860"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtGetArlTableApi",
+          "description": "Enables / Disables EthSwt_GetArlTable API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtGetArlTableApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ddea1320-b490-4d2d-810b-1f04b314d7ff"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtGetBufferLevelApi",
+          "description": "Enables / Disables API to fetch the switch buffer utilization.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtGetBufferLevelApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:90b58238-c1c1-4ce9-8d14-dc4fd778da98"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtGetDropCountApi",
+          "description": "Enables / Disables EthSwt_GetDropCount API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtGetDropCountApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:de712ddb-6adf-4518-9e40-b39f61b00f8d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtGetEtherStatsApi",
+          "description": "Enables / Disables EthSwt_GetEtherStats API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtGetEtherStatsApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b5dd0d07-c466-4867-8913-e86738cbd1c4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtGetMacLearningModeApi",
+          "description": "Enables / Disables EthSwt_GetMacLearningMode API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtGetMacLearningModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:34b67e5b-3aff-48ba-87dc-4a6977cf12b0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtGetPortMacAddrApi",
+          "description": "Enables / Disables EthSwt_GetPortMacAddr API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtGetPortMacAddrApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:cc4070df-e3d1-48f8-81a8-d51c9a7b84e3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtGetSwitchRegApi",
+          "description": "Enables / Disables EthSwt_GetSwitchReg API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtGetSwitchRegApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:73bf4d9d-c9bb-42bb-b602-cc4923f629e6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtPersistentConfigurationResult",
+          "description": "Enables / Disables the callback API <User>_PersistentConfigurationResult.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtPersistentConfigurationResult",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f8450fe6-4d29-4e15-bd03-cf5ae09526f8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtReadTrcvRegisterApi",
+          "description": "Enables / Disables EthSwt_ReadTrcvRegister API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtReadTrcvRegisterApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e1967e31-054e-4403-a7b9-b8c88de81c56"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtResetConfigurationApi",
+          "description": "Enables / Disables EthSwt_ResetConfiguration API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtResetConfigurationApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:16af361b-4414-4cf5-aa22-08737cdb74b4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtSetMacLearningModeApi",
+          "description": "Enables / Disables EthSwt_SetMacLearningMode API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtSetMacLearningModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f419814f-256a-4219-8b31-f12ec7f7372a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtSetSwitchRegApi",
+          "description": "Enables / Disables EthSwt_SetSwitchReg API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtSetSwitchRegApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0425871a-a7ea-4b22-93ec-75e00a77a5bf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtStoreConfigurationApi",
+          "description": "Enables / Disables EthSwt_StoreConfiguration API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtStoreConfigurationApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9012e251-d823-4ec7-ab36-04c58eef5efc"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtVersionInfoApi",
+          "description": "Enables / Disables version info API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e884d0d0-8bb9-472b-ae56-eca768f1a331"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtWriteTrcvRegisterApi",
+          "description": "Enables / Disables EthSwt_WriteTrcvRegister API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtWriteTrcvRegisterApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c1518a91-3da5-4941-a1ce-b7ca69fb86eb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSwtIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:1cb88db2-2bb7-4324-bc58-84083b1e22ed"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtLinkDownUser",
+          "description": "Defines the <User> function name for the <User>_LinkDown callback.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthSwtLinkDownUser",
+          "type": "FUNCTION",
+          "uuid": "ECUC:d84f11d1-8ece-4319-b463-9153fb20709c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtLinkUpUser",
+          "description": "Defines the <User> function name for the <User>_LinkUp callback.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthSwtLinkUpUser",
+          "type": "FUNCTION",
+          "uuid": "ECUC:6231011e-406a-4302-ad0e-635210f97a84"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtPersistentConfigurationResultUser",
+          "description": "Defines the <User> function name for the <User>_PersistentConfigurationResult callback.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthSwtPersistentConfigurationResultUser",
+          "type": "FUNCTION",
+          "uuid": "ECUC:04d72fa0-52c3-4588-84af-e897ba51d7ba"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSwt/EthSwtGeneral/EthSwtPublicCddHeaderFile",
+          "description": "Defines header files for callback functions which shall be included in case of CDDs.",
+          "isOptional": true,
+          "maxLength": 32,
+          "minLength": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "EthSwtPublicCddHeaderFile",
+          "type": "STRING",
+          "uuid": "ECUC:6e2b80fe-5da2-48cb-a5c6-df33a57a4438"
+        }
+      ],
+      "references": [],
+      "shortName": "EthSwtGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:3d96a192-1204-4873-9177-991e498850f6"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EthSwt",
+  "description": "Configuration of the EthSwt (Ethernet Switch Driver) module.",
+  "importWarnings": [
+    "ETHSWT_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "EthSwtNvmBlockDescriptorRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+    "EthSwtPortFifoTrafficClassAssignment：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "EthSwtPortEgressPredecessorRef：多候选引用，可在 3 个候选目标中选一个。",
+    "EthSwtPortPredefinedMacAddresses：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "EthSwtPortTrcvRef：目标 /AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig 位于本模块之外；编辑器只读展示。",
+    "EthSwtSpiSequenceName：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EthSwtSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+    "EthSwtPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "EthSwt",
+  "version": "4.2.2"
+}

@@ -6,6 +6,8 @@ export interface ProjectMetadata {
   chip: { family: string; note?: string };
   moduleShortNames: string[];
   setUuids: string[];
+  /** Detached records remain in the library; re-adding may recover these unassigned records. */
+  detachedSetUuids?: string[];
   createdAt: string;
 }
 export interface ProjectInput {
@@ -45,6 +47,12 @@ export function parseProjects(raw: unknown): ProjectMetadata[] {
       if (!Array.isArray(p[key]) || !(p[key] as unknown[]).every((id) => typeof id === 'string'))
         throw new Error('工程模块或配置集关联无效');
     }
+    if (
+      p.detachedSetUuids !== undefined &&
+      (!Array.isArray(p.detachedSetUuids) ||
+        !p.detachedSetUuids.every((id) => typeof id === 'string'))
+    )
+      throw new Error('工程已移除模块关联无效');
     if (ids.has(p.projectUuid as string)) throw new Error('工程 UUID 重复');
     ids.add(p.projectUuid as string);
     for (const id of p.setUuids as string[]) {

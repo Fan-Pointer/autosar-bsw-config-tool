@@ -1,0 +1,1137 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "34ea0f0790fa58c8779b8f9648f74cfe67fee8e68f476e7f4750b954b72eeb7b",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration",
+      "description": "This container contains the configuration (parameters) of the ECU State Manager.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "EcuMConfiguration",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration",
+          "description": "This container contains the common configuration (parameters) of the ECU State Manager.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "LINK_TIME",
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMConfigConsistencyHash",
+              "description": "In the pre-compile and link-time configuration phase a hash value is generated across all pre-compile and link-time parameters of all BSW modules.",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EcuMConfigConsistencyHash",
+              "type": "INTEGER",
+              "uuid": "ECUC:0bae5ee1-7bcc-4635-a400-d245750296dd"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDefaultAppMode",
+              "description": "The default application mode loaded when the ECU comes out of reset.",
+              "destinationContainerType": "OsAppMode",
+              "destinationRef": "/AUTOSAR/EcucDefs/Os/OsAppMode",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Os/OsAppMode"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EcuMDefaultAppMode",
+              "uuid": "ECUC:65c6e769-6d64-4d96-8675-7983ccee0258"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMOSResource",
+              "description": "This parameter is a reference to a OS resource which is used to bring the ECU into sleep mode.",
+              "destinationContainerType": "OsResource",
+              "destinationRef": "/AUTOSAR/EcucDefs/Os/OsResource",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Os/OsResource"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "EcuMOSResource",
+              "uuid": "ECUC:c2dcaae0-bc92-410f-bdb9-adf1d91ecffc"
+            }
+          ],
+          "shortName": "EcuMCommonConfiguration",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDefaultShutdownTarget",
+              "description": "This container describes the default shutdown target to be selected by EcuM. The actual shutdown target may be overridden by the EcuM_SelectShutdownTarget serv…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "POST_BUILD",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDefaultShutdownTarget/EcuMDefaultShutdownTarget",
+                  "description": "This parameter describes the state part of the default shutdown target selected when the ECU comes out of reset. If EcuMShutdownTargetSleep is selected, the pa…",
+                  "enumValues": [
+                    "EcuMShutdownTargetOff",
+                    "EcuMShutdownTargetReset",
+                    "EcuMShutdownTargetSleep"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMDefaultShutdownTarget",
+                  "type": "ENUM",
+                  "uuid": "ECUC:ccac5543-c698-41bb-869a-fa1a6acbf26f"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDefaultShutdownTarget/EcuMDefaultResetModeRef",
+                  "description": "If EcuMDefaultShutdownTarget is EcuMShutdownTargetReset, this parameter selects the default reset mode. Otherwise this parameter may be ignored.",
+                  "destinationContainerType": "EcuMResetMode",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMResetMode",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMResetMode"
+                  ],
+                  "isExternal": false,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMDefaultResetModeRef",
+                  "uuid": "ECUC:68b39a3a-9e3c-40c0-8b2f-d30262687598"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDefaultShutdownTarget/EcuMDefaultSleepModeRef",
+                  "description": "If EcuMDefaultShutdownTarget is EcuMShutdownTargetSleep, this parameter selects the default sleep mode. Otherwise this parameter may be ignored.",
+                  "destinationContainerType": "EcuMSleepMode",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode"
+                  ],
+                  "isExternal": false,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMDefaultSleepModeRef",
+                  "uuid": "ECUC:7cf854cf-a9cb-4ead-8eae-96bd1592bd0a"
+                }
+              ],
+              "shortName": "EcuMDefaultShutdownTarget",
+              "subContainers": [],
+              "uuid": "ECUC:aebde982-c84c-47f2-ac81-1989258cbaef"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListOne",
+              "description": "Container for Init Block I.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "EcuMDriverInitListOne",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListOne/EcuMDriverInitItem",
+                  "description": "These containers describe the entries in a driver init list.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListOne/EcuMDriverInitItem/EcuMModuleParameter",
+                      "description": "Definition of the function prototype and the parameter passed to the function.",
+                      "enumValues": [
+                        "NULL_PTR",
+                        "POSTBUILD_PTR",
+                        "VOID"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleParameter",
+                      "type": "ENUM",
+                      "uuid": "ECUC:a50143a0-bea2-df92-120c-54c216ca74f6"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListOne/EcuMDriverInitItem/EcuMModuleService",
+                      "description": "The service to be called to initialize that module, e.g. Init, PreInit, Start etc. If nothing is defined \"Init\" is taken by default.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleService",
+                      "type": "STRING",
+                      "uuid": "ECUC:f7b11899-50e8-e38b-ef40-30412ee7e758"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListOne/EcuMDriverInitItem/EcuMModuleRef",
+                      "description": "Foreign reference to the configuration of a module instance which shall be initialized by EcuM",
+                      "destinationContainerType": "EcuMModuleRef",
+                      "destinationRefs": [],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "foreign",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleRef",
+                      "uuid": "ECUC:c45f91df-a9d3-e5c4-ef5c-076df7908fa3"
+                    }
+                  ],
+                  "shortName": "EcuMDriverInitItem",
+                  "subContainers": [],
+                  "uuid": "ECUC:b37908f7-5536-96bf-545e-fa7e8d6d11e0"
+                }
+              ],
+              "uuid": "ECUC:e108fe98-dc5c-4f3c-9d9e-5a4989fb20d0"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListZero",
+              "description": "Container for Init Block 0.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "EcuMDriverInitListZero",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListZero/EcuMDriverInitItem",
+                  "description": "These containers describe the entries in a driver init list.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListZero/EcuMDriverInitItem/EcuMModuleParameter",
+                      "description": "Definition of the function prototype and the parameter passed to the function.",
+                      "enumValues": [
+                        "NULL_PTR",
+                        "POSTBUILD_PTR",
+                        "VOID"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleParameter",
+                      "type": "ENUM",
+                      "uuid": "ECUC:f6025103-72a5-d8a5-fe39-c30c18e875da"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListZero/EcuMDriverInitItem/EcuMModuleService",
+                      "description": "The service to be called to initialize that module, e.g. Init, PreInit, Start etc. If nothing is defined \"Init\" is taken by default.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleService",
+                      "type": "STRING",
+                      "uuid": "ECUC:48b225fc-04eb-dc9e-db6d-9e8b3105e83c"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverInitListZero/EcuMDriverInitItem/EcuMModuleRef",
+                      "description": "Foreign reference to the configuration of a module instance which shall be initialized by EcuM",
+                      "destinationContainerType": "EcuMModuleRef",
+                      "destinationRefs": [],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "foreign",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleRef",
+                      "uuid": "ECUC:15609f42-5dd6-ded7-db89-75b7f9ae9087"
+                    }
+                  ],
+                  "shortName": "EcuMDriverInitItem",
+                  "subContainers": [],
+                  "uuid": "ECUC:047a165a-0939-8fd2-408c-68c88f8b12c4"
+                }
+              ],
+              "uuid": "ECUC:320a0bfb-905f-484f-89cb-c8938c1921b4"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverRestartList",
+              "description": "List of modules to be initialized.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "EcuMDriverRestartList",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverRestartList/EcuMDriverInitItem",
+                  "description": "These containers describe the entries in a driver init list.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverRestartList/EcuMDriverInitItem/EcuMModuleParameter",
+                      "description": "Definition of the function prototype and the parameter passed to the function.",
+                      "enumValues": [
+                        "NULL_PTR",
+                        "POSTBUILD_PTR",
+                        "VOID"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleParameter",
+                      "type": "ENUM",
+                      "uuid": "ECUC:67267d90-9ff3-d6db-3123-129d18e8e79f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverRestartList/EcuMDriverInitItem/EcuMModuleService",
+                      "description": "The service to be called to initialize that module, e.g. Init, PreInit, Start etc. If nothing is defined \"Init\" is taken by default.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleService",
+                      "type": "STRING",
+                      "uuid": "ECUC:b9d65289-3239-dad4-0e56-ee1c31065a01"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMDriverRestartList/EcuMDriverInitItem/EcuMModuleRef",
+                      "description": "Foreign reference to the configuration of a module instance which shall be initialized by EcuM",
+                      "destinationContainerType": "EcuMModuleRef",
+                      "destinationRefs": [],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "foreign",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleRef",
+                      "uuid": "ECUC:8684cbcf-8b24-dd0d-0e72-c548f9af024c"
+                    }
+                  ],
+                  "shortName": "EcuMDriverInitItem",
+                  "subContainers": [],
+                  "uuid": "ECUC:759e42e7-3687-8e08-7375-b8598f8b8489"
+                }
+              ],
+              "uuid": "ECUC:a32e3888-bdad-4685-bcb5-18248c199379"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode",
+              "description": "These containers describe the configured sleep modes.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 256
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode/EcuMSleepModeId",
+                  "description": "This ID identifies this sleep mode in services like EcuM_SelectShutdownTarget.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMSleepModeId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6575d26f-25a3-419a-a1f9-73e213842f07"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode/EcuMSleepModeSuspend",
+                  "description": "Flag, which is set true, if the CPU is suspended, halted, or powered off in the sleep mode. If the CPU keeps running in this sleep mode, then this flag must be…",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMSleepModeSuspend",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:3da7b115-6bc9-4855-a744-83e78ae2f17b"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode/EcuMSleepModeMcuModeRef",
+                  "description": "This parameter is a reference to the corresponding MCU mode for this sleep mode.",
+                  "destinationContainerType": "McuModeSettingConf",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMSleepModeMcuModeRef",
+                  "uuid": "ECUC:f6907e19-209e-44bc-b8f4-08b7922a9adb"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode/EcuMWakeupSourceMask",
+                  "description": "These parameters are references to the wakeup sources that shall be enabled for this sleep mode.",
+                  "destinationContainerType": "EcuMWakeupSource",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "EcuMWakeupSourceMask",
+                  "uuid": "ECUC:35ef3ce4-a034-4906-8400-3b4b02eaa0b8"
+                }
+              ],
+              "shortName": "EcuMSleepMode",
+              "subContainers": [],
+              "uuid": "ECUC:a9cbddde-5cd2-4616-9604-6041afbe9990"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+              "description": "These containers describe the configured wakeup sources.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 32
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource/EcuMCheckWakeupTimeout",
+                  "description": "This Parameter is the initial Value for the Time of the EcuM to delay shut down of the ECU if the check of the Wakeup Source is done asynchronously (CheckWakeu…",
+                  "isOptional": true,
+                  "max": 10,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMCheckWakeupTimeout",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:bc20e5bf-7c5b-431c-b32f-b1218275d1c1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource/EcuMValidationTimeout",
+                  "description": "The validation timeout (period for which the ECU State Manager will wait for the validation of a wakeup event) can be defined for each wakeup source independen…",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMValidationTimeout",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:db82044d-d3a9-40b9-a9f5-6d2f788d3266"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource/EcuMWakeupSourceId",
+                  "description": "This parameter defines the identifier of this wakeup source.",
+                  "isOptional": false,
+                  "max": 31,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMWakeupSourceId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bdc9686e-5683-43b0-95b2-0f1cd8114964"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource/EcuMWakeupSourcePolling",
+                  "description": "This parameter describes if the wakeup source needs polling.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMWakeupSourcePolling",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:5af33790-8355-4594-8989-195b1e09d64a"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource/EcuMComMChannelRef",
+                  "description": "This parameter is a reference to a Network (channel) defined in the Communication Manager. No reference indicates that the wakeup source is not a communication…",
+                  "destinationContainerType": "ComMChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMComMChannelRef",
+                  "uuid": "ECUC:7ad19fd1-f48a-43da-9491-0efb37cd51df"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource/EcuMComMPNCRef",
+                  "description": "This is a reference to a one or more PNC's defined in the Communication Manager.",
+                  "destinationContainerType": "ComMPnc",
+                  "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "EcuMComMPNCRef",
+                  "uuid": "ECUC:829da2c9-1afe-4459-a565-b098479e264d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource/EcuMResetReasonRef",
+                  "description": "This parameter describes the mapping of reset reasons detected by the MCU driver into wakeup sources.",
+                  "destinationContainerType": "McuResetReasonConf",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Mcu/McuPublishedInformation/McuResetReasonConf",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Mcu/McuPublishedInformation/McuResetReasonConf"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "EcuMResetReasonRef",
+                  "uuid": "ECUC:be6be3ac-3dd8-4fb4-9890-c767597eb3ef"
+                }
+              ],
+              "shortName": "EcuMWakeupSource",
+              "subContainers": [],
+              "uuid": "ECUC:0a729dd6-2641-4d68-95a0-5a26ca418457"
+            }
+          ],
+          "uuid": "ECUC:8e610dbe-ea33-4a18-bca8-c4d70a9da2f1"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration",
+          "description": "This container contains the configuration (parameters) of the EcuMFlex.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMNormalMcuModeRef",
+              "description": "This parameter is a reference to the normal MCU mode to be restored after a sleep.",
+              "destinationContainerType": "McuModeSettingConf",
+              "destinationRef": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EcuMNormalMcuModeRef",
+              "uuid": "ECUC:ef0eb80f-8127-45a4-8e24-04744d48a5f8"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMPartitionRef",
+              "description": "Reference denotes the partition a EcuM shall run inside.",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "EcuMPartitionRef",
+              "uuid": "ECUC:2eed4127-0af3-40e5-8a8c-2a8587e75f02"
+            }
+          ],
+          "shortName": "EcuMFlexConfiguration",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMAlarmClock",
+              "description": "These containers describe the configured alarm clocks.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMAlarmClock/EcuMAlarmClockId",
+                  "description": "This ID identifies this alarmclock.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMAlarmClockId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:49861b32-83d2-464f-afd2-24fb12a3e1e0"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMAlarmClock/EcuMAlarmClockTimeOut",
+                  "description": "This parameter allows to define a timeout for this alarm clock.",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMAlarmClockTimeOut",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:9677f083-e76f-486e-8634-df1555753290"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMAlarmClock/EcuMAlarmClockUser",
+                  "description": "This parameter allows an alarm to be assigned to a user.",
+                  "destinationContainerType": "EcuMFlexUserConfig",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMAlarmClockUser",
+                  "uuid": "ECUC:e6ff4bc0-7648-4128-b239-de3f273d33d2"
+                }
+              ],
+              "shortName": "EcuMAlarmClock",
+              "subContainers": [],
+              "uuid": "ECUC:750dd6de-13ec-48cf-befd-615fde9145b3"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMDriverInitListBswM",
+              "description": "This container holds a list of modules to be initialized by the BswM.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "EcuMDriverInitListBswM",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMDriverInitListBswM/EcuMDriverInitItem",
+                  "description": "These containers describe the entries in a driver init list.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMDriverInitListBswM/EcuMDriverInitItem/EcuMModuleParameter",
+                      "description": "Definition of the function prototype and the parameter passed to the function.",
+                      "enumValues": [
+                        "NULL_PTR",
+                        "POSTBUILD_PTR",
+                        "VOID"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleParameter",
+                      "type": "ENUM",
+                      "uuid": "ECUC:b2ca6600-4d85-d0f7-1ca8-eacc5d5c0897"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMDriverInitListBswM/EcuMDriverInitItem/EcuMModuleService",
+                      "description": "The service to be called to initialize that module, e.g. Init, PreInit, Start etc. If nothing is defined \"Init\" is taken by default.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleService",
+                      "type": "STRING",
+                      "uuid": "ECUC:057a3af8-dfcb-d4f0-f9dc-c64b75797af9"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMDriverInitListBswM/EcuMDriverInitItem/EcuMModuleRef",
+                      "description": "Foreign reference to the configuration of a module instance which shall be initialized by EcuM",
+                      "destinationContainerType": "EcuMModuleRef",
+                      "destinationRefs": [],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "foreign",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EcuMModuleRef",
+                      "uuid": "ECUC:d228b43f-38b6-d729-f9f8-9d783e222344"
+                    }
+                  ],
+                  "shortName": "EcuMDriverInitItem",
+                  "subContainers": [],
+                  "uuid": "ECUC:c1422b56-e419-8824-5efb-9088d3fea581"
+                }
+              ],
+              "uuid": "ECUC:eed220f8-6b3f-40a1-a83a-f053d08cb471"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig",
+              "description": "These containers describe the identifiers that are needed to refer to a software component or another appropriate entity in the system which uses the EcuMFlex …",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 256
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig/EcuMFlexUser",
+                  "description": "Parameter used to identify one user.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMFlexUser",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:7cefee01-1e46-45e6-b582-678888f226cc"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig/EcuMFlexEcucPartitionRef",
+                  "description": "Denotes in which \"EcucPartition\" the user of the EcuM is executed.",
+                  "destinationContainerType": "EcucPartition",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMFlexEcucPartitionRef",
+                  "uuid": "ECUC:fe138ccd-1882-4c4c-ad96-ce9be41c7a07"
+                }
+              ],
+              "shortName": "EcuMFlexUserConfig",
+              "subContainers": [],
+              "uuid": "ECUC:3058925d-af3b-4a8a-9252-bd6700407009"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMGoDownAllowedUsers",
+              "description": "This container describes the collection of allowed users which are allowed to call the EcuM_GoDownHaltPoll API (only applies in the case that the previously se…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMGoDownAllowedUsers/EcuMGoDownAllowedUserRef",
+                  "description": "This references an allowed user.",
+                  "destinationContainerType": "EcuMFlexUserConfig",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "EcuMGoDownAllowedUserRef",
+                  "uuid": "ECUC:79119397-b629-4210-a818-6071972fb77f"
+                }
+              ],
+              "shortName": "EcuMGoDownAllowedUsers",
+              "subContainers": [],
+              "uuid": "ECUC:7d3d53a3-4f3d-4595-9bd9-4c2e42819a48"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMResetMode",
+              "description": "These containers describe the configured reset modes.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 256
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMResetMode/EcuMResetModeId",
+                  "description": "This ID identifies this reset mode in services like EcuM_SelectShutdownTarget.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMResetModeId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:0a945601-d809-4f20-9ffe-e90e4d9a60a4"
+                }
+              ],
+              "references": [],
+              "shortName": "EcuMResetMode",
+              "subContainers": [],
+              "uuid": "ECUC:f2f88c2c-79a4-47d4-8e3a-750f1bb3624e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMSetClockAllowedUsers",
+              "description": "This container describes the collection of allowed users which are allowed to call the EcuM_SetClock API.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMSetClockAllowedUsers/EcuMSetClockAllowedUserRef",
+                  "description": "These parameters describe the references to the users which are allowed to call the EcuM_SetClock API.",
+                  "destinationContainerType": "EcuMFlexUserConfig",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "EcuMSetClockAllowedUserRef",
+                  "uuid": "ECUC:6c8dce8f-f2da-4d1f-9a06-da9d9829e14e"
+                }
+              ],
+              "shortName": "EcuMSetClockAllowedUsers",
+              "subContainers": [],
+              "uuid": "ECUC:b2941bdd-11fe-440e-a773-bce84948a4fd"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMShutdownCause",
+              "description": "These containers describe the configured shut down or reset causes.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 256
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMShutdownCause/EcuMShutdownCauseId",
+                  "description": "This ID identifies this shut down cause.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EcuMShutdownCauseId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:596b234d-0197-46f6-87ee-f6a25635fa91"
+                }
+              ],
+              "references": [],
+              "shortName": "EcuMShutdownCause",
+              "subContainers": [],
+              "uuid": "ECUC:76c32704-2514-4828-a00c-c26c6ae45534"
+            }
+          ],
+          "uuid": "ECUC:e088e752-6fde-4e09-9190-f0619180e9b4"
+        }
+      ],
+      "uuid": "ECUC:16fb469f-1f19-45e7-b4e5-555ae0f14089"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMFlexGeneral",
+      "description": "This container holds the general, pre-compile configuration parameters for the EcuMFlex.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMFlexGeneral/EcuMAlarmClockPresent",
+          "description": "This flag indicates whether the optional AlarmClock feature is present.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EcuMAlarmClockPresent",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b21df21d-f88f-4e68-a784-0b5b0836f989"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMFlexGeneral/EcuMModeHandling",
+          "description": "If false, Run Request Protocol is not performed.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EcuMModeHandling",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:84de8697-4b3a-4a5e-8728-cccbbbdf18b5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMFlexGeneral/EcuMResetLoopDetection",
+          "description": "If false, no reset loop detection is performed. If this configuration parameter exists and is set to true, the callout \"EcuM_LoopDetection\" is called during st…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EcuMResetLoopDetection",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:53a6ceed-b5cc-4bd4-8741-60747b77dd76"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMFlexGeneral/EcuMSetProgrammableInterrupts",
+          "description": "If this configuration parameter exists and is to true, the callout \"EcuM_AL_SetProgrammableInterrupts\" is called during startup of EcuM (during StartPreOS).",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EcuMSetProgrammableInterrupts",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:63786888-09f7-4b95-8a90-8c03c0ce45a3"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMFlexGeneral/EcuMAlarmWakeupSource",
+          "description": "This parameter describes the reference to the EcuMWakeupSource being used for the EcuM AlarmClock.",
+          "destinationContainerType": "EcuMWakeupSource",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EcuMAlarmWakeupSource",
+          "uuid": "ECUC:824c1dac-d512-4089-aa9e-15bf7d01a829"
+        }
+      ],
+      "shortName": "EcuMFlexGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:2042330b-0dc9-451d-9f4d-48e741cee88f"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMGeneral",
+      "description": "This container holds the general, pre-compile configuration parameters.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMGeneral/EcuMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EcuMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:07363168-09da-4d24-b4be-b85eba468e64"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMGeneral/EcuMIncludeDet",
+          "description": "If defined, the according BSW module will be initialized by the ECU State Manager",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EcuMIncludeDet",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:eb2066d7-d0e8-4fc5-bc8e-3a3d35c30a52"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMGeneral/EcuMVersionInfoApi",
+          "description": "Switches the version info API on or off",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EcuMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fa4df206-514e-4273-98fe-65daf9b2536c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuM/EcuMGeneral/EcuMMainFunctionPeriod",
+          "description": "This parameter defines the schedule period of EcuM_MainFunction.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EcuMMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:40a1fc47-8607-49ff-be26-3f868176d15f"
+        }
+      ],
+      "references": [],
+      "shortName": "EcuMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:fd0b9fcb-4de6-4f6d-9725-5c36640588db"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EcuM",
+  "description": "Configuration of the EcuM (ECU State Manager) module.",
+  "importWarnings": [
+    "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcuMSleepModeMcuModeRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf 位于本模块之外；编辑器只读展示。",
+    "EcuMWakeupSourceMask：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcuMComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "EcuMComMPNCRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcuMComMPNCRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMPnc 位于本模块之外；编辑器只读展示。",
+    "EcuMResetReasonRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcuMResetReasonRef：目标 /AUTOSAR/EcucDefs/Mcu/McuPublishedInformation/McuResetReasonConf 位于本模块之外；编辑器只读展示。",
+    "EcuMDefaultAppMode：目标 /AUTOSAR/EcucDefs/Os/OsAppMode 位于本模块之外；编辑器只读展示。",
+    "EcuMOSResource：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcuMOSResource：目标 /AUTOSAR/EcucDefs/Os/OsResource 位于本模块之外；编辑器只读展示。",
+    "EcuMModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcuMFlexEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "EcuMGoDownAllowedUserRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcuMSetClockAllowedUserRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcuMNormalMcuModeRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf 位于本模块之外；编辑器只读展示。",
+    "EcuMPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcuMPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "EcuM",
+  "version": "4.4.0"
+}

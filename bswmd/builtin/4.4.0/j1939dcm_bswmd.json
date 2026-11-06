@@ -1,0 +1,979 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "4dd910b3fdd193258227da018fa8787a1f06606da058ed9b8aaeebd816b52bfa",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR J1939Dcm module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "J1939DcmConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel",
+          "description": "Contains the J1939DcmChannel parameters.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel/J1939DcmBusType",
+              "description": "Identifies the communication port",
+              "enumValues": [
+                "J1939DCM_ISO9141",
+                "J1939DCM_J1587",
+                "J1939DCM_J1850",
+                "J1939DCM_J1922",
+                "J1939DCM_J1939_NETWORK_1",
+                "J1939DCM_J1939_NETWORK_2",
+                "J1939DCM_J1939_NETWORK_3",
+                "J1939DCM_J1939_NETWORK_4",
+                "J1939DCM_OTHER",
+                "J1939DCM_PROPRIETARY_NETWORK_1",
+                "J1939DCM_PROPRIETARY_NETWORK_2"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmBusType",
+              "type": "ENUM",
+              "uuid": "ECUC:c2832537-bb25-4294-b1aa-0263dedc5354"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel/J1939DcmComMChannelRef",
+              "description": "Reference to the ComMChannel.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmComMChannelRef",
+              "uuid": "ECUC:586413e9-775b-4017-b565-c58b387f0a66"
+            }
+          ],
+          "shortName": "J1939DcmChannel",
+          "subContainers": [],
+          "uuid": "ECUC:479961c3-79c3-4dfe-ab40-d2e312782ce6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode",
+          "description": "Contains the parameters for the support of a logical J1939 node.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmSPNsInDataStream",
+              "description": "Defines the SPNs available in data stream for use in DM24.",
+              "isOptional": true,
+              "max": 524287,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "J1939DcmSPNsInDataStream",
+              "type": "INTEGER",
+              "uuid": "ECUC:4c385e0b-27f5-4246-a92a-cf6300ea578f"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDemClientRef",
+              "description": "Reference to the corresponding Dem Client.",
+              "destinationContainerType": "DemClient",
+              "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemGeneral/DemClient",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Dem/DemGeneral/DemClient"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmDemClientRef",
+              "uuid": "ECUC:9c094184-64ca-457d-8f3f-0f935732544c"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmNmNodeRef",
+              "description": "Reference to the corresponding J1939Nm node.",
+              "destinationContainerType": "J1939NmNode",
+              "destinationRef": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmNmNodeRef",
+              "uuid": "ECUC:7c2388e4-11ff-4319-b0f0-a1f58c73cdd5"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmNodeRmUserRef",
+              "description": "Reference to the J1939RmUser used by J1939Dcm.",
+              "destinationContainerType": "J1939RmDcmUser",
+              "destinationRef": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmDcmUser",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmDcmUser"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmNodeRmUserRef",
+              "uuid": "ECUC:6fc42938-a0d2-42c0-aed4-b69560df8a94"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmServiceOnlyDTCsMemoryDestinationRef",
+              "description": "Reference to the user defined memory used for the Service Only DTCs handled by DM53, DM54, and DM55.",
+              "destinationContainerType": "DemUserDefinedMemory",
+              "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemGeneral/DemEventMemorySet/DemUserDefinedMemory",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Dem/DemGeneral/DemEventMemorySet/DemUserDefinedMemory"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939DcmServiceOnlyDTCsMemoryDestinationRef",
+              "uuid": "ECUC:176f343d-14b3-4d8e-86ac-88ee4dbfae62"
+            }
+          ],
+          "shortName": "J1939DcmNode",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport",
+              "description": "Contains parameters to configure the diagnostic message support",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmDmxSupport",
+                  "description": "This parameter is used to identify the actual DMx message.",
+                  "enumValues": [
+                    "J1939DCM_DM01_SUPPORT",
+                    "J1939DCM_DM02_SUPPORT",
+                    "J1939DCM_DM03_SUPPORT",
+                    "J1939DCM_DM04_SUPPORT",
+                    "J1939DCM_DM05_SUPPORT",
+                    "J1939DCM_DM06_SUPPORT",
+                    "J1939DCM_DM07_SUPPORT",
+                    "J1939DCM_DM08_SUPPORT",
+                    "J1939DCM_DM09_SUPPORT",
+                    "J1939DCM_DM10_SUPPORT",
+                    "J1939DCM_DM11_SUPPORT",
+                    "J1939DCM_DM12_SUPPORT",
+                    "J1939DCM_DM13_SUPPORT",
+                    "J1939DCM_DM14_SUPPORT",
+                    "J1939DCM_DM15_SUPPORT",
+                    "J1939DCM_DM16_SUPPORT",
+                    "J1939DCM_DM17_SUPPORT",
+                    "J1939DCM_DM18_SUPPORT",
+                    "J1939DCM_DM19_SUPPORT",
+                    "J1939DCM_DM20_SUPPORT",
+                    "J1939DCM_DM21_SUPPORT",
+                    "J1939DCM_DM22_SUPPORT",
+                    "J1939DCM_DM23_SUPPORT",
+                    "J1939DCM_DM24_SUPPORT",
+                    "J1939DCM_DM25_SUPPORT",
+                    "J1939DCM_DM26_SUPPORT",
+                    "J1939DCM_DM27_SUPPORT",
+                    "J1939DCM_DM28_SUPPORT",
+                    "J1939DCM_DM29_SUPPORT",
+                    "J1939DCM_DM30_SUPPORT",
+                    "J1939DCM_DM31_SUPPORT",
+                    "J1939DCM_DM32_SUPPORT",
+                    "J1939DCM_DM33_SUPPORT",
+                    "J1939DCM_DM34_SUPPORT",
+                    "J1939DCM_DM35_SUPPORT",
+                    "J1939DCM_DM36_SUPPORT",
+                    "J1939DCM_DM37_SUPPORT",
+                    "J1939DCM_DM38_SUPPORT",
+                    "J1939DCM_DM39_SUPPORT",
+                    "J1939DCM_DM40_SUPPORT",
+                    "J1939DCM_DM41_SUPPORT",
+                    "J1939DCM_DM42_SUPPORT",
+                    "J1939DCM_DM43_SUPPORT",
+                    "J1939DCM_DM44_SUPPORT",
+                    "J1939DCM_DM45_SUPPORT",
+                    "J1939DCM_DM46_SUPPORT",
+                    "J1939DCM_DM47_SUPPORT",
+                    "J1939DCM_DM48_SUPPORT",
+                    "J1939DCM_DM49_SUPPORT",
+                    "J1939DCM_DM50_SUPPORT",
+                    "J1939DCM_DM51_SUPPORT",
+                    "J1939DCM_DM52_SUPPORT",
+                    "J1939DCM_DM53_SUPPORT",
+                    "J1939DCM_DM54_SUPPORT",
+                    "J1939DCM_DM55_SUPPORT",
+                    "J1939DCM_DM56_SUPPORT",
+                    "J1939DCM_DM57_SUPPORT"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmDmxSupport",
+                  "type": "ENUM",
+                  "uuid": "ECUC:9bf1ed6d-d630-46bf-bfba-fcb6a5d7f8f8"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmDiagnosticMessageModeRuleRef",
+                  "description": "Reference to a J1939DcmModeRule which controls the execution of a DiagnosticMessage.",
+                  "destinationContainerType": "J1939DcmModeRule",
+                  "destinationRef": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeRule",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeRule"
+                  ],
+                  "isExternal": false,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmDiagnosticMessageModeRuleRef",
+                  "uuid": "ECUC:88966358-9215-46dc-9668-2765da58e80d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmDiagnosticMessageSupportChannelRef",
+                  "description": "Reference to J1939DcmChannel for which this diagnostic message is supported.",
+                  "destinationContainerType": "J1939DcmChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmDiagnosticMessageSupportChannelRef",
+                  "uuid": "ECUC:57908c40-62d5-4c3e-b608-ffd1942241a6"
+                }
+              ],
+              "shortName": "J1939DcmDiagnosticMessageSupport",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmRxPdu",
+                  "description": "Contains parameters to configure the J1939DcmRxPdu.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmRxPdu/J1939DcmRxPduId",
+                      "description": "The I-PDU identifier used for communication with PduR.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmRxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:47f6f332-a463-4ab4-ae11-2357c1f53117"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmRxPdu/J1939DcmRxPduRef",
+                      "description": "Reference to the global Pdu element in the Ecuc module.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmRxPduRef",
+                      "uuid": "ECUC:ca833b0d-d026-408d-a29e-2f6932cc556a"
+                    }
+                  ],
+                  "shortName": "J1939DcmRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:51ff7abe-391b-45d1-8bc7-23ff915747a8"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmTxPdu",
+                  "description": "Contains parameters to configure the J1939DcmTxPdu.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmTxPdu/J1939DcmTxPduId",
+                      "description": "The I-PDU identifier used to identify the Tx message.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmTxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d5ed5ba0-e2c8-4961-a078-e5c84d9166e4"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmTxPdu/J1939DcmTxPduRef",
+                      "description": "Reference to the global Pdu element in the Ecuc module.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmTxPduRef",
+                      "uuid": "ECUC:91d59c46-3144-499e-91cb-c296b0253830"
+                    }
+                  ],
+                  "shortName": "J1939DcmTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:5cd84b13-9170-4c22-bc15-325eadb42281"
+                }
+              ],
+              "uuid": "ECUC:87be66d8-6859-4b2d-86c6-abc78db9475c"
+            }
+          ],
+          "uuid": "ECUC:c3c80278-c732-4da0-a76c-eeede3ba41af"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions",
+          "description": "This container contains the configuration for mode arbitration functionality of the J1939Dcm",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "J1939DcmProcessingConditions",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition",
+              "description": "This container contains the configuration of a mode condition or an environmental conditions which can be used as argument in J1939DcmModeRules.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmConditionType",
+                  "description": "This parameter specifies what kind of comparison that is made for the evaluation of the mode condition.",
+                  "enumValues": [
+                    "J1939DCM_EQUALS",
+                    "J1939DCM_EQUALS_NOT",
+                    "J1939DCM_GREATER_OR_EQUAL",
+                    "J1939DCM_GREATER_THAN",
+                    "J1939DCM_LESS_OR_EQUAL",
+                    "J1939DCM_LESS_THAN"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmConditionType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:b1f5d425-f6be-4808-8065-cf316dd232b6"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmBswModeRef",
+                  "description": "This parameter references a mode of a ModeDeclarationGroupPrototype provided by a Basic Software Module used for the condition.",
+                  "destinationContainerType": "J1939DcmBswModeRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "instance",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmBswModeRef",
+                  "uuid": "ECUC:f91ce8c9-9cdc-4d70-8008-d2b73f816a88"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcModeRef",
+                  "description": "This parameter references a mode in a particular mode request port of a software component that is used for the condition.",
+                  "destinationContainerType": "J1939DcmSwcModeRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "instance",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmSwcModeRef",
+                  "uuid": "ECUC:52d61648-d700-4898-aa86-cd6ac1929f36"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementRef",
+                  "description": "Reference to environmental conditions.",
+                  "destinationContainerType": "J1939DcmDspExternalSRDataElementClass",
+                  "destinationRef": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass"
+                  ],
+                  "isExternal": false,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmSwcSRDataElementRef",
+                  "uuid": "ECUC:d4e0efbe-729e-4fe6-9547-b02524daef5c"
+                }
+              ],
+              "shortName": "J1939DcmModeCondition",
+              "subContainers": [
+                {
+                  "choice": {
+                    "candidateRefs": [
+                      "ECUC:ecac3b6e-c755-4001-8f80-0c7a6fb0c94d",
+                      "ECUC:a2730355-da34-40b8-b054-c9ed3497109b"
+                    ]
+                  },
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementValue",
+                  "description": "This container contains the configuration of a S/R compare value.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "J1939DcmSwcSRDataElementValue",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementValue/J1939DcmSwcSRDataElementArray",
+                      "description": "This container contains the configuration of a array SR data element compare value.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [],
+                      "references": [],
+                      "shortName": "J1939DcmSwcSRDataElementArray",
+                      "subContainers": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementValue/J1939DcmSwcSRDataElementArray/J1939DcmSwcSRDataElementArrayElement",
+                          "description": "This container contains the configuration of a array element SR data element compare value.",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": "unbounded"
+                          },
+                          "parameters": [
+                            {
+                              "configClass": "PRE_COMPILE",
+                              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementValue/J1939DcmSwcSRDataElementArray/J1939DcmSwcSRDataElementArrayElement/J1939DcmSwcSRDataElementArrayElementIndex",
+                              "description": "Index to an array SR data element.",
+                              "isOptional": false,
+                              "max": 18446744073709552000,
+                              "min": 0,
+                              "multiplicity": {
+                                "lower": 1,
+                                "upper": 1
+                              },
+                              "shortName": "J1939DcmSwcSRDataElementArrayElementIndex",
+                              "type": "INTEGER",
+                              "uuid": "ECUC:d5a0021a-0de8-4375-9cf2-bd62225e4d8c"
+                            },
+                            {
+                              "configClass": "PRE_COMPILE",
+                              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementValue/J1939DcmSwcSRDataElementArray/J1939DcmSwcSRDataElementArrayElement/J1939DcmSwcSRDataElementArrayElementValue",
+                              "description": "Value of an array SR data element compare value.",
+                              "isOptional": false,
+                              "max": 18446744073709552000,
+                              "min": 0,
+                              "multiplicity": {
+                                "lower": 1,
+                                "upper": 1
+                              },
+                              "shortName": "J1939DcmSwcSRDataElementArrayElementValue",
+                              "type": "INTEGER",
+                              "uuid": "ECUC:a0b983e6-c3f4-4fea-85ba-b9c2b0531c95"
+                            }
+                          ],
+                          "references": [],
+                          "shortName": "J1939DcmSwcSRDataElementArrayElement",
+                          "subContainers": [],
+                          "uuid": "ECUC:b3a8ffe5-f84c-4cf0-b129-eb60c60d43c3"
+                        }
+                      ],
+                      "uuid": "ECUC:ecac3b6e-c755-4001-8f80-0c7a6fb0c94d"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementValue/J1939DcmSwcSRDataElementPrimitive",
+                      "description": "This container contains the configuration of a primitive SR data element compare value.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition/J1939DcmSwcSRDataElementValue/J1939DcmSwcSRDataElementPrimitive/J1939DcmSwcSRDataElementPrimitiveValue",
+                          "description": "Reference to a primitive SR data element compare value.",
+                          "isOptional": false,
+                          "max": 18446744073709552000,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "J1939DcmSwcSRDataElementPrimitiveValue",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:819f941a-eaf1-4ad2-a0ad-4d1e3b918c12"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "J1939DcmSwcSRDataElementPrimitive",
+                      "subContainers": [],
+                      "uuid": "ECUC:a2730355-da34-40b8-b054-c9ed3497109b"
+                    }
+                  ],
+                  "uuid": "ECUC:abf19691-7a30-4c90-b978-1b354b204bf2"
+                }
+              ],
+              "uuid": "ECUC:786c68d9-d90b-45c3-9ea3-607c31786c50"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeRule",
+              "description": "This container contains the configuration of a mode rule which represents a logical expression with J1939DcmModeConditions or other J1939DcmModeRules as argume…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeRule/J1939DcmLogicalOperator",
+                  "description": "This parameter specifies the logical operator to be used in the logical expression. If the expression only consists of a single condition this parameter shall …",
+                  "enumValues": [
+                    "J1939DCM_AND",
+                    "J1939DCM_OR"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmLogicalOperator",
+                  "type": "ENUM",
+                  "uuid": "ECUC:3e03796c-516d-48e2-8404-9fdda3b6e3b3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeRule/J1939DcmModeRuleNrcValue",
+                  "description": "Optional parameter which defines the NRC to be sent in case the mode rule condition is not valid.",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmModeRuleNrcValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:79cf1157-e9e3-4c3b-8f01-79ee00134ea9"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeRule/J1939DcmArgumentRef",
+                  "description": "This is a choice reference either to a mode condition or a an other mode rule serving as sub-expression.",
+                  "destinationContainerType": "J1939DcmModeCondition",
+                  "destinationRef": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeCondition",
+                    "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmProcessingConditions/J1939DcmModeRule"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "choice",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "J1939DcmArgumentRef",
+                  "uuid": "ECUC:9dd483e9-05df-4ec0-bbb7-b6de0685bd28"
+                }
+              ],
+              "shortName": "J1939DcmModeRule",
+              "subContainers": [],
+              "uuid": "ECUC:e149b9df-74e7-423b-b42b-0c9700e08272"
+            }
+          ],
+          "uuid": "ECUC:4fcbc5c1-48b2-404f-952f-16bd402f4056"
+        },
+        {
+          "choice": {
+            "candidateRefs": [
+              "ECUC:e91cc4bb-3317-4d7a-be8c-f9d500eb8a5f",
+              "ECUC:149bb9a2-8d22-4ba9-afef-32dca47676d6",
+              "ECUC:4103d332-ea4b-4b30-b866-bf5181e86165"
+            ]
+          },
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass",
+          "description": "This container defines the source of data in a provided port which shall be read respectively the target of data in a required port which shall be written.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "J1939DcmDspExternalSRDataElementClass",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass/J1939DcmDataElementInstance",
+              "description": "Instance Reference to the primitive data in a port where the data element is typed with an ApplicationPrimitveDataType or an ImplementationDataType.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass/J1939DcmDataElementInstance/J1939DcmDataElementInstanceRef",
+                  "description": "Instance Reference to the primitive data which shall be read or written.",
+                  "destinationContainerType": "J1939DcmDataElementInstanceRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "instance",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmDataElementInstanceRef",
+                  "uuid": "ECUC:19d093a5-3eda-4695-ba2e-23fa40c08246"
+                }
+              ],
+              "shortName": "J1939DcmDataElementInstance",
+              "subContainers": [],
+              "uuid": "ECUC:e91cc4bb-3317-4d7a-be8c-f9d500eb8a5f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass/J1939DcmSubElementInDataElementInstance",
+              "description": "Instance Reference to the primitve sub-element (at any level) of composite data in a port where the data element is typed with an ApplicationCompositeDataType.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass/J1939DcmSubElementInDataElementInstance/J1939DcmSubElementInDataElementInstanceRef",
+                  "description": "Instance Reference to the primitve sub-element (at any level) of composite data in a port which shall be read.",
+                  "destinationContainerType": "J1939DcmSubElementInDataElementInstanceRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "instance",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmSubElementInDataElementInstanceRef",
+                  "uuid": "ECUC:16edbf46-ab18-4a56-abd6-f5ba44d012be"
+                }
+              ],
+              "shortName": "J1939DcmSubElementInDataElementInstance",
+              "subContainers": [],
+              "uuid": "ECUC:149bb9a2-8d22-4ba9-afef-32dca47676d6"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass/J1939DcmSubElementInImplDataElementInstance",
+              "description": "Instance Reference to the primitve sub-element (at any level) of composite data in a port where the data element is typed with an ImplementationDataType.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmDspExternalSRDataElementClass/J1939DcmSubElementInImplDataElementInstance/J1939DcmSubElementInImplDataElementInstanceRef",
+                  "description": "Instance Reference to the primitve sub-element (at any level) of composite data in a port which shall be read.",
+                  "destinationContainerType": "J1939DcmSubElementInImplDataElementInstanceRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "instance",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmSubElementInImplDataElementInstanceRef",
+                  "uuid": "ECUC:c1503c9c-1de3-4483-9045-519a0d807627"
+                }
+              ],
+              "shortName": "J1939DcmSubElementInImplDataElementInstance",
+              "subContainers": [],
+              "uuid": "ECUC:4103d332-ea4b-4b30-b866-bf5181e86165"
+            }
+          ],
+          "uuid": "ECUC:ee0366e4-f8be-4a07-98ff-7d7dd8ceb93e"
+        }
+      ],
+      "uuid": "ECUC:54d36a7e-56c3-496e-ab52-8668a8543286"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral",
+      "description": "Contains the general configuration parameters of the module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmCommonBufferSize",
+          "description": "Size of common buffer (in Bytes). The buffer size should be as large as the longest command or response message.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmCommonBufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:75cc5147-5255-4b18-ae07-d333e462e901"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmDM01BufferSize",
+          "description": "Size of DM01 buffer (in Bytes). The buffer size should be as large as the longest DM01 response message.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmDM01BufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:cfc31919-2f6c-4ec0-919f-afce870be6ab"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 20,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmDM01MaxDTCs",
+          "description": "Configuration value of limitation of maximum DTCs to be reported in the DM01 message.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmDM01MaxDTCs",
+          "type": "INTEGER",
+          "uuid": "ECUC:b9726084-750b-4c0e-846c-e3c79eb3a663"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmDM35BufferSize",
+          "description": "Size of DM35 buffer (in Bytes). The buffer size should be as large as the longest DM35 response message.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmDM35BufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:175e7c32-19a7-4745-a99c-9014e4069d9b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMaxDTCsPerMainFunction",
+          "description": "Maximum threshold of DTCs filtered in a single MainFunction cycle.",
+          "isOptional": true,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMaxDTCsPerMainFunction",
+          "type": "INTEGER",
+          "uuid": "ECUC:8e9c59fd-60eb-4033-a05e-8ffa50bc9b32"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMaxFreezeFramesPerMainFunction",
+          "description": "Maximum threshold of FreezeFrames filtered in a single MainFunction cycle.",
+          "isOptional": true,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMaxFreezeFramesPerMainFunction",
+          "type": "INTEGER",
+          "uuid": "ECUC:dbeea3ec-67a4-4b25-a58a-6ee028e3e33b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMaxRatiosPerMainFunction",
+          "description": "Maximum threshold of Ratios filtered in a single MainFunction cycle.",
+          "isOptional": true,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMaxRatiosPerMainFunction",
+          "type": "INTEGER",
+          "uuid": "ECUC:618f1f50-57a6-494d-bbd6-a96c0c97a067"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e3fe7a83-abdd-4ce3-bb7e-a69b2b4c1395"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmVersionInfoApi",
+          "description": "Pre-processor switch for enabling version info API support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3a2aad50-1a5c-41e0-bf89-4790e65410a8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMainFunctionPeriod",
+          "description": "Call cycle in seconds of J1939Dcm_MainFunction.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:15eb4ec9-68f9-4310-877a-b722370f5e01"
+        }
+      ],
+      "references": [],
+      "shortName": "J1939DcmGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:b9c7141d-4b7f-4b67-a69a-94b54e5e2350"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm",
+  "description": "The SAE J1939 Dcm module",
+  "importWarnings": [
+    "J1939DcmComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "J1939DcmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939DcmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939DcmSPNsInDataStream：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "J1939DcmDemClientRef：目标 /AUTOSAR/EcucDefs/Dem/DemGeneral/DemClient 位于本模块之外；编辑器只读展示。",
+    "J1939DcmNmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+    "J1939DcmNodeRmUserRef：目标 /AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmDcmUser 位于本模块之外；编辑器只读展示。",
+    "J1939DcmServiceOnlyDTCsMemoryDestinationRef：目标 /AUTOSAR/EcucDefs/Dem/DemGeneral/DemEventMemorySet/DemUserDefinedMemory 位于本模块之外；编辑器只读展示。",
+    "J1939DcmSwcSRDataElementValue：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "J1939DcmBswModeRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+    "J1939DcmSwcModeRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+    "J1939DcmArgumentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "J1939DcmArgumentRef：多候选引用，可在 2 个候选目标中选一个。",
+    "J1939DcmDspExternalSRDataElementClass：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "J1939DcmDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+    "J1939DcmSubElementInDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+    "J1939DcmSubElementInImplDataElementInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "J1939Dcm",
+  "version": "4.4.0"
+}

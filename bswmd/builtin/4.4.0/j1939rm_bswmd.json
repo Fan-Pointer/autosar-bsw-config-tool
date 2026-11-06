@@ -1,0 +1,1086 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "64f37d796332bc393cb87ef8c1a40af1eff68c0b00d4e3f3efc758082a65eacc",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR J1939Rm module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "J1939RmConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel",
+          "description": "Contains the parameters for a CAN channel supported by the J1939 Request Manager.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmAckQueueSize",
+              "description": "Number of transmitted Acknowledgement messages that can be stored.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939RmAckQueueSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:5dcee440-f4bb-46d6-a787-4a19d98560f2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRequestQueue2Size",
+              "description": "Number of transmitted Request2 messages that can be stored.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939RmRequestQueue2Size",
+              "type": "INTEGER",
+              "uuid": "ECUC:674f436e-ad22-49c3-8f9a-bc58def24d9e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRequestQueueSize",
+              "description": "Number of transmitted Request messages that can be stored.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939RmRequestQueueSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:32b3c018-dd5e-462d-9f5c-8a88a11af231"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRequestTimeoutMonitors",
+              "description": "Number of transmitted requests that can be monitored for timeout.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939RmRequestTimeoutMonitors",
+              "type": "INTEGER",
+              "uuid": "ECUC:a829bbce-af3a-476b-bac4-727fedfc827c"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmComMNetworkHandleRef",
+              "description": "Reference to the channel defined by the ComMChannel providing access to the unique channel index ComMChannelId.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939RmComMNetworkHandleRef",
+              "uuid": "ECUC:17cfd20c-d369-473a-800b-2010c8a5be28"
+            }
+          ],
+          "shortName": "J1939RmChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmAckmRxPdu",
+              "description": "Contains the configuration of the I-PDU used to receive the Acknowledgement PG. This PDU consumes a meta data item of type CAN_ID_32.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmAckmRxPdu/J1939RmAckmRxPduId",
+                  "description": "The I-PDU identifier used for RxIndication from PduR.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmAckmRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:384018fd-c035-4758-b3ce-3588af856fe3"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmAckmRxPdu/J1939RmAckmRxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmAckmRxPduRef",
+                  "uuid": "ECUC:df89fcd4-edb0-45d2-874e-2c632c2981e8"
+                }
+              ],
+              "shortName": "J1939RmAckmRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:c29fc910-2ae7-4d23-b3d6-471a6a664ece"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmAckmTxPdu",
+              "description": "Contains the configuration of the I-PDU used to transmit the Acknowledgement PG. This PDU produces a meta data item of type CAN_ID_32.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmAckmTxPdu/J1939RmAckmTxPduId",
+                  "description": "The I-PDU identifier used for TxConfirmation from PduR.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmAckmTxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:b31cb398-8dd5-4b8c-b239-63e5c1adf9a0"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmAckmTxPdu/J1939RmAckmTxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmAckmTxPduRef",
+                  "uuid": "ECUC:1d59d5a3-b579-4d8f-abd9-81307a195a58"
+                }
+              ],
+              "shortName": "J1939RmAckmTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:3dc55eb3-e8d0-4c21-98bf-5e34edce9502"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqst2RxPdu",
+              "description": "Contains the configuration of the I-PDU used to receive the Request2 PG. This PDU consumes a meta data item of type CAN_ID_32.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqst2RxPdu/J1939RmRqst2RxPduId",
+                  "description": "The I-PDU identifier used for RxIndication from PduR.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqst2RxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:63191c2a-ab27-43d3-8f1e-30987d10a798"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqst2RxPdu/J1939RmRqst2RxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqst2RxPduRef",
+                  "uuid": "ECUC:5f2eed4b-e613-476f-9cc7-e96cddf99233"
+                }
+              ],
+              "shortName": "J1939RmRqst2RxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:b37f63b3-90ef-4439-be38-80eb19d146ee"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqst2TxPdu",
+              "description": "Contains the configuration of the I-PDU used to transmit the Request2 PG. This PDU produces a meta data item of type CAN_ID_32.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqst2TxPdu/J1939RmRqst2TxPduId",
+                  "description": "The I-PDU identifier used for TxConfirmation from PduR.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqst2TxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:4b13b7f7-1406-4daf-8c59-0a0c56f1acb8"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqst2TxPdu/J1939RmRqst2TxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqst2TxPduRef",
+                  "uuid": "ECUC:5b8e204f-1efb-4c01-beb4-c6bee0fdb276"
+                }
+              ],
+              "shortName": "J1939RmRqst2TxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:6ca61dda-6ddd-4f43-965f-e91fe69c08b5"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqstRxPdu",
+              "description": "Contains the configuration of the I-PDU used to receive the Request PG. This PDU consumes a meta data item of type CAN_ID_32.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqstRxPdu/J1939RmRqstRxPduId",
+                  "description": "The I-PDU identifier used for RxIndication from PduR.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqstRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a54ac773-f61b-4092-bf95-94fa8249e93a"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqstRxPdu/J1939RmRqstRxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqstRxPduRef",
+                  "uuid": "ECUC:a1b2b442-997d-4e4e-9785-137bbba46565"
+                }
+              ],
+              "shortName": "J1939RmRqstRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:479965fe-361f-48f3-8cb4-093697565b3f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqstTxPdu",
+              "description": "Contains the configuration of the I-PDU used to transmit the Request PG. This PDU produces a meta data item of type CAN_ID_32.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqstTxPdu/J1939RmRqstTxPduId",
+                  "description": "The I-PDU identifier used for TxConfirmation from PduR.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqstTxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c837bbfe-c073-44d7-9b6e-30fe89bdb70d"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel/J1939RmRqstTxPdu/J1939RmRqstTxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939RmRqstTxPduRef",
+                  "uuid": "ECUC:5efc2cae-3d15-4cff-b893-ba702661b8e7"
+                }
+              ],
+              "shortName": "J1939RmRqstTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:58f0f75c-0764-429f-80d7-83187edbee73"
+            }
+          ],
+          "uuid": "ECUC:7e0aa11e-4b45-4a32-9b33-2fa5e2907640"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode",
+          "description": "Contains the parameters for the support of a logical J1939 node (identified by an ECU address).",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmNmNodeRef",
+              "description": "Reference to the corresponding J1939Nm node.",
+              "destinationContainerType": "J1939NmNode",
+              "destinationRef": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939RmNmNodeRef",
+              "uuid": "ECUC:07bed225-fddd-4e71-96ed-cd22d87229fc"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmNodeChannelRef",
+              "description": "Reference to the channels this node has access to.",
+              "destinationContainerType": "J1939RmChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmChannel"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "J1939RmNodeChannelRef",
+              "uuid": "ECUC:aa122285-1c57-41e0-99da-41c9602f34ba"
+            }
+          ],
+          "shortName": "J1939RmNode",
+          "subContainers": [
+            {
+              "choice": {
+                "candidateRefs": [
+                  "ECUC:8ea3a23f-e406-4b0e-a365-61cefbb833a0",
+                  "ECUC:f43a9c7a-1fa0-4aea-95e5-94181c15d9cb",
+                  "ECUC:78ce570d-255a-40fa-b173-f44bfd6f3014",
+                  "ECUC:a7d1972a-e798-4831-928a-046195163142",
+                  "ECUC:9e5cb9a4-1428-4c0d-937b-73a9cce37e2a"
+                ]
+              },
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser",
+              "description": "Contains the configuration of a module that uses the request and acknowledgement interfaces of J1939Rm.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "J1939RmUser",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser",
+                  "description": "J1939Rm User representing a complex driver (CDD). CDDs may use all services provided by J1939Rm.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserAckIndication",
+                      "description": "Enable AckIndication for this module. In case of CDD, the name is <apiServicePrefix>_AckIndication. In case of RTE, the operation AckIndication of the required…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserAckIndication",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:f6a27430-0d73-984e-36ec-f650d82adca8"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserRequestIndication",
+                      "description": "Enable RequestIndication for this module. In case of J1939Nm or J1939Dcm, the name is fixed. In case of CDD, the name is <apiServicePrefix>_RequestIndication. …",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserRequestIndication",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:62d40e6d-55da-8cf3-5a26-1de2505d697f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserSendAck",
+                      "description": "Enable the SendAck API for this module. In case of RTE, the operation SendAck of the provided port J1939Rm_SendAck_{user} is called.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserSendAck",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:11b5493b-6f81-8d0d-314f-23a58e679044"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserSendRequest",
+                      "description": "Enable the SendRequest API for this module. In case of RTE, the operation SendRequest of the provided port J1939Rm_SendRequest_{user} is called.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserSendRequest",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:a30a7a7f-45a2-96d7-41d5-2e3b22cd6feb"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserTimeoutSupervision",
+                      "description": "Enable RequestTimeoutIndication and CancelRequestTimeout for this module.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserTimeoutSupervision",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:33e6011e-a817-9a91-52ed-9c370e30c773"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserAckPGN",
+                      "description": "PGN supported to be acknowledged to this module. The PGNs supported by different modules should usually be disjunctive.",
+                      "isOptional": true,
+                      "max": 262143,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "shortName": "J1939RmUserAckPGN",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c63d20e0-146b-95b8-4d47-a28b6740d75c"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserId",
+                      "description": "Identifier used by a module using J1939Rm. This parameter is only required when the module uses transmission of requests or acknowledgements.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:ae8d5de9-96dc-8ed1-5361-a4f612be2557"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserRequestPGN",
+                      "description": "PGN supported to be requested from this module. The PGNs supported by different modules should usually be disjunctive.",
+                      "isOptional": true,
+                      "max": 262143,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "shortName": "J1939RmUserRequestPGN",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:9e2d167c-15ea-94e8-5079-0a267178d0bb"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmCddUser/J1939RmUserCddRef",
+                      "description": "Reference to the CDD module description.",
+                      "destinationContainerType": "J1939RmUserCddRef",
+                      "destinationRefs": [],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "foreign",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserCddRef",
+                      "uuid": "ECUC:074f9e81-f250-420f-b47c-2fd7c9430c42"
+                    }
+                  ],
+                  "shortName": "J1939RmCddUser",
+                  "subContainers": [],
+                  "uuid": "ECUC:8ea3a23f-e406-4b0e-a365-61cefbb833a0"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmComUser",
+                  "description": "J1939Rm User representing AUTOSAR COM. Supports requests for COM I-PDUs.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "J1939RmComUser",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmComUser/J1939RmComIPdu",
+                      "description": "Contains the configuration of an I-PDU that is to be transmitted on request by COM.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmComUser/J1939RmComIPdu/J1939RmComIPduExtId1",
+                          "description": "First extended identifier byte of the COM I-PDU.",
+                          "isOptional": true,
+                          "max": 255,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "J1939RmComIPduExtId1",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:f58bec82-efda-4e9c-80a9-ac40efc60138"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmComUser/J1939RmComIPdu/J1939RmComIPduExtId2",
+                          "description": "Second extended identifier byte of the COM I-PDU.",
+                          "isOptional": true,
+                          "max": 255,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "J1939RmComIPduExtId2",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:c31dd519-bedb-4d01-ba5c-c51166c3895c"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmComUser/J1939RmComIPdu/J1939RmComIPduExtId3",
+                          "description": "Third extended identifier byte of the COM I-PDU.",
+                          "isOptional": true,
+                          "max": 255,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "J1939RmComIPduExtId3",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:46a1a404-2844-4f9f-8417-3c135ad08e44"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmComUser/J1939RmComIPdu/J1939RmComIPduPGN",
+                          "description": "PGN of the COM I-PDU.",
+                          "isOptional": false,
+                          "max": 262143,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "J1939RmComIPduPGN",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:e25ddae6-8a07-4ede-9340-dd08d4a54df3"
+                        }
+                      ],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmComUser/J1939RmComIPdu/J1939RmComIPduRef",
+                          "description": "Reference to the Pdu object representing the I-PDU.",
+                          "destinationContainerType": "Pdu",
+                          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                          ],
+                          "isExternal": true,
+                          "isOptional": false,
+                          "kind": "reference",
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "J1939RmComIPduRef",
+                          "uuid": "ECUC:e1ebaf35-cb54-438c-8ee7-68c218ac6c1d"
+                        }
+                      ],
+                      "shortName": "J1939RmComIPdu",
+                      "subContainers": [],
+                      "uuid": "ECUC:895c7730-bd1b-4c1a-819d-d5a5c83a0001"
+                    }
+                  ],
+                  "uuid": "ECUC:f43a9c7a-1fa0-4aea-95e5-94181c15d9cb"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmDcmUser",
+                  "description": "J1939Rm User representing the J1939Dcm. Requires request indication and transmission of acknowledgement.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmDcmUser/J1939RmUserId",
+                      "description": "Identifier used by J1939Dcm when calling J1939Rm_SendAck.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:99c33e43-bef6-4e13-88c8-8c30878e1a6e"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmDcmUser/J1939RmUserRequestPGN",
+                      "description": "PGN of DMx PG supported by J1939Dcm.",
+                      "isOptional": true,
+                      "max": 262143,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "shortName": "J1939RmUserRequestPGN",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:259db079-c732-40c9-9053-43710b91202d"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "J1939RmDcmUser",
+                  "subContainers": [],
+                  "uuid": "ECUC:78ce570d-255a-40fa-b173-f44bfd6f3014"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmNmUser",
+                  "description": "J1939Rm User representing the J1939Nm. Requires request indication.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "J1939RmNmUser",
+                  "subContainers": [],
+                  "uuid": "ECUC:a7d1972a-e798-4831-928a-046195163142"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser",
+                  "description": "J1939Rm User representing an application software component (SW-C). SW-Cs may use all services provided by the J1939Rm via service ports.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserAckIndication",
+                      "description": "Enable AckIndication for this module. In case of CDD, the name is <apiServicePrefix>_AckIndication. In case of RTE, the operation AckIndication of the required…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserAckIndication",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:065b8b94-3d95-994d-2703-082ba9562732"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserRequestIndication",
+                      "description": "Enable RequestIndication for this module. In case of J1939Nm or J1939Dcm, the name is fixed. In case of CDD, the name is <apiServicePrefix>_RequestIndication. …",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserRequestIndication",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:728d25d1-85fc-8df2-4a3c-2fbd2188b409"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserSendAck",
+                      "description": "Enable the SendAck API for this module. In case of RTE, the operation SendAck of the provided port J1939Rm_SendAck_{user} is called.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserSendAck",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:216e609f-9fa3-8e0c-2165-35805f92dace"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserSendRequest",
+                      "description": "Enable the SendRequest API for this module. In case of RTE, the operation SendRequest of the provided port J1939Rm_SendRequest_{user} is called.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserSendRequest",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:b2c391e3-75c4-97d6-31eb-4015f3f8ba75"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserTimeoutSupervision",
+                      "description": "Enable RequestTimeoutIndication and CancelRequestTimeout for this module.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserTimeoutSupervision",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:439f1882-d839-9b90-4303-ae11df5c11fd"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserAckPGN",
+                      "description": "PGN supported to be acknowledged to this module. The PGNs supported by different modules should usually be disjunctive.",
+                      "isOptional": true,
+                      "max": 262143,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "shortName": "J1939RmUserAckPGN",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d5f63844-448d-96b7-3d5d-b466386c21e6"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserId",
+                      "description": "Identifier used by a module using J1939Rm. This parameter is only required when the module uses transmission of requests or acknowledgements.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "J1939RmUserId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:be46754d-c6fe-8fd0-4377-b6d0e3e96fe1"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser/J1939RmRteUser/J1939RmUserRequestPGN",
+                      "description": "PGN supported to be requested from this module. The PGNs supported by different modules should usually be disjunctive.",
+                      "isOptional": true,
+                      "max": 262143,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "shortName": "J1939RmUserRequestPGN",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:ade62de0-460c-95e7-408f-1c0142a41b45"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "J1939RmRteUser",
+                  "subContainers": [],
+                  "uuid": "ECUC:9e5cb9a4-1428-4c0d-937b-73a9cce37e2a"
+                }
+              ],
+              "uuid": "ECUC:e534c545-1a58-4f2f-8e41-95d1106733a8"
+            }
+          ],
+          "uuid": "ECUC:d453e997-a0a0-403c-aa6d-34845c74418b"
+        }
+      ],
+      "uuid": "ECUC:5cf1a263-c0ee-4a24-a485-704ec78413a7"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral",
+      "description": "Contains the general configuration parameters of the module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ceb44cc8-860f-44f9-bd1a-ffa67730e875"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmGatewaySupport",
+          "description": "Enables/disables support for routing Request and Acknowledgement messages.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmGatewaySupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:268dc66b-8c4f-4f42-b4f1-7050f1b10641"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmSupportAckIndication",
+          "description": "Pre-processor switch for enabling support of acknowledgement indications.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmSupportAckIndication",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3604d400-de3f-4289-8096-b362ad169b62"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmSupportAckTransmission",
+          "description": "Pre-processor switch for enabling support of acknowledgement transmission.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmSupportAckTransmission",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bb26d6d7-9043-4363-b73e-e4831744d154"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmSupportRequest2",
+          "description": "Pre-processor switch for enabling support of the Request2 PG.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmSupportRequest2",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:62ecf7b2-b4a2-4ae5-b12b-2fc1c06a4066"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmSupportRequestIndication",
+          "description": "Pre-processor switch for enabling support of request indications.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmSupportRequestIndication",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:dfb17ab4-18dd-4573-9991-b5542658f1cf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmSupportRequestTransmission",
+          "description": "Pre-processor switch for enabling support of request transmission.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmSupportRequestTransmission",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:49750482-096b-4af9-a961-9239859cfb16"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmSupportTimeoutSupervision",
+          "description": "Pre-processor switch for enabling support of request timeout supervision.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmSupportTimeoutSupervision",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a598ff50-095c-4c40-bd21-79db6bf6a85a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmVersionInfoApi",
+          "description": "Pre-processor switch for enabling version info API support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:48e29e97-ddfd-4ada-b709-5f4891496e07"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmGeneral/J1939RmMainFunctionPeriod",
+          "description": "Execution cycle of J1939Rm_MainFunction in seconds.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939RmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:d465d8dd-0f52-4781-976e-90c74758483a"
+        }
+      ],
+      "references": [],
+      "shortName": "J1939RmGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:5b511604-71f4-4fcc-855b-e14dfcf98b78"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/J1939Rm",
+  "description": "Configuration of the J1939 Request Manager.",
+  "importWarnings": [
+    "J1939RmAckmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939RmAckmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939RmRqst2RxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939RmRqst2TxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939RmRqstRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939RmRqstTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939RmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "J1939RmUser：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "J1939RmUserAckPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "J1939RmUserRequestPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "J1939RmUserCddRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "J1939RmComIPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939RmUserRequestPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "J1939RmUserAckPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "J1939RmUserRequestPGN：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "J1939RmNmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+    "J1939RmNodeChannelRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "J1939Rm",
+  "version": "4.4.0"
+}

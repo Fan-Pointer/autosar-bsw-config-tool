@@ -1,0 +1,432 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "444654904e8e3b723bfb2ed3cb55469ee931fb25d8d85af4245e2ffcdbf09f7b",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration",
+      "description": "This container contains the global parameters of the CanSM and sub containers, which are for the CAN network specific configuration.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMModeRequestRepetitionMax",
+          "description": "Specifies the maximal amount of mode request repetitions without a respective mode indication from the CanIf module until the CanSM module reports a Developmen…",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanSMModeRequestRepetitionMax",
+          "type": "INTEGER",
+          "uuid": "ECUC:fbd6f32b-a40f-4cb0-b0aa-ec95515d4924"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMModeRequestRepetitionTime",
+          "description": "Specifies in which time duration the CanSM module shall repeat mode change requests by using the API of the CanIf module.",
+          "isOptional": false,
+          "max": 65.535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanSMModeRequestRepetitionTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:17b52ad9-6aa7-4241-92ee-a2473d8d919e"
+        }
+      ],
+      "references": [],
+      "shortName": "CanSMConfiguration",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork",
+          "description": "This container contains the CAN network specific parameters of each CAN network",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMBorCounterL1ToL2",
+              "description": "This threshold defines the count of bus-offs until the bus-off recovery switches from level 1 (short recovery time) to level 2 (long recovery time).",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanSMBorCounterL1ToL2",
+              "type": "INTEGER",
+              "uuid": "ECUC:6afd2490-63a3-408a-acc7-6a259c18911b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMBorTimeL1",
+              "description": "This time parameter defines in seconds the duration of the bus-off recovery time in level 1 (short recovery time).",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanSMBorTimeL1",
+              "type": "FLOAT",
+              "uuid": "ECUC:553a838d-8ff8-45d0-8076-14a532d9c971"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMBorTimeL2",
+              "description": "This time parameter defines in seconds the duration of the bus-off recovery time in level 2 (long recovery time).",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanSMBorTimeL2",
+              "type": "FLOAT",
+              "uuid": "ECUC:16f2464e-677a-481d-b40c-8a12e3a5bd08"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMBorTimeTxEnsured",
+              "description": "This parameter defines in seconds the duration of the bus-off event check. This check assesses, if the recovery has been successful after the recovery reenable…",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanSMBorTimeTxEnsured",
+              "type": "FLOAT",
+              "uuid": "ECUC:172eb209-1cd3-4a9b-b0e2-0ed59e940257"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMBorTxConfirmationPolling",
+              "description": "This parameter shall configure, if the CanSM polls the CanIf_GetTxConfirmationState API to decide the bus-off state to be recovered instead of using the CanSMB…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanSMBorTxConfirmationPolling",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d1288eea-fa2e-4cba-8f62-4d06654c68e9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMEnableBusOffDelay",
+              "description": "This parameter defines if the <User_GetBusOffDelay> shall be called for this network.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanSMEnableBusOffDelay",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:18bbeed8-7978-4b18-8b3c-ecba245683aa"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMComMNetworkHandleRef",
+              "description": "Unique handle to identify one certain CAN network. Reference to one of the network handles configured for the ComM.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanSMComMNetworkHandleRef",
+              "uuid": "ECUC:38d80a04-8ea5-4ef0-a73d-fccc98346f9e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMTransceiverId",
+              "description": "ID of the CAN transceiver assigned to the configured network handle. Reference to one of the transceivers managed by the CanIf module.",
+              "destinationContainerType": "CanIfTrcvCfg",
+              "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanSMTransceiverId",
+              "uuid": "ECUC:6901aaa5-9333-4715-af47-ff3256224be4"
+            }
+          ],
+          "shortName": "CanSMManagerNetwork",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMController",
+              "description": "This container contains the controller IDs assigned to a CAN network.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMController/CanSMControllerId",
+                  "description": "Unique handle to identify one certain CAN controller. Reference to one of the CAN controllers managed by the CanIf module.",
+                  "destinationContainerType": "CanIfCtrlCfg",
+                  "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanSMControllerId",
+                  "uuid": "ECUC:aeebc335-a75f-4d6d-a66a-3168d73982e8"
+                }
+              ],
+              "shortName": "CanSMController",
+              "subContainers": [],
+              "uuid": "ECUC:e1a0044e-723d-42ba-b1db-3b376c29d4d8"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMDemEventParameterRefs/CANSM_E_BUS_OFF",
+                  "description": "Reference to configured DEM event to report bus off errors for this CAN network.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CANSM_E_BUS_OFF",
+                  "uuid": "ECUC:c5a06f69-0d10-47ef-8af5-21c9188e5c5d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMConfiguration/CanSMManagerNetwork/CanSMDemEventParameterRefs/CANSM_E_MODE_REQUEST_TIMEOUT",
+                  "description": "Reference to configured DEM event to report bus off errors for this CAN network.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CANSM_E_MODE_REQUEST_TIMEOUT",
+                  "uuid": "ECUC:8802ddb6-297c-44ff-8b90-920e3c257979"
+                }
+              ],
+              "shortName": "CanSMDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:a10827ae-af02-4cd0-abc9-db0aa085c1c1"
+            }
+          ],
+          "uuid": "ECUC:d75eddcc-261d-499f-acf6-db8f46ad12ac"
+        }
+      ],
+      "uuid": "ECUC:2aff0394-611e-4368-b4e7-7551f7e10881"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral",
+      "description": "Container for general pre-compile parameters of the CanSM module",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanSMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:db5c43c4-2a04-4668-aa92-e6293ca26ac6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMIcomSupport",
+          "description": "Selects support of Pretended Network features in CanSM.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanSMIcomSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1d616bda-326a-499e-883c-7956bb31c4df"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMPncSupport",
+          "description": "Enables or disables support of partial networking.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanSMPncSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:428e913d-8727-41c4-9923-7b19a97a76a8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMSetBaudrateApi",
+          "description": "The support of the Can_SetBaudrate API is optional. If this parameter is set to true the Can_SetBaudrate API shall be supported. Otherwise the API is not suppo…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanSMSetBaudrateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ec4a84cd-09ae-448b-aab2-c0239ed03b0e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMTxOfflineActiveSupport",
+          "description": "Determines whether the ECU passive feature is supported by CanSM.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanSMTxOfflineActiveSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:10243c44-9d06-4db8-a9d1-c5e5fe09133b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMVersionInfoApi",
+          "description": "Activate/Deactivate the version information API (CanSM_GetVersionInfo).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanSMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:755ac5e7-3bfb-458e-bf62-971dd0929455"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMGetBusOffDelayFunction",
+          "description": "This parameter configures the name of the <User_GetBusOffDelay> callout function, which is used by CanSM to acquire an additional L1/L2 delay time. This functi…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanSMGetBusOffDelayFunction",
+          "type": "FUNCTION",
+          "uuid": "ECUC:1ea46f6f-d881-4000-8213-f662c9866d4e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMGetBusOffDelayHeader",
+          "description": "This parameter configures the header file containing the prototype of the <User_GetBusOffDelay> callout function.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanSMGetBusOffDelayHeader",
+          "type": "STRING",
+          "uuid": "ECUC:5db54e8b-1a5e-455c-9343-b2afd7411d69"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanSM/CanSMGeneral/CanSMMainFunctionTimePeriod",
+          "description": "This parameter defines the cycle time of the function CanSM_MainFunction in seconds",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanSMMainFunctionTimePeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:753ef3fc-9b30-415b-a21a-b272e7629216"
+        }
+      ],
+      "references": [],
+      "shortName": "CanSMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:7df54934-eb9b-4605-96f3-8d0c28ba3ac8"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/CanSM",
+  "description": "Configuration of the CanSM module",
+  "importWarnings": [
+    "CanSMControllerId：目标 /AUTOSAR/EcucDefs/CanIf/CanIfCtrlDrvCfg/CanIfCtrlCfg 位于本模块之外；编辑器只读展示。",
+    "CANSM_E_BUS_OFF：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "CANSM_E_MODE_REQUEST_TIMEOUT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "CanSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "CanSMTransceiverId：目标 /AUTOSAR/EcucDefs/CanIf/CanIfTrcvDrvCfg/CanIfTrcvCfg 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "CanSM",
+  "version": "4.4.0"
+}

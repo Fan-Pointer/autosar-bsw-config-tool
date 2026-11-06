@@ -45,9 +45,9 @@
           <el-select v-model="moduleName" aria-label="配置模块">
             <el-option
               v-for="module in store.modules"
-              :key="module.shortName"
-              :label="module.shortName"
-              :value="module.shortName"
+              :key="moduleKey(module.shortName, module.version)"
+              :label="`${module.shortName} · CP ${module.version}`"
+              :value="moduleKey(module.shortName, module.version)"
             />
           </el-select>
         </el-form-item>
@@ -70,16 +70,28 @@
 import { computed, ref } from 'vue';
 import { ElMessageBox } from 'element-plus';
 import { useConfigStore } from '@/stores/configStore';
+import { moduleKey } from '@/core/bswmd/ModuleKey';
 
 const store = useConfigStore();
 const emit = defineEmits<{ opened: [] }>();
 const showCreate = ref(false);
 const name = ref('');
-const moduleName = ref(store.module?.shortName ?? store.modules[0]?.shortName);
+const initialModule = store.module ?? store.modules[0];
+const moduleName = ref(
+  initialModule ? moduleKey(initialModule.shortName, initialModule.version) : ''
+);
 const summary = computed(() => store.summaries.find((set) => set.uuid === store.activeUuid));
 
 async function createSet(): Promise<void> {
-  if (await store.createConfigSet(name.value, moduleName.value).catch(() => false)) {
+  const definition = store.modules.find(
+    (item) => moduleKey(item.shortName, item.version) === moduleName.value
+  );
+  if (!definition) return;
+  if (
+    await store
+      .createConfigSet(name.value, definition.shortName, definition.version)
+      .catch(() => false)
+  ) {
     showCreate.value = false;
     name.value = '';
     emit('opened');

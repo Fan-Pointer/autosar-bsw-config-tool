@@ -1,0 +1,456 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "3e631b8118adda7811abed15feec18e5704d1e346bb6de7ce3bb03e80c4d0c85",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration",
+      "description": "This container contains the configuration (parameters) of the MCU driver.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration/McuDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a940168d-eeab-4151-a78e-381ce11c5706"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration/McuGetRamStateApi",
+          "description": "Pre-processor switch to enable/disable the API Mcu_GetRamState.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuGetRamStateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ea4753f1-1822-458f-a149-613e06cf9d75"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration/McuInitClock",
+          "description": "If this parameter is set to FALSE, the clock initialization has to be disabled from the MCU driver. This concept applies when there are some write once clock r…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuInitClock",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3ad589e7-8c66-4cfc-b54f-f07908d45ea0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration/McuNoPll",
+          "description": "This parameter shall be set True, if the H/W does not have a PLL or the PLL circuitry is enabled after the power on without S/W intervention. In this case MCU_…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuNoPll",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:80005e5b-81c8-4254-9253-65722170a8d2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration/McuPerformResetApi",
+          "description": "Pre-processor switch to enable / disable the use of the function Mcu_PerformReset()",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuPerformResetApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:88316ee4-ac23-418d-a433-20ccecc20da2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration/McuVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c573aff5-6a13-491f-a869-7a125b7ca0e4"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuGeneralConfiguration/McuEcucPartitionRef",
+          "description": "Maps the MCU driver to zero or multiple ECUC partition to make the driver API available in this partition. Tags: atp.Status=draft",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "McuEcucPartitionRef",
+          "uuid": "ECUC:1f5846e1-1734-4157-a80e-80de5db43895"
+        }
+      ],
+      "shortName": "McuGeneralConfiguration",
+      "subContainers": [],
+      "uuid": "ECUC:0a0f46f3-25a3-4d80-bef0-2752b7304463"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration",
+      "description": "This container contains the configuration (parameters) of the MCU driver",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSrcFailureNotification",
+          "description": "Enables/Disables clock failure notification. In case this feature is not supported by HW the setting should be disabled.",
+          "enumValues": [
+            "DISABLED",
+            "ENABLED"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuClockSrcFailureNotification",
+          "type": "ENUM",
+          "uuid": "ECUC:303ee5f9-8122-452c-a715-a46983e7fe5e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuNumberOfMcuModes",
+          "description": "This parameter shall represent the number of Modes available for the MCU.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuNumberOfMcuModes",
+          "type": "INTEGER",
+          "uuid": "ECUC:a0e5878f-ad7b-4ec1-a4cf-26394deb5ac6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuRamSectors",
+          "description": "This parameter shall represent the number of RAM sectors available for the MCU.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "McuRamSectors",
+          "type": "INTEGER",
+          "uuid": "ECUC:5c7ef78a-cb1b-4ea9-978f-f6c78cd8d738"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuResetSetting",
+          "description": "This parameter relates to the MCU specific reset configuration. This applies to the function Mcu_PerformReset, which performs a microcontroller reset using the…",
+          "isOptional": true,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "McuResetSetting",
+          "type": "INTEGER",
+          "uuid": "ECUC:8182a6cf-4323-418c-bb8c-277225bae6da"
+        }
+      ],
+      "references": [],
+      "shortName": "McuModuleConfiguration",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig",
+          "description": "This container contains the configuration (parameters) for the Clock settings of the MCU. Please see MCU031 for more information on the MCU clock settings.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockSettingId",
+              "description": "The Id of this McuClockSettingConfig to be used as argument for the API call \"Mcu_InitClock\".",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "McuClockSettingId",
+              "type": "INTEGER",
+              "uuid": "ECUC:d2d2ea3f-9a7b-4fbf-9e20-b87bd423a209"
+            }
+          ],
+          "references": [],
+          "shortName": "McuClockSettingConfig",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint",
+              "description": "This container defines a reference point in the Mcu Clock tree. It defines the frequency which then can be used by other modules as an input value. Lower multi…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint/McuClockReferencePointFrequency",
+                  "description": "This is the frequency for the specific instance of the McuClockReferencePoint container. It shall be given in Hz.",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "McuClockReferencePointFrequency",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:602fa1f9-cadd-4b16-9b2e-d9ef5c152f96"
+                }
+              ],
+              "references": [],
+              "shortName": "McuClockReferencePoint",
+              "subContainers": [],
+              "uuid": "ECUC:11433bf7-4c9a-4499-ba86-d4f2b6e3186e"
+            }
+          ],
+          "uuid": "ECUC:f63efc1c-b907-462f-8bb7-4089e77f95f9"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuDemEventParameterRefs",
+          "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuDemEventParameterRefs/MCU_E_CLOCK_FAILURE",
+              "description": "Reference to configured DEM event to report \"Clock source failure\".",
+              "destinationContainerType": "DemEventParameter",
+              "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "MCU_E_CLOCK_FAILURE",
+              "uuid": "ECUC:66c8e900-6197-42a3-8e25-a695aa21788e"
+            }
+          ],
+          "shortName": "McuDemEventParameterRefs",
+          "subContainers": [],
+          "uuid": "ECUC:4c697a37-02d8-42df-8696-0c9f592008c7"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf",
+          "description": "This container contains the configuration (parameters) for the Mode setting of the MCU. Please see MCU035 for more information on the MCU mode settings.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuModeSettingConf/McuMode",
+              "description": "The parameter represents the MCU Mode settings.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "McuMode",
+              "type": "INTEGER",
+              "uuid": "ECUC:f0450b1d-51c7-4e23-9bd7-0488035ae777"
+            }
+          ],
+          "references": [],
+          "shortName": "McuModeSettingConf",
+          "subContainers": [],
+          "uuid": "ECUC:32517397-6199-41a5-bfb1-6bebf9df26ea"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuRamSectorSettingConf",
+          "description": "This container contains the configuration (parameters) for the RAM Sector setting. Please see MCU030 for more information on RAM sec-tor settings.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuRamSectorSettingConf/McuRamDefaultValue",
+              "description": "This parameter shall represent the Data pre-setting to be initialized",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "McuRamDefaultValue",
+              "type": "INTEGER",
+              "uuid": "ECUC:e25b2477-20d6-43c4-8551-041fc23d8eeb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuRamSectorSettingConf/McuRamSectionBaseAddress",
+              "description": "This parameter shall represent the MCU RAM section base address",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "McuRamSectionBaseAddress",
+              "type": "INTEGER",
+              "uuid": "ECUC:c24586f9-4f43-42cc-87fd-05fe91e91f5c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuRamSectorSettingConf/McuRamSectionSize",
+              "description": "This parameter represents the MCU RAM Section size in bytes.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "McuRamSectionSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:7221c8a7-78ec-4cc3-8cfe-6c93010660cb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 8,
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuRamSectorSettingConf/McuRamSectionWriteSize",
+              "description": "This parameter shall define the size in bytes of data which can be written into RAM at once.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "McuRamSectionWriteSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:68c8f026-b6c5-4d8a-b713-f3399185cbb7"
+            }
+          ],
+          "references": [],
+          "shortName": "McuRamSectorSettingConf",
+          "subContainers": [],
+          "uuid": "ECUC:067acd14-020b-4eaf-9597-b9c52b6fca43"
+        }
+      ],
+      "uuid": "ECUC:885e3d9d-b8f4-4142-98ae-050bd6d9c6ae"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuPublishedInformation",
+      "description": "Container holding all MCU specific published information parameters",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "McuPublishedInformation",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuPublishedInformation/McuResetReasonConf",
+          "description": "This container contains the configuration for the different type of reset reason that can be retrieved from Mcu_GetResetReason Api.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Mcu/McuPublishedInformation/McuResetReasonConf/McuResetReason",
+              "description": "The parameter represents the different type of reset that a Micro supports. This parameter is referenced by the parameter EcuMResetReason in the ECU State mana…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "McuResetReason",
+              "type": "INTEGER",
+              "uuid": "ECUC:8b8a721a-1726-4a04-8f61-da75604611b2"
+            }
+          ],
+          "references": [],
+          "shortName": "McuResetReasonConf",
+          "subContainers": [],
+          "uuid": "ECUC:6dad17e9-21eb-47f5-a6c3-6ccc06977645"
+        }
+      ],
+      "uuid": "ECUC:8051fc81-2a32-4e81-8e62-c3701213a9f2"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Mcu",
+  "description": "Configuration of the Mcu (Microcontroller Unit) module.",
+  "importWarnings": [
+    "McuEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "McuEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "MCU_E_CLOCK_FAILURE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Mcu",
+  "version": "4.4.0"
+}

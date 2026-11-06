@@ -1,0 +1,1126 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "d6c17fa52eafcffa44be161aa3197f681ba517710ef71104791b10f35dd336c1",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate",
+      "description": "This container contains the certificate configuration.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 65535
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertAlgorithmType",
+          "description": "Specify in which format the certificate will be provided.",
+          "enumValues": [
+            "ECC",
+            "RSA"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertAlgorithmType",
+          "type": "ENUM",
+          "uuid": "ECUC:833f15f1-acba-490a-89bc-2f3c96ee3100"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertFormatType",
+          "description": "Specify in which format the certificate will be provided.",
+          "enumValues": [
+            "CRL",
+            "CVC",
+            "X509"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertFormatType",
+          "type": "ENUM",
+          "uuid": "ECUC:86316f90-026e-413a-851c-9c2aced9aeb3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateId",
+          "description": "Identifier of the certificate. The set of configured identifiers shall be consecutive and gapless.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertificateId",
+          "type": "INTEGER",
+          "uuid": "ECUC:42bf49af-2780-4ce5-88d7-d3d0501fb612"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateMaxLength",
+          "description": "Specify the maximum length in bytes of the certificate.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertificateMaxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:f1343d36-0755-43bc-a626-3da68b6f8744"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateName",
+          "description": "Provides a unique name of the certificate for identification. The certificate provisional will reference certificates by this unique name.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertificateName",
+          "type": "STRING",
+          "uuid": "ECUC:e21f95a8-4e7a-4a1a-bb5d-8c0fd7c771cb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateVerifyCallbackNotificationFunc",
+          "description": "This parameter provides the function name for the callback <KeyM_CertificateVerifyCallbackNotification>. It indicates if a certificate verification operation w…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCertificateVerifyCallbackNotificationFunc",
+          "type": "FUNCTION",
+          "uuid": "ECUC:ebcbed71-f13e-46e9-a146-da6c53f4c4ca"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMServiceCertificateCallbackNotificationFunc",
+          "description": "This parameter provides the function name for the service certificate callback <KeyM_ServiceCertificateCallbackNotification>. It indicates if a certificate ser…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMServiceCertificateCallbackNotificationFunc",
+          "type": "FUNCTION",
+          "uuid": "ECUC:d9025e69-d1ed-4faa-85bb-a00ed47f9de3"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertCertificateElementRuleRef",
+          "description": "Reference to certificate element rules which should be verified within the certification validation step.",
+          "destinationContainerType": "KeyMCertificateElementRule",
+          "destinationRef": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementRule",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementRule"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 65535
+          },
+          "shortName": "KeyMCertCertificateElementRuleRef",
+          "uuid": "ECUC:2c88eb12-cf5a-4a2d-8ff9-8e27b3bed786"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertCsmSignatureVerifyJobRef",
+          "description": "Reference to the CSM job that is used to verify the signature",
+          "destinationContainerType": "CsmJob",
+          "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertCsmSignatureVerifyJobRef",
+          "uuid": "ECUC:67ed4fda-4206-4e75-9111-2966e5d9902e"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertCsmSignatureVerifyKeyRef",
+          "description": "References to the CSM key associated to the CSM signature verify job. This parameter can be omitted if the certificate is stored in CSM and the public key auto…",
+          "destinationContainerType": "CsmKey",
+          "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCertCsmSignatureVerifyKeyRef",
+          "uuid": "ECUC:e9ce61a5-4ce4-4d45-8c2b-cbc5b3b1c021"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertPrivateKeyStorageCryptoKeyRef",
+          "description": "Defines a storage location of the private key of a certificate.",
+          "destinationContainerType": "KeyMCryptoKey",
+          "destinationRef": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCertPrivateKeyStorageCryptoKeyRef",
+          "uuid": "ECUC:aab20642-2950-456b-9bd7-7a168f45be8e"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertTimebaseRef",
+          "description": "This is a reference to an StbM time base to validate the validity period. Alternatively, KeyMCertificateElementVerification with the KeyMCertificateElement of …",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertTimebaseRef",
+          "uuid": "ECUC:4d76500f-0d56-4ccd-9df5-1b47805e06e3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertUpperHierarchicalCertRef",
+          "description": "Identifier of the certificate that is the next higher in the PKI hierarchical structure. The reference points to itself for root certificates.",
+          "destinationContainerType": "KeyMCertificate",
+          "destinationRef": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate"
+          ],
+          "isExternal": false,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertUpperHierarchicalCertRef",
+          "uuid": "ECUC:1163298a-1bd8-48d9-a87b-4a9a50e9baeb"
+        }
+      ],
+      "shortName": "KeyMCertificate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement",
+          "description": "This container contains the certificate element configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 65535
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement/KeyMCertificateElementHasIteration",
+              "description": "Defines if the certificate element can occur more than one time. If so, the iterator can be used to retrieve the individual data values of this certificate ele…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "KeyMCertificateElementHasIteration",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:e9b02987-4a5b-4d83-a066-ba6f2d9588d0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement/KeyMCertificateElementId",
+              "description": "Identifier of a certificate element.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "KeyMCertificateElementId",
+              "type": "INTEGER",
+              "uuid": "ECUC:2621613d-e293-4088-85bc-a657a70f4c95"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement/KeyMCertificateElementMaxLength",
+              "description": "Maximum length in bytes",
+              "isOptional": false,
+              "max": 65535,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "KeyMCertificateElementMaxLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:c48692bc-26ad-437e-976a-4d2cf53152d9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement/KeyMCertificateElementObjectType",
+              "description": "Certificate elements are stored in ASN.1 format. In this item the type of ASN.1 TLV can be specified (e.g. INTEGER has the value '2'). This can be used to iden…",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "KeyMCertificateElementObjectType",
+              "type": "INTEGER",
+              "uuid": "ECUC:8e8dce5a-8c49-474e-a3b7-9fd4cd0933ac"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement/KeyMCertificateElementObjectId",
+              "description": "This is the object identifier (OID) that is used to identify the certificate element within its element structure.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "KeyMCertificateElementObjectId",
+              "type": "STRING",
+              "uuid": "ECUC:6ed83f67-b000-43d8-9fe8-202e0b54217c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement/KeyMCertificateElementOfStructure",
+              "description": "This defines in which structure the certificate element is located.",
+              "enumValues": [
+                "CertificateExtension",
+                "CertificateIssuerName",
+                "CertificateIssuerUniqueIdentifier",
+                "CertificateSerialNumber",
+                "CertificateSignature",
+                "CertificateSignatureAlgorithm",
+                "CertificateSignatureAlgorithmID",
+                "CertificateSubjectName",
+                "CertificateSubjectPublicKeyInfo_PublicKeyAlgorithm",
+                "CertificateSubjectPublicKeyInfo_SubjectPublicKey",
+                "CertificateSubjectUniqueIdentifier",
+                "CertificateValidityPeriodNotAfter",
+                "CertificateValidityPeriodNotBefore",
+                "CertificateVersionNumber"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "KeyMCertificateElementOfStructure",
+              "type": "ENUM",
+              "uuid": "ECUC:99fb2f38-edfb-494f-8fcd-6601360e8797"
+            }
+          ],
+          "references": [],
+          "shortName": "KeyMCertificateElement",
+          "subContainers": [],
+          "uuid": "ECUC:916dce37-7040-42ed-8d54-97c123489837"
+        }
+      ],
+      "uuid": "ECUC:3815cf41-1e38-4f31-8316-290f53f87b15"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification",
+      "description": "This container defines if and how certificate elements are to be verified.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 65535
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "KeyMCertificateElementVerification",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition",
+          "description": "This container contains the configuration of KeyElement compare conditions which can be used as arguments for a KeyMCertificateElementRule.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertElementConditionType",
+              "description": "This parameter specifies what kind of comparison that is made for the evaluation of the mode condition.",
+              "enumValues": [
+                "KEYM_EQUALS",
+                "KEYM_EQUALS_NOT",
+                "KEYM_GREATER_OR_EQUAL",
+                "KEYM_LESS_OR_EQUAL",
+                "KEYM_LESS_THAN"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "KeyMCertElementConditionType",
+              "type": "ENUM",
+              "uuid": "ECUC:0a932241-93b6-477b-9fc7-3a9facc1ca5b"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementRef",
+              "description": "Reference to a certificate element used for the condition.",
+              "destinationContainerType": "KeyMCertificateElement",
+              "destinationRef": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "KeyMCertificateElementRef",
+              "uuid": "ECUC:a8273668-6dda-4c41-bdf8-4a7fed4fe494"
+            }
+          ],
+          "shortName": "KeyMCertificateElementCondition",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue",
+              "description": "This container contains the configuration of a compare value.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "KeyMCertificateElementConditionValue",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionArray",
+                  "description": "This container contains the configuration of a array compare value.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "KeyMCertificateElementConditionArray",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionArray/KeyMCertificateElementConditionArrayElement",
+                      "description": "This container contains the configuration of a array compare value.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionArray/KeyMCertificateElementConditionArrayElement/KeyMCertificateElementConditionArrayElementIndex",
+                          "description": "Index to an element of the compare value array.",
+                          "isOptional": false,
+                          "max": 65535,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "KeyMCertificateElementConditionArrayElementIndex",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:4be41af0-534e-4c8d-a1d3-b2a5a72814f6"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionArray/KeyMCertificateElementConditionArrayElement/KeyMCertificateElementConditionArrayElementValue",
+                          "description": "Value of an array element compare value.",
+                          "isOptional": false,
+                          "max": 18446744073709552000,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "KeyMCertificateElementConditionArrayElementValue",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:e26110cd-6886-4560-bfb0-aadd9848615b"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "KeyMCertificateElementConditionArrayElement",
+                      "subContainers": [],
+                      "uuid": "ECUC:4495dc20-4a95-42cc-a198-65fc85d12f38"
+                    }
+                  ],
+                  "uuid": "ECUC:89771f22-b2dc-4cdf-a312-c24056fd5649"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionCerificateElement",
+                  "description": "This container contains the configuration of a certificate element as a compare value.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionCerificateElement/KeyMCertificateElementRef",
+                      "description": "Reference to another certificate element.",
+                      "destinationContainerType": "KeyMCertificateElement",
+                      "destinationRef": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/KeyM/KeyMCertificate/KeyMCertificateElement"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "KeyMCertificateElementRef",
+                      "uuid": "ECUC:487e7273-509c-41ca-9d43-d82a0f59669f"
+                    }
+                  ],
+                  "shortName": "KeyMCertificateElementConditionCerificateElement",
+                  "subContainers": [],
+                  "uuid": "ECUC:a0a5d896-ef4c-40c0-b0fa-1be6e13c4f9c"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionPrimitive",
+                  "description": "This container contains the configuration of a primitive compare value.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionPrimitive/KeyMCertificateElementConditionPrimitiveValue",
+                      "description": "Primitive compare value",
+                      "isOptional": false,
+                      "max": 18446744073709552000,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "KeyMCertificateElementConditionPrimitiveValue",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:05ba59f2-a105-44f4-bb48-23fd7b4a0099"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "KeyMCertificateElementConditionPrimitive",
+                  "subContainers": [],
+                  "uuid": "ECUC:1a82aa94-28e5-43e1-b16f-c6be50cdd91e"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionSenderReceiver",
+                  "description": "This container contains the configuration of a dynamic compare value in a sender-/receiver interface.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition/KeyMCertificateElementConditionValue/KeyMCertificateElementConditionSenderReceiver/KeyMCertificateElementConditionSenderReceiver",
+                      "description": "This parameter references a mode in a particular mode request port of a software component that is used for the condition.",
+                      "destinationContainerType": "KeyMCertificateElementConditionSenderReceiver",
+                      "destinationRefs": [],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "instance",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "KeyMCertificateElementConditionSenderReceiver",
+                      "uuid": "ECUC:dd509ab8-cfe0-463e-9f54-9ae2d1753345"
+                    }
+                  ],
+                  "shortName": "KeyMCertificateElementConditionSenderReceiver",
+                  "subContainers": [],
+                  "uuid": "ECUC:2cacb3c7-dd85-48de-abc1-696513fe2634"
+                }
+              ],
+              "uuid": "ECUC:c11870ee-9aef-4325-8581-b1a710df3475"
+            }
+          ],
+          "uuid": "ECUC:17ab2852-86c7-4e7b-8d40-640f79e771cc"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementRule",
+          "description": "This container contains the configuration of a mode rule which represents a logical expression with KeyMCertificateElementCondition or other KeyMCertificateEle…",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementRule/KeyMLogicalOperator",
+              "description": "This parameter specifies the logical operator to be used in the logical expression. If the expression only consists of a single condition this parameter shall …",
+              "enumValues": [
+                "KEYM_AND",
+                "KEYM_OR"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "KeyMLogicalOperator",
+              "type": "ENUM",
+              "uuid": "ECUC:9d8f4f53-0ef8-4e58-8b6e-e0358fadd2af"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementRule/KeyMArgumentRef",
+              "description": "This is a choice reference either to a condition or another rule serving as sub-expression.",
+              "destinationContainerType": "KeyMCertificateElementCondition",
+              "destinationRef": "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementCondition",
+                "/AUTOSAR/EcucDefs/KeyM/KeyMCertificateElementVerification/KeyMCertificateElementRule"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "choice",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "KeyMArgumentRef",
+              "uuid": "ECUC:5cf0c58f-8240-4063-a80c-77a1ab45fa1f"
+            }
+          ],
+          "shortName": "KeyMCertificateElementRule",
+          "subContainers": [],
+          "uuid": "ECUC:1f2eba51-597b-47d9-be85-5c481d7e896c"
+        }
+      ],
+      "uuid": "ECUC:3ffd48cf-01a3-4efd-903f-21db48ed1901"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey",
+      "description": "This container contains the crypto keys that can be updated.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 65535
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoCsmVerifyJobType",
+          "description": "Specifies what type of function for key verification operation is used.",
+          "enumValues": [
+            "KEYM_VERIFY_AEADDECRYPT",
+            "KEYM_VERIFY_AEADENCRYPT",
+            "KEYM_VERIFY_DECRYPT",
+            "KEYM_VERIFY_ENCRYPT",
+            "KEYM_VERIFY_MACGENERATE",
+            "KEYM_VERIFY_MACVERIFY"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoCsmVerifyJobType",
+          "type": "ENUM",
+          "uuid": "ECUC:912bcc9b-1b55-42b7-8c00-0b1ca88a0787"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyGenerationType",
+          "description": "Specifies how the CryptoKey will be generated. If it is derived from another key or simply stored with KeyElementSet.",
+          "enumValues": [
+            "KEYM_DERIVED_KEY",
+            "KEYM_STORED_KEY"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyGenerationType",
+          "type": "ENUM",
+          "uuid": "ECUC:4a4b5642-a609-4867-b42c-4873de2c5ec9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyStorage",
+          "description": "Specify the storage location of the certificate.",
+          "enumValues": [
+            "KEYM_STORAGE_IN_CSM",
+            "KEYM_STORAGE_IN_NVM",
+            "KEYM_STORAGE_IN_RAM"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyStorage",
+          "type": "ENUM",
+          "uuid": "ECUC:48980e5b-3563-48e4-97eb-2c690cfbc0cf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyCryptoProps",
+          "description": "If set, it will provide additional hints to the crypto key that is used by KeyM to identify the key.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyCryptoProps",
+          "type": "STRING",
+          "uuid": "ECUC:4c9fece2-ef77-4930-915d-322e6015d2ce"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyGenerationInfo",
+          "description": "This data may contain static data for key derivation. If a key is configured to be derived from another key and this configuration item is set, the data will b…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyGenerationInfo",
+          "type": "STRING",
+          "uuid": "ECUC:f43d582f-210e-4025-be82-b023cc4f5b9c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyName",
+          "description": "Provides a unique name of the key for identification. The key master will reference keys by this unique key name.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyName",
+          "type": "STRING",
+          "uuid": "ECUC:dc6e7951-c064-45c7-b2e8-5a05d04db2da"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyId",
+          "description": "Identifier of the crypto key. The set of configured identifiers shall be consecutive and gapless.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyId",
+          "type": "INTEGER",
+          "uuid": "ECUC:8975041a-b2a2-49ad-b6fc-33bba2022cc7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyMaxLength",
+          "description": "The maximum size in bytes of a CryptoKey.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyMaxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:8fd4ffc9-082a-45ab-b12a-4987a23a0199"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyCsmKeySourceDeriveRef",
+          "description": "Defines a reference to the associated CSM key that is used as source for the key derivation of this key.",
+          "destinationContainerType": "CsmKey",
+          "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyCsmKeySourceDeriveRef",
+          "uuid": "ECUC:7c31c6b4-3cfd-4216-a5d4-20b0f5162a9a"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyCsmKeyTargetRef",
+          "description": "Defines a reference to the associated CSM key that shall be generated.",
+          "destinationContainerType": "CsmKey",
+          "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyCsmKeyTargetRef",
+          "uuid": "ECUC:5c0d2ee8-98a8-457a-ade4-e71b8ffcf60a"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMCryptoKeyCsmVerifyJobRef",
+          "description": "Defines the crypto job that the key verify function can use for verification of a certain key.",
+          "destinationContainerType": "CsmJob",
+          "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyCsmVerifyJobRef",
+          "uuid": "ECUC:70948f00-8e9a-415e-a4be-f3433f38b43b"
+        }
+      ],
+      "shortName": "KeyMCryptoKey",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMNvmBlock",
+          "description": "Configuration of optional usage of Nvm in case the KeyM module requires non volatile memory in the Ecu to store information (e.g. crypto keys or certificates).",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMCryptoKey/KeyMNvmBlock/KeyMNvmBlockDescriptorRef",
+              "description": "Reference to the Nvm block description in the Nvm module configuration.",
+              "destinationContainerType": "NvMBlockDescriptor",
+              "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "KeyMNvmBlockDescriptorRef",
+              "uuid": "ECUC:d5177ff2-7eeb-4f17-8c72-ace047a6b8c6"
+            }
+          ],
+          "shortName": "KeyMNvmBlock",
+          "subContainers": [],
+          "uuid": "ECUC:aaecb708-e348-4e7f-98b9-55976b41bbda"
+        }
+      ],
+      "uuid": "ECUC:cb7ddbfe-c4a8-4749-8527-7034a8ca7fc6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral",
+      "description": "This container holds general configuration (parameters) for key manager.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCertificateChainMaxDepth",
+          "description": "Maximum number of certificates defined in a certificate chain.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertificateChainMaxDepth",
+          "type": "INTEGER",
+          "uuid": "ECUC:93e8454c-327c-4c5d-af9e-86bef1e243ff"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMKeyCertNameMaxLength",
+          "description": "Maximum length in bytes of certificate or key names used for the service interface.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMKeyCertNameMaxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:824a6d50-891d-4098-abf6-0cc9ce186663"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCertificateManagerEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the part that manages certificates.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCertificateManagerEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f173f54b-3515-437b-a967-89ce33c9bb97"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyHandlerPrepareEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the key handler prepare function call. If set to true, the corresponding key handler function shall be provided.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyHandlerPrepareEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:41b3c83c-1579-4f21-8e15-5a8b096e7726"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyHandlerServiceCertificateEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the key handler service function call. If set to true, the certificate submodule function KeyM_KH_ServiceCertificate() shall…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyHandlerServiceCertificateEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fbe91daf-ff5f-4d8f-a12f-77d9c58a11a6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyHandlerStartFinalizeEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the key handler start and finalize function call. If set to true, the key handler functions KeyM_KH_Start() and KeyM_KH_Fina…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyHandlerStartFinalizeEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b516e06a-b1c2-4203-a4b4-45428261a079"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyHandlerUpdateEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the call to the key handler update function KeyM_KH_Update(). If set to true, the corresponding key handler function shall b…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyHandlerUpdateEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c1b319d8-348d-4493-9739-2ce852e061b7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyHandlerVerifyEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the call to the key handler verify function KeyM_KH_Verify(). If set to true, the corresponding key handler function shall b…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyHandlerVerifyEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e410b31b-0dcd-4955-8154-f88762d62f06"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyManagerEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the part that manages crypto key operations.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyManagerEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:aedc2796-e45a-4dad-b10f-da248b0c53a9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyPrepareFunctionEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the prepare function of the key manager. If set to true, the KeyM_Prepare() function has to be called accordingly.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyPrepareFunctionEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a9b1a74c-8aec-43b5-bfe1-416d6504f7fd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyStartFinalizeFunctionEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the start and Finish function of the key manager. If set to true, the KeyM_Start() and KeyM_Finalize() functions have to be …",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyStartFinalizeFunctionEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3796e262-a4db-4891-a00d-6b7f4d2fbbc3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyVerifyAsyncMode",
+          "description": "This parameter defines if the function KeyM_Verify() runs in synchronous or asynchronous mode",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyVerifyAsyncMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0030a464-4346-4ad6-9206-996fddd7b8d3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMCryptoKeyVerifyFunctionEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the verify function of the key manager. If set to true, the KeyM_Verify() function can be called.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMCryptoKeyVerifyFunctionEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:df771ead-177f-40b8-8b68-6a00fb321a29"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2d4d2418-06c2-4e91-bf73-494b04273e8f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMServiceCertificateFunctionEnabled",
+          "description": "Enables (TRUE) or disables (FALSE) the certificate service function of the key manager. If set to true, the KeyM_ServiceCertificate() function has to be called…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "KeyMServiceCertificateFunctionEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4c250ea2-741a-4313-bd7b-4b14a4a3c9fe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/KeyM/KeyMGeneral/KeyMMainFunctionPeriod",
+          "description": "Specifies the period of main function KeyM_MainFunction in seconds.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "KeyMMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:635a874c-e116-4bc1-8b5b-c20bcb85630f"
+        }
+      ],
+      "references": [],
+      "shortName": "KeyMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:9d2fb602-a28e-4112-9023-a1e4b8142752"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/KeyM",
+  "description": "Configuration of the Mcu (Microcontroller Unit) module.",
+  "importWarnings": [
+    "KeyMCertCertificateElementRuleRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "KeyMCertCsmSignatureVerifyJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。",
+    "KeyMCertCsmSignatureVerifyKeyRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+    "KeyMCertTimebaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。",
+    "KeyMCertificateElementConditionSenderReceiver：instance 引用无静态目标（实例引用），编辑器只读展示。",
+    "KeyMArgumentRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "KeyMArgumentRef：多候选引用，可在 2 个候选目标中选一个。",
+    "KeyMNvmBlockDescriptorRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+    "KeyMCryptoKeyCsmKeySourceDeriveRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+    "KeyMCryptoKeyCsmKeyTargetRef：目标 /AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey 位于本模块之外；编辑器只读展示。",
+    "KeyMCryptoKeyCsmVerifyJobRef：目标 /AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "KeyM",
+  "version": "4.4.0"
+}

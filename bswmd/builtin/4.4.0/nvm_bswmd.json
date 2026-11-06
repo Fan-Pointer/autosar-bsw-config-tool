@@ -3,8 +3,9 @@
     "bytes": 15447041,
     "contentSha256": "73e054fc77f108ed64f1d9a2d29168bda21b2fb0c6eedc99cceafeae75f2b0ec",
     "descriptionLimit": 160,
-    "file": "AUTOSAR_MOD_ECUConfigurationParameters.arxml",
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
     "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
     "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
   },
   "arxmlExportBlockers": [],

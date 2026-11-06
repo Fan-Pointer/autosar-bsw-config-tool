@@ -1,0 +1,442 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "cad9befda8cf3323900cfe38c2514bf1a9acf6067cf92e49195ddea21a6bd763",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGeneral",
+      "description": "Container that holds all LIN transport protocol general parameters.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGeneral/LinTpChangeParameterApi",
+          "description": "This parameter, if set to true, enables the LinTp_ChangeParameter Api for this Module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTpChangeParameterApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:722f06a2-90c9-43e7-844d-c869657b44e8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGeneral/LinTpVersionInfoApi",
+          "description": "Switches the LinTp_GetVersionInfo function ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTpVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bc909b41-a1bb-4fca-9f1a-77f667a29850"
+        }
+      ],
+      "references": [],
+      "shortName": "LinTpGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:507bfde0-7d43-44d2-ba6d-7c896dc3a960"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig",
+      "description": "This container contains the global configuration parameters of the LinTp.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpMaxRxNSduCnt",
+          "description": "Maximum number of NSdus. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LinTpMaxRxNSduCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:d4861e1b-9b60-464c-8723-6da1a7a274f1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpMaxTxNSduCnt",
+          "description": "Maximum number of NSdus. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LinTpMaxTxNSduCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:4f30cd97-09e6-48d1-9065-0d7eeec2c2c5"
+        }
+      ],
+      "references": [],
+      "shortName": "LinTpGlobalConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpChannelConfig",
+          "description": "This container contains the channel specific configuration parameters of LinTp.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpChannelConfig/LinTpDropNotRequestedNad",
+              "description": "Configures if TP Frames of not requested LIN-Slaves are dropped or not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpDropNotRequestedNad",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:623b4adc-f857-4db4-8df2-6a4239c3ea12"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpChannelConfig/LinTpScheduleChangeDiag",
+              "description": "Enables or disables the call of BswM_LinTp_RequestMode() to diagnostic request/response schedule.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpScheduleChangeDiag",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:a4f81595-1b5d-411a-b67c-12813b6e908e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpChannelConfig/LinTpMaxNumberOfRespPendingFrames",
+              "description": "Configures the maximum number of allowed response pending frames.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpMaxNumberOfRespPendingFrames",
+              "type": "INTEGER",
+              "uuid": "ECUC:890a3d1a-3e8d-49b5-8790-f58e75209c9e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpChannelConfig/LinTpP2Max",
+              "description": "P2*max timeout when a response pending frame is expected in seconds.",
+              "isOptional": false,
+              "max": 2,
+              "min": 0.05,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpP2Max",
+              "type": "FLOAT",
+              "uuid": "ECUC:f5f9d77d-0657-40f0-802f-8c889a6c248a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpChannelConfig/LinTpP2Timing",
+              "description": "Definition of the P2max timeout observation parameter in seconds.",
+              "isOptional": false,
+              "max": 0.5,
+              "min": 0.05,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpP2Timing",
+              "type": "FLOAT",
+              "uuid": "ECUC:7224db3b-049b-4739-a1de-40d00a6c61c5"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpChannelConfig/LinTpChannelRef",
+              "description": "Index of the channel this LinTp channel belongs to.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpChannelRef",
+              "uuid": "ECUC:d77322dd-3025-4b05-aed5-eadd5e1cfec3"
+            }
+          ],
+          "shortName": "LinTpChannelConfig",
+          "subContainers": [],
+          "uuid": "ECUC:3b714729-b20a-4cd1-a2b2-fe456f2b166f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpRxNSdu",
+          "description": "This container exists once for each received N-SDU on any channel the node is connected to. This N-SDU produces meta data items of type LIN_NAD_8.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpRxNSdu/LinTpNcr",
+              "description": "Value in seconds of the N_Cr timeout. N_Cr is the time until reception of the next Consecutive Frame N_PDU.",
+              "isOptional": true,
+              "max": 1,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinTpNcr",
+              "type": "FLOAT",
+              "uuid": "ECUC:afea2bb4-341b-478e-b5c3-85c660cf88be"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpRxNSdu/LinTpRxNSduId",
+              "description": "The identifier of the Transport Protocol message. This ID will be used by upper layers to call LinTp_ChangeParameter.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpRxNSduId",
+              "type": "INTEGER",
+              "uuid": "ECUC:a260e374-b6ba-43eb-97ad-f35f03b2df6c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpRxNSdu/LinTpRxNSduNad",
+              "description": "A N-SDU transported on LIN is identified using the NAD for the specific slave.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpRxNSduNad",
+              "type": "INTEGER",
+              "uuid": "ECUC:7d1d4df7-f790-4e69-a075-cbd01e2453a9"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpRxNSdu/LinTpRxNSduChannelRef",
+              "description": "Index of the channel this N-SDU belongs to.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpRxNSduChannelRef",
+              "uuid": "ECUC:50174cd9-703b-4f07-9f44-7d0cff4acef2"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpRxNSdu/LinTpRxNSduPduRef",
+              "description": "Reference to the global PDU",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpRxNSduPduRef",
+              "uuid": "ECUC:c5020b6e-1867-43c2-8ac6-d986c14c95d8"
+            }
+          ],
+          "shortName": "LinTpRxNSdu",
+          "subContainers": [],
+          "uuid": "ECUC:36e83088-e486-4dad-a4f7-aadafe50dfbe"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu",
+          "description": "This container exists once for each transmitted N-SDU on any channel the node is connected to. This N-SDU consumes meta data items of type LIN_NAD_8.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu/LinTpMaxBufReq",
+              "description": "This parameter defines the maximum number of times the LinTp should request upper layer for the Tx Buffer. It is also used to limit the number of retries for P…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpMaxBufReq",
+              "type": "INTEGER",
+              "uuid": "ECUC:2341e503-9be7-4507-a014-35749034fa28"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu/LinTpTxNSduId",
+              "description": "The identifier of the Transport Protocol message. This ID will be the one that is communicated with upper layers.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpTxNSduId",
+              "type": "INTEGER",
+              "uuid": "ECUC:e6fac2a8-b8d9-48c7-a221-b0d95b1a6dbb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu/LinTpTxNSduNad",
+              "description": "A N-SDU transported on LIN is identified using the NAD for the specific slave.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpTxNSduNad",
+              "type": "INTEGER",
+              "uuid": "ECUC:68bd9442-1566-4238-a020-64413a564106"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu/LinTpNas",
+              "description": "Value in seconds of the N_As timeout. N_As is the time for transmission of a LIN frame (any N_PDU) on the part of the sender.",
+              "isOptional": false,
+              "max": 1,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpNas",
+              "type": "FLOAT",
+              "uuid": "ECUC:53caf4f4-f8d1-4a6c-b58b-ba5b6587c1a8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu/LinTpNcs",
+              "description": "Value in seconds of the performance requirement of N_Cs. N_Cs is the time which elapses between the transmit request of a CF N-PDU until the transmit request o…",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinTpNcs",
+              "type": "FLOAT",
+              "uuid": "ECUC:8e2477c2-4d97-4bce-ad06-edbe632f95db"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu/LinTpTxNSduChannelRef",
+              "description": "Index of the channel this N-SDU belongs to.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpTxNSduChannelRef",
+              "uuid": "ECUC:cf97bb02-8432-4030-a195-bfa294ac463d"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTp/LinTpGlobalConfig/LinTpTxNSdu/LinTpTxNSduPduRef",
+              "description": "Reference to the global PDU",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinTpTxNSduPduRef",
+              "uuid": "ECUC:fc9777f3-1e35-44c4-863c-26936aa20382"
+            }
+          ],
+          "shortName": "LinTpTxNSdu",
+          "subContainers": [],
+          "uuid": "ECUC:0f57fcb7-8212-43f3-b93d-775bbe842ee5"
+        }
+      ],
+      "uuid": "ECUC:28592dff-ba46-4041-afc5-c7c2bebdbede"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/LinTp",
+  "description": "Configuration of the LIN Transport Protocol.",
+  "importWarnings": [
+    "LinTpChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "LinTpRxNSduChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "LinTpRxNSduPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "LinTpTxNSduChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "LinTpTxNSduPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "LinTp",
+  "version": "4.4.0"
+}

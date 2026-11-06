@@ -1,0 +1,178 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "f20205d93d3800b638776c664df234cc53036ffce3ff728f73a892639c31aef5",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMGeneral",
+      "description": "This container contains the global parameter of the Ethernet State Manager.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMGeneral/EthSMDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8d8442fe-424d-4bf4-b0b0-a6cc37dee29b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMGeneral/EthSMDummyMode",
+          "description": "Disables the API to the EthIf. The API to the ComM is available but the functionality is deactivated. The function calls from the ComM will be answered with th…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSMDummyMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f081696f-77a7-4ebd-9df9-400a656ab75f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMGeneral/EthSMVersionInfoApi",
+          "description": "Enables and disables the version info API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0cd3155a-3f2b-4ad8-bcc7-36205264a3f4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMGeneral/EthSMMainFunctionPeriod",
+          "description": "Specifies the period in seconds that the MainFunction has to be triggered with.",
+          "isOptional": false,
+          "max": 1,
+          "min": 0.005,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSMMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:e46ee864-8ae6-4a07-8e2f-817073cbecb6"
+        }
+      ],
+      "references": [],
+      "shortName": "EthSMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:78fcf290-0b0b-492a-af4e-69b20bc58c9f"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMNetwork",
+      "description": "This container contains the Ethernet network-specific parameters of each Ethernet network. It also contains the controller and transceiver IDs assigned to a Et…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMNetwork/EthSMComMNetworkHandleRef",
+          "description": "Unique handle to identify one certain Ethernet network. Reference to one of the network handles configured for the ComM.",
+          "destinationContainerType": "ComMChannel",
+          "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSMComMNetworkHandleRef",
+          "uuid": "ECUC:90fd482d-e9f2-436b-8dd2-ca69eccc3407"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMNetwork/EthSMEthIfControllerRef",
+          "description": "Reference to EthIfCtrl container where a ETH controller and",
+          "destinationContainerType": "EthIfController",
+          "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthSMEthIfControllerRef",
+          "uuid": "ECUC:ca206552-a24a-42d9-a7a4-222ecba045e6"
+        }
+      ],
+      "shortName": "EthSMNetwork",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMNetwork/EthSMDemEventParameterRefs",
+          "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occur…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthSM/EthSMNetwork/EthSMDemEventParameterRefs/ETHSM_E_LINK_DOWN",
+              "description": "Reference to configured DEM event to report bus off errors for this Eth network.",
+              "destinationContainerType": "DemEventParameter",
+              "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ETHSM_E_LINK_DOWN",
+              "uuid": "ECUC:402b4fad-2686-4096-a2fd-aeab95f3b91a"
+            }
+          ],
+          "shortName": "EthSMDemEventParameterRefs",
+          "subContainers": [],
+          "uuid": "ECUC:afdeaabf-81fe-4291-b326-292ae18ea6ff"
+        }
+      ],
+      "uuid": "ECUC:b14ff5a3-8d2d-4f9b-aed4-508801a04f62"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EthSM",
+  "description": "Configuration of the Ethernet State Manager",
+  "importWarnings": [
+    "ETHSM_E_LINK_DOWN：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "EthSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "EthSMEthIfControllerRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "EthSM",
+  "version": "4.2.2"
+}

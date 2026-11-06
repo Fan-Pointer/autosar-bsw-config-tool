@@ -1,0 +1,556 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "73362c92c469fa9bf8b737ecadc5d0cdcb09b6040653407ce4675aa7314c1c4d",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel",
+      "description": "Container gives FlexRay transceiver driver information about a single FlexRay transceiver channel.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvChannelId",
+          "description": "Unique identifier of the FlexRay Transceiver Channel.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvChannelId",
+          "type": "INTEGER",
+          "uuid": "ECUC:67510191-07a2-4733-bacb-b855ed5e9848"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvChannelUsed",
+          "description": "Shall the related FlexRay transceiver channel be used?",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvChannelUsed",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3c0da124-1720-4525-9c77-6197ec38db66"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvControlsPowerSupply",
+          "description": "Is ECU power supply controlled by this transceiver?",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvControlsPowerSupply",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c0cabff2-370d-46a9-898e-642bd09bc754"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvWakeupByBusUsed",
+          "description": "Is wake up by node supported? If FlexRay transceiver hardware does not support wake up by node value is always FALSE. If FlexRay transceiver hardware supports …",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvWakeupByBusUsed",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:89e14001-00b1-46e0-9477-f15b92505ef8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvEnableInterruptCallout",
+          "description": "This parameter defines the existence and the name of a callout function that enables the interrupt pin for the wakeup. If this parameter is omitted no callout …",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrTrcvEnableInterruptCallout",
+          "type": "FUNCTION",
+          "uuid": "ECUC:b7d9b677-ea64-4b95-928c-52e149bbfd47"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionIssue": "源默认值 FRTRCV_OP_MODE_NORMAL 不在合法枚举中；请手动选择，不自动替换。",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvInitState",
+          "description": "State of FlexRay transceiver after power on.",
+          "enumValues": [
+            "FRTRCV_TRCVMODE_NORMAL",
+            "FRTRCV_TRCVMODE_RECEIVEONLY",
+            "FRTRCV_TRCVMODE_SLEEP",
+            "FRTRCV_TRCVMODE_STANDBY"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvInitState",
+          "sourceDefaultValue": "FRTRCV_OP_MODE_NORMAL",
+          "type": "ENUM",
+          "uuid": "ECUC:bdad88e9-d322-46c4-b541-bd98b14993a6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvMaxBaudrate",
+          "description": "Max baudrate for transceiver hardware type. Only used for validation purposes. Value shall be configured by configuration tool based on",
+          "enumValues": [
+            "FR_10M",
+            "FR_2M5",
+            "FR_5M0"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvMaxBaudrate",
+          "type": "ENUM",
+          "uuid": "ECUC:0a4a52b2-f873-4328-a06f-23c424748826"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvIcuChannelRef",
+          "description": "Reference to the IcuChannel to enable/disable the interrupts for wakeups.",
+          "destinationContainerType": "IcuChannel",
+          "destinationRef": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrTrcvIcuChannelRef",
+          "uuid": "ECUC:41f5e91b-e5b1-4d1b-8c4d-dedbed7268a1"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvWakeupSourceRef",
+          "description": "Reference to a wakeup source in the EcuM configuration. If",
+          "destinationContainerType": "EcuMWakeupSource",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrTrcvWakeupSourceRef",
+          "uuid": "ECUC:457a74d4-b12c-4daf-ba4e-671aa8b5e471"
+        }
+      ],
+      "shortName": "FrTrcvChannel",
+      "subContainers": [
+        {
+          "choice": {
+            "candidateRefs": [
+              "ECUC:017c4e37-64c2-49c3-96dc-3e8581246ed7",
+              "ECUC:8094373c-1435-4ce2-9060-88ed58ee2b78"
+            ]
+          },
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvAccess",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "FrTrcvAccess",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvAccess/FrTrcvDioAccess",
+              "description": "Container gives FR transceiver driver information about accessing ports and port pins. If a FR transceiver hardware has no Dio interface, there is no instance …",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "FrTrcvDioAccess",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvAccess/FrTrcvDioAccess/FrTrcvDioChannelAccess",
+                  "description": "In this Container the relation between FR transceiver hardware pin names and Dio port access information is given.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvAccess/FrTrcvDioAccess/FrTrcvDioChannelAccess/FrTrcvHardwareInterfaceName",
+                      "description": "FR transceiver hardware interface name. It is typically the name of a pin. From a Dio point of view it is either a port, a single channel or a channel group. D…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrTrcvHardwareInterfaceName",
+                      "type": "STRING",
+                      "uuid": "ECUC:3801a24c-fcd3-4f0f-acc3-3d9768c585e9"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvAccess/FrTrcvDioAccess/FrTrcvDioChannelAccess/FrTrcvDioSymNameRef",
+                      "description": "Choice Reference to a DIO Port, DIO Channel or DIO Channel Group. This reference replaces the FRTRCV_DIO_PORT_SYM_NAME, FRTRCV_DIO_CHANNEL_SYM_NAME and FRTRCV_…",
+                      "destinationContainerType": "DioChannel",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel",
+                        "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup",
+                        "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "choice",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrTrcvDioSymNameRef",
+                      "uuid": "ECUC:203b8070-d42e-4e9d-b69a-ab7fb502ab86"
+                    }
+                  ],
+                  "shortName": "FrTrcvDioChannelAccess",
+                  "subContainers": [],
+                  "uuid": "ECUC:21266d48-9151-4727-b32d-10f3140ddff1"
+                }
+              ],
+              "uuid": "ECUC:017c4e37-64c2-49c3-96dc-3e8581246ed7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvAccess/FrTrcvSpiSequence",
+              "description": "Container gives FlexRay transceiver driver information about one SPI sequence. One SPI sequence used by FlexRay transceiver driver is in exclusive use for it. …",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvAccess/FrTrcvSpiSequence/FrTrcvSpiSequenceName",
+                  "description": "Reference to a Spi sequence configuration container.",
+                  "destinationContainerType": "SpiSequence",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTrcvSpiSequenceName",
+                  "uuid": "ECUC:226694f7-3ba5-4bb2-bbe4-cef2c5e5a057"
+                }
+              ],
+              "shortName": "FrTrcvSpiSequence",
+              "subContainers": [],
+              "uuid": "ECUC:8094373c-1435-4ce2-9060-88ed58ee2b78"
+            }
+          ],
+          "uuid": "ECUC:90eb74ea-b108-416d-8567-3a9c6e60d6d7"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvBranchIdContainer",
+          "description": "Only one SymbolicNameValue can be defined per container. Therefore this container is necessary.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvBranchIdContainer/FrTrcvBranchId",
+              "description": "Unique branch id. It is used by CDDs and internally.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTrcvBranchId",
+              "type": "INTEGER",
+              "uuid": "ECUC:fbe17363-0924-4881-b863-220e9319c4fc"
+            }
+          ],
+          "references": [],
+          "shortName": "FrTrcvBranchIdContainer",
+          "subContainers": [],
+          "uuid": "ECUC:5524e0a8-0fd6-4fd6-893c-8798cd442f3b"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvChannelDemEventParameterRefs",
+          "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occur…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvChannelDemEventParameterRefs/FRTRCV_E_FR_BUSERROR_TRCV",
+              "description": "Reference to configured DEM event to report \"Error Status of Class B (SPI) transceiver bus errors where TrcvIdx is the transceiver index\"",
+              "destinationContainerType": "DemEventParameter",
+              "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FRTRCV_E_FR_BUSERROR_TRCV",
+              "uuid": "ECUC:d4fdf986-ec85-4372-9173-283ee02c5204"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel/FrTrcvChannelDemEventParameterRefs/FRTRCV_E_FR_ERRN_TRCV",
+              "description": "Reference to configured DEM event to report \"Error Status of Class A (GPIO) transceiver\"",
+              "destinationContainerType": "DemEventParameter",
+              "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FRTRCV_E_FR_ERRN_TRCV",
+              "uuid": "ECUC:ec2d5975-e047-4131-9c9f-f37c0e0468cd"
+            }
+          ],
+          "shortName": "FrTrcvChannelDemEventParameterRefs",
+          "subContainers": [],
+          "uuid": "ECUC:40a82e90-ce95-414b-b2cd-21f5fad10e7e"
+        }
+      ],
+      "uuid": "ECUC:27a48bc7-ab60-4e05-b3c9-6cb90cc0e80d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral",
+      "description": "Container gives FlexRay transceiver driver basic information.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvDemReportErrorStatusConfiguration",
+          "description": "Name of a C function which substitutes Dem_ReportErrorStatus.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrTrcvDemReportErrorStatusConfiguration",
+          "type": "FUNCTION",
+          "uuid": "ECUC:2078af64-4a4a-4eff-9fe2-7878ad8fd90d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1c51d5a8-a933-40f2-946f-0184c5c69105"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvErrorCheckDuringCommunication",
+          "description": "Enable a functionality to check transceiver's state during communication.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvErrorCheckDuringCommunication",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:64ba621e-c7dc-4521-9afa-f983429af91e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvErrorCheckInInit",
+          "description": "Enable a functionality to check transceiver's state while initialization process of FrTrcv.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvErrorCheckInInit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:99f6f586-4c3a-47e6-95e8-ad1758eb2d9d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvGetVersionInfo",
+          "description": "Switches version information API on and off. If switched off, function need not be present in compiled code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvGetVersionInfo",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f5957278-1a3f-467b-bcd5-ce90157a7f7a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:f49fa7ab-6ea2-4827-9084-9c9402d4acf4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvRetryCountInInit",
+          "description": "Specifies the number of retry count when error occurs while initialization process of FrTrcv.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvRetryCountInInit",
+          "type": "INTEGER",
+          "uuid": "ECUC:1db1dc75-0a03-416c-bc7f-8805c44c0d24"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvMainFunctionCycleTime",
+          "description": "Cyclic call time for function FrTrcvMainFunction in seconds. A call time of 0ms indicates no calls for this function. In this case function need not be present…",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvMainFunctionCycleTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:ceab3479-8179-441d-880e-885d36609f71"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvWaitTime",
+          "description": "Wait time for transceiver state changes in seconds.",
+          "isOptional": true,
+          "max": 0.000255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrTrcvWaitTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:47bb6528-ea82-4be4-bd13-29cfe8633d0a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvTimerType",
+          "description": "Type of the Time Service Predefined Timer.",
+          "enumValues": [
+            "None",
+            "Timer_1us16bit"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrTrcvTimerType",
+          "type": "ENUM",
+          "uuid": "ECUC:ace8af91-5584-4038-9b9b-bdfc9e73a0ed"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvGeneral/FrTrcvWakeUpSupport",
+          "description": "Informs whether wake up is supported by polling or whether it is not supported.",
+          "enumValues": [
+            "FRTRCV_WAKEUP_BY_POLLING",
+            "FRTRCV_WAKEUP_NOT_SUPPORTED"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTrcvWakeUpSupport",
+          "type": "ENUM",
+          "uuid": "ECUC:eeab06d7-a456-47ef-b4a2-a313a9619688"
+        }
+      ],
+      "references": [],
+      "shortName": "FrTrcvGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:5a6841e4-4dc0-4860-9204-018b12dde294"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/FrTrcv",
+  "description": "Configuration of the FrTrcv (FlexRay Transceiver driver) module.",
+  "importWarnings": [
+    "FrTrcvAccess：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "FrTrcvDioSymNameRef：目标 /AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel 位于本模块之外；编辑器只读展示。",
+    "FrTrcvSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+    "FRTRCV_E_FR_BUSERROR_TRCV：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRTRCV_E_FR_ERRN_TRCV：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FrTrcvInitState：源默认值 FRTRCV_OP_MODE_NORMAL 不在合法枚举中；请手动选择，不自动替换。",
+    "FrTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。",
+    "FrTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "FrTrcv",
+  "version": "4.2.2"
+}

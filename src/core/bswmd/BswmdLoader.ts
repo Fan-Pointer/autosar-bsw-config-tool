@@ -1,5 +1,6 @@
 import type { BswmdModule } from './BswmdTypes';
 import { BswmdParser } from './BswmdParser';
+import { moduleKey } from './ModuleKey';
 
 /**
  * BSWMD 加载器
@@ -69,11 +70,11 @@ export class BswmdLoader {
 
   /**
    * 获取已加载的模块
-   * @param name Module short name.
+   * @param name Module short name. @param release AUTOSAR release, defaulting to the legacy 4.4.0 baseline.
    * @returns Cached module, if present.
    */
-  getModule(name: string): BswmdModule | undefined {
-    return this.loadedModules.get(name);
+  getModule(name: string, release = '4.4.0'): BswmdModule | undefined {
+    return this.loadedModules.get(moduleKey(name, release));
   }
 
   /**
@@ -81,7 +82,7 @@ export class BswmdLoader {
    * @returns Cached short names.
    */
   listModules(): string[] {
-    return Array.from(this.loadedModules.keys());
+    return [...new Set(this.getAllModules().map((module) => module.shortName))];
   }
 
   /**
@@ -104,6 +105,6 @@ export class BswmdLoader {
    * 缓存模块
    */
   private cacheModule(module: BswmdModule): void {
-    this.loadedModules.set(module.shortName, module);
+    this.loadedModules.set(moduleKey(module.shortName, module.version), module);
   }
 }

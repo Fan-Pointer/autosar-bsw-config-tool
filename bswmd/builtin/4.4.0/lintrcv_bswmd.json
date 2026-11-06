@@ -1,0 +1,380 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "88a087cfa0e2fdc7be58d865db24e0965e004f973259fb8f31f0a02fa496d239",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel",
+      "description": "Container gives LIN transceiver driver information about a single LIN transceiver channel. Any LIN transceiver driver has such LIN transceiver channels.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvChannelId",
+          "description": "Unique identifier of the LIN Transceiver Channel.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTrcvChannelId",
+          "type": "INTEGER",
+          "uuid": "ECUC:ea720240-7002-4a3b-8cec-9e7d8615d120"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvChannelUsed",
+          "description": "Shall the related LIN transceiver channel be used?",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTrcvChannelUsed",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:884f60c8-028b-4855-aff0-3f97451c988e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvWakeupByBusUsed",
+          "description": "Is wake up by bus supported? If LIN transceiver hardware does not support wake up by bus value is always FALSE. If LIN transceiver hardware supports wake up by…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTrcvWakeupByBusUsed",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7f058deb-29b5-4646-a085-759f9a2406cd"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvChannelEcucPartitionRef",
+          "description": "Maps one single Lin transceiver channel to zero or one ECUC partitions. The ECUC partition referenced is a subset of the ECUC partitions where the Lin transcei…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LinTrcvChannelEcucPartitionRef",
+          "uuid": "ECUC:368967f8-2f54-4394-a9be-ef9d6eb2e7b3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvIcuChannelRef",
+          "description": "Reference to the IcuChannel to enable/disable the interrupts for wakeups.",
+          "destinationContainerType": "IcuChannel",
+          "destinationRef": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LinTrcvIcuChannelRef",
+          "uuid": "ECUC:0b855299-4d08-4de1-a437-5059825c76ea"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvWakeupSourceRef",
+          "description": "Reference to a wakeup source in the EcuM configuration. This reference is only needed if LinTrcvWakeupByBusUsed is true. Implementation Type: reference to EcuM…",
+          "destinationContainerType": "EcuMWakeupSource",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LinTrcvWakeupSourceRef",
+          "uuid": "ECUC:6c159cde-405c-4220-b459-9036157b36b8"
+        }
+      ],
+      "shortName": "LinTrcvChannel",
+      "subContainers": [
+        {
+          "choice": {
+            "candidateRefs": [
+              "ECUC:5097db74-73a0-4c39-a04d-2bc2b00d47ef",
+              "ECUC:b4dd521f-0d5c-4e82-b30d-8a192720ba27"
+            ]
+          },
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvAccess",
+          "description": "Container gives LIN transceiver driver access about a single LIN transceiver channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "LinTrcvAccess",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvAccess/LinTrcvDioAccess",
+              "description": "Container gives LIN transceiver driver information about accessing ports and port pins. In addition relation between LIN transceiver hardware pin names and Dio…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "LinTrcvDioAccess",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvAccess/LinTrcvDioAccess/LinTrcvDioChannelAccess",
+                  "description": "Container gives DIO channel access by single Lin transceiver channel.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvAccess/LinTrcvDioAccess/LinTrcvDioChannelAccess/LinTrcvHardwareInterfaceName",
+                      "description": "LIN transceiver hardware interface name. It is typically the name of a pin. From a Dio point of view it is either a port, a single channel or a channel group. …",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "LinTrcvHardwareInterfaceName",
+                      "type": "STRING",
+                      "uuid": "ECUC:1bb5ccfc-4a1b-4d05-94aa-b4f31d5fe9ae"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvAccess/LinTrcvDioAccess/LinTrcvDioChannelAccess/LinTrcvDioSymRefName",
+                      "description": "Choice Reference to a DIO Port, DIO Channel or DIO Channel Group. This reference replaces the LINTRCV_DIO_PORT_SYM_NAME, LINTRCV_DIO_CHANNEL_SYM_NAME and LINTR…",
+                      "destinationContainerType": "DioChannel",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel",
+                        "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup",
+                        "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "choice",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "LinTrcvDioSymRefName",
+                      "uuid": "ECUC:de9282c6-6a65-47db-95ff-aa3fe4b97a0a"
+                    }
+                  ],
+                  "shortName": "LinTrcvDioChannelAccess",
+                  "subContainers": [],
+                  "uuid": "ECUC:793b4242-4f83-4d10-ac20-9ef264bfd9b3"
+                }
+              ],
+              "uuid": "ECUC:5097db74-73a0-4c39-a04d-2bc2b00d47ef"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvAccess/LinTrcvSpiSequence",
+              "description": "Container gives LIN transceiver driver information about one SPI sequence.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel/LinTrcvAccess/LinTrcvSpiSequence/LinTrcvSpiSequenceName",
+                  "description": "Reference to a Spi sequence configuration container.",
+                  "destinationContainerType": "SpiSequence",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinTrcvSpiSequenceName",
+                  "uuid": "ECUC:606dedc9-d5fb-4881-b88f-f39e2c10008a"
+                }
+              ],
+              "shortName": "LinTrcvSpiSequence",
+              "subContainers": [],
+              "uuid": "ECUC:b4dd521f-0d5c-4e82-b30d-8a192720ba27"
+            }
+          ],
+          "uuid": "ECUC:5eacba8a-9292-46db-a06e-3a7cf400b449"
+        }
+      ],
+      "uuid": "ECUC:5519f98a-d432-484f-b653-445226eca31a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral",
+      "description": "Container gives LIN transceiver driver basic information.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral/LinTrcvDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTrcvDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4fc91bfc-86af-4a83-99a7-973f2b5be813"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral/LinTrcvVersionInfoApi",
+          "description": "Switches version information API on and off. If switched off, function need not be present in compiled code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTrcvVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:88361779-3793-47d9-8acc-ad065a048c2d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral/LinTrcvWakeUpSupport",
+          "description": "Informs whether wake up is supported or not. In case wake up is not supported by LIN transceiver hardware the setting shall be false. The wake up ability may b…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTrcvWakeUpSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6da8ded4-8d8a-4f7d-97de-c40d9e3b8ee4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral/LinTrcvIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTrcvIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:77460cdb-d56a-4a49-8614-b9e15d69dc07"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral/LinTrcvTimerType",
+          "description": "Type of the Time Service Predefined Timer.",
+          "enumValues": [
+            "None",
+            "Timer_1us16bit"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LinTrcvTimerType",
+          "type": "ENUM",
+          "uuid": "ECUC:2f8f839d-6feb-4351-aa09-cd3d1a742be8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral/LinTrcvWaitTime",
+          "description": "Wait time for transceiver state changes in seconds.",
+          "isOptional": true,
+          "max": 0.000255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LinTrcvWaitTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:46e39632-5374-46d2-ad7e-3b316b681bc1"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvGeneral/LinTrcvEcucPartitionRef",
+          "description": "Maps the Lin transceiver driver to zero or multiple ECUC partitions to make the modules API available in this partition. The Lin transceiver driver will operat…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "LinTrcvEcucPartitionRef",
+          "uuid": "ECUC:3cb8136f-d38f-4f73-919a-df2f80c88975"
+        }
+      ],
+      "shortName": "LinTrcvGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:f54ae770-970c-4e6f-9558-edcb05029375"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/LinTrcv",
+  "description": "Configuration of LIN Transceiver Driver module",
+  "importWarnings": [
+    "LinTrcvAccess：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "LinTrcvDioSymRefName：目标 /AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel 位于本模块之外；编辑器只读展示。",
+    "LinTrcvSpiSequenceName：目标 /AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence 位于本模块之外；编辑器只读展示。",
+    "LinTrcvChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "LinTrcvIcuChannelRef：目标 /AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel 位于本模块之外；编辑器只读展示。",
+    "LinTrcvWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "LinTrcvEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "LinTrcvEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "LinTrcv",
+  "version": "4.4.0"
+}

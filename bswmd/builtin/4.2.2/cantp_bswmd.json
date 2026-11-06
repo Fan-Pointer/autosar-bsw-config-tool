@@ -1,0 +1,945 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "dd26a262b39b65202e94b2f76adae56b08300d678ae98c78bec40bd1cbf82ca7",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR CanTp module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpMainFunctionPeriod",
+          "description": "Allow to configure the time for the MainFunction (as float in seconds). The CanTpMainFunctionPeriod should be assigned a value which is optimal regarding all o…",
+          "isOptional": false,
+          "max": 0.255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTpMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:9411ad02-2e5e-499f-b474-41daf0a62d3b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpMaxChannelCnt",
+          "description": "Maximum number of channels. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTpMaxChannelCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:74647c97-e7ac-436c-8e50-b2de15695902"
+        }
+      ],
+      "references": [],
+      "shortName": "CanTpConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel",
+          "description": "This container contains the configuration parameters of the CanTp channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpChannelMode",
+              "description": "The CAN Transport Layer supports half and full duplex channel modes.",
+              "enumValues": [
+                "CANTP_MODE_FULL_DUPLEX",
+                "CANTP_MODE_HALF_DUPLEX"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTpChannelMode",
+              "type": "ENUM",
+              "uuid": "ECUC:6a4ebc88-1ecd-4bf2-b3e5-7fa3000a974b"
+            }
+          ],
+          "references": [],
+          "shortName": "CanTpChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu",
+              "description": "The following parameters needs to be configured for each CAN N-SDU that the CanTp module receives via the CanTpChannel.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpBs",
+                  "description": "Sets the number of N-PDUs the CanTp receiver allows the sender to send, before waiting for an authorization to continue transmission of the following N-PDUs.Fo…",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpBs",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:9e272594-cfed-4b05-acf4-140870cfaf98"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxNSduId",
+                  "description": "Unique identifier user by the upper layer to call CanTp_CancelReceive, CanTp_ChangeParameter and CanTp_ReadParameter.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpRxNSduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:3a4bcfb0-4e57-4fac-a38a-2fe13b81ba11"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxWftMax",
+                  "description": "This parameter indicates how many Flow Control wait N-PDUs can be consecutively transmitted by the receiver. It is local to the node and is not transmitted ins…",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpRxWftMax",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:690b3798-af94-47b2-bb18-c3c5dea0b89c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNar",
+                  "description": "Value in seconds of the N_Ar timeout. N_Ar is the time for transmission of a CAN frame (any N_PDU) on the receiver side.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpNar",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:7f55eb6a-9157-4409-b921-d055c6043c74"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNbr",
+                  "description": "Value in seconds of the performance requirement for (N_Br + N_Ar). N_Br is the elapsed time between the receiving indication of a FF or CF or the transmit conf…",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpNbr",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:52b014bc-5bc7-46ac-b56b-5451de79a28f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNcr",
+                  "description": "Value in seconds of the N_Cr timeout. N_Cr is the time until reception of the next Consecutive Frame N_PDU.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpNcr",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:4d6b2bf7-3aa8-47aa-9d36-57087f5352fa"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpSTmin",
+                  "description": "Sets the duration of the minimum time the CanTp sender shall wait between the transmissions of two CF N-PDUs.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpSTmin",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:d6287381-1914-4ab1-8da6-3ba8d004928b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxAddressingFormat",
+                  "description": "Declares which communication addressing mode is supported for this RxNSdu. Definition of Enumeration values:",
+                  "enumValues": [
+                    "CANTP_EXTENDED",
+                    "CANTP_MIXED",
+                    "CANTP_MIXED29BIT",
+                    "CANTP_NORMALFIXED",
+                    "CANTP_STANDARD"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpRxAddressingFormat",
+                  "type": "ENUM",
+                  "uuid": "ECUC:fb78a30b-39a0-4018-8840-efb008c07a7c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxPaddingActivation",
+                  "description": "Defines if the receive frame uses padding or not. This parameter is restricted to 8 byte N-PDUs.",
+                  "enumValues": [
+                    "CANTP_OFF",
+                    "CANTP_ON"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpRxPaddingActivation",
+                  "type": "ENUM",
+                  "uuid": "ECUC:02a6f989-3eac-466e-b153-684542f925bc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxTaType",
+                  "description": "Declares the communication type of this Rx N-SDU.",
+                  "enumValues": [
+                    "CANTP_CANFD_FUNCTIONAL",
+                    "CANTP_CANFD_PHYSICAL",
+                    "CANTP_FUNCTIONAL",
+                    "CANTP_PHYSICAL"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpRxTaType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f1a0d9e6-3b2c-4a26-bcd2-356d1f5798b5"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxNSduRef",
+                  "description": "Reference to a Pdu in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpRxNSduRef",
+                  "uuid": "ECUC:6d3d5f1b-598b-4468-9e3d-46dadb685fb2"
+                }
+              ],
+              "shortName": "CanTpRxNSdu",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNAe",
+                  "description": "This container is required for each RxNSdu and TxNSdu with AddressingFormat CANTP_MIXED or CANTP_MIXED29BIT.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNAe/CanTpNAe",
+                      "description": "This parameter contains the transport protocol address extension value.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpNAe",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:ca4f6d74-43cf-de56-284c-f15c15991332"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanTpNAe",
+                  "subContainers": [],
+                  "uuid": "ECUC:18b8222f-bd64-9aaf-705f-908e2a662c4d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNSa",
+                  "description": "This container is required for each RxNSdu and TxNSdu with RxTaType CANTP_PHYSICAL and CanTpAddressingFormat CANTP_EXTENDED. When DynIdSupport is enabled, this…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNSa/CanTpNSa",
+                      "description": "This parameter contains the transport protocol source address value.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpNSa",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c9dd6e8d-70ce-ddc3-c92d-60ad6a671331"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanTpNSa",
+                  "subContainers": [],
+                  "uuid": "ECUC:8ba3d8bb-3ecd-9132-3f29-4896b1409dad"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNTa",
+                  "description": "This container is required for each RxNSdu and TxNSdu with AddressingFormat CANTP_EXTENDED. When DynIdSupport is enabled, this container is also required for e…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpNTa/CanTpNTa",
+                      "description": "This parameter contains the transport protocol target address value.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpNTa",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:16997313-3400-def4-0328-fd07f2930985"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanTpNTa",
+                  "subContainers": [],
+                  "uuid": "ECUC:8a934eab-6a33-91e1-712b-19e06eac0399"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxNPdu",
+                  "description": "Used for grouping of the ID of a PDU and the Reference to a PDU.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxNPdu/CanTpRxNPduId",
+                      "description": "The N-PDU identifier attached to the RxNsdu is identified by CanTpRxNSduId.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpRxNPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:40262159-8c60-41ec-a8d8-981f42899648"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpRxNPdu/CanTpRxNPduRef",
+                      "description": "Reference to a Pdu in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpRxNPduRef",
+                      "uuid": "ECUC:b15ae189-a46c-4a18-be34-77f25a1d0465"
+                    }
+                  ],
+                  "shortName": "CanTpRxNPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:036c8537-7034-4cc4-bafc-40765f860705"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpTxFcNPdu",
+                  "description": "Used for grouping of the ID of a PDU and the Reference to a PDU.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpTxFcNPdu/CanTpTxFcNPduConfirmationPduId",
+                      "description": "Handle Id to be used by the CanIf to confirm the transmission of the CanTpTxFcNPdu to the CanIf module.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpTxFcNPduConfirmationPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c00d752b-13ad-4699-b3be-e597181b1072"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpRxNSdu/CanTpTxFcNPdu/CanTpTxFcNPduRef",
+                      "description": "Reference to a Pdu in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpTxFcNPduRef",
+                      "uuid": "ECUC:4ea37b19-102e-4005-9da7-59e0a1f8fc4f"
+                    }
+                  ],
+                  "shortName": "CanTpTxFcNPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:4991f892-f334-4fcc-b92b-2bbca315c562"
+                }
+              ],
+              "uuid": "ECUC:252c3693-8f61-4fdb-bc0f-defd6a327590"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu",
+              "description": "The following parameters needs to be configured for each CAN N-SDU that the CanTp module transmits via the CanTpChannel.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNas",
+                  "description": "Value in second of the N_As timeout. N_As is the time for transmission of a CAN frame (any N_PDU) on the part of the sender.",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpNas",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:aa8cbd96-3f51-45d3-b7dd-97df8cab52b0"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNbs",
+                  "description": "Value in seconds of the N_Bs timeout. N_Bs is the time of transmission until reception of the next Flow Control N_PDU.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpNbs",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:f9170c8d-c626-4740-b605-6e0984eeaaa9"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNcs",
+                  "description": "Value in seconds of the performance requirement of (N_Cs + N_As). N_Cs is the time which elapses between the transmit request of a CF N-PDU until the transmit …",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpNcs",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:76ef9dbd-266a-4a13-a9cc-ed92e147d5c3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTc",
+                  "description": "Switch for enabling Transmit Cancellation and Receive Cancellation.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpTc",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:aaf45ff0-1683-409e-8948-a14484b30250"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxAddressingFormat",
+                  "description": "Declares which communication addressing format is supported for this TxNSdu. Definition of Enumeration values:",
+                  "enumValues": [
+                    "CANTP_EXTENDED",
+                    "CANTP_MIXED",
+                    "CANTP_MIXED29BIT",
+                    "CANTP_NORMALFIXED",
+                    "CANTP_STANDARD"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpTxAddressingFormat",
+                  "type": "ENUM",
+                  "uuid": "ECUC:882d2f8d-fd9d-4a01-985f-cbbb3f2874a3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxPaddingActivation",
+                  "description": "Defines if the transmit frame use padding or not. This parameter is restricted to 8 byte N-PDUs.",
+                  "enumValues": [
+                    "CANTP_OFF",
+                    "CANTP_ON"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpTxPaddingActivation",
+                  "type": "ENUM",
+                  "uuid": "ECUC:bd869917-f0fd-430c-838f-18795134106d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxTaType",
+                  "description": "Declares the communication type of this TxNsdu.",
+                  "enumValues": [
+                    "CANTP_FUNCTIONAL",
+                    "CANTP_PHYSICAL"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpTxTaType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:9b3c8f7b-911d-4cb9-a607-bf5f6d38bc4d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxNSduId",
+                  "description": "Unique identifier to a structure that contains all useful information to process the transmission of a TxNsdu.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpTxNSduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a798e4bd-fb6c-4e1f-97eb-0b8b02f47a63"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxNSduRef",
+                  "description": "Reference to a Pdu in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTpTxNSduRef",
+                  "uuid": "ECUC:8c314f3c-266b-42b1-849a-b67aa94d59c9"
+                }
+              ],
+              "shortName": "CanTpTxNSdu",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNAe",
+                  "description": "This container is required for each RxNSdu and TxNSdu with AddressingFormat CANTP_MIXED or CANTP_MIXED29BIT.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNAe/CanTpNAe",
+                      "description": "This parameter contains the transport protocol address extension value.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpNAe",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:5346fcad-8efd-d7cd-12db-2d1fc649b3d6"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanTpNAe",
+                  "subContainers": [],
+                  "uuid": "ECUC:a1afb169-0892-9426-5aed-cc51db16ccf1"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNSa",
+                  "description": "This container is required for each RxNSdu and TxNSdu with RxTaType CANTP_PHYSICAL and CanTpAddressingFormat CANTP_EXTENDED. When DynIdSupport is enabled, this…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNSa/CanTpNSa",
+                      "description": "This parameter contains the transport protocol source address value.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpNSa",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:52d4fdc6-bbfc-d73a-b3bb-9c711b17b3d5"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanTpNSa",
+                  "subContainers": [],
+                  "uuid": "ECUC:149b67f4-89fb-8aa9-29b7-845a61f13e51"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNTa",
+                  "description": "This container is required for each RxNSdu and TxNSdu with AddressingFormat CANTP_EXTENDED. When DynIdSupport is enabled, this container is also required for e…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpNTa/CanTpNTa",
+                      "description": "This parameter contains the transport protocol target address value.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpNTa",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:9f91024c-7f2e-d86b-edb7-38cba343aa29"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanTpNTa",
+                  "subContainers": [],
+                  "uuid": "ECUC:138adde4-b561-8b58-5bb9-55a41f5ca43d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpRxFcNPdu",
+                  "description": "Used for grouping of the ID of a PDU and the Reference to a PDU.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpRxFcNPdu/CanTpRxFcNPduId",
+                      "description": "N-PDU identifier attached to the FC N-PDU of this TxNsdu identified by CanTpTxNSduId.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpRxFcNPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:4e87ce7d-00bc-4a88-b1b5-daa96e41b0e1"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpRxFcNPdu/CanTpRxFcNPduRef",
+                      "description": "Reference to a Pdu in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpRxFcNPduRef",
+                      "uuid": "ECUC:1d5ecce4-71e5-44df-92a3-5411a32d0f8b"
+                    }
+                  ],
+                  "shortName": "CanTpRxFcNPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:0f204774-e365-43f9-b770-fb106ee7ee72"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxNPdu",
+                  "description": "Used for grouping of the ID of a PDU and the Reference to a PDU.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxNPdu/CanTpTxNPduConfirmationPduId",
+                      "description": "Handle Id to be used by the CanIf to confirm the transmission of the CanTpTxNPdu to the CanIf module.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpTxNPduConfirmationPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:ccbbf2b0-f1a1-4144-9c70-8d1162d42095"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpConfig/CanTpChannel/CanTpTxNSdu/CanTpTxNPdu/CanTpTxNPduRef",
+                      "description": "Reference to a Pdu in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanTpTxNPduRef",
+                      "uuid": "ECUC:9637f1c5-6d62-4765-9ac6-f09367865b65"
+                    }
+                  ],
+                  "shortName": "CanTpTxNPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:3074d8ed-ed78-4948-a3da-3d0384d43dc8"
+                }
+              ],
+              "uuid": "ECUC:ae23c5cc-da8f-4952-a69e-1ac11ae31634"
+            }
+          ],
+          "uuid": "ECUC:755e5d1d-0639-40a4-aed2-3e537d79362a"
+        }
+      ],
+      "uuid": "ECUC:bda25515-3634-4597-9be2-8d5d1405d9e7"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral",
+      "description": "This container contains the general configuration parameters of the CanTp module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpChangeParameterApi",
+          "description": "This parameter, if set to true, enables the CanTp_ChangeParameterRequest Api for this Module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTpChangeParameterApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d4c70e88-7a39-41a2-aeea-b7bb0ae249ef"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTpDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d7ad678b-0f30-45a2-b3c2-dd92c02c073e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpDynIdSupport",
+          "description": "Enable support for dynamic ID handling via N-PDU MetaData.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTpDynIdSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b99a6b38-1bfa-413d-ade0-34f9a3d06327"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpFlexibleDataRateSupport",
+          "description": "Enable support for CAN FD frames.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTpFlexibleDataRateSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:30faf77d-0285-4231-96b2-aedecf133e62"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpGenericConnectionSupport",
+          "description": "Enable support for the handling of generic connections using N-SDUs with MetaData. Requires CanTpDynIdSupport.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanTpGenericConnectionSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:35509324-2590-40fa-bee6-528cb2167482"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpReadParameterApi",
+          "description": "This parameter, if set to true, enables the CanTp_ReadParameterApi for this module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTpReadParameterApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:000c8e11-32d9-404d-8286-f5860e874d97"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpVersionInfoApi",
+          "description": "The function CanTp_GetVersionInfo is configurable (On/Off) by this configuration parameter.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTpVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9fae5ee7-951f-4717-8197-d9fb2cda46aa"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTp/CanTpGeneral/CanTpPaddingByte",
+          "description": "Used for the initialization of unused bytes with a certain value",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTpPaddingByte",
+          "type": "INTEGER",
+          "uuid": "ECUC:5fddf0b7-8088-444c-a2fa-1d8ecca9a85e"
+        }
+      ],
+      "references": [],
+      "shortName": "CanTpGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:738fd332-49f9-4028-a587-4dd2cf717e05"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/CanTp",
+  "description": "Configuration of the CanTp (CAN Transport Protocol) module.",
+  "importWarnings": [
+    "CanTpRxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanTpTxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanTpRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanTpRxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanTpTxNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanTpTxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "CanTp",
+  "version": "4.2.2"
+}

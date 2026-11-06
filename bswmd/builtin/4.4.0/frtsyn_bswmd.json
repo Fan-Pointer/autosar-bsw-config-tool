@@ -1,0 +1,574 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "d6b428addb1259f1ae414fc2874887e983c3c9338988cc6f400cd3142afb35e2",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGeneral",
+      "description": "This container holds the general parameters of the Flexray-specific Synchronized Time-base Manager",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGeneral/FrTSynDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTSynDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b7b4cc23-856c-43c7-b873-af5efb2c5951"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGeneral/FrTSynVersionInfoApi",
+          "description": "Activate/Deactivate the version information API (FrTSyn_GetVersionInfo). True: version information API activated False: version information API deactivated.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTSynVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ffbdbbc4-0155-42de-8d79-8df4415b97a4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGeneral/FrTSynMainFunctionPeriod",
+          "description": "Schedule period of the main function FrTSyn_MainFunction. Unit: [s].",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTSynMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:cb8f715a-ca54-442e-93d2-cfda87fe3cea"
+        }
+      ],
+      "references": [],
+      "shortName": "FrTSynGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:152a1c8f-1716-4590-ab6e-3497e5684270"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain",
+      "description": "This represents the existence of a global time domain on Flexray. The FrTSyn module can administrate several global time domains at the same time that in itsel…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeDomainId",
+          "description": "The global time domain ID.",
+          "isOptional": false,
+          "max": 31,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTSynGlobalTimeDomainId",
+          "type": "INTEGER",
+          "uuid": "ECUC:0f2915c2-44e3-49c0-8901-33efb01f29e1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSecureTmacLength",
+          "description": "Represents the number of bytes for the used Truncated Message Authentication Code (TMAC). If 0, no message authentication will be used. Tags: atp.Status=draft",
+          "isOptional": false,
+          "max": 16,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTSynGlobalTimeSecureTmacLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:3977c070-3016-4d38-b97c-efb918543647"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynUseExtendedMsgFormat",
+          "description": "* true: use at least 32 byte for Timesync messages (depending on configuration) Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTSynUseExtendedMsgFormat",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bda75889-a9f5-43e5-8d8d-dad6c9a0a769"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynSynchronizedTimeBaseRef",
+          "description": "Mandatory reference to the required synchronized time-base.",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrTSynSynchronizedTimeBaseRef",
+          "uuid": "ECUC:5c424dae-ffcb-4d06-a9be-bcdddc027801"
+        }
+      ],
+      "shortName": "FrTSynGlobalTimeDomain",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster",
+          "description": "Configuration of the global time master. Each global time domain is required to have exactly one global time master. This master may or may not exist on the co…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynCyclicMsgResumeTime",
+              "description": "Defines the time where the 1st regular cycle time based message transmission takes place, after an immediate transmission before. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynCyclicMsgResumeTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:a027e020-af08-40c9-a0ff-0bd000bf7d78"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynGlobalTimeDebounceTime",
+              "description": "This represents the configuration of a TX debounce time for SYNC and OFS messages compared to a message before with the same PDU. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynGlobalTimeDebounceTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:d4e088c8-f0d4-47bc-8888-f378dddec574"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynGlobalTimeTxPeriod",
+              "description": "This represents the TX period. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynGlobalTimeTxPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:ba4fee0f-3169-4423-bcde-14f772f57729"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynGlobalTimeTxCrcSecured",
+              "description": "This represents the configuration of whether or not CRC is supported.",
+              "enumValues": [
+                "CRC_NOT_SUPPORTED",
+                "CRC_SUPPORTED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynGlobalTimeTxCrcSecured",
+              "type": "ENUM",
+              "uuid": "ECUC:54650f12-e70d-459e-a47b-a74faef4c78b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynTxTmacCalculated",
+              "description": "This parameter controls whether or not TMAC calculation shall be supported. Tags: atp.Status=draft",
+              "enumValues": [
+                "TMAC_CALCULATED",
+                "TMAC_NOT_CALCULATED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynTxTmacCalculated",
+              "type": "ENUM",
+              "uuid": "ECUC:92f20b22-7154-49e7-bebd-1e21f48d4a8b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynImmediateTimeSync",
+              "description": "Enables/Disables the cyclic polling of StbM_GetTimeBaseUpdateCounter() within FrTSyn_MainFunction().",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynImmediateTimeSync",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:c1016639-5123-4147-97cf-914b3d4b11d8"
+            }
+          ],
+          "references": [],
+          "shortName": "FrTSynGlobalTimeMaster",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynGlobalTimeMasterPdu",
+              "description": "This container carries all properties required to configure the PDU sent by the global time master for the given global time domain.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynGlobalTimeMasterPdu/FrTSynGlobalTimeMasterHandleId",
+                  "description": "This represents the handle ID of the PDU that contains the global time information.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimeMasterHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:b038a143-2607-4a84-a653-5cba56f8faf0"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeMaster/FrTSynGlobalTimeMasterPdu/FrTSynGlobalTimePduRef",
+                  "description": "This represents the reference to the Pdu taken to transmit the global time information. The global time master of a global time domain acts as the sender of th…",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimePduRef",
+                  "uuid": "ECUC:ff92e074-24df-9071-0a59-81b5c1075eac"
+                }
+              ],
+              "shortName": "FrTSynGlobalTimeMasterPdu",
+              "subContainers": [],
+              "uuid": "ECUC:a6520827-5db3-437b-88ec-4546098276aa"
+            }
+          ],
+          "uuid": "ECUC:c81d2327-685e-4a2b-bc0f-558a4e47bd25"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeOfsDataIDList",
+          "description": "The DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "FrTSynGlobalTimeOfsDataIDList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeOfsDataIDList/FrTSynGlobalTimeOfsDataIDListElement",
+              "description": "Element of the DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+              "multiplicity": {
+                "lower": 16,
+                "upper": 16
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeOfsDataIDList/FrTSynGlobalTimeOfsDataIDListElement/FrTSynGlobalTimeOfsDataIDListIndex",
+                  "description": "Index of the DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimeOfsDataIDListIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:5b866117-315b-469a-a799-5042fe5c2a07"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeOfsDataIDList/FrTSynGlobalTimeOfsDataIDListElement/FrTSynGlobalTimeOfsDataIDListValue",
+                  "description": "Value of the DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimeOfsDataIDListValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:d3e4b9f9-d345-4a66-915a-42498fe2ff13"
+                }
+              ],
+              "references": [],
+              "shortName": "FrTSynGlobalTimeOfsDataIDListElement",
+              "subContainers": [],
+              "uuid": "ECUC:a2d036fc-423d-419b-9898-dd110feaaf60"
+            }
+          ],
+          "uuid": "ECUC:850490cc-5843-4bc0-9cb8-8542e31d2409"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave",
+          "description": "This represents the time slave for the enclosing global time domain.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynGlobalTimeMinMsgGap",
+              "description": "This parameter represents the configuration of a minimum message gap time for received SYNC and OFS messages compared to a message before with the same PDU. If…",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynGlobalTimeMinMsgGap",
+              "type": "FLOAT",
+              "uuid": "ECUC:9aec346a-a67c-426a-8ab6-c656339aff51"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynGlobalTimeTmacTimeout",
+              "description": "Rx timeout for the TMAC message. Tags: atp.Status=draft",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynGlobalTimeTmacTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:c6a7514f-309f-4d05-8fd9-58c416d74005"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynGlobalTimeSequenceCounterJumpWidth",
+              "description": "The SequenceCounterJumpWidth specifies the maximum allowed gap of the Sequence Counter between two SYNC resp. two OFS messages.",
+              "isOptional": false,
+              "max": 15,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynGlobalTimeSequenceCounterJumpWidth",
+              "type": "INTEGER",
+              "uuid": "ECUC:6ae0c5ee-752a-4e81-8761-d5dca60b2181"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynRxCrcValidated",
+              "description": "This parameter controls whether or not CRC validation shall be supported.",
+              "enumValues": [
+                "CRC_IGNORED",
+                "CRC_NOT_VALIDATED",
+                "CRC_OPTIONAL",
+                "CRC_VALIDATED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynRxCrcValidated",
+              "type": "ENUM",
+              "uuid": "ECUC:506cebff-befa-4be2-a05a-1eacc76a8dfd"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynRxTmacValidated",
+              "description": "This parameter controls whether or not TMAC validation shall be supported. Tags: atp.Status=draft",
+              "enumValues": [
+                "TMAC_NOT_VALIDATED",
+                "TMAC_VALIDATED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrTSynRxTmacValidated",
+              "type": "ENUM",
+              "uuid": "ECUC:4914f80a-7112-4637-bdf3-a205493c912d"
+            }
+          ],
+          "references": [],
+          "shortName": "FrTSynGlobalTimeSlave",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynGlobalTimeSlavePdu",
+              "description": "This container carries all properties required to configure the PDU received by the time slave for the given global time domain.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynGlobalTimeSlavePdu/FrTSynGlobalTimeSlaveHandleId",
+                  "description": "This represents the handle ID of the PDU that contains the global time information.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimeSlaveHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:4543db85-68dc-481d-bcf5-224358ce207d"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSlave/FrTSynGlobalTimeSlavePdu/FrTSynGlobalTimePduRef",
+                  "description": "This represents the reference to the Pdu taken to transmit the global time information. The global time master of a global time domain acts as the sender of th…",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimePduRef",
+                  "uuid": "ECUC:fbf81894-843b-9b68-3c8f-146a4bf428e8"
+                }
+              ],
+              "shortName": "FrTSynGlobalTimeSlavePdu",
+              "subContainers": [],
+              "uuid": "ECUC:a2b74047-bd0f-4e72-bb21-d7fa946f40e6"
+            }
+          ],
+          "uuid": "ECUC:1fc02f8e-48f6-4f0f-bde6-1474e5a447ed"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSyncDataIDList",
+          "description": "The DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "FrTSynGlobalTimeSyncDataIDList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSyncDataIDList/FrTSynGlobalTimeSyncDataIDListElement",
+              "description": "Element of the DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+              "multiplicity": {
+                "lower": 16,
+                "upper": 16
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSyncDataIDList/FrTSynGlobalTimeSyncDataIDListElement/FrTSynGlobalTimeSyncDataIDListIndex",
+                  "description": "Index of the DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimeSyncDataIDListIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:023a78f5-4b75-43e0-bb4b-0d86989c0965"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn/FrTSynGlobalTimeDomain/FrTSynGlobalTimeSyncDataIDList/FrTSynGlobalTimeSyncDataIDListElement/FrTSynGlobalTimeSyncDataIDListValue",
+                  "description": "Value of the DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrTSynGlobalTimeSyncDataIDListValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:7f6b0234-351e-4013-93a0-71b5a3286c3d"
+                }
+              ],
+              "references": [],
+              "shortName": "FrTSynGlobalTimeSyncDataIDListElement",
+              "subContainers": [],
+              "uuid": "ECUC:29bc628f-12fc-42db-a811-8f5501e9af1d"
+            }
+          ],
+          "uuid": "ECUC:a62732c8-a61d-477f-89f0-10590b2d8a7d"
+        }
+      ],
+      "uuid": "ECUC:02607b16-6475-42ef-ba99-cde5b5f061b4"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/FrTSyn",
+  "description": "This represents the specific configuration variant for the TSyn on Flexray.",
+  "importWarnings": [
+    "FrTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrTSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "FrTSyn",
+  "version": "4.4.0"
+}

@@ -1,0 +1,195 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "00651cbecd4fae36c3b4104e0249fe74add9ef28bbf04e55a7253317adffd089",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Det/DetConfigSet",
+      "description": "Configuration set container for Det.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "DetConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Det/DetConfigSet/DetModule",
+          "description": "This container describes a non BSW module that is using the Det via Service Interface.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Det/DetConfigSet/DetModule/DetModuleId",
+              "description": "Unique identifier of the error reporting component. When reporting errors to the DET, a symbolic name derived from the moduleID has to be used to identify the …",
+              "isOptional": false,
+              "max": 65535,
+              "min": 4096,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DetModuleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:90426035-5ea7-46d9-a899-026b1b5cb19c"
+            }
+          ],
+          "references": [],
+          "shortName": "DetModule",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Det/DetConfigSet/DetModule/DetModuleInstance",
+              "description": "Describes the Instance used for the according Service Port.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/Det/DetConfigSet/DetModule/DetModuleInstance/DetInstanceId",
+                  "description": "Describes the InstanceId used for the according Service Port.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DetInstanceId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:86c27104-85da-43ea-a8be-427590bfc8c3"
+                }
+              ],
+              "references": [],
+              "shortName": "DetModuleInstance",
+              "subContainers": [],
+              "uuid": "ECUC:8e0d687f-fd94-48cd-b975-d661274fb333"
+            }
+          ],
+          "uuid": "ECUC:0b7d9c3e-7690-4cef-b6b1-394862e748f7"
+        }
+      ],
+      "uuid": "ECUC:5dd819cd-a8a0-4190-8c6a-8e1a29607869"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Det/DetGeneral",
+      "description": "Generic configuration parameters of the Det module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Det/DetGeneral/DetForwardToDlt",
+          "description": "Only if the parameter is present and set to true, the Det requires the Dlt interface and forwards it's call to the function Dlt_DetForwardErrorTrace. In this c…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "DetForwardToDlt",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b2357d09-e516-4d39-9ffc-ea9d879036cd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Det/DetGeneral/DetVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DetVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e159322f-adc7-4d76-a86c-f70943ef81d7"
+        }
+      ],
+      "references": [],
+      "shortName": "DetGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:b7be2bf7-601e-4026-ac3e-a373d11757e9"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Det/DetNotification",
+      "description": "Configuration of the notification functions.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Det/DetNotification/DetErrorHook",
+          "description": "Optional list of functions to be called by the Default Error Tracer in context of each call of Det_ReportError.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "DetErrorHook",
+          "type": "FUNCTION",
+          "uuid": "ECUC:d84b34e6-1a69-4388-9f95-60c7bc06a711"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Det/DetNotification/DetReportRuntimeErrorCallout",
+          "description": "This parameter defines the existence and the names of callout functions for the corresponding runtime error handler.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "DetReportRuntimeErrorCallout",
+          "type": "FUNCTION",
+          "uuid": "ECUC:2d406ad5-163f-459f-8ad8-75e7b6ec4234"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Det/DetNotification/DetReportTransientFaultCallout",
+          "description": "This parameter defines the existence and the names of callout functions for the corresponding transient fault handler.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "DetReportTransientFaultCallout",
+          "type": "FUNCTION",
+          "uuid": "ECUC:ca0af0d8-ebf1-42e4-85b2-fccf8c24acf2"
+        }
+      ],
+      "references": [],
+      "shortName": "DetNotification",
+      "subContainers": [],
+      "uuid": "ECUC:1f580088-5563-4447-93e8-216411efb4c8"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Det",
+  "description": "Det configuration includes the functions to be called at notification. On one",
+  "importWarnings": [
+    "DetErrorHook：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "DetReportRuntimeErrorCallout：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "DetReportTransientFaultCallout：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Det",
+  "version": "4.4.0"
+}

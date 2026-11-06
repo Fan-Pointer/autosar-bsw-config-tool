@@ -30,6 +30,8 @@ export function resolveReferenceCandidates(
   config: ConfigInstance,
   module: BswmdModule
 ): ContainerEntry[] {
+  if (config.moduleRef !== module.shortName || config.version !== module.version)
+    throw new Error('Reference candidates require the configuration’s exact module version');
   return collectContainers(config, module).filter((entry) =>
     matchesReferenceDefinition(reference, entry.definition)
   );
@@ -44,5 +46,6 @@ export function referenceDefinitionDest(reference: BswmdReference): string {
     choice: 'ECUC-CHOICE-REFERENCE-DEF',
     foreign: 'ECUC-FOREIGN-REFERENCE-DEF',
     instance: 'ECUC-INSTANCE-REFERENCE-DEF',
+    symbolic: 'ECUC-SYMBOLIC-NAME-REFERENCE-DEF',
   }[reference.kind ?? 'reference'];
 }

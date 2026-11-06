@@ -1,0 +1,206 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "100e61cc8fa17ed969bfb22d3292cbf692d6cec7412d410ba10976736eece26e",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR DIO module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "DioConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort",
+          "description": "Configuration of individual DIO ports, consisting of channels and possible channel groups.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioPortId",
+              "description": "Numeric identifier of the DIO port. Not all MCU ports may be used for DIO, thus there may be \"gaps\" in the list of all IDs. This value will be",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DioPortId",
+              "type": "INTEGER",
+              "uuid": "ECUC:d596f059-d21f-46fa-8c62-8eae8ff3d68d"
+            }
+          ],
+          "references": [],
+          "shortName": "DioPort",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel",
+              "description": "Configuration of an individual DIO channel.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel/DioChannelId",
+                  "description": "Channel Id of the DIO channel. This value will be assigned to the symbolic names.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DioChannelId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:e87de39b-7754-4f85-816c-b58b7659a4e1"
+                }
+              ],
+              "references": [],
+              "shortName": "DioChannel",
+              "subContainers": [],
+              "uuid": "ECUC:3160aae0-8510-4b1f-88ac-40f7c48a9e2d"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup",
+              "description": "Definition and configuration of DIO channel groups. A channel group represents several adjoining DIO channels represented by a logical group.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup/DioChannelGroupIdentification",
+                  "description": "The DIO channel group is identified in DIO API by a pointer to a data structure (of type Dio_ChannelGroupType). That data structure contains the channel group …",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DioChannelGroupIdentification",
+                  "type": "STRING",
+                  "uuid": "ECUC:c0a5ca8e-4bf0-4e03-83d7-6559e724a983"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup/DioPortMask",
+                  "description": "This shall be the mask which defines the positions of the channel",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DioPortMask",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c3f03c97-def2-40d9-bdd3-052b0acd5a91"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup/DioPortOffset",
+                  "description": "The position of the Channel Group on the port, counted",
+                  "isOptional": false,
+                  "max": 31,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DioPortOffset",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:41125c72-502e-4fb4-b85c-1b499923b736"
+                }
+              ],
+              "references": [],
+              "shortName": "DioChannelGroup",
+              "subContainers": [],
+              "uuid": "ECUC:8e498821-8d5c-4512-88fc-8d4d90dca1ab"
+            }
+          ],
+          "uuid": "ECUC:f85f480f-fee7-4a00-a99a-4aede301e703"
+        }
+      ],
+      "uuid": "ECUC:b9ea6561-fd73-4381-bdb6-8e027a43ad62"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioGeneral",
+      "description": "General DIO module configuration parameters.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioGeneral/DioDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DioDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f82078d3-b78e-4805-8069-a1cb89699750"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioGeneral/DioFlipChannelApi",
+          "description": "Adds / removes the service Dio_FlipChannel() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DioFlipChannelApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:01513b33-8238-4e96-afe3-753cca65effa"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dio/DioGeneral/DioVersionInfoApi",
+          "description": "Adds / removes the service Dio_ GetVersionInfo() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DioVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:20d99dc2-e3fe-4832-8ecf-379936ade262"
+        }
+      ],
+      "references": [],
+      "shortName": "DioGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:ba24cf3d-7a2a-4465-a7a7-6a5f42c8e3ba"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Dio",
+  "description": "Configuration of the Dio (Digital IO) module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Dio",
+  "version": "4.2.2"
+}

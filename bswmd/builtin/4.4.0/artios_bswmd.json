@@ -1,0 +1,213 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "513da6ce809a529b80d44b25a6b029fdb9e636122aa72c7a8667baf647f45318",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsClass",
+      "description": "Contains the layout of an ARTI \"Os\" object, extending the EcuC OsOS. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsClass/ArtiOsAppModeClassRef",
+          "description": "Refers to the ArtiObjectClassParameter that defines the ArtiOsAppModeInstance parameter. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectClassParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiOsAppModeClassRef",
+          "uuid": "ECUC:2543c018-e93d-4d83-aab8-7060068d1d7e"
+        }
+      ],
+      "shortName": "ArtiOsClass",
+      "subContainers": [],
+      "uuid": "ECUC:407dd9b4-0454-4bbe-ba9f-030c9f6fe697"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsInstance",
+      "description": "Represents an instance of an ARTI \"Os\" object, extending the EcuC OsOS. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsInstance/ArtiOsAppModeEcucRef",
+          "description": "Refers to the EcucDefs/Os/OsAppMode of this OS. Tags: atp.Status=draft",
+          "destinationContainerType": "OsAppMode",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsAppMode",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsAppMode"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiOsAppModeEcucRef",
+          "uuid": "ECUC:6aab3f95-94ea-477f-867d-536ff1e009d5"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsInstance/ArtiOsAppModeInstanceRef",
+          "description": "Refers to the ArtiObjectInstanceParameter that contains the evaluation for the \"application mode\" of this OS. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiObjectInstanceParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiOsAppModeInstanceRef",
+          "uuid": "ECUC:27d75b37-1075-4ec5-98d1-0cf7f925d12e"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsInstance/ArtiOsEcucRef",
+          "description": "Refers to the EcucDefs/Os/OsOS of this OS. Tags: atp.Status=draft",
+          "destinationContainerType": "OsOS",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsOS",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsOS"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiOsEcucRef",
+          "uuid": "ECUC:4ccdcb25-b09f-4f50-ab64-22122367b124"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsInstance/ArtiOsTaskHookRef",
+          "description": "Refers to a hook for a specific task. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiHook",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiHook",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiHook"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "ArtiOsTaskHookRef",
+          "uuid": "ECUC:9f2b7d96-7a32-4cc3-8306-b087284e5c02"
+        }
+      ],
+      "shortName": "ArtiOsInstance",
+      "subContainers": [],
+      "uuid": "ECUC:696083fb-4846-4ead-8267-2b601f9fb8bb"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsTaskClass",
+      "description": "Contains the layout of an ARTI \"OsTask\" object, extending the EcuC OsTask. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "ArtiOsTaskClass",
+      "subContainers": [],
+      "uuid": "ECUC:f4b3af52-d152-4341-a493-a38ae7d0a345"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsTaskInstance",
+      "description": "Represents an instance of an ARTI \"OsTask\" object, extending the EcuC OsTask. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsTaskInstance/ArtiGenericComponentInstanceRef",
+          "description": "Refers to an ArtiGenericComponentInstance that extends the OsTask. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiGenericComponentInstance",
+          "destinationRef": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiGenericComponentInstanceRef",
+          "uuid": "ECUC:badacb9d-24ec-4359-aa35-1099e50424ca"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs/ArtiOsTaskInstance/ArtiOsTaskEcucRef",
+          "description": "Refers to an ArtiGenericComponentInstance that extends the OsTask. Tags: atp.Status=draft",
+          "destinationContainerType": "OsTask",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsTask",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsTask"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiOsTaskEcucRef",
+          "uuid": "ECUC:129f6697-aa8d-4ec0-a897-43cef1b128d0"
+        }
+      ],
+      "shortName": "ArtiOsTaskInstance",
+      "subContainers": [],
+      "uuid": "ECUC:485b0f61-3e65-4100-a507-b9e4a4c9cf25"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/ArtiOs",
+  "description": "The ArtiOs Module contains ARTI extensions to the EcucDefs/Os module. Tags: atp.Status=draft",
+  "importWarnings": [
+    "ArtiOsAppModeClassRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter 位于本模块之外；编辑器只读展示。",
+    "ArtiOsAppModeEcucRef：目标 /AUTOSAR/EcucDefs/Os/OsAppMode 位于本模块之外；编辑器只读展示。",
+    "ArtiOsAppModeInstanceRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter 位于本模块之外；编辑器只读展示。",
+    "ArtiOsEcucRef：目标 /AUTOSAR/EcucDefs/Os/OsOS 位于本模块之外；编辑器只读展示。",
+    "ArtiOsTaskHookRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ArtiOsTaskHookRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiHook 位于本模块之外；编辑器只读展示。",
+    "ArtiGenericComponentInstanceRef：目标 /AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance 位于本模块之外；编辑器只读展示。",
+    "ArtiOsTaskEcucRef：目标 /AUTOSAR/EcucDefs/Os/OsTask 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "ArtiOs",
+  "version": "4.4.0"
+}

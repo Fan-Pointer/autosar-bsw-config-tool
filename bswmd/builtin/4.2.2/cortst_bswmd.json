@@ -1,0 +1,521 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "a7b1de03e8fd106aca614d5ca10ac97c8a63178c82cfee4d22ff653dde1e821d",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet",
+      "description": "Multiple Configuration Set Container, defines background mode.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CorTstBackgroundConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect",
+          "description": "This container specifies configuration parameters to select individual tests for foreground mode and background mode. The availability is hardware and implemen…",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect/CorTstAddress",
+              "description": "Enable/Disables core address test.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstAddress",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b5360c0b-037a-d9d9-a493-656c04bfcfbc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect/CorTstAlu",
+              "description": "Enable/Disables core ALU test.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstAlu",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:7bd51b24-c3a7-daa6-b81e-8561e03812a7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect/CorTstCache",
+              "description": "Enable/Disables core cache test.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstCache",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:8a28cded-0efd-dac7-b7b1-768a1f552bf1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect/CorTstInterrupt",
+              "description": "Enable/Disables core interrupt test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstInterrupt",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:797547b1-830a-e048-aa5e-f3c5e919339d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect/CorTstMemoryIf",
+              "description": "Enable/Disables core memory interface test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstMemoryIf",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:e15bc8c9-cf05-d7c6-a084-0d5318d8454d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect/CorTstMpu",
+              "description": "Enable/Disables core MPU test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstMpu",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d512a17d-5d8a-dffa-cd7d-8653fc6f823d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstBackgroundConfigSet/CorTstSelect/CorTstRegister",
+              "description": "Enable/Disables core register test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstRegister",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:c8dfedab-ee43-e033-99fd-cbd7c4ef97fe"
+            }
+          ],
+          "references": [],
+          "shortName": "CorTstSelect",
+          "subContainers": [],
+          "uuid": "ECUC:fdc54cb3-66d7-9413-104e-6eec9b6ab710"
+        }
+      ],
+      "uuid": "ECUC:4abd3c77-cd49-4b0a-8f98-61eac791284d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices/CorTstAbortApi",
+          "description": "Adds / removes the service CorTst_Abort() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstAbortApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:317dc460-8c74-4fd2-9109-00ed4751554f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices/CorTstGetCurrentStatus",
+          "description": "Adds / removes the service CorTst_GetCurrentStatus() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstGetCurrentStatus",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6191aa54-d5fb-4ac5-8706-eb3e7bf2866d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices/CorTstGetFgndSignature",
+          "description": "Adds / removes the service CorTst_GetFgndSignature() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstGetFgndSignature",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9d8e4991-d8a1-4e54-af0f-cc62e300cf21"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices/CorTstGetSignature",
+          "description": "Adds / removes the service CorTst_GetSignature() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstGetSignature",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c59a0625-5199-4aaf-a0d3-a4b391e1db4f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices/CorTstGetStateApi",
+          "description": "Adds / removes the service CorTst_GetState() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstGetStateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a503e197-9147-444f-b094-30f772ca7114"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices/CorTstStartApi",
+          "description": "Adds / removes the service CorTst_Start() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstStartApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:497b13d5-6a95-452c-ad96-bb61a204ef07"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstConfigApiServices/CorTstVersionInfoApi",
+          "description": "Adds / removes the service CorTst_GetVersionInfo() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6f877a50-ab0c-4014-b659-3115c4c0a493"
+        }
+      ],
+      "references": [],
+      "shortName": "CorTstConfigApiServices",
+      "subContainers": [],
+      "uuid": "ECUC:8598c4af-2127-4229-9ad7-a5dbb94c82ee"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstDemEventParameterRefs",
+      "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus in case the corresponding error occurs. T…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstDemEventParameterRefs/CORTST_E_CORE_FAILURE",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"CORE failure\" has occured.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CORTST_E_CORE_FAILURE",
+          "uuid": "ECUC:e0838ca8-7d10-444e-b0ac-898050fc6917"
+        }
+      ],
+      "shortName": "CorTstDemEventParameterRefs",
+      "subContainers": [],
+      "uuid": "ECUC:2279068b-7746-4d4b-a8cb-47afe4e2a309"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet",
+      "description": "Multiple Configuration Set Container , defines foreground mode.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstTestIdFgnd",
+          "description": "This is the Id of this specific foreground test configuration. The value shall be used in the call to the API CorTst_Start(CorTst_TestIdFgndType TestId).",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstTestIdFgnd",
+          "type": "INTEGER",
+          "uuid": "ECUC:d214eee0-143e-4d6e-a306-365ec26a5177"
+        }
+      ],
+      "references": [],
+      "shortName": "CorTstForegroundConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect",
+          "description": "This container specifies configuration parameters to select individual tests for foreground mode and background mode. The availability is hardware and implemen…",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect/CorTstAddress",
+              "description": "Enable/Disables core address test.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstAddress",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:c53e1b1f-6388-d330-c3e2-c7d563526cf4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect/CorTstAlu",
+              "description": "Enable/Disables core ALU test.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstAlu",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:8bdd2a39-23b5-d3fd-d76d-e7cb3ecaafdf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect/CorTstCache",
+              "description": "Enable/Disables core cache test.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstCache",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:9a30dd01-6f0b-d41e-d700-d8f37de7c929"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect/CorTstInterrupt",
+              "description": "Enable/Disables core interrupt test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstInterrupt",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:897d56c5-e318-d99f-c9ae-562f47abd0d5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect/CorTstMemoryIf",
+              "description": "Enable/Disables core memory interface test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstMemoryIf",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f163d7de-2f13-d11d-bfd3-6fbc776ae285"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect/CorTstMpu",
+              "description": "Enable/Disables core MPU test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstMpu",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:e51ab091-bd98-d951-eccc-e8bd5b021f75"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstForegroundConfigSet/CorTstSelect/CorTstRegister",
+              "description": "Enable/Disables core register test",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CorTstRegister",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d8e7fcc0-4e51-d98a-b94d-2e4123823536"
+            }
+          ],
+          "references": [],
+          "shortName": "CorTstSelect",
+          "subContainers": [],
+          "uuid": "ECUC:0dcd5bc7-c6e5-8d6a-2f9d-d155f9fd5448"
+        }
+      ],
+      "uuid": "ECUC:5ac54b8c-2d57-4461-aee7-c4542623c585"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstGeneral",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstGeneral/CorTstDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1cebc962-a05b-49a6-b0e4-f1423dec097b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstGeneral/CorTstNotificationSupported",
+          "description": "Switch to indicate that the notification is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstNotificationSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2ff3d6f0-16cf-4efb-ba96-260ba8e5f6cb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstGeneral/CorTstTestResultMode",
+          "description": "Switch for enabling test result comparison within the Core test driver. In this mode a core test result OK or NOTOK shall not be calculated from the core test …",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstTestResultMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d2f1c839-0863-41b0-a96f-c70dee2fa4c6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstGeneral/CorTstFgndTestNumber",
+          "description": "This parameter holds the number of test configurations available for the foreground tests as defined in this configuration.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CorTstFgndTestNumber",
+          "type": "INTEGER",
+          "uuid": "ECUC:04f7d432-2924-49b3-b8ac-81a39b03d802"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CorTst/CorTstGeneral/CorTstTestIntervalIdEndValue",
+          "description": "Defines the end value of the Test Interval Id.",
+          "isOptional": true,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CorTstTestIntervalIdEndValue",
+          "type": "INTEGER",
+          "uuid": "ECUC:056b7ede-f135-4798-84e9-c7a70289599a"
+        }
+      ],
+      "references": [],
+      "shortName": "CorTstGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:418d5d15-2b92-4fe4-b26d-b56fd36d767b"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/CorTst",
+  "description": "Configuration of the CorTst module.",
+  "importWarnings": [
+    "CORTST_E_CORE_FAILURE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "CorTst",
+  "version": "4.2.2"
+}

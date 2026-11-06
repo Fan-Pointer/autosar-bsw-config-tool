@@ -1,0 +1,121 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "97fcb4917b269e51522413c7d8ec1c94a9c51f31e3e4a10a2d37dac84dcce93d",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp/V2xBtpGeneral",
+      "description": "This container contains the general configuration parameters of the Vehicle-2-X Basic Transport.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp/V2xBtpGeneral/V2xBtpDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xBtpDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0ca12fd6-2426-4a6f-966e-107b2f7bb485"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp/V2xBtpGeneral/V2xBtpVersionInfoApi",
+          "description": "Enable/disables the API for reading the version information of the V2xBtp Module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xBtpVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bcb9b79d-27a6-464c-913b-9111216b1d25"
+        }
+      ],
+      "references": [],
+      "shortName": "V2xBtpGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:fb2d8290-c565-4845-a14a-81f6267320ab"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp/V2xBtpRxIndicationFunction",
+      "description": "This container contains the RxIndication functions for V2xBtp upper layers. You can configure more than one container in test vehicles, but not in production v…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp/V2xBtpRxIndicationFunction/V2xBtpCddHeaderFile",
+          "description": "This parameter specifies the name of the header file containing the definition of the V2xBtpRxIndicationFunction module functions.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xBtpCddHeaderFile",
+          "type": "STRING",
+          "uuid": "ECUC:b3fc545c-2404-46c2-bc32-e26956a5a74d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp/V2xBtpRxIndicationFunction/V2xBtpDestinationPort",
+          "description": "Destination port for the <User>_RxIndication function.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xBtpDestinationPort",
+          "type": "INTEGER",
+          "uuid": "ECUC:3258f77b-d8e4-491e-8b0a-c05f99fa2e8f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp/V2xBtpRxIndicationFunction/V2xBtpRxIndicationFunctionName",
+          "description": "Name of the <User>_RxIndication callback function.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xBtpRxIndicationFunctionName",
+          "type": "FUNCTION",
+          "uuid": "ECUC:d92b13fb-03d7-4919-afa2-29507bccb94b"
+        }
+      ],
+      "references": [],
+      "shortName": "V2xBtpRxIndicationFunction",
+      "subContainers": [],
+      "uuid": "ECUC:72388e3a-4204-45e2-8173-a4a7944687f0"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/V2xBtp",
+  "description": "Configuration of the V2xBtp (Vehicle-2-X Basic Transport) module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "V2xBtp",
+  "version": "4.4.0"
+}

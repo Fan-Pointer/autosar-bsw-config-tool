@@ -1,0 +1,1448 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "b26539c13776e1ec6e362fd62d0b713c8468085fc92a81f3a1f49329324ebbc3",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution",
+      "description": "Contribution of COM Stack modules.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CddComStackContribution",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComIfUpperLayerContribution",
+          "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the UpperLayer of the Com Interface module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CddComIfUpperLayerContribution",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerRxPdu",
+              "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerRxPdu/CddComIfHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddComIfHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bdb6e83b-6f80-6d61-0a1c-c2c1e3e27c8b"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerRxPdu/CddComIfPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddComIfPduRef",
+                  "uuid": "ECUC:3ab696a9-ab82-6adf-fd0c-32253ef4ea0c"
+                }
+              ],
+              "shortName": "CddComIfUpperLayerRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:f01a8883-104a-21e7-7b8b-d4565566da5f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerTxPdu",
+              "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerTxPdu/CddComIfHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddComIfHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:cdea80af-8318-664a-fc93-79d9e8110690"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerTxPdu/CddComIfPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddComIfPduRef",
+                  "uuid": "ECUC:755bae9f-b30d-61ae-fd21-99a66bfdb57e"
+                }
+              ],
+              "shortName": "CddComIfUpperLayerTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:15e2d386-e79e-1ffa-787f-43d0de5cea72"
+            }
+          ],
+          "uuid": "ECUC:26d8f6d4-67c6-d62e-cf4d-50368f703e56"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComMLowerLayerContribution",
+          "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the LowerLayer of the Communication Manager module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CddComMLowerLayerContribution",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComMLowerLayerContribution/CddComMLowerLayerChannel",
+              "description": "This container contains the network specific parameters.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddComMLowerLayerContribution/CddComMLowerLayerChannel/CddComMLowerLayerChannelRef",
+                  "description": "Unique handle to identify one certain network. Reference to one of the network handles configured for the ComM.",
+                  "destinationContainerType": "ComMChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddComMLowerLayerChannelRef",
+                  "uuid": "ECUC:3dcd6a28-cc63-6e59-db97-1a7e4896a474"
+                }
+              ],
+              "shortName": "CddComMLowerLayerChannel",
+              "subContainers": [],
+              "uuid": "ECUC:ea7b8cfa-5cda-21fd-3bce-d04e2b19c9ab"
+            }
+          ],
+          "uuid": "ECUC:947b3f3b-0b1a-d7e1-9ba7-881122b63756"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddGenericNmLowerLayerContribution",
+          "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the LowerLayer of the Generic NM module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CddGenericNmLowerLayerContribution",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddGenericNmLowerLayerContribution/CddGenericNmLowerLayerChannel",
+              "description": "NM Channel specific configuration parameters.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddGenericNmLowerLayerContribution/CddGenericNmLowerLayerChannel/CddGenericNmComMNetworkHandleRef",
+                  "description": "This reference points to the unique channel defined by the ComMChannel and provides access to the unique channel index value in ComMChannelId.",
+                  "destinationContainerType": "ComMChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddGenericNmComMNetworkHandleRef",
+                  "uuid": "ECUC:5ec5c3c1-f120-66de-0cc5-2f2990259914"
+                }
+              ],
+              "shortName": "CddGenericNmLowerLayerChannel",
+              "subContainers": [],
+              "uuid": "ECUC:69a1c13b-0f74-1acc-6d7e-2305aff1c98f"
+            }
+          ],
+          "uuid": "ECUC:5807032e-ed05-d87b-c1cd-4d748c5d790d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution",
+          "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the LowerLayer of the Pdu Router module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CddPduRLowerLayerContribution",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu",
+              "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu/CddPduRApiType",
+                  "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                  "enumValues": [
+                    "IF",
+                    "TP"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRApiType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:29721af0-7e6d-699a-b7a8-864ee1dde3a8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu/CddPduRLowerLayerHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRLowerLayerHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fa288e25-aa46-7420-b37d-18ea0e9e324f"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu/CddPduRLowerLayerPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRLowerLayerPduRef",
+                  "uuid": "ECUC:7a270130-3caa-68da-b1a3-a305aa21fea9"
+                }
+              ],
+              "shortName": "CddPduRLowerLayerRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:854b05b5-a8c6-24d6-2db1-bc966ce01f35"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu",
+              "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu/CddPduRApiType",
+                  "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                  "enumValues": [
+                    "IF",
+                    "TP"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRApiType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:0faf26cf-ab6f-640c-d6d2-7e0349392a23"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu/CddPduRLowerLayerHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRLowerLayerHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:54e4ff79-74ae-6885-e5e1-9286e82d889c"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu/CddPduRLowerLayerPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRLowerLayerPduRef",
+                  "uuid": "ECUC:c1eb0b95-126c-65ab-fb4f-b42923cedf65"
+                }
+              ],
+              "shortName": "CddPduRLowerLayerTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:6b881194-d5c8-1f48-4cdb-b44ad43b65b0"
+            }
+          ],
+          "uuid": "ECUC:531af91c-9517-d4ee-a1f7-28a35667971d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution",
+          "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the UpperLayer of the Pdu Router module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CddPduRUpperLayerContribution",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu",
+              "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu/CddPduRApiType",
+                  "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                  "enumValues": [
+                    "IF",
+                    "TP"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRApiType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:e0b6bdf3-5dc9-65ea-b364-e6fb6b6e800f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu/CddPduRUpperLayerHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRUpperLayerHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6fae49d7-f6c8-68ea-bb9f-f89a0d5b5a05"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu/CddPduRUpperLayerPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRUpperLayerPduRef",
+                  "uuid": "ECUC:0ae208be-40b0-70e8-cdbc-ae55bfb96b1e"
+                }
+              ],
+              "shortName": "CddPduRUpperLayerRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:3c8fa8b8-8822-2126-296e-1d42f670bb9c"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu",
+              "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu/CddPduRApiType",
+                  "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                  "enumValues": [
+                    "IF",
+                    "TP"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRApiType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f68044ca-b7ee-6e58-c0e0-e7839d5f39dc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu/CddPduRUpperLayerHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRUpperLayerHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:0c9550cc-c94b-7035-d7cf-c369a2b192b9"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu/CddPduRUpperLayerPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRUpperLayerPduRef",
+                  "uuid": "ECUC:76b568a1-27e9-6a7a-e1ce-477e5aeabdfc"
+                }
+              ],
+              "shortName": "CddPduRUpperLayerTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:52592f8f-e247-2994-36ea-1dcb28617569"
+            }
+          ],
+          "uuid": "ECUC:ad380acb-8789-de2a-a782-7d7b915d4cc6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution",
+          "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the UpperLayer of the SoAd module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CddSoAdUpperLayerContribution",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu",
+              "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu/CddPduRApiType",
+                  "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                  "enumValues": [
+                    "IF",
+                    "TP"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRApiType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:5384a425-7365-66a1-d2f7-eb584bd6a829"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu/CddSoAdUpperLayerHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddSoAdUpperLayerHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ea286112-5421-6ac0-f3f8-9a30c1f6a5a1"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu/CddSoAdUpperLayerPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddSoAdUpperLayerPduRef",
+                  "uuid": "ECUC:b3b8e760-c07b-673e-eabc-8d2dac12c6b7"
+                }
+              ],
+              "shortName": "CddSoAdUpperLayerRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:af5d8eea-9dbe-21dd-4901-219fd6d8e3b6"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu",
+              "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu/CddPduRApiType",
+                  "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                  "enumValues": [
+                    "IF",
+                    "TP"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddPduRApiType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:dd9212e1-8046-6ae6-cffa-2aba5d94cc5b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu/CddSoAdUpperLayerHandleId",
+                  "description": "ECU wide unique, symbolic handle for the Pdu.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CddSoAdUpperLayerHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fbfc02e4-2942-721a-ecbf-2e66445e194e"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu/CddSoAdUpperLayerPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CddSoAdUpperLayerPduRef",
+                  "uuid": "ECUC:408dbcac-db90-6a1c-cb42-20e26d6af708"
+                }
+              ],
+              "shortName": "CddSoAdUpperLayerTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:396afda6-aa9f-2622-4603-6101e89707e8"
+            }
+          ],
+          "uuid": "ECUC:d541ae12-f919-d829-c265-344fa240edfe"
+        }
+      ],
+      "uuid": "ECUC:7e88f2eb-0f67-9178-1ab3-ecf7a4cabaf4"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet",
+      "description": "Configuration set container of the Cdd.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CddConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution",
+          "description": "Contribution of COM Stack modules.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CddComStackContribution",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComIfUpperLayerContribution",
+              "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the UpperLayer of the Com Interface module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CddComIfUpperLayerContribution",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerRxPdu",
+                  "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerRxPdu/CddComIfHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddComIfHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:848ad3c7-f664-6c09-083c-605a485726b8"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerRxPdu/CddComIfPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddComIfPduRef",
+                      "uuid": "ECUC:018a8236-3266-6987-fb2b-cfbda3699439"
+                    }
+                  ],
+                  "shortName": "CddComIfUpperLayerRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:b6ee740f-972e-208f-79ab-71eeb9db848c"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerTxPdu",
+                  "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerTxPdu/CddComIfHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddComIfHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:94be6c3c-09fc-64f2-fab3-17724c85b0bd"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComIfUpperLayerContribution/CddComIfUpperLayerTxPdu/CddComIfPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddComIfPduRef",
+                      "uuid": "ECUC:3c2f9a2c-39f1-6056-fb41-373ed0725fab"
+                    }
+                  ],
+                  "shortName": "CddComIfUpperLayerTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:dcb6bf13-6e82-1ea2-769e-e16942d1949f"
+                }
+              ],
+              "uuid": "ECUC:edace260-eeaa-d4d6-cd6c-edcef3e4e883"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComMLowerLayerContribution",
+              "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the LowerLayer of the Communication Manager module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CddComMLowerLayerContribution",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComMLowerLayerContribution/CddComMLowerLayerChannel",
+                  "description": "This container contains the network specific parameters.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddComMLowerLayerContribution/CddComMLowerLayerChannel/CddComMLowerLayerChannelRef",
+                      "description": "Unique handle to identify one certain network. Reference to one of the network handles configured for the ComM.",
+                      "destinationContainerType": "ComMChannel",
+                      "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddComMLowerLayerChannelRef",
+                      "uuid": "ECUC:04a155b5-5347-6d01-d9b6-b816ad0b4ea1"
+                    }
+                  ],
+                  "shortName": "CddComMLowerLayerChannel",
+                  "subContainers": [],
+                  "uuid": "ECUC:b14f7886-e3be-20a5-39ee-6de68f8e73d8"
+                }
+              ],
+              "uuid": "ECUC:5b4f2ac7-91fe-d689-99c7-25a9872ae183"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddGenericNmLowerLayerContribution",
+              "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the LowerLayer of the Generic NM module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CddGenericNmLowerLayerContribution",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddGenericNmLowerLayerContribution/CddGenericNmLowerLayerChannel",
+                  "description": "NM Channel specific configuration parameters.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddGenericNmLowerLayerContribution/CddGenericNmLowerLayerChannel/CddGenericNmComMNetworkHandleRef",
+                      "description": "This reference points to the unique channel defined by the ComMChannel and provides access to the unique channel index value in ComMChannelId.",
+                      "destinationContainerType": "ComMChannel",
+                      "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddGenericNmComMNetworkHandleRef",
+                      "uuid": "ECUC:2599af4e-7804-6586-0ae4-ccc1f49a4341"
+                    }
+                  ],
+                  "shortName": "CddGenericNmLowerLayerChannel",
+                  "subContainers": [],
+                  "uuid": "ECUC:3075acc7-9658-1974-6b9d-c09e146673bc"
+                }
+              ],
+              "uuid": "ECUC:1edaeebb-73e9-d723-bfec-eb0cf0d2233a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution",
+              "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the LowerLayer of the Pdu Router module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CddPduRLowerLayerContribution",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu",
+                  "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu/CddPduRApiType",
+                      "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                      "enumValues": [
+                        "IF",
+                        "TP"
+                      ],
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRApiType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:f046067d-0551-6842-b5c8-23e746528dd5"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu/CddPduRLowerLayerHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRLowerLayerHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c0fc79b2-312a-72c8-b19c-b6827312dc7c"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerRxPdu/CddPduRLowerLayerPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRLowerLayerPduRef",
+                      "uuid": "ECUC:40faecbc-c38e-6782-afc3-409e0e96a8d6"
+                    }
+                  ],
+                  "shortName": "CddPduRLowerLayerRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:4c1ef142-2faa-237e-2bd1-5a2ed154c962"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu",
+                  "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu/CddPduRApiType",
+                      "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                      "enumValues": [
+                        "IF",
+                        "TP"
+                      ],
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRApiType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:d683125c-3253-62b4-d4f2-1b9badadd450"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu/CddPduRLowerLayerHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRLowerLayerHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:1bb8eb05-fb92-672d-e401-301f4ca232c9"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRLowerLayerContribution/CddPduRLowerLayerTxPdu/CddPduRLowerLayerPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRLowerLayerPduRef",
+                      "uuid": "ECUC:88bef721-9950-6453-f96f-51c188438992"
+                    }
+                  ],
+                  "shortName": "CddPduRLowerLayerTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:325bfd21-5cac-1df0-4afb-51e338b00fdd"
+                }
+              ],
+              "uuid": "ECUC:19eee4a9-1bfb-d396-a016-c63bbadc414a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution",
+              "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the UpperLayer of the Pdu Router module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CddPduRUpperLayerContribution",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu",
+                  "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu/CddPduRApiType",
+                      "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                      "enumValues": [
+                        "IF",
+                        "TP"
+                      ],
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRApiType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:a78aa97f-e4ad-6492-b184-8493cfe32a3c"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu/CddPduRUpperLayerHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRUpperLayerHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:36823564-7dac-6792-b9bf-963271d00432"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerRxPdu/CddPduRUpperLayerPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRUpperLayerPduRef",
+                      "uuid": "ECUC:d1b5f44a-c794-6f90-cbdc-4bee242e154b"
+                    }
+                  ],
+                  "shortName": "CddPduRUpperLayerRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:03639445-0f06-1fce-278d-badb5ae565c9"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu",
+                  "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu/CddPduRApiType",
+                      "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                      "enumValues": [
+                        "IF",
+                        "TP"
+                      ],
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRApiType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:bd543057-3ed2-6d00-bf00-851c01d3e409"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu/CddPduRUpperLayerHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRUpperLayerHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d3693c59-502f-6edd-d5ef-610207263ce6"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddPduRUpperLayerContribution/CddPduRUpperLayerTxPdu/CddPduRUpperLayerPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRUpperLayerPduRef",
+                      "uuid": "ECUC:3d89542d-aecd-6922-dfed-e516bf5f6829"
+                    }
+                  ],
+                  "shortName": "CddPduRUpperLayerTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:192d1b1c-692b-283c-3509-bb638cd61f96"
+                }
+              ],
+              "uuid": "ECUC:740bf658-0e6d-dcd2-a5a2-1b13f5d1f6f3"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution",
+              "description": "Parameters that are necessary for the configuration of a Complex Driver that serves as the UpperLayer of the SoAd module.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CddSoAdUpperLayerContribution",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu",
+                  "description": "This container specifies Rx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu/CddPduRApiType",
+                      "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                      "enumValues": [
+                        "IF",
+                        "TP"
+                      ],
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRApiType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:1a588fb1-fa49-6549-d117-88f0b04b5256"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu/CddSoAdUpperLayerHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddSoAdUpperLayerHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:b0fc4c9e-db05-6968-f218-37c9266b4fce"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerRxPdu/CddSoAdUpperLayerPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddSoAdUpperLayerPduRef",
+                      "uuid": "ECUC:7a8cd2ed-475f-65e6-e8dc-2ac6108770e4"
+                    }
+                  ],
+                  "shortName": "CddSoAdUpperLayerRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:76317a77-24a2-2085-4720-bf383b4d8de3"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu",
+                  "description": "This container specifies Tx PDUs that are exchanged between the CDD and the standardized BSW module.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu/CddPduRApiType",
+                      "description": "This parameter configures the type of the CDD interface (IF/TP)",
+                      "enumValues": [
+                        "IF",
+                        "TP"
+                      ],
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddPduRApiType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:a465fe6e-072a-698e-ce19-c852c2097688"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu/CddSoAdUpperLayerHandleId",
+                      "description": "ECU wide unique, symbolic handle for the Pdu.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CddSoAdUpperLayerHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c2cfee70-b026-70c2-eade-cbfea8d2c37b"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddComStackContribution/CddSoAdUpperLayerContribution/CddSoAdUpperLayerTxPdu/CddSoAdUpperLayerPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CddSoAdUpperLayerPduRef",
+                      "uuid": "ECUC:0761a839-6274-68c4-c961-be7ad1dfa135"
+                    }
+                  ],
+                  "shortName": "CddSoAdUpperLayerTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:003ee933-3183-24ca-4422-fe9a4d0bb215"
+                }
+              ],
+              "uuid": "ECUC:9c15999f-7ffd-d6d1-c084-d1e806b5982b"
+            }
+          ],
+          "uuid": "ECUC:455cde77-964b-9020-18d3-8a90093f6521"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddEcucPartitionInteraction",
+          "description": "This optional container holds the partition interaction configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddEcucPartitionInteraction/CddPartitionStoppedFunctionName",
+              "description": "Function name to be called when the partition which is triggering the Complex Driver is stopped.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CddPartitionStoppedFunctionName",
+              "type": "FUNCTION",
+              "uuid": "ECUC:ea5fc875-ef47-e2d1-c94a-4cabffb3512a"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddConfigSet/CddEcucPartitionInteraction/CddEcucPartitionRef",
+              "description": "Reference to the \"EcucPartition\" which executes the software which triggers the CDD.",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CddEcucPartitionRef",
+              "uuid": "ECUC:7e031b42-27d7-dd66-c129-cf6f40433a44"
+            }
+          ],
+          "shortName": "CddEcucPartitionInteraction",
+          "subContainers": [],
+          "uuid": "ECUC:37363018-1baf-93ba-357c-5a16fbd903d8"
+        }
+      ],
+      "uuid": "ECUC:d95ad338-d02c-4a3a-8046-ff7234d8d269"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddEcucPartitionInteraction",
+      "description": "This optional container holds the partition interaction configuration.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddEcucPartitionInteraction/CddPartitionStoppedFunctionName",
+          "description": "Function name to be called when the partition which is triggering the Complex Driver is stopped.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CddPartitionStoppedFunctionName",
+          "type": "FUNCTION",
+          "uuid": "ECUC:238bdce9-6863-e429-cb2a-af139b3ea6fd"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cdd/CddEcucPartitionInteraction/CddEcucPartitionRef",
+          "description": "Reference to the \"EcucPartition\" which executes the software which triggers the CDD.",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CddEcucPartitionRef",
+          "uuid": "ECUC:b72f2fb5-a0f3-debe-c30a-31d6dbce9017"
+        }
+      ],
+      "shortName": "CddEcucPartitionInteraction",
+      "subContainers": [],
+      "uuid": "ECUC:7062448b-94cb-9512-375c-bc7e976459ab"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Cdd",
+  "description": "The CDD module describes the minimal requirements that are necessary for the configuration of a CDD with respect to the surrounding standardized BSW modules.",
+  "importWarnings": [
+    "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddComMLowerLayerChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "CddGenericNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddComIfPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddComMLowerLayerChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "CddGenericNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddPduRLowerLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddPduRUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddSoAdUpperLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CddEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "CddEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Cdd",
+  "version": "4.2.2"
+}

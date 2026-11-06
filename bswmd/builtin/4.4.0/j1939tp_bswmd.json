@@ -1,0 +1,940 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "2728bc7417a4dee45facf516d4a4420043ebf05c9901006cd30df47c054f6fec",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration",
+      "description": "This container contains the configuration parameters and sub containers of the J1939Tp module that define the communication paths.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "J1939TpConfiguration",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel",
+          "description": "This container describes a reception channel of the J1939Tp module. A channel referencing N-PDUs without MetaData is used for all N-SDUs that share the same so…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxCancellationSupport",
+              "description": "Enable receive cancellation using the API J1939Tp_CancelReceive() for this channel.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxCancellationSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b9f7bb95-8a10-4b0a-bfc6-5a21fed0f1f8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxDynamicBlockCalculation",
+              "description": "Enable dynamic calculation of \"number of packets that can be sent\" value in TP.CM_CTS, based on the size of buffers in upper layers reported via StartOfRecepti…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxDynamicBlockCalculation",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:12a952f5-a010-454d-aa5f-900769e76022"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxRetrySupport",
+              "description": "Enable support for triggering repetition of failed transmission using TP.CM_CTS with a packet number that has already been sent. Retransmission is triggered wh…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxRetrySupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:6e825eab-8996-4de8-9543-071c1b8ff271"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxDa",
+              "description": "Destination address (DA) of this channel. This parameter is only required for channels with fixed DA which use N-PDUs with MetaData containing the DA.",
+              "isOptional": true,
+              "max": 253,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxDa",
+              "type": "INTEGER",
+              "uuid": "ECUC:5a651cef-6e15-4b89-965f-e4981ab3bee2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 80,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxDynamicBufferRatio",
+              "description": "Percentage of available buffer that shall be used for retry.",
+              "isOptional": true,
+              "max": 100,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxDynamicBufferRatio",
+              "type": "INTEGER",
+              "uuid": "ECUC:1d3623a6-fb5a-45d6-9c0b-ab339bf56710"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 16,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPacketsPerBlock",
+              "description": "Number of TP.DT frames the receiving J1939Tp module allows the sender to send before waiting for another TP.CM_CTS. This parameter is transmitted in the TP.CM_…",
+              "isOptional": true,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxPacketsPerBlock",
+              "type": "INTEGER",
+              "uuid": "ECUC:055119b6-786e-4eb1-8c32-1dcb0f687fd2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxSa",
+              "description": "Source address (SA) of this channel. This parameter is only required for channels with fixed SA which use N-PDUs with MetaData containing the SA.",
+              "isOptional": true,
+              "max": 253,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxSa",
+              "type": "INTEGER",
+              "uuid": "ECUC:b36d2c33-9838-4abd-a346-b4459b31fb3c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxProtocolType",
+              "description": "Protocol type used by this channel. This parameter is only required for channels with fixed destination address.",
+              "enumValues": [
+                "J1939TP_PROTOCOL_BAM",
+                "J1939TP_PROTOCOL_CMDT"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpRxProtocolType",
+              "type": "ENUM",
+              "uuid": "ECUC:d4381061-b05f-46dc-a790-e3aa896e5c1d"
+            }
+          ],
+          "references": [],
+          "shortName": "J1939TpRxChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxCmNPdu",
+              "description": "This N-PDU represents the TP.CM frame of a J1939 transport protocol session. TP.CM is used both by BAM and CMDT to initialize the connection. For CMDT, it is a…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxCmNPdu/J1939TpRxCmNPduId",
+                  "description": "The N-PDU identifier used for communication with CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxCmNPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:464ab287-0148-4c7e-a45e-3813d55cc18d"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxCmNPdu/J1939TpRxCmNPduRef",
+                  "description": "Reference to the Pdu object representing the N-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxCmNPduRef",
+                  "uuid": "ECUC:a9e670c7-aea3-47bd-a4f3-ecb6939dc0ca"
+                }
+              ],
+              "shortName": "J1939TpRxCmNPdu",
+              "subContainers": [],
+              "uuid": "ECUC:6684e309-b1d7-4cbf-993b-59dfa69448a6"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxDtNPdu",
+              "description": "This N-PDU represents the TP.DT frame of a J1939 transport protocol session. TP.DT is used both by BAM and CMDT to transfer the contents of an N-SDU. This N-PD…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxDtNPdu/J1939TpRxDtNPduId",
+                  "description": "The N-PDU identifier used for communication with CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxDtNPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bd6e339d-e54f-409b-8b78-e9607738f5b2"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxDtNPdu/J1939TpRxDtNPduRef",
+                  "description": "Reference to the Pdu object representing the N-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxDtNPduRef",
+                  "uuid": "ECUC:7fba40f8-c31a-438e-9bbe-02b26942ef85"
+                }
+              ],
+              "shortName": "J1939TpRxDtNPdu",
+              "subContainers": [],
+              "uuid": "ECUC:3ffc5cc6-f7c8-4883-86a9-e6fad1fc7e58"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg",
+              "description": "Parameter group received by the J1939 transport layer.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxPgDynLength",
+                  "description": "This flag is set to TRUE when the N-SDU refers to a PGN with variable length.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxPgDynLength",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:5ba82600-95d6-4482-8a3a-8496a546ef37"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxPgPGN",
+                  "description": "PGN of the referenced N-SDUs.",
+                  "isOptional": false,
+                  "max": 262143,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxPgPGN",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:af7e6b86-55ac-47b8-9bd8-29440112fbee"
+                }
+              ],
+              "references": [],
+              "shortName": "J1939TpRxPg",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxDirectNPdu",
+                  "description": "This N-PDU represents the short frame that is used for a dynamic length PGN when it has a length of less that 8 bytes. This N-PDU consumes a meta data item of …",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxDirectNPdu/J1939TpRxDirectNPduId",
+                      "description": "The N-PDU identifier used for communication with CanIf.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpRxDirectNPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:7211a017-168c-4853-8abd-007484113d62"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxDirectNPdu/J1939TpRxDirectNPduRef",
+                      "description": "Reference to the Pdu object representing the N-PDU.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpRxDirectNPduRef",
+                      "uuid": "ECUC:49221d7a-0065-40bf-92c3-e0f4c510cd62"
+                    }
+                  ],
+                  "shortName": "J1939TpRxDirectNPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:4670b8e9-53c8-4a34-952c-93f992443a3f"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxNSdu",
+                  "description": "This container describes the parameters that are relevant for the reception of a specific N-SDU. This N-SDU produces meta data items of type SOURCE_ADDRESS_16,…",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxNSdu/J1939TpRxNSduId",
+                      "description": "This is a unique identifier for a received N-SDU. This Id is used in the CancelReceive and ChangeParameter API call.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpRxNSduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:fab87ba9-da98-4c39-8ae0-4c065cf5780e"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpRxPg/J1939TpRxNSdu/J1939TpRxNSduRef",
+                      "description": "Reference to the Pdu object representing the N-SDU.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpRxNSduRef",
+                      "uuid": "ECUC:b67e8279-7c4e-47c5-ab95-0910efa8f37c"
+                    }
+                  ],
+                  "shortName": "J1939TpRxNSdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:ea21edf4-f628-40a7-9787-b4b79b1cac67"
+                }
+              ],
+              "uuid": "ECUC:d29930e8-2059-4480-8a9c-659a00bff3b2"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpTxFcNPdu",
+              "description": "This N-PDU represents the TP.CM frame that is used in reverse direction for a J1939 transport protocol session using the CMDT protocol type. TP.CM in reverse d…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpTxFcNPdu/J1939TpTxFcNPduTxConfId",
+                  "description": "The N-PDU identifier used for Tx confirmation from CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxFcNPduTxConfId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:812c7bf6-09ca-4a54-8172-7dc5edee1808"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpRxChannel/J1939TpTxFcNPdu/J1939TpTxFcNPduRef",
+                  "description": "Reference to the Pdu object representing the N-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxFcNPduRef",
+                  "uuid": "ECUC:9485f1cb-5ea0-410b-b5ea-665e26e96dc1"
+                }
+              ],
+              "shortName": "J1939TpTxFcNPdu",
+              "subContainers": [],
+              "uuid": "ECUC:f506a124-f4a6-4176-b361-2b8a5788cf0c"
+            }
+          ],
+          "uuid": "ECUC:16037320-3130-46b8-a81e-cd187da021a2"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel",
+          "description": "This container describes a transmission channel of the J1939Tp module. A channel referencing N-PDUs without MetaData is used for all N-SDUs that share the same…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxCancellationSupport",
+              "description": "Enable transmit cancellation using the API J1939Tp_CancelTransmit() for this channel.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpTxCancellationSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:03a6c67b-af79-4353-8bc7-03b3ba0b7c35"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxDynamicBlockCalculation",
+              "description": "Enable dynamic calculation of \"maximum number of packets that can be sent\" value in TP.CM_RTS, based on the available amount of data in upper layers reported v…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpTxDynamicBlockCalculation",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:90c02ca1-3d43-48b9-872c-dec31552ad7e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxRetrySupport",
+              "description": "Enable support for repetition of failed transmission using TP.CM_CTS with a packet number that has already been sent. Retransmission is handled via the retry f…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpTxRetrySupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:647d5d7a-94fc-4c5f-8534-fa64b70f6ac1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxDa",
+              "description": "Destination address (DA) of this channel. This parameter is only required for channels with fixed DA which use N-PDUs with MetaData containing the DA.",
+              "isOptional": true,
+              "max": 253,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpTxDa",
+              "type": "INTEGER",
+              "uuid": "ECUC:656f23f3-6d8f-464a-adf7-bf9771be7527"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 255,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxMaxPacketsPerBlock",
+              "description": "Maximum number of TP.DT frames the transmitting J1939Tp module is ready to send before waiting for another TP.CM_CTS. This parameter is transmitted in the TP.C…",
+              "isOptional": true,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpTxMaxPacketsPerBlock",
+              "type": "INTEGER",
+              "uuid": "ECUC:77bb04f2-c2c5-4f6a-869b-2b6affa9657e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxSa",
+              "description": "Source address (SA) of this channel. This parameter is only required for channels with fixed SA which use N-PDUs with MetaData containing the SA.",
+              "isOptional": true,
+              "max": 253,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpTxSa",
+              "type": "INTEGER",
+              "uuid": "ECUC:cff00ee2-bc09-43cc-bf73-be6df2558061"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxProtocolType",
+              "description": "Protocol type used by this channel. This parameter is only required for channels with fixed destination address.",
+              "enumValues": [
+                "J1939TP_PROTOCOL_BAM",
+                "J1939TP_PROTOCOL_CMDT"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "J1939TpTxProtocolType",
+              "type": "ENUM",
+              "uuid": "ECUC:ad813619-9bf1-445a-9eec-dedc5a20622c"
+            }
+          ],
+          "references": [],
+          "shortName": "J1939TpTxChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpRxFcNPdu",
+              "description": "This N-PDU represents the TP.CM frame that is used in reverse direction for a J1939 transport protocol session using the CMDT protocol type. TP.CM in reverse d…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpRxFcNPdu/J1939TpRxFcNPduId",
+                  "description": "The N-PDU identifier used for communication with CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxFcNPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:48d9bdba-694d-422f-a6cb-be322049623d"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpRxFcNPdu/J1939TpRxFcNPduRef",
+                  "description": "Reference to the Pdu object representing the N-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpRxFcNPduRef",
+                  "uuid": "ECUC:0ab0e89e-f60c-4eb7-a574-0e56cfb41b48"
+                }
+              ],
+              "shortName": "J1939TpRxFcNPdu",
+              "subContainers": [],
+              "uuid": "ECUC:c6f3eb7f-4730-4b1a-80cd-597af81d0ba2"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxCmNPdu",
+              "description": "This N-PDU represents the TP.CM frame of a J1939 transport protocol session. TP.CM is used both by BAM and CMDT to initialize the connection. For CMDT, it is a…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxCmNPdu/J1939TpTxCmNPduTxConfId",
+                  "description": "The N-PDU identifier used for Tx confirmation from CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxCmNPduTxConfId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:4867413f-c3a2-40d6-b492-7af2229ce9a9"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxCmNPdu/J1939TpTxCmNPduRef",
+                  "description": "Reference to the Pdu object representing the N-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxCmNPduRef",
+                  "uuid": "ECUC:2d23b35d-c9e7-4654-b2f9-80ceb3a9df15"
+                }
+              ],
+              "shortName": "J1939TpTxCmNPdu",
+              "subContainers": [],
+              "uuid": "ECUC:997e0b90-6e9a-4bdb-81ff-74c614b6b74a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxDtNPdu",
+              "description": "This N-PDU represents the TP.DT frame of a J1939 transport protocol session. TP.DT is used both by BAM and CMDT to transfer the contents of an N-SDU. This N-PD…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxDtNPdu/J1939TpTxDtNPduTxConfId",
+                  "description": "The N-PDU identifier used for Tx confirmation from CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxDtNPduTxConfId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:45f57865-7eec-4d71-bfc5-53f8e6c1c51d"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxDtNPdu/J1939TpTxDtNPduRef",
+                  "description": "Reference to the Pdu object representing the N-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxDtNPduRef",
+                  "uuid": "ECUC:acef6169-2bc9-4c44-96c5-4671185be67e"
+                }
+              ],
+              "shortName": "J1939TpTxDtNPdu",
+              "subContainers": [],
+              "uuid": "ECUC:fd027a4b-68be-4dba-8c1a-6133972222d5"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg",
+              "description": "Parameter group transmitted by the J1939 transport layer.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxPgDynLength",
+                  "description": "This flag is set to TRUE when the N-SDU refers to a PGN with variable length.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxPgDynLength",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:4748f013-44c7-4aad-93ab-4eab22babff1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxPgPGN",
+                  "description": "PGN of the referenced N-SDUs.",
+                  "isOptional": false,
+                  "max": 262143,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939TpTxPgPGN",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:07fc38c2-2e08-401a-bdc8-2bca67cb6ae0"
+                }
+              ],
+              "references": [],
+              "shortName": "J1939TpTxPg",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxDirectNPdu",
+                  "description": "This N-PDU represents the short frame that is used for a dynamic length PGN when it has a length of less that 8 bytes. This N-PDU produces a meta data item of …",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxDirectNPdu/J1939TpTxDirectNPduTxConfId",
+                      "description": "The N-PDU identifier used for Tx confirmation from CanIf.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpTxDirectNPduTxConfId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:4a52637b-ecb5-4c31-836b-3f812eca7b6e"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxDirectNPdu/J1939TpTxDirectNPduRef",
+                      "description": "Reference to the Pdu object representing the N-PDU.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpTxDirectNPduRef",
+                      "uuid": "ECUC:3bdbad34-85ed-4dee-a011-155d63b45ca0"
+                    }
+                  ],
+                  "shortName": "J1939TpTxDirectNPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:5603000c-c870-43c1-9817-c3e9a355c4e2"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxNSdu",
+                  "description": "This container describes the parameters that are relevant for the transmission of a specific N-SDU. This N-SDU consumes meta data items of type SOURCE_ADDRESS_…",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxNSdu/J1939TpTxNSduId",
+                      "description": "The N-SDU identifier used for communication with PduR.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpTxNSduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:e3ac8ee6-ab25-43c8-b35c-ab18502dbb43"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpConfiguration/J1939TpTxChannel/J1939TpTxPg/J1939TpTxNSdu/J1939TpTxNSduRef",
+                      "description": "Reference to the Pdu object representing the N-SDU.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939TpTxNSduRef",
+                      "uuid": "ECUC:a0fdbc88-365e-44d0-849e-086cb4753d4e"
+                    }
+                  ],
+                  "shortName": "J1939TpTxNSdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:f56b592b-4066-4964-9d6e-7997362ad1c8"
+                }
+              ],
+              "uuid": "ECUC:1089c025-9282-40b4-bc33-9ab7219624a7"
+            }
+          ],
+          "uuid": "ECUC:4e8c4bc7-f756-452c-8473-b5e269d5e64d"
+        }
+      ],
+      "uuid": "ECUC:002a61c9-c3cf-4ef9-9d1c-551864f217f6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpGeneral",
+      "description": "This container describes the general configuration parameters of the J1939Tp module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpGeneral/J1939TpCancellationSupport",
+          "description": "Enable transmit and receive cancellation.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939TpCancellationSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6ac44a46-ad45-4a96-91f2-1c3cb665054a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpGeneral/J1939TpDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939TpDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6fa4d436-1366-4f19-b138-a6b1e8298b46"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpGeneral/J1939TpVersionInfoApi",
+          "description": "The function J1939Tp_GetVersionInfo is configurable (On/Off) by this configuration parameter.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939TpVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d5b779eb-21fa-4a8b-bf7b-37792e970577"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp/J1939TpGeneral/J1939TpMainFunctionPeriod",
+          "description": "Allow to configure the time for the MainFunction (in seconds).",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939TpMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:88728f57-6db8-4d34-8b0b-91e427732ecc"
+        }
+      ],
+      "references": [],
+      "shortName": "J1939TpGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:49139360-a21c-43bb-8469-400fd36fe9ca"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/J1939Tp",
+  "description": "Configuration of the J1939Tp (J1939 Transport Protocol) module.",
+  "importWarnings": [
+    "J1939TpRxCmNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpRxDtNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpRxDirectNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpTxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpRxFcNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpTxCmNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpTxDtNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpTxDirectNPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939TpTxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "J1939Tp",
+  "version": "4.4.0"
+}

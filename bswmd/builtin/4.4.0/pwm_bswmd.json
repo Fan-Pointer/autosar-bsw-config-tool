@@ -1,0 +1,482 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "f8458bb56463b1a4c32f4228e20469b6a3bc0097342a97aca67801414e8eae4f",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Pwm module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "PwmChannelConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel",
+          "description": "Configuration of an individual PWM channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmChannelClass",
+              "description": "Class of PWM Channel.",
+              "enumValues": [
+                "PWM_FIXED_PERIOD",
+                "PWM_FIXED_PERIOD_SHIFTED",
+                "PWM_VARIABLE_PERIOD"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PwmChannelClass",
+              "type": "ENUM",
+              "uuid": "ECUC:31505abb-2296-4c99-bdb7-d0909f0440f2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmIdleState",
+              "description": "The parameter PWM_IDLE_STATE represents the output state of the PWM after the signal is stopped (e.g. call of Pwm_SetOutputToIdle).",
+              "enumValues": [
+                "PWM_HIGH",
+                "PWM_LOW"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmIdleState",
+              "type": "ENUM",
+              "uuid": "ECUC:7cc25f83-b89c-4ba0-8766-7ba087185c97"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmPolarity",
+              "description": "Defines the starting polarity of each PWM channel.",
+              "enumValues": [
+                "PWM_HIGH",
+                "PWM_LOW"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmPolarity",
+              "type": "ENUM",
+              "uuid": "ECUC:a31896f1-a4ab-4dc8-a116-aff3df41810f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmChannelId",
+              "description": "Channel Id of the PWM channel. This value will be assigned to the symbolic name derived of the PwmChannel container short name.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:3a0e3f14-a2b9-428e-9b76-6a361c8b2ea4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmDutycycleDefault",
+              "description": "Value of duty cycle used for Initialization",
+              "isOptional": false,
+              "max": 32768,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmDutycycleDefault",
+              "type": "INTEGER",
+              "uuid": "ECUC:daa5c051-75d5-4a20-8b6a-ca34afab3ddd"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "\"NULL\"",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmNotification",
+              "description": "Definition of the Callback function.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PwmNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:44bb38ac-d409-4b1d-96be-ec84466c1019"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmPeriodDefault",
+              "description": "Value of period used for Initialization.(in seconds).",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmPeriodDefault",
+              "type": "FLOAT",
+              "uuid": "ECUC:2e258b97-f1d8-4dc0-ad1a-dbdc0445568b"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmChannelEcucPartitionRef",
+              "description": "Maps a PWM channel to zero or multiple ECUC partitions to limit the access to this channe. The ECUC partitions referenced are a subset of the ECUC partitions w…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "PwmChannelEcucPartitionRef",
+              "uuid": "ECUC:e5ec6c8a-32db-4b8b-af74-5098184de965"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel/PwmMcuClockReferencePoint",
+              "description": "This parameter contains reference to the McuClockReferencePoint",
+              "destinationContainerType": "McuClockReferencePoint",
+              "destinationRef": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmMcuClockReferencePoint",
+              "uuid": "ECUC:c945dd5e-1a5b-4bcc-a8ab-0a4d19ec3585"
+            }
+          ],
+          "shortName": "PwmChannel",
+          "subContainers": [],
+          "uuid": "ECUC:c2253a76-e0d8-4a8f-b383-ce80ffc0e870"
+        }
+      ],
+      "uuid": "ECUC:64be7cd3-9cb3-4e87-b679-3a43aaf7f82c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmConfigurationOfOptApiServices",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmConfigurationOfOptApiServices/PwmDeInitApi",
+          "description": "Adds / removes the service Pwm_DeInit() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmDeInitApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3e3da645-2c56-4fd5-9fe6-2b2cd88ed6d8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmConfigurationOfOptApiServices/PwmGetOutputState",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmGetOutputState",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8a7eb9e8-f5d3-4585-855b-72634c98da24"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmConfigurationOfOptApiServices/PwmSetDutyCycle",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmSetDutyCycle",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bf14870c-ef7a-4d27-a6c0-4ebd02c8fdfe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmConfigurationOfOptApiServices/PwmSetOutputToIdle",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmSetOutputToIdle",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:45d9cbcc-c5b7-4c76-8469-5b65f7e9d6cd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmConfigurationOfOptApiServices/PwmSetPeriodAndDuty",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmSetPeriodAndDuty",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bbb4cf88-5a3a-4053-8eae-023f3990279e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmConfigurationOfOptApiServices/PwmVersionInfoApi",
+          "description": "Switch to indicate that the Pwm_ GetVersionInfo is supported",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:33bfc216-9d93-4694-90c5-39340e82c758"
+        }
+      ],
+      "references": [],
+      "shortName": "PwmConfigurationOfOptApiServices",
+      "subContainers": [],
+      "uuid": "ECUC:946d9f33-9bb7-48d7-8278-0f6efdacfaeb"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7ee4dbf7-92ca-43f8-bedf-cd012b1d5f01"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmDutycycleUpdatedEndperiod",
+          "description": "Switch for enabling the update of the duty cycle parameter at the end of the current period.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmDutycycleUpdatedEndperiod",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:873477b1-c07e-4208-b92e-4e1875570984"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmLowPowerStatesSupport",
+          "description": "Adds / removes all power state management related APIs (PWM_SetPowerState, PWM_GetCurrentPowerState, PWM_GetTargetPowerState, PWM_PreparePowerState, PWM_Main_P…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "PwmLowPowerStatesSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2abff61e-374e-4c26-bcc6-6486e894e765"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmNotificationSupported",
+          "description": "Switch to indicate that the notifications are supported",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmNotificationSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:39804e4a-209d-4df8-ade1-4e0cd88cc57d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmPeriodUpdatedEndperiod",
+          "description": "Switch for enabling the update of the period parameter at the end of the current period.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmPeriodUpdatedEndperiod",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:da85e8d7-af3c-4ad4-a700-43ea0462bee4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmPowerStateAsynchTransitionMode",
+          "description": "Enables / disables support of the PWM Driver to the asynchronous power state transition.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "PwmPowerStateAsynchTransitionMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a510f93f-3393-467e-8c07-090d589c89f6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PwmIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:1559f6dc-e859-4216-8c88-0f8836ae115e"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmEcucPartitionRef",
+          "description": "Maps the PWM driver to zero or multiple ECUC partitions to make the driver API available in the according partition. Tags: atp.Status=draft",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "PwmEcucPartitionRef",
+          "uuid": "ECUC:ff7ff096-9089-4721-92ff-e1fa7037ef39"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmKernelEcucPartitionRef",
+          "description": "Maps the PWM kernel to zero or one ECUC partitions to assign the driver kernel to a certain core. The ECUC partition referenced is a subset of the ECUC partiti…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "PwmKernelEcucPartitionRef",
+          "uuid": "ECUC:41261ae7-f458-4aa7-8ca0-1a8b60bd2711"
+        }
+      ],
+      "shortName": "PwmGeneral",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmPowerStateConfig",
+          "description": "Each instance of this parameter defines a power state and the callback to be called when this power state is reached.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmPowerStateConfig/PwmPowerState",
+              "description": "Each instance of this parameter describes a different power state supported by the PWM HW. It should be defined by the HW supplier and used by the PWMDriver to…",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmPowerState",
+              "type": "INTEGER",
+              "uuid": "ECUC:ee4c6090-0034-4736-bdd2-7ad86f21e9d3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Pwm/PwmGeneral/PwmPowerStateConfig/PwmPowerStateReadyCbkRef",
+              "description": "Each instance of this parameter contains a reference to a power mode callback defined in a CDD or IoHwAbs component.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PwmPowerStateReadyCbkRef",
+              "type": "FUNCTION",
+              "uuid": "ECUC:6e8869ff-d465-40bf-9296-d75dce548e58"
+            }
+          ],
+          "references": [],
+          "shortName": "PwmPowerStateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:32734417-2e9b-48db-930e-3df1591c3887"
+        }
+      ],
+      "uuid": "ECUC:9e045944-b70f-48ae-9745-0344fa64c653"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Pwm",
+  "description": "Configuration of Pwm (Pulse Width Modulation) module.",
+  "importWarnings": [
+    "PwmChannelEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "PwmChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "PwmMcuClockReferencePoint：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。",
+    "PwmEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "PwmEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "PwmKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Pwm",
+  "version": "4.4.0"
+}

@@ -1,0 +1,261 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "722719123292f13a3d6c49e3b44e72963384f4954f601cba68b5190e9d6cf0c7",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig",
+      "description": "This container contains the global configuration parameter of the LinNm.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmBusSynchronizationEnabled",
+          "description": "Pre-processor switch for enabling bus synchronization support of the LinNm. This feature is required for NM Coordinator nodes only.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmBusSynchronizationEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:34aeae50-3f53-4ad2-ae2f-6d24cae5270b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmComControlEnabled",
+          "description": "Pre-processor switch for enabling the Communication Control support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmComControlEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fffa7ced-3e7e-4677-bb33-686b51c7ba4e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmCoordinatorSyncSupport",
+          "description": "Enables/disables the coordinator synchronization support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmCoordinatorSyncSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9a677008-f8c6-4f6c-9719-52b509bbd794"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b7386aaf-43d7-44ef-aa6d-86024fcef154"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmPassiveModeEnabled",
+          "description": "Pre-processor switch for enabling support of the Passive Mode of the LinNm.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmPassiveModeEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:67c1b2c5-48f6-41bb-8e42-f128d18c1530"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmRemoteSleepIndicationEnabled",
+          "description": "Pre-processor switch for enabling Remote Sleep Indication support. This feature is required for NM Coordinator nodes only.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmRemoteSleepIndicationEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:61c8f2bc-ea1c-415d-be2d-debd42b3dd45"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmStateChangeIndEnabled",
+          "description": "Pre-processor switch for enabling the Network Management state change notification.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmStateChangeIndEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ab459bd1-c4a1-4d4f-8b8a-5e8c70fa6c6e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmSynchronizationPointEnabled",
+          "description": "Pre-processor switch for enabling the Synchronize NM feature.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmSynchronizationPointEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9e87222e-0b46-41f5-8407-11b4e8ff44e8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmUserDataEnabled",
+          "description": "Pre-processor switch for enabling User Data support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmUserDataEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:52314590-0421-48d3-bbf2-e15b7ec4f3b7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmVersionInfoApi",
+          "description": "Pre-processor switch for enabling version info API support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f7596ee2-cac8-4869-998d-8eda86c28e5f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmMainFunctionPeriod",
+          "description": "Call cycle in seconds of LinNm_MainFunction.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinNmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:74936c9b-b028-4c6c-9d04-c058a04d7675"
+        }
+      ],
+      "references": [],
+      "shortName": "LinNmGlobalConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmChannelConfig",
+          "description": "This container contains the channel specific configuration parameter of the LinNm.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmChannelConfig/LinNmNodeDetectionEnabled",
+              "description": "Pre-processor switch for enabling the Node Detection feature.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinNmNodeDetectionEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:565b8109-27e0-493b-9021-2ab33ceb1c04"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmChannelConfig/LinNmNodeIdEnabled",
+              "description": "Pre-processor switch for enabling transmission of the source node identifier in NM messages.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinNmNodeIdEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:705925d2-4113-4afe-9998-bf899134457f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmChannelConfig/LinNmTimeoutTime",
+              "description": "Network Timeout after passive start-up. It denotes the time in seconds how long the NM shall stay in Network Mode in case of passive start-up before transition…",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinNmTimeoutTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:b17affc5-60b4-40a5-8901-2598e032e60d"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinNm/LinNmGlobalConfig/LinNmChannelConfig/LinNmComMNetworkHandleRef",
+              "description": "This reference points to the unique channel defined by the ComMChannel and provides access to the unique channel index value in ComMChannelId.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinNmComMNetworkHandleRef",
+              "uuid": "ECUC:a58e0dac-8547-4692-a211-9779f082a36c"
+            }
+          ],
+          "shortName": "LinNmChannelConfig",
+          "subContainers": [],
+          "uuid": "ECUC:a5ee4f06-740c-4bbb-bdfe-d5d513102e68"
+        }
+      ],
+      "uuid": "ECUC:534f84b2-6d05-4c99-8dee-8f74bf3e15a1"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/LinNm",
+  "description": "Configuration Parameters for the Lin Nm module.",
+  "importWarnings": [
+    "LinNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "LinNm",
+  "version": "4.4.0"
+}

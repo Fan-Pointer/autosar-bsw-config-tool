@@ -1,0 +1,1503 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "5e02c84c7a10e733f413b70c39e107ae95d4ce29b80968e90b30af8ffede9b51",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Service Discovery module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "SdConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance",
+          "description": "This container represents an instance of the SD; i.e. the SD configuration for a certain link.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceHostname",
+              "description": "Configuration parameter to specify the Hostname.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SdInstanceHostname",
+              "type": "STRING",
+              "uuid": "ECUC:ae63ecde-952c-49e6-a911-49c039a553d3"
+            }
+          ],
+          "references": [],
+          "shortName": "SdInstance",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService",
+              "description": "This container specifies all parameters used by Client services.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceAutoRequire",
+                  "description": "If existing and set to true, this Service will be set to \"required\" on start.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceAutoRequire",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:b0aefe0b-0801-4486-8807-37c44397bf5a"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceHandleId",
+                  "description": "The HandleId by which the BswM can identify this Client Service Instance.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:e55d49c4-21ba-4b1c-8dbd-5d33c6c343c0"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceId",
+                  "description": "Id to identify the service. This is unique for the service interface.",
+                  "isOptional": false,
+                  "max": 65534,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:55150245-ac37-4a34-bf4a-cd44c7d77ee7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceInstanceId",
+                  "description": "Configuration parameter to specify Instance Id of the service as used in SD entries.",
+                  "isOptional": false,
+                  "max": 65534,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceInstanceId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:89e8e56f-96f8-4a54-9229-0b15538df8ba"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceMajorVersion",
+                  "description": "Major version number of the Service as used in the SD entries.",
+                  "isOptional": false,
+                  "max": 254,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceMajorVersion",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:76ba4bba-a54e-4a52-b129-57fe3959dd5c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceMinorVersion",
+                  "description": "Minor version number of the Service as used in the SD Service Entries.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceMinorVersion",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:def32508-2c8f-49f2-bc83-24607c4befef"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceTcpRef",
+                  "description": "Reference to the SoAdSocketConnection representing the data path (TCP) for communication with methods.",
+                  "destinationContainerType": "SoAdSocketConnectionGroup",
+                  "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceTcpRef",
+                  "uuid": "ECUC:bd317a9e-01ab-44f2-9361-55f035da9043"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceTimerRef",
+                  "description": "The reference of the SdClientTimer container for this service.",
+                  "destinationContainerType": "SdClientTimer",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceTimerRef",
+                  "uuid": "ECUC:50712e7a-7cf2-42a0-b9bf-0c74635c7890"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientServiceUdpRef",
+                  "description": "Reference to the SoAdSocketConnection representing the data path (UDP) for communication with methods.",
+                  "destinationContainerType": "SoAdSocketConnectionGroup",
+                  "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientServiceUdpRef",
+                  "uuid": "ECUC:bccf7329-9e29-44af-be83-148ca6537803"
+                }
+              ],
+              "shortName": "SdClientService",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientCapabilityRecord",
+                  "description": "Sd uses capability records to store arbitrary name/value pairs conveying additional information about the named service.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientCapabilityRecord/SdClientServiceCapabilityRecordKey",
+                      "description": "Defines a CapabilityRecord key.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdClientServiceCapabilityRecordKey",
+                      "type": "STRING",
+                      "uuid": "ECUC:036b1450-e10e-d0f7-e2e4-4591149fe6db"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdClientCapabilityRecord/SdClientServiceCapabilityRecordValue",
+                      "description": "Defines the corresponding CapabilityRecord value.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SdClientServiceCapabilityRecordValue",
+                      "type": "STRING",
+                      "uuid": "ECUC:62783abe-e3b8-d599-c2f1-9a4db2fed89d"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "SdClientCapabilityRecord",
+                  "subContainers": [],
+                  "uuid": "ECUC:aac361f2-7417-8d40-2c11-28fd180bafe0"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup",
+                  "description": "A Service may have event groups which can be consumed. A service consumer has to subscribe to the corresponding event-group. After the subscription the event c…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupAutoRequire",
+                      "description": "If existing and set to true, this EventGroup will be set to \"required\" on start.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdConsumedEventGroupAutoRequire",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:ba0a63f1-7167-438d-8854-3b0ad958e3c4"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupHandleId",
+                      "description": "The HandleId by which the BswM can identify this EventGroup.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdConsumedEventGroupHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:9f56182e-3725-4353-afd4-b8ba2347ec42"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupId",
+                      "description": "The Eventgroup Id of this eventGroup as a unique identifier of the eventgroup in this service. This identifier is used for EventGroup entries as well.",
+                      "isOptional": false,
+                      "max": 65534,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdConsumedEventGroupId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:505b0b9e-3cc1-4549-bb8b-47e02ee0c7d6"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupMulticastGroupRef",
+                      "description": "Reference to the SoAdSocketConnectionGroup representing the multicast data path (UDP).",
+                      "destinationContainerType": "SoAdSocketConnectionGroup",
+                      "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup"
+                      ],
+                      "isExternal": true,
+                      "isOptional": true,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "shortName": "SdConsumedEventGroupMulticastGroupRef",
+                      "uuid": "ECUC:60954940-cc93-4641-a774-e9cf0ca8d8a8"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupTimerRef",
+                      "description": "The reference of the SdClientTimer container for this eventGroup.",
+                      "destinationContainerType": "SdClientTimer",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdConsumedEventGroupTimerRef",
+                      "uuid": "ECUC:c3bd7117-3c06-4440-ba51-604e0969d72e"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupMulticastActivationRef",
+                      "description": "The reference of a Routing Group in order to activate and setup the Socket Connection for Multicast Events of this EventGroup. The multicast address from the r…",
+                      "destinationContainerType": "SoAdRoutingGroup",
+                      "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                      ],
+                      "isExternal": true,
+                      "isOptional": true,
+                      "kind": "symbolic",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SdConsumedEventGroupMulticastActivationRef",
+                      "uuid": "ECUC:44ad17a6-751c-42a5-98b1-f061bd1ef9bd"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupTcpActivationRef",
+                      "description": "The reference of the Routing Group for activation of the data path for receiving TCP events.",
+                      "destinationContainerType": "SoAdRoutingGroup",
+                      "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                      ],
+                      "isExternal": true,
+                      "isOptional": true,
+                      "kind": "symbolic",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SdConsumedEventGroupTcpActivationRef",
+                      "uuid": "ECUC:cc5bdf5c-9c41-4731-813b-675d5de9f72e"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdConsumedEventGroupUdpActivationRef",
+                      "description": "The reference of the Routing Group for activation of the data path for receiving UDP events.",
+                      "destinationContainerType": "SoAdRoutingGroup",
+                      "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                      ],
+                      "isExternal": true,
+                      "isOptional": true,
+                      "kind": "symbolic",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SdConsumedEventGroupUdpActivationRef",
+                      "uuid": "ECUC:741ee45e-e2c6-48da-aa09-ef7bd1361513"
+                    }
+                  ],
+                  "shortName": "SdConsumedEventGroup",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdClientCapabilityRecord",
+                      "description": "Sd uses capability records to store arbitrary name/value pairs conveying additional information about the named service.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdClientCapabilityRecord/SdClientServiceCapabilityRecordKey",
+                          "description": "Defines a CapabilityRecord key.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "SdClientServiceCapabilityRecordKey",
+                          "type": "STRING",
+                          "uuid": "ECUC:900f7687-13a9-d262-e8d1-7a45c6fe56c9"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedEventGroup/SdClientCapabilityRecord/SdClientServiceCapabilityRecordValue",
+                          "description": "Defines the corresponding CapabilityRecord value.",
+                          "isOptional": true,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdClientServiceCapabilityRecordValue",
+                          "type": "STRING",
+                          "uuid": "ECUC:ef1c9cf5-1653-d704-c8de-cf02655d488b"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "SdClientCapabilityRecord",
+                      "subContainers": [],
+                      "uuid": "ECUC:3767c428-a6b2-8eab-31fe-5db1ca6a1fce"
+                    }
+                  ],
+                  "uuid": "ECUC:83329fec-a819-451e-96f0-64151aa3524a"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedMethods",
+                  "description": "Container element for representing the data path for accessing the server methods.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientService/SdConsumedMethods/SdClientServiceActivationRef",
+                      "description": "Reference to a SoAdRoutingGroupRef to activate/deactivate the data path for the methods.",
+                      "destinationContainerType": "SoAdRoutingGroup",
+                      "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "symbolic",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdClientServiceActivationRef",
+                      "uuid": "ECUC:312665e5-3bbf-42cc-a0d6-2cfcb81e2f75"
+                    }
+                  ],
+                  "shortName": "SdConsumedMethods",
+                  "subContainers": [],
+                  "uuid": "ECUC:9df5f68a-cff8-4c24-9d91-ab14d93739d6"
+                }
+              ],
+              "uuid": "ECUC:f68e3db6-757e-43b3-9103-2f606844e25c"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer",
+              "description": "This container specifies all timers used by the Service Discovery module for Client Services.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer/SdClientTimerInitialFindDelayMax",
+                  "description": "Max value in [s] to delay randomly the transmission of a find message. This parameter is mandatory for ClientService.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientTimerInitialFindDelayMax",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:1a21c6e5-384a-4e0d-9629-c2c8818e3853"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer/SdClientTimerInitialFindDelayMin",
+                  "description": "Min value in [s] to delay randomly the transmission of a find message. This parameter is mandatory for ClientService.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientTimerInitialFindDelayMin",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:d9c73e19-0364-4c48-9879-8db8d02ab112"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer/SdClientTimerInitialFindRepetitionsBaseDelay",
+                  "description": "The base delay in [s] for find repetitions. Successive finds have an exponential back off delay (1x base delay, 2x base delay, 4x base delay, ...). This parame…",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientTimerInitialFindRepetitionsBaseDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:8e1d6e7e-9f2d-418a-905e-de3054e5331f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer/SdClientTimerRequestResponseMaxDelay",
+                  "description": "Maximum allowable response delay to entries received by multicast in seconds. This parameter is mandatory for ConsumedEventGroups.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientTimerRequestResponseMaxDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:6b73d0a8-21a2-426f-8b4b-416d9349c512"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer/SdClientTimerRequestResponseMinDelay",
+                  "description": "Minimum allowable response delay to the find message in seconds. This parameter is mandatory for ConsumedEventGroups.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientTimerRequestResponseMinDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:c19c4138-80e9-4299-b797-f94616832cb8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer/SdClientTimerInitialFindRepetitionsMax",
+                  "description": "Configuration for the maximum number of find repetitions. This parameter is mandatory for ClientService.",
+                  "isOptional": true,
+                  "max": 10,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientTimerInitialFindRepetitionsMax",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:3d026bb0-8af3-498a-9c13-ea6881c55780"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdClientTimer/SdClientTimerTTL",
+                  "description": "Time to live for find and subscribe messages.",
+                  "isOptional": false,
+                  "max": 16777215,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdClientTimerTTL",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:68fd030c-092e-45b6-9510-b120cdcc8054"
+                }
+              ],
+              "references": [],
+              "shortName": "SdClientTimer",
+              "subContainers": [],
+              "uuid": "ECUC:c443f1b3-de9c-4af4-8002-1dd9afaf083b"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occur…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceDemEventParameterRefs/SD_E_MALFORMED_MSG",
+                  "description": "Reference to the DemEventParameter which shall be issued when the SD Instance received malformed messsage.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SD_E_MALFORMED_MSG",
+                  "uuid": "ECUC:153db4a1-3900-46d6-ab60-53ba740c83cb"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceDemEventParameterRefs/SD_E_OUT_OF_RES",
+                  "description": "Reference to the DemEventParameter which shall be issued when the SD Instance does not have enough resources to handle client.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SD_E_OUT_OF_RES",
+                  "uuid": "ECUC:89b9f271-e2c6-470d-b4e9-3607d5197cb4"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceDemEventParameterRefs/SD_E_SUBSCR_NACK_RECV",
+                  "description": "Reference to the DemEventParameter which shall be issued when receiving SubscribeEventgroupNack entry.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SD_E_SUBSCR_NACK_RECV",
+                  "uuid": "ECUC:aae7e481-50ea-4ce1-8521-79183b4b86c2"
+                }
+              ],
+              "shortName": "SdInstanceDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:73ceeafa-cd1d-49eb-92df-8dd4fee8120a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceMulticastRxPdu",
+              "description": "This container specifies the received PDU.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceMulticastRxPdu/SdRxPduId",
+                  "description": "ID of the PDU that will be received via the API Sd_SoAdIfRxIndication().",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:1be8da89-4233-4359-aa0c-af5ab04dbec1"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceMulticastRxPdu/SdRxPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdRxPduRef",
+                  "uuid": "ECUC:98ef8aa7-6ae3-46cc-aa15-16489eaf952e"
+                }
+              ],
+              "shortName": "SdInstanceMulticastRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:bea12c80-f2e7-436e-8b0c-84c85b798f0f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceTxPdu",
+              "description": "This container specifies the transmitted PDU.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceTxPdu/SdTxPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdTxPduRef",
+                  "uuid": "ECUC:6d7b96cb-5291-42d9-9f11-18526e08f918"
+                }
+              ],
+              "shortName": "SdInstanceTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:9860bb63-3785-4422-9f84-c1ebed9be61a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceUnicastRxPdu",
+              "description": "This container specifies the received PDU.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceUnicastRxPdu/SdRxPduId",
+                  "description": "ID of the PDU that will be received via the API Sd_SoAdIfRxIndication().",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:60ade062-f122-45e5-b8e3-5ee8dd3e5742"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdInstanceUnicastRxPdu/SdRxPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdRxPduRef",
+                  "uuid": "ECUC:0665655e-b25c-45a0-b5f6-f29616d77fd7"
+                }
+              ],
+              "shortName": "SdInstanceUnicastRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:2c61fb83-0189-4677-b735-a69f39ddf17e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService",
+              "description": "This container specifies all parameters used by Server services.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": false,
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceAutoAvailable",
+                  "description": "If existing and set to true, this Service will be set to \"Available\" on start.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceAutoAvailable",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:84312806-2ac0-4c8c-a910-7c1f3ad6f752"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceHandleId",
+                  "description": "The HandleId by which the BswM can identify this Server Service Instance.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ce2a7cd7-64ff-4d90-916b-ba896157fa67"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceId",
+                  "description": "Id to identify the service. This is unique for the service interface.",
+                  "isOptional": false,
+                  "max": 65534,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:3525b90b-f352-4412-8bb6-8c5fe5368a8d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceInstanceId",
+                  "description": "Configuration parameter to specify Instance Id of the Service implemented by the Server Service.",
+                  "isOptional": false,
+                  "max": 65534,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceInstanceId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:0cc94fdc-f6e0-41a5-9f94-702e1eeca869"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceMajorVersion",
+                  "description": "Major version number of the Service as used in SD Entries.",
+                  "isOptional": false,
+                  "max": 254,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceMajorVersion",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:b978e561-cc50-49bb-9904-5dcdd7b5f942"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceMinorVersion",
+                  "description": "Minor version number of the Service as used e.g. in Offer Service entries.",
+                  "isOptional": false,
+                  "max": 4294967294,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceMinorVersion",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6fe78ada-4229-4652-91a4-61b0a7f93811"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceTcpRef",
+                  "description": "Reference to SoAdSocketConnectionGroup used for methods.",
+                  "destinationContainerType": "SoAdSocketConnectionGroup",
+                  "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceTcpRef",
+                  "uuid": "ECUC:b3498ae5-faa5-42b7-ad50-c0a6c9230366"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceTimerRef",
+                  "description": "The reference of the SdServerTimer container for this service.",
+                  "destinationContainerType": "SdServerTimer",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceTimerRef",
+                  "uuid": "ECUC:8d4c6253-06aa-4cc4-9b4e-7f4b621e6a11"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerServiceUdpRef",
+                  "description": "Reference to SoAdSocketConnectionGroup used for methods.",
+                  "destinationContainerType": "SoAdSocketConnectionGroup",
+                  "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerServiceUdpRef",
+                  "uuid": "ECUC:cf179e95-120d-46f9-9af3-ffe21c5853fa"
+                }
+              ],
+              "shortName": "SdServerService",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler",
+                  "description": "Container Element for representing an EventGroup as part of the Service Instance.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerEventGroupId",
+                      "description": "The EventGroup Id of this EventGroup as a unique identifier of the EventGroup in this service. This identifier is used for EventGroup entries as well.",
+                      "isOptional": false,
+                      "max": 65534,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdEventHandlerEventGroupId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f35274e5-c81e-46db-85e0-c8c87a035ceb"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerHandleId",
+                      "description": "The HandleId by which the BswM can identify this EventGroup.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdEventHandlerHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:82078ed5-703f-4f07-a18f-96d753123380"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerMulticastThreshold",
+                      "description": "Specifies the number of subscribed clients that trigger the Server to change the transmission of events to Multicast.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdEventHandlerMulticastThreshold",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c1839189-c609-4754-b527-ac6fbab2d338"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerTimerRef",
+                      "description": "The reference of the SdServerTimer container for this EventGroup.",
+                      "destinationContainerType": "SdServerTimer",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdEventHandlerTimerRef",
+                      "uuid": "ECUC:cb252f3e-aecf-4f25-86d8-bead3b24302a"
+                    }
+                  ],
+                  "shortName": "SdEventHandler",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerMulticast",
+                      "description": "The subcontainer including the Routing Group for Activation of Events sent over Multicast.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerMulticast/SdEventActivationRef",
+                          "description": "Reference to a SoAdRoutingGroup for activation of the data path for a subscribed client (start sending events after subscribe).",
+                          "destinationContainerType": "SoAdRoutingGroup",
+                          "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "symbolic",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdEventActivationRef",
+                          "uuid": "ECUC:fcee271a-c77c-92c3-553c-54fc8ffcb6ba"
+                        },
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerMulticast/SdMulticastEventSoConRef",
+                          "description": "Reference to the SoAdSocketConnection representing the multicast data path (UDP).",
+                          "destinationContainerType": "SoAdSocketConnection",
+                          "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "symbolic",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdMulticastEventSoConRef",
+                          "uuid": "ECUC:4cd26add-e83b-4f4a-8e7b-85e564ed0313"
+                        }
+                      ],
+                      "shortName": "SdEventHandlerMulticast",
+                      "subContainers": [],
+                      "uuid": "ECUC:7455adf8-6cdb-48c7-bf10-411438fafd5d"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerTcp",
+                      "description": "The subcontainer including the Routing Groups for Activation and Trigger Transmit for Events sent over TCP.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerTcp/SdEventActivationRef",
+                          "description": "Reference to a SoAdRoutingGroup for activation of the data path for a subscribed client (start sending events after subscribe).",
+                          "destinationContainerType": "SoAdRoutingGroup",
+                          "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "symbolic",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdEventActivationRef",
+                          "uuid": "ECUC:c5ba83aa-57be-9277-550f-0be47d2adcd3"
+                        },
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerTcp/SdEventTriggeringRef",
+                          "description": "Reference to a SoAdRoutingGroup that is used for triggered transmit. Triggering is needed to sent out initial events on the server side after a client got subs…",
+                          "destinationContainerType": "SoAdRoutingGroup",
+                          "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "symbolic",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdEventTriggeringRef",
+                          "uuid": "ECUC:3ff6e054-70b5-8f1c-79a4-ba9fd271e728"
+                        }
+                      ],
+                      "shortName": "SdEventHandlerTcp",
+                      "subContainers": [],
+                      "uuid": "ECUC:3d220a87-fd1d-487b-bee2-f7fc26292376"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerUdp",
+                      "description": "The subcontainer including the Routing Groups for Activation and Trigger Transmit for Events sent over UDP.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerUdp/SdEventActivationRef",
+                          "description": "Reference to a SoAdRoutingGroup for activation of the data path for a subscribed client (start sending events after subscribe).",
+                          "destinationContainerType": "SoAdRoutingGroup",
+                          "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "symbolic",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdEventActivationRef",
+                          "uuid": "ECUC:78eaad1e-8038-921d-187d-4a887b8febe8"
+                        },
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdEventHandlerUdp/SdEventTriggeringRef",
+                          "description": "Reference to a SoAdRoutingGroup that is used for triggered transmit. Triggering is needed to sent out initial events on the server side after a client got subs…",
+                          "destinationContainerType": "SoAdRoutingGroup",
+                          "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "symbolic",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdEventTriggeringRef",
+                          "uuid": "ECUC:f32709c8-992f-8ec2-3d12-f943d0d6f63d"
+                        }
+                      ],
+                      "shortName": "SdEventHandlerUdp",
+                      "subContainers": [],
+                      "uuid": "ECUC:f05233fc-2597-4821-8251-36a0248e328b"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdServerCapabilityRecord",
+                      "description": "Sd uses capability records to store arbitrary name/value pairs conveying additional information about the named service.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdServerCapabilityRecord/SdServerCapabilityRecordKey",
+                          "description": "Defines a CapabilityRecord key.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "SdServerCapabilityRecordKey",
+                          "type": "STRING",
+                          "uuid": "ECUC:85581780-b2a7-e4f6-f115-c361ebc73326"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdEventHandler/SdServerCapabilityRecord/SdServerCapabilityRecordValue",
+                          "description": "Defines the corresponding CapabilityRecord value.",
+                          "isOptional": true,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "SdServerCapabilityRecordValue",
+                          "type": "STRING",
+                          "uuid": "ECUC:295ec106-dd2f-dd8b-fcc0-e6a878a3007e"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "SdServerCapabilityRecord",
+                      "subContainers": [],
+                      "uuid": "ECUC:e0abede2-41dc-96cb-501a-bbd2fb7781be"
+                    }
+                  ],
+                  "uuid": "ECUC:cd0817ff-4984-4c30-945b-17d9f12a5937"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdProvidedMethods",
+                  "description": "Container element for representing the needed elements of the data path for the methods provided by the service.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdProvidedMethods/SdServerServiceActivationRef",
+                      "description": "Reference to a SoAdRoutingGroup to activated and deactivate the data path for methods of the service.",
+                      "destinationContainerType": "SoAdRoutingGroup",
+                      "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "symbolic",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdServerServiceActivationRef",
+                      "uuid": "ECUC:41afbb7c-420b-4239-bcc8-a2aaeaf9bd27"
+                    }
+                  ],
+                  "shortName": "SdProvidedMethods",
+                  "subContainers": [],
+                  "uuid": "ECUC:c44675a1-0711-453d-875f-d581bcf43cfc"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerCapabilityRecord",
+                  "description": "Sd uses capability records to store arbitrary name/value pairs conveying additional information about the named service.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerCapabilityRecord/SdServerCapabilityRecordKey",
+                      "description": "Defines a CapabilityRecord key.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SdServerCapabilityRecordKey",
+                      "type": "STRING",
+                      "uuid": "ECUC:2bf79f01-8d7d-dcdd-fa22-be8fe3ac494f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerService/SdServerCapabilityRecord/SdServerCapabilityRecordValue",
+                      "description": "Defines the corresponding CapabilityRecord value.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SdServerCapabilityRecordValue",
+                      "type": "STRING",
+                      "uuid": "ECUC:cffe4887-b805-d572-05cd-e1d6708816a7"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "SdServerCapabilityRecord",
+                  "subContainers": [],
+                  "uuid": "ECUC:874b7563-1cb2-8eb2-5927-b700f35c97e7"
+                }
+              ],
+              "uuid": "ECUC:73a79f80-245a-4417-9d68-1307e90f6f60"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer",
+              "description": "This container specifies all timers used by the Service Discovery module for Server Services.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerInitialOfferDelayMax",
+                  "description": "Max value in [s] to delay randomly the first offer. This parameter is mandatory for ServerService.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerInitialOfferDelayMax",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:8396d06c-fc84-48c0-aeea-10994e019bef"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerInitialOfferDelayMin",
+                  "description": "Min value in [s] to delay randomly the first offer. This parameter is mandatory for ServerService.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerInitialOfferDelayMin",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:4a39de00-b0fb-42e5-a5d8-53c0921bd820"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerInitialOfferRepetitionBaseDelay",
+                  "description": "The base delay in [s] for offer repetitions. Successive offers have an exponential back off delay (1x base delay, 2x base delay, 4x base delay, ...). This para…",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerInitialOfferRepetitionBaseDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:d29dcea0-ce20-48c0-9107-19d90b75f6ff"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerOfferCyclicDelay",
+                  "description": "Interval between cyclic offers in the main phase. This parameter is mandatory for ServerService.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerOfferCyclicDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:b411f88e-04c1-4a0d-b989-f4900d2b505d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerRequestResponseMaxDelay",
+                  "description": "Maximum allowable response delay to entries received by multicast in seconds.",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerRequestResponseMaxDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:bb0ae042-d899-4a43-81e0-f91af146126b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerRequestResponseMinDelay",
+                  "description": "Minimum allowable response delay to entries received by multicast in seconds.",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerRequestResponseMinDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:f78f66b8-1294-4000-8b73-7dccb6614a1e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerInitialOfferRepetitionsMax",
+                  "description": "Configure the maximum amount of offer repetition. This parameter is mandatory for ServerService.",
+                  "isOptional": true,
+                  "max": 10,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerInitialOfferRepetitionsMax",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:39dd75c8-8b0d-4180-9f2c-35d51b39a4b7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdConfig/SdInstance/SdServerTimer/SdServerTimerTTL",
+                  "description": "Time to live for offer service.",
+                  "isOptional": false,
+                  "max": 16777215,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SdServerTimerTTL",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:18853e91-cd2f-4c33-a05d-a7ff072a496f"
+                }
+              ],
+              "references": [],
+              "shortName": "SdServerTimer",
+              "subContainers": [],
+              "uuid": "ECUC:04b00855-be0a-4099-8d3a-c29a817984af"
+            }
+          ],
+          "uuid": "ECUC:3c4bbbc4-1c53-4234-a90c-9373ba4d3f3c"
+        }
+      ],
+      "uuid": "ECUC:130bd546-f092-45a3-b09e-073504d54f03"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdGeneral",
+      "description": "This container lists the general configuration parameters for the Service Discovery module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdGeneral/SdDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SdDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e33af6e9-d274-4e33-9b24-13a11b7cedd9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdGeneral/SdVersionInfoApi",
+          "description": "Enables and disables the version info API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SdVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1cd5d766-78b8-42f5-8c15-cdc197aa01fd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Sd/SdGeneral/SdMainFunctionCycleTime",
+          "description": "This parameter defines the cycle time in seconds of the periodic calling of Sd main function.",
+          "isOptional": false,
+          "max": 1,
+          "min": 0.0001,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SdMainFunctionCycleTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:5f971779-d2f5-4db7-af61-05b803d0c8ea"
+        }
+      ],
+      "references": [],
+      "shortName": "SdGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:7b79cd36-3be0-4156-bb91-48a55e906fde"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Sd",
+  "description": "Configuration of the Service Discovery module.",
+  "importWarnings": [
+    "SdConsumedEventGroupMulticastGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "SdConsumedEventGroupMulticastGroupRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+    "SdConsumedEventGroupMulticastActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdConsumedEventGroupTcpActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdConsumedEventGroupUdpActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdClientServiceActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdClientServiceTcpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+    "SdClientServiceUdpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+    "SD_E_MALFORMED_MSG：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "SD_E_OUT_OF_RES：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "SD_E_SUBSCR_NACK_RECV：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "SdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SdTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SdEventActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdMulticastEventSoConRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection 位于本模块之外；编辑器只读展示。",
+    "SdEventActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdEventTriggeringRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdEventActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdEventTriggeringRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdServerServiceActivationRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup 位于本模块之外；编辑器只读展示。",
+    "SdServerServiceTcpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。",
+    "SdServerServiceUdpRef：目标 /AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Sd",
+  "version": "4.2.2"
+}

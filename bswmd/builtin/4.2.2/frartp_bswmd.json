@@ -1,0 +1,688 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "537f106d2aad32730c45af65036391956fa8a6a0c5376d812d4871b5619c5290",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral",
+      "description": "This container contains the general configuration (parameters) of the FlexRay TP.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral/FrArTpDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrArTpDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8cbe5489-2294-4b35-826c-7e20a3b269e2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral/FrArTpHaveAckRt",
+          "description": "Preprocessor switch for enabling the Acknowledgement and retry mechanisms.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrArTpHaveAckRt",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2941d541-7731-416a-a4cb-f758b008bf2e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral/FrArTpHaveGrpSeg",
+          "description": "Preprocessor switch for enabling segmentation of 1:n messages.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrArTpHaveGrpSeg",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:db0c21bb-0d51-42d3-ba97-44552e586054"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral/FrArTpHaveLm",
+          "description": "Preprocessor switch for enabling the mechanism for message longer than allowed by.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrArTpHaveLm",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f7de932d-8d25-4503-a3ca-e1dba3c182ec"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral/FrArTpHaveTc",
+          "description": "Preprocessor switch for enabling Transmit Cancellation and Receive Cancellation.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrArTpHaveTc",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b65f5bc0-3252-486e-a5e8-caef4d3a0c53"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral/FrArTpVersionInfoApi",
+          "description": "Preprocessor switch for enabling the Version info API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrArTpVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:079edbf3-4881-462e-8f1c-89d43738bc62"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpGeneral/FrArTpMainFuncCycle",
+          "description": "This parameter contains the calling period of the TPs Main Function. The parameter is specified in seconds.",
+          "isOptional": false,
+          "max": 1.024,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrArTpMainFuncCycle",
+          "type": "FLOAT",
+          "uuid": "ECUC:d93c4677-c68f-4b7a-af41-002d09edecf8"
+        }
+      ],
+      "references": [],
+      "shortName": "FrArTpGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:d5bcaff4-567a-4272-8758-7faeee4ae05c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR FrArTp module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "FrArTpMultipleConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel",
+          "description": "This container contains the configuration (parameters) of one FlexRay TP channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpAckType",
+              "description": "This parameter defines the type of acknowledgement which is used for the specific channel.",
+              "enumValues": [
+                "FRARTP_ACK_WITHOUT_RT",
+                "FRARTP_ACK_WITH_RT",
+                "FRARTP_NO"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpAckType",
+              "type": "ENUM",
+              "uuid": "ECUC:7ac80ba2-db0b-4a4c-8ccf-c058e66b5540"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpAdrType",
+              "description": "This parameter states the addressing type this connection has. The meanings of the values are one byte and two byte.",
+              "enumValues": [
+                "FRARTP_OB",
+                "FRARTP_TB"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpAdrType",
+              "type": "ENUM",
+              "uuid": "ECUC:fbf212e1-3eb4-408a-a2e7-952ba8bff386"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpLm",
+              "description": "This specifies the maximum message length for the particular channel.",
+              "enumValues": [
+                "FRARTP_ISO",
+                "FRARTP_ISO6",
+                "FRARTP_L4G"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpLm",
+              "type": "ENUM",
+              "uuid": "ECUC:00c0ff2e-ea55-401b-add2-16b714ae2ea7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConcurrentConnections",
+              "description": "This parameter defines the number of connections that can be active at the same time. If set to 0, all configured connections can be active at the same time.",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrArTpConcurrentConnections",
+              "type": "INTEGER",
+              "uuid": "ECUC:70d005eb-4b6c-48c9-8650-223812ff5371"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpMaxAr",
+              "description": "This parameter defines the maximum number of trying to send a frame when a TIMEOUT AR occurs.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpMaxAr",
+              "type": "INTEGER",
+              "uuid": "ECUC:4d538907-b70d-4699-8f56-8e7234286355"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpMaxAs",
+              "description": "This parameter defines the maximum number of trying to send a frame when a TIMEOUT AS occurs.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpMaxAs",
+              "type": "INTEGER",
+              "uuid": "ECUC:4d7d6aaf-92b2-4001-ab30-fe6040a6acb6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpMaxBs",
+              "description": "This parameter defines the number of consecutive CFs between two FCs (block size). Valid values are 1 .. 16 when retry is activated, and 0 .. 255 otherwise.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpMaxBs",
+              "type": "INTEGER",
+              "uuid": "ECUC:9505fed5-9588-4c03-8b0b-a1627d38b537"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpMaxRn",
+              "description": "This parameter defines the maximum number of retries (if retry is configured for the particular channel).",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpMaxRn",
+              "type": "INTEGER",
+              "uuid": "ECUC:89d01884-23a7-478e-b641-52e479415a03"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpMaxWft",
+              "description": "This parameter defines the maximal number of wait frames to be sent for a pending connection.",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrArTpMaxWft",
+              "type": "INTEGER",
+              "uuid": "ECUC:1d596a06-8fbe-4ab0-baaf-5189114b8f24"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpGrpSeg",
+              "description": "Here can be specified, whether segmentation within a 1:n connection is allowed or not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpGrpSeg",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:fd40e0b6-4a5b-4123-b2f2-5d36a18499f6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpTc",
+              "description": "With this switch Transmit Cancellation and Receive Cancellation can be turned on or off for this channel.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpTc",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:7fe1452b-6e76-47fd-822b-84d512e89568"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpStMin",
+              "description": "This parameter defines the minimum amount of time between two succeeding CFs of a 1:1 segmented transmission in seconds. Valid values are 0, 100µs, 200µs .. 90…",
+              "isOptional": false,
+              "max": 0.127,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpStMin",
+              "type": "FLOAT",
+              "uuid": "ECUC:c593f78b-411f-44c5-bdfc-6cd25077dadb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpStMinGrpSeg",
+              "description": "This parameter defines the minimum amount of time between two succeeding CFs of a 1:n segmented transmission in seconds. Valid values are 0, 100µs, 200µs ... 9…",
+              "isOptional": true,
+              "max": 0.127,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrArTpStMinGrpSeg",
+              "type": "FLOAT",
+              "uuid": "ECUC:107fd25c-f800-4017-a568-f2faab13ad84"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpTimeBr",
+              "description": "This parameter defines the time in seconds between receiving the last CF of a block or an FF-x (or SF-x) and sending out an FC or AF.",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpTimeBr",
+              "type": "FLOAT",
+              "uuid": "ECUC:525037db-2b41-44ec-a323-83e5bb925586"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpTimeCs",
+              "description": "This parameter defines the time in seconds between the sending of two consecutive CFs or between reception of an FC or AF and sending of the next CF .",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpTimeCs",
+              "type": "FLOAT",
+              "uuid": "ECUC:52be0e3c-0912-4b1d-80a8-144d2ed34efe"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpTimeoutAr",
+              "description": "This parameter states the timeout in seconds between the PDU transmit request of the Transport Layer to the FlexRay Interface and the corresponding confirmatio…",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpTimeoutAr",
+              "type": "FLOAT",
+              "uuid": "ECUC:af2272f8-9b82-465a-b640-fefd7582dc0c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpTimeoutAs",
+              "description": "This parameter states the timeout in seconds between the PDU transmit request for the first PDU of the group used in the current connection of the Transport La…",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpTimeoutAs",
+              "type": "FLOAT",
+              "uuid": "ECUC:d5e8acba-4da6-4ec2-b73c-b11684d92d53"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpTimeoutBs",
+              "description": "This parameter defines the timeout in seconds for waiting for an FC or AF on the sender side in a 1:1 connection.",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpTimeoutBs",
+              "type": "FLOAT",
+              "uuid": "ECUC:21b6f6ba-d00f-4ae3-a59c-6abdc1e49bd5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpTimeoutCr",
+              "description": "This parameter defines the timeout value in seconds for waiting for a CF or FF-x (in case of retry) after receiving the last CF or after sending an FC or AF on…",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrArTpTimeoutCr",
+              "type": "FLOAT",
+              "uuid": "ECUC:76f8dcee-0a17-4eeb-bd8d-c1c719af4a06"
+            }
+          ],
+          "references": [],
+          "shortName": "FrArTpChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection",
+              "description": "This container contains the configuration (parameters) of one FlexRay TP connection.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpConPrioPdus",
+                  "description": "This parameter defines the number of TxNPdus to which this connection has prioritized access. It must be ensured that the number of prioritized PDUs of all con…",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrArTpConPrioPdus",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:eaba7439-31d8-432b-9541-9949b0793d64"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpLa",
+                  "description": "This parameter defines the Local Address for the respective connection.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrArTpLa",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:e954e143-e9a7-4b6c-852d-8f18e1ca4dda"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpRa",
+                  "description": "This parameter defines the Remote Address for the respective connection.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrArTpRa",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:d61dfa47-2482-40bc-8d65-015f5a973016"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpMultRec",
+                  "description": "This parameter defines, whether this connection is an 1:1 ('false') or an 1:n ('true') connection.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrArTpMultRec",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:16ce2a19-fe14-4138-bccc-d9d65af5b845"
+                }
+              ],
+              "references": [],
+              "shortName": "FrArTpConnection",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpRxSdu",
+                  "description": "Describes the Rx SDU",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpRxSdu/FrArTpSduRxId",
+                      "description": "This is a unique identifier for a received message. This Id is used in the CancelReceive and ChangeParameter API call.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrArTpSduRxId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:11449a7a-0e5f-4585-806f-e7b9943538f9"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpRxSdu/FrArTpRxSduRef",
+                      "description": "Reference to a PDU in the global PDU structure.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrArTpRxSduRef",
+                      "uuid": "ECUC:2fe49c20-df8f-4155-81c1-2a0028c467cd"
+                    }
+                  ],
+                  "shortName": "FrArTpRxSdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:d8731acc-40fe-4633-853b-297b53ec6b1d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpTxSdu",
+                  "description": "Describes the Tx SDU",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpTxSdu/FrArTpSduTxId",
+                      "description": "This is a unique identifier for a received or a to be transmitted message. With this (and by means of e.g. a lookup table) the PDU Router can route the message…",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrArTpSduTxId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:53e537ea-84a2-43cd-a160-3507af15d05c"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpConnection/FrArTpTxSdu/FrArTpTxSduRef",
+                      "description": "Reference to a PDU in the global PDU structure.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrArTpTxSduRef",
+                      "uuid": "ECUC:84f2bd32-9b3a-4b4f-8625-4c5869465f63"
+                    }
+                  ],
+                  "shortName": "FrArTpTxSdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:dfda3c7c-8f9c-4b60-9906-c46a84e4e450"
+                }
+              ],
+              "uuid": "ECUC:13a80df6-16e8-4e9b-940b-bbb23b65795a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpPdu",
+              "description": "Container to hold the PDU parameters.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpPdu/FrArTpPduDirection",
+                  "description": "This parameter defines the direction of the PDU.",
+                  "enumValues": [
+                    "FRARTP_RX",
+                    "FRARTP_TX"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrArTpPduDirection",
+                  "type": "ENUM",
+                  "uuid": "ECUC:65ff9cc6-6ff0-4283-91b9-2ef072d144e7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpPdu/FrArTpPduId",
+                  "description": "This is the identifier of the FlexRay Interface PDUs (Fr N-PDU, Fr L-SDU) in which the Transport Layer Frames of this channel should be transmitted.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrArTpPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:32c3e70e-66b0-4889-9164-c9b77fd3817f"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp/FrArTpMultipleConfig/FrArTpChannel/FrArTpPdu/FrArTpPduRef",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrArTpPduRef",
+                  "uuid": "ECUC:121b4008-ac40-47de-87e5-8aa17f5cccb9"
+                }
+              ],
+              "shortName": "FrArTpPdu",
+              "subContainers": [],
+              "uuid": "ECUC:41f834ea-0a7e-41f1-922b-6ec9fdfca831"
+            }
+          ],
+          "uuid": "ECUC:676806cc-fb0f-496e-a505-11dc3ce82ef6"
+        }
+      ],
+      "uuid": "ECUC:97993d4a-7769-4798-aa92-461976ddbef6"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/FrArTp",
+  "description": "Configuration of the FrArTp (FlexRay Transport Protocol) module.",
+  "importWarnings": [
+    "FrArTpRxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrArTpTxSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrArTpPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "FrArTp",
+  "version": "4.2.2"
+}

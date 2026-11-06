@@ -1,0 +1,989 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "c699ca05827f7825a86190aebfc3b12aa6b747d5bab4a83c6acc16617bc7b3fd",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig",
+      "description": "This container contains the global configuration parameter of the CanNm. The parameters and the parameters of the sub containers shall be mapped to the C data …",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmBusLoadReductionEnabled",
+          "description": "Pre-processor switch for enabling busload reduction support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmBusLoadReductionEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2f4ec8ee-6cab-47d2-a7cd-4a429eb7f8c9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmBusSynchronizationEnabled",
+          "description": "Pre-processor switch for enabling bus synchronization support. This feature is required for gateway nodes only.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmBusSynchronizationEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f27f1a40-1ef7-465f-b7a9-018baec90c72"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmComControlEnabled",
+          "description": "Pre-processor switch for enabling the Communication Control support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmComControlEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:39e127e9-9bfb-4b66-91dc-69d319c5e033"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmComUserDataSupport",
+          "description": "Preprocessor switch for enabling the Tx path of Com User Data.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmComUserDataSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f245f7fe-a9db-4eea-b241-6f5dff772a63"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmCoordinatorSyncSupport",
+          "description": "Enables/disables the coordinator synchronization support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmCoordinatorSyncSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:88ba730b-a0ac-42c9-b182-bbda7da16a35"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0c6b4279-9da7-411f-92da-bbe845f27408"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmGlobalPnSupport",
+          "description": "Pre-processor switch for enabling partial networking support globally.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmGlobalPnSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:cc0dd2dc-3056-4c50-bf07-c8c601188afe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmImmediateRestartEnabled",
+          "description": "Pre-processor switch for enabling the immediate transmission of a NM PDU upon bus-communication request in Prepare-Bus-Sleep mode.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmImmediateRestartEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a84a2b93-549c-4eaf-a29b-8533d2dcce66"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmImmediateTxconfEnabled",
+          "description": "Enable/disable the immediate tx confirmation.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmImmediateTxconfEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ede29802-8487-4471-ae68-0a530d246329"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPassiveModeEnabled",
+          "description": "Pre-processor switch for enabling support of the Passive Mode.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmPassiveModeEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:89a4c7ef-a71f-4995-a457-3640bfc9e3c4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPduRxIndicationEnabled",
+          "description": "Pre-processor switch for enabling the PDU Rx Indication.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmPduRxIndicationEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:abc8024d-f231-4568-a899-f6f8c8b257e3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnEiraCalcEnabled",
+          "description": "Specifies if CanNm calculates the PN request information for internal an external requests. (EIRA)",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanNmPnEiraCalcEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0f09a983-43cd-4aaa-b090-01143ba63f8c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmRemoteSleepIndEnabled",
+          "description": "Pre-processor switch for enabling remote sleep indication support. This feature is required for gateway nodes only.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmRemoteSleepIndEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8b15eb81-8391-42a3-ac2e-3168ca0934e5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmStateChangeIndEnabled",
+          "description": "Pre-processor switch for enabling the CAN NM state change notification.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmStateChangeIndEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:016766a9-f583-4d2f-9bc2-471e455ab810"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmUserDataEnabled",
+          "description": "Pre-processor switch for enabling user data support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmUserDataEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d2a7536b-14e2-4eea-86f5-ba095e740756"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmVersionInfoApi",
+          "description": "Pre-processor switch for enabling version info API support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:18de9b2a-6920-4616-8921-efdb0143d9d4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmMainFunctionPeriod",
+          "description": "Call cycle in seconds of CanNm_MainFunction.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanNmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:6fc20523-5f6d-4f5e-894e-29a40e3ef2c7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnResetTime",
+          "description": "Specifies the runtime of the reset timer in seconds. This reset time is valid for the reset of PN requests in the EIRA and in the ERA. The value shall be the s…",
+          "isOptional": true,
+          "max": 65.535,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanNmPnResetTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:cceff8c4-88b2-454b-b189-70cf5941a9c4"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnEiraRxNSduRef",
+          "description": "Reference to a Pdu in the COM-Stack.",
+          "destinationContainerType": "Pdu",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanNmPnEiraRxNSduRef",
+          "uuid": "ECUC:2e5c6c98-a29a-46d1-b7da-e702de0d63a5"
+        }
+      ],
+      "shortName": "CanNmGlobalConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig",
+          "description": "This container contains the channel specific configuration parameter of the CanNm.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmActiveWakeupBitEnabled",
+              "description": "Enables/Disables the handling of the Active Wakeup Bit in the CanNm module.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmActiveWakeupBitEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b3b0a8b5-49ae-4137-bf38-c29a7c9741d0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmAllNmMessagesKeepAwake",
+              "description": "Specifies if CanNm drops irrelevant NM PDUs.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmAllNmMessagesKeepAwake",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:c102fdeb-4831-4ada-9e0b-1c5125f3f909"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmBusLoadReductionActive",
+              "description": "This parameter defines if bus load reduction for the respective NM channel is active or not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmBusLoadReductionActive",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:dec32a1b-7b95-402b-b284-d41f1c849f95"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmCarWakeUpFilterEnabled",
+              "description": "If CWU filtering is supported, only the CWU bit within the NM PDU with source node identifier CanNmCarWakeUpFilterNodeId is considered as CWU request.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmCarWakeUpFilterEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:0a3657af-f39c-4912-8576-532ed0640fdc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmCarWakeUpRxEnabled",
+              "description": "Enables or disables support of CarWakeUp bit evaluation in received NM PDUs.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmCarWakeUpRxEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b50831a3-ae64-4020-8e65-835e3a6a7811"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmNodeDetectionEnabled",
+              "description": "Precompile time switch to enable the node detection feature.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmNodeDetectionEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:fa7827df-840e-4a41-ae45-c89eeb9c9eb6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmNodeIdEnabled",
+              "description": "Pre-processor switch for enabling the source node identifier.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmNodeIdEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:cf11c63f-4583-4c44-8823-00d7a384ac7e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmPnEnabled",
+              "description": "Enables or disables support of partial networking.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmPnEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:1b3bcc11-49fa-4981-8233-c557b26537fa"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmPnEraCalcEnabled",
+              "description": "Specifies if CanNm calculates the PN request information for external requests. (ERA)",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmPnEraCalcEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:3c603053-712a-4bcf-b0fc-e1777544559a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmPnHandleMultipleNetworkRequests",
+              "description": "Specifies if CanNm performs an additional transition from Network Mode to Repeat Message State (true) or not (false).",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmPnHandleMultipleNetworkRequests",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:1d373ff7-5d82-4720-ab7c-9d6d4c8c4b34"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmRepeatMsgIndEnabled",
+              "description": "Enable/disable the notification that a RepeatMessageRequest bit has been received.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmRepeatMsgIndEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:3735b6e1-55f5-4c70-a74a-412c49c0f38d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmCarWakeUpBitPosition",
+              "description": "Specifies the Bit position of the CWU within the NM PDU.",
+              "isOptional": true,
+              "max": 7,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmCarWakeUpBitPosition",
+              "type": "INTEGER",
+              "uuid": "ECUC:2e5a9851-b764-44d9-8bc6-360bd5253f4f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmCarWakeUpBytePosition",
+              "description": "Specifies the Byte position of the CWU within the NM PDU.",
+              "isOptional": true,
+              "max": 7,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmCarWakeUpBytePosition",
+              "type": "INTEGER",
+              "uuid": "ECUC:7459386d-f35e-4ff5-8ec7-5c3f2a33268f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmCarWakeUpFilterNodeId",
+              "description": "Source node identifier for CWU filtering. If CWU filtering is supported, only the CWU bit within the NM PDU with source node identifier CanNmCarWakeUpFilterNod…",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmCarWakeUpFilterNodeId",
+              "type": "INTEGER",
+              "uuid": "ECUC:7fcec870-37fd-4166-9835-2344602fc85b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmImmediateNmTransmissions",
+              "description": "Defines the number of immediate NM PDUs which shall be transmitted. If the value is zero no immediate NM PDUs are transmitted. The cycle time of immeditate NM …",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmImmediateNmTransmissions",
+              "type": "INTEGER",
+              "uuid": "ECUC:7fcb9567-5cb0-413d-9d9d-f5f5b7d7abaf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmNodeId",
+              "description": "Node identifier of local node.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmNodeId",
+              "type": "INTEGER",
+              "uuid": "ECUC:e1a8b761-2721-45c0-9b76-eb3000e571d8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmImmediateNmCycleTime",
+              "description": "Defines the immediate NM PDU cycle time in seconds which is used for CanNmImmediateNmTransmissions NM PDU transmissions.",
+              "isOptional": true,
+              "max": 65.535,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmImmediateNmCycleTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:4d249c1c-3176-4ea0-93eb-07d16128346d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmMsgCycleOffset",
+              "description": "Time offset in the periodic transmission node. It determines the start delay of the transmission. Specified in seconds.",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmMsgCycleOffset",
+              "type": "FLOAT",
+              "uuid": "ECUC:be191aab-c6f6-4a39-903f-af940f5a0339"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmMsgCycleTime",
+              "description": "Period of a NM PDU in seconds. It determines the periodic rate in the \"periodic transmission mode with bus load reduction\" and is the basis for transmit schedu…",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmMsgCycleTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:21645185-ede2-413f-a98d-d2d27b5439f9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmMsgReducedTime",
+              "description": "Node specific bus cycle time in the periodic transmission mode with bus load reduction. Specified in seconds.",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmMsgReducedTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:2e443262-a8d3-43b3-80c8-8e9cc95cc4e4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmMsgTimeoutTime",
+              "description": "When using Partial Network and this timeout is defined then CanNm monitors that a NM-PDU is transmitted successfully within this Transmission Timeout Time and …",
+              "isOptional": true,
+              "max": 65.535,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmMsgTimeoutTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:b57d7962-6598-46c9-b891-cb6f28e306bc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmRemoteSleepIndTime",
+              "description": "Timeout for Remote Sleep Indication.",
+              "isOptional": true,
+              "max": 65.535,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmRemoteSleepIndTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:d11eee3e-14a4-486a-965a-7a2c2f9e5793"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmRepeatMessageTime",
+              "description": "Timeout for Repeat Message State.",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmRepeatMessageTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:fcceb68d-d4a5-4768-933e-9f44201e799d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmTimeoutTime",
+              "description": "Network Timeout for NM PDUs.",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0.002,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmTimeoutTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:d87091a6-9fbe-4875-85c4-d8eac6bf974d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmWaitBusSleepTime",
+              "description": "Timeout for bus calm down phase.",
+              "isOptional": false,
+              "max": 65.535,
+              "min": 0.001,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmWaitBusSleepTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:527bf265-b1fb-41ac-8c73-7752563cbf22"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmPduCbvPosition",
+              "description": "Defines the position of the control bit vector within the NM PDU.",
+              "enumValues": [
+                "CANNM_PDU_BYTE_0",
+                "CANNM_PDU_BYTE_1",
+                "CANNM_PDU_OFF"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmPduCbvPosition",
+              "type": "ENUM",
+              "uuid": "ECUC:fd955a85-f2c8-4eb4-a31d-fbb0561f5965"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmPduNidPosition",
+              "description": "Defines the position of the source node identifier within the NM PDU.",
+              "enumValues": [
+                "CANNM_PDU_BYTE_0",
+                "CANNM_PDU_BYTE_1",
+                "CANNM_PDU_OFF"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmPduNidPosition",
+              "type": "ENUM",
+              "uuid": "ECUC:14a3efb8-8926-4a6c-bdf2-42df6b95d5c7"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmComMNetworkHandleRef",
+              "description": "This reference points to the unique channel defined by the ComMChannel and provides access to the unique channel index value in ComMChannelId.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmComMNetworkHandleRef",
+              "uuid": "ECUC:530c669d-24c1-46c2-88e4-d807280d907e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmPnEraRxNSduRef",
+              "description": "Reference to a Pdu in the COM-Stack. The SduRef is required for every CanNm Channel, because ERA is reported per channel.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanNmPnEraRxNSduRef",
+              "uuid": "ECUC:37b6b74d-f4c6-463a-b271-276a852264ee"
+            }
+          ],
+          "shortName": "CanNmChannelConfig",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmRxPdu",
+              "description": "This container is used to configure the Rx PDU properties that are used for the CanNm Channel.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmRxPdu/CanNmRxPduId",
+                  "description": "This parameter defines the Rx PDU ID of the CanIf L-PDU range that is associated with this CanNm channel.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:44ce4764-dd8e-4812-98bf-7fcf028339cd"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmRxPdu/CanNmRxPduRef",
+                  "description": "Reference to the global PDU that is used by this CanNm channel.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmRxPduRef",
+                  "uuid": "ECUC:a847294c-efd1-4c3b-b141-9ccc994928ba"
+                }
+              ],
+              "shortName": "CanNmRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:c620bd04-5aeb-400c-8943-b3da3707cb6d"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmTxPdu",
+              "description": "This container contains the CanNmTxConfirmationPduId and the CanNmTxPduRef.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmTxPdu/CanNmTxConfirmationPduId",
+                  "description": "Handle Id to be used by the Lower Layer to confirm the transmission of the CanNmTxPdu to the LowerLayer.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmTxConfirmationPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:50820697-ec08-4c54-a032-3ebb637181cd"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmTxPdu/CanNmTxPduRef",
+                  "description": "The reference to the common PDU structure.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmTxPduRef",
+                  "uuid": "ECUC:af4a2c58-b28e-40cc-a437-8a37b96b7230"
+                }
+              ],
+              "shortName": "CanNmTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:60374ba6-0f1b-4b0e-a88f-35baecd95798"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmUserDataTxPdu",
+              "description": "This optional container is used to configure the UserNm PDU. This container is only available if CanNmComUserDataSupport is enabled.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmUserDataTxPdu/CanNmTxUserDataPduId",
+                  "description": "This parameter defines the Handle ID of the NM User Data I-PDU.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmTxUserDataPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fdd1a8bb-18a5-4143-898d-67ce5a51c78f"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmChannelConfig/CanNmUserDataTxPdu/CanNmTxUserDataPduRef",
+                  "description": "Reference to the NM User Data I-PDU in the global PDU collection.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmTxUserDataPduRef",
+                  "uuid": "ECUC:0f92a525-3d00-4381-b61e-03f0605f8c93"
+                }
+              ],
+              "shortName": "CanNmUserDataTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:d2c3ba3c-7789-48b2-b5f9-724baef3655a"
+            }
+          ],
+          "uuid": "ECUC:8f9f4fb9-8f74-4206-b178-9ed880e39529"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnInfo",
+          "description": "PN information configuration",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnInfo/CanNmPnInfoLength",
+              "description": "Specifies the length of the PN request information in the NM PDU.",
+              "isOptional": false,
+              "max": 7,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmPnInfoLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:a0c4f3a8-7670-4243-9bdd-706add08df8f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnInfo/CanNmPnInfoOffset",
+              "description": "Specifies the offset of the PN request information in the NM PDU.",
+              "isOptional": false,
+              "max": 7,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanNmPnInfoOffset",
+              "type": "INTEGER",
+              "uuid": "ECUC:3ff9d02a-9aed-47d7-980d-4745fbda215a"
+            }
+          ],
+          "references": [],
+          "shortName": "CanNmPnInfo",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnInfo/CanNmPnFilterMaskByte",
+              "description": "PN information configuration",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 7
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnInfo/CanNmPnFilterMaskByte/CanNmPnFilterMaskByteIndex",
+                  "description": "Index of the filter mask byte. Specifies the position within the filter mask byte array.",
+                  "isOptional": false,
+                  "max": 6,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmPnFilterMaskByteIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:70575bee-1cd4-49d5-8876-ac3306dc7403"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanNm/CanNmGlobalConfig/CanNmPnInfo/CanNmPnFilterMaskByte/CanNmPnFilterMaskByteValue",
+                  "description": "Parameter to configure the filter mask byte.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanNmPnFilterMaskByteValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:42691f2f-b4b1-473e-8fe5-238527cdc3e6"
+                }
+              ],
+              "references": [],
+              "shortName": "CanNmPnFilterMaskByte",
+              "subContainers": [],
+              "uuid": "ECUC:f6506a2e-abb4-443d-b84c-9726fef9fb8a"
+            }
+          ],
+          "uuid": "ECUC:0ccf5768-41f4-4e72-864d-50940ccdf6a6"
+        }
+      ],
+      "uuid": "ECUC:5adfcc42-72f3-4b31-8817-31cc191594f8"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/CanNm",
+  "description": "Configuration Parameters for the Can Nm module.",
+  "importWarnings": [
+    "CanNmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanNmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanNmTxUserDataPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanNmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "CanNmPnEraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanNmPnEiraRxNSduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "CanNm",
+  "version": "4.4.0"
+}

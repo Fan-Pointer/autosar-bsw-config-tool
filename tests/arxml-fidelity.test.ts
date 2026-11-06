@@ -202,6 +202,8 @@ describe('TASK-008 explicit ECUC configuration semantics', () => {
   });
   it('imports ordinary third-party ARXML without editor SDGs as unconfigured and assigns an initial timestamp only once', () => {
     const { config, module } = sample();
+    // TASK-021: metadata-free files use the documented 4.4.0 baseline.
+    module.version = config.version = '4.4.0';
     const xml = exportArxml(config, module).replace(/<ADMIN-DATA>[\s\S]*?<\/ADMIN-DATA>/g, '');
     vi.spyOn(Date, 'now').mockReturnValue(12345);
     const copy = importArxml(xml, [module]);

@@ -1,0 +1,21 @@
+
+ RUN  v2.1.9 D:/ProFile/教培业务/配置器/autosar-bsw-config-tool
+
+stdout | tests/editor-ui.test.ts > TASK-006 workspace interactions > renders 500-instance search results within 200 ms from input
+500-instance input-to-render: 67.20 ms
+
+stdout | tests/editor-ui.test.ts > TASK-006 workspace interactions > renders twenty undo steps within 500 ms and restores the full configuration
+20-step undo with workspace rendering: 311.78 ms
+
+ ✓ tests/editor-ui.test.ts (9 tests) 3177ms
+   ✓ TASK-006 workspace interactions > uses toolbar and Ctrl/Cmd shortcuts but preserves native input/IME/contenteditable undo 497ms
+   ✓ TASK-006 workspace interactions > supports Ctrl/Shift selection, shared parameters, skip summaries and one-step batch undo 498ms
+   ✓ TASK-006 workspace interactions > marks imported dangling references in tree and form, navigates errors, clears and undoes them 396ms
+   ✓ TASK-006 workspace interactions > searches across sets, highlights literal matches and focuses the selected parameter after switching 534ms
+   ✓ TASK-006 workspace interactions > renders twenty undo steps within 500 ms and restores the full configuration 481ms
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  17:40:33
+   Duration  10.51s (transform 1.31s, setup 0ms, collect 5.56s, tests 3.18s, environment 1.03s, prepare 241ms)
+

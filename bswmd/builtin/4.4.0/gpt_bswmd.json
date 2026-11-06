@@ -1,0 +1,452 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "ebf69c3b2846edbff1622cf15b513d8aa2591c64b4dcc40dc16d6cf8916fc4b0",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet",
+      "description": "This container is the base of a Configuration Set which contains the configured GPT channels. This way, different configuration sets can be defined for post-bu…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "GptChannelConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration",
+          "description": "Configuration of an individual GPT channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptChannelId",
+              "description": "Channel Id of the GPT channel. This value will be assigned to the symbolic name derived of the GptChannelConfiguration container short name.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "GptChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:6837c6f8-ac45-45c2-ad43-e9c4bd938987"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptChannelTickValueMax",
+              "description": "Maximum value in ticks, the timer channel is able to count. With the next tick, the timer rolls over to zero.",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "GptChannelTickValueMax",
+              "type": "INTEGER",
+              "uuid": "ECUC:e9a0902c-4d36-49a6-9ee6-b96c7e2020a3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptChannelMode",
+              "description": "Specifies the behavior of the timer channel after the target time is reached.",
+              "enumValues": [
+                "GPT_CH_MODE_CONTINUOUS",
+                "GPT_CH_MODE_ONESHOT"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "GptChannelMode",
+              "type": "ENUM",
+              "uuid": "ECUC:d096f707-71e0-412f-a76d-b0c298d22a2e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptChannelTickFrequency",
+              "description": "Specifies the tick frequency of the timer channel in Hz.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "GptChannelTickFrequency",
+              "type": "FLOAT",
+              "uuid": "ECUC:8091bd1f-9e25-428e-a01c-43ba9fdc009e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptEnableWakeup",
+              "description": "Enables wakeup capability of MCU for a channel.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "GptEnableWakeup",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:050adbdf-4788-4c6d-bb7c-189e1fdada87"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptNotification",
+              "description": "Function pointer to callback function (for non-wakeup notification)",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "GptNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:ebfb835b-d90b-4928-831b-b544eef5b204"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptChannelClkSrcRef",
+              "description": "Reference to the GptClockReferencePoint from which the channel",
+              "destinationContainerType": "GptClockReferencePoint",
+              "destinationRef": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptClockReferencePoint",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptClockReferencePoint"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "GptChannelClkSrcRef",
+              "uuid": "ECUC:28265a09-7e26-491d-95dd-8e4122a9fb97"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptChannelEcucPartitionRef",
+              "description": "Maps a GPT channel to zero or multiple ECUC partitions to limit the access to this channel group. The ECUC partitions referenced are a subset of the ECUC parti…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "GptChannelEcucPartitionRef",
+              "uuid": "ECUC:14cc6e73-619e-4029-a793-3535990384ad"
+            }
+          ],
+          "shortName": "GptChannelConfiguration",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptWakeupConfiguration",
+              "description": "Function pointer to callback function (for wakeup notification).",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration/GptWakeupConfiguration/GptWakeupSourceRef",
+                  "description": "In case the wakeup-capability is true this value is transmitted to the Ecu State Manager.",
+                  "destinationContainerType": "EcuMWakeupSource",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "GptWakeupSourceRef",
+                  "uuid": "ECUC:95b50a0d-7238-4494-91b4-430aa279da61"
+                }
+              ],
+              "shortName": "GptWakeupConfiguration",
+              "subContainers": [],
+              "uuid": "ECUC:1e4712bb-f384-47fd-b5f3-9aa93036757a"
+            }
+          ],
+          "uuid": "ECUC:3bd21bc7-c30d-4c8f-9c92-12d0728d28fb"
+        }
+      ],
+      "uuid": "ECUC:4979fd66-44c0-4740-bb83-130a05d7b9e7"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptConfigurationOfOptApiServices",
+      "description": "This container contains all configuration switches for configuring optional API services of the GPT driver.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptConfigurationOfOptApiServices/GptDeinitApi",
+          "description": "Adds / removes the service Gpt_DeInit() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptDeinitApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:dbfab416-7231-4c9e-b7a2-2580d8484cbf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptConfigurationOfOptApiServices/GptEnableDisableNotificationApi",
+          "description": "Adds / removes the services Gpt_EnableNotification() and Gpt_DisableNotification from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptEnableDisableNotificationApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:027ab717-0873-44c6-b93d-0f24ee62e86f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptConfigurationOfOptApiServices/GptTimeElapsedApi",
+          "description": "Adds / removes the service Gpt_GetTimeElapsed() from the code",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptTimeElapsedApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:058aeda8-3c76-4d95-b2cc-5016fd1bd1fe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptConfigurationOfOptApiServices/GptTimeRemainingApi",
+          "description": "Adds / removes the service Gpt_GetTimeRemaining() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptTimeRemainingApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:5161a68e-b5aa-479a-a9b0-615efa4cd7e4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptConfigurationOfOptApiServices/GptVersionInfoApi",
+          "description": "Adds / removes the service Gpt_GetVersionInfo() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:92f35bef-c3fa-4df9-80e5-fde7d2101466"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptConfigurationOfOptApiServices/GptWakeupFunctionalityApi",
+          "description": "Adds / removes the services Gpt_SetMode(), Gpt_EnableWakeup() Gpt_DisableWakeup() and Gpt_CheckWakeup() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptWakeupFunctionalityApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:22859cbc-8346-4a44-a605-211d23a78203"
+        }
+      ],
+      "references": [],
+      "shortName": "GptConfigurationOfOptApiServices",
+      "subContainers": [],
+      "uuid": "ECUC:90664429-2ed4-41ca-bcf2-01b0a2746af8"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration",
+      "description": "This container contains the module-wide configuration (parameters) of the GPT Driver",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:412da385-6bf4-4819-87e4-8ec226fb5b17"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptPredefTimer100us32bitEnable",
+          "description": "Enables/disables the GPT Predef Timer 100µs32bit.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptPredefTimer100us32bitEnable",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3180661f-752e-4a2b-8c41-90892cd0a655"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptReportWakeupSource",
+          "description": "Enables/Disables wakeup source reporting.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptReportWakeupSource",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:53a4201b-75d1-4987-905d-e27a656712ff"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptPredefTimer1usEnablingGrade",
+          "description": "Specifies the grade of enabling the GPT Predef Timers with 1µs tick duration.",
+          "enumValues": [
+            "GPT_PREDEF_TIMER_1US_16BIT_ENABLED",
+            "GPT_PREDEF_TIMER_1US_16_24BIT_ENABLED",
+            "GPT_PREDEF_TIMER_1US_16_24_32BIT_ENABLED",
+            "GPT_PREDEF_TIMER_1US_DISABLED"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "GptPredefTimer1usEnablingGrade",
+          "type": "ENUM",
+          "uuid": "ECUC:92c9cf6f-d2a3-45c4-af10-157a0b5ab06b"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptEcucPartitionRef",
+          "description": "Maps the GPT driver to zero or multiple ECUC partitions to make the driver API available in the according partition. Depending on the addressed timer resource …",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "GptEcucPartitionRef",
+          "uuid": "ECUC:f86d720b-a1e5-4f3f-a656-0f49601b8563"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptKernelEcucPartitionRef",
+          "description": "Maps the GPT kernel to zero or one ECUC partitions to assign the driver kernel to a certain core. The ECUC partition referenced is a subset of the ECUC partiti…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "GptKernelEcucPartitionRef",
+          "uuid": "ECUC:2257ea54-1810-4b76-84b2-e12939218b57"
+        }
+      ],
+      "shortName": "GptDriverConfiguration",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptClockReferencePoint",
+          "description": "This container contains a parameter, which represents a reference to a container of the type McuClockReferencePoint (defined in module MCU).",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Gpt/GptDriverConfiguration/GptClockReferencePoint/GptClockReference",
+              "description": "Reference to a container of the type McuClockReferencePoint, to select an input clock.",
+              "destinationContainerType": "McuClockReferencePoint",
+              "destinationRef": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "GptClockReference",
+              "uuid": "ECUC:ff94d0f2-e4d4-4b60-b980-6ea07438f2bd"
+            }
+          ],
+          "shortName": "GptClockReferencePoint",
+          "subContainers": [],
+          "uuid": "ECUC:8eb48a5f-43d7-4a7a-bedb-9f520c5165b2"
+        }
+      ],
+      "uuid": "ECUC:2f5dc4e3-3ec4-4d52-b768-29135bf6010f"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Gpt",
+  "description": "Configuration of the Gpt (General Purpose Timer) module.",
+  "importWarnings": [
+    "GptWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "GptChannelEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "GptChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "GptClockReference：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。",
+    "GptEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "GptEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "GptKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Gpt",
+  "version": "4.4.0"
+}

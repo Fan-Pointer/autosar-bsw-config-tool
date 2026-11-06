@@ -1,0 +1,499 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "b10ce05fda5d821c34f2dbe2031f8e8976eaf54920585ec49e86153fb7ebf1c7",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR J1939Dcm module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "J1939DcmConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel",
+          "description": "Contains the J1939DcmChannel parameters.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel/J1939DcmBusType",
+              "description": "Identifies the communication port",
+              "enumValues": [
+                "J1939DCM_ISO9141",
+                "J1939DCM_J1587",
+                "J1939DCM_J1850",
+                "J1939DCM_J1922",
+                "J1939DCM_J1939_NETWORK_1",
+                "J1939DCM_J1939_NETWORK_2",
+                "J1939DCM_J1939_NETWORK_3",
+                "J1939DCM_OTHER"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmBusType",
+              "type": "ENUM",
+              "uuid": "ECUC:c2832537-bb25-4294-b1aa-0263dedc5354"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel/J1939DcmComMChannelRef",
+              "description": "Reference to the ComMChannel.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmComMChannelRef",
+              "uuid": "ECUC:586413e9-775b-4017-b565-c58b387f0a66"
+            }
+          ],
+          "shortName": "J1939DcmChannel",
+          "subContainers": [],
+          "uuid": "ECUC:479961c3-79c3-4dfe-ab40-d2e312782ce6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode",
+          "description": "Contains the parameters for the support of a logical J1939 node.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmSPNsInDataStream",
+              "description": "Defines the SPNs available in data stream for use in DM24.",
+              "isOptional": true,
+              "max": 524287,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "J1939DcmSPNsInDataStream",
+              "type": "INTEGER",
+              "uuid": "ECUC:4c385e0b-27f5-4246-a92a-cf6300ea578f"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmNmNodeRef",
+              "description": "Reference to the corresponding J1939Nm node.",
+              "destinationContainerType": "J1939NmNode",
+              "destinationRef": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmNmNodeRef",
+              "uuid": "ECUC:7c2388e4-11ff-4319-b0f0-a1f58c73cdd5"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmNodeRmUserRef",
+              "description": "Reference to the J1939RmUser used by J1939Dcm.",
+              "destinationContainerType": "J1939RmUser",
+              "destinationRef": "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939DcmNodeRmUserRef",
+              "uuid": "ECUC:6fc42938-a0d2-42c0-aed4-b69560df8a94"
+            }
+          ],
+          "shortName": "J1939DcmNode",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport",
+              "description": "Contains parameters to configure the diagnostic message support",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmDmxSupport",
+                  "description": "This parameter is used to identify the actual DMx message.",
+                  "enumValues": [
+                    "J1939DCM_DM01_SUPPORT",
+                    "J1939DCM_DM02_SUPPORT",
+                    "J1939DCM_DM03_SUPPORT",
+                    "J1939DCM_DM04_SUPPORT",
+                    "J1939DCM_DM05_SUPPORT",
+                    "J1939DCM_DM06_SUPPORT",
+                    "J1939DCM_DM07_SUPPORT",
+                    "J1939DCM_DM08_SUPPORT",
+                    "J1939DCM_DM09_SUPPORT",
+                    "J1939DCM_DM10_SUPPORT",
+                    "J1939DCM_DM11_SUPPORT",
+                    "J1939DCM_DM12_SUPPORT",
+                    "J1939DCM_DM13_SUPPORT",
+                    "J1939DCM_DM14_SUPPORT",
+                    "J1939DCM_DM15_SUPPORT",
+                    "J1939DCM_DM16_SUPPORT",
+                    "J1939DCM_DM17_SUPPORT",
+                    "J1939DCM_DM18_SUPPORT",
+                    "J1939DCM_DM19_SUPPORT",
+                    "J1939DCM_DM20_SUPPORT",
+                    "J1939DCM_DM21_SUPPORT",
+                    "J1939DCM_DM22_SUPPORT",
+                    "J1939DCM_DM23_SUPPORT",
+                    "J1939DCM_DM24_SUPPORT",
+                    "J1939DCM_DM25_SUPPORT",
+                    "J1939DCM_DM26_SUPPORT",
+                    "J1939DCM_DM27_SUPPORT",
+                    "J1939DCM_DM28_SUPPORT",
+                    "J1939DCM_DM29_SUPPORT",
+                    "J1939DCM_DM30_SUPPORT",
+                    "J1939DCM_DM31_SUPPORT",
+                    "J1939DCM_DM32_SUPPORT",
+                    "J1939DCM_DM33_SUPPORT",
+                    "J1939DCM_DM34_SUPPORT",
+                    "J1939DCM_DM35_SUPPORT",
+                    "J1939DCM_DM36_SUPPORT",
+                    "J1939DCM_DM37_SUPPORT",
+                    "J1939DCM_DM38_SUPPORT",
+                    "J1939DCM_DM39_SUPPORT",
+                    "J1939DCM_DM40_SUPPORT",
+                    "J1939DCM_DM41_SUPPORT",
+                    "J1939DCM_DM42_SUPPORT",
+                    "J1939DCM_DM43_SUPPORT",
+                    "J1939DCM_DM44_SUPPORT",
+                    "J1939DCM_DM45_SUPPORT",
+                    "J1939DCM_DM46_SUPPORT",
+                    "J1939DCM_DM47_SUPPORT",
+                    "J1939DCM_DM48_SUPPORT",
+                    "J1939DCM_DM49_SUPPORT",
+                    "J1939DCM_DM50_SUPPORT",
+                    "J1939DCM_DM51_SUPPORT",
+                    "J1939DCM_DM52_SUPPORT",
+                    "J1939DCM_DM53_SUPPORT",
+                    "J1939DCM_DM54_SUPPORT",
+                    "J1939DCM_DM55_SUPPORT",
+                    "J1939DCM_DM56_SUPPORT",
+                    "J1939DCM_DM57_SUPPORT"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmDmxSupport",
+                  "type": "ENUM",
+                  "uuid": "ECUC:9bf1ed6d-d630-46bf-bfba-fcb6a5d7f8f8"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmDiagnosticMessageSupportChannelRef",
+                  "description": "Reference to J1939DcmChannel for which this diagnostic message is supported.",
+                  "destinationContainerType": "J1939DcmChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmChannel"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939DcmDiagnosticMessageSupportChannelRef",
+                  "uuid": "ECUC:57908c40-62d5-4c3e-b608-ffd1942241a6"
+                }
+              ],
+              "shortName": "J1939DcmDiagnosticMessageSupport",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmRxPdu",
+                  "description": "Contains parameters to configure the J1939DcmRxPdu.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmRxPdu/J1939DcmRxPduId",
+                      "description": "The I-PDU identifier used for communication with PduR.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmRxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:47f6f332-a463-4ab4-ae11-2357c1f53117"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmRxPdu/J1939DcmRxPduRef",
+                      "description": "Reference to the global Pdu element in the Ecuc module.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmRxPduRef",
+                      "uuid": "ECUC:ca833b0d-d026-408d-a29e-2f6932cc556a"
+                    }
+                  ],
+                  "shortName": "J1939DcmRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:51ff7abe-391b-45d1-8bc7-23ff915747a8"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmTxPdu",
+                  "description": "Contains parameters to configure the J1939DcmTxPdu.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmTxPdu/J1939DcmTxPduId",
+                      "description": "The I-PDU identifier used to identify the Tx message.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmTxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d5ed5ba0-e2c8-4961-a078-e5c84d9166e4"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmConfigSet/J1939DcmNode/J1939DcmDiagnosticMessageSupport/J1939DcmTxPdu/J1939DcmTxPduRef",
+                      "description": "Reference to the global Pdu element in the Ecuc module.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "J1939DcmTxPduRef",
+                      "uuid": "ECUC:91d59c46-3144-499e-91cb-c296b0253830"
+                    }
+                  ],
+                  "shortName": "J1939DcmTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:5cd84b13-9170-4c22-bc15-325eadb42281"
+                }
+              ],
+              "uuid": "ECUC:87be66d8-6859-4b2d-86c6-abc78db9475c"
+            }
+          ],
+          "uuid": "ECUC:c3c80278-c732-4da0-a76c-eeede3ba41af"
+        }
+      ],
+      "uuid": "ECUC:54d36a7e-56c3-496e-ab52-8668a8543286"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral",
+      "description": "Contains the general configuration parameters of the module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmCommonBufferSize",
+          "description": "Size of common buffer (in Bytes). The buffer size should be as large as the longest command or response message.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmCommonBufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:75cc5147-5255-4b18-ae07-d333e462e901"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmDM01BufferSize",
+          "description": "Size of DM01 buffer (in Bytes). The buffer size should be as large as the longest DM01 response message.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmDM01BufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:cfc31919-2f6c-4ec0-919f-afce870be6ab"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMaxDTCsPerMainFunction",
+          "description": "Maximum threshold of DTCs filtered in a single MainFunction cycle.",
+          "isOptional": true,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMaxDTCsPerMainFunction",
+          "type": "INTEGER",
+          "uuid": "ECUC:8e9c59fd-60eb-4033-a05e-8ffa50bc9b32"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMaxFreezeFramesPerMainFunction",
+          "description": "Maximum threshold of FreezeFrames filtered in a single MainFunction cycle.",
+          "isOptional": true,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMaxFreezeFramesPerMainFunction",
+          "type": "INTEGER",
+          "uuid": "ECUC:dbeea3ec-67a4-4b25-a58a-6ee028e3e33b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMaxRatiosPerMainFunction",
+          "description": "Maximum threshold of Ratios filtered in a single MainFunction cycle.",
+          "isOptional": true,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMaxRatiosPerMainFunction",
+          "type": "INTEGER",
+          "uuid": "ECUC:618f1f50-57a6-494d-bbd6-a96c0c97a067"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e3fe7a83-abdd-4ce3-bb7e-a69b2b4c1395"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmVersionInfoApi",
+          "description": "Pre-processor switch for enabling version info API support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3a2aad50-1a5c-41e0-bf89-4790e65410a8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm/J1939DcmGeneral/J1939DcmMainFunctionPeriod",
+          "description": "Call cycle in seconds of J1939Dcm_MainFunction.",
+          "isOptional": false,
+          "max": 0.255,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939DcmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:15eb4ec9-68f9-4310-877a-b722370f5e01"
+        }
+      ],
+      "references": [],
+      "shortName": "J1939DcmGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:b9c7141d-4b7f-4b67-a69a-94b54e5e2350"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/J1939Dcm",
+  "description": "The SAE J1939 Dcm module",
+  "importWarnings": [
+    "J1939DcmComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "J1939DcmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939DcmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939DcmSPNsInDataStream：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "J1939DcmNmNodeRef：目标 /AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode 位于本模块之外；编辑器只读展示。",
+    "J1939DcmNodeRmUserRef：目标 /AUTOSAR/EcucDefs/J1939Rm/J1939RmConfigSet/J1939RmNode/J1939RmUser 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "J1939Dcm",
+  "version": "4.2.2"
+}

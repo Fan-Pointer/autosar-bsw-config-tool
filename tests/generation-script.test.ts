@@ -86,7 +86,22 @@ describe('official 4.4.0 definition extraction CLI', () => {
     expect(readFileSync(logPath, 'utf8')).toBe(changeBytes);
   }, 30000);
 
-  it('rejects a 4.2.2 definition before altering any existing generated artifact', () => {
+  it('extracts a real 4.2.2 official fragment and records its release', () => {
+    const source = join(root, 'tests/fixtures/ecuc-enum-symbolic-4.2.2.arxml');
+    const destination = join(scratch, 'dem422.json');
+    const result = spawnSync(
+      process.execPath,
+      ['scripts/gen-bswmd-from-arxml.mjs', 'Dem', source, destination],
+      { cwd: root, encoding: 'utf8', timeout: 30000 }
+    );
+    expect(result.status, result.stderr).toBe(0);
+    const payload = JSON.parse(readFileSync(destination, 'utf8'));
+    expect(payload.version).toBe('4.2.2');
+    expect(payload.$source.release).toBe('4.2.2');
+    expect(payload.importWarnings.join(' ')).toContain('DEM_DTC_SEV_NO_SEVERITY');
+  }, 30000);
+
+  it('rejects an unsupported 4.5.0 definition before altering any existing generated artifact', () => {
     writeFileSync(input, officialSource);
     expect(run().status).toBe(0);
     const before = readFileSync(output, 'utf8');
@@ -95,12 +110,12 @@ describe('official 4.4.0 definition extraction CLI', () => {
       input,
       officialSource.replace(
         '<REVISION-LABEL>4.4.0</REVISION-LABEL>',
-        '<REVISION-LABEL>4.2.2</REVISION-LABEL>'
+        '<REVISION-LABEL>4.5.0</REVISION-LABEL>'
       )
     );
     const rejected = run();
     expect(rejected.status).not.toBe(0);
-    expect(rejected.stderr).toContain('输入模块版本为 4.2.2');
+    expect(rejected.stderr).toContain('输入模块版本为 4.5.0');
     expect(readFileSync(output, 'utf8')).toBe(before);
     expect(readFileSync(logPath, 'utf8')).toBe(log);
   }, 30000);

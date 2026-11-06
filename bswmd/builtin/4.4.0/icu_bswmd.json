@@ -1,0 +1,557 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "252dc51e134730518cd0f8123e71f2419fb11e62b3e4ae1b3e1a856e98b8d8d6",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Icu module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuMaxChannel",
+          "description": "This parameter contains the number of Channels configured. It will be gathered by tools during the configuration stage.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuMaxChannel",
+          "type": "INTEGER",
+          "uuid": "ECUC:65e2f79c-922e-4180-90dc-0819fc20f890"
+        }
+      ],
+      "references": [],
+      "shortName": "IcuConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel",
+          "description": "Configuration of an individual ICU channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuChannelId",
+              "description": "Channel Id of the ICU channel. This value will be assigned to the symbolic name derived of the IcuChannel container short name.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IcuChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:3e518668-f29a-463d-b183-d4b4d1c28766"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuDefaultStartEdge",
+              "description": "Configures the default-activation-edge which shall be used for this channel if there was no activation-edge configured by the call of service Icu_SetActivation…",
+              "enumValues": [
+                "ICU_BOTH_EDGES",
+                "ICU_FALLING_EDGE",
+                "ICU_RISING_EDGE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IcuDefaultStartEdge",
+              "type": "ENUM",
+              "uuid": "ECUC:29f03c55-e634-4f63-90cf-2027f4cd10f1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuMeasurementMode",
+              "description": "Configures the measurement mode of this channel.",
+              "enumValues": [
+                "ICU_MODE_EDGE_COUNTER",
+                "ICU_MODE_SIGNAL_EDGE_DETECT",
+                "ICU_MODE_SIGNAL_MEASUREMENT",
+                "ICU_MODE_TIMESTAMP"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IcuMeasurementMode",
+              "type": "ENUM",
+              "uuid": "ECUC:b9e816ea-2297-4329-8830-328ccdeabda3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuWakeupCapability",
+              "description": "Information about the wakeup-capability of this channel.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IcuWakeupCapability",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:fc806d81-9561-454b-8c39-aed26d6e49bf"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuChannelEcucPartitionRef",
+              "description": "Maps an ICU channel to zero or multiple ECUC partitions to limit the access to this channel. The ECUC partitions referenced are a subset of the ECUC partitions…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "IcuChannelEcucPartitionRef",
+              "uuid": "ECUC:9b06fcbd-ce60-43e0-ba41-4ce3e151298b"
+            }
+          ],
+          "shortName": "IcuChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuSignalEdgeDetection",
+              "description": "This container contains the configuration (parameters) in case the measurement mode is \"IcuSignalEdgeDetection\"",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuSignalEdgeDetection/IcuSignalNotification",
+                  "description": "Notification function for signal notification.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "IcuSignalNotification",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:98319c3e-7a97-4edf-8ec1-9da0994e2db2"
+                }
+              ],
+              "references": [],
+              "shortName": "IcuSignalEdgeDetection",
+              "subContainers": [],
+              "uuid": "ECUC:761a76f3-f5c6-4715-a916-9a077db4a160"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuSignalMeasurement",
+              "description": "This container contains the configuration (parameters) in case the measurement mode is \"IcuSignalMeasurement\"",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuSignalMeasurement/IcuSignalMeasurementProperty",
+                  "description": "Configures the property that could be measured in case the mode is \"IcuSignalMeasurement\".",
+                  "enumValues": [
+                    "ICU_DUTY_CYCLE",
+                    "ICU_HIGH_TIME",
+                    "ICU_LOW_TIME",
+                    "ICU_PERIOD_TIME"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IcuSignalMeasurementProperty",
+                  "type": "ENUM",
+                  "uuid": "ECUC:dd5a6572-bc3a-4853-985d-753d3392a183"
+                }
+              ],
+              "references": [],
+              "shortName": "IcuSignalMeasurement",
+              "subContainers": [],
+              "uuid": "ECUC:d5664952-203b-47c4-9c69-bc138c81857b"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuTimestampMeasurement",
+              "description": "This container contains the configuration (parameters) in case the measurement mode is \"IcuTimestamp\"",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuTimestampMeasurement/IcuTimestampMeasurementProperty",
+                  "description": "Configures the handling of the buffer in case the mode is \"Timestamp\"",
+                  "enumValues": [
+                    "ICU_CIRCULAR_BUFFER",
+                    "ICU_LINEAR_BUFFER"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IcuTimestampMeasurementProperty",
+                  "type": "ENUM",
+                  "uuid": "ECUC:b13ccde7-442b-4468-a875-28648408d95e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuTimestampMeasurement/IcuTimestampNotification",
+                  "description": "Notification function if the number of requested timestamps",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "IcuTimestampNotification",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:0a447661-94c2-4817-b14f-930ee4258f2f"
+                }
+              ],
+              "references": [],
+              "shortName": "IcuTimestampMeasurement",
+              "subContainers": [],
+              "uuid": "ECUC:3bb68cd5-7dfc-43b4-b64f-f601cb9d99ea"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuWakeup",
+              "description": "This container contains the configuration (parameters) needed to configure a wakeup capable channel",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel/IcuWakeup/IcuChannelWakeupInfo",
+                  "description": "If the wakeup-capability is true the wakeup source referenced is transmitted to the ECU State Manager (EcuM) .",
+                  "destinationContainerType": "EcuMWakeupSource",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "IcuChannelWakeupInfo",
+                  "uuid": "ECUC:f78189c5-99ae-4266-ba74-122fb3ce7b26"
+                }
+              ],
+              "shortName": "IcuWakeup",
+              "subContainers": [],
+              "uuid": "ECUC:1e4f92c1-8c4d-4ae4-8cc8-2ef213419e4f"
+            }
+          ],
+          "uuid": "ECUC:74f0ce69-2156-4784-bae9-57ea4699e6e4"
+        }
+      ],
+      "uuid": "ECUC:65e11074-8c5d-4fb7-b332-10e4889287f2"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuGeneral",
+      "description": "Configuration of general ICU parameters.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuGeneral/IcuDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7224bf75-cdc8-408f-91ff-3a99e7a18f84"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuGeneral/IcuReportWakeupSource",
+          "description": "Switch for enabling Wakeup source reporting.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuReportWakeupSource",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4f4c8d4b-1b31-4832-9593-481e273767fb"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuGeneral/IcuEcucPartitionRef",
+          "description": "Maps the ICU driver to zero or multiple ECUC partitions to make the driver API available in the according partition. Tags: atp.Status=draft",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "IcuEcucPartitionRef",
+          "uuid": "ECUC:17b4aa86-03d5-4b04-8eeb-8f477738c39f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuGeneral/IcuKernelEcucPartitionRef",
+          "description": "Maps the ICU kernel to zero or one ECUC partitions to assign the driver kernel to a certain core. The ECUC partition referenced is a subset of the ECUC partiti…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IcuKernelEcucPartitionRef",
+          "uuid": "ECUC:13ba45f8-14f2-4261-aeb4-bf2195db494e"
+        }
+      ],
+      "shortName": "IcuGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:1d7a6ee1-8bc5-4f5f-b509-c17e210792d6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis",
+      "description": "This container contains all configuration switches for configuring optional API services of the ICU driver.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuDeInitApi",
+          "description": "Adds / removes the service Icu_DeInit() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuDeInitApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4d39ccac-2595-4da7-a69e-66453109d78a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuDisableWakeupApi",
+          "description": "Adds / removes the service Icu_DisableWakeup() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuDisableWakeupApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6d684a90-4bd5-46f1-98c7-5ee0c87a4d3b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuEdgeCountApi",
+          "description": "Adds / removes all services related to the edge counting functionality as listed below, from the code: Icu_ResetEdgeCount(), Icu_EnableEdgeCount(), Icu_Disable…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuEdgeCountApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:cdf40ca5-30d2-4ef5-ab1f-8718f7c34a1b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuEdgeDetectApi",
+          "description": "Adds / removes the services related to the edge detection functionality, from the code:",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuEdgeDetectApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c7120c6a-ec51-4ec8-af9f-6ff680d2a9a8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuEnableWakeupApi",
+          "description": "Adds / removes the service Icu_EnableWakeup() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuEnableWakeupApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c66b6658-f92b-44db-849d-d21fd3ec8bd7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuGetDutyCycleValuesApi",
+          "description": "Adds / removes the service Icu_GetDutyCycleValues() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuGetDutyCycleValuesApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8c295fd4-29a0-4f33-8275-5e5885f0d0da"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuGetInputStateApi",
+          "description": "Adds / removes the service Icu_GetInputState() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuGetInputStateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:45a58d33-058d-473d-bb4e-16e883293e42"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuGetTimeElapsedApi",
+          "description": "Adds / removes the service Icu_GetTimeElapsed() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuGetTimeElapsedApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a87b3e59-925b-48f0-9e65-7dd842060e1a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuGetVersionInfoApi",
+          "description": "Adds / removes the service Icu_GetVersionInfo() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuGetVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ab4fff0d-bcf9-4cd4-8d5f-a8c599f9f4a6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuSetModeApi",
+          "description": "Adds / removes the service Icu_SetMode() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuSetModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b06b2a5f-8d05-4cfc-819d-b2c1823f26c6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuSignalMeasurementApi",
+          "description": "Adds / removes the services Icu_StartSignalMeasurement() and Icu_StopSignalMeasurement() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuSignalMeasurementApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e7f32d8d-d9d3-485b-ae88-cf3658bfbaf9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuTimestampApi",
+          "description": "Adds / removes all services related to the timestamping functionality as listed below from the code: Icu_StartTimestamp(), Icu_StopTimestamp(), Icu_GetTimestam…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuTimestampApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b4d200cd-fefe-4c78-8338-cccedb398ee1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Icu/IcuOptionalApis/IcuWakeupFunctionalityApi",
+          "description": "Adds / removes the service Icu_CheckWakeup() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IcuWakeupFunctionalityApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ac569439-e703-4088-ac80-d9ccdeebf2fc"
+        }
+      ],
+      "references": [],
+      "shortName": "IcuOptionalApis",
+      "subContainers": [],
+      "uuid": "ECUC:52e9680e-5f55-4fd1-b0bc-888491b8943f"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Icu",
+  "description": "Configuration of the Icu (Input Capture Unit) module.",
+  "importWarnings": [
+    "IcuChannelWakeupInfo：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "IcuChannelEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "IcuChannelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "IcuEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "IcuEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "IcuKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Icu",
+  "version": "4.4.0"
+}

@@ -1,0 +1,621 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "b2f7505fdc9fd82d175f0594804d6d5bf4adc600e1a4a63cc2a8373764d58d49",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral",
+      "description": "Flags for adding removing functionality from code.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:27eff560-d84c-4d88-949e-9a5b432dbc63"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementAppIdContextIdQuery",
+          "description": "If set the functionality for Verbose Mode shall be available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementAppIdContextIdQuery",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6384a5ee-f631-45a5-9e97-b2a6be818e14"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementExtendedHeader",
+          "description": "If set the extended functionality for the header shall be available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementExtendedHeader",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:72051e53-9842-49c9-8f62-8b593a0e4537"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementFilterMessages",
+          "description": "This flag is for code generation of Dlt. If set the functionality for filtering messages shall be included in the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementFilterMessages",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:856a1361-05c1-4b73-a193-244d208267c1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementNVRamStorage",
+          "description": "If set the functionality for storing and loading information in and from NVRam shall be available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementNVRamStorage",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b459d722-5902-4cd8-bfad-9d1eb2c83e0a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementSWCInjection",
+          "description": "If the remote call from functions over the Dlt in SW-C shall be available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementSWCInjection",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8bae3785-070c-4d72-b9f0-2f23f6e57f6b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementTimestamp",
+          "description": "If set the timestamp functionality for the header shall be available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementTimestamp",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8ae7a706-e865-429d-b34f-3da16bd4a58f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementVerboseMode",
+          "description": "If set the functionality for Verbose Mode shall be available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementVerboseMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:37ab72ba-626c-4819-9b76-530db893fc3f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltImplementVfbTrace",
+          "description": "If set the the header files and the implementation of VFB-trace shall be generated.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltImplementVfbTrace",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:867712da-7313-4f21-8c0f-53a0782c1091"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltVersionInfoApi",
+          "description": "Pre-processor switch for enabling Version Info API support.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "DltVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3fa6a53a-60e1-42e7-97eb-86d5d9639751"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltVfbTraceLogLevel",
+          "description": "The log level of the log messages generated by the VFB-Trace.",
+          "isOptional": false,
+          "max": 6,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltVfbTraceLogLevel",
+          "type": "INTEGER",
+          "uuid": "ECUC:22380264-b196-44e5-8202-0b65f9d4a6a6"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltGeneral/DltGptChannel",
+          "description": "Reference to the hardware free running timer of the GPT module for time stamps (if no HWFRT is applied, calls to add timestamps are ignored).",
+          "destinationContainerType": "GptChannelConfiguration",
+          "destinationRef": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "DltGptChannel",
+          "uuid": "ECUC:35571a7d-1d57-4381-af44-36fd075fccdf"
+        }
+      ],
+      "shortName": "DltGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:dc794cf6-4757-4873-9431-2ad613223e3b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMemory",
+      "description": "Configuration parameters for reserving memory for some internal storing and buffer.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMemory/DltInitBufferSize",
+          "description": "Buffer size for the C-init buffer. This buffer is for storing messages from other BSW modules before Dlt is initialized.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltInitBufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:3d367d10-5882-49fc-8c48-9fe02b6f883a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMemory/DltMaxCountAppIds",
+          "description": "The maximum count of register able Application Ids. There shall be a table to manage registered Application IDs, this is the number of lines to hold in this ta…",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltMaxCountAppIds",
+          "type": "INTEGER",
+          "uuid": "ECUC:b5e67bde-10d3-4c8b-a84d-2f6dd5c19950"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMemory/DltMaxCountContextIds",
+          "description": "The maximum count of registrable Context Ids. There shall be a table to manage registered Context IDs, this is the number of lines to hold in this table.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltMaxCountContextIds",
+          "type": "INTEGER",
+          "uuid": "ECUC:6c2f1f5e-1d47-49f0-b214-0979978cae61"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMemory/DltMaxCountContextIdsPerAppId",
+          "description": "Each Context ID belongs to a specific Application ID. Dlt shall handle the correlation between them. The table of the registered Application IDs shall hold for…",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltMaxCountContextIdsPerAppId",
+          "type": "INTEGER",
+          "uuid": "ECUC:7afb6655-4ec4-4d6e-a912-4be203c66610"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMemory/DltMessageBufferSize",
+          "description": "Buffer size for storing Dlt messages for waiting to transmit over the Network (send buffer).",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltMessageBufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:49f7f303-026d-4e27-96bd-88506db89f40"
+        }
+      ],
+      "references": [],
+      "shortName": "DltMemory",
+      "subContainers": [],
+      "uuid": "ECUC:1a1331b6-d21c-426c-91e2-a798adec55b3"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Dlt module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltNvRamBlockRef",
+          "description": "Reference to the NvM Block which is used to store the Dlt parameters.",
+          "destinationContainerType": "NvMBlockDescriptor",
+          "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "DltNvRamBlockRef",
+          "uuid": "ECUC:62a6ab9c-882e-4793-a18f-14c791b8bfdf"
+        }
+      ],
+      "shortName": "DltMultipleConfigurationContainer",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltBandwidth",
+          "description": "Configuration parameters controlling network and diagnostic interfaces bandwidth. If DltImplementNVRamStorage is enabled this parameters are the initial values…",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltBandwidth/DltBandwidthForComModule",
+              "description": "For communication over the Dlt Communication Module the maximum bandwidth shall be set.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltBandwidthForComModule",
+              "type": "INTEGER",
+              "uuid": "ECUC:5f6ba5bd-0e66-46fe-994f-7927c6fa8d49"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltBandwidth/DltBandwidthForDiagChannel",
+              "description": "For communication over the DCM and as follows over the diagnostic interface the maximum bandwidth shall be set.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltBandwidthForDiagChannel",
+              "type": "INTEGER",
+              "uuid": "ECUC:99ebaf64-1deb-4efb-8430-7f33e6208dc8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltBandwidth/DltTimePeriodTrafficShaping",
+              "description": "For implementing a traffic shaping, a time window for measuring shall be provided.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltTimePeriodTrafficShaping",
+              "type": "FLOAT",
+              "uuid": "ECUC:b0d3a0cd-d0a7-4897-978e-1981bfcb4b13"
+            }
+          ],
+          "references": [],
+          "shortName": "DltBandwidth",
+          "subContainers": [],
+          "uuid": "ECUC:53adb1a1-f889-4f3b-9efb-be856ca46398"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltMessageFiltering",
+          "description": "Configuration parameters for setting message filtering properties in Dlt module.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltMessageFiltering/DltDefaultMaxLogLevel",
+              "description": "The maximum log level a received message (from SW-C to Dlt) can have. This can also be modified at runtime and stored persistently in NVRAM. If DltImplementNVR…",
+              "isOptional": false,
+              "max": 6,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltDefaultMaxLogLevel",
+              "type": "INTEGER",
+              "uuid": "ECUC:f11c0bb5-8364-4bc3-aa4b-52edd8eb4b6b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltMessageFiltering/DltFactoryDefaultMaxLogLevel",
+              "description": "The maximum log level a received message (from SW-C to Dlt) can have. This is for setting DltDefaultMaxLogLevel to factory defaults. The value 0 means logging …",
+              "isOptional": false,
+              "max": 6,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltFactoryDefaultMaxLogLevel",
+              "type": "INTEGER",
+              "uuid": "ECUC:461f8e8c-dc26-4cd2-8df9-a6dbcc743a6d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltMessageFiltering/DltDefaultTraceStatus",
+              "description": "Tells if trace messages shall be forwarded by Dlt. This functionality can also be modified at runtime and changed can stored persistently in NVRAM. If DltImple…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltDefaultTraceStatus",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:3c82a23b-cc61-4278-9f45-46666cd43334"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltMessageFiltering/DltFilterMessages",
+              "description": "This flag gives the Dlt the instruction to filter or not to filter incoming log or trace messages. If it is not set all incoming messages are forwarded to the …",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltFilterMessages",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:65e72d79-7077-4579-8f2b-c84c370e2de3"
+            }
+          ],
+          "references": [],
+          "shortName": "DltMessageFiltering",
+          "subContainers": [],
+          "uuid": "ECUC:f3d597a1-feda-425b-9e15-9522cde760ed"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol",
+          "description": "Configuration parameters for handling the specific protocol variants.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltEcuId",
+              "description": "This is the name of the ECU for use within the Dlt protocol. The meaning is described in the document. This name is transmitted within the Dlt protocol. There …",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltEcuId",
+              "type": "STRING",
+              "uuid": "ECUC:fec6b9e9-76d1-4c6c-8b91-0a0339311bad"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltHeaderPayloadEndianes",
+              "description": "Determines the endianess of the CPU (Most Significant Byte).",
+              "enumValues": [
+                "BigEndian",
+                "LittleEndian"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltHeaderPayloadEndianes",
+              "type": "ENUM",
+              "uuid": "ECUC:44c2c0a2-cc9c-4891-b17c-ccd176f1a389"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltHeaderUseEcuId",
+              "description": "Corresponds to field WEID (With ECU ID). If set ECU ID shall be placed in the header, else not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltHeaderUseEcuId",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:6b268ebe-3d20-4c23-871c-1710d325e9a4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltHeaderUseExtendedHeader",
+              "description": "Corresponds to field UEH (Use Extended Header). If set the Extended Header shall be attached, else not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltHeaderUseExtendedHeader",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:4041bbe1-5fa4-499b-9875-be585f933967"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltHeaderUseSessionID",
+              "description": "Corresponds to field WSID (with Session ID). If set the Session ID shall be placed in the header, else not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltHeaderUseSessionID",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:1e5526f3-a47b-4fac-996f-6baf27f3f79a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltHeaderUseTimestamp",
+              "description": "Corresponds to field WTMS (With Timestamp). If set the timestamp shall be placed in the header, else not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltHeaderUseTimestamp",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:5a6f7891-da88-4d3d-8eda-696d7a8787a8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltUseVerboseMode",
+              "description": "If this flag is set Dlt shall use the Verbose Mode for generating the header of the transport protocol. Also it shall store the information provided by registe…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltUseVerboseMode",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:2bf031fc-a4f1-4c38-aed3-26e119a6aa73"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltMultipleConfigurationContainer/DltProtocol/DltMaxMessageLength",
+              "description": "The maximum length of a Dlt log or trace message.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 8,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DltMaxMessageLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:ca14ade8-dd63-4f4d-95e6-7e760fc35609"
+            }
+          ],
+          "references": [],
+          "shortName": "DltProtocol",
+          "subContainers": [],
+          "uuid": "ECUC:93a94ed4-d678-4a3e-8c58-29be1f26dcc1"
+        }
+      ],
+      "uuid": "ECUC:42be3745-69d8-4ed2-aae7-fb376d167de3"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltVfbTrace",
+      "description": "All functions to trace from the VFB by the Dlt.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltVfbTrace/DltVfbTraceFunction",
+          "description": "The Dlt generator shall enable VFB tracing for a given hook function when there is a #define in the Dlt-VFB configuration header file for the hook function nam…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltVfbTraceFunction",
+          "type": "FUNCTION",
+          "uuid": "ECUC:1d453c14-033e-4a5d-a5ba-34a735adae68"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Dlt/DltVfbTrace/DltBswModuleEntryRef",
+          "description": "Foreign reference to the BSWModuleEntry describing the trace function implementation.",
+          "destinationContainerType": "DltBswModuleEntryRef",
+          "destinationRefs": [],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "foreign",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DltBswModuleEntryRef",
+          "uuid": "ECUC:adef58d2-13df-4dc5-81ec-d9d3e871754e"
+        }
+      ],
+      "shortName": "DltVfbTrace",
+      "subContainers": [],
+      "uuid": "ECUC:6c62a8d2-e346-4415-a905-92508689806e"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Dlt",
+  "importWarnings": [
+    "DltGptChannel：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+    "DltNvRamBlockRef：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+    "DltBswModuleEntryRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Dlt",
+  "version": "4.2.2"
+}

@@ -1,0 +1,283 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "6b69d061560c9b2389198d041eae90e9f1a8cda7f70924c6390315a9d9cc7cb6",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration",
+      "description": "Configuration of block specific parameters for the Flash EEPROM Emulation module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration/FeeBlockNumber",
+          "description": "Block identifier (handle).",
+          "isOptional": false,
+          "max": 65534,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeBlockNumber",
+          "type": "INTEGER",
+          "uuid": "ECUC:0a407883-2fc6-4823-a26e-ea079aa7e73f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration/FeeBlockSize",
+          "description": "Size of a logical block in bytes.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeBlockSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:24bf18c3-8512-4334-8585-6c7937444d1d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration/FeeNumberOfWriteCycles",
+          "description": "Number of write cycles required for this block.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeNumberOfWriteCycles",
+          "type": "INTEGER",
+          "uuid": "ECUC:b55e41d9-f6b5-4613-937e-2b83fe37a654"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration/FeeImmediateData",
+          "description": "Marker for high priority data.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeImmediateData",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b1116e04-53cd-44a7-8056-f43434aa82c8"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeBlockConfiguration/FeeDeviceIndex",
+          "description": "Reference to the device this block is stored in.",
+          "destinationContainerType": "FlsGeneral",
+          "destinationRef": "/AUTOSAR/EcucDefs/Fls/FlsGeneral",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Fls/FlsGeneral"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeDeviceIndex",
+          "uuid": "ECUC:f3bfa469-e131-4f58-bb89-ca7fc4548d25"
+        }
+      ],
+      "shortName": "FeeBlockConfiguration",
+      "subContainers": [],
+      "uuid": "ECUC:3e3f6a41-1274-4d00-b94d-504e69110cfa"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral",
+      "description": "Container for general parameters. These parameters are not specific to a block.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeeDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f262f806-4d29-4ef6-b4c1-6167282e1f21"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeePollingMode",
+          "description": "Pre-processor switch to enable and disable the polling mode for this module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeePollingMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:cbbd2e13-d937-4e0f-8546-6ea5cc3b7eeb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeeSetModeSupported",
+          "description": "Compiler switch to enable/disable the 'SetMode' functionality of the FEE module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeSetModeSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f064e794-edd8-4288-b518-84c07839383d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeeVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e66783a5-0bb8-4060-83ed-985d387af3a5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeeMainFunctionPeriod",
+          "description": "The period between successive calls to the main function in seconds.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:a5360d15-f12c-489d-a6c1-d1946bb47b2b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeeNvmJobEndNotification",
+          "description": "Mapped to the job end notification routine provided by the upper layer module (NvM_JobEndNotification).",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FeeNvmJobEndNotification",
+          "type": "FUNCTION",
+          "uuid": "ECUC:3b4f73c8-354a-4d0e-86e6-0e2d07ba5590"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeeNvmJobErrorNotification",
+          "description": "Mapped to the job error notification routine provided by the upper layer module (NvM_JobErrorNotification).",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FeeNvmJobErrorNotification",
+          "type": "FUNCTION",
+          "uuid": "ECUC:9a658f03-834b-4dd3-add7-58b968076e7d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeeGeneral/FeeVirtualPageSize",
+          "description": "The size in bytes to which logical blocks shall be aligned.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeVirtualPageSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:cfc06841-4637-4082-9f2e-57de66655c6f"
+        }
+      ],
+      "references": [],
+      "shortName": "FeeGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:40da9e07-9e9a-4777-85e7-a111b37d8453"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeePublishedInformation",
+      "description": "Additional published parameters not covered by CommonPublishedInformation container.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeePublishedInformation/FeeBlockOverhead",
+          "description": "Management overhead per logical block in bytes.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeeBlockOverhead",
+          "type": "INTEGER",
+          "uuid": "ECUC:05f4fdfa-6b05-4960-973e-f62746494b3d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fee/FeePublishedInformation/FeePageOverhead",
+          "description": "Management overhead per page in bytes.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FeePageOverhead",
+          "type": "INTEGER",
+          "uuid": "ECUC:ff042c2b-4ea3-4cc9-b210-6b4956da10d9"
+        }
+      ],
+      "references": [],
+      "shortName": "FeePublishedInformation",
+      "subContainers": [],
+      "uuid": "ECUC:c99d74b3-e634-4c09-b512-87583d22c249"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Fee",
+  "description": "Configuration of the Fee (Flash EEPROM Emulation) module.",
+  "importWarnings": [
+    "FeeDeviceIndex：目标 /AUTOSAR/EcucDefs/Fls/FlsGeneral 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Fee",
+  "version": "4.4.0"
+}

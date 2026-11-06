@@ -1,0 +1,236 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "a42db447660f6de74a131f34c8d32c935a41da33c01d8a83d00ba450e9c38e16",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass",
+      "description": "The class definition describes the layout of the object (similar to a \"class\" definition in C). Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass/ArtiGenericComponentClassName",
+          "description": "Name of the class. Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiGenericComponentClassName",
+          "type": "STRING",
+          "uuid": "ECUC:79e31615-719b-4b28-925b-201e1179e7cc"
+        }
+      ],
+      "references": [],
+      "shortName": "ArtiGenericComponentClass",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass/ArtiGenericComponentClassParameter",
+          "description": "Parameter definition of a class. Tags: atp.Status=draft",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass/ArtiGenericComponentClassParameter/ArtiGenericComponentClassParameterName",
+              "description": "Name of the parameter. Tags: atp.Status=draft",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ArtiGenericComponentClassParameterName",
+              "type": "STRING",
+              "uuid": "ECUC:9f2ea270-7b99-4b12-a771-536d771488eb"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass/ArtiGenericComponentClassParameter/ArtiParameterTypeMapRef",
+              "description": "Refers to a parameter type to interpret the parameter value. Tags: atp.Status=draft",
+              "destinationContainerType": "ArtiParameterTypeMap",
+              "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ArtiParameterTypeMapRef",
+              "uuid": "ECUC:8de6e175-ddaa-4330-a4bf-3e422898c906"
+            }
+          ],
+          "shortName": "ArtiGenericComponentClassParameter",
+          "subContainers": [],
+          "uuid": "ECUC:b1ca1916-0013-4c35-bc71-2e3e03cabf31"
+        }
+      ],
+      "uuid": "ECUC:dc8b1c52-b839-4702-bb8c-c00e6dacf867"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance",
+      "description": "The instance definition describes a specific instantiated object. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance/ArtiGenericComponentInstanceName",
+          "description": "Name of the instance. Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiGenericComponentInstanceName",
+          "type": "STRING",
+          "uuid": "ECUC:1d57675e-c642-4cb1-9f57-388c4a670cb9"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance/ArtiGenericComponentClassRef",
+          "description": "Refers to a ArtGenericClass of which this object is instantiated. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiGenericComponentClass",
+          "destinationRef": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass"
+          ],
+          "isExternal": false,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiGenericComponentClassRef",
+          "uuid": "ECUC:98317161-8c38-4440-92c8-a681ac313c7e"
+        }
+      ],
+      "shortName": "ArtiGenericComponentInstance",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance/ArtiGenericComponentInstanceParameter",
+          "description": "Parameter definition of an instance. Tags: atp.Status=draft",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance/ArtiGenericComponentInstanceParameter/ArtiConstantRef",
+              "description": "Refers to an ArtiConstant that represents the value of this parameter. Tags: atp.Status=draft",
+              "destinationContainerType": "ArtiConstant",
+              "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiConstant",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Arti/ArtiConstant"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ArtiConstantRef",
+              "uuid": "ECUC:4b5042b3-46b6-47bf-945d-e9a998784f0f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance/ArtiGenericComponentInstanceParameter/ArtiExpressionRef",
+              "description": "Refers to an ArtiExpression that evaluates the value of this parameter. Tags: atp.Status=draft",
+              "destinationContainerType": "ArtiExpression",
+              "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiExpression",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Arti/ArtiExpression"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ArtiExpressionRef",
+              "uuid": "ECUC:d8811807-ab16-4bdd-b707-9827a8f7cc5c"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance/ArtiGenericComponentInstanceParameter/ArtiGenericComponentClassParameterRef",
+              "description": "Refers to an ArtiGenericComponentClassParameter that defines this parameter. Tags: atp.Status=draft",
+              "destinationContainerType": "ArtiGenericComponentClassParameter",
+              "destinationRef": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass/ArtiGenericComponentClassParameter",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentClass/ArtiGenericComponentClassParameter"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "ArtiGenericComponentClassParameterRef",
+              "uuid": "ECUC:973f8d67-63a5-4b7e-b77a-a490839e21a5"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric/ArtiGenericComponentInstance/ArtiGenericComponentInstanceParameter/ArtiHookRef",
+              "description": "Refers to a hook that records this parameter. Tags: atp.Status=draft",
+              "destinationContainerType": "ArtiHook",
+              "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiHook",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Arti/ArtiHook"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ArtiHookRef",
+              "uuid": "ECUC:4cb52969-651d-43b2-be80-86c040ecc70b"
+            }
+          ],
+          "shortName": "ArtiGenericComponentInstanceParameter",
+          "subContainers": [],
+          "uuid": "ECUC:0ce680cf-6a46-4224-be85-cebc9da404b3"
+        }
+      ],
+      "uuid": "ECUC:1171181e-f661-40f0-bd48-7e753290dfd9"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/ArtiGeneric",
+  "description": "The ArtiGeneric contains definitions for generic objects, i.e. not belonging to a standard AUTOSAR module. Tags: atp.Status=draft",
+  "importWarnings": [
+    "ArtiParameterTypeMapRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap 位于本模块之外；编辑器只读展示。",
+    "ArtiConstantRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiConstant 位于本模块之外；编辑器只读展示。",
+    "ArtiExpressionRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiExpression 位于本模块之外；编辑器只读展示。",
+    "ArtiGenericComponentClassParameterRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ArtiHookRef：目标 /AUTOSAR/EcucDefs/Arti/ArtiHook 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "ArtiGeneric",
+  "version": "4.4.0"
+}

@@ -1,0 +1,2242 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "fa3b279a2757c49e86e688132e0dcf46a0f91028e25fe1755e09ca21d77aadf7",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymDecrypt",
+      "description": "Container for incorporation of AsymDecrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymDecrypt/CalAsymDecryptMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement an asymmetrical decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymDecryptMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:45ad4d7f-37a2-463c-9059-bb94a312631f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymDecrypt/CalAsymDecryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement an asymmetrical decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymDecryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:37f98b68-c1e5-4c64-a1dd-cbdf20e4921c"
+        }
+      ],
+      "references": [],
+      "shortName": "CalAsymDecrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymDecrypt/CalAsymDecryptConfig",
+          "description": "Container for configuration of service AsymDecrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymDecrypt/CalAsymDecryptConfig/CalAsymDecryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymDecryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:606bede9-3ac0-46ba-ad54-6a592891a23f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymDecrypt/CalAsymDecryptConfig/CalAsymDecryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymDecryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:c1ac42e3-ded0-443c-97a4-f85c1056e8fe"
+            }
+          ],
+          "references": [],
+          "shortName": "CalAsymDecryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:99a7c886-305c-4c91-a2b3-2809b1e11b0f"
+        }
+      ],
+      "uuid": "ECUC:c2b02512-1d6f-45ea-b7ad-768fcf8d52f5"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymEncrypt",
+      "description": "Container for incorporation of AsymEncrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymEncrypt/CalAsymEncryptMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement an asymmetrical encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymEncryptMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:62990ba6-a5cf-4c9a-8dfe-502071854dd9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymEncrypt/CalAsymEncryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement an asymmetrical encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymEncryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:b76c9d68-2e6b-4d9f-bbbe-83a60a6a33c2"
+        }
+      ],
+      "references": [],
+      "shortName": "CalAsymEncrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymEncrypt/CalAsymEncryptConfig",
+          "description": "Container for configuration of service AsymEncrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymEncrypt/CalAsymEncryptConfig/CalAsymEncryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymEncryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:8af3dcaa-3c53-4aba-b232-688e52884686"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymEncrypt/CalAsymEncryptConfig/CalAsymEncryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymEncryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:f04729b5-91f1-4f49-b731-c38e7dc94c24"
+            }
+          ],
+          "references": [],
+          "shortName": "CalAsymEncryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:d591c6b1-f35b-4e4f-8f35-78e78337ddc8"
+        }
+      ],
+      "uuid": "ECUC:6954f702-9bfb-440a-88c5-206dc0e4ad88"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyExtract",
+      "description": "Container for incorporation of AsymPrivateKeyExtract primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyExtract/CalAsymPrivateKeyExtractMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement an asymmetrical private key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyExtractMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:f6cf1905-541b-4174-841a-918e922b90fa"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyExtract/CalAsymPrivateKeyExtractMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement an asymmetrical private key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyExtractMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:a143f0b9-858f-4572-bf2d-5a302030e55d"
+        }
+      ],
+      "references": [],
+      "shortName": "CalAsymPrivateKeyExtract",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyExtract/CalAsymPrivateKeyExtractConfig",
+          "description": "Container for configuration of service AsymPrivateKeyExtract.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyExtract/CalAsymPrivateKeyExtractConfig/CalAsymPrivateKeyExtractInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPrivateKeyExtractInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:51d30aa7-82c1-4fe6-a67c-e5ed2529aacc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyExtract/CalAsymPrivateKeyExtractConfig/CalAsymPrivateKeyExtractPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPrivateKeyExtractPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:9380adbb-5da7-4f62-806e-3bb05608aa91"
+            }
+          ],
+          "references": [],
+          "shortName": "CalAsymPrivateKeyExtractConfig",
+          "subContainers": [],
+          "uuid": "ECUC:16e8d036-8426-4c55-8b8b-4b37511af318"
+        }
+      ],
+      "uuid": "ECUC:5b3aa5d9-f98e-4d0e-bc37-c5f92692f57d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapAsym",
+      "description": "Container for incorporation of AsymPrivateKeyWrapAsym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapAsym/CalAsymPrivateKeyWrapAsymMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a asymmetrical wrapping of the private part of an asymmetric key.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyWrapAsymMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:bc341ff6-c5ef-461d-9ae3-d30652a3904b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapAsym/CalAsymPrivateKeyWrapAsymMaxPrivKeySize",
+          "description": "The maximum length, in bytes, of all private information types used in all CPL primitives which implement an asymmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyWrapAsymMaxPrivKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:731f5d40-bd32-42c9-a424-e1ebfa814a99"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapAsym/CalAsymPrivateKeyWrapAsymMaxPubKeySize",
+          "description": "The maximum length, in bytes, of all public key types used in all CPL primitives which implement an asymmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyWrapAsymMaxPubKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:9995d79e-d314-4c42-bd2e-faae5d1e332b"
+        }
+      ],
+      "references": [],
+      "shortName": "CalAsymPrivateKeyWrapAsym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapAsym/CalAsymPrivateKeyWrapAsymConfig",
+          "description": "Container for configuration of service AsymPrivateKeyWrapAsym.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapAsym/CalAsymPrivateKeyWrapAsymConfig/CalAsymPrivateKeyWrapAsymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPrivateKeyWrapAsymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:2358ab88-4336-40c3-879e-4283e5e86e7d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapAsym/CalAsymPrivateKeyWrapAsymConfig/CalAsymPrivateKeyWrapAsymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPrivateKeyWrapAsymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:db5be4a1-bfdc-43ed-924e-c6f5d4bc7cce"
+            }
+          ],
+          "references": [],
+          "shortName": "CalAsymPrivateKeyWrapAsymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:f62dd31b-d9cd-420f-a2f0-030fd25de322"
+        }
+      ],
+      "uuid": "ECUC:16b1dc6b-a36e-449c-80dd-42b1849f7d26"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapSym",
+      "description": "Container for incorporation of AsymPrivateKeyWrapSym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapSym/CalAsymPrivateKeyWrapSymMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a symmetrical wrapping of the private part of an asymmetric key.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyWrapSymMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:bf1f51bb-cb84-4f39-b29e-7e7224623b10"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapSym/CalAsymPrivateKeyWrapSymMaxPrivKeySize",
+          "description": "The maximum length, in bytes, of all private information types used in all CPL primitives which implement an asymmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyWrapSymMaxPrivKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:46859cd1-3c15-471b-90b5-b73dc47e103f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapSym/CalAsymPrivateKeyWrapSymMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement an asymmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPrivateKeyWrapSymMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:07b7d500-164d-4248-9e7e-edb9948c45ab"
+        }
+      ],
+      "references": [],
+      "shortName": "CalAsymPrivateKeyWrapSym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapSym/CalAsymPrivateKeyWrapSymConfig",
+          "description": "Container for configuration of service AsymPrivateKeyWrapSym.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapSym/CalAsymPrivateKeyWrapSymConfig/CalAsymPrivateKeyWrapSymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPrivateKeyWrapSymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:93df8c89-92b7-433a-983d-b69f175725b8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPrivateKeyWrapSym/CalAsymPrivateKeyWrapSymConfig/CalAsymPrivateKeyWrapSymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPrivateKeyWrapSymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:8e62c3ed-c8af-4ab0-88c8-c5432d054cc0"
+            }
+          ],
+          "references": [],
+          "shortName": "CalAsymPrivateKeyWrapSymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:141dc2be-aa87-48f1-9d9d-a84104b9dcb5"
+        }
+      ],
+      "uuid": "ECUC:0318a2c1-136c-44e3-bff5-5594777d79b8"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPublicKeyExtract",
+      "description": "Container for incorporation of AsymPublicKeyExtract primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPublicKeyExtract/CalAsymPublicKeyExtractMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement an asymmetrical public key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPublicKeyExtractMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:a6658840-f5d9-4fcc-b794-38bc510e163c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPublicKeyExtract/CalAsymPublicKeyExtractMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement an asymmetrical public key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalAsymPublicKeyExtractMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:42bc63da-a495-4225-955b-df4cef36d944"
+        }
+      ],
+      "references": [],
+      "shortName": "CalAsymPublicKeyExtract",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPublicKeyExtract/CalAsymPublicKeyExtractConfig",
+          "description": "Container for configuration of service AsymPublicKeyExtract.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPublicKeyExtract/CalAsymPublicKeyExtractConfig/CalAsymPublicKeyExtractInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPublicKeyExtractInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:8e447d12-d852-4079-9463-50d421db4f46"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalAsymPublicKeyExtract/CalAsymPublicKeyExtractConfig/CalAsymPublicKeyExtractPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalAsymPublicKeyExtractPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:69167f65-fab4-4252-9f3b-bbbca9e55543"
+            }
+          ],
+          "references": [],
+          "shortName": "CalAsymPublicKeyExtractConfig",
+          "subContainers": [],
+          "uuid": "ECUC:86c587fa-6f48-4a6e-88fb-10c1d3004813"
+        }
+      ],
+      "uuid": "ECUC:ef7bcb3c-d009-4fb0-bf83-9e85b44d69d1"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalChecksum",
+      "description": "Container for incorporation of Checksum primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalChecksum/CalChecksumMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a checksum computation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalChecksumMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:cdf72f4b-e20e-44ca-ad1d-ec93104d1ae5"
+        }
+      ],
+      "references": [],
+      "shortName": "CalChecksum",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalChecksum/CalChecksumConfig",
+          "description": "Container for configuration of service Checksum. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalChecksum/CalChecksumConfig/CalChecksumInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalChecksumInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:eede1f61-32c3-48e0-b59a-78e21dbcd3b6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalChecksum/CalChecksumConfig/CalChecksumPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalChecksumPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:0c102bf1-a9c2-496a-8f51-c6dadd85fa50"
+            }
+          ],
+          "references": [],
+          "shortName": "CalChecksumConfig",
+          "subContainers": [],
+          "uuid": "ECUC:0c67f22b-47c0-4f61-846e-034d26e89538"
+        }
+      ],
+      "uuid": "ECUC:b8d7b754-116e-4061-bbd5-f1584bf62d30"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalCompression",
+      "description": "Container for incorporation of Compression primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalCompression/CalCompressMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a compression computation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalCompressMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:d8767e87-961b-44fa-9f36-46cb07f78acb"
+        }
+      ],
+      "references": [],
+      "shortName": "CalCompression",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalCompression/CalCompressionConfig",
+          "description": "Container for configuration of service Compression. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalCompression/CalCompressionConfig/CalCompressInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalCompressInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:3979c517-faf3-41e9-aba8-782a91f28f32"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalCompression/CalCompressionConfig/CalCompressPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalCompressPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:cea213ac-0f9c-40a3-80c0-76015d888b68"
+            }
+          ],
+          "references": [],
+          "shortName": "CalCompressionConfig",
+          "subContainers": [],
+          "uuid": "ECUC:0cd9f8a6-d279-4ce5-9e82-7c390a3d32ac"
+        }
+      ],
+      "uuid": "ECUC:7ecf575c-5784-499a-81c4-ee6b6c6a13b7"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalDecompression",
+      "description": "Container for incorporation of Decompression primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalDecompression/CalDecompressMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a decompression computation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalDecompressMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:22786330-1a27-44b0-b0bc-9d9b47247bd0"
+        }
+      ],
+      "references": [],
+      "shortName": "CalDecompression",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalDecompression/CalDecompressionConfig",
+          "description": "Container for configuration of service Decompression. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalDecompression/CalDecompressionConfig/CalDecompressInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalDecompressInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:3f3ce7a9-c7bc-410e-b613-10940ac5d8c2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalDecompression/CalDecompressionConfig/CalDecompressPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalDecompressPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:03def6db-f464-411a-9e1c-9a7ce3b9e4b2"
+            }
+          ],
+          "references": [],
+          "shortName": "CalDecompressionConfig",
+          "subContainers": [],
+          "uuid": "ECUC:8fc675a1-be0b-418b-aeda-19c543ee277a"
+        }
+      ],
+      "uuid": "ECUC:e6c8ba0b-cdb0-4617-b98d-5a32a40e5aad"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalGeneral",
+      "description": "Container for common configuration options.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalGeneral/CalMaxAlignScalarType",
+          "description": "The scalar type which has the maximum alignment restrictions on the given platform.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalMaxAlignScalarType",
+          "type": "STRING",
+          "uuid": "ECUC:1ca75bb2-f39f-4655-97e9-10f2b129ea52"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalGeneral/CalVersionInfoApi",
+          "description": "Pre-processor switch to enable and disable availability of the API Cal_GetVersionInfo(). True: API Cal_GetVersionInfo() is available. False: API Cal_GetVersion…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:32eb2ff8-2576-4f6d-8eee-0be1982c8a5e"
+        }
+      ],
+      "references": [],
+      "shortName": "CalGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:7d813e6d-d38d-48d4-bfff-a46f8ec6f674"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalHash",
+      "description": "Container for incorporation of Hash primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalHash/CalHashMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a hash computation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalHashMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:eda55c7c-5886-4134-aba2-4009777fe1e6"
+        }
+      ],
+      "references": [],
+      "shortName": "CalHash",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalHash/CalHashConfig",
+          "description": "Configurations for the Hash service. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalHash/CalHashConfig/CalHashInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalHashInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:a506efe9-dc26-45e1-80bc-331dda93fa54"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalHash/CalHashConfig/CalHashPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalHashPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:d7df6a25-8d30-4b48-894d-9656b5069286"
+            }
+          ],
+          "references": [],
+          "shortName": "CalHashConfig",
+          "subContainers": [],
+          "uuid": "ECUC:afb56866-a648-48f6-b0bd-a6aa913291fc"
+        }
+      ],
+      "uuid": "ECUC:983a4ad8-fe68-429b-8127-2d43c16b729a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyDerive",
+      "description": "Container for incorporation of KeyDerive primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyDerive/CalKeyDeriveMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a key derivation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyDeriveMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:8711c8bc-3725-430f-a77f-5032e64fc4c6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyDerive/CalKeyDeriveMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRL primitives which implement a key derivation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyDeriveMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:95db1898-c86b-4a72-b725-a59364466ddc"
+        }
+      ],
+      "references": [],
+      "shortName": "CalKeyDerive",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyDerive/CalKeyDeriveConfig",
+          "description": "Container for configuration of service KeyDerive. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyDerive/CalKeyDeriveConfig/CalKeyDeriveInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalKeyDeriveInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:060790a3-40f7-4417-9b92-dde48d01fc13"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyDerive/CalKeyDeriveConfig/CalKeyDerivePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalKeyDerivePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:974fe581-b127-46bc-9948-c9aa70ad000e"
+            }
+          ],
+          "references": [],
+          "shortName": "CalKeyDeriveConfig",
+          "subContainers": [],
+          "uuid": "ECUC:c8ca5182-81f1-4ccd-85fb-2ac691f4f63e"
+        }
+      ],
+      "uuid": "ECUC:1cb9ff39-036d-4c46-b893-27ae38c17605"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcPubVal",
+      "description": "Container for incorporation of KeyExchangeCalcPubVal primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcPubVal/CalKeyExchangeCalcPubValMaxBaseTypeSize",
+          "description": "The maximum length, in bytes, of all base types used in all CPL primitives which implement a public value calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyExchangeCalcPubValMaxBaseTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:d2abb09c-c27e-4e44-a3b3-14cb736f3db9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcPubVal/CalKeyExchangeCalcPubValMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a public value calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyExchangeCalcPubValMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:09388930-896a-40d7-95f5-3f48731a6cd6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcPubVal/CalKeyExchangeCalcPubValMaxPrivateTypeSize",
+          "description": "The maximum length, in bytes, of all private information types used in all CPL primitives which implement a public value calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyExchangeCalcPubValMaxPrivateTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:342d08b4-37f6-403a-93a1-445ae3c2a31d"
+        }
+      ],
+      "references": [],
+      "shortName": "CalKeyExchangeCalcPubVal",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcPubVal/CalKeyExchangeCalcPubValConfig",
+          "description": "Container for configuration of service KeyExchangeCalcPubVal. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcPubVal/CalKeyExchangeCalcPubValConfig/CalKeyExchangeCalcPubValInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalKeyExchangeCalcPubValInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:c9fea318-8a6d-4693-a210-ee67f39d8b83"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcPubVal/CalKeyExchangeCalcPubValConfig/CalKeyExchangeCalcPubValPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalKeyExchangeCalcPubValPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:9998d915-e42e-4458-a051-82fcc6179f74"
+            }
+          ],
+          "references": [],
+          "shortName": "CalKeyExchangeCalcPubValConfig",
+          "subContainers": [],
+          "uuid": "ECUC:6047f1e3-150c-4062-9de5-83009e98ed29"
+        }
+      ],
+      "uuid": "ECUC:54f59a16-893f-49ea-94fe-c0d105975e3c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcSecret",
+      "description": "Container for incorporation of KeyExchangeCalcSecret primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcSecret/CalKeyExchangeCalcSecretMaxBaseTypeSize",
+          "description": "The maximum length, in bytes, of all base types used in all CPL primitives which implement a shared secret calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyExchangeCalcSecretMaxBaseTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:9202d352-3dd7-478b-a9f1-0a7331eda4d2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcSecret/CalKeyExchangeCalcSecretMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a shared secret calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyExchangeCalcSecretMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:5299e2f5-c14f-4acf-97e9-58fe7847a70f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcSecret/CalKeyExchangeCalcSecretMaxPrivateTypeSize",
+          "description": "The maximum length, in bytes, of all private information types used in all CPL primitives which implement a shared secret calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalKeyExchangeCalcSecretMaxPrivateTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:961c6c12-62ed-4535-bda4-7c915ff4befa"
+        }
+      ],
+      "references": [],
+      "shortName": "CalKeyExchangeCalcSecret",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcSecret/CalKeyExchangeCalcSecretConfig",
+          "description": "Container for configuration of service KeyExchangeCalcSecret. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcSecret/CalKeyExchangeCalcSecretConfig/CalKeyExchangeCalcSecretInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalKeyExchangeCalcSecretInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:1ace766d-4d32-401c-b0f6-20f707f099cf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalKeyExchangeCalcSecret/CalKeyExchangeCalcSecretConfig/CalKeyExchangeCalcSecretPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalKeyExchangeCalcSecretPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:ae74d778-36b0-45ed-a5bd-6c9e3ebd669e"
+            }
+          ],
+          "references": [],
+          "shortName": "CalKeyExchangeCalcSecretConfig",
+          "subContainers": [],
+          "uuid": "ECUC:505681d9-7848-4817-80af-ae6cb5fe77d1"
+        }
+      ],
+      "uuid": "ECUC:0bbf5f7e-f757-48ab-990b-b49b938aa477"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacGenerate",
+      "description": "Container for incorporation of MacGenerate primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a MAC generation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalMacGenerateMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:ab6c8df7-5d9b-4774-9fbd-3d129c1a9722"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a MAC generation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalMacGenerateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:0a380b91-ee5e-4e17-9e18-34d356fdc74d"
+        }
+      ],
+      "references": [],
+      "shortName": "CalMacGenerate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateConfig",
+          "description": "Configurations for the MacGenerate service. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateConfig/CalMacGenerateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalMacGenerateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:56919315-3e9b-4690-b498-816f55155234"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateConfig/CalMacGeneratePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalMacGeneratePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:63570cda-923b-40a7-80af-ae1603d2caf6"
+            }
+          ],
+          "references": [],
+          "shortName": "CalMacGenerateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:676e518e-d86e-423e-a684-c6092b48bd23"
+        }
+      ],
+      "uuid": "ECUC:d88ab491-979c-4e5f-b986-41b9492056d9"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacVerify",
+      "description": "Container for incorporation of MacVerify primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a MAC verification.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalMacVerifyMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:1b823ea2-7e54-404f-add3-e42389e881a4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a MAC verification.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalMacVerifyMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:429c9ad2-bafe-49a8-8899-3d75f0fa8517"
+        }
+      ],
+      "references": [],
+      "shortName": "CalMacVerify",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyConfig",
+          "description": "Container for configuration of service MacVerify. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyConfig/CalMacVerifyInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalMacVerifyInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:0db6135a-2ecd-414c-af07-bcff544557b2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyConfig/CalMacVerifyPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalMacVerifyPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:8849e93f-e34c-407c-bcbf-d475291d2981"
+            }
+          ],
+          "references": [],
+          "shortName": "CalMacVerifyConfig",
+          "subContainers": [],
+          "uuid": "ECUC:04c7c28a-81e5-4a06-97f4-a44aef32279d"
+        }
+      ],
+      "uuid": "ECUC:9afc6b54-3bc5-49a6-ad92-3354c2a9e09a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomGenerate",
+      "description": "Container for incorporation of RandomGenerate primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CalRandomGenerate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomGenerate/CalRandomGenerateConfig",
+          "description": "Container for configuration of service RandomGenerate. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomGenerate/CalRandomGenerateConfig/CalRandomGenerateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalRandomGenerateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:d31994d7-dc24-4be8-b079-cd7a3f62b41a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomGenerate/CalRandomGenerateConfig/CalRandomGeneratePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalRandomGeneratePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:703f0519-3619-4715-a475-01f404a460bd"
+            }
+          ],
+          "references": [],
+          "shortName": "CalRandomGenerateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:3be06fd3-a46d-42a6-a6e7-83c3da56547e"
+        }
+      ],
+      "uuid": "ECUC:15c9bbec-fd88-4744-8563-e8b245477cae"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomSeed",
+      "description": "Container for incorporation of RandomSeed primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomSeed/CalRandomMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement seeding or generating a random number.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalRandomMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:ef467bd8-c0f7-4713-a091-e7b849962b87"
+        }
+      ],
+      "references": [],
+      "shortName": "CalRandomSeed",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomSeed/CalRandomSeedConfig",
+          "description": "Container for configuration of service RandomSeed. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomSeed/CalRandomSeedConfig/CalRandomSeedInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalRandomSeedInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:4d6f2112-9185-4cdc-b3c3-ea305191f3cd"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalRandomSeed/CalRandomSeedConfig/CalRandomSeedPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalRandomSeedPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:a26b0cd5-3f4f-44f8-ab1c-696fbcfb7e6e"
+            }
+          ],
+          "references": [],
+          "shortName": "CalRandomSeedConfig",
+          "subContainers": [],
+          "uuid": "ECUC:32d0487f-dba6-436d-931b-cc3009ac07d3"
+        }
+      ],
+      "uuid": "ECUC:f331107f-2173-4e57-9317-78f8eeda1df6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureGenerate",
+      "description": "Container for incorporation of SignatureGenerate primitives",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureGenerate/CalSignatureGenerateMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a signature generation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSignatureGenerateMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:32c828cf-1ebd-4914-86cf-73da9f17d4f1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureGenerate/CalSignatureGenerateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a signature generation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSignatureGenerateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:15af97e0-1d91-41dc-9dd9-a7f73fc54fce"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSignatureGenerate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureGenerate/CalSignatureGenerateConfig",
+          "description": "Container for configuration of service SignatureGenerate. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureGenerate/CalSignatureGenerateConfig/CalSignatureGenerateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSignatureGenerateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:190fbdd7-2112-4a48-b241-1fcc2991bb59"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureGenerate/CalSignatureGenerateConfig/CalSignatureGeneratePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSignatureGeneratePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:dde18f27-1038-41a8-8605-0ad51aa1ebbe"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSignatureGenerateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:fba64fb0-3d09-44f0-8c89-27a3ba3783e1"
+        }
+      ],
+      "uuid": "ECUC:c9f667d5-c938-4e16-a5cf-dc0a6557457c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureVerify",
+      "description": "Container for incorporation of SignatureVerify primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureVerify/CalSignatureVerifyMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a signature verification.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSignatureVerifyMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:446c212f-3cce-411b-8b5c-44b7f3727279"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureVerify/CalSignatureVerifyMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a signature verification.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSignatureVerifyMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:6f4d8a51-cab8-44d0-9952-7a6e2c55caad"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSignatureVerify",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureVerify/CalSignatureVerifyConfig",
+          "description": "Container for configuration of service SignatureVerify. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureVerify/CalSignatureVerifyConfig/CalSignatureVerifyInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSignatureVerifyInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:31b6c628-78c8-421b-8f71-6e7ec94970d5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSignatureVerify/CalSignatureVerifyConfig/CalSignatureVerifyPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSignatureVerifyPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:d5572bd8-c4e1-4579-940b-58ab550d2e3e"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSignatureVerifyConfig",
+          "subContainers": [],
+          "uuid": "ECUC:4ddb2ff1-9ab7-4857-b942-3902c2b3a8c3"
+        }
+      ],
+      "uuid": "ECUC:0896c97f-29da-4728-b518-a9fb32d757ef"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockDecrypt",
+      "description": "Container for incorporation of SymBlockDecrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockDecrypt/CalSymBlockDecryptMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a symmetrical block decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymBlockDecryptMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:98c3d5ee-bde9-4cb5-9f1d-e95698b418db"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockDecrypt/CalSymBlockDecryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a symmetrical block decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymBlockDecryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:dd0f7b4d-52ea-47b4-8c6e-ac73c1811773"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSymBlockDecrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockDecrypt/CalSymBlockDecryptConfig",
+          "description": "Container for configuration of service SymBlockDecrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockDecrypt/CalSymBlockDecryptConfig/CalSymBlockDecryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymBlockDecryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:5df8bfb0-4d7b-4b48-af49-311ce14c21b4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockDecrypt/CalSymBlockDecryptConfig/CalSymBlockDecryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymBlockDecryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:aa7bc88e-e328-4ecd-a1f5-ca1235e2d486"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSymBlockDecryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:27c2233c-bd85-4b46-82e7-481d8f9446c8"
+        }
+      ],
+      "uuid": "ECUC:30c15161-f8c6-4817-9a4c-c6e84bf0cfe1"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockEncrypt",
+      "description": "Container for incorporation of SymBlockEncrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockEncrypt/CalSymBlockEncryptMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a symmetrical block encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymBlockEncryptMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:c9671303-95a0-4ccd-9bdf-3430ecd33748"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockEncrypt/CalSymBlockEncryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a symmetrical block encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymBlockEncryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:6cead96f-93a9-439a-b30a-30941797d7d8"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSymBlockEncrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockEncrypt/CalSymBlockEncryptConfig",
+          "description": "Container for configuration of service SymBlockEncrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockEncrypt/CalSymBlockEncryptConfig/CalSymBlockEncryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymBlockEncryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:3909228c-b3e8-40fd-9071-c0589a663275"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymBlockEncrypt/CalSymBlockEncryptConfig/CalSymBlockEncryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymBlockEncryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:a909e448-87be-4f4c-80a6-0404c0c745f1"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSymBlockEncryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:61f2c3e0-c9d1-401e-b5bc-885a4299b333"
+        }
+      ],
+      "uuid": "ECUC:ee9537c9-2dd9-46e4-a7b6-6226c2a490aa"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymDecrypt",
+      "description": "Container for incorporation of SymDecrypt primitives",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymDecrypt/CalSymDecryptMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a symmetrical decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymDecryptMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:7e86b49f-ca1e-4969-8d23-6b58a4387f7d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymDecrypt/CalSymDecryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a symmetrical decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymDecryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:207278f2-5333-4d05-bf17-4acc4b52de50"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSymDecrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymDecrypt/CalSymDecryptConfig",
+          "description": "Container for configuration of service SymDecrypt.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymDecrypt/CalSymDecryptConfig/CalSymDecryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymDecryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:a3a3297a-fedf-4f32-9946-d78b46d6894d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymDecrypt/CalSymDecryptConfig/CalSymDecryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymDecryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:1467d2d9-0718-4aa1-9d15-b864a1bfcc6f"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSymDecryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:f413d024-59fa-42d0-8b92-1c64c7d5a1b5"
+        }
+      ],
+      "uuid": "ECUC:de88d16a-4393-47ef-90ce-94dfd42a9c44"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymEncrypt",
+      "description": "Container for incorporation of SymEncrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymEncrypt/CalSymEncryptMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a symmetrical encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymEncryptMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:c228691f-bd5d-4d14-b9ed-4db30fa05d33"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymEncrypt/CalSymEncryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a symmetrical encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymEncryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:9b575a02-485b-4815-8432-bcf32b45f39f"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSymEncrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymEncrypt/CalSymEncryptConfig",
+          "description": "Container for configuration of service SymEncrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymEncrypt/CalSymEncryptConfig/CalSymEncryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymEncryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:6e493190-58ea-4034-94da-04ce84ff7225"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymEncrypt/CalSymEncryptConfig/CalSymEncryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymEncryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:0d22d540-3889-4dd5-80bc-4d329748bb00"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSymEncryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:58bb6a94-d5f0-4bf6-b922-9a2ae8dcf9ac"
+        }
+      ],
+      "uuid": "ECUC:874ca516-3ea1-4673-bdcb-78dcb8e75e34"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyExtract",
+      "description": "Container for incorporation of SymKeyExtract primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyExtract/CalSymKeyExtractMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a symmetrical key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymKeyExtractMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:c4dcf674-b454-4c2c-bd06-a836ab76c3db"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyExtract/CalSymKeyExtractMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a symmetrical key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymKeyExtractMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:27a1e153-127b-4b7d-b178-bf24afaa9184"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSymKeyExtract",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyExtract/CalSymKeyExtractConfig",
+          "description": "Container for configuration of service SymKeyExtract. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyExtract/CalSymKeyExtractConfig/CalSymKeyExtractInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymKeyExtractInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:b18dbda5-2217-4bfd-8ede-58095ba221ad"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyExtract/CalSymKeyExtractConfig/CalSymKeyExtractPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymKeyExtractPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:879aa62c-b8ef-4371-90c9-79bfe6e4e2bc"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSymKeyExtractConfig",
+          "subContainers": [],
+          "uuid": "ECUC:f671e200-2693-4ca1-b610-f9edfa2683e9"
+        }
+      ],
+      "uuid": "ECUC:fadfb320-923d-4607-80e8-f04e6cbe6787"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapAsym",
+      "description": "Container for incorporation of SymKeyWrapAsym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapAsym/CalSymKeyWrapAsymMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a asymmetrical wrapping of a symmetric key.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymKeyWrapAsymMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:7dc9fc50-56d5-4465-b57c-863c0743ed88"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapAsym/CalSymKeyWrapAsymMaxPubKeySize",
+          "description": "The maximum length, in bytes, of all public key types used in all CPL primitives which implement a symmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymKeyWrapAsymMaxPubKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:9fba9927-6edf-405d-b14e-dfc06619ce87"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapAsym/CalSymKeyWrapAsymMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a symmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymKeyWrapAsymMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:664ffa6e-cdf0-4239-89fe-ed591362e592"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSymKeyWrapAsym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapAsym/CalSymKeyWrapAsymConfig",
+          "description": "Container for configuration of service SymKeyWrapAsym.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapAsym/CalSymKeyWrapAsymConfig/CalSymKeyWrapAsymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymKeyWrapAsymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:75bee5f8-3bbd-4b08-b7d2-adbf72f7e8f8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapAsym/CalSymKeyWrapAsymConfig/CalSymKeyWrapAsymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymKeyWrapAsymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:3fa84ac3-6b11-49e2-983b-166fd1a72b4a"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSymKeyWrapAsymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:32deddc9-6f4d-4e39-a51c-b3ea37a4fcf0"
+        }
+      ],
+      "uuid": "ECUC:e6940cad-173b-4cca-9023-11a4724ea7d5"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapSym",
+      "description": "Container for incorporation of SymKeyWrapSym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapSym/CalSymKeyWrapSymMaxCtxBufByteSize",
+          "description": "The maximum, in bytes, of all context buffers used in all CPL primitives which implement a symmetrical wrapping of a symmetric key.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymKeyWrapSymMaxCtxBufByteSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:6d3a955b-16a0-474e-93e9-af225e9e9dfe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapSym/CalSymKeyWrapSymMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CPL primitives which implement a symmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CalSymKeyWrapSymMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:b9a42ac3-a2ef-4a64-9b33-4a398fdd2fde"
+        }
+      ],
+      "references": [],
+      "shortName": "CalSymKeyWrapSym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapSym/CalSymKeyWrapSymConfig",
+          "description": "Container for configuration of service SymKeyWrapSym.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapSym/CalSymKeyWrapSymConfig/CalSymKeyWrapSymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymKeyWrapSymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:3ff6e410-231d-4fb5-87ed-05cb4017634f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Cal/CalSymKeyWrapSym/CalSymKeyWrapSymConfig/CalSymKeyWrapSymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CalSymKeyWrapSymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:8835a39e-8f26-4b59-a1b9-285e0a5fc59f"
+            }
+          ],
+          "references": [],
+          "shortName": "CalSymKeyWrapSymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:467640ee-e2a3-4818-8044-9c26aa919257"
+        }
+      ],
+      "uuid": "ECUC:a48d5fad-4e91-4887-ac82-090b693ab99f"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Cal",
+  "description": "Configuration of the Cal (CryptoAbstractionLibrary) module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Cal",
+  "version": "4.2.2"
+}

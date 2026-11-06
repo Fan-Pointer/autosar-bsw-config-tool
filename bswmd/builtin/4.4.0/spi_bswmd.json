@@ -1,0 +1,826 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "c2221edc6984d0d8d684d42b62abf018205f4340a96058d088585dcb1e61eb3a",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDemEventParameterRefs",
+      "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDemEventParameterRefs/SPI_E_HARDWARE_ERROR",
+          "description": "Reference to configured DEM event to report \"Hardware failure\". If the reference is not configured the error shall not be reported.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SPI_E_HARDWARE_ERROR",
+          "uuid": "ECUC:16a6922a-5961-4442-ae00-f898421141f3"
+        }
+      ],
+      "shortName": "SpiDemEventParameterRefs",
+      "subContainers": [],
+      "uuid": "ECUC:8ee1511e-a250-43ec-84a7-20ed59600fc0"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Spi module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiMaxChannel",
+          "description": "This parameter contains the number of Channels configured. It will be gathered by tools during the configuration stage.",
+          "isOptional": true,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SpiMaxChannel",
+          "type": "INTEGER",
+          "uuid": "ECUC:0b8b6daa-25d6-4474-b831-47457b71a111"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiMaxJob",
+          "description": "Total number of Jobs configured.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SpiMaxJob",
+          "type": "INTEGER",
+          "uuid": "ECUC:d0bedae2-a4fe-4171-bd96-d73b06d23ac4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiMaxSequence",
+          "description": "Total number of Sequences configured.",
+          "isOptional": true,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SpiMaxSequence",
+          "type": "INTEGER",
+          "uuid": "ECUC:1815d8ea-5da2-491e-9524-6625c11c90cf"
+        }
+      ],
+      "references": [],
+      "shortName": "SpiDriver",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel",
+          "description": "All data needed to configure one SPI-channel",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel/SpiChannelId",
+              "description": "SPI Channel ID, used as parameter in SPI API functions.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:57cf4873-901e-44b3-8e63-0c4280de938d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel/SpiDataWidth",
+              "description": "This parameter is the width of a transmitted data unit.",
+              "isOptional": false,
+              "max": 32,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiDataWidth",
+              "type": "INTEGER",
+              "uuid": "ECUC:1aa15934-fb17-437e-9366-be307c42368b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel/SpiDefaultData",
+              "description": "The default data to be transmitted when (for internal buffer or external buffer) the pointer passed to Spi_WriteIB (for internal buffer) or to Spi_SetupEB (for…",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SpiDefaultData",
+              "type": "INTEGER",
+              "uuid": "ECUC:464acbf4-53a4-4964-843d-432be296ecb9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel/SpiEbMaxLength",
+              "description": "This parameter contains the maximum size (number of data elements) of data buffers in case of EB Channels and only.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiEbMaxLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:202d39ab-4e1d-4eaa-a539-8a106e07b926"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel/SpiIbNBuffers",
+              "description": "This parameter contains the maximum number of data buffers in case of IB Channels and only.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiIbNBuffers",
+              "type": "INTEGER",
+              "uuid": "ECUC:4de36954-b7d2-4c48-9bd6-6e0196eba21a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel/SpiChannelType",
+              "description": "Buffer usage with EB/IB channel.",
+              "enumValues": [
+                "EB",
+                "IB"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiChannelType",
+              "type": "ENUM",
+              "uuid": "ECUC:6b345ae6-4631-4cb8-af29-b9a20aeb6d8c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel/SpiTransferStart",
+              "description": "This parameter defines the first starting bit for transmission.",
+              "enumValues": [
+                "LSB",
+                "MSB"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiTransferStart",
+              "type": "ENUM",
+              "uuid": "ECUC:c8e19a9c-9ff2-4b2d-8f31-5b59e7a65181"
+            }
+          ],
+          "references": [],
+          "shortName": "SpiChannel",
+          "subContainers": [],
+          "uuid": "ECUC:f2748179-dbc5-4754-b29d-73ae022425e0"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice",
+          "description": "The communication settings of an external device. Closely linked to SpiJob.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiBaudrate",
+              "description": "This parameter is the communication baudrate - This parameter allows",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiBaudrate",
+              "type": "FLOAT",
+              "uuid": "ECUC:f1768d73-9a2c-4e95-aeda-d9f3b0f3c448"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiTimeClk2Cs",
+              "description": "Timing between clock and chip select (in seconds) - This parameter allows to use a range of values from 0 up to 0.0001 seconds.",
+              "isOptional": false,
+              "max": 0.0001,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiTimeClk2Cs",
+              "type": "FLOAT",
+              "uuid": "ECUC:756a5087-687e-43ae-8607-2470f7de9db7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiCsIdentifier",
+              "description": "This parameter is the symbolic name to identify the Chip Select (CS) allocated to this Job.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiCsIdentifier",
+              "type": "STRING",
+              "uuid": "ECUC:af7c2eb8-32b9-40eb-b810-52c4dae7caf4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiCsPolarity",
+              "description": "This parameter defines the active polarity of Chip Select.",
+              "enumValues": [
+                "HIGH",
+                "LOW"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiCsPolarity",
+              "type": "ENUM",
+              "uuid": "ECUC:07cb58ef-8a6f-4146-9ab5-380cb5de8918"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "CS_VIA_PERIPHERAL_ENGINE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiCsSelection",
+              "description": "When the Chip select handling is enabled (see SpiEnableCs), then this parameter specifies if the chip select is handled automatically by Peripheral HW engine o…",
+              "enumValues": [
+                "CS_VIA_GPIO",
+                "CS_VIA_PERIPHERAL_ENGINE"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SpiCsSelection",
+              "type": "ENUM",
+              "uuid": "ECUC:6654d212-8ab8-41d7-8479-520af776eb1c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiDataShiftEdge",
+              "description": "This parameter defines the SPI data shift edge.",
+              "enumValues": [
+                "LEADING",
+                "TRAILING"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiDataShiftEdge",
+              "type": "ENUM",
+              "uuid": "ECUC:3500cbba-2a1c-4073-873f-83083f11ce53"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiHwUnit",
+              "description": "This parameter is the symbolic name to identify the HW SPI Hardware",
+              "enumValues": [
+                "CSIB0",
+                "CSIB1",
+                "CSIB2",
+                "CSIB3"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiHwUnit",
+              "type": "ENUM",
+              "uuid": "ECUC:c9df357c-60ad-4f37-ac85-1c24c9fbacb7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiShiftClockIdleLevel",
+              "description": "This parameter defines the SPI shift clock idle level.",
+              "enumValues": [
+                "HIGH",
+                "LOW"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiShiftClockIdleLevel",
+              "type": "ENUM",
+              "uuid": "ECUC:da746c64-de65-4db4-a5db-bcccb49f3c56"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiEnableCs",
+              "description": "This parameter enables or not the Chip Select handling functions. If this parameter is enabled then parameter SpiCsSelection further details the type of chip s…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiEnableCs",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:914e2e80-7c97-4d1c-8546-1eaaefae8c4e"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice/SpiDeviceEcucPartitionRef",
+              "description": "Maps an SPI external device to zero or multiple ECUC partitions to limit the access to this external device. The ECUC partitions referenced are a subset of the…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "SpiDeviceEcucPartitionRef",
+              "uuid": "ECUC:f9cec818-0551-4576-be1f-6b9bfd6b1ee6"
+            }
+          ],
+          "shortName": "SpiExternalDevice",
+          "subContainers": [],
+          "uuid": "ECUC:801f9c6a-fd4a-4d1b-a2f3-d9cf1d1145b6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob",
+          "description": "All data needed to configure one SPI-Job, amongst others the connection between the internal SPI unit and the special settings for an external device is done.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob/SpiJobEndNotification",
+              "description": "This parameter is a reference to a notification function.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SpiJobEndNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:74518a4a-bc61-4898-915d-7deca2577064"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob/SpiJobId",
+              "description": "SPI Job ID, used as parameter in SPI API functions.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiJobId",
+              "type": "INTEGER",
+              "uuid": "ECUC:3ea95b90-3a95-48b4-ab87-e0a8fe7221fd"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob/SpiJobPriority",
+              "description": "Priority set accordingly to SPI093: 0, lowest, 3, highest priority",
+              "isOptional": false,
+              "max": 3,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiJobPriority",
+              "type": "INTEGER",
+              "uuid": "ECUC:18823873-1f2a-4df0-a761-3c3a4540b359"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob/SpiDeviceAssignment",
+              "description": "Reference to the external device used by this job",
+              "destinationContainerType": "SpiExternalDevice",
+              "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiExternalDevice"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiDeviceAssignment",
+              "uuid": "ECUC:ffde9462-b41e-487a-8d62-d4940bae49b7"
+            }
+          ],
+          "shortName": "SpiJob",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob/SpiChannelList",
+              "description": "References to SPI channels and their order within the Job.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob/SpiChannelList/SpiChannelIndex",
+                  "description": "This parameter specifies the order of Channels within the Job.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SpiChannelIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:3bcaf670-2b2d-489f-aea5-9799fdf9c2c3"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob/SpiChannelList/SpiChannelAssignment",
+                  "description": "A job reference to a SPI channel.",
+                  "destinationContainerType": "SpiChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiChannel"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SpiChannelAssignment",
+                  "uuid": "ECUC:58235e11-5f21-4c3a-a9da-696b588bac80"
+                }
+              ],
+              "shortName": "SpiChannelList",
+              "subContainers": [],
+              "uuid": "ECUC:ab2edd79-9273-437e-a4a1-61b8a5b3813c"
+            }
+          ],
+          "uuid": "ECUC:02dff674-91c0-4b9a-a3a8-32619f35d54c"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence",
+          "description": "All data needed to configure one SPI-sequence",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence/SpiInterruptibleSequence",
+              "description": "This parameter allows or not this Sequence to be suspended by another one.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiInterruptibleSequence",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:8f6b2ed8-3991-4bfe-bec5-cb279b9ca41d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence/SpiSeqEndNotification",
+              "description": "This parameter is a reference to a notification function.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SpiSeqEndNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:2e282067-fed0-4803-aa66-d641c71663e7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence/SpiSequenceId",
+              "description": "SPI Sequence ID, used as parameter in SPI API functions.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SpiSequenceId",
+              "type": "INTEGER",
+              "uuid": "ECUC:2f5ec946-17d2-4d3b-aadc-f03cfc2d985c"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence/SpiJobAssignment",
+              "description": "A sequence references several jobs, which are executed during a communication sequence",
+              "destinationContainerType": "SpiJob",
+              "destinationRef": "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiJob"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "SpiJobAssignment",
+              "uuid": "ECUC:d88727e5-d5c4-4148-adeb-aab0bef83355"
+            }
+          ],
+          "shortName": "SpiSequence",
+          "subContainers": [],
+          "uuid": "ECUC:3cb6ec10-7596-4a7e-9ee9-b08170958ddf"
+        }
+      ],
+      "uuid": "ECUC:56a72daf-c292-43bd-9989-a7d0120ded9e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral",
+      "description": "General configuration settings for SPI-Handler",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiCancelApi",
+          "description": "Switches the Spi_Cancel function ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiCancelApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e2c6330e-7d7f-4d1c-b975-e46ef315e714"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a50f2a2c-5374-496e-a509-5073192fe0a5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiHwStatusApi",
+          "description": "Switches the Spi_GetHWUnitStatus function ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiHwStatusApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4e6873dc-5c72-45d4-a49a-f37d8bad7f2b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiInterruptibleSeqAllowed",
+          "description": "Switches the Interruptible Sequences handling functionality ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiInterruptibleSeqAllowed",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f010eb50-2a4e-4a75-ab18-1ab5413ac8ae"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiSupportConcurrentSyncTransmit",
+          "description": "Specifies whether concurrent Spi_SyncTransmit() calls for different sequences shall be configurable.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiSupportConcurrentSyncTransmit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d38d155d-a5e5-4354-bc92-8f1e56f3fca1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiVersionInfoApi",
+          "description": "Switches the Spi_GetVersionInfo function ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8629314a-5451-4737-a52a-3f967ae9aba8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiChannelBuffersAllowed",
+          "description": "Selects the SPI Handler/Driver Channel Buffers usage allowed and",
+          "isOptional": false,
+          "max": 2,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiChannelBuffersAllowed",
+          "type": "INTEGER",
+          "uuid": "ECUC:0067ac2f-f0fd-40dc-9bd8-9e982207d046"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiLevelDelivered",
+          "description": "Selects the SPI Handler/Driver level of scalable functionality that is",
+          "isOptional": false,
+          "max": 2,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiLevelDelivered",
+          "type": "INTEGER",
+          "uuid": "ECUC:f15843c0-09d6-43d4-8794-73a66d2c4505"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.01,
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiMainFunctionPeriod",
+          "description": "This parameter defines the cycle time of the function Spi_MainFunction_Handling in seconds. The parameter is not used by the driver it self, but it is used by …",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SpiMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:e7157b90-1fd3-4067-8cb1-e5e01f6c482e"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiEcucPartitionRef",
+          "description": "Maps the SPI driver to zero or multiple ECUC partitions to make the driver API available in the according partition. Tags: atp.Status=draft",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "SpiEcucPartitionRef",
+          "uuid": "ECUC:cb29aac8-4fde-46e1-b46f-a9c89cafb501"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiGeneral/SpiKernelEcucPartitionRef",
+          "description": "Maps the SPI kernel to zero or one ECUC partitions to assign the driver kernel to a certain core. The ECUC partition referenced is a subset of the ECUC partiti…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SpiKernelEcucPartitionRef",
+          "uuid": "ECUC:107200f0-ad10-454f-a90c-271bad292304"
+        }
+      ],
+      "shortName": "SpiGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:e8854824-b4c9-4618-aa5b-46efc092de25"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiPublishedInformation",
+      "description": "Container holding all SPI specific published information parameters",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Spi/SpiPublishedInformation/SpiMaxHwUnit",
+          "description": "Number of different SPI hardware microcontroller peripherals (units/busses) available and handled by this SPI Handler/Driver module.",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SpiMaxHwUnit",
+          "type": "INTEGER",
+          "uuid": "ECUC:3e514982-2194-4b74-8c2e-baa2b264704d"
+        }
+      ],
+      "references": [],
+      "shortName": "SpiPublishedInformation",
+      "subContainers": [],
+      "uuid": "ECUC:ab74629f-37d4-453b-b708-5dc31fe4fe2f"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Spi",
+  "description": "Configuration of the Spi (Serial Peripheral Interface) module.",
+  "importWarnings": [
+    "SPI_E_HARDWARE_ERROR：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "SpiDeviceEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "SpiDeviceEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "SpiJobAssignment：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "SpiEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "SpiEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "SpiKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Spi",
+  "version": "4.4.0"
+}

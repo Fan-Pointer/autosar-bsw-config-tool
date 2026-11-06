@@ -1,0 +1,521 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "78b61ff358f901c702737d640a40b5c379b7442da0a6fd32f7148469a905ec89",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig",
+      "description": "This container contains the configuration (parameters) of the bus channel(s). The channel parameter shall be harmonized within the whole communication stack.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmActiveCoordinator",
+          "description": "This parameter indicates whether a NM channel - part of a Nm Coordination cluster - will be coordinated actively (NmActiveCoordinator = TRUE) or passively (NmA…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NmActiveCoordinator",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b34cdb52-707b-4af1-8403-52611cb0f7b1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmChannelSleepMaster",
+          "description": "This parameter shall be set to indicate if the sleep of this network can be absolutely decided by the local node only and that no other nodes can oppose that d…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NmChannelSleepMaster",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0335c4a7-8904-45ec-a525-d7490bbcdfa3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmComUserDataSupport",
+          "description": "This parameter indicates whether on a NM channel user data is accessed via Com signals or by SetUserData API.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NmComUserDataSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ad801e7f-5c0e-405e-b7ad-5fa9798a6c4a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmPassiveModeEnabled",
+          "description": "This parameter indicates whether a NM channel is active,e.g. can request communication and keep the bus awake, or passive, e.g. can just be woken up and kept a…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NmPassiveModeEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6b3d457e-6659-40eb-a0d6-8dcfc5889862"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmStateReportEnabled",
+          "description": "Specifies if the NMS shall be set for the corresponding network.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NmStateReportEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:34d2798b-5bfb-4b0a-a4d4-b59a566954fe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmSynchronizingNetwork",
+          "description": "If this parameter is true, then this network is a synchronizing network for the NM coordination cluster which it belongs to. The network is expected to call Nm…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NmSynchronizingNetwork",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e8274329-e850-439c-8477-e29a4651ca61"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmCoordClusterIndex",
+          "description": "If this parameter is undefined for a channel, the corresponding bus does not belong to an NM coordination cluster.",
+          "isOptional": true,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NmCoordClusterIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:bc7c10ec-1a35-495a-a04d-da39be8da935"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmComMChannelRef",
+          "description": "Reference to the corresponding ComM Channel.",
+          "destinationContainerType": "ComMChannel",
+          "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "NmComMChannelRef",
+          "uuid": "ECUC:833d8eee-a64b-4b28-a3f9-acf0a74117e9"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmStateReportSignalRef",
+          "description": "Reference to the signal for setting the NMS by calling Com_SendSignal for the respective channel.",
+          "destinationContainerType": "ComSignal",
+          "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "NmStateReportSignalRef",
+          "uuid": "ECUC:bfde6ac3-3d19-4a27-bfb8-34e63dc69f2b"
+        }
+      ],
+      "shortName": "NmChannelConfig",
+      "subContainers": [
+        {
+          "choice": {
+            "candidateRefs": [
+              "ECUC:92af2901-de9c-4b91-86cb-1539013c5941",
+              "ECUC:f7089f32-1bb9-43c6-b980-9593e7d0e4ad"
+            ]
+          },
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmBusType",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "NmBusType",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmBusType/NmGenericBusNmConfig",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmBusType/NmGenericBusNmConfig/NmGenericBusNmPrefix",
+                  "description": "The prefix which identifies the generic <BusNm>. This will be used to determine the API name to be called by Nm for the provided interfaces of the <BusNm>. Thi…",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "NmGenericBusNmPrefix",
+                  "type": "STRING",
+                  "uuid": "ECUC:bb6fb5bb-3537-4848-b999-40a466d5ef00"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmBusType/NmGenericBusNmConfig/NmGenericBusNmShutdownTime",
+                  "description": "This parameter shall be",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "NmGenericBusNmShutdownTime",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:6cb6dd23-169a-441c-be67-d57133632015"
+                }
+              ],
+              "references": [],
+              "shortName": "NmGenericBusNmConfig",
+              "subContainers": [],
+              "uuid": "ECUC:92af2901-de9c-4b91-86cb-1539013c5941"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmBusType/NmStandardBusNmConfig",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmChannelConfig/NmBusType/NmStandardBusNmConfig/NmStandardBusType",
+                  "description": "Identifies the bus type of the channel for standard AUTOSAR <BusNm>s and is used to determine which set of API calls to be called by Nm for the <BusNm>s.",
+                  "enumValues": [
+                    "NM_BUSNM_CANNM",
+                    "NM_BUSNM_FRNM",
+                    "NM_BUSNM_J1939NM",
+                    "NM_BUSNM_LOCALNM",
+                    "NM_BUSNM_UDPNM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "NmStandardBusType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:85163822-730a-47cc-bc09-ca69fd6a8cbb"
+                }
+              ],
+              "references": [],
+              "shortName": "NmStandardBusNmConfig",
+              "subContainers": [],
+              "uuid": "ECUC:f7089f32-1bb9-43c6-b980-9593e7d0e4ad"
+            }
+          ],
+          "uuid": "ECUC:09004dec-3810-4de9-8b9f-fcb8a7b7f53e"
+        }
+      ],
+      "uuid": "ECUC:842b96df-ba92-4b68-ac20-f463b92f08b9"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig",
+      "description": "This container contains all global configuration parameters of the Nm Interface.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "NmGlobalConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalConstants",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalConstants/NmNumberOfChannels",
+              "description": "Number of NM channels allowed within one ECU.",
+              "isOptional": false,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmNumberOfChannels",
+              "type": "INTEGER",
+              "uuid": "ECUC:c13a0439-d0e8-4c2b-94c8-8aa9a521f13e"
+            }
+          ],
+          "references": [],
+          "shortName": "NmGlobalConstants",
+          "subContainers": [],
+          "uuid": "ECUC:651affe5-65bf-46cc-9776-9e296fd7b3f8"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmBusSynchronizationEnabled",
+              "description": "Pre-processor switch for enabling bus synchronization support of the <BusNm>s. This feature is required for NM Coordinator nodes only.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmBusSynchronizationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b4b6f8dd-8b3f-403f-ad6a-870f65346dcc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmCarWakeUpRxEnabled",
+              "description": "Enables or disables CWU detection.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmCarWakeUpRxEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:797d5792-89b9-4cc0-8e9b-ee6caedb6e3d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmComControlEnabled",
+              "description": "Pre-processor switch for enabling the Communication Control support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmComControlEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:a29345dd-b421-44e3-ad37-979593f7efed"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmCoordinatorSupportEnabled",
+              "description": "Pre-processor switch for enabling NM Coordinator support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmCoordinatorSupportEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:30e5795b-0a84-43c5-af11-bb593f3c94d8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmCoordinatorSyncSupport",
+              "description": "Enables/disables the coordinator synchronisation support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmCoordinatorSyncSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:2af42a92-dc61-4947-a063-b0448567ebba"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmPduRxIndicationEnabled",
+              "description": "Pre-processor switch for enabling the PDU Rx Indication.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmPduRxIndicationEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:030ff2c7-699f-4261-8f5a-1b4cc2ba36d0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmRemoteSleepIndEnabled",
+              "description": "Pre-processor switch for enabling Remote Sleep Indication support. This feature is required for a Gateway or Nm Coordinator functionality.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmRemoteSleepIndEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d4af23a3-afd4-412f-8e83-97303d8a465e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmStateChangeIndEnabled",
+              "description": "Pre-processor switch for enabling the Network Management state change notification.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmStateChangeIndEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f8af09e6-5046-47b9-a8b2-dd6fe01f6886"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmUserDataEnabled",
+              "description": "Pre-processor switch for enabling User Data support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmUserDataEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:10110c11-2fef-4781-b55a-c875c8cc4e17"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmCarWakeUpCallout",
+              "description": "Name of the callout function to be called if Nm_CarWakeUpIndication() is called. If this parameter is not configured, the Nm will call BswM_Nm_CarWakeUpIndicat…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "NmCarWakeUpCallout",
+              "type": "FUNCTION",
+              "uuid": "ECUC:4b206fb3-ec14-4ca7-a0cc-901859f487ee"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalFeatures/NmGlobalCoordinatorTime",
+              "description": "This parameter defines the maximum shutdown time of a connected and coordinated NM-Cluster.",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "NmGlobalCoordinatorTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:ce98cd3e-0883-43c4-afae-4d39e58b7524"
+            }
+          ],
+          "references": [],
+          "shortName": "NmGlobalFeatures",
+          "subContainers": [],
+          "uuid": "ECUC:c71f0478-cc29-49a3-93c8-e9010f07b07f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalProperties",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalProperties/NmCycletimeMainFunction",
+              "description": "The period between successive calls to the Main Function of the NM Interface in seconds.",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "NmCycletimeMainFunction",
+              "type": "FLOAT",
+              "uuid": "ECUC:74bd8ad8-344c-4ee9-8a81-42cc0daa4d55"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalProperties/NmDevErrorDetect",
+              "description": "Switches the development error detection and notification on or off.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmDevErrorDetect",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:28c149cd-8f76-430e-a060-94f166a265b4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Nm/NmGlobalConfig/NmGlobalProperties/NmVersionInfoApi",
+              "description": "Pre-processor switch for enabling Version Info API support.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "NmVersionInfoApi",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:85f60c55-9699-4cdc-b41a-491e125b6b00"
+            }
+          ],
+          "references": [],
+          "shortName": "NmGlobalProperties",
+          "subContainers": [],
+          "uuid": "ECUC:a4fbfe4d-0bfd-4740-9d2e-6422aa09a214"
+        }
+      ],
+      "uuid": "ECUC:ed27fca6-b4e9-4dd2-b499-72b51d716b48"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Nm",
+  "description": "The Generic Network Management Interface module",
+  "importWarnings": [
+    "NmBusType：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "NmComMChannelRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "NmStateReportSignalRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComSignal 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Nm",
+  "version": "4.4.0"
+}

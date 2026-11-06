@@ -1,0 +1,543 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "6a945c59e2bc8df888c5785b4524ca04b77dce552c7290972bd751169e98da15",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet",
+      "description": "This container is a MultipleConfigurationContainer, i.e. this container and its sub-containers exist once per configuration set.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "J1939NmConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel",
+          "description": "Physical CAN channel handled by J1939Nm.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmChannelUsesAddressArbitration",
+              "description": "Defines whether the nodes attached to this channel use an initial address claim, and whether they react to contending address claims of other nodes.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmChannelUsesAddressArbitration",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:5a144530-8fd0-4668-b3ef-1f54ea7354f7"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmComMNetworkHandleRef",
+              "description": "Reference to the channel defined by the ComMChannel providing access to the unique channel index ComMChannelId.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmComMNetworkHandleRef",
+              "uuid": "ECUC:40ce4e12-8c1a-40bd-aa17-3736a1d0bcc3"
+            }
+          ],
+          "shortName": "J1939NmChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmRxPdu",
+              "description": "Contains the configuration of the I-PDU used to receive the AddressClaimed PG.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmRxPdu/J1939NmRxPduId",
+                  "description": "The I-PDU identifier used for RxIndication from CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939NmRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:8b5769b0-b023-4312-b133-225e768d24b9"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmRxPdu/J1939NmRxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939NmRxPduRef",
+                  "uuid": "ECUC:b160754a-d835-49e6-947c-1bda8bfe67fd"
+                }
+              ],
+              "shortName": "J1939NmRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:cd6ba114-60e2-4a76-903c-9bd53ad0e9f0"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmTxPdu",
+              "description": "Contains the configuration of the I-PDU used to transmit the AddressClaimed PG.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmTxPdu/J1939NmTxPduId",
+                  "description": "The I-PDU identifier used for TxConfirmation from CanIf.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939NmTxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a56515cd-e693-44d6-90ad-9978da64beeb"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel/J1939NmTxPdu/J1939NmTxPduRef",
+                  "description": "Reference to the Pdu object representing the I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "J1939NmTxPduRef",
+                  "uuid": "ECUC:ef0d1c92-2c51-4eda-a348-4edf6545f048"
+                }
+              ],
+              "shortName": "J1939NmTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:5290a782-b763-461f-aefa-fd3eaf2438ec"
+            }
+          ],
+          "uuid": "ECUC:91f209de-2296-44de-bbba-934fa68478a3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode",
+          "description": "Logical node representing one function handled by J1939Nm.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeId",
+              "description": "Unique identifier of this node.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeId",
+              "type": "INTEGER",
+              "uuid": "ECUC:076630b4-11af-4476-92b1-8f2977197854"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameECUInstance",
+              "description": "ECU Instance field of the NAME of this node.",
+              "isOptional": false,
+              "max": 7,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameECUInstance",
+              "type": "INTEGER",
+              "uuid": "ECUC:633b21cb-8cd9-4e4a-bd78-2f53f92c6adc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameFunction",
+              "description": "Function field of the NAME of this node.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameFunction",
+              "type": "INTEGER",
+              "uuid": "ECUC:124e5383-ff69-4c92-b71d-dfd0c8567365"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameFunctionInstance",
+              "description": "Function Instance field of the NAME of this node.",
+              "isOptional": false,
+              "max": 31,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameFunctionInstance",
+              "type": "INTEGER",
+              "uuid": "ECUC:20d916a0-3481-4502-bcf7-6e5ff6df7541"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameIdentityNumber",
+              "description": "Identity Number field of the NAME of this node.",
+              "isOptional": false,
+              "max": 2097151,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameIdentityNumber",
+              "type": "INTEGER",
+              "uuid": "ECUC:d1bd0d42-502e-4ccb-8e81-3a094bc92b18"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameIndustryGroup",
+              "description": "Industry Group field of the NAME of this node.",
+              "isOptional": false,
+              "max": 7,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameIndustryGroup",
+              "type": "INTEGER",
+              "uuid": "ECUC:ef2b10d3-f245-4e26-af43-d73d6b7e085c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameManufacturerCode",
+              "description": "Manufacturer Code field of the NAME of this node.",
+              "isOptional": false,
+              "max": 2047,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameManufacturerCode",
+              "type": "INTEGER",
+              "uuid": "ECUC:08a5086c-3f16-4616-83b1-0a21ef16b14d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameVehicleSystem",
+              "description": "Vehicle System field of the NAME of this node.",
+              "isOptional": false,
+              "max": 127,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameVehicleSystem",
+              "type": "INTEGER",
+              "uuid": "ECUC:3553c17f-b620-4d8a-8917-d471a24769ac"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameVehicleSystemInstance",
+              "description": "Vehicle System Instance field of the NAME of this node.",
+              "isOptional": false,
+              "max": 15,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameVehicleSystemInstance",
+              "type": "INTEGER",
+              "uuid": "ECUC:4f775893-203a-45ec-87be-5c9f165ea17f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodePreferredAddress",
+              "description": "Source address of this node used for address claiming.",
+              "isOptional": false,
+              "max": 253,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodePreferredAddress",
+              "type": "INTEGER",
+              "uuid": "ECUC:86331330-8cf2-4ae5-af39-f65878df134e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeNameArbitraryAddressCapable",
+              "description": "Arbitrary Address Capable field of the NAME of this node.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeNameArbitraryAddressCapable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:a35df279-672f-4e1b-a2bd-fd4085ad3080"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeStartUpDelay",
+              "description": "If enabled, the node will start communication after a delay of 250ms after transmission of the initial AddressClaimed, depending on the configured J1939NmNodeP…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "J1939NmNodeStartUpDelay",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:3e9bfadc-80ef-467c-8488-d9d90431de26"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmNode/J1939NmNodeChannelRef",
+              "description": "Reference to the channels this node has access to.",
+              "destinationContainerType": "J1939NmChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/J1939Nm/J1939NmConfigSet/J1939NmChannel"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "J1939NmNodeChannelRef",
+              "uuid": "ECUC:956f929c-20ba-4df4-b610-904d08dde898"
+            }
+          ],
+          "shortName": "J1939NmNode",
+          "subContainers": [],
+          "uuid": "ECUC:cccaa4c2-b5e3-40f5-8f09-e27161937982"
+        }
+      ],
+      "uuid": "ECUC:87bed3ae-939d-4412-833a-67416982645a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmDemEventParameterRefs",
+      "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus in case the corresponding error occurs. T…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmDemEventParameterRefs/J1939NM_E_ADDRESS_LOST",
+          "description": "Reference to the DemEventParameter which shall be issued when the ECU failed to claim one of its addresses.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939NM_E_ADDRESS_LOST",
+          "uuid": "ECUC:514e5619-0217-467f-98db-552dcd982e19"
+        }
+      ],
+      "shortName": "J1939NmDemEventParameterRefs",
+      "subContainers": [],
+      "uuid": "ECUC:ff361e73-525a-49a7-b3e6-e74158649eaf"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral",
+      "description": "Contains the general configuration parameters of the module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.02,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral/J1939NmBusOffDelayTickPeriod",
+          "description": "Duration of ticks that are used to time BusOff delays after conflicting address claims. This parameter must be synchronized with the main function period of th…",
+          "isOptional": true,
+          "max": 0.255,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939NmBusOffDelayTickPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:6b1cbe0e-51af-4ec5-86db-827d9528e424"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.01,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral/J1939NmMainFunctionPeriod",
+          "description": "Call cycle in seconds of J1939Nm_MainFunction.",
+          "isOptional": false,
+          "max": 0.255,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939NmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:ba210df4-d3f7-4491-9d59-edd0cad191bd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1.5,
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral/J1939NmTxConfirmationTimeout",
+          "description": "Time in seconds to wait for a confirmation after transmission of a message. The behaviour when the time elapses depends on the transmitted message.",
+          "isOptional": false,
+          "max": 65.535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939NmTxConfirmationTimeout",
+          "type": "FLOAT",
+          "uuid": "ECUC:ac3880f0-50f7-4954-b28f-9ba143aa5d90"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral/J1939NmDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939NmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:110eb439-484b-4167-8849-b7b17156b975"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral/J1939NmVersionInfoApi",
+          "description": "Pre-processor switch for enabling version info API support.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "J1939NmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f152aeba-0be9-436f-94be-69acd9fd156d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral/J1939NmUserCallout",
+          "description": "Pre-processor switch for enabling the <User_AddressClaimedIndication> and defining the name of the callout function.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939NmUserCallout",
+          "type": "FUNCTION",
+          "uuid": "ECUC:b9d1e12d-f8e7-4953-abaf-7bfd500e8518"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm/J1939NmGeneral/J1939NmUserCalloutHeaderFile",
+          "description": "Header file which is included by J1939Nm when J1939NmUserCallout is enabled. This header file must provide the prototype of the <User_AddressClaimedIndication>…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "J1939NmUserCalloutHeaderFile",
+          "type": "STRING",
+          "uuid": "ECUC:0bb57cfe-a6d3-4095-bb6d-9b2ad267c91f"
+        }
+      ],
+      "references": [],
+      "shortName": "J1939NmGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:9129f6d0-0e81-4a68-94a3-deaeb5bc1bf2"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/J1939Nm",
+  "description": "Configuration of the J1939 Network Management module.",
+  "importWarnings": [
+    "J1939NmRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939NmTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "J1939NmComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "J1939NmNodeChannelRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "J1939NM_E_ADDRESS_LOST：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "J1939Nm",
+  "version": "4.2.2"
+}

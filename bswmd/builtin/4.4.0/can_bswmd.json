@@ -1,0 +1,1660 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "eee63c5298f6aef2e350dc7d5cb0e7a18ea36bef95c0b1a11501ad926ae7d8cb",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Can module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CanConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController",
+          "description": "This container contains the configuration parameters of the CAN controller(s).",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanBusoffProcessing",
+              "description": "Enables / disables API Can_MainFunction_BusOff() for handling busoff events in polling mode.",
+              "enumValues": [
+                "INTERRUPT",
+                "POLLING"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanBusoffProcessing",
+              "type": "ENUM",
+              "uuid": "ECUC:1ac4345e-22de-49c3-8bb0-053a8e121758"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanRxProcessing",
+              "description": "Enables / disables API Can_MainFunction_Read() for handling PDU reception events in polling mode.",
+              "enumValues": [
+                "INTERRUPT",
+                "MIXED",
+                "POLLING"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanRxProcessing",
+              "type": "ENUM",
+              "uuid": "ECUC:60718366-d647-4c8c-95ea-bc42b9536786"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTxProcessing",
+              "description": "Enables / disables API Can_MainFunction_Write() for handling PDU transmission events in polling mode.",
+              "enumValues": [
+                "INTERRUPT",
+                "MIXED",
+                "POLLING"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTxProcessing",
+              "type": "ENUM",
+              "uuid": "ECUC:87199697-72c8-46ee-b7c7-276cc811d697"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanWakeupProcessing",
+              "description": "Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode.",
+              "enumValues": [
+                "INTERRUPT",
+                "POLLING"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanWakeupProcessing",
+              "type": "ENUM",
+              "uuid": "ECUC:826d181c-d6ad-4d64-93a2-bf529c8481e4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerActivation",
+              "description": "Defines if a CAN controller is used in the configuration.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanControllerActivation",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:e12d871d-e196-46d8-a5a5-454f8475061f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanWakeupFunctionalityAPI",
+              "description": "Adds / removes the service Can_CheckWakeup() from the code.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanWakeupFunctionalityAPI",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f4fba261-5da0-4946-a6ec-bee9048c2068"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanWakeupSupport",
+              "description": "CAN driver support for wakeup over CAN Bus.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanWakeupSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:48e0b1e7-b421-4388-ac6c-04b471380664"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaseAddress",
+              "description": "Specifies the CAN controller base address.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanControllerBaseAddress",
+              "type": "INTEGER",
+              "uuid": "ECUC:69afaa0c-2dc7-4390-a7c9-c605ae01c22f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerId",
+              "description": "This parameter provides the controller ID which is unique in a given CAN Driver. The value for this parameter starts with 0 and continue without any gaps.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanControllerId",
+              "type": "INTEGER",
+              "uuid": "ECUC:efc9b48f-271a-4833-9ba0-aa53aa4cf278"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerDefaultBaudrate",
+              "description": "Reference to baudrate configuration container configured for the Can Controller.",
+              "destinationContainerType": "CanControllerBaudrateConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanControllerDefaultBaudrate",
+              "uuid": "ECUC:aef302e1-1821-4e87-8041-e542f92cb963"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerEcucPartitionRef",
+              "description": "Maps the CAN controller to zero or one ECUC partitions. The ECUC partition referenced is a subset of the ECUC partitions where the CAN driver is mapped to. Tag…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanControllerEcucPartitionRef",
+              "uuid": "ECUC:a7938a1e-0233-47aa-9529-410ed905003e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanCpuClockRef",
+              "description": "Reference to the CPU clock configuration, which is set in the MCU driver configuration",
+              "destinationContainerType": "McuClockReferencePoint",
+              "destinationRef": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanCpuClockRef",
+              "uuid": "ECUC:2e20d271-b4b3-47cc-a0ee-a6e49b8373ec"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanWakeupSourceRef",
+              "description": "This parameter contains a reference to the Wakeup Source for this controller as defined in the ECU State Manager.",
+              "destinationContainerType": "EcuMWakeupSource",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanWakeupSourceRef",
+              "uuid": "ECUC:61a02a48-1812-4052-8e57-b48bc38ce491"
+            }
+          ],
+          "shortName": "CanController",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig",
+              "description": "This container contains bit timing related configuration parameters of the CAN controller(s).",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerBaudRate",
+                  "description": "Specifies the baudrate of the controller in kbps.",
+                  "isOptional": false,
+                  "max": 2000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanControllerBaudRate",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:e5ae7b80-e6c2-4e56-8ccd-5dce07379977"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerBaudRateConfigID",
+                  "description": "Uniquely identifies a specific baud rate configuration. This ID is used by SetBaudrate API.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanControllerBaudRateConfigID",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c4fe090b-f30d-4ed9-a615-dd6f4ddb51ef"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerPropSeg",
+                  "description": "Specifies propagation delay in time quantas.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanControllerPropSeg",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:669827f7-fac2-42e8-870b-8003e83a0cbc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerSeg1",
+                  "description": "Specifies phase segment 1 in time quantas.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanControllerSeg1",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:2ff9d8a8-d32b-4a08-85d7-8cc51effa452"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerSeg2",
+                  "description": "Specifies phase segment 2 in time quantas.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanControllerSeg2",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:755cccd2-d9a8-4df1-9cdb-6a9c5f850a12"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerSyncJumpWidth",
+                  "description": "Specifies the synchronization jump width for the controller in time quantas.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanControllerSyncJumpWidth",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:70cfe32e-1160-408d-be3c-9e8a789a5bb9"
+                }
+              ],
+              "references": [],
+              "shortName": "CanControllerBaudrateConfig",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig",
+                  "description": "This optional container contains bit timing related configuration parameters of the CAN controller(s) for payload and CRC of a CAN FD frame. If this container …",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig/CanControllerFdBaudRate",
+                      "description": "Specifies the data segment baud rate of the controller in kbps.",
+                      "isOptional": false,
+                      "max": 16000,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanControllerFdBaudRate",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:b94746f7-c0be-4dae-b9f1-3b2c733f5f53"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig/CanControllerPropSeg",
+                      "description": "Specifies propagation delay in time quantas.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanControllerPropSeg",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d335a2d8-ce8e-4bb4-b14c-05e922192a1c"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig/CanControllerSeg1",
+                      "description": "Specifies phase segment 1 in time quantas.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanControllerSeg1",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:103a3847-0a04-42b0-a2d8-3dd2a8a782a4"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig/CanControllerSeg2",
+                      "description": "Specifies phase segment 2 in time quantas.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanControllerSeg2",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:ec543f31-b00f-4d8b-a383-8f34f9bdbe2a"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig/CanControllerSspOffset",
+                      "description": "Specifies the Transmitter Delay Compensation Offset in minimum time quanta (see [17]). Transmitter Delay Compensation Offset is used to adjust the position of …",
+                      "isOptional": true,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "CanControllerSspOffset",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:96788811-d264-4770-bd46-daa887997e1e"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig/CanControllerSyncJumpWidth",
+                      "description": "Specifies the synchronization jump width for the controller in time quantas.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanControllerSyncJumpWidth",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:6604384d-8e09-4b7a-826b-e3fefd6b3e8d"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": true,
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig/CanControllerFdBaudrateConfig/CanControllerTxBitRateSwitch",
+                      "description": "Specifies if the bit rate switching shall be used for transmissions.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "CanControllerTxBitRateSwitch",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:5c7f3f4a-53ee-4c6b-a2da-56154d4566e3"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "CanControllerFdBaudrateConfig",
+                  "subContainers": [],
+                  "uuid": "ECUC:1674722b-2c4c-4599-bdca-8ea3df6508f6"
+                }
+              ],
+              "uuid": "ECUC:7380e54a-e891-4fb8-88e8-459dc7c59aaf"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController",
+              "description": "CanTTController is specified in the SWS TTCAN and contains the configuration parameters of the TTCAN controller(s) (which are needed in addition to the configu…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerApplWatchdogLimit",
+                  "description": "Defines the maximum time period (unit is 256 times NTU) after which the application has to serve the watchdog.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerApplWatchdogLimit",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:58bdc478-e74c-42df-8d3d-0ba19ae24008"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerCycleCountMax",
+                  "description": "Defines the value for cycle_count_max.",
+                  "isOptional": false,
+                  "max": 63,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerCycleCountMax",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fafa672b-b0c5-4c09-9035-06e2461576cf"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerExpectedTxTrigger",
+                  "description": "Number of expected_tx_trigger.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerExpectedTxTrigger",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:91b067db-e57d-432f-9093-262d567242ec"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerInitialRefOffset",
+                  "description": "Defines the initial value for ref trigger offset.",
+                  "isOptional": false,
+                  "max": 127,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerInitialRefOffset",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:25750102-31df-4bed-91cf-01253dc78faf"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerInterruptEnable",
+                  "description": "Enables/disables the respective interrupts.",
+                  "isOptional": false,
+                  "max": 1023,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerInterruptEnable",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6d752b5f-31aa-4e11-915c-cbe1e1a0f01a"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerTimeMasterPriority",
+                  "description": "Defines the time master priority.",
+                  "isOptional": false,
+                  "max": 7,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerTimeMasterPriority",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:64837877-30b7-48a4-9f87-a7e4e959010f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerTxEnableWindowLength",
+                  "description": "Length of the tx enable window given in CAN bit times.",
+                  "isOptional": false,
+                  "max": 16,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerTxEnableWindowLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:432b3c85-542c-48e3-ab51-3944e1d6e421"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerWatchTriggerGapTimeMark",
+                  "description": "watch trigger time mark after a gap",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerWatchTriggerGapTimeMark",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a880dad8-6591-4dbc-a3d4-8057ff9b6931"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerWatchTriggerTimeMark",
+                  "description": "watch trigger time mark",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerWatchTriggerTimeMark",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:496f1799-9365-4e5b-878a-dd8cab58f338"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerExternalClockSynchronisation",
+                  "description": "Enables/disables the external clock synchronization.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerExternalClockSynchronisation",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:1f319887-2617-4190-b5d6-95b9e555b180"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerGlobalTimeFiltering",
+                  "description": "Enables/disables the global time filtering.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerGlobalTimeFiltering",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:ced20e88-c426-42a9-bce0-ed1a2a5f3797"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerLevel2",
+                  "description": "Defines whether Level 2 or Level 1 is used.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerLevel2",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:91462836-5301-42da-8b89-dad7c7ddeb2c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerTimeMaster",
+                  "description": "Defines whether the controller acts as a potential time master.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerTimeMaster",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:68c24e85-bb75-4b38-b9af-05947b2f0f27"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerTURRestore",
+                  "description": "Enables/disables the TUR restore.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerTURRestore",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:e5b66746-4e6e-47f5-b62b-ab6452a49082"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerNTUConfig",
+                  "description": "Defines the config value for NTU (network time unit).",
+                  "isOptional": false,
+                  "max": 100,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerNTUConfig",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:fc8b7d0e-677b-4c04-b547-ef6602271c33"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerSyncDeviation",
+                  "description": "Defines the maximum synchronization deviation:",
+                  "isOptional": false,
+                  "max": 100,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerSyncDeviation",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:26f778c8-15de-4c4a-b05e-fff49e20b233"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerOperationMode",
+                  "description": "Defines the operation mode.",
+                  "enumValues": [
+                    "CAN_TT_EVENT_SYNC_TIME_TRIGGERED",
+                    "CAN_TT_EVENT_TRIGGERED",
+                    "CAN_TT_TIME_TRIGGERED"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerOperationMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:fd04f084-a5cc-4c27-9d75-7e1a46e86bfa"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTIRQProcessing",
+                  "description": "Enables / disables API Can_MainFunction_BusOff() for handling busoff events in polling mode.",
+                  "enumValues": [
+                    "INTERRUPT",
+                    "POLLING"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTIRQProcessing",
+                  "type": "ENUM",
+                  "uuid": "ECUC:089059db-bfe6-43a7-9fa7-99b4b583a2bf"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanTTController/CanTTControllerEcucPartitionRef",
+                  "description": "Maps the Time triggered CAN controller to zero or one ECUC partitions. The ECUC partition referenced is a subset of the ECUC partitions where the CAN driver is…",
+                  "destinationContainerType": "EcucPartition",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTControllerEcucPartitionRef",
+                  "uuid": "ECUC:a1c33cc3-d7a0-4944-9c9d-4e0ae7a9bd90"
+                }
+              ],
+              "shortName": "CanTTController",
+              "subContainers": [],
+              "uuid": "ECUC:03522dfa-716f-4cae-b216-c32f5ff584ce"
+            }
+          ],
+          "uuid": "ECUC:a79e276f-cf20-496c-8587-edf4d9d2f01b"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject",
+          "description": "This container contains the configuration (parameters) of CAN Hardware Objects.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanFdPaddingValue",
+              "description": "Specifies the value which is used to pad unspecified data in CAN FD frames > 8 bytes for transmission. This is necessary due to the discrete possible values of…",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanFdPaddingValue",
+              "type": "INTEGER",
+              "uuid": "ECUC:14711138-dbc9-4e86-8f92-4fcb2a077481"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanHwObjectCount",
+              "description": "Number of hardware objects used to implement one HOH. In case of a HRH this parameter defines the number of elements in the hardware FIFO or the number of shad…",
+              "isOptional": false,
+              "max": 65535,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanHwObjectCount",
+              "type": "INTEGER",
+              "uuid": "ECUC:6d1e7a5e-a3fa-40fe-a488-04313db384f5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanObjectId",
+              "description": "Holds the handle ID of HRH or HTH. The value of this parameter is unique in a given CAN Driver, and it should start with 0 and continue without any gaps.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanObjectId",
+              "type": "INTEGER",
+              "uuid": "ECUC:5049e195-870c-490c-ac6d-745aae833d04"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanHandleType",
+              "description": "Specifies the type (Full-CAN or Basic-CAN) of a hardware object.",
+              "enumValues": [
+                "BASIC",
+                "FULL"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanHandleType",
+              "type": "ENUM",
+              "uuid": "ECUC:6c58c09a-9aa2-4e4d-8ae3-8eba40a77aaf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanIdType",
+              "description": "Specifies whether the IdValue is of type",
+              "enumValues": [
+                "EXTENDED",
+                "MIXED",
+                "STANDARD"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanIdType",
+              "type": "ENUM",
+              "uuid": "ECUC:f8442a9b-7752-416c-ac68-8cd3080589c0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanObjectType",
+              "description": "Specifies if the HardwareObject is used as Transmit or as Receive object",
+              "enumValues": [
+                "RECEIVE",
+                "TRANSMIT"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanObjectType",
+              "type": "ENUM",
+              "uuid": "ECUC:b8abf5c9-4e6a-46bf-a1ae-63b191e72d04"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanHardwareObjectUsesPolling",
+              "description": "Enables polling of this hardware object.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanHardwareObjectUsesPolling",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:837fac51-6343-4b60-969d-af6cd7911ac4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTriggerTransmitEnable",
+              "description": "This parameter defines if or if not Can supports the trigger-transmit API for this handle.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanTriggerTransmitEnable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:22b0af01-6ae7-4b23-8b55-c90fa107d1f5"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanControllerRef",
+              "description": "Reference to CAN Controller to which the HOH is associated to.",
+              "destinationContainerType": "CanController",
+              "destinationRef": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanControllerRef",
+              "uuid": "ECUC:e2b98fcd-3e29-4041-a480-aed31e706d97"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanMainFunctionRWPeriodRef",
+              "description": "Reference to CanMainFunctionPeriod",
+              "destinationContainerType": "CanMainFunctionRWPeriods",
+              "destinationRef": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMainFunctionRWPeriods",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMainFunctionRWPeriods"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanMainFunctionRWPeriodRef",
+              "uuid": "ECUC:185477b7-2192-42b1-9dad-c72942a94b7c"
+            }
+          ],
+          "shortName": "CanHardwareObject",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanHwFilter",
+              "description": "This container is only valid for HRHs and contains the configuration (parameters) of one hardware filter.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanHwFilter/CanHwFilterCode",
+                  "description": "Specifies (together with the filter mask) the identifiers range that passes the hardware filter.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanHwFilterCode",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c12386a9-c7ef-4bac-a5ab-ebff3f0e7d2e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanHwFilter/CanHwFilterMask",
+                  "description": "Describes a mask for hardware-based filtering of CAN identifiers. The CAN identifiers of incoming messages are masked with the appropriate CanFilterMaskValue. …",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanHwFilterMask",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:539be437-f97a-46a0-bd96-8b23c395a500"
+                }
+              ],
+              "references": [],
+              "shortName": "CanHwFilter",
+              "subContainers": [],
+              "uuid": "ECUC:c935096b-0081-4569-8b32-31f4b4a18a22"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger",
+              "description": "CanTTHardwareObjectTrigger is specified in the SWS TTCAN and contains the configuration (parameters) of TTCAN triggers for Hardware Objects, which are addition…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger/CanTTHardwareObjectBaseCycle",
+                  "description": "Defines the cycle_offset.",
+                  "isOptional": false,
+                  "max": 63,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTHardwareObjectBaseCycle",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bbb7fda0-3f86-4144-b471-33793652290e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger/CanTTHardwareObjectCycleRepetition",
+                  "description": "Defines the repeat_factor.",
+                  "isOptional": false,
+                  "max": 64,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTHardwareObjectCycleRepetition",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6f58e444-b305-47d4-899b-38971bc77aa6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger/CanTTHardwareObjectTimeMark",
+                  "description": "Defines the point in time, when the trigger will be activated.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTHardwareObjectTimeMark",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:737166e8-39c4-4d60-ac3f-00672a8ebf66"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger/CanTTHardwareObjectTriggerId",
+                  "description": "Sequential number which allows separation of different TTCAN triggers configured for one and the same hardware object.",
+                  "isOptional": false,
+                  "max": 63,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTHardwareObjectTriggerId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:0da05573-613f-45fd-94f7-68688e7bcf18"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanHardwareObject/CanTTHardwareObjectTrigger/CanTTHardwareObjectTriggerType",
+                  "description": "Defines the type of the trigger associated with the hardware object. This parameter depends on plain CAN parameter CAN_OBJECT_TYPE.",
+                  "enumValues": [
+                    "CAN_TT_RX_TRIGGER",
+                    "CAN_TT_TX_REF_TRIGGER",
+                    "CAN_TT_TX_REF_TRIGGER_GAP",
+                    "CAN_TT_TX_TRIGGER_EXCLUSIVE",
+                    "CAN_TT_TX_TRIGGER_MERGED",
+                    "CAN_TT_TX_TRIGGER_SINGLE"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTTHardwareObjectTriggerType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:b15710a4-a4ef-45a8-830a-33d47a8b386c"
+                }
+              ],
+              "references": [],
+              "shortName": "CanTTHardwareObjectTrigger",
+              "subContainers": [],
+              "uuid": "ECUC:5c10353d-3ba8-4140-adf6-b5c02d28c9f0"
+            }
+          ],
+          "uuid": "ECUC:ee3d6577-0017-42fc-b4d6-8d27c2e66563"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom",
+          "description": "This container contains the parameters for configuring pretended networking",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CanIcom",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig",
+              "description": "This container contains the configuration parameters of the ICOM Configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomConfigId",
+                  "description": "This parameter identifies the ID of the ICOM configuration.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanIcomConfigId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a32174e2-70a5-4609-a303-503941f99ce7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": true,
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeOnBusOff",
+                  "description": "This parameter defines that the MCU shall wake if the bus off is detected or not.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanIcomWakeOnBusOff",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:8e7c0fd0-06f2-49fa-b680-9aa65d0d346d"
+                }
+              ],
+              "references": [],
+              "shortName": "CanIcomConfig",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses",
+                  "description": "This container contains the configuration parameters of the wakeup causes to leave the power saving mode.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "CanIcomWakeupCauses",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage",
+                      "description": "This container contains the configuration parameters for the wakeup causes for matching received messages. It has to be configured as often as received message…",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomCounterValue",
+                          "description": "This parameter defines that the MCU shall wake if the message with the ID is received n times on the communication channel.",
+                          "isOptional": true,
+                          "max": 65536,
+                          "min": 1,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "CanIcomCounterValue",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:44c7f7cd-27c9-4d44-9040-f939d5741f3f"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomMessageId",
+                          "description": "This parameter defines the message ID the wakeup causes of this CanIcomRxMessage are configured for. In addition a mask (CanIcomMessageIdMask) can be defined, …",
+                          "isOptional": false,
+                          "max": 536870912,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "CanIcomMessageId",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:bc842073-5c72-4379-8417-8d7ec3974135"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomMessageIdMask",
+                          "description": "Describes a mask for filtering of CAN identifiers. The CAN identifiers of incoming messages are masked with this CanIcomMessageIdMask. If the masked identifier…",
+                          "isOptional": true,
+                          "max": 536870912,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "CanIcomMessageIdMask",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:ec84df4c-ff4f-4073-9d4e-f56e05565ede"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomMissingMessageTimerValue",
+                          "description": "This parameter defines that the MCU shall wake if the message with the ID is not received for a specific time in s on the",
+                          "isOptional": true,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "CanIcomMissingMessageTimerValue",
+                          "type": "FLOAT",
+                          "uuid": "ECUC:123941f0-3f0c-4664-9505-666c96bd7da3"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomPayloadLengthError",
+                          "description": "This parameter defines that the MCU shall wake if a payload error occurs",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "CanIcomPayloadLengthError",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:d4192bb5-3b33-4327-a259-dd0d39ba22a9"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "CanIcomRxMessage",
+                      "subContainers": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomRxMessageSignalConfig",
+                          "description": "This container contains the configuration parameters for the wakeup causes for matching signals.",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": "unbounded"
+                          },
+                          "parameters": [
+                            {
+                              "configClass": "PRE_COMPILE",
+                              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomRxMessageSignalConfig/CanIcomSignalMask",
+                              "description": "This parameter shall be used to mask a signal in the payload of a CAN message.",
+                              "isOptional": false,
+                              "max": 18446744073709552000,
+                              "min": 0,
+                              "multiplicity": {
+                                "lower": 1,
+                                "upper": 1
+                              },
+                              "shortName": "CanIcomSignalMask",
+                              "type": "INTEGER",
+                              "uuid": "ECUC:b3259eec-85a6-4940-b2eb-9b30e7545548"
+                            },
+                            {
+                              "configClass": "PRE_COMPILE",
+                              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomRxMessageSignalConfig/CanIcomSignalValue",
+                              "description": "This parameter shall be used to define a signal value which shall be compared (CanIcomSignalOperation) with the masked CanIcomSignalMask value of the received …",
+                              "isOptional": false,
+                              "max": 18446744073709552000,
+                              "min": 0,
+                              "multiplicity": {
+                                "lower": 1,
+                                "upper": 1
+                              },
+                              "shortName": "CanIcomSignalValue",
+                              "type": "INTEGER",
+                              "uuid": "ECUC:bcc8ac06-0acb-4c88-95b6-1ccb750482a6"
+                            },
+                            {
+                              "configClass": "PRE_COMPILE",
+                              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomRxMessageSignalConfig/CanIcomSignalOperation",
+                              "description": "This parameter defines the operation, which shall be used to verify the signal value creates a wakeup condition.",
+                              "enumValues": [
+                                "AND",
+                                "EQUAL",
+                                "GREATER",
+                                "SMALLER",
+                                "XOR"
+                              ],
+                              "isOptional": false,
+                              "multiplicity": {
+                                "lower": 1,
+                                "upper": 1
+                              },
+                              "shortName": "CanIcomSignalOperation",
+                              "type": "ENUM",
+                              "uuid": "ECUC:c6a66701-801b-4ba7-b033-2c81ccb20fd5"
+                            }
+                          ],
+                          "references": [
+                            {
+                              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanConfigSet/CanIcom/CanIcomConfig/CanIcomWakeupCauses/CanIcomRxMessage/CanIcomRxMessageSignalConfig/CanIcomSignalRef",
+                              "description": "This parameter defines a reference to the signal which shall be checked additional to the message id (CanIcomMessageId).",
+                              "destinationContainerType": "ComSignal",
+                              "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal",
+                              "destinationRefs": [
+                                "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal"
+                              ],
+                              "isExternal": true,
+                              "isOptional": true,
+                              "kind": "reference",
+                              "multiplicity": {
+                                "lower": 0,
+                                "upper": 1
+                              },
+                              "shortName": "CanIcomSignalRef",
+                              "uuid": "ECUC:161d89b2-a487-4461-8cc1-0d5164d13424"
+                            }
+                          ],
+                          "shortName": "CanIcomRxMessageSignalConfig",
+                          "subContainers": [],
+                          "uuid": "ECUC:26beb935-7b78-4e1d-8409-4b3085f26539"
+                        }
+                      ],
+                      "uuid": "ECUC:f9946c36-b957-4334-8cbd-baca9391f183"
+                    }
+                  ],
+                  "uuid": "ECUC:88f58fe7-2127-4109-bbbb-643488678bc0"
+                }
+              ],
+              "uuid": "ECUC:7f6fc855-d99c-4bd4-b348-b46b56f4b567"
+            }
+          ],
+          "uuid": "ECUC:a83d5f7e-0055-4b7c-813b-853cfac7718b"
+        }
+      ],
+      "uuid": "ECUC:e28c636a-f5f1-4503-b0ad-aed7fbed80d7"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral",
+      "description": "This container contains the parameters related each CAN Driver Unit.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:00beaaf9-8ba3-448a-aa81-a27661c11c8b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMultiplexedTransmission",
+          "description": "Specifies if multiplexed transmission shall be supported.ON or OFF",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanMultiplexedTransmission",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2eb95d32-92e6-407d-bae9-abac34896d07"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanPublicIcomSupport",
+          "description": "Selects support of Pretended Network features in Can driver.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanPublicIcomSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:19d23547-6c28-4028-a899-8dafec02b311"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanSetBaudrateApi",
+          "description": "The support of the Can_SetBaudrate API is optional.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanSetBaudrateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:20787da0-43f8-4154-a42c-126ffaa7273d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanVersionInfoApi",
+          "description": "Switches the Can_GetVersionInfo() API ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:52d00b4f-174c-453b-8884-271b69795d80"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:18b93eb8-b1dc-4779-9372-277b674dd618"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanLPduReceiveCalloutFunction",
+          "description": "This parameter defines the existence and the name of a callout function that is called after a successful",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanLPduReceiveCalloutFunction",
+          "type": "FUNCTION",
+          "uuid": "ECUC:0bf48002-3ae8-405d-8e51-63cbb66a3f2a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMainFunctionBusoffPeriod",
+          "description": "This parameter describes the period for cyclic call to Can_MainFunction_Busoff. Unit is seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanMainFunctionBusoffPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:12306b16-f8b2-418a-9262-e10b8222f967"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMainFunctionModePeriod",
+          "description": "This parameter describes the period for cyclic call to Can_MainFunction_Mode. Unit is seconds.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanMainFunctionModePeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:a4a82737-e923-4dd2-a0c3-8e56b5c0ce7c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMainFunctionWakeupPeriod",
+          "description": "This parameter describes the period for cyclic call to Can_MainFunction_Wakeup. Unit is seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanMainFunctionWakeupPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:c25c3355-86db-4423-a9cb-3f081c873488"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanTimeoutDuration",
+          "description": "Specifies the maximum time for blocking function until a timeout is detected. Unit is seconds.",
+          "isOptional": false,
+          "max": 65.535,
+          "min": 0.000001,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTimeoutDuration",
+          "type": "FLOAT",
+          "uuid": "ECUC:b395c86f-3f7f-42d0-8b8a-94cdc17d2246"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanEcucPartitionRef",
+          "description": "Maps the CAN driver to zero or multiple ECUC partitions to make the modules API available in this partition. The CAN driver will operate as an independent inst…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "CanEcucPartitionRef",
+          "uuid": "ECUC:295d9fcf-5961-4e76-a36c-1ffc387a8277"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanOsCounterRef",
+          "description": "This parameter contains a reference to the OsCounter, which is used by the CAN driver.",
+          "destinationContainerType": "OsCounter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsCounter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsCounter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CanOsCounterRef",
+          "uuid": "ECUC:0f0c8933-6ce9-4a53-90cc-31b61ca90e25"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanSupportTTCANRef",
+          "description": "The parameter refers to CanIfSupportTTCAN parameter in the CAN Interface Module configuration.",
+          "destinationContainerType": "CanIfPrivateCfg",
+          "destinationRef": "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanSupportTTCANRef",
+          "uuid": "ECUC:3fc9831b-0db6-41a2-8700-1b0dbcf79da4"
+        }
+      ],
+      "shortName": "CanGeneral",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanIcomGeneral",
+          "description": "This container contains the general configuration parameters of the ICOM Configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "CAN_ICOM_LEVEL_ONE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanIcomGeneral/CanIcomLevel",
+              "description": "Defines the level of Pretended Networking.",
+              "enumValues": [
+                "CAN_ICOM_LEVEL_ONE",
+                "CAN_ICOM_LEVEL_TWO"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CanIcomLevel",
+              "type": "ENUM",
+              "uuid": "ECUC:6386bf05-7b63-43d6-960e-42e2c45d4cd0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "CAN_ICOM_VARIANT_NONE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanIcomGeneral/CanIcomVariant",
+              "description": "Defines the variant, which is supported by this CanController",
+              "enumValues": [
+                "CAN_ICOM_VARIANT_HW",
+                "CAN_ICOM_VARIANT_NONE",
+                "CAN_ICOM_VARIANT_SW"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanIcomVariant",
+              "type": "ENUM",
+              "uuid": "ECUC:73b82610-6067-4839-a1d3-174e9cebe0f2"
+            }
+          ],
+          "references": [],
+          "shortName": "CanIcomGeneral",
+          "subContainers": [],
+          "uuid": "ECUC:ee402e97-dfb3-4307-8991-0aeb27f217b6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMainFunctionRWPeriods",
+          "description": "This container contains the parameter for configuring the period for cyclic call to Can_MainFunction_Read or Can_MainFunction_Write depending on the referring …",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Can/CanGeneral/CanMainFunctionRWPeriods/CanMainFunctionPeriod",
+              "description": "This parameter describes the period for cyclic call to Can_MainFunction_Read or Can_MainFunction_Write depending on the referring item. Unit is seconds. Differ…",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanMainFunctionPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:ba511b57-1198-4335-a07d-8556ddcc3caa"
+            }
+          ],
+          "references": [],
+          "shortName": "CanMainFunctionRWPeriods",
+          "subContainers": [],
+          "uuid": "ECUC:e19259ca-56e6-476f-8828-152be61457d0"
+        }
+      ],
+      "uuid": "ECUC:856dd730-a715-4e74-89f9-cd03e465c206"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Can",
+  "description": "This container holds the configuration of a single CAN Driver.",
+  "importWarnings": [
+    "CanTTControllerEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "CanControllerEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "CanCpuClockRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。",
+    "CanWakeupSourceRef：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。",
+    "CanIcomSignalRef：目标 /AUTOSAR/EcucDefs/Com/ComConfig/ComSignal 位于本模块之外；编辑器只读展示。",
+    "CanEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "CanEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "CanOsCounterRef：目标 /AUTOSAR/EcucDefs/Os/OsCounter 位于本模块之外；编辑器只读展示。",
+    "CanSupportTTCANRef：目标 /AUTOSAR/EcucDefs/CanIf/CanIfPrivateCfg 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Can",
+  "version": "4.4.0"
+}

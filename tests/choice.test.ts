@@ -162,10 +162,12 @@ describe('TASK-009 choice values and round trips', () => {
     'round-trips selected %s, custom parameters, UUIDs, references and flags',
     (candidate) => {
       const { config, manager, group, module } = sample();
+      // The metadata-free round trip below explicitly exercises the 4.4.0 baseline.
       config.name = 'choice';
       const child = manager.selectChoice(config, group.uuid, candidate);
       manager.setParameterValue(child, candidate + '-p', 42);
       manager.setReferenceTarget(child, candidate + '-r', child.uuid);
+      module.version = config.version = '4.4.0';
       const xml = exportArxml(config, module);
       const doc = new DOMParser().parseFromString(xml, 'application/xml');
       expect(doc.querySelector('parsererror')).toBeNull();

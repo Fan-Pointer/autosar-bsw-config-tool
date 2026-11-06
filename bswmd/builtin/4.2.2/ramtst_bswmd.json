@@ -1,0 +1,689 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "ee7b4f18a28d4f6a565e4411c68439defc683a5b35636dd8fb72f449ae20e2da",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon",
+      "description": "This container holds a list of all available functions in the RamTst module. Each function is turned ON or OFF before compiling so that only the desired functi…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAllowApi",
+          "description": "Preprocessor switch to disable / enable the function \"RamTst_Allow\".",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstAllowApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:16d97fa1-5ab2-41a9-af8c-3cda57200b97"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstChangeNumOfTestedCellsApi",
+          "description": "Preprocessor switch to disable / enable the function \"RamTst_ChangeNumberOfTestedCells\".",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstChangeNumOfTestedCellsApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:67b4eef0-edc6-4494-9520-88892daafa0c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:93c7f35b-d732-421e-b9fb-4b1dcb8d2b14"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstGetAlgParamsApi",
+          "description": "Preprocessor switch to disable / enable the function \"RamTst_GetAlgParams\".",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstGetAlgParamsApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:121a2fc3-d8e6-487c-aec7-2de919158616"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstGetExecutionStatusApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstGetExecutionStatusApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ce59a5d7-75da-4e29-ae79-682dbf67224e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstGetNumberOfTestedCellsApi",
+          "description": "Preprocessor switch to disable / enable the function \"RamTst_GetNumberOfTestedCells\".",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstGetNumberOfTestedCellsApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2c64f7c8-4708-445b-b554-59cf1ed50d00"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstGetTestAlgorithmApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstGetTestAlgorithmApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:22e5162a-cb96-4587-ae82-d484e700063b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstGetTestResultApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstGetTestResultApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1cf74528-d6b7-427e-bdef-5e5bc20a272d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstGetTestResultPerBlockApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstGetTestResultPerBlockApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d498d99f-687c-4c3e-aee3-7dcb64361ceb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstGetVersionInfoApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstGetVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2b74d931-78c0-46ec-9f62-34fa7cbdec9c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstResumeApi",
+          "description": "Preprocessor switch to disable / enable the function \"RamTst_Resume\".",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstResumeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:53eb56f0-9d37-4896-a0a2-f8ed5386f467"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstRunFullTestApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstRunFullTestApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7ac6372f-f153-4355-82cc-681d17b7f103"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstRunPartialTestApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstRunPartialTestApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d16c5d80-6a90-45d6-85b1-e625962a5345"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstSelectAlgParamsApi",
+          "description": "Preprocessor switch to disable / enable the function \"RamTst_SelectAlgParams\".",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstSelectAlgParamsApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bf32a854-b733-4de2-b7bc-4b4828533715"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstStopApi",
+          "description": "Preprocessor switch to disable / enable the function",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstStopApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e8ffd34d-8e36-4485-b40c-985cff41cc2d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstSuspendApi",
+          "description": "Preprocessor switch to disable / enable the function \"RamTst_Suspend\".",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstSuspendApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7a003020-da8b-4bc7-8833-d53d520c82be"
+        }
+      ],
+      "references": [],
+      "shortName": "RamTstCommon",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAlgorithms",
+          "description": "This container holds all of the available test algorithms for the specific microcontroller. Each test algorithm is selected ON or OFF before compiling so that …",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAlgorithms/RamTstAbrahamTestSelected",
+              "description": "Preprocessor switch to select the Abraham Test ON or OFF",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstAbrahamTestSelected",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:03482ab8-281d-4bfb-ae2d-fd63631d8108"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAlgorithms/RamTstCheckerboardTestSelected",
+              "description": "Preprocessor switch to select the Checkerboard Test ON or OFF",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstCheckerboardTestSelected",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:0f5c4e78-46da-40cf-a1c7-11bce1d9263f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAlgorithms/RamTstGalpatTestSelected",
+              "description": "Preprocessor switch to select the Galpat Test ON or OFF",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstGalpatTestSelected",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:090daeed-f256-425a-8e8f-be78873010f1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAlgorithms/RamTstMarchTestSelected",
+              "description": "Preprocessor switch to select the March Test ON or OFF",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstMarchTestSelected",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:3582c79a-0327-4966-8752-343657127d47"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAlgorithms/RamTstTranspGalpatTestSelected",
+              "description": "Preprocessor switch to select the Transparent Galpat Test ON or OFF",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstTranspGalpatTestSelected",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:94098234-bf83-41a3-84e4-f233699940b5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstAlgorithms/RamTstWalkPathTestSelected",
+              "description": "Preprocessor switch to select the Walking Path Test ON or OFF",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstWalkPathTestSelected",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f58faded-f154-4097-bfab-f56397d80138"
+            }
+          ],
+          "references": [],
+          "shortName": "RamTstAlgorithms",
+          "subContainers": [],
+          "uuid": "ECUC:62eb25f3-28ac-452e-a2fa-0f92357c16a6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams",
+          "description": "This container specifies configuration parameters which are set at pre-compile or link time.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstDefaultAlgParamsId",
+              "description": "This is the identifier for the default \"RamTstAlgParams\" valid after the \"RamTst_Init(..)\" function. It is the initial value for a RAM variable which could be …",
+              "isOptional": false,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstDefaultAlgParamsId",
+              "type": "INTEGER",
+              "uuid": "ECUC:06024431-c473-4eca-9fc7-cb09b2c469a0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstMinNumberOfTestedCells",
+              "description": "Minimum number of tested cells for one cycle of a background test, as defined by implementer.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstMinNumberOfTestedCells",
+              "type": "INTEGER",
+              "uuid": "ECUC:b5bda6a2-ef40-4cbd-b1b2-0798c4470c9b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstNumberOfAlgParamSets",
+              "description": "Number of configured parameter sets for the available test algorithms.",
+              "isOptional": false,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstNumberOfAlgParamSets",
+              "type": "INTEGER",
+              "uuid": "ECUC:657cca5b-020d-4d2f-8f3c-72fb031dc992"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstTestCompletedNotification",
+              "description": "This function will be called from a background test after finishing the RAM test without an error.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstTestCompletedNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:c1358c78-a1a1-4f16-a6da-7ab1912eca98"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstTestErrorNotification",
+              "description": "This function will be called from a background test if an error occurs during the RAM test.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "RamTstTestErrorNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:a1575dfa-04a7-496c-bb71-d5dbf722f0cc"
+            }
+          ],
+          "references": [],
+          "shortName": "RamTstConfigParams",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams",
+              "description": "This container holds parameters for configuring an algorithm. For each algorithm selected in the RamTst_Algorithms container there can be one or more RamTstAlg…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 255
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstAlgParamsId",
+                  "description": "This is the identifier by which this RamTstAlgParams set can be selected.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "RamTstAlgParamsId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ee97557e-a517-4dc6-a63d-e47756d5572f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstExtNumberOfTestedCells",
+                  "description": "This is the absolute maximum value for the number of cells that NUMBER_OF_TESTED_CELLS and MAX_NUMBER_OF_TESTED_CELLS can be.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "RamTstExtNumberOfTestedCells",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:733eb7c6-c2b1-4d00-9a53-564d38e9565f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstMaxNumberOfTestedCells",
+                  "description": "This is the maximum value for the number of cells that can be tested in one cycle of a background test.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "RamTstMaxNumberOfTestedCells",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ed2796ab-085b-470c-b351-095568a161f2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstNumberOfBlocks",
+                  "description": "Number of RAM blocks configured using the container",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "RamTstNumberOfBlocks",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:2e0f071e-2902-4850-a181-728a84d916b6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstNumberOfTestedCells",
+                  "description": "This is the initial value for a RAM variable, which can be changed by the function \"RamTst_ChangeNumberOfTestedCells\"",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "RamTstNumberOfTestedCells",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:8ba7b460-0266-4e5f-816d-0d5aa100dfa7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstAlgorithm",
+                  "description": "This is the algorithm for which this RamTstAlgParams set is defined. Note that the same algorithm can be used in more than one RamTstAlgParams.",
+                  "enumValues": [
+                    "RAMTST_ABRAHAM_TEST",
+                    "RAMTST_CHECKERBOARD_TEST",
+                    "RAMTST_GALPAT_TEST",
+                    "RAMTST_MARCH_TEST",
+                    "RAMTST_TRANSP_GALPAT_TEST",
+                    "RAMTST_WALK_PATH_TEST"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "RamTstAlgorithm",
+                  "type": "ENUM",
+                  "uuid": "ECUC:c7ffb64f-2076-45ab-83c3-8c16a01d9a62"
+                }
+              ],
+              "references": [],
+              "shortName": "RamTstAlgParams",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstBlockParams",
+                  "description": "This container holds the description for one block of RAM. For each RAM block to be tested by a given algorithm, there is one container which describes the blo…",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 65535
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstBlockParams/RamTstBlockId",
+                      "description": "ID of the RAM block",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "RamTstBlockId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:870cc0a7-22ab-4ec1-a6c3-bbdd1f48186a"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstBlockParams/RamTstEndAddress",
+                      "description": "End Address of the RAM block.",
+                      "isOptional": false,
+                      "max": 4294967295,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "RamTstEndAddress",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:db9b3de1-6fa0-4124-9b4c-54348cf8a124"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstBlockParams/RamTstFillPattern",
+                      "description": "Pattern to be filled into each memory cell after destructive test of this block.",
+                      "isOptional": false,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "RamTstFillPattern",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:9cb6843f-a344-4e37-b442-d28f2b57f222"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstBlockParams/RamTstStartAddress",
+                      "description": "Start Address of the RAM block.",
+                      "isOptional": false,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "RamTstStartAddress",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:3cf53207-3a55-4307-b184-899a4d9e6060"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstCommon/RamTstConfigParams/RamTstAlgParams/RamTstBlockParams/RamTstTestPolicy",
+                      "description": "Policy regarding destruction or non-destruction of memory content.",
+                      "enumValues": [
+                        "RAMTEST_DESTRUCTIVE",
+                        "RAMTEST_NON_DESTRUCTIVE"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "RamTstTestPolicy",
+                      "type": "ENUM",
+                      "uuid": "ECUC:1ba15d70-cca5-4af0-8497-2f540a258f38"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "RamTstBlockParams",
+                  "subContainers": [],
+                  "uuid": "ECUC:365453a2-a957-4210-899c-637b8bb698fe"
+                }
+              ],
+              "uuid": "ECUC:72143fb4-1c83-44dc-8753-282521328089"
+            }
+          ],
+          "uuid": "ECUC:f21793ef-75e0-4393-b885-e5580bc5e76f"
+        }
+      ],
+      "uuid": "ECUC:8e3b9850-bbd7-415a-a5bb-e6e4962cc5da"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstDemEventParameterRefs",
+      "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus in case the corresponding error occurs. T…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstDemEventParameterRefs/RAMTST_E_RAM_FAILURE",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"RAM failure\" has occurred.",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "RAMTST_E_RAM_FAILURE",
+          "uuid": "ECUC:b688e59f-c065-4c8d-92f7-1dd4a961f00b"
+        }
+      ],
+      "shortName": "RamTstDemEventParameterRefs",
+      "subContainers": [],
+      "uuid": "ECUC:837481e5-843f-49a5-bef6-fbe366860373"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstPublishedInformation",
+      "description": "Container holding all RamTst specific published information parameter.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/RamTst/RamTstPublishedInformation/RamTstCellSize",
+          "description": "Size of RAM cells (in bits) which can be tested individually by the given implementation.",
+          "isOptional": false,
+          "max": 64,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "RamTstCellSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:79ad475e-d255-4fb7-a3d8-4ae49f9106ef"
+        }
+      ],
+      "references": [],
+      "shortName": "RamTstPublishedInformation",
+      "subContainers": [],
+      "uuid": "ECUC:ada3cd50-4795-4481-84dd-e5f0575be6c9"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/RamTst",
+  "description": "Configuration of the RamTst module.",
+  "importWarnings": [
+    "RAMTST_E_RAM_FAILURE：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "RamTst",
+  "version": "4.2.2"
+}

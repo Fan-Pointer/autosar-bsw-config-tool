@@ -1,0 +1,1 @@
+gcc -std=c11 -Wall -Wextra -Werror -pedantic -fsyntax-only Dem_PBCfg.c: PASS

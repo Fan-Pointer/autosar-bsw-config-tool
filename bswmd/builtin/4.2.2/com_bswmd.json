@@ -1,0 +1,2428 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "703f41cf4cf3ca5249cda6f5900eb6811ef34d0d876345c882b0cbe206fa7a5f",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR COM module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComDataMemSize",
+          "description": "Size of internal Com data in units of bytes (static memory allocation) - memory required by post-build configuration must be smaller than this constant. This p…",
+          "isOptional": true,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComDataMemSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:ddfe0fcf-ccd7-4dfd-a3c6-cc367bd19c6c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComMaxIPduCnt",
+          "description": "Maximum number of IPdus. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMaxIPduCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:2130c8cf-2e10-43c8-b1d7-439d64580048"
+        }
+      ],
+      "references": [],
+      "shortName": "ComConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping",
+          "description": "Each instance of this container defines one mapping of the integrated Signal Gateway.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "ComGwMapping",
+          "subContainers": [
+            {
+              "choice": {
+                "candidateRefs": [
+                  "ECUC:02fc5539-53d4-4a74-929c-3db3a8a40f03",
+                  "ECUC:6f4a2e6b-5d24-918f-64e6-23afaf9c2337"
+                ]
+              },
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination",
+              "description": "Each instance of this choice container allows to define one routing destination either by reference to an already configured COM signal / signal group or by a …",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "ComGwDestination",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription",
+                  "description": "Description of a gateway destination. This container allows defining a gateway destination without the configuration of a complete COM signal. This allows addi…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComBitPosition",
+                      "description": "Starting position within the I-PDU. This parameter refers to the position in the I-PDU and not in the shadow buffer. If the endianness conversion is configured…",
+                      "isOptional": false,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComBitPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:a9d55d52-13f7-9895-1dba-0e140e8f522f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComUpdateBitPosition",
+                      "description": "Bit position of update-bit inside I-PDU.",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComUpdateBitPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:53d6e619-a6d4-8b2c-3f29-7230c53687ce"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComSignalEndianness",
+                      "description": "Defines the endianness of the signal's network representation.",
+                      "enumValues": [
+                        "BIG_ENDIAN",
+                        "LITTLE_ENDIAN",
+                        "OPAQUE"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComSignalEndianness",
+                      "type": "ENUM",
+                      "uuid": "ECUC:0b9384a4-946a-94a7-2a07-5ba84e265ac2"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComTransferProperty",
+                      "description": "Defines if a write access to this signal can trigger the transmission of the corresponding I-PDU. If the I-PDU is triggered, depends also on the transmission m…",
+                      "enumValues": [
+                        "PENDING",
+                        "TRIGGERED",
+                        "TRIGGERED_ON_CHANGE",
+                        "TRIGGERED_ON_CHANGE_WITHOUT_REPETITION",
+                        "TRIGGERED_WITHOUT_REPETITION"
+                      ],
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComTransferProperty",
+                      "type": "ENUM",
+                      "uuid": "ECUC:ecf98909-3c1d-91ca-3903-106b9cedcad2"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": "0",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComSignalInitValue",
+                      "description": "Initial value for this signal. In case of UINT8_N the default value is a string of length ComSignalLength with all bytes set to 0x00. In case of UINT8_DYN the …",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComSignalInitValue",
+                      "type": "STRING",
+                      "uuid": "ECUC:2a96aa3d-e035-8a97-31c5-ffa140233a68"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComGwIPduRef",
+                      "description": "Reference to an I-PDU of a Signal Gateway source or destination description.",
+                      "destinationContainerType": "ComIPdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComGwIPduRef",
+                      "uuid": "ECUC:b2a6fa40-d2bf-8b35-35e3-7f71a89ce3da"
+                    }
+                  ],
+                  "shortName": "ComGwDestinationDescription",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter",
+                      "description": "This container contains the configuration parameters of the AUTOSAR COM module's Filters.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter/ComFilterAlgorithm",
+                          "description": "The range of values is specified in the [17] specification, chapter 2.2.2, Reception Filtering.",
+                          "enumValues": [
+                            "ALWAYS",
+                            "MASKED_NEW_DIFFERS_MASKED_OLD",
+                            "MASKED_NEW_DIFFERS_X",
+                            "MASKED_NEW_EQUALS_X",
+                            "NEVER",
+                            "NEW_IS_OUTSIDE",
+                            "NEW_IS_WITHIN",
+                            "ONE_EVERY_N"
+                          ],
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "ComFilterAlgorithm",
+                          "type": "ENUM",
+                          "uuid": "ECUC:95540f43-264b-d487-990c-d67a5b818dc6"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter/ComFilterMask",
+                          "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                          "isOptional": true,
+                          "max": 4294967295,
+                          "min": -2147483648,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComFilterMask",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:7805082d-7971-d0e6-cf5f-69a2cfbde0c3"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter/ComFilterMax",
+                          "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                          "isOptional": true,
+                          "max": 4294967295,
+                          "min": -2147483648,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComFilterMax",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:0824e635-998e-cfd5-b607-47ccfb97a8e3"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter/ComFilterMin",
+                          "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                          "isOptional": true,
+                          "max": 4294967295,
+                          "min": -2147483648,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComFilterMin",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:689bbdc7-90e1-d2f6-c522-4401a59d181f"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter/ComFilterOffset",
+                          "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                          "isOptional": true,
+                          "max": 4294967294,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComFilterOffset",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:5f3d95fe-9032-cf47-d434-525de7c9d30f"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter/ComFilterPeriod",
+                          "description": "This parameter defines the period of the ComFilterAlgorithm ONE_EVERY_N.",
+                          "isOptional": true,
+                          "max": 4294967295,
+                          "min": 2,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComFilterPeriod",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:cc407bb6-0c02-cd27-b812-391fbf021b5d"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwDestinationDescription/ComFilter/ComFilterX",
+                          "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                          "isOptional": true,
+                          "max": 4294967295,
+                          "min": -2147483648,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComFilterX",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:5aaf6d66-6dfe-d243-ad66-9c30197c6b72"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "ComFilter",
+                      "subContainers": [],
+                      "uuid": "ECUC:45dc391d-9fe8-8b32-14f8-696b27f2fd02"
+                    }
+                  ],
+                  "uuid": "ECUC:02fc5539-53d4-4a74-929c-3db3a8a40f03"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwSignal",
+                  "description": "This container allows specifying a gateway source or destination respectively with a reference to a ComSignal, a ComGroupSignal or a ComSignalGroup.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwDestination/ComGwSignal/ComGwSignalRef",
+                      "description": "Reference to an object of a gateway relation. Either to a ComSignal, ComGroupSignal or to a SignalGroup.",
+                      "destinationContainerType": "ComGroupSignal",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal",
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal",
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "choice",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComGwSignalRef",
+                      "uuid": "ECUC:89dd8bb0-170c-d8ba-21c3-b5c6074dd9e5"
+                    }
+                  ],
+                  "shortName": "ComGwSignal",
+                  "subContainers": [],
+                  "uuid": "ECUC:6f4a2e6b-5d24-918f-64e6-23afaf9c2337"
+                }
+              ],
+              "uuid": "ECUC:007f74c9-4d99-4605-a6cd-abd1ce2c888c"
+            },
+            {
+              "choice": {
+                "candidateRefs": [
+                  "ECUC:96ce3bc1-58cf-955e-7ad8-2213ed49e3b2",
+                  "ECUC:d9984304-65a7-4aad-b96b-183daa37336e"
+                ]
+              },
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource",
+              "description": "This choice container allows the definition of the gateway source signal either by reference to an already configured COM signal / signal group or by a source …",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "ComGwSource",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSignal",
+                  "description": "This container allows specifying a gateway source or destination respectively with a reference to a ComSignal, a ComGroupSignal or a ComSignalGroup.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSignal/ComGwSignalRef",
+                      "description": "Reference to an object of a gateway relation. Either to a ComSignal, ComGroupSignal or to a SignalGroup.",
+                      "destinationContainerType": "ComGroupSignal",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal",
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal",
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "choice",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComGwSignalRef",
+                      "uuid": "ECUC:b1619906-12b7-dc89-37b5-b42a44fb9a60"
+                    }
+                  ],
+                  "shortName": "ComGwSignal",
+                  "subContainers": [],
+                  "uuid": "ECUC:96ce3bc1-58cf-955e-7ad8-2213ed49e3b2"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription",
+                  "description": "Description of a gateway source. This container allows defining a gateway source without the configuration of a complete COM signal. This allows adding / chang…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription/ComBitPosition",
+                      "description": "Starting position within the I-PDU. This parameter refers to the position in the I-PDU and not in the shadow buffer. If the endianness conversion is configured…",
+                      "isOptional": false,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComBitPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:80714b1d-25ca-98ce-4488-e89e1022769a"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription/ComBitSize",
+                      "description": "Size in bits, for integer signal types. For ComSignalType UINT8_N and UINT8_DYN",
+                      "isOptional": true,
+                      "max": 64,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComBitSize",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:e17b033e-b6c3-90ee-7203-cd4b7de89d71"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription/ComSignalLength",
+                      "description": "Description:",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComSignalLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:12040cb4-a560-97a6-5180-695531bc5419"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription/ComUpdateBitPosition",
+                      "description": "Bit position of update-bit inside I-PDU.",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComUpdateBitPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:2a72d3e4-b8a7-8b65-65f8-4cbac6c9ac39"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription/ComSignalEndianness",
+                      "description": "Defines the endianness of the signal's network representation.",
+                      "enumValues": [
+                        "BIG_ENDIAN",
+                        "LITTLE_ENDIAN",
+                        "OPAQUE"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComSignalEndianness",
+                      "type": "ENUM",
+                      "uuid": "ECUC:e22f726f-a63d-94e0-50d6-36324fb97f2d"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription/ComSignalType",
+                      "description": "The AUTOSAR type of the signal. Whether or not the signal is signed or unsigned can be found by examining the value of this attribute.",
+                      "enumValues": [
+                        "BOOLEAN",
+                        "FLOAT32",
+                        "FLOAT64",
+                        "SINT16",
+                        "SINT32",
+                        "SINT64",
+                        "SINT8",
+                        "UINT16",
+                        "UINT32",
+                        "UINT64",
+                        "UINT8",
+                        "UINT8_DYN",
+                        "UINT8_N"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComSignalType",
+                      "type": "ENUM",
+                      "uuid": "ECUC:e06cfb18-5b4d-959b-507b-e5f3dc438131"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComGwMapping/ComGwSource/ComGwSourceDescription/ComGwIPduRef",
+                      "description": "Reference to an I-PDU of a Signal Gateway source or destination description.",
+                      "destinationContainerType": "ComIPdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComGwIPduRef",
+                      "uuid": "ECUC:8942e80b-e492-8b6e-5cb2-59fbaa300845"
+                    }
+                  ],
+                  "shortName": "ComGwSourceDescription",
+                  "subContainers": [],
+                  "uuid": "ECUC:d9984304-65a7-4aad-b96b-183daa37336e"
+                }
+              ],
+              "uuid": "ECUC:2803821f-4944-49d4-bcbf-aa360bda4907"
+            }
+          ],
+          "uuid": "ECUC:c290eaea-e207-4f2e-89a5-134d43a125a0"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu",
+          "description": "Contains the configuration parameters of the AUTOSAR COM module's I-PDUs.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduCallout",
+              "description": "This parameter defines the existence and the name of a callout function for the corresponding I-PDU. If this parameter is omitted no I-PDU callout shall take p…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComIPduCallout",
+              "type": "FUNCTION",
+              "uuid": "ECUC:dfd7f113-2d92-42e3-9682-466e04f70473"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduTriggerTransmitCallout",
+              "description": "If there is a trigger transmit callout defined for this I-PDU this parameter contains the name of the callout function.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComIPduTriggerTransmitCallout",
+              "type": "FUNCTION",
+              "uuid": "ECUC:142dca8a-fcb4-4444-ba45-c5954999b77f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduCancellationSupport",
+              "description": "Defines for I-PDUs with ComIPduType NORMAL: If the underlying IF-modul supports cancellation of transmit requests.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComIPduCancellationSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:590e65ba-bcf3-4622-a02c-f9cd1768902b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduDirection",
+              "description": "The direction defines if this I-PDU, and therefore the contributing signals and signal groups, shall be sent or received.",
+              "enumValues": [
+                "RECEIVE",
+                "SEND"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComIPduDirection",
+              "type": "ENUM",
+              "uuid": "ECUC:602c5de9-9aae-48e0-90c5-5e40a3ee1562"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduSignalProcessing",
+              "description": "For the definition of the two modes Immediate and Deferred.",
+              "enumValues": [
+                "DEFERRED",
+                "IMMEDIATE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComIPduSignalProcessing",
+              "type": "ENUM",
+              "uuid": "ECUC:d23c5427-29e4-4828-9509-d2a6e953bced"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduType",
+              "description": "Defines if this I-PDU is a normal I-PDU that can be sent unfragmented or if this is a large I-PDU that shall be sent via the Transport Protocol of the underlyi…",
+              "enumValues": [
+                "NORMAL",
+                "TP"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComIPduType",
+              "type": "ENUM",
+              "uuid": "ECUC:c64c0d10-9152-443d-91b9-13195e7eb049"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduHandleId",
+              "description": "The numerical value used as the ID of this I-PDU. The ComIPduHandleId is required by the API calls Com_RxIndication, Com_TpRxIndication, Com_StartOfReception a…",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComIPduHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:ae2fd4f0-9482-4454-8bad-fa692d275b39"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduGroupRef",
+              "description": "Reference to the I-PDU groups this I-PDU belongs to.",
+              "destinationContainerType": "ComIPduGroup",
+              "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "ComIPduGroupRef",
+              "uuid": "ECUC:b55a77e7-c54c-4f56-aec1-e222f78228ba"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduSignalGroupRef",
+              "description": "References to all signal groups contained in this I-Pdu",
+              "destinationContainerType": "ComSignalGroup",
+              "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "ComIPduSignalGroupRef",
+              "uuid": "ECUC:7171db05-bd44-4f33-8fcc-345182c94c9b"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduSignalRef",
+              "description": "References to all signals contained in this I-PDU.",
+              "destinationContainerType": "ComSignal",
+              "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "ComIPduSignalRef",
+              "uuid": "ECUC:ee4c14ce-6b3a-44d8-b206-b5e824aefbaa"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComPduIdRef",
+              "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComPduIdRef",
+              "uuid": "ECUC:55b82985-70d9-400f-9e67-3d51f7f00ac9"
+            }
+          ],
+          "shortName": "ComIPdu",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduCounter",
+              "description": "This optional container contains the configuration parameters of PDU Counter.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduCounter/ComIPduCounterErrorNotification",
+                  "description": "Name of Com_CbkCounterErr callback function to be called. If this",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComIPduCounterErrorNotification",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:4859caf3-c801-4c24-abcc-3a0b2d51adca"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduCounter/ComIPduCounterSize",
+                  "description": "Size of PDU Counter expressed in bits",
+                  "isOptional": false,
+                  "max": 8,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComIPduCounterSize",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6960bb22-331a-4158-92a2-5dbb400df6ab"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduCounter/ComIPduCounterStartPosition",
+                  "description": "Position of PDU counter expressed in bits from start position of data content",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComIPduCounterStartPosition",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:415ccc35-3f77-4f12-bb9f-7043ea53d655"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduCounter/ComIPduCounterThreshold",
+                  "description": "Threshold value of I-PDU counter algorithm, see ECUC_Com_00590.",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComIPduCounterThreshold",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:314f81b7-17b3-4607-9cc1-732bacf2abf5"
+                }
+              ],
+              "references": [],
+              "shortName": "ComIPduCounter",
+              "subContainers": [],
+              "uuid": "ECUC:138ce27a-5e66-468b-98f8-0983b735c064"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduReplication",
+              "description": "This optional container contains the information needed for each I-PDU replicated.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduReplication/ComIPduReplicationQuorum",
+                  "description": "The number of identical I-PDUs needed for successful voting.",
+                  "isOptional": false,
+                  "max": 3,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComIPduReplicationQuorum",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fe74bf86-eac7-4720-8293-5addf106b811"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComIPduReplication/ComIPduReplicaRef",
+                  "description": "Reference to replicas PduR PDUs of this IPDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 2
+                  },
+                  "shortName": "ComIPduReplicaRef",
+                  "uuid": "ECUC:f03e9979-e355-481d-a1ca-f1ae44448996"
+                }
+              ],
+              "shortName": "ComIPduReplication",
+              "subContainers": [],
+              "uuid": "ECUC:57263070-9b06-41b7-9e1c-33b4d1c65828"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu",
+              "description": "This container contains additional transmission related configuration parameters of the AUTOSAR COM module's I-PDUs.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComMetaDataDefault",
+                  "description": "In case an I-PDU has a globally configured MetaDataLength distinct from 0 and no explicit meta data is given for a send request (e.g. by using Com_TriggerIPDUS…",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComMetaDataDefault",
+                  "type": "STRING",
+                  "uuid": "ECUC:60eaf59e-c4c0-4aee-b6b5-eb5aabb9878c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComMinimumDelayTime",
+                  "description": "Defines the Minimum Delay Time (MDT) between successive transmissions of this I-PDU in seconds. The MDT is independent of the possible different transmission m…",
+                  "isOptional": true,
+                  "max": 3600,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComMinimumDelayTime",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:f1629245-0cb7-4189-9861-19caabedb323"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxIPduClearUpdateBit",
+                  "description": "Defines when the update-bits of signals or signal groups, contained in this I-PDU, will be cleared.",
+                  "enumValues": [
+                    "Confirmation",
+                    "Transmit",
+                    "TriggerTransmit"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComTxIPduClearUpdateBit",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f3654eba-0ff7-40df-aad5-71812f896052"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxIPduUnusedAreasDefault",
+                  "description": "The AUTOSAR COM module fills not used areas of an I-PDU with this byte pattern. This attribute is mandatory to avoid undefined behaviour. This byte-pattern wil…",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComTxIPduUnusedAreasDefault",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:af4f2f68-10af-48ca-8c08-dd0ab4921c81"
+                }
+              ],
+              "references": [],
+              "shortName": "ComTxIPdu",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeFalse",
+                  "description": "This container contains the configuration parameters of the AUTOSAR COM module's transmission modes in the case the ComFilter evaluates to false.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "ComTxModeFalse",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeFalse/ComTxMode",
+                      "description": "This container contains the configuration parameters of the AUTOSAR COM module's transmission modes.",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeFalse/ComTxMode/ComTxModeMode",
+                          "description": "The available transmission modes described in [18] shall be extended by the additional mode None.",
+                          "enumValues": [
+                            "DIRECT",
+                            "MIXED",
+                            "NONE",
+                            "PERIODIC"
+                          ],
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeMode",
+                          "type": "ENUM",
+                          "uuid": "ECUC:2cfd31fd-6975-d281-1948-06fb4cb75607"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeFalse/ComTxMode/ComTxModeNumberOfRepetitions",
+                          "description": "Defines the number of repetitions for the transmission mode DIRECT and the event driven part of transmission mode MIXED.",
+                          "isOptional": true,
+                          "max": 255,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeNumberOfRepetitions",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:6fb3519d-c40b-db38-fd08-70f912baedec"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeFalse/ComTxMode/ComTxModeRepetitionPeriod",
+                          "description": "Defines the repetition period in seconds of the multiple transmissions in case ComTxModeNumberOfRepetitions is configured greater than or equal to 1 and ComTxM…",
+                          "isOptional": true,
+                          "max": 3600,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeRepetitionPeriod",
+                          "type": "FLOAT",
+                          "uuid": "ECUC:faeb57d4-bfe7-d50c-eb8c-1ef6d82df89a"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeFalse/ComTxMode/ComTxModeTimeOffset",
+                          "description": "Defines the period in seconds between the start of the I-PDU by Com_IpduGroupControl and the first transmission request in case ComTxModeMode is configured to …",
+                          "isOptional": true,
+                          "max": 3600,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeTimeOffset",
+                          "type": "FLOAT",
+                          "uuid": "ECUC:ce45c969-d5d9-d305-f36e-8e8a95353990"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeFalse/ComTxMode/ComTxModeTimePeriod",
+                          "description": "Defines the repetition period in seconds of the periodic transmission requests in case ComTxModeMode is configured to PERIODIC or MIXED. In case of the mixed t…",
+                          "isOptional": true,
+                          "max": 3600,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeTimePeriod",
+                          "type": "FLOAT",
+                          "uuid": "ECUC:c4e629ae-8c57-d86c-180d-80c1a8431e94"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "ComTxMode",
+                      "subContainers": [],
+                      "uuid": "ECUC:a765973c-9c32-8f36-59d0-25e9fe09f415"
+                    }
+                  ],
+                  "uuid": "ECUC:94b40004-9c9e-4156-9f49-4b4d102d260d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeTrue",
+                  "description": "This container contains the configuration parameters of the AUTOSAR COM module's transmission modes in the case the ComFilter evaluates to true.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "ComTxModeTrue",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeTrue/ComTxMode",
+                      "description": "This container contains the configuration parameters of the AUTOSAR COM module's transmission modes.",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeTrue/ComTxMode/ComTxModeMode",
+                          "description": "The available transmission modes described in [18] shall be extended by the additional mode None.",
+                          "enumValues": [
+                            "DIRECT",
+                            "MIXED",
+                            "NONE",
+                            "PERIODIC"
+                          ],
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeMode",
+                          "type": "ENUM",
+                          "uuid": "ECUC:565b2643-7915-db1b-202b-65b84ad546cd"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeTrue/ComTxMode/ComTxModeNumberOfRepetitions",
+                          "description": "Defines the number of repetitions for the transmission mode DIRECT and the event driven part of transmission mode MIXED.",
+                          "isOptional": true,
+                          "max": 255,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeNumberOfRepetitions",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:991145e3-d3ab-e3d2-03eb-cfb610d8deb2"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeTrue/ComTxMode/ComTxModeRepetitionPeriod",
+                          "description": "Defines the repetition period in seconds of the multiple transmissions in case ComTxModeNumberOfRepetitions is configured greater than or equal to 1 and ComTxM…",
+                          "isOptional": true,
+                          "max": 3600,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeRepetitionPeriod",
+                          "type": "FLOAT",
+                          "uuid": "ECUC:24494c1a-cf87-dda6-f26f-7db3d64be960"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeTrue/ComTxMode/ComTxModeTimeOffset",
+                          "description": "Defines the period in seconds between the start of the I-PDU by Com_IpduGroupControl and the first transmission request in case ComTxModeMode is configured to …",
+                          "isOptional": true,
+                          "max": 3600,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeTimeOffset",
+                          "type": "FLOAT",
+                          "uuid": "ECUC:f7a3bdaf-e579-db9f-fa51-ed4793532a56"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPdu/ComTxIPdu/ComTxModeTrue/ComTxMode/ComTxModeTimePeriod",
+                          "description": "Defines the repetition period in seconds of the periodic transmission requests in case ComTxModeMode is configured to PERIODIC or MIXED. In case of the mixed t…",
+                          "isOptional": true,
+                          "max": 3600,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "ComTxModeTimePeriod",
+                          "type": "FLOAT",
+                          "uuid": "ECUC:ee441df4-9bf7-e106-1ef0-df7ea6610f5a"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "ComTxMode",
+                      "subContainers": [],
+                      "uuid": "ECUC:d0c38b82-abd2-97d0-60b3-84a6fc27e4db"
+                    }
+                  ],
+                  "uuid": "ECUC:be11f44a-ac3e-49f0-a62c-aa0a0e4b16d3"
+                }
+              ],
+              "uuid": "ECUC:46a4bca4-69d5-4f21-88ea-b445b29a6601"
+            }
+          ],
+          "uuid": "ECUC:2369f6e2-91a1-4a41-9a26-ca4deec17900"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup",
+          "description": "Contains the configuration parameters of the AUTOSAR COM module's I-PDU groups.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup/ComIPduGroupHandleId",
+              "description": "The numerical value used as the ID of this I-PDU Group .",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComIPduGroupHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:0db9c161-2c65-400c-a788-45eafacdc525"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup/ComIPduGroupGroupRef",
+              "description": "References to all I-PDU groups that includes this I-PDU group. If this reference is omitted this I-PDU group does not belong to another I-PDU group.",
+              "destinationContainerType": "ComIPduGroup",
+              "destinationRef": "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Com/ComConfig/ComIPduGroup"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "ComIPduGroupGroupRef",
+              "uuid": "ECUC:8cd1cdc0-4ac4-408d-88a4-6c307023695e"
+            }
+          ],
+          "shortName": "ComIPduGroup",
+          "subContainers": [],
+          "uuid": "ECUC:9c06af69-2cee-4cff-958e-722ca870926f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal",
+          "description": "Contains the configuration parameters of the AUTOSAR COM module's signals.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComBitPosition",
+              "description": "Starting position within the I-PDU. This parameter refers to the position in the I-PDU and not in the shadow buffer. If the endianness conversion is configured…",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComBitPosition",
+              "type": "INTEGER",
+              "uuid": "ECUC:0efae823-5158-984a-1a9c-09ac9a5a7a3d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComBitSize",
+              "description": "Size in bits, for integer signal types. For ComSignalType UINT8_N and UINT8_DYN",
+              "isOptional": true,
+              "max": 64,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComBitSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:7004a044-e251-906a-4816-ee5a0820a114"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComHandleId",
+              "description": "The numerical value used as the ID.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:6fb9c4af-5fec-8dba-480b-f6827831ff5c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComSignalLength",
+              "description": "Description:",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComSignalLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:a08da9ba-d0ee-9722-2793-8a63bbf457bc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComUpdateBitPosition",
+              "description": "Bit position of update-bit inside I-PDU.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComUpdateBitPosition",
+              "type": "INTEGER",
+              "uuid": "ECUC:b8fc70ea-e435-8ae1-3c0b-6dc95101afdc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComDataInvalidAction",
+              "description": "This parameter defines the action performed upon reception of an invalid signal.",
+              "enumValues": [
+                "NOTIFY",
+                "REPLACE"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComDataInvalidAction",
+              "type": "ENUM",
+              "uuid": "ECUC:0b851468-e9b8-8eb5-23bd-7f1f24242421"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComRxDataTimeoutAction",
+              "description": "This parameter defines the action performed upon expiration of the reception deadline monitoring timer.",
+              "enumValues": [
+                "NONE",
+                "REPLACE"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComRxDataTimeoutAction",
+              "type": "ENUM",
+              "uuid": "ECUC:f4b36b66-eb9b-96f7-40cd-1942ddc22bd5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComSignalEndianness",
+              "description": "Defines the endianness of the signal's network representation.",
+              "enumValues": [
+                "BIG_ENDIAN",
+                "LITTLE_ENDIAN",
+                "OPAQUE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComSignalEndianness",
+              "type": "ENUM",
+              "uuid": "ECUC:70b90f75-d1cb-945c-26e9-5740d9f182d0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComSignalType",
+              "description": "The AUTOSAR type of the signal. Whether or not the signal is signed or unsigned can be found by examining the value of this attribute.",
+              "enumValues": [
+                "BOOLEAN",
+                "FLOAT32",
+                "FLOAT64",
+                "SINT16",
+                "SINT32",
+                "SINT64",
+                "SINT8",
+                "UINT16",
+                "UINT32",
+                "UINT64",
+                "UINT8",
+                "UINT8_DYN",
+                "UINT8_N"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ComSignalType",
+              "type": "ENUM",
+              "uuid": "ECUC:6ef6981e-86db-9517-268f-0702667b84d4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComTransferProperty",
+              "description": "Defines if a write access to this signal can trigger the transmission of the corresponding I-PDU. If the I-PDU is triggered, depends also on the transmission m…",
+              "enumValues": [
+                "PENDING",
+                "TRIGGERED",
+                "TRIGGERED_ON_CHANGE",
+                "TRIGGERED_ON_CHANGE_WITHOUT_REPETITION",
+                "TRIGGERED_WITHOUT_REPETITION"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComTransferProperty",
+              "type": "ENUM",
+              "uuid": "ECUC:521f13da-797e-917f-35e5-0c0428b8f2e0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComErrorNotification",
+              "description": "Only valid on sender side: Name of Com_CbkTxErr callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComErrorNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:1dfd0b59-8b1e-8f59-40fd-3d57a237f88c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComInvalidNotification",
+              "description": "Only valid on receiver side: Name of Com_CbkInv callback function to be called. Name of the function which notifies the RTE about the reception of an invalidat…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComInvalidNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:0c9bd76e-1519-9774-43ff-0d2dab2d1446"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComNotification",
+              "description": "On sender side: Name of Com_CbkTxAck callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:01cfe381-c4e1-9609-35fd-75f7b8646113"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComTimeoutNotification",
+              "description": "On sender side: Name of Com_CbkTxTOut callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComTimeoutNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:c14a1a71-124c-957d-32e0-7977e8ff640b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFirstTimeout",
+              "description": "Defines the length of the first deadline monitoring timeout period in seconds. This timeout is used immediately after start (or restart) of the deadline monito…",
+              "isOptional": true,
+              "max": 3600,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComFirstTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:efde3e34-acb9-8a6b-4cee-a372064d2d67"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComTimeout",
+              "description": "Defines the length of the deadline monitoring timeout period in seconds. The period for the first timeout period can be configured separately by ECUC_Com_00183.",
+              "isOptional": true,
+              "max": 3600,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:7fdf73ac-5b6f-9942-422a-b04f791e2cd8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComInitialValueOnly",
+              "description": "This parameter defines that the respective signal's initial value shall be put into the respective PDU but there will not be any update of the value through th…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComInitialValueOnly",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:c897388b-0ee6-4319-b435-de13349a45f8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComSignalDataInvalidValue",
+              "description": "Defines the data invalid value of the signal.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComSignalDataInvalidValue",
+              "type": "STRING",
+              "uuid": "ECUC:fe1e31f9-f103-902d-1a4a-641326ab89d0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "0",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComSignalInitValue",
+              "description": "Initial value for this signal. In case of UINT8_N the default value is a string of length ComSignalLength with all bytes set to 0x00. In case of UINT8_DYN the …",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComSignalInitValue",
+              "type": "STRING",
+              "uuid": "ECUC:8fbc350f-1d96-8a4c-2ea7-fb39cbee6276"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComSystemTemplateSystemSignalRef",
+              "description": "Reference to the ISignalToIPduMapping that contains a reference to the ISignal (System Template) which this ComSignal (or ComGroupSignal) represents.",
+              "destinationContainerType": "ComSystemTemplateSystemSignalRef",
+              "destinationRefs": [],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "foreign",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComSystemTemplateSystemSignalRef",
+              "uuid": "ECUC:c5ba8319-d7d4-97bc-3e3e-f33ac5481dc0"
+            }
+          ],
+          "shortName": "ComSignal",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter",
+              "description": "This container contains the configuration parameters of the AUTOSAR COM module's Filters.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter/ComFilterAlgorithm",
+                  "description": "The range of values is specified in the [17] specification, chapter 2.2.2, Reception Filtering.",
+                  "enumValues": [
+                    "ALWAYS",
+                    "MASKED_NEW_DIFFERS_MASKED_OLD",
+                    "MASKED_NEW_DIFFERS_X",
+                    "MASKED_NEW_EQUALS_X",
+                    "NEVER",
+                    "NEW_IS_OUTSIDE",
+                    "NEW_IS_WITHIN",
+                    "ONE_EVERY_N"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComFilterAlgorithm",
+                  "type": "ENUM",
+                  "uuid": "ECUC:fa799a14-63ac-d43c-95ee-d212e74cb5d4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter/ComFilterMask",
+                  "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": -2147483648,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComFilterMask",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:dd2a92fe-b6d2-d09b-cc41-653b5b8908d1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter/ComFilterMax",
+                  "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": -2147483648,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComFilterMax",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6d4a7106-d6ef-cf8a-b2e9-43658762d0f1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter/ComFilterMin",
+                  "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": -2147483648,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComFilterMin",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:cdc14898-ce42-d2ab-c204-3f9a3168402d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter/ComFilterOffset",
+                  "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                  "isOptional": true,
+                  "max": 4294967294,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComFilterOffset",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c46320cf-cd93-cefc-d116-4df67394fb1d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter/ComFilterPeriod",
+                  "description": "This parameter defines the period of the ComFilterAlgorithm ONE_EVERY_N.",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 2,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComFilterPeriod",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:31660687-4963-ccdc-b4f4-34b84acd436b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignal/ComFilter/ComFilterX",
+                  "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": -2147483648,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComFilterX",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bfd4f837-ab5f-d1f8-aa48-97c8a5479380"
+                }
+              ],
+              "references": [],
+              "shortName": "ComFilter",
+              "subContainers": [],
+              "uuid": "ECUC:ab01c3ee-dd49-8ae7-11da-6503b3be2510"
+            }
+          ],
+          "uuid": "ECUC:6821e00a-9135-4a29-8f7e-394c346f3711"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup",
+          "description": "Contains the configuration parameters of the AUTOSAR COM module's signal groups.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComDataInvalidAction",
+              "description": "This parameter defines the action performed upon reception of an invalid signal.",
+              "enumValues": [
+                "NOTIFY",
+                "REPLACE"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComDataInvalidAction",
+              "type": "ENUM",
+              "uuid": "ECUC:8faff5fb-dbfc-90de-3ce9-e31ffec662ac"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComRxDataTimeoutAction",
+              "description": "This parameter defines the action performed upon expiration of the reception deadline monitoring timer.",
+              "enumValues": [
+                "NONE",
+                "REPLACE"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComRxDataTimeoutAction",
+              "type": "ENUM",
+              "uuid": "ECUC:78de4cf9-dddf-9920-59f9-7d43b8646a60"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComTransferProperty",
+              "description": "Defines if a write access to this signal can trigger the transmission of the corresponding I-PDU. If the I-PDU is triggered, depends also on the transmission m…",
+              "enumValues": [
+                "PENDING",
+                "TRIGGERED",
+                "TRIGGERED_ON_CHANGE",
+                "TRIGGERED_ON_CHANGE_WITHOUT_REPETITION",
+                "TRIGGERED_WITHOUT_REPETITION"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComTransferProperty",
+              "type": "ENUM",
+              "uuid": "ECUC:d649f56d-6bc2-93a8-4f11-7005035b316b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComErrorNotification",
+              "description": "Only valid on sender side: Name of Com_CbkTxErr callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComErrorNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:a227ecec-7d62-9182-5a29-a1587cda3717"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComInvalidNotification",
+              "description": "Only valid on receiver side: Name of Com_CbkInv callback function to be called. Name of the function which notifies the RTE about the reception of an invalidat…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComInvalidNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:90c6b901-075d-999d-5d2b-712e85cf52d1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComNotification",
+              "description": "On sender side: Name of Com_CbkTxAck callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:85fac514-b725-9832-4f29-d9f893069f9e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComTimeoutNotification",
+              "description": "On sender side: Name of Com_CbkTxTOut callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComTimeoutNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:4574fc04-0490-97a6-4c0c-dd78c3a1a296"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComFirstTimeout",
+              "description": "Defines the length of the first deadline monitoring timeout period in seconds. This timeout is used immediately after start (or restart) of the deadline monito…",
+              "isOptional": true,
+              "max": 3600,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComFirstTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:74091fc7-9efd-8c94-661b-0772e0ef6bf2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComTimeout",
+              "description": "Defines the length of the deadline monitoring timeout period in seconds. The period for the first timeout period can be configured separately by ECUC_Com_00183.",
+              "isOptional": true,
+              "max": 3600,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:040a553f-4db3-9b6b-5b57-145053c06b63"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComHandleId",
+              "description": "The numerical value used as the ID.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:f3e4a642-5230-8fe3-6138-5a8352d43de7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComUpdateBitPosition",
+              "description": "Bit position of update-bit inside I-PDU.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComUpdateBitPosition",
+              "type": "INTEGER",
+              "uuid": "ECUC:3d27527d-d679-8d0a-5537-d1ca2ba3ee67"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComInitialValueOnly",
+              "description": "This parameter defines that the respective signal's initial value shall be put into the respective PDU but there will not be any update of the value through th…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComInitialValueOnly",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b604f440-8bf0-4334-9d36-59faf04ac0bc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComSignalGroupArrayAccess",
+              "description": "Defines whether the uint8-array based access shall be used for this ComSignalGroup.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComSignalGroupArrayAccess",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d0c33bf3-42af-4404-a779-a38b29d790a1"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComSystemTemplateSignalGroupRef",
+              "description": "Reference to the ISignalToIPduMapping that contains a reference to the ISignalGroup (SystemTemplate) which this ComSignalGroup represents.",
+              "destinationContainerType": "ComSystemTemplateSignalGroupRef",
+              "destinationRefs": [],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "foreign",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComSystemTemplateSignalGroupRef",
+              "uuid": "ECUC:915b9295-5b7d-414e-abc1-47140c383e4e"
+            }
+          ],
+          "shortName": "ComSignalGroup",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal",
+              "description": "This container contains the configuration parameters of group signals. I.e. signals that are included within a signal group.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComBitPosition",
+                  "description": "Starting position within the I-PDU. This parameter refers to the position in the I-PDU and not in the shadow buffer. If the endianness conversion is configured…",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComBitPosition",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6372b3fa-3859-971d-2e2f-348910deba67"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComBitSize",
+                  "description": "Size in bits, for integer signal types. For ComSignalType UINT8_N and UINT8_DYN",
+                  "isOptional": true,
+                  "max": 64,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComBitSize",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c47c6c1b-c952-8f3d-5baa-19367ea4e13e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComHandleId",
+                  "description": "The numerical value used as the ID.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c4319086-46ed-8c8d-5b9f-215eeeb63f86"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComSignalLength",
+                  "description": "Description:",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComSignalLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:f5057591-b7ef-95f5-3b26-b540327897e6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComSignalDataInvalidValue",
+                  "description": "Defines the data invalid value of the signal.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComSignalDataInvalidValue",
+                  "type": "STRING",
+                  "uuid": "ECUC:5295fdd0-d804-8f00-2ddd-8eef9d2fc9fa"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "0",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComSignalInitValue",
+                  "description": "Initial value for this signal. In case of UINT8_N the default value is a string of length ComSignalLength with all bytes set to 0x00. In case of UINT8_DYN the …",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComSignalInitValue",
+                  "type": "STRING",
+                  "uuid": "ECUC:e43400e6-0497-891f-423b-26164272a2a0"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComSignalEndianness",
+                  "description": "Defines the endianness of the signal's network representation.",
+                  "enumValues": [
+                    "BIG_ENDIAN",
+                    "LITTLE_ENDIAN",
+                    "OPAQUE"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComSignalEndianness",
+                  "type": "ENUM",
+                  "uuid": "ECUC:c530db4c-b8cc-932f-3a7c-821d5075c2fa"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComSignalType",
+                  "description": "The AUTOSAR type of the signal. Whether or not the signal is signed or unsigned can be found by examining the value of this attribute.",
+                  "enumValues": [
+                    "BOOLEAN",
+                    "FLOAT32",
+                    "FLOAT64",
+                    "SINT16",
+                    "SINT32",
+                    "SINT64",
+                    "SINT8",
+                    "UINT16",
+                    "UINT32",
+                    "UINT64",
+                    "UINT8",
+                    "UINT8_DYN",
+                    "UINT8_N"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "ComSignalType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:c36e63f5-6ddc-93ea-3a22-31dedcffc4fe"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComTransferProperty",
+                  "description": "Optionally defines whether this group signal shall contribute to the TRIGGERED_ON_CHANGE transfer property of the signal group. If at least one group signal of…",
+                  "enumValues": [
+                    "PENDING",
+                    "TRIGGERED_ON_CHANGE"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComTransferProperty",
+                  "type": "ENUM",
+                  "uuid": "ECUC:74335baf-cc2f-4470-9926-0dde9c21f642"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComSystemTemplateSystemSignalRef",
+                  "description": "Reference to the ISignalToIPduMapping that contains a reference to the ISignal (System Template) which this ComSignal (or ComGroupSignal) represents.",
+                  "destinationContainerType": "ComSystemTemplateSystemSignalRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "foreign",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ComSystemTemplateSystemSignalRef",
+                  "uuid": "ECUC:1a324ef0-bed5-968f-51d2-1e173bcc5dea"
+                }
+              ],
+              "shortName": "ComGroupSignal",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter",
+                  "description": "This container contains the configuration parameters of the AUTOSAR COM module's Filters.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter/ComFilterAlgorithm",
+                      "description": "The range of values is specified in the [17] specification, chapter 2.2.2, Reception Filtering.",
+                      "enumValues": [
+                        "ALWAYS",
+                        "MASKED_NEW_DIFFERS_MASKED_OLD",
+                        "MASKED_NEW_DIFFERS_X",
+                        "MASKED_NEW_EQUALS_X",
+                        "NEVER",
+                        "NEW_IS_OUTSIDE",
+                        "NEW_IS_WITHIN",
+                        "ONE_EVERY_N"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "ComFilterAlgorithm",
+                      "type": "ENUM",
+                      "uuid": "ECUC:4ef165eb-4aad-d30f-a981-fcef5dd0f5fe"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter/ComFilterMask",
+                      "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": -2147483648,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComFilterMask",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:31a25ed5-9dd3-cf6e-dfd4-9017d20d48fb"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter/ComFilterMax",
+                      "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": -2147483648,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComFilterMax",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c1c23cdd-bdf0-ce5d-c67c-6e41fde7111b"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter/ComFilterMin",
+                      "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": -2147483648,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComFilterMin",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:2239146f-b543-d17e-d597-6a76a7ec8057"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter/ComFilterOffset",
+                      "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                      "isOptional": true,
+                      "max": 4294967294,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComFilterOffset",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:18daeca6-b494-cdcf-e4a9-78d2ea193b47"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter/ComFilterPeriod",
+                      "description": "This parameter defines the period of the ComFilterAlgorithm ONE_EVERY_N.",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": 2,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComFilterPeriod",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:85ddd25e-3064-cbaf-c887-5f94c1518395"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComSignalGroup/ComGroupSignal/ComFilter/ComFilterX",
+                      "description": "The name of this attribute corresponds to the parameter name in the [17] specification of Reception Filtering.",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": -2147483648,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "ComFilterX",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:144cc40e-9260-d0cb-bddb-c2a51bcbd3aa"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "ComFilter",
+                  "subContainers": [],
+                  "uuid": "ECUC:ff798fc5-c44a-89ba-256d-8fe02a42653a"
+                }
+              ],
+              "uuid": "ECUC:bc99abe1-7836-48fc-a311-6428aaf3773b"
+            }
+          ],
+          "uuid": "ECUC:ec4cc19d-8379-4c52-a8aa-9d4d0f11759c"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComTimeBase",
+          "description": "Contains the timebase parameters for Tx, Rx and routing.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComTimeBase/ComGwTimeBase",
+              "description": "The period between successive calls to Com_MainFunctionRouteSignals in seconds. This parameter may be used by the COM generator to transform the values of the …",
+              "isOptional": true,
+              "max": 3600,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComGwTimeBase",
+              "type": "FLOAT",
+              "uuid": "ECUC:7eec51bf-3de0-4c96-b3b9-3ed94229efdf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComTimeBase/ComRxTimeBase",
+              "description": "The period between successive calls to Com_MainFunctionRx in seconds. This parameter may be used by the COM generator to transform the values of the reception …",
+              "isOptional": true,
+              "max": 3600,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComRxTimeBase",
+              "type": "FLOAT",
+              "uuid": "ECUC:75011746-cdd3-476e-b865-12008e7fa625"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Com/ComConfig/ComTimeBase/ComTxTimeBase",
+              "description": "The period between successive calls to Com_MainFunctionTx in seconds. This parameter may be used by the COM generator to transform the values of the transmissi…",
+              "isOptional": true,
+              "max": 3600,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "ComTxTimeBase",
+              "type": "FLOAT",
+              "uuid": "ECUC:e546fc3c-05c3-48e4-b0d1-15b4d0f450fc"
+            }
+          ],
+          "references": [],
+          "shortName": "ComTimeBase",
+          "subContainers": [],
+          "uuid": "ECUC:6ab9e562-e6e7-42d2-b654-5851adc09e3d"
+        }
+      ],
+      "uuid": "ECUC:31da4c36-26a7-4ed7-9350-4d63f12cf7b7"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral",
+      "description": "Contains the general configuration parameters of the module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComCancellationSupport",
+          "description": "This parameter enables/disables the cancellation feature:",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComCancellationSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d10dbec7-81b8-4219-9bf2-71a9bfd1d85f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComConfigurationUseDet",
+          "description": "The error hook shall contain code to call the Det.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComConfigurationUseDet",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9bb66a6b-aa9c-4e13-b9d6-a5382d3a4be4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComEnableMDTForCyclicTransmission",
+          "description": "Enables globally for the whole Com module the minimum delay time monitoring for cyclic and repeated transmissions (ComTxModeMode=PERIODIC or ComTxModeMode=MIXE…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComEnableMDTForCyclicTransmission",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0777156b-b5c5-45cd-93c3-2d1a66cc8ffe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComEnableSignalGroupArrayApi",
+          "description": "Activate/Deactivate the signal group array access APIs (Com_SendSignalGroupArray, Com_ReceiveSignalGroupArray).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComEnableSignalGroupArrayApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:57c07d86-959d-471a-9238-1df7a3e5bf7d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComMetaDataSupport",
+          "description": "This parameter enables/disables the support of meta-data feature including the API Com_TriggerIPDUSendWithMetaData.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComMetaDataSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fe4cb76e-c684-4aaf-bdca-a4698f8f55e2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComRetryFailedTransmitRequests",
+          "description": "If this Parameter is set to true, retry of failed transmission requests is enabled. If this Parameter is not present, the default value is assumed.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ComRetryFailedTransmitRequests",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2200aba4-3c6c-4fc4-818a-f5c1d08fd959"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComVersionInfoApi",
+          "description": "Activate/Deactivate the version information API (Com_GetVersionInfo).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:391f5569-abda-4a3d-bfb1-af45fba3d69a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComSupportedIPduGroups",
+          "description": "Defines the maximum number of supported I-PDU groups.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ComSupportedIPduGroups",
+          "type": "INTEGER",
+          "uuid": "ECUC:2bd0c280-d8db-4a93-b38f-bc18a85780aa"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Com/ComGeneral/ComUserCbkHeaderFile",
+          "description": "Defines the header files for callback functions which shall be included by the COM module.",
+          "isOptional": true,
+          "maxLength": 32,
+          "minLength": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "ComUserCbkHeaderFile",
+          "type": "STRING",
+          "uuid": "ECUC:91b95a6a-0103-41a5-a50b-4ec526119bb2"
+        }
+      ],
+      "references": [],
+      "shortName": "ComGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:2a2e4d9c-0065-4cfe-ba7b-9a73a0e988db"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Com",
+  "description": "Configuration of the AUTOSAR COM module.",
+  "importWarnings": [
+    "ComGwDestination：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "ComGwSignalRef：多候选引用，可在 3 个候选目标中选一个。",
+    "ComGwSource：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "ComGwSignalRef：多候选引用，可在 3 个候选目标中选一个。",
+    "ComIPduReplicaRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ComIPduReplicaRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "ComIPduGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ComIPduSignalGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ComIPduSignalRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ComPduIdRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "ComIPduGroupGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "ComSystemTemplateSystemSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "ComSystemTemplateSystemSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "ComSystemTemplateSignalGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "ComUserCbkHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Com",
+  "version": "4.2.2"
+}

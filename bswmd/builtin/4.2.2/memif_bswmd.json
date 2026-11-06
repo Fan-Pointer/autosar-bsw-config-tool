@@ -1,0 +1,78 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "27205a1be7f99e26664f25b055b93656d1130a31b777bc16c83a2a11940a2266",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/MemIf/MemIfGeneral",
+      "description": "Configuration of the memory abstraction interface (Memif) module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/MemIf/MemIfGeneral/MemIfDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "MemIfDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a26c464b-6da2-4a86-89e9-946ceb9024b0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/MemIf/MemIfGeneral/MemIfVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "MemIfVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2ccf46a6-5f32-42c8-b33a-9be3d2b1f0a9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/MemIf/MemIfGeneral/MemIfNumberOfDevices",
+          "description": "Concrete number of underlying memory abstraction modules.",
+          "isOptional": false,
+          "max": 2,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "MemIfNumberOfDevices",
+          "type": "INTEGER",
+          "uuid": "ECUC:ceddbf0c-99ad-44b1-9f1f-08c2a65ca876"
+        }
+      ],
+      "references": [],
+      "shortName": "MemIfGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:e338145a-6813-4489-af1f-25eedc3a3b95"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/MemIf",
+  "description": "Configuration of the MemIf (Memory Abstraction Interface) module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "MemIf",
+  "version": "4.2.2"
+}

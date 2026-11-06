@@ -1,0 +1,284 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "79fdf821528b444f64229f13d96390e0d317d330b23e79d81a0d0e9beb4532f5",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration",
+      "description": "Configuration of block specific parameters for the EEPROM abstraction module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration/EaBlockNumber",
+          "description": "Block identifier (handle).",
+          "isOptional": false,
+          "max": 65534,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaBlockNumber",
+          "type": "INTEGER",
+          "uuid": "ECUC:997bcb48-170b-4a2d-ab97-3ba85568fcdf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration/EaBlockSize",
+          "description": "Size of a logical block in bytes.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaBlockSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:d93be6ac-f99a-4500-bf92-c61f222dad5d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration/EaNumberOfWriteCycles",
+          "description": "Number of write cycles required for this block.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaNumberOfWriteCycles",
+          "type": "INTEGER",
+          "uuid": "ECUC:cd71c820-c85a-4055-97e2-3cce71bc93d3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration/EaImmediateData",
+          "description": "Marker for high priority data.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaImmediateData",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ceda93f2-07fd-44c2-8d31-b8aabbced641"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaBlockConfiguration/EaDeviceIndex",
+          "description": "Reference to the device this block is stored in.",
+          "destinationContainerType": "EepGeneral",
+          "destinationRef": "/AUTOSAR/EcucDefs/Eep/EepGeneral",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Eep/EepGeneral"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaDeviceIndex",
+          "uuid": "ECUC:735d011c-31e9-4235-ab22-d5c1a2647936"
+        }
+      ],
+      "shortName": "EaBlockConfiguration",
+      "subContainers": [],
+      "uuid": "ECUC:9b7435b0-8e2b-4fa1-a37d-ddc652cf908c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral",
+      "description": "General configuration of the EEPROM abstraction module. This container lists block independent configuration parameters.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:699071d4-4525-41af-8cd1-1bfe69f6798c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaPollingMode",
+          "description": "Pre-processor switch to enable and disable the polling mode for this module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaPollingMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:43431c0d-0ddd-4243-8eaa-e4ebe5013d20"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaSetModeSupported",
+          "description": "Compile switch to enable / disable the function Ea_SetMode.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaSetModeSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:aed5447c-ebbe-4b22-878a-ee0ab4fe3622"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d2c0e417-0cc7-4b7e-9cfe-9052f4736927"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaMainFunctionPeriod",
+          "description": "The period between successive calls to the main function in seconds.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:23a8e9ad-c4fe-4fae-ac61-283a5fee81e0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaNvmJobEndNotification",
+          "description": "Mapped to the job end notification routine provided by the upper layer module (NvM_JobEndNotification).",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EaNvmJobEndNotification",
+          "type": "FUNCTION",
+          "uuid": "ECUC:791c602d-f757-476f-8535-129663700557"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaNvmJobErrorNotification",
+          "description": "Mapped to the job error notification routine provided by the upper layer module (NvM_JobErrorNotification).",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EaNvmJobErrorNotification",
+          "type": "FUNCTION",
+          "uuid": "ECUC:82486646-4e38-4149-89db-6605202cce18"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaGeneral/EaVirtualPageSize",
+          "description": "The size in bytes to which logical blocks shall be aligned.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaVirtualPageSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:7e38c9b0-11ed-4af3-b258-c643137642d0"
+        }
+      ],
+      "references": [],
+      "shortName": "EaGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:03c545b5-0414-475e-b6c3-383d510bb159"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaPublishedInformation",
+      "description": "Additional published parameters not covered by CommonPublishedInformation container.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaPublishedInformation/EaBlockOverhead",
+          "description": "Management overhead per logical block in bytes.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaBlockOverhead",
+          "type": "INTEGER",
+          "uuid": "ECUC:8f3bc078-5df6-437e-8a6e-1500dc5c5966"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ea/EaPublishedInformation/EaPageOverhead",
+          "description": "Management overhead per page in bytes.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EaPageOverhead",
+          "type": "INTEGER",
+          "uuid": "ECUC:f5c6f8c3-943e-441b-a0b6-5f1f06db40f2"
+        }
+      ],
+      "references": [],
+      "shortName": "EaPublishedInformation",
+      "subContainers": [],
+      "uuid": "ECUC:dcc718b0-9772-4964-99d6-ab1aa86e8033"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Ea",
+  "description": "Configuration of the Ea (EEPROM Abstraction) module.",
+  "importWarnings": [
+    "EaDeviceIndex：目标 /AUTOSAR/EcucDefs/Eep/EepGeneral 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Ea",
+  "version": "4.4.0"
+}

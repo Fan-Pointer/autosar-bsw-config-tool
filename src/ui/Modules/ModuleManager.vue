@@ -2,12 +2,17 @@
   <el-dialog
     :model-value="modelValue"
     title="模块管理"
+    top="24px"
+    :close-on-click-modal="!definitionBusy"
+    :close-on-press-escape="!definitionBusy"
+    :show-close="!definitionBusy"
     width="min(1000px, 94vw)"
     class="module-manager"
     @update:model-value="emit('update:modelValue', $event)"
   >
     <p v-if="store.activeProject" class="library-scope-note">
-      此处管理本机模块定义与全局开关。当前工程使用创建时所选模块；新增定义可在默认工程中配置。
+      当前工程：{{ store.activeProject.name }} · CP
+      {{ release }}。移除模块会保留配置数据，重新加入可恢复。
     </p>
     <details class="definition-import" aria-label="导入模块定义">
       <summary>高级：手工导入模块定义 ARXML</summary>
@@ -29,10 +34,18 @@
             v-model="selectedDefinitions"
             type="checkbox"
             :value="name"
-            :disabled="definitionBusy || store.modules.some((item) => item.shortName === name)"
+            :disabled="
+              definitionBusy ||
+              store.modules.some((item) => item.shortName === name && item.version === release)
+            "
             :aria-label="'导入 ' + name"
           />
-          {{ name }}{{ store.modules.some((item) => item.shortName === name) ? '（已加载）' : '' }}
+          {{ name
+          }}{{
+            store.modules.some((item) => item.shortName === name && item.version === release)
+              ? '（已加载）'
+              : ''
+          }}
         </label>
       </div>
       <el-button
@@ -54,93 +67,44 @@
         >
       </div>
     </details>
-    <div class="module-transfer">
-      <section class="module-catalog">
-        <header>
-          <label
-            ><input
-              type="checkbox"
-              :checked="allSelected"
-              @change="selectAll(($event.target as HTMLInputElement).checked)"
-            />
-            全部</label
-          ><span>{{ leftSelected.length }}/{{ available.length }}</span>
-        </header>
-        <div class="module-panel-body">
-          <el-input
-            v-model="leftSearch"
-            placeholder="请输入模块名"
-            aria-label="搜索可用模块"
-            clearable
+    <label v-if="!store.activeProject" class="release-picker"
+      >AUTOSAR 版本<select v-model="release" aria-label="模块目录版本">
+        <option>4.4.0</option>
+        <option>4.2.2</option>
+      </select></label
+    >
+    <p class="catalog-summary">
+      CP {{ release }} · {{ catalog.length }} 个模块 · 未支持项可查看原因
+    </p>
+    <ModuleSelector v-model="selected" :entries="catalog" :busy="definitionBusy">
+      <template #head
+        ><th>生成</th>
+        <th>验证</th></template
+      >
+      <template #row="{ entry }"
+        ><td>
+          <input
+            v-if="draft[moduleKey(entry.shortName, release)]"
+            v-model="draft[moduleKey(entry.shortName, release)].generation"
+            type="checkbox"
+            :aria-label="entry.shortName + ' 生成'"
+            :disabled="definitionBusy"
           />
-          <details open>
-            <summary>标准模块 · CP {{ store.activeProject?.autosarVersion ?? '4.4.0' }}</summary>
-            <label v-for="item in filteredAvailable" :key="item.shortName" class="catalog-item">
-              <input v-model="leftSelected" type="checkbox" :value="item.shortName" />
-              {{ item.shortName }}
-            </label>
-          </details>
-          <p v-if="!available.length" class="empty-catalog">全部可用模块均已加入</p>
-        </div>
-      </section>
-      <div class="transfer-actions">
-        <button aria-label="加入模块" :disabled="!leftSelected.length" @click="include">›</button
-        ><button aria-label="移除模块" :disabled="!rightSelected.length" @click="exclude">‹</button>
-      </div>
-      <section class="module-selection">
-        <header>
-          <span /> <span>{{ rightSelected.length }}/{{ included.length }}</span>
-        </header>
-        <div class="module-panel-body">
-          <el-input
-            v-model="rightSearch"
-            placeholder="请输入模块名"
-            aria-label="搜索已选模块"
-            clearable
-          />
-          <table>
-            <thead>
-              <tr>
-                <th>选择</th>
-                <th>模块名</th>
-                <th>生成</th>
-                <th>验证</th>
-                <th>定义路径</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in filteredIncluded" :key="item.shortName">
-                <td>
-                  <input
-                    v-model="rightSelected"
-                    type="checkbox"
-                    :value="item.shortName"
-                    :aria-label="'选择模块 ' + item.shortName"
-                  />
-                </td>
-                <td>{{ item.shortName }}</td>
-                <td>
-                  <input
-                    v-model="draft[item.shortName].generation"
-                    type="checkbox"
-                    :aria-label="item.shortName + ' 生成'"
-                  />
-                </td>
-                <td>
-                  <input
-                    v-model="draft[item.shortName].validation"
-                    type="checkbox"
-                    :aria-label="item.shortName + ' 验证'"
-                  />
-                </td>
-                <td>Autosar/{{ item.shortName }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+        </td>
+        <td>
+          <input
+            v-if="draft[moduleKey(entry.shortName, release)]"
+            v-model="draft[moduleKey(entry.shortName, release)].validation"
+            type="checkbox"
+            :aria-label="entry.shortName + ' 验证'"
+            :disabled="definitionBusy"
+          /></td
+      ></template>
+    </ModuleSelector>
+    <p v-if="definitionError" role="alert">{{ definitionError }}</p>
     <template #footer
+      ><el-button :disabled="definitionBusy" @click="emit('update:modelValue', false)"
+        >取消</el-button
       ><el-button type="primary" :disabled="definitionBusy" @click="confirm"
         >确定</el-button
       ></template
@@ -152,18 +116,39 @@ import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useConfigStore, type ModulePreference } from '@/stores/configStore';
 import type { BswmdModule } from '@/core/bswmd/BswmdTypes';
 import { EcucDefinitionSession } from './EcucDefinitionSession';
-import { builtinCatalog, readBuiltinModules } from '@/modules/builtinCatalog';
+import {
+  builtinCatalog,
+  readBuiltinModules,
+  type BuiltinModuleEntry,
+} from '@/modules/builtinCatalog';
+import { moduleKey } from '@/core/bswmd/ModuleKey';
+import { ElMessageBox } from 'element-plus';
+import ModuleSelector from './ModuleSelector.vue';
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{ 'update:modelValue': [value: boolean]; applied: [] }>();
 const store = useConfigStore();
-const catalog = computed(() => [
-  ...store.modules,
-  ...builtinCatalog.filter(
-    (m) =>
-      m.version === (store.activeProject?.autosarVersion ?? '4.4.0') &&
-      !store.modules.some((loaded) => loaded.shortName === m.shortName)
-  ),
-]);
+const release = ref(store.activeProject?.autosarVersion ?? store.module?.version ?? '4.4.0');
+const catalog = computed<BuiltinModuleEntry[]>(() => {
+  const entries = builtinCatalog.filter((entry) => entry.release === release.value);
+  const loaded = store.modules.filter((module) => module.version === release.value);
+  return [
+    ...entries,
+    ...loaded
+      .filter((module) => !entries.some((entry) => entry.shortName === module.shortName))
+      .map((module) => ({
+        shortName: module.shortName,
+        release: module.version,
+        group: '已导入定义',
+        asset: null,
+        contentSha256: null,
+        status: 'limited' as const,
+        parsed: true,
+        reason: '本机导入的定义；输出以实际校验结果为准',
+        batch: null,
+        diagnostics: module.importWarnings ?? [],
+      })),
+  ];
+});
 let definitionSession: EcucDefinitionSession | undefined;
 const fileModules = ref<string[]>([]),
   selectedDefinitions = ref<string[]>([]);
@@ -222,6 +207,10 @@ async function previewDefinitions(): Promise<void> {
   definitionStatus.value = '正在解析所选模块…';
   try {
     pendingDefinitions.value = await definitionSession.parse([...selectedDefinitions.value]);
+    if (pendingDefinitions.value.some((item) => item.version !== release.value)) {
+      pendingDefinitions.value = [];
+      throw new Error('源定义版本与当前模块目录不同，请切换到对应版本后导入');
+    }
   } catch (error) {
     definitionError.value = error instanceof Error ? error.message : String(error);
   } finally {
@@ -236,7 +225,9 @@ async function applyDefinitions(): Promise<void> {
     if (!(await store.importModuleDefinitions(pendingDefinitions.value)))
       throw new Error(store.error ?? '模块保存失败');
     for (const item of pendingDefinitions.value)
-      draft.value[item.shortName] = { ...store.modulePreferences[item.shortName] };
+      draft.value[moduleKey(item.shortName, item.version)] = {
+        ...store.getModulePreference(item.shortName, item.version),
+      };
     selectedDefinitions.value = [];
     pendingDefinitions.value = [];
     emit('applied');
@@ -247,99 +238,94 @@ async function applyDefinitions(): Promise<void> {
   }
 }
 const draft = ref<Record<string, ModulePreference>>({});
-const leftSelected = ref<string[]>([]),
-  rightSelected = ref<string[]>([]);
-const leftSearch = ref(''),
-  rightSearch = ref('');
+const selected = ref<string[]>([]);
+function resetSelection(): void {
+  draft.value = Object.fromEntries(
+    catalog.value.map((item) => [
+      moduleKey(item.shortName, release.value),
+      { ...store.getModulePreference(item.shortName, release.value) },
+    ])
+  );
+  selected.value = store.activeProject
+    ? [...store.activeProject.moduleShortNames]
+    : catalog.value
+        .filter((item) => draft.value[moduleKey(item.shortName, release.value)].included)
+        .map((item) => item.shortName);
+  definitionError.value = '';
+}
 watch(
   () => props.modelValue,
-  (value) => {
-    if (!value) return;
-    draft.value = Object.fromEntries(
-      catalog.value.map((item) => [
-        item.shortName,
-        {
-          ...(store.modulePreferences[item.shortName] ?? {
-            included: false,
-            generation: true,
-            validation: true,
-          }),
-        },
-      ])
-    );
-    leftSelected.value = [];
-    rightSelected.value = [];
-    leftSearch.value = '';
-    rightSearch.value = '';
+  (open) => {
+    if (!open) return;
+    release.value = store.activeProject?.autosarVersion ?? store.module?.version ?? '4.4.0';
+    resetSelection();
   },
   { immediate: true }
 );
-const available = computed(() =>
-  catalog.value.filter((item) => !draft.value[item.shortName]?.included)
-);
-const included = computed(() =>
-  catalog.value.filter((item) => draft.value[item.shortName]?.included)
-);
-const filteredAvailable = computed(() =>
-  available.value.filter((item) =>
-    item.shortName.toLowerCase().includes(leftSearch.value.toLowerCase())
-  )
-);
-const filteredIncluded = computed(() =>
-  included.value.filter((item) =>
-    item.shortName.toLowerCase().includes(rightSearch.value.toLowerCase())
-  )
-);
-const allSelected = computed(
-  () =>
-    available.value.length > 0 &&
-    available.value.every((item) => leftSelected.value.includes(item.shortName))
-);
-function selectAll(value: boolean): void {
-  leftSelected.value = value ? available.value.map((item) => item.shortName) : [];
-}
-function include(): void {
-  for (const name of leftSelected.value) draft.value[name].included = true;
-  leftSelected.value = [];
-}
-function exclude(): void {
-  for (const name of rightSelected.value) draft.value[name].included = false;
-  rightSelected.value = [];
-}
+watch(release, resetSelection);
 async function confirm(): Promise<void> {
   try {
     store.assertWritable();
-  } catch {
-    return;
-  }
-  definitionBusy.value = true;
-  try {
-    const missing = included.value.filter(
-      (m) => !store.modules.some((loaded) => loaded.shortName === m.shortName)
-    );
-    if (
-      missing.length &&
-      !(await store.importModuleDefinitions(
-        await readBuiltinModules(
-          missing.map((m) => m.shortName),
-          store.activeProject?.autosarVersion ?? '4.4.0'
-        )
-      ))
-    )
-      return;
   } catch (error) {
-    definitionError.value = error instanceof Error ? error.message : String(error);
+    definitionError.value = String(error);
     return;
-  } finally {
-    definitionBusy.value = false;
   }
-  const previous = store.modulePreferences;
-  store.modulePreferences = Object.fromEntries(
-    Object.entries(draft.value).map(([name, value]) => [name, { ...value }])
-  );
-  if (!(await store.saveConfig().catch(() => false))) {
-    store.modulePreferences = previous;
-    return;
+  const project = store.activeProject;
+  if (project) {
+    const removed = project.moduleShortNames.filter((name) => !selected.value.includes(name));
+    try {
+      await ElMessageBox.confirm(
+        removed.length
+          ? `移除 ${removed.join('、')} 并应用模块选择？配置数据会保留，重新加入可恢复。`
+          : '将所选模块加入当前工程并保存？',
+        '更新工程模块',
+        { confirmButtonText: '应用变更', cancelButtonText: '取消' }
+      );
+    } catch {
+      return;
+    }
+    definitionBusy.value = true;
+    try {
+      if (!(await store.updateProjectModules(project.projectUuid, selected.value, draft.value)))
+        throw new Error(store.projectError ?? '模块变更未保存');
+    } catch (error) {
+      definitionError.value = error instanceof Error ? error.message : String(error);
+      return;
+    } finally {
+      definitionBusy.value = false;
+    }
+  } else {
+    definitionBusy.value = true;
+    try {
+      const missing = selected.value.filter(
+        (name) =>
+          !store.modules.some(
+            (module) => module.shortName === name && module.version === release.value
+          )
+      );
+      if (
+        missing.length &&
+        !(await store.importModuleDefinitions(await readBuiltinModules(missing, release.value)))
+      )
+        throw new Error(store.error ?? '模块保存失败');
+      const previous = { ...store.modulePreferences };
+      for (const entry of catalog.value) {
+        const key = moduleKey(entry.shortName, release.value);
+        store.modulePreferences[key] = {
+          ...draft.value[key],
+          included: selected.value.includes(entry.shortName),
+        };
+      }
+      if (!(await store.saveConfig())) {
+        store.modulePreferences = previous;
+        throw new Error(store.error ?? '保存失败');
+      }
+    } catch (error) {
+      definitionError.value = error instanceof Error ? error.message : String(error);
+      return;
+    } finally {
+      definitionBusy.value = false;
+    }
   }
   emit('applied');
   emit('update:modelValue', false);
@@ -411,97 +397,39 @@ async function confirm(): Promise<void> {
 :global(.module-manager .el-dialog__footer .el-button) {
   width: 100px;
 }
-.module-transfer {
-  display: grid;
-  grid-template-columns: minmax(240px, 1fr) 72px minmax(420px, 1.65fr);
-  height: 485px;
-}
-.module-catalog,
-.module-selection {
-  border: 1px solid var(--color-border);
-  border-radius: 3px;
-  box-shadow: 0 1px 8px var(--color-shadow);
-  overflow: auto;
-}
-header {
-  height: 52px;
-  padding: 0 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--color-panel);
-  border-bottom: 1px solid var(--color-border);
-}
-.module-panel-body {
-  padding: 20px;
-}
-.module-panel-body :deep(.el-input__wrapper) {
-  min-height: 25px;
-  height: 25px;
-  border-radius: 2px;
-}
-.module-panel-body :deep(input) {
-  height: 23px;
-  font-size: 12px;
-}
-details {
-  margin-top: 14px;
-}
-summary {
-  cursor: pointer;
-  color: var(--color-muted);
-}
-.catalog-item {
-  display: block;
-  margin: 12px 20px;
-}
-input[type='checkbox'] {
-  accent-color: var(--color-accent);
-  width: 14px;
-  height: 14px;
-  vertical-align: middle;
-}
-.transfer-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
-  justify-content: center;
-}
-.transfer-actions button {
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background: var(--color-surface);
-  color: var(--color-muted);
-  font-size: 23px;
-  cursor: pointer;
-}
-.transfer-actions button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  font-size: 13px;
-}
 td,
 th {
-  height: 33px;
-  border: 1px solid var(--color-border);
   text-align: center;
   padding: 4px 8px;
 }
-th {
-  background: var(--color-panel);
-  color: var(--color-muted);
-  font-weight: 600;
+input[type='checkbox'] {
+  accent-color: var(--color-accent);
 }
-.empty-catalog {
+:global(.module-manager .el-dialog__body) {
+  max-height: calc(100vh - 160px);
+  overflow: auto;
+}
+</style>
+
+<style scoped>
+.release-picker,
+.catalog-summary {
+  font-size: 13px;
+  margin: 8px 20px;
   color: var(--color-muted);
-  font-size: 12px;
+}
+.release-picker select {
+  margin-left: 12px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 6px;
+}
+.module-selector {
+  margin: 12px 20px;
+}
+p[role='alert'] {
+  color: var(--color-error);
+  padding: 0 20px;
 }
 </style>

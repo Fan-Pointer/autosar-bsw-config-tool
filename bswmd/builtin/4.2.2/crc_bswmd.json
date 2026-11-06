@@ -1,0 +1,127 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "721bc26cfe9ade3ed2b975d109d2c4e92f9f13f7298e78edaff9c0025e167228",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Crc/CrcGeneral",
+      "description": "General configuration of CRC module",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Crc/CrcGeneral/Crc16Mode",
+          "description": "Switch to select one of the available CRC 16-bit (CCITT) calculation methods",
+          "enumValues": [
+            "CRC_16_HARDWARE",
+            "CRC_16_RUNTIME",
+            "CRC_16_TABLE"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "Crc16Mode",
+          "type": "ENUM",
+          "uuid": "ECUC:57dcff50-89c4-444b-b345-2c797a2880f7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Crc/CrcGeneral/Crc32Mode",
+          "description": "Switch to select one of the available CRC 32-bit (IEEE-802.3 CRC32 Ethernet Standard) calculation methods",
+          "enumValues": [
+            "CRC_32_HARDWARE",
+            "CRC_32_RUNTIME",
+            "CRC_32_TABLE"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "Crc32Mode",
+          "type": "ENUM",
+          "uuid": "ECUC:17071ba5-9db3-4cb9-a8ec-b5c97e935977"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Crc/CrcGeneral/Crc32P4Mode",
+          "description": "Switch to select one of the available CRC 32-bit E2E Profile 4 calculation methods.",
+          "enumValues": [
+            "CRC_32P4_HARDWARE",
+            "CRC_32P4_RUNTIME",
+            "CRC_32P4_TABLE"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "Crc32P4Mode",
+          "type": "ENUM",
+          "uuid": "ECUC:27a43b49-5515-4849-a334-4e1c9703d3de"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Crc/CrcGeneral/Crc8H2FMode",
+          "description": "Switch to select one of the available CRC 8-bit (2Fh polynomial) calculation methods",
+          "enumValues": [
+            "CRC_8H2F_HARDWARE",
+            "CRC_8H2F_RUNTIME",
+            "CRC_8H2F_TABLE"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "Crc8H2FMode",
+          "type": "ENUM",
+          "uuid": "ECUC:4e2ed5e0-022e-415d-9e9c-ce4263e08b97"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Crc/CrcGeneral/Crc8Mode",
+          "description": "Switch to select one of the available CRC 8-bit (SAE J1850) calculation methods",
+          "enumValues": [
+            "CRC_8_HARDWARE",
+            "CRC_8_RUNTIME",
+            "CRC_8_TABLE"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "Crc8Mode",
+          "type": "ENUM",
+          "uuid": "ECUC:965dd362-cb66-40a5-bdb1-1b6521fc6a0e"
+        }
+      ],
+      "references": [],
+      "shortName": "CrcGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:022760ec-ae2e-4125-96ad-ca206d355f95"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Crc",
+  "description": "Configuration of the Crc (Crc routines) module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Crc",
+  "version": "4.2.2"
+}

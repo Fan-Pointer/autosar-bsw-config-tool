@@ -1,0 +1,2767 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "0c29527059aec1a26f0e70238b14d98a6cec89fd59671b7c81a9c8f5cf18acf9",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymDecrypt",
+      "description": "Container for incorporation of AsymDecrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymDecrypt/CsmAsymDecryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetrical decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymDecryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:aca9020e-3a5c-42f7-a50b-2abd7e627d1d"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymDecrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymDecrypt/CsmAsymDecryptConfig",
+          "description": "Container for configuration of service AsymDecrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymDecrypt/CsmAsymDecryptConfig/CsmAsymDecryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymDecryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:46142f92-941d-46ca-a074-4021b6251b4f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymDecrypt/CsmAsymDecryptConfig/CsmAsymDecryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymDecryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:791aa8d3-6e78-49be-ae94-993cd86509c4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymDecrypt/CsmAsymDecryptConfig/CsmCallbackAsymDecrypt",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymDecrypt",
+              "type": "FUNCTION",
+              "uuid": "ECUC:2a8281b7-1f18-418e-bc8b-5f255664cace"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymDecryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:1ec397cd-4237-41ea-bf76-05ea54f015e3"
+        }
+      ],
+      "uuid": "ECUC:a4727607-1803-4f02-8bf2-6f52d2f998e4"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymEncrypt",
+      "description": "Container for incorporation of AsymEncrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymEncrypt/CsmAsymEncryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetrical encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymEncryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:e98c5d24-65ba-4f93-b3e4-e2909d63d64c"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymEncrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymEncrypt/CsmAsymEncryptConfig",
+          "description": "Container for configuration of service AsymEncrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymEncrypt/CsmAsymEncryptConfig/CsmAsymEncryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymEncryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:d44eb1f5-84d8-4ddd-9bce-b77982235e3b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymEncrypt/CsmAsymEncryptConfig/CsmAsymEncryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymEncryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:5b691d81-ee6a-403a-85b9-603fb0e633f4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymEncrypt/CsmAsymEncryptConfig/CsmCallbackAsymEncrypt",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymEncrypt",
+              "type": "FUNCTION",
+              "uuid": "ECUC:a02bbcd6-678c-4c4a-b0cd-03515b6966f0"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymEncryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:885eabf0-5a85-4adc-a3e2-c14d24c061fc"
+        }
+      ],
+      "uuid": "ECUC:6f58f954-94f0-4ebf-ad3e-4250bb9df993"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyExtract",
+      "description": "Container for incorporation of AsymPrivateKeyExtract primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyExtract/CsmAsymPrivateKeyExtractMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetrical private key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPrivateKeyExtractMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:4ee755fd-b562-49b4-b16e-239af86b8455"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymPrivateKeyExtract",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyExtract/CsmAsymPrivateKeyExtractConfig",
+          "description": "Container for configuration of service AsymPrivateKeyExtract.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyExtract/CsmAsymPrivateKeyExtractConfig/CsmAsymPrivateKeyExtractInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyExtractInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:6f68eb9b-65e9-4277-8954-0d0d5689ec0e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyExtract/CsmAsymPrivateKeyExtractConfig/CsmAsymPrivateKeyExtractPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyExtractPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:03c9bf8a-2b84-4007-9a16-99a6aa1652ef"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyExtract/CsmAsymPrivateKeyExtractConfig/CsmCallbackAsymPrivateKeyExtract",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymPrivateKeyExtract",
+              "type": "FUNCTION",
+              "uuid": "ECUC:3945bb31-d8fd-46a3-9b2e-ed22be1085e7"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymPrivateKeyExtractConfig",
+          "subContainers": [],
+          "uuid": "ECUC:d6d570b2-e0f5-44d5-af96-45a39e52fb91"
+        }
+      ],
+      "uuid": "ECUC:deb43eb5-b1f6-4d91-9923-ee038a4a2e62"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyUpdate",
+      "description": "Container for incorporation of Asymmetric Private Key Update primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyUpdate/CsmAsymPrivateKeyUpdateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetrical private key update.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPrivateKeyUpdateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:1eb66ee0-9845-41d5-a27f-1105943d56f3"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymPrivateKeyUpdate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyUpdate/CsmAsymPrivateKeyUpdateConfig",
+          "description": "Container for configuration of service Asymmetric Private Key Update. The container name serves as a symbolic name for the identifier of a service configuratio…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyUpdate/CsmAsymPrivateKeyUpdateConfig/CsmAsymPrivateKeyUpdateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyUpdateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:32736fd2-62d8-45c0-b9cb-b2f6d4ff451b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyUpdate/CsmAsymPrivateKeyUpdateConfig/CsmAsymPrivateKeyUpdatePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyUpdatePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:8d247571-3b06-4a6c-90ac-b850daf3d06e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyUpdate/CsmAsymPrivateKeyUpdateConfig/CsmCallbackAsymPrivateKeyUpdate",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymPrivateKeyUpdate",
+              "type": "FUNCTION",
+              "uuid": "ECUC:8fe2d21a-0faf-4069-80de-1a8bcae3219c"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymPrivateKeyUpdateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:5c0b0c77-c478-4622-a7bb-9489c0abdeb9"
+        }
+      ],
+      "uuid": "ECUC:52b556be-e441-4a9e-8676-968af3da5feb"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapAsym",
+      "description": "Container for incorporation of AsymPrivateKeyWrapSym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapAsym/CsmAsymPrivateKeyWrapAsymMaxPrivKeySize",
+          "description": "The maximum length, in bytes, of all private key types used in all CRY primitives which implement an asymmetrical private key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPrivateKeyWrapAsymMaxPrivKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:1305bc6c-74ca-480c-ab66-f326910e2105"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapAsym/CsmAsymPrivateKeyWrapAsymMaxPubKeySize",
+          "description": "The maximum length, in bytes, of all public key types used in all CRY primitives which implement an asymmetrical private key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPrivateKeyWrapAsymMaxPubKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:41fb17e8-729d-43f8-bd10-c7c97c84af1b"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymPrivateKeyWrapAsym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapAsym/CsmAsymPrivateKeyWrapAsymConfig",
+          "description": "Container for configuration of service SymKeyWrapAsym. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapAsym/CsmAsymPrivateKeyWrapAsymConfig/CsmAsymPrivateKeyWrapAsymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyWrapAsymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:423e7446-0582-4f1f-a2a3-7ffc5dd7c539"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapAsym/CsmAsymPrivateKeyWrapAsymConfig/CsmAsymPrivateKeyWrapAsymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyWrapAsymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:4f22dec5-8076-4850-b31a-d66de4fe4cf3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapAsym/CsmAsymPrivateKeyWrapAsymConfig/CsmCallbackAsymPrivateKeyWrapAsym",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymPrivateKeyWrapAsym",
+              "type": "FUNCTION",
+              "uuid": "ECUC:611cb7f2-3a2f-4e70-a603-1f8f509e935a"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymPrivateKeyWrapAsymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:c1e321df-9c0b-4024-89b4-eecf065d75c3"
+        }
+      ],
+      "uuid": "ECUC:7f8581a5-c64d-4192-9b8a-32a5c30f8b7b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapSym",
+      "description": "Container for incorporation of AsymPrivateKeyWrapSym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapSym/CsmAsymPrivateKeyWrapSymMaxPrivKeySize",
+          "description": "The maximum length, in bytes, of all private information types used in all CRY primitives which implement an asymmetric private key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPrivateKeyWrapSymMaxPrivKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:55058e4e-9e0d-4076-87d3-8e2a4174be00"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapSym/CsmAsymPrivateKeyWrapSymMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetric private key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPrivateKeyWrapSymMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:84f95ada-9d85-4f25-9e54-62d8210bb680"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymPrivateKeyWrapSym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapSym/CsmAsymPrivateKeyWrapSymConfig",
+          "description": "Container for configuration of service AsymPrivateKeyWrapSym. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapSym/CsmAsymPrivateKeyWrapSymConfig/CsmAsymPrivateKeyWrapSymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyWrapSymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:5e5c1d38-4f5e-4b3e-b860-ca1c82198856"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapSym/CsmAsymPrivateKeyWrapSymConfig/CsmAsymPrivateKeyWrapSymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPrivateKeyWrapSymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:badc74e1-5e00-4df7-8bd5-22e4ed076299"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPrivateKeyWrapSym/CsmAsymPrivateKeyWrapSymConfig/CsmCallbackAsymPrivateKeyWrapSym",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymPrivateKeyWrapSym",
+              "type": "FUNCTION",
+              "uuid": "ECUC:6341118a-12f1-4e72-8ef3-c4ed3d83ab8a"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymPrivateKeyWrapSymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:c79d859f-86b5-4fb0-a4d8-4d5c7f3ffb13"
+        }
+      ],
+      "uuid": "ECUC:4310350f-45db-43fa-90ce-45e3df345716"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyExtract",
+      "description": "Container for incorporation of AsymPublicKeyExtract primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyExtract/CsmAsymPublicKeyExtractMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetrical public key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPublicKeyExtractMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:9ef29970-44e3-4d53-88f3-e603adb1de6e"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymPublicKeyExtract",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyExtract/CsmAsymPublicKeyExtractConfig",
+          "description": "Container for configuration of service AsymPublicKeyExtract.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyExtract/CsmAsymPublicKeyExtractConfig/CsmAsymPublicKeyExtractInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPublicKeyExtractInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:4b6a219b-4619-4488-9835-2894014122fc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyExtract/CsmAsymPublicKeyExtractConfig/CsmAsymPublicKeyExtractPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPublicKeyExtractPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:d8e78353-3e9f-4485-860e-21cc47dcf122"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyExtract/CsmAsymPublicKeyExtractConfig/CsmCallbackAsymPublicKeyExtract",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymPublicKeyExtract",
+              "type": "FUNCTION",
+              "uuid": "ECUC:f0818975-978b-4aa1-a088-44dd6958f3f1"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymPublicKeyExtractConfig",
+          "subContainers": [],
+          "uuid": "ECUC:40266dd9-a930-4281-90c9-6784e199fd23"
+        }
+      ],
+      "uuid": "ECUC:77a79a5a-d250-42a1-bca3-493f1889461e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyUpdate",
+      "description": "Container for incorporation of Asymmetric Public Key Update primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyUpdate/CsmAsymPublicKeyUpdateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetrical public key update.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPublicKeyUpdateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:168d6134-6e33-427c-8345-2082f6a790d7"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmAsymPublicKeyUpdate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyUpdate/CsmAsymPublicKeyUpdateConfig",
+          "description": "Container for configuration of service Asymmetric Public Key Update. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyUpdate/CsmAsymPublicKeyUpdateConfig/CsmAsymPublicKeyUpdateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPublicKeyUpdateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:65b5dc80-33ef-46f4-8184-225756717ea8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyUpdate/CsmAsymPublicKeyUpdateConfig/CsmAsymPublicKeyUpdatePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmAsymPublicKeyUpdatePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:24f3db40-3198-4e18-b758-9fab6ec62652"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmAsymPublicKeyUpdate/CsmAsymPublicKeyUpdateConfig/CsmCallbackAsymPublicKeyUpdate",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackAsymPublicKeyUpdate",
+              "type": "FUNCTION",
+              "uuid": "ECUC:a8ed4ab5-068e-4fbb-9da8-8d26fc8ff793"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmAsymPublicKeyUpdateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:4548a6a6-2f7e-4698-a143-f25574671daa"
+        }
+      ],
+      "uuid": "ECUC:805123cd-0850-4b8f-a237-1f2a3ccb6ddb"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmChecksum",
+      "description": "Container for incorporation of Checksum primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmChecksum",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmChecksum/CsmChecksumConfig",
+          "description": "Container for configuration of service Checksum. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmChecksum/CsmChecksumConfig/CsmCallbackChecksum",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackChecksum",
+              "type": "FUNCTION",
+              "uuid": "ECUC:92122126-2a22-4b51-b560-d6c4c3ea0010"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmChecksum/CsmChecksumConfig/CsmChecksumInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmChecksumInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:e0c0b967-7bc1-4055-b47e-db6cbbb96add"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmChecksum/CsmChecksumConfig/CsmChecksumPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmChecksumPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:323d61cf-0036-4c29-805e-f9723ac81bfb"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmChecksumConfig",
+          "subContainers": [],
+          "uuid": "ECUC:e74a6959-14ad-448a-a027-3eb3d48724dc"
+        }
+      ],
+      "uuid": "ECUC:2c345c96-2f1b-415f-ae81-360dbab1caea"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCompression",
+      "description": "Container for incorporation of Compression primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmCompression",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCompression/CsmCompressionConfig",
+          "description": "Container for configuration of service Compression. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCompression/CsmCompressionConfig/CsmCallbackCompression",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackCompression",
+              "type": "FUNCTION",
+              "uuid": "ECUC:f9446220-2963-4f5b-a13f-488d3f4efc80"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCompression/CsmCompressionConfig/CsmCompressionInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCompressionInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:ae6ed830-6542-4d9c-80d7-f5ca82aadad9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCompression/CsmCompressionConfig/CsmCompressionPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCompressionPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:08ae6d85-3a58-4f1d-a56d-4144cc24e1db"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmCompressionConfig",
+          "subContainers": [],
+          "uuid": "ECUC:fe2a3b9f-bf13-4925-bdbd-43b985429dbf"
+        }
+      ],
+      "uuid": "ECUC:8561dac0-e74c-45da-8466-a0bc11c7b275"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmDecompression",
+      "description": "Container for incorporation of Decompression primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmDecompression",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmDecompression/CsmDecompressionConfig",
+          "description": "Container for configuration of service Decompression. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmDecompression/CsmDecompressionConfig/CsmCallbackDecompression",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackDecompression",
+              "type": "FUNCTION",
+              "uuid": "ECUC:73533618-e3e6-4fce-859a-455e611374ea"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmDecompression/CsmDecompressionConfig/CsmDecompressionInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmDecompressionInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:c2c2efa9-527b-4615-84d0-5c231e091301"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmDecompression/CsmDecompressionConfig/CsmDecompressionPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmDecompressionPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:c1530851-b384-4214-83cb-9d38b691fbb4"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmDecompressionConfig",
+          "subContainers": [],
+          "uuid": "ECUC:446d5f15-c92a-492e-a7f1-d9a075ceba40"
+        }
+      ],
+      "uuid": "ECUC:15891543-b49a-4976-9432-84ccd61ea93e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral",
+      "description": "Container for common configuration options.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0db81420-ae1c-47d2-95d3-30fe6f1a96ce"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmUseSyncJobProcessing",
+          "description": "Pre-processor switch to enable and disable synchronous job processing.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmUseSyncJobProcessing",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9c13c9d3-b618-48d2-9b15-55c386f2df42"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmVersionInfoApi",
+          "description": "Pre-processor switch to enable and disable availability of the API Csm_GetVersionInfo(). True: API Csm_GetVersionInfo() is available. False: API Csm_GetVersion…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:03c4c49a-20f9-472f-8d44-f1a3be5c9c90"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmMainFunctionPeriod",
+          "description": "Specifies the period of main function Csm_MainFunction in seconds.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CsmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:fa189de9-a300-4f51-bd6c-b227d9562b67"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmMaxAlignScalarType",
+          "description": "The scalar type which has the maximum alignment restrictions on the given platform.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmMaxAlignScalarType",
+          "type": "STRING",
+          "uuid": "ECUC:de263006-ae74-4ba9-ad81-9bbe33118c40"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:d6aec539-c985-4963-8aff-af50f114a59f"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmHash",
+      "description": "Container for incorporation of Hash primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmHash",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmHash/CsmHashConfig",
+          "description": "Configurations for the Hash service. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmHash/CsmHashConfig/CsmCallbackHash",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackHash",
+              "type": "FUNCTION",
+              "uuid": "ECUC:626c9bab-d978-4bf7-8adf-b17b751c2452"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmHash/CsmHashConfig/CsmHashInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmHashInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:dc9b87e6-a7fe-4ead-9b4c-7471db97853c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmHash/CsmHashConfig/CsmHashPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmHashPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:5bd98867-5465-4d05-992e-9a053b070851"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmHashConfig",
+          "subContainers": [],
+          "uuid": "ECUC:cb154f67-10dc-4c4d-b2c1-33bf620562ce"
+        }
+      ],
+      "uuid": "ECUC:9a03b907-3e2a-4fde-905a-e1ea1e27ea7a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDerive",
+      "description": "Container for incorporation of KeyDerive primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDerive/CsmKeyDeriveMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a key derivation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyDeriveMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:27795482-f2fe-4996-8403-0a7b0cab074e"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmKeyDerive",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDerive/CsmKeyDeriveConfig",
+          "description": "Container for configuration of service KeyDerive. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDerive/CsmKeyDeriveConfig/CsmCallbackKeyDerive",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackKeyDerive",
+              "type": "FUNCTION",
+              "uuid": "ECUC:d3248962-a3e1-4936-a8a7-79b922b83d4e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDerive/CsmKeyDeriveConfig/CsmKeyDeriveInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyDeriveInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:9755843c-362a-447f-bfa7-3830e5767036"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDerive/CsmKeyDeriveConfig/CsmKeyDerivePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyDerivePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:e6369d15-5601-4b35-8500-33a740211eb8"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmKeyDeriveConfig",
+          "subContainers": [],
+          "uuid": "ECUC:1b36096d-37fa-4fd4-99df-b0335004c81f"
+        }
+      ],
+      "uuid": "ECUC:515f1fe2-6e47-4c95-a6d2-7790ba70d5c2"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDeriveSymKey",
+      "description": "Container for incorporation of CsmKeyDeriveSymKey primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDeriveSymKey/CsmKeyDeriveSymKeyMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a key derivation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyDeriveSymKeyMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:1d998a09-6198-4850-bc26-9fbed209e088"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmKeyDeriveSymKey",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDeriveSymKey/CsmKeyDeriveSymKeyConfig",
+          "description": "Container for configuration of service CsmKeyDeriveSymKey. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDeriveSymKey/CsmKeyDeriveSymKeyConfig/CsmCallbackKeyDeriveSymKey",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackKeyDeriveSymKey",
+              "type": "FUNCTION",
+              "uuid": "ECUC:bae29657-148d-4614-9550-851b3fca27fe"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDeriveSymKey/CsmKeyDeriveSymKeyConfig/CsmKeyDeriveSymKeyInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyDeriveSymKeyInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:48ecd6ac-ce61-4d8e-94e5-42fb9b6a5843"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyDeriveSymKey/CsmKeyDeriveSymKeyConfig/CsmKeyDeriveSymKeyPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyDeriveSymKeyPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:ce81d12e-e6ba-4db0-9ff1-cfbbfddacb64"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmKeyDeriveSymKeyConfig",
+          "subContainers": [],
+          "uuid": "ECUC:f90fa34f-9864-41a3-af8a-42e491c521cb"
+        }
+      ],
+      "uuid": "ECUC:c9b3cdee-c95e-45ae-94bd-2c5e78bbbff3"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcPubVal",
+      "description": "Container for incorporation of KeyExchangeCalcPubVal primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcPubVal/CsmKeyExchangeCalcPubValMaxBaseTypeSize",
+          "description": "The maximum length, in bytes, of all base types used in all CRY primitives which implement a public value calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyExchangeCalcPubValMaxBaseTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:af74eced-ab4b-4ed8-876b-ef5599999641"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcPubVal/CsmKeyExchangeCalcPubValMaxPrivateTypeSize",
+          "description": "The maximum length, in bytes, of all private information types used in all CRY primitives which implement a public value calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyExchangeCalcPubValMaxPrivateTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:efe84264-12ca-472e-9677-ca81c9b99290"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmKeyExchangeCalcPubVal",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcPubVal/CsmKeyExchangeCalcPubValConfig",
+          "description": "Container for configuration of service KeyExchangeCalcPubVal. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcPubVal/CsmKeyExchangeCalcPubValConfig/CsmCallbackKeyExchangeCalcPubVal",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackKeyExchangeCalcPubVal",
+              "type": "FUNCTION",
+              "uuid": "ECUC:088a69fb-c6be-414e-8a98-bdd912f5088b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcPubVal/CsmKeyExchangeCalcPubValConfig/CsmKeyExchangeCalcPubValInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyExchangeCalcPubValInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:1fdb4a5b-53c3-47fb-8f1c-2b3f0d237934"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcPubVal/CsmKeyExchangeCalcPubValConfig/CsmKeyExchangeCalcPubValPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyExchangeCalcPubValPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:7d5d08c2-5093-4d54-8b84-52d0f232a346"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmKeyExchangeCalcPubValConfig",
+          "subContainers": [],
+          "uuid": "ECUC:05998cb6-ca81-4ce2-a21d-ca589f21114e"
+        }
+      ],
+      "uuid": "ECUC:3318d9a8-6e7f-4413-bac9-6cfe7f7f3670"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSecret",
+      "description": "Container for incorporation of KeyExchangeCalcSecret primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSecret/CsmKeyExchangeCalcSecretMaxBaseTypeSize",
+          "description": "The maximum length, in bytes, of all base types used in all CRY primitives which implement a shared secret calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyExchangeCalcSecretMaxBaseTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:c13a96c3-e26f-47c0-90bb-d6d866270e9a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSecret/CsmKeyExchangeCalcSecretMaxPrivateTypeSize",
+          "description": "The maximum length, in bytes, of all private information types used in all CRY primitives which implement a shared secret calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyExchangeCalcSecretMaxPrivateTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:a6b19c35-abc9-45a6-8cc3-3a9b9c13f4fb"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmKeyExchangeCalcSecret",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSecret/CsmKeyExchangeCalcSecretConfig",
+          "description": "Container for configuration of service KeyExchangeCalcSecret. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSecret/CsmKeyExchangeCalcSecretConfig/CsmCallbackKeyExchangeCalcSecret",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackKeyExchangeCalcSecret",
+              "type": "FUNCTION",
+              "uuid": "ECUC:efb03c25-23ad-4943-98a1-9dec4c4f6c98"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSecret/CsmKeyExchangeCalcSecretConfig/CsmKeyExchangeCalcSecretInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyExchangeCalcSecretInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:6f93b3d6-e530-454a-ad1a-c0ad54921400"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSecret/CsmKeyExchangeCalcSecretConfig/CsmKeyExchangeCalcSecretPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyExchangeCalcSecretPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:51418101-1de2-4530-b9b0-4e8d017f7f49"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmKeyExchangeCalcSecretConfig",
+          "subContainers": [],
+          "uuid": "ECUC:01078e1f-c746-4d7e-b184-4e71980c1c2b"
+        }
+      ],
+      "uuid": "ECUC:b88de4dd-0b6f-4982-9a10-a91c2efdadc8"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey",
+      "description": "Container for incorporation of KeyExchangeCalcSymKey primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey/CsmKeyExchangeCalcSymKeyMaxBaseTypeSize",
+          "description": "The maximum length, in bytes, of all base types used in all CRY primitives which implement a symmetrical key calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyExchangeCalcSymKeyMaxBaseTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:4cfdaaa0-8911-441b-9d0d-f5de00556277"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey/CsmKeyExchangeCalcSymKeyMaxPrivateTypeSize",
+          "description": "The maximum length, in bytes, of all private information types used in all CRY primitives which implement a symmetrical key calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyExchangeCalcSymKeyMaxPrivateTypeSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:5c1cae3a-9e4f-4cef-a15b-5e16a654da64"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey/CsmKeyExchangeCalcSymKeyMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical key calculation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmKeyExchangeCalcSymKeyMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:781d9233-b745-4405-a703-697bd11d43fd"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmKeyExchangeCalcSymKey",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey/CsmKeyExchangeCalcSymKeyConfig",
+          "description": "Container for configuration of service KeyExchangeCalcSymKey. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey/CsmKeyExchangeCalcSymKeyConfig/CsmCallbackKeyExchangeCalcSymKey",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackKeyExchangeCalcSymKey",
+              "type": "FUNCTION",
+              "uuid": "ECUC:9e86bf52-0406-4a2e-abb0-6ff6d845198c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey/CsmKeyExchangeCalcSymKeyConfig/CsmKeyExchangeCalcSymKeyInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyExchangeCalcSymKeyInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:fd8557b9-85aa-42fc-9ab8-cf3d94b284e2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeyExchangeCalcSymKey/CsmKeyExchangeCalcSymKeyConfig/CsmKeyExchangeCalcSymKeyPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyExchangeCalcSymKeyPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:cbc31523-d015-443d-9c09-4c21d2b50692"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmKeyExchangeCalcSymKeyConfig",
+          "subContainers": [],
+          "uuid": "ECUC:b1ead378-dce5-4eb1-97d6-c8d4c089bad8"
+        }
+      ],
+      "uuid": "ECUC:0b868709-b2bb-4462-8e4c-6069ec6d7d1a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacGenerate",
+      "description": "Container for incorporation of MacGenerate primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacGenerate/CsmMacGenerateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a MAC generation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmMacGenerateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:d2350a5e-dc6d-4abf-a1e4-866017a0fccb"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmMacGenerate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacGenerate/CsmMacGenerateConfig",
+          "description": "Configurations for the MacGenerate service. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacGenerate/CsmMacGenerateConfig/CsmCallbackMacGenerate",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackMacGenerate",
+              "type": "FUNCTION",
+              "uuid": "ECUC:8e0f4405-4003-46af-874b-8fd8c16d0592"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmMacGenerateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:cd3b3259-a374-468c-845c-ac123bdfd3e1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGeneratePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmMacGeneratePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:ed2b9770-1b9e-4f6c-9819-c428f62162d0"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmMacGenerateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:7e5f3092-03e0-4652-badc-55a5e6888da1"
+        }
+      ],
+      "uuid": "ECUC:bfd910b5-4ac5-4fd6-bacd-c0d245efa4dc"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacVerify",
+      "description": "Container for incorporation of MacVerify primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacVerify/CsmMacVerifyMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a MAC verification.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmMacVerifyMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:e220b31a-74c9-41f0-959b-af2ebd74e2c6"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmMacVerify",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacVerify/CsmMacVerifyConfig",
+          "description": "Container for configuration of service MacVerify. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacVerify/CsmMacVerifyConfig/CsmCallbackMacVerify",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackMacVerify",
+              "type": "FUNCTION",
+              "uuid": "ECUC:bce8012c-bad5-4812-9157-45d872a4acd6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmMacVerifyInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:0b964299-0439-46ad-b968-9b2e07803090"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmMacVerifyPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:b067c4be-c2ab-4c06-a402-b40774633e61"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmMacVerifyConfig",
+          "subContainers": [],
+          "uuid": "ECUC:bcb181b4-f623-4fb0-90f2-0d4b3213f302"
+        }
+      ],
+      "uuid": "ECUC:fae841a4-378c-47f5-a634-409690fbcb02"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomGenerate",
+      "description": "Container for incorporation of RandomGenerate primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmRandomGenerate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomGenerate/CsmRandomGenerateConfig",
+          "description": "Container for configuration of service RandomGenerate. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomGenerate/CsmRandomGenerateConfig/CsmCallbackRandomGenerate",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackRandomGenerate",
+              "type": "FUNCTION",
+              "uuid": "ECUC:9e048017-000e-42dc-ba8e-b6d8b17f134f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmRandomGenerateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:e37272e8-5965-494f-819d-15f390fdc9fb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGeneratePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmRandomGeneratePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:c671dc88-6959-4f1a-a365-afd6cde0a3d3"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmRandomGenerateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:76bd63d3-76e9-4946-9898-f7842e212b84"
+        }
+      ],
+      "uuid": "ECUC:eda353ed-5511-4bbd-93a9-40fcd076aecd"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomSeed",
+      "description": "Container for incorporation of RandomSeed primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmRandomSeed",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomSeed/CsmRandomSeedConfig",
+          "description": "Container for configuration of service RandomSeed. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomSeed/CsmRandomSeedConfig/CsmCallbackRandomSeed",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackRandomSeed",
+              "type": "FUNCTION",
+              "uuid": "ECUC:40e14075-d0cd-4253-a2ae-a05b0130c509"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomSeed/CsmRandomSeedConfig/CsmRandomSeedInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmRandomSeedInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:a3e658de-7728-449f-9dee-11bc59f54663"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmRandomSeed/CsmRandomSeedConfig/CsmRandomSeedPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmRandomSeedPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:a80d3d21-4728-4de1-86a8-d6f589f90378"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmRandomSeedConfig",
+          "subContainers": [],
+          "uuid": "ECUC:e44be5b4-563a-4c24-bb13-7844f47d7152"
+        }
+      ],
+      "uuid": "ECUC:45124c32-1307-4388-a33c-86f808adde8a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureGenerate",
+      "description": "Container for incorporation of SignatureGenerate primitives",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureGenerate/CsmSignatureGenerateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a signature generation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSignatureGenerateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:96910f90-e039-4be2-8ead-7ade2ee4a22d"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSignatureGenerate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureGenerate/CsmSignatureGenerateConfig",
+          "description": "Container for configuration of service SignatureGenerate. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmCallbackSignatureGenerate",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSignatureGenerate",
+              "type": "FUNCTION",
+              "uuid": "ECUC:a3b0a4ac-8a9b-42a9-9266-fa3634126186"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSignatureGenerateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:02d8eb7b-828c-4e40-bcd5-de9a202f0069"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGeneratePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSignatureGeneratePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:f26a4c5c-756e-495c-9058-638bb31723c5"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSignatureGenerateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:5195456a-649c-402a-8c70-759eb4cd7f61"
+        }
+      ],
+      "uuid": "ECUC:85722c21-1751-4b5b-85b0-b3342480d5da"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureVerify",
+      "description": "Container for incorporation of SignatureVerify primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureVerify/CsmSignatureVerifyMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a signature verification.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSignatureVerifyMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:106df44d-05e3-49b1-a409-e36e39d80d88"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSignatureVerify",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureVerify/CsmSignatureVerifyConfig",
+          "description": "Container for configuration of service SignatureVerify. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmCallbackSignatureVerify",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSignatureVerify",
+              "type": "FUNCTION",
+              "uuid": "ECUC:a3cb5c41-a76c-4fa5-b7c4-1705185c45e7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSignatureVerifyInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:0d62a502-9fc1-40a1-8fa3-f39797bfc977"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSignatureVerifyPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:14bac674-8221-4c54-b327-31e5944066e7"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSignatureVerifyConfig",
+          "subContainers": [],
+          "uuid": "ECUC:3c8c071b-109b-4187-9fa6-8de711344b11"
+        }
+      ],
+      "uuid": "ECUC:46a544f2-dfe6-4551-9a86-527ad0b3d946"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockDecrypt",
+      "description": "Container for incorporation of SymBlockDecrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockDecrypt/CsmSymBlockDecryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical block decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymBlockDecryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:58e7a8f1-10ff-4f12-a36d-746d992cf193"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymBlockDecrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockDecrypt/CsmSymBlockDecryptConfig",
+          "description": "Container for configuration of service SymBlockDecrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockDecrypt/CsmSymBlockDecryptConfig/CsmCallbackSymBlockDecrypt",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymBlockDecrypt",
+              "type": "FUNCTION",
+              "uuid": "ECUC:dd0c12b7-c0e0-41aa-aa12-c0eb63e2ab65"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockDecrypt/CsmSymBlockDecryptConfig/CsmSymBlockDecryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymBlockDecryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:4dbf4e80-dbd0-4cfd-8e98-bf116444be19"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockDecrypt/CsmSymBlockDecryptConfig/CsmSymBlockDecryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymBlockDecryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:b6a323a7-9e01-47ce-87ce-4d3f9c099c72"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymBlockDecryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:a47fecc9-956d-4fdd-85e1-a847e5e236de"
+        }
+      ],
+      "uuid": "ECUC:0097546f-22cf-4b2f-b599-4380134e852f"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockEncrypt",
+      "description": "Container for incorporation of SymBlockEncrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockEncrypt/CsmSymBlockEncryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical block encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymBlockEncryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:c0a15d6e-d1f8-4337-86f5-d8a6f1b8bc0a"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymBlockEncrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockEncrypt/CsmSymBlockEncryptConfig",
+          "description": "Container for configuration of service SymBlockEncrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockEncrypt/CsmSymBlockEncryptConfig/CsmCallbackSymBlockEncrypt",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymBlockEncrypt",
+              "type": "FUNCTION",
+              "uuid": "ECUC:9119233e-dd60-4535-92a5-d70d257ca43e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockEncrypt/CsmSymBlockEncryptConfig/CsmSymBlockEncryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymBlockEncryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:20efbf77-599b-4469-b3c9-f57da90b2400"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymBlockEncrypt/CsmSymBlockEncryptConfig/CsmSymBlockEncryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymBlockEncryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:cbaf738e-9fae-443c-b82c-b479cff02b0b"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymBlockEncryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:2ec2375b-900a-450f-8b11-46f0cb433e93"
+        }
+      ],
+      "uuid": "ECUC:ea5f1657-f0b1-42be-a493-9e05e83f3948"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymDecrypt",
+      "description": "Container for incorporation of SymDecrypt primitives",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymDecrypt/CsmSymDecryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical decryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymDecryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:e7b0874d-348a-4851-b229-7e4e8310d95d"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymDecrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymDecrypt/CsmSymDecryptConfig",
+          "description": "Container for configuration of service SymDecrypt.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymDecrypt/CsmSymDecryptConfig/CsmCallbackSymDecrypt",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymDecrypt",
+              "type": "FUNCTION",
+              "uuid": "ECUC:6385d4b5-0bbd-455b-a9ed-5f894bffd0d5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymDecrypt/CsmSymDecryptConfig/CsmSymDecryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymDecryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:c2ba9173-7d1a-4b27-8d6b-1c327d680dbc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymDecrypt/CsmSymDecryptConfig/CsmSymDecryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymDecryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:aea317de-57e9-47d3-a7f3-105768098a1d"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymDecryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:152272c1-bb24-4f9a-982f-1a9122f3bd23"
+        }
+      ],
+      "uuid": "ECUC:5d559d4a-f33a-4d01-b49e-2bce85d95ea4"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymEncrypt",
+      "description": "Container for incorporation of SymEncrypt primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymEncrypt/CsmSymEncryptMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical encryption.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymEncryptMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:85a27d6f-4b25-4692-934b-c4ca2c686355"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymEncrypt",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymEncrypt/CsmSymEncryptConfig",
+          "description": "Container for configuration of service SymEncrypt. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymEncrypt/CsmSymEncryptConfig/CsmCallbackSymEncrypt",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymEncrypt",
+              "type": "FUNCTION",
+              "uuid": "ECUC:65fc72dc-e8dd-4f0c-b700-e75bbfa821ce"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymEncrypt/CsmSymEncryptConfig/CsmSymEncryptInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymEncryptInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:d5da2b44-3e5b-4ef3-a139-fd54dcf43598"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymEncrypt/CsmSymEncryptConfig/CsmSymEncryptPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymEncryptPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:64e40bfa-9b3c-4e9a-8b09-f77f49880e4e"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymEncryptConfig",
+          "subContainers": [],
+          "uuid": "ECUC:d12607a8-1b6b-4b30-9319-a8f36794d617"
+        }
+      ],
+      "uuid": "ECUC:be6d37a8-bf03-4926-b85d-ce09d9ea817d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyExtract",
+      "description": "Container for incorporation of SymKeyExtract primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyExtract/CsmSymKeyExtractMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical key extraction.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymKeyExtractMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:37262028-5915-463d-8e02-f833dafdd74d"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymKeyExtract",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyExtract/CsmSymKeyExtractConfig",
+          "description": "Container for configuration of service SymKeyExtract. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyExtract/CsmSymKeyExtractConfig/CsmCallbackSymKeyExtract",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymKeyExtract",
+              "type": "FUNCTION",
+              "uuid": "ECUC:5c3d4dd2-c5a3-4b1e-afcc-e4dcc75626fd"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyExtract/CsmSymKeyExtractConfig/CsmSymKeyExtractInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyExtractInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:d3720a30-3182-4180-849c-0b8cc6553cb4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyExtract/CsmSymKeyExtractConfig/CsmSymKeyExtractPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyExtractPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:cebc8d95-45f4-44dd-9165-2cec9da77e40"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymKeyExtractConfig",
+          "subContainers": [],
+          "uuid": "ECUC:4bd70269-a3c7-46bc-9b29-b542dbe1919b"
+        }
+      ],
+      "uuid": "ECUC:943a7a19-8ad4-4d58-bf86-51d3d5fd1496"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyGenerate",
+      "description": "Container for incorporation of Symmetric Key Generate primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyGenerate/CsmSymKeyGenerateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical key generation.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymKeyGenerateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:ac9c63fd-8969-464d-9993-0592d02930bb"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymKeyGenerate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyGenerate/CsmSymKeyGenerateConfig",
+          "description": "Container for configuration of service Symmetric Key Generate. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyGenerate/CsmSymKeyGenerateConfig/CsmCallbackSymKeyGenerate",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymKeyGenerate",
+              "type": "FUNCTION",
+              "uuid": "ECUC:fffa0af5-0868-4bf9-a8cd-cf5d5c559428"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyGenerate/CsmSymKeyGenerateConfig/CsmSymKeyGenerateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyGenerateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:3a069157-40f9-4ad5-b802-2e449125c21e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyGenerate/CsmSymKeyGenerateConfig/CsmSymKeyGeneratePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyGeneratePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:2b0b7596-a403-418f-94f6-a68dce2bd32f"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymKeyGenerateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:650b2ade-abe4-4a0d-b289-bcbc01e481a0"
+        }
+      ],
+      "uuid": "ECUC:342f873c-e733-4e4d-871a-b780447b32bf"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyUpdate",
+      "description": "Container for incorporation of Symmetric Key Update primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyUpdate/CsmSymKeyUpdateMaxKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement a symmetrical key update.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymKeyUpdateMaxKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:8fe6711b-df4d-4805-877d-0cf18b18a2ba"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymKeyUpdate",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyUpdate/CsmSymKeyUpdateConfig",
+          "description": "Container for configuration of service Symmetric Key Update. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyUpdate/CsmSymKeyUpdateConfig/CsmCallbackSymKeyUpdate",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymKeyUpdate",
+              "type": "FUNCTION",
+              "uuid": "ECUC:9f63e9ac-64de-4f6c-934a-6d471466df70"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyUpdate/CsmSymKeyUpdateConfig/CsmSymKeyUpdateInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyUpdateInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:a8dc5ad5-b081-4fff-873d-7a7145ce20b8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyUpdate/CsmSymKeyUpdateConfig/CsmSymKeyUpdatePrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyUpdatePrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:3e7bef76-22b0-48c3-9d24-a70d2ad9b0b2"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymKeyUpdateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:4d615d23-24af-4d6f-bcc1-827b5a010155"
+        }
+      ],
+      "uuid": "ECUC:f19fe07e-45b2-42a8-8ce2-8ac2ac0bece6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapAsym",
+      "description": "Container for incorporation of SymKeyWrapSym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapAsym/CsmSymKeyWrapAsymMaxPubKeySize",
+          "description": "The maximum length, in bytes, of all public key types used in all CRY primitives which implement an asymmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymKeyWrapAsymMaxPubKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:dfb3569f-004b-44fc-b066-516bd1e40e28"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapAsym/CsmSymKeyWrapAsymMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an asymmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymKeyWrapAsymMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:147f0587-907d-4e40-834e-8c609e68e29a"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymKeyWrapAsym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapAsym/CsmSymKeyWrapAsymConfig",
+          "description": "Container for configuration of service SymKeyWrapAsym. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapAsym/CsmSymKeyWrapAsymConfig/CsmCallbackSymKeyWrapAsym",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymKeyWrapAsym",
+              "type": "FUNCTION",
+              "uuid": "ECUC:3cfb9249-d56f-4232-9367-c50eb041359f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapAsym/CsmSymKeyWrapAsymConfig/CsmSymKeyWrapAsymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyWrapAsymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:e9d3582e-c6a1-4aba-8ee4-b28478e171d0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapAsym/CsmSymKeyWrapAsymConfig/CsmSymKeyWrapAsymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyWrapAsymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:50394ff4-d0bb-4979-85b2-26d44a7f672c"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymKeyWrapAsymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:82c2a258-5b42-4b52-970b-885d2d78a6b0"
+        }
+      ],
+      "uuid": "ECUC:b50852e2-4f4d-4b05-944c-8ead36b6a8fe"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapSym",
+      "description": "Container for incorporation of SymKeyWrapSym primitives.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapSym/CsmSymKeyWrapSymMaxSymKeySize",
+          "description": "The maximum, in bytes, of all key lengths used in all CRY primitives which implement an symmetrical key wrapping.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmSymKeyWrapSymMaxSymKeySize",
+          "type": "INTEGER",
+          "uuid": "ECUC:039844fb-7658-4320-a4de-59198a55c2aa"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmSymKeyWrapSym",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapSym/CsmSymKeyWrapSymConfig",
+          "description": "Container for configuration of service SymKeyWrapSym. The container name serves as a symbolic name for the identifier of a service configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 32
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapSym/CsmSymKeyWrapSymConfig/CsmCallbackSymKeyWrapSym",
+              "description": "Callback function to be called if service has finished.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackSymKeyWrapSym",
+              "type": "FUNCTION",
+              "uuid": "ECUC:e72e3e70-b06a-4d1a-a96f-779ef497a748"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapSym/CsmSymKeyWrapSymConfig/CsmSymKeyWrapSymInitConfiguration",
+              "description": "Name of a C symbol which contains the configuration of the underlying cryptographic primitive.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyWrapSymInitConfiguration",
+              "type": "STRING",
+              "uuid": "ECUC:f8e9692f-2dd3-4149-9462-fdb9bc5953ff"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmSymKeyWrapSym/CsmSymKeyWrapSymConfig/CsmSymKeyWrapSymPrimitiveName",
+              "description": "Name of the cryptographic primitive to use.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmSymKeyWrapSymPrimitiveName",
+              "type": "STRING",
+              "uuid": "ECUC:9b777e9f-be2e-497a-8fed-40484d6246fa"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmSymKeyWrapSymConfig",
+          "subContainers": [],
+          "uuid": "ECUC:0a22b291-78e5-44fd-a4b6-63649f992d42"
+        }
+      ],
+      "uuid": "ECUC:b90032af-9757-4ef8-b9be-686af2adec69"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Csm",
+  "description": "Configuration of the Csm (CryptoServiceManager) module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Csm",
+  "version": "4.2.2"
+}

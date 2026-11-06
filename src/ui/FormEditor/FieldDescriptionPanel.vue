@@ -8,6 +8,9 @@
       <template v-if="field">
         <p class="description-text">{{ field.description || '此字段未提供说明' }}</p>
         <p class="definition-path">{{ field.definitionPath ?? path }}</p>
+        <p v-if="'definitionIssue' in field && field.definitionIssue" role="note">
+          {{ field.definitionIssue }}
+        </p>
         <p v-if="'type' in field">
           类型：{{ field.type }}
           <template v-if="field.min !== undefined || field.max !== undefined">

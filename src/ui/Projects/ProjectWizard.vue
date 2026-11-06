@@ -3,7 +3,8 @@
     v-if="modelValue"
     :model-value="modelValue"
     title="新建工程"
-    width="min(760px, 94vw)"
+    top="24px"
+    width="min(960px, 94vw)"
     class="project-wizard"
     :close-on-click-modal="!store.projectBusy"
     :close-on-press-escape="!store.projectBusy"
@@ -29,7 +30,7 @@
         <label
           >AUTOSAR 版本<select v-model="version" aria-label="AUTOSAR 版本">
             <option value="4.4.0">Classic Platform 4.4.0</option>
-            <option value="4.2.2" disabled>4.2.2 · 定义库待接入</option>
+            <option value="4.2.2">Classic Platform 4.2.2</option>
           </select></label
         >
         <label
@@ -58,37 +59,12 @@
           </div>
           <span>已选择 {{ selected.length }} 个模块</span>
         </div>
-        <label class="module-filter"
-          ><span>搜索模块</span
-          ><input
-            v-model="search"
-            type="search"
-            placeholder="输入模块名称"
-            aria-label="搜索内置模块"
-        /></label>
-        <div class="builtin-options">
-          <label
-            v-for="module in visibleModules"
-            :key="module.shortName"
-            :class="{ chosen: selected.includes(module.shortName) }"
-          >
-            <input
-              v-model="selected"
-              type="checkbox"
-              :value="module.shortName"
-              :aria-label="'选择 ' + module.shortName"
-              :disabled="store.projectBusy"
-            />
-            <span
-              ><strong>{{ module.shortName }}</strong
-              ><small>{{ module.group }}</small></span
-            ><span class="builtin-badge">内置</span>
-          </label>
-          <p v-if="!visibleModules.length">没有匹配的模块。</p>
-        </div>
-        <p class="wizard-hint">
-          已内置 3 个标准模块，选择后即可配置。其他定义可通过「模块管理 →
-          高级」导入，并在默认工程中使用。
+        <ModuleSelector v-model="selected" :entries="versionCatalog" :busy="store.projectBusy" />
+        <p class="wizard-hint catalog-hint">
+          CP {{ version }} 共 {{ versionCatalog.length }} 个标准模块，{{
+            versionCatalog.filter((entry) => entry.status !== 'unsupported').length
+          }}
+          个已通过当前配置与输出边界验证。有限制或待支持的模块可查看具体原因。
         </p>
       </div>
       <p v-if="message" role="alert" class="wizard-error">{{ message }}</p>
@@ -119,6 +95,7 @@
 import { computed, ref, watch } from 'vue';
 import { useConfigStore } from '@/stores/configStore';
 import { builtinCatalog } from '@/modules/builtinCatalog';
+import ModuleSelector from '@/ui/Modules/ModuleSelector.vue';
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{ 'update:modelValue': [value: boolean]; opened: [] }>();
 const store = useConfigStore();
@@ -127,15 +104,14 @@ const step = ref(1),
   version = ref('4.4.0'),
   chip = ref('S32K1XX'),
   note = ref(''),
-  search = ref(''),
   message = ref('');
 const selected = ref<string[]>(['Dem']);
-const visibleModules = computed(() =>
-  builtinCatalog.filter(
-    (m) =>
-      m.version === version.value && m.shortName.toLowerCase().includes(search.value.toLowerCase())
-  )
+const versionCatalog = computed(() =>
+  builtinCatalog.filter((entry) => entry.release === version.value)
 );
+watch(version, () => {
+  selected.value = ['Dem'];
+});
 watch(
   () => props.modelValue,
   (open) => {
@@ -145,7 +121,6 @@ watch(
     version.value = '4.4.0';
     chip.value = 'S32K1XX';
     note.value = '';
-    search.value = '';
     selected.value = ['Dem'];
     message.value = '';
   }
@@ -176,8 +151,8 @@ async function create(): Promise<void> {
 .wizard-steps {
   display: flex;
   list-style: none;
-  padding: 0 0 20px;
-  margin: 0 0 24px;
+  padding: 0 0 14px;
+  margin: 0 0 16px;
   gap: 28px;
   border-bottom: 1px solid var(--color-border);
   color: var(--color-muted);
@@ -236,8 +211,8 @@ button:focus-visible {
 .wizard-footer {
   display: flex;
   gap: 12px;
-  margin-top: 28px;
-  padding-top: 20px;
+  margin-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid var(--color-border);
 }
 .wizard-footer span {
@@ -266,7 +241,7 @@ button:disabled {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 h3 {
   margin: 0;
@@ -277,54 +252,11 @@ h3 {
   font-size: 13px;
   color: var(--color-muted);
 }
-.module-filter {
-  font-size: 13px;
-}
-.builtin-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 18px 0;
-}
-.builtin-options label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  cursor: pointer;
-}
-.builtin-options label.chosen {
-  border-color: var(--color-accent);
-  background: var(--color-selected);
-}
-.builtin-options input {
-  accent-color: var(--color-accent);
-}
-.builtin-options strong,
-.builtin-options small {
-  display: block;
-}
-.builtin-options strong {
-  color: var(--color-text);
-}
-.builtin-options small {
-  color: var(--color-muted);
-  margin-top: 5px;
-  font-size: 12px;
-}
-.builtin-badge {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--color-accent);
-}
 .wizard-error {
   color: var(--color-error);
 }
 @media (max-width: 600px) {
-  .project-fields,
-  .builtin-options {
+  .project-fields {
     grid-template-columns: 1fr;
   }
   .selection-heading {
@@ -334,5 +266,18 @@ h3 {
   .wizard-footer {
     flex-wrap: wrap;
   }
+}
+</style>
+
+<style scoped>
+.catalog-hint {
+  margin-top: 12px;
+}
+:global(.project-wizard .el-dialog__body) {
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+}
+:global(.project-wizard) {
+  margin-bottom: 24px;
 }
 </style>

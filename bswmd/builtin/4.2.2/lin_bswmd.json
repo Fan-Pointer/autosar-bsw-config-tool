@@ -1,0 +1,237 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "552a1b70fdd2ac4441a7dc4370ef36076708f325fd28722d4032c0edba3aad8c",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinDemEventParameterRefs",
+      "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occur…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinDemEventParameterRefs/LIN_E_TIMEOUT",
+          "description": "Reference to the DemEventParameter which shall be issued when the error \"Timeout caused by hardware error\" has occurred. If the reference is not configured the…",
+          "destinationContainerType": "DemEventParameter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "LIN_E_TIMEOUT",
+          "uuid": "ECUC:446e5fcc-d6f0-4bde-ad8f-8cf86f88f501"
+        }
+      ],
+      "shortName": "LinDemEventParameterRefs",
+      "subContainers": [],
+      "uuid": "ECUC:cb79ebdd-beff-4f92-a997-990c0ab58193"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGeneral",
+      "description": "This container contains the parameters related to each LIN Driver Unit.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGeneral/LinDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6f7825c9-bce4-4f50-8643-1f8fcef24d80"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGeneral/LinVersionInfoApi",
+          "description": "Switches the Lin_GetVersionInfo function ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:03f6c9e0-e3b7-4907-84c0-a96e099b4431"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGeneral/LinIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:6d8fcd10-4bde-4582-99fd-4e98b7c25839"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGeneral/LinTimeoutDuration",
+          "description": "Specifies the maximum number of loops for blocking function until a timeout is raised in short term wait loops",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinTimeoutDuration",
+          "type": "INTEGER",
+          "uuid": "ECUC:4c279681-63d2-4125-b3a0-36aabd53153b"
+        }
+      ],
+      "references": [],
+      "shortName": "LinGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:1d543976-f649-42c3-b4ac-ad3abf68201a"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig",
+      "description": "This container contains the global configuration parameter of the Lin driver.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "LinGlobalConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel",
+          "description": "This container contains the configuration (parameters) of the LIN Controller(s).",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel/LinChannelBaudRate",
+              "description": "Specifies the baud rate of the LIN channel",
+              "isOptional": false,
+              "max": 20000,
+              "min": 1000,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinChannelBaudRate",
+              "type": "INTEGER",
+              "uuid": "ECUC:16748716-3f59-4064-a8ef-ca1ab0b00deb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel/LinChannelId",
+              "description": "Identifies the LIN channel. Replaces LIN_CHANNEL_INDEX_NAME from the LIN SWS.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:c3ebc9ff-d623-4c49-ac91-241dec476a8d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel/LinChannelWakeupSupport",
+              "description": "Specifies if the LIN hardware channel supports wake up functionality",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinChannelWakeupSupport",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:644aeda6-9c40-4e6d-945f-555f9c2b0c56"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel/LinClockRef",
+              "description": "Reference to the LIN clock source configuration, which is set in the MCU driver configuration.",
+              "destinationContainerType": "McuClockReferencePoint",
+              "destinationRef": "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinClockRef",
+              "uuid": "ECUC:df926436-58ac-4912-beb2-b6a951d5f244"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel/LinChannelEcuMWakeupSource",
+              "description": "This parameter contains a reference to the Wakeup Source for this controller as defined in the ECU State Manager.",
+              "destinationContainerType": "EcuMWakeupSource",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinChannelEcuMWakeupSource",
+              "uuid": "ECUC:c24ae6cb-a145-4c7d-a7e1-7493da1e0df8"
+            }
+          ],
+          "shortName": "LinChannel",
+          "subContainers": [],
+          "uuid": "ECUC:5068d91d-ca0a-460f-9f6a-21f7ad18d591"
+        }
+      ],
+      "uuid": "ECUC:5bf7d5c4-2ce3-45ef-9aa4-694ae888aef1"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Lin",
+  "description": "Configuration of the Lin (LIN driver) module.",
+  "importWarnings": [
+    "LIN_E_TIMEOUT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "LinClockRef：目标 /AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint 位于本模块之外；编辑器只读展示。",
+    "LinChannelEcuMWakeupSource：目标 /AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Lin",
+  "version": "4.2.2"
+}

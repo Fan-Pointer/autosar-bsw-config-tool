@@ -1,0 +1,1514 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "f14877c3b29ae55e703c6073480ab56f39c39f8d38eadc6a7e198c1eadc662d5",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig",
+      "description": "This container contains the sub containers of the IpduM module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMMaxTxBufferSize",
+          "description": "Maximum total size of all Tx buffers. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IpduMMaxTxBufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:ceef328b-ef6d-4853-94de-7e154f03f132"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMMaxTxPathwayCnt",
+          "description": "Maximum number of transmitted IPdus. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IpduMMaxTxPathwayCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:e788ec24-e16f-4d73-a76e-ebc32e102c8f"
+        }
+      ],
+      "references": [],
+      "shortName": "IpduMConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedRxPdu",
+          "description": "Configuration of a received contained Pdu.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedRxPdu/IpduMContainedPduOffset",
+              "description": "Static offset (in bytes) of the ContainedPdu. Tags: atp.Status=draft",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedPduOffset",
+              "type": "INTEGER",
+              "uuid": "ECUC:9d46e30a-1d3f-8303-3509-8be80c94c764"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedRxPdu/IpduMContainedRxPduLongHeaderId",
+              "description": "LongHeader Id which is part of the ContainerPdu when this ContainedPdu is inside.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedRxPduLongHeaderId",
+              "type": "INTEGER",
+              "uuid": "ECUC:48b8760d-040f-487d-ba48-26010657f644"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedRxPdu/IpduMContainedRxPduShortHeaderId",
+              "description": "ShortHeader Id which is part of the ContainerPdu when this ContainedPdu is inside.",
+              "isOptional": true,
+              "max": 16777215,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedRxPduShortHeaderId",
+              "type": "INTEGER",
+              "uuid": "ECUC:5a243f2c-8517-4e3c-9eed-81758b2a8978"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedRxPdu/IpduMPduUpdateBitPosition",
+              "description": "This value specifies where the PDU's Update-Bit is stored in the Container PDU (bit location of PDU's Update-Bit in the Container PDU). Tags: atp.Status=draft",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMPduUpdateBitPosition",
+              "type": "INTEGER",
+              "uuid": "ECUC:845ed947-d78d-8d78-4d57-b62f10b3777c"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedRxPdu/IpduMContainedRxInContainerPduRef",
+              "description": "Optional reference to an IpduMContainerRxPdu this IpduMContainedRxPdu may be received in.",
+              "destinationContainerType": "IpduMContainerRxPdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedRxInContainerPduRef",
+              "uuid": "ECUC:30e6206f-666f-4d8f-a66b-883ce64951f7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedRxPdu/IpduMContainedRxPduRef",
+              "description": "Reference to the Pdu which represents this ContainedPdu and is used for reception indication.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedRxPduRef",
+              "uuid": "ECUC:2c109a6f-b369-4e64-8aab-d16df021b5eb"
+            }
+          ],
+          "shortName": "IpduMContainedRxPdu",
+          "subContainers": [],
+          "uuid": "ECUC:23135174-a437-419a-9d97-d0c8a6da224d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu",
+          "description": "Configuration of a sender ContainedPdu.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedPduHeaderId",
+              "description": "Header Id which is part of the ContainerPdu when this ContainedPdu is inside.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedPduHeaderId",
+              "type": "INTEGER",
+              "uuid": "ECUC:8fb582d5-c2b9-49f4-a95c-f7f9293ef1c5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedPduOffset",
+              "description": "Static offset (in bytes) of the ContainedPdu. Tags: atp.Status=draft",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedPduOffset",
+              "type": "INTEGER",
+              "uuid": "ECUC:f34bda6d-44ca-889f-19ac-82344dca4bae"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxPduHandleId",
+              "description": "Handle Id of the ContainedPdu.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxPduHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:30a9f077-e171-4238-96c7-b2abdefe20cf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 255,
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxPduPriority",
+              "description": "Defines a priority of a ContainedTxPdu. 255 represents the lowest priority and 0 represent the highest priority.",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxPduPriority",
+              "type": "INTEGER",
+              "uuid": "ECUC:ceed8f53-b9f8-48f4-a35a-5c53db1580e1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMPduUpdateBitPosition",
+              "description": "This value specifies where the PDU's Update-Bit is stored in the Container PDU (bit location of PDU's Update-Bit in the Container PDU). Tags: atp.Status=draft",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMPduUpdateBitPosition",
+              "type": "INTEGER",
+              "uuid": "ECUC:da63d0aa-ff18-9314-31fa-ac7b51e8fbc6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxPduCollectionSemantics",
+              "description": "Defines whether this IpduMContainedTxPdu shall be collected using a last-is-best or queued semantics.",
+              "enumValues": [
+                "IPDUM_COLLECT_LAST_IS_BEST",
+                "IPDUM_COLLECT_QUEUED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxPduCollectionSemantics",
+              "type": "ENUM",
+              "uuid": "ECUC:241b7e86-021b-48ba-b29a-79b59768422a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxPduTrigger",
+              "description": "Defines whether this Pdu triggers the sending of the ContainerPdu.",
+              "enumValues": [
+                "IPDUM_TRIGGER_ALWAYS",
+                "IPDUM_TRIGGER_NEVER"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxPduTrigger",
+              "type": "ENUM",
+              "uuid": "ECUC:1fc45d53-28ef-48a4-8195-4922ec1935ea"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxPduConfirmation",
+              "description": "This Parameter determines whether for this contained I-PDU a TxConfirmation shall be provided. If set to TRUE a TxConfirmation is issued. It is not used when a…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxPduConfirmation",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:ea74c379-a393-4df0-bd9c-2405c7d70434"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxPduSendTimeout",
+              "description": "Defines a ContainedPdu specific sender timeout which can reduce the ContainerPdu timer when this ContainedPdu is put inside the ContainerPdu.",
+              "isOptional": true,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxPduSendTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:e6fac165-cc62-4ab5-94e1-2cec0609f5f3"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxInContainerPduRef",
+              "description": "Reference to the container Pdu which this contained Pdu shall be collected in.",
+              "destinationContainerType": "IpduMContainerTxPdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxInContainerPduRef",
+              "uuid": "ECUC:0a15c013-c0d4-417d-9674-76207d08a72a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainedTxPdu/IpduMContainedTxPduRef",
+              "description": "Reference to the Pdu which represents this ContainedPdu and is used for transmission.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainedTxPduRef",
+              "uuid": "ECUC:1b2057ec-907f-4bc7-9f34-25a9eef84053"
+            }
+          ],
+          "shortName": "IpduMContainedTxPdu",
+          "subContainers": [],
+          "uuid": "ECUC:791848d7-cbc2-4736-823a-c714e80fa697"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu",
+          "description": "Configuration of a receiver ContainerPdu which may collect several ContainedPdus.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu/IpduMContainerHeaderSize",
+              "description": "Defines the layout of the header information (header id and length).",
+              "enumValues": [
+                "IPDUM_HEADERTYPE_LONG",
+                "IPDUM_HEADERTYPE_NONE",
+                "IPDUM_HEADERTYPE_SHORT"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerHeaderSize",
+              "type": "ENUM",
+              "uuid": "ECUC:f6085257-2137-889a-5714-432746509801"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu/IpduMContainerPduProcessing",
+              "description": "Defines whether the handling of this ContainerPdu shall be done in the context of the caller (IMMEDIATE) or in the next call to IpduM_MainFunctionRx (DEFERRED).",
+              "enumValues": [
+                "IPDUM_PROCESSING_DEFERRED",
+                "IPDUM_PROCESSING_IMMEDIATE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerPduProcessing",
+              "type": "ENUM",
+              "uuid": "ECUC:54dd7b87-c70e-4292-8fb0-d2248a0b7e19"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu/IpduMContainerRxAcceptContainedPdu",
+              "description": "Defines for the received IpduMContainerRxPdu whether the list of referencing IpduMContainedRxPdus (via the reference IpduMContainedPduContainerRefRx) is a clos…",
+              "enumValues": [
+                "IPDUM_ACCEPT_ALL",
+                "IPDUM_ACCEPT_CONFIGURED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerRxAcceptContainedPdu",
+              "type": "ENUM",
+              "uuid": "ECUC:722a835c-4867-4f34-94e1-4936cec8948f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu/IpduMContainerQueueSize",
+              "description": "Defines a local queue for handling of each ContainerPdu.",
+              "isOptional": true,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerQueueSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:0bd46c1b-1938-859e-52eb-9f58b74213ec"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu/IpduMContainerRxHandleId",
+              "description": "Handle Id used by the PduR for RxIndication.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerRxHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:aa0c884d-6267-4829-9396-98b8fd5a1cad"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerRxPdu/IpduMContainerRxPduRef",
+              "description": "Reference to the Pdu which represents the container and is used for reception.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerRxPduRef",
+              "uuid": "ECUC:f2caa5c2-e8b8-4fc2-b142-005df5ec6c44"
+            }
+          ],
+          "shortName": "IpduMContainerRxPdu",
+          "subContainers": [],
+          "uuid": "ECUC:5d925ddf-12e3-4599-b270-042c31e381bb"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu",
+          "description": "Configuration of a transmitted container Pdu.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerHeaderSize",
+              "description": "Defines the layout of the header information (header id and length).",
+              "enumValues": [
+                "IPDUM_HEADERTYPE_LONG",
+                "IPDUM_HEADERTYPE_NONE",
+                "IPDUM_HEADERTYPE_SHORT"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerHeaderSize",
+              "type": "ENUM",
+              "uuid": "ECUC:9d8c628b-75be-9012-2a1f-ff9d6fc907a0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerTxTriggerMode",
+              "description": "Defines whether this ContainerPdu is fetched via trigger transmit.",
+              "enumValues": [
+                "IPDUM_DIRECT",
+                "IPDUM_TRIGGERTRANSMIT"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerTxTriggerMode",
+              "type": "ENUM",
+              "uuid": "ECUC:fe00aca6-2aa1-47c5-ac1b-c708b0a2da1c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 1,
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerQueueSize",
+              "description": "Defines a local queue for handling of each ContainerPdu.",
+              "isOptional": true,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerQueueSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:b3587c4f-6dbf-8d16-25f7-5bcee0ba838b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerTxHandleId",
+              "description": "Handle Id used by the PduR for TxConfirmation and for TriggerTransmit of the ContainerPdu.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerTxHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:efa3fff6-909e-44c5-8511-bf9555ed9dcf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerTxSizeThreshold",
+              "description": "Defines the size threshold in bytes which, when exceeded, triggers the sending of the ContainerPdu although the maxium Pdu size (PduLength parameter of Pdu obj…",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerTxSizeThreshold",
+              "type": "INTEGER",
+              "uuid": "ECUC:a06d30c7-b0ce-4b1b-9cb1-9cb21b510de7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMUnusedAreasDefault",
+              "description": "IpduM fills not updated areas of the Container PDU with this byte-pattern. Tags: atp.Status=draft",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMUnusedAreasDefault",
+              "type": "INTEGER",
+              "uuid": "ECUC:27348714-d1c3-4091-98be-692839840e20"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerTxFirstContainedPduTrigger",
+              "description": "Defines if the transmission of this IpduMContainerTxPdu shall be requested right after the first IpduMContainedTxPdu was put into it.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerTxFirstContainedPduTrigger",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:2ed7ba6a-3bcf-4daa-9296-e4b8f3bbbf75"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerTxSendTimeout",
+              "description": "When this timeout expires the ContainerPdu is triggered for sending. The respective timer is started when the first Pdu is put into the ContainerPdu.",
+              "isOptional": true,
+              "max": 65.535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerTxSendTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:9a4008f5-85c6-424a-9d51-5e7833214912"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMContainerTxPdu/IpduMContainerTxPduRef",
+              "description": "Reference to the Pdu which represents the container and is used for transmission.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "IpduMContainerTxPduRef",
+              "uuid": "ECUC:c60e1385-2617-4809-8f06-3165454aef0e"
+            }
+          ],
+          "shortName": "IpduMContainerTxPdu",
+          "subContainers": [],
+          "uuid": "ECUC:05166e13-676a-4d11-857b-c0a25b5bf15a"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway",
+          "description": "Contains the configuration parameters received I-PDUs by the IpduM module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "IpduMRxPathway",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication",
+              "description": "Contains the configuration for incoming RxIndication calls.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMByteOrder",
+                  "description": "This parameter defines the ByteOrder for all segments (static and dynamic part) and for the selectorField within the MultiplexedPdu.",
+                  "enumValues": [
+                    "BIG_ENDIAN",
+                    "LITTLE_ENDIAN"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMByteOrder",
+                  "type": "ENUM",
+                  "uuid": "ECUC:0a091ae2-be9b-9515-59e3-e1ccee37c364"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxHandleId",
+                  "description": "This is the I-PDU ID of the incoming I-PDU. If an incoming RxIndication's I-PDU ID matches this value then it is unpacked according to the specification in thi…",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMRxHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:0033a86b-82e6-4de0-ba8f-63fb49ed2d56"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxIndicationPduRef",
+                  "description": "Reference to the received Pdu representation in the ECU Configuration Description exchange file.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMRxIndicationPduRef",
+                  "uuid": "ECUC:1072e012-067c-4a46-a7d3-c732cc72e5fb"
+                }
+              ],
+              "shortName": "IpduMRxIndication",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxDynamicPart",
+                  "description": "This container contains the configuration for the dynamic part of incoming RxIndication calls. When an incoming received I-PDU's selector field matches the Ipd…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxDynamicPart/IpduMRxSelectorValue",
+                      "description": "This is the selector value that this container refers to.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMRxSelectorValue",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:3f6485c6-3099-46d6-8c29-8472e98b8156"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxDynamicPart/IpduMOutgoingDynamicPduRef",
+                      "description": "When the new I-PDU is sent out it is sent with this I-PDU ID. Reference to the sent PDU representation in the ECU Configuration Description exchange file.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMOutgoingDynamicPduRef",
+                      "uuid": "ECUC:4e7f0043-612c-4d35-b62a-db8642482b3e"
+                    }
+                  ],
+                  "shortName": "IpduMRxDynamicPart",
+                  "subContainers": [],
+                  "uuid": "ECUC:f1397a3c-d592-43f4-b7c2-f27fa8343387"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxDynamicSegment",
+                  "description": "The dynamic part of the multiplexed incoming I-Pdu (referenced by IpduMRxIndicationPduRef) can be separated into several segments.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxDynamicSegment/IpduMSegmentLength",
+                      "description": "Length of the segment in bits.",
+                      "isOptional": false,
+                      "max": 2032,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:1d7f4d14-4258-9cf8-775f-46d3a9e30dd8"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxDynamicSegment/IpduMSegmentPosition",
+                      "description": "Segments bit position in the multiplexed Pdu.",
+                      "isOptional": false,
+                      "max": 2031,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:6915a896-c67f-9906-6ea6-ceb1e3ea1b41"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "IpduMRxDynamicSegment",
+                  "subContainers": [],
+                  "uuid": "ECUC:82472b9d-3180-4fbc-b95d-3df0ebca936e"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxStaticPart",
+                  "description": "This container contains the configuration for the static part of incoming RxIndication calls. On reception, the new outgoing I-PDU for the static part is const…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxStaticPart/IpduMOutgoingStaticPduRef",
+                      "description": "When the new I-PDU is sent out it is sent with this I-PDU ID. Reference to the sent Pdu representation in the ECU Configuration Description exchange file.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMOutgoingStaticPduRef",
+                      "uuid": "ECUC:0e3f6906-b529-4773-b5dc-18f321d17d07"
+                    }
+                  ],
+                  "shortName": "IpduMRxStaticPart",
+                  "subContainers": [],
+                  "uuid": "ECUC:4928f0b1-4227-4382-a2e5-c6dc41caf280"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxStaticSegment",
+                  "description": "The static part of the multiplexed incoming I-Pdu (referenced by IpduMRxIndicationPduRef) can be separated into several segments.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxStaticSegment/IpduMSegmentLength",
+                      "description": "Length of the segment in bits.",
+                      "isOptional": false,
+                      "max": 2032,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:5819405f-eec1-91c8-7598-7c24e2adf5a2"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMRxStaticSegment/IpduMSegmentPosition",
+                      "description": "Segments bit position in the multiplexed Pdu.",
+                      "isOptional": false,
+                      "max": 2031,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:a3af9be2-72e8-8dd6-6ce0-04031cb5030b"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "IpduMRxStaticSegment",
+                  "subContainers": [],
+                  "uuid": "ECUC:bce11ee8-dde9-448c-b796-734224957b38"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMSelectorField",
+                  "description": "This contains the location and the length of the selector field.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMSelectorField/IpduMSelectorFieldLength",
+                      "description": "Length of the selector field in bits.",
+                      "isOptional": false,
+                      "max": 16,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSelectorFieldLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f25ae367-aac9-e609-e486-87a52b031fdd"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMRxPathway/IpduMRxIndication/IpduMSelectorField/IpduMSelectorFieldPosition",
+                      "description": "Selector field bit position in the multiplexed Pdu.",
+                      "isOptional": false,
+                      "max": 2031,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSelectorFieldPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:b542e6ee-166c-e294-bddc-23c4350a221e"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "IpduMSelectorField",
+                  "subContainers": [],
+                  "uuid": "ECUC:7812a762-87eb-986f-2dc8-b97e52a6cd82"
+                }
+              ],
+              "uuid": "ECUC:79391c0f-2367-4aaa-9fe1-0499addc12a4"
+            }
+          ],
+          "uuid": "ECUC:7bedc87c-e833-4e9a-8ca3-ac8d731e7639"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway",
+          "description": "Contains the configuration parameters transmitted I-PDUs by the IpduM module.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "IpduMTxPathway",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest",
+              "description": "This container is used to specify the configuration for Transmit requests.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMByteOrder",
+                  "description": "This parameter defines the ByteOrder for all segments (static and dynamic part) and for the selectorField within the MultiplexedPdu.",
+                  "enumValues": [
+                    "BIG_ENDIAN",
+                    "LITTLE_ENDIAN"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMByteOrder",
+                  "type": "ENUM",
+                  "uuid": "ECUC:9e473272-4b2e-95b2-57bf-085ed9f9b7c3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxTriggerMode",
+                  "description": "Selects whether to send the multiplexed I-PDU immediately or at some later date.",
+                  "enumValues": [
+                    "DYNAMIC_PART_TRIGGER",
+                    "NONE",
+                    "STATIC_OR_DYNAMIC_PART_TRIGGER",
+                    "STATIC_PART_TRIGGER"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMTxTriggerMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:69612ecd-3531-4049-b5c0-7524610ef2bc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMIPduUnusedAreasDefault",
+                  "description": "IpduM module fills not used areas of an I-PDU with this bit-pattern",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMIPduUnusedAreasDefault",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:69073676-9fa7-4288-b2e0-3026caff1032"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxConfirmationPduId",
+                  "description": "Handle Id used by the PduR for confirmation (IpduM_TxConfirmation)<b> </b>and for TriggerTransmit (IpduM_TriggerTransmit).",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMTxConfirmationPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:258cd7c4-f9ec-4228-9e80-8c7b5065c561"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMInitialDynamicPart",
+                  "description": "Reference to the dynamic part that shall be used to initialize this multiplexed TX-I-PDU.",
+                  "destinationContainerType": "IpduMTxDynamicPart",
+                  "destinationRef": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicPart",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicPart"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMInitialDynamicPart",
+                  "uuid": "ECUC:360b8673-3660-4296-bce3-e0c4f605a64e"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMOutgoingPduRef",
+                  "description": "Reference to the PDU defining the outgoing I-PDU.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "IpduMOutgoingPduRef",
+                  "uuid": "ECUC:9c9ad385-0306-44ac-a575-b5c32377b397"
+                }
+              ],
+              "shortName": "IpduMTxRequest",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMSelectorField",
+                  "description": "This contains the location and the length of the selector field.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMSelectorField/IpduMSelectorFieldLength",
+                      "description": "Length of the selector field in bits.",
+                      "isOptional": false,
+                      "max": 16,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSelectorFieldLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:8698faf7-375c-e6a6-e261-ae3716c5143c"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMSelectorField/IpduMSelectorFieldPosition",
+                      "description": "Selector field bit position in the multiplexed Pdu.",
+                      "isOptional": false,
+                      "max": 2031,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSelectorFieldPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:4980fe7d-a2ff-e331-bbb7-4a5620cc167d"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "IpduMSelectorField",
+                  "subContainers": [],
+                  "uuid": "ECUC:0c50bef2-147e-990c-2ba3-e0103e68c1e1"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicPart",
+                  "description": "Configuration parameters for an instance of a TxRequest call into the IpduM. When a Tx Request with the IpduMTxDynamicHandleId is received by the IpduM, all se…",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicPart/IpduMJitUpdate",
+                      "description": "If configured to true fetch the data of this part Just-In-Time via the triggerTransmit API of the PduR.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMJitUpdate",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:d09eccc9-8102-9927-19b6-15b5f18d8936"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicPart/IpduMTxDynamicConfirmation",
+                      "description": "A transmit request can be confirmed by the lower layer. If this parameter is set to true a confirmation of the I-PDU in COM representing the dynamic part is ge…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMTxDynamicConfirmation",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:b6ce8ccd-e819-4c1d-82a5-1a795a79cdf2"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicPart/IpduMTxDynamicHandleId",
+                      "description": "This defines an incoming handle id. When the handle of an incoming Tx Request matches this id, the configured dynamic segments are copied and the IpduMTxTrigge…",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMTxDynamicHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:6387c164-c4f0-42c4-b7ef-3d03708e8e86"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicPart/IpduMTxDynamicPduRef",
+                      "description": "Reference to the Pdu representation in the ECU Configuration Description exchange file to be transmitted.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMTxDynamicPduRef",
+                      "uuid": "ECUC:ccb1bc43-ddaa-499b-a564-619481758ef8"
+                    }
+                  ],
+                  "shortName": "IpduMTxDynamicPart",
+                  "subContainers": [],
+                  "uuid": "ECUC:3796101d-e7a3-4b52-98c6-f1127db9a143"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicSegment",
+                  "description": "The dynamic part of the multiplexed outgoing I-Pdu (referenced by IpduMOutgoingPduRef) can be separated into several segments.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicSegment/IpduMSegmentLength",
+                      "description": "Length of the segment in bits.",
+                      "isOptional": false,
+                      "max": 2032,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:883b69df-9a3b-932c-5cb7-1d4e08a27260"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxDynamicSegment/IpduMSegmentPosition",
+                      "description": "Segments bit position in the multiplexed Pdu.",
+                      "isOptional": false,
+                      "max": 2031,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d3d1c562-1e62-8f3a-53fe-a52c42a97fc9"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "IpduMTxDynamicSegment",
+                  "subContainers": [],
+                  "uuid": "ECUC:ed034868-8963-45f0-9eb5-146b4a89f7f6"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticPart",
+                  "description": "Configuration parameters for an instance of a Tx_Request call into the IpduM. When a Tx Request with the IpduMTxStaticHandleId is received by the IpduM, all se…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticPart/IpduMJitUpdate",
+                      "description": "If configured to true fetch the data of this part Just-In-Time via the triggerTransmit API of the PduR.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMJitUpdate",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:c7153793-c847-9c50-0288-8881bb508325"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticConfirmation",
+                      "description": "A transmit request can be confirmed by the lower layer. If this parameter is set to true a confirmation of the I-PDU in COM representing the static part is gen…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMTxStaticConfirmation",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:4ce07ee5-1ee2-4cb7-a88e-a1a5fbc52dcb"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticHandleId",
+                      "description": "This defines an incoming handle id. When the handle of an incoming Tx Request matches this id, the configured static segments are copied and the IpduMTxTrigger…",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMTxStaticHandleId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:70025d88-e703-48fd-bf16-be6df3b135db"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticPart/IpduMTxStaticPduRef",
+                      "description": "Reference to the Pdu representation in the ECU Configuration Description exchange file to be transmitted.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMTxStaticPduRef",
+                      "uuid": "ECUC:1e7ba123-6e03-4f9c-b63c-cb74d7b31a9c"
+                    }
+                  ],
+                  "shortName": "IpduMTxStaticPart",
+                  "subContainers": [],
+                  "uuid": "ECUC:2e0c7ae8-2ee8-4e7b-8199-63de477c9b32"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticSegment",
+                  "description": "The static part of the multiplexed outgoing I-Pdu (referenced by IpduMOutgoingPduRef) can be separated into several segments.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticSegment/IpduMSegmentLength",
+                      "description": "Length of the segment in bits.",
+                      "isOptional": false,
+                      "max": 2032,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:b2ab0c48-ce4d-8fc8-759b-be09f74d18cf"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMConfig/IpduMTxPathway/IpduMTxRequest/IpduMTxStaticSegment/IpduMSegmentPosition",
+                      "description": "Segments bit position in the multiplexed Pdu.",
+                      "isOptional": false,
+                      "max": 2031,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "IpduMSegmentPosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:fe4167cb-5274-8bd6-6ce3-45e831542638"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "IpduMTxStaticSegment",
+                  "subContainers": [],
+                  "uuid": "ECUC:1772ead1-bd75-428c-b799-b52739349e65"
+                }
+              ],
+              "uuid": "ECUC:0d77339e-affa-4b47-9dbc-2b2b999e0703"
+            }
+          ],
+          "uuid": "ECUC:9cdee255-853a-4712-9486-6c862bb07011"
+        }
+      ],
+      "uuid": "ECUC:7af0ef33-3531-4c92-8769-330c3db2f19b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral",
+      "description": "Contains the general configuration parameters of IpduM.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMContainedTxPduPriorityHandling",
+          "description": "This parameter enables/disables handling of priority for IpduMContainedTxPdu's with IpduMContainedTxPduCollectionSemantics IPDUM_LAST_IS_BEST.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IpduMContainedTxPduPriorityHandling",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:44ab461e-2693-4749-a288-b37a2a6aeab2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IpduMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2ab08891-5dd2-4861-8432-8aedd0b61dfe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMMetaDataSupport",
+          "description": "This parameter enables/disables the support of meta-data feature.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IpduMMetaDataSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:95c6d513-2884-409b-8b42-2c6cb263709b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMStaticPartExists",
+          "description": "This is to allow optimizations in the case the IpduM will never be used with a static part.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IpduMStaticPartExists",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9974a5d3-b6a8-4d53-98a8-415803a91d78"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMVersionInfoApi",
+          "description": "Active/Deactivate the version information API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IpduMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c3f380d8-b5fb-4fe4-a1ef-fc16979aaed6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMHeaderByteOrder",
+          "description": "This parameter defines the ByteOrder of the headers inside a Container I-PDU.",
+          "enumValues": [
+            "IPDUM_BIG_ENDIAN",
+            "IPDUM_LITTLE_ENDIAN"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IpduMHeaderByteOrder",
+          "type": "ENUM",
+          "uuid": "ECUC:afc9ce05-da15-49c3-869b-8caf4cc3a1e9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMRxTimeBase",
+          "description": "The period between successive calls to IpduM_MainFunctionRx in seconds. This parameter may be used by the IpduM generator to transform the values of the recept…",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IpduMRxTimeBase",
+          "type": "FLOAT",
+          "uuid": "ECUC:07a408a5-5972-4e58-9a46-c1528bf4d50c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMGeneral/IpduMTxTimeBase",
+          "description": "The period between successive calls to IpduM_MainFunctionTx in seconds. This parameter may be used by the IpduM generator to transform the values of the recept…",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "IpduMTxTimeBase",
+          "type": "FLOAT",
+          "uuid": "ECUC:e2f906e6-a038-456b-917d-58c01274453f"
+        }
+      ],
+      "references": [],
+      "shortName": "IpduMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:315d58cd-393b-43c9-9743-757f43d5e78e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMPublishedInformation",
+      "description": "Additional published parameters not covered by",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/IpduM/IpduMPublishedInformation/IpduMRxDirectComInvocation",
+          "description": "If set to TRUE the COM invocation optimization as defined in",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "IpduMRxDirectComInvocation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7624ef7a-7214-43a6-96a5-a30a54b6af64"
+        }
+      ],
+      "references": [],
+      "shortName": "IpduMPublishedInformation",
+      "subContainers": [],
+      "uuid": "ECUC:e49398c4-0f28-425e-8177-a0d5623eccfe"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/IpduM",
+  "description": "Configuration of the IpduM (Ipdu Multiplexer) module.",
+  "importWarnings": [
+    "IpduMContainedRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMContainedTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMContainerRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMContainerTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMOutgoingDynamicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMOutgoingStaticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMRxIndicationPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMTxDynamicPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMTxStaticPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "IpduMOutgoingPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "IpduM",
+  "version": "4.4.0"
+}

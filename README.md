@@ -1,6 +1,6 @@
 # 航海科技 · OneSAR Configurator
 
-## 当前使用入口（TASK-019）
+## 当前使用入口（TASK-021）
 
 安装 Node.js 18+ 后执行 `npm install`、`npm run dev`，打开 `http://localhost:3000/`。
 首页采用蓝白产品目录，提供新建工程、本机工程列表以及知识库/订阅中心的「待更新」页面。
@@ -11,15 +11,17 @@ Windows 桌面入口由 `scripts/desktop/Install-DesktopShortcut.ps1` 安装，�
 「BSW 配置器」快捷方式即可打开当前仓库的最新首页；启动器不会复制旧版本，也不修改系统执行策略。
 
 新建工程分两步：填写名称、AUTOSAR 版本、芯片与描述，然后勾选模块。
-本轮内置官方 CP **4.4.0 的 Dem / CanIf / NvM**，无需手工导入 ARXML。
-CP **4.2.2 定义库待接入**，已取得的官方源将在 TASK-021 接入；旧手写 4.2.2 资产仅用于只读恢复。
+内置目录包含 CP **4.4.0 的全部 98 个模块**和 CP **4.2.2 的全部 84 个模块**，按所选版本展示。
+目前分别有 94 / 23 个模块可选择，其他模块显示具体原因；可选择不代表所有字段或供应商集成都已支持。
+Dem 4.2.2 已验证创建、编辑、保存、校验、JSON/ARXML 往返及通用 C 代码编译；旧手写资产仍只用于只读恢复。
 S32K1XX、S32K3XX 是工程属性，不表示已实现 MCAL/芯片驱动适配。
 
 工程元信息保存在独立 `autosar-projects` 索引中；配置集沿用原来的 v3 库。
 旧配置集自动显示在「默认工程」，不进行迁移或覆盖。移除工程归属只移除索引关联，配置仍保留。
 数据属于当前浏览器及来源地址，请保持使用 `localhost:3000`；定期导出备份。
-本轮工程模块由创建时选择；模块管理仍管理本机定义和全局开关，新增手工定义在默认工程使用。
-按工程增减模块、工程整体导出与跨模块边界收口属于后续 S5；不宣称供应商 BSW 集成已验证。
+工程向导和模块管理共用分类、搜索、左右加入/移除选择器。已建工程可通过模块管理调整归属，提交前需确认；
+移除只隐藏该工程的模块，配置数据保留，重新加入会恢复原配置。取消不写入数据。
+工程整体导出与跨模块边界收口属于后续 S5；不宣称供应商 BSW 集成已验证。
 
 右键实例仅显示「新建实例、克隆实例、删除实例」。悬停新建即展开子容器名称，移出两级菜单
 300ms 后收起；键盘 ArrowRight/ArrowLeft/Esc 仍可使用。参数说明保留在底部说明区。
@@ -33,15 +35,17 @@ S32K1XX、S32K3XX 是工程属性，不表示已实现 MCAL/芯片驱动适配�
 node scripts/gen-bswmd-from-arxml.mjs Dem ../AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml bswmd/dem_bswmd.json
 node scripts/gen-bswmd-from-arxml.mjs CanIf ../AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml bswmd/builtin/4.4.0/canif_bswmd.json
 node scripts/gen-bswmd-from-arxml.mjs NvM ../AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml bswmd/builtin/4.4.0/nvm_bswmd.json
+node scripts/gen-bswmd-from-arxml.mjs --all ../AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml bswmd/builtin/4.4.0
+node scripts/gen-bswmd-from-arxml.mjs --all ../AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml bswmd/builtin/4.2.2
 npm run build
 npm run test:verify
 ```
 
 生成物带 `$source`、源 SHA256、内容 SHA256 和相邻 `changelog.json`，对象键稳定排序、数组保留定义顺序。
-三份定义分别构建为独立资源块；CanIf/NvM 在选择时加载，Dem 随配置 store 加载，不计入主 JS 包。
-用户已追加完整双版本模块目录及统一左右选择器要求。当前源清单实测为 84 / 98 个模块，
-现解析器读入 20 / 92 个；详细失败位置见 `evidence/task019/fullcatalog-source-inventory.json`。
-这不是最终支持数量；全量解析补齐与版本隔离待 WorkBuddy 更新后续契约，不把三模块版视为该要求完成。
+全目录按模块构建为独立资源块；所选模块才加载，既有 Dem 基线仍由配置 store 初始化。
+最新解析数是 4.2.2 的 78/84、4.4.0 的 94/98；其中 55 个已解析的 4.2.2 模块仍等待符号名引用全库验证。
+完整状态、来源哈希和输出边界检查保存在各版本的 `catalog.json`。后续类型批次见
+[TASK-021 交付与限制](.codex/reports/TASK-021-REPORT.md)，不把目录可见等同于全功能交付。
 
 当前范围和阶段依据 [产品设计](docs/product-design/02-TECH-DESIGN.md) 与
 [任务状态](.codex/STATE.json)。下面保留早期项目说明以供追溯，其中路线表不是当前完成状态；

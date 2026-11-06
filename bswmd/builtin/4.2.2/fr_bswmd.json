@@ -1,0 +1,925 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "e18a4c2a849f3bb572c44d9d539e1a4dec8f3973fe61e06020dd1171ef882370",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral",
+      "description": "General configuration (parameters) of the FlexRay Driver module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrCtrlTestCount",
+          "description": "Maxmimum number of iterations the FlexRay controller hardware test is performed during controller initialization.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrCtrlTestCount",
+          "type": "INTEGER",
+          "uuid": "ECUC:f7190b81-1f47-444c-9d32-9e0e82e0c9f7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:5ee7a7bf-1cc4-47de-a427-f11ea06fbb2f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrNumCtrlSupported",
+          "description": "Determines the maximum number of communication controllers that the driver supports.",
+          "isOptional": false,
+          "max": 256,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrNumCtrlSupported",
+          "type": "INTEGER",
+          "uuid": "ECUC:2a9eb7e5-0f0b-41c1-a27b-5e4021e02ff1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c18a7dea-5161-442c-8232-61c38c251e94"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrDisableLPduSupport",
+          "description": "Enables or disabled API function Fr_DisableLPdu.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrDisableLPduSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:28c651d6-c284-49c6-889d-5f94a8acdd94"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrPrepareLPduSupport",
+          "description": "Enables or disables API function Fr_PrepareLPdu.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrPrepareLPduSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1cbf3793-ff69-4c9d-a7cb-f5a40ea5b7e5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrReconfigLPduSupport",
+          "description": "Enables or disabled API function Fr_ReconfigLPdu.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrReconfigLPduSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0356ade9-2eaa-4b7a-aac8-c283814186f8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrRxStringentCheck",
+          "description": "If stringent check is enabled (true), received frames are accepted only if no slot status error occurred.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrRxStringentCheck",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:46202616-b70b-4edf-adff-f10f6e750624"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrRxStringentLengthCheck",
+          "description": "If stringent check is enabled (true), received frames are accepted only if the received payload length matches the configured payload length.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrRxStringentLengthCheck",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6f6fc996-4dcb-458b-acce-465a0db38d3f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrGeneral/FrVersionInfoApi",
+          "description": "Enables/disables the existence of the Fr_GetVersionInfo API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:33fda032-3791-4e79-a96d-bb26532308d7"
+        }
+      ],
+      "references": [],
+      "shortName": "FrGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:b3e5d20a-0749-49ce-868a-6e44e55bd319"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Fr module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "FrMultipleConfiguration",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController",
+          "description": "Configuration of the individual controller.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrCtrlIdx",
+              "description": "Determines index of CC within Fr.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrCtrlIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:3a32cd48-9beb-49bf-9f69-8d9f992db560"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPAllowPassiveToActive",
+              "description": "Number of consecutive even/odd cycle pairs that must have valid clock correction terms before the CC will be allowed to transition from the POC:normal passive …",
+              "isOptional": false,
+              "max": 31,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPAllowPassiveToActive",
+              "type": "INTEGER",
+              "uuid": "ECUC:dd94c5b2-37fb-4abb-9410-9e4e3d7a0e73"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPClusterDriftDamping",
+              "description": "Local cluster drift damping factor used for rate correction [Microticks].",
+              "isOptional": false,
+              "max": 20,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPClusterDriftDamping",
+              "type": "INTEGER",
+              "uuid": "ECUC:d35d03fb-d515-4b9f-9579-2d3f8e99c174"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPDecodingCorrection",
+              "description": "Value used by the receiver to calculate the difference between primary time reference point and secondary time reference point [Microticks].",
+              "isOptional": false,
+              "max": 143,
+              "min": 12,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPDecodingCorrection",
+              "type": "INTEGER",
+              "uuid": "ECUC:31d98484-adf6-4157-b2e5-d1fc9e78d70b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPDelayCompensationA",
+              "description": "Value used to compensate for reception delays on the indicated channel. This covers assumed propagation delay up to cPropagationDelayMax for microticks in the …",
+              "isOptional": false,
+              "max": 211,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPDelayCompensationA",
+              "type": "INTEGER",
+              "uuid": "ECUC:9427d10c-a311-43a6-b1f9-2afebeabb656"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPDelayCompensationB",
+              "description": "Value used to compensate for reception delays on the indicated channel. This covers assumed propagation delay up to cPropagationDelayMax for microticks in the …",
+              "isOptional": false,
+              "max": 211,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPDelayCompensationB",
+              "type": "INTEGER",
+              "uuid": "ECUC:7e207545-f11a-47b6-a69f-95b6ad773e2a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPKeySlotId",
+              "description": "ID of the key slot, i.e., the slot used to transmit the startup frame, sync frame, or designated key slot frame. If this parameter is set to zero the node does…",
+              "isOptional": false,
+              "max": 1023,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPKeySlotId",
+              "type": "INTEGER",
+              "uuid": "ECUC:bec8cdb4-9d4f-40f6-bc34-7c4b1db8501e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPLatestTx",
+              "description": "Number of the last minislot in which a frame transmission can start in the dynamic segment.",
+              "isOptional": false,
+              "max": 7988,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPLatestTx",
+              "type": "INTEGER",
+              "uuid": "ECUC:5c0ed691-4e48-4e92-8fc5-6f288bda5c75"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPMacroInitialOffsetA",
+              "description": "Integer number of macroticks between the static slot boundary and the following macrotick boundary of the secondary time reference point based on the nominal m…",
+              "isOptional": false,
+              "max": 68,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPMacroInitialOffsetA",
+              "type": "INTEGER",
+              "uuid": "ECUC:ad06786f-950d-4eb2-b459-ad62b8312238"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPMacroInitialOffsetB",
+              "description": "Integer number of macroticks between the static slot boundary and the following macrotick boundary of the secondary time reference point based on the nominal m…",
+              "isOptional": false,
+              "max": 68,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPMacroInitialOffsetB",
+              "type": "INTEGER",
+              "uuid": "ECUC:20667922-deba-4f36-a9fd-38bb73a8cb06"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPMicroInitialOffsetA",
+              "description": "Number of microticks between the secondary time reference point",
+              "isOptional": false,
+              "max": 239,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPMicroInitialOffsetA",
+              "type": "INTEGER",
+              "uuid": "ECUC:40d9b3f2-34e9-4df6-b5de-8cdff1df15ca"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPMicroInitialOffsetB",
+              "description": "Number of microticks between the secondary time reference point",
+              "isOptional": false,
+              "max": 239,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPMicroInitialOffsetB",
+              "type": "INTEGER",
+              "uuid": "ECUC:51f90f36-3a2b-476f-8f62-adff14ce2630"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPMicroPerCycle",
+              "description": "Nominal number of microticks in the communication cycle of the local node. If nodes have different microtick durations this number will differ from node to nod…",
+              "isOptional": false,
+              "max": 1280000,
+              "min": 640,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPMicroPerCycle",
+              "type": "INTEGER",
+              "uuid": "ECUC:ff796864-926f-40e2-bc7a-cf4a66ff0f93"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPOffsetCorrectionOut",
+              "description": "Magnitude of the maximum permissible offset correction value [Microticks]. Remark: Upper limit 15567 for FlexRay Protocol 2.1 Rev A compliance. Remark: Lower l…",
+              "isOptional": false,
+              "max": 16082,
+              "min": 13,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPOffsetCorrectionOut",
+              "type": "INTEGER",
+              "uuid": "ECUC:f18c4dbe-fe8e-4a72-8d55-4330369d3c2a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPOffsetCorrectionStart",
+              "description": "Start of the offset correction phase within the NIT, expressed as the number of macroticks from the start of cycle [Macroticks].",
+              "isOptional": false,
+              "max": 15999,
+              "min": 7,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPOffsetCorrectionStart",
+              "type": "INTEGER",
+              "uuid": "ECUC:43ed0211-08ef-4c45-892c-079f9b547554"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPPayloadLengthDynMax",
+              "description": "Maximum payload length for dynamic frames [16 bit words].",
+              "isOptional": false,
+              "max": 127,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPPayloadLengthDynMax",
+              "type": "INTEGER",
+              "uuid": "ECUC:43f079aa-f758-4d8a-9669-c2f1c04e26d3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPRateCorrectionOut",
+              "description": "Magnitude of the maximum permissible rate correction value and the maximum drift offset between two nodes operating with unsynchronized clocks for one communic…",
+              "isOptional": false,
+              "max": 3846,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPRateCorrectionOut",
+              "type": "INTEGER",
+              "uuid": "ECUC:b37acd1f-3189-480f-bfcb-5c1b977c5647"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPSecondKeySlotId",
+              "description": "ID of the second key slot, in which a second startup frame shall be sent when operating as a coldstart node in a TT-L or TT-D cluster. If this parameter is set…",
+              "isOptional": false,
+              "max": 1023,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPSecondKeySlotId",
+              "type": "INTEGER",
+              "uuid": "ECUC:c7c872e2-01cc-476d-b1b8-f84f79b9648b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPWakeupPattern",
+              "description": "Number of repetitions of the wakeup symbol that are combined to form a wakeup pattern when the node enters the POC:wakeup send state.",
+              "isOptional": false,
+              "max": 63,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPWakeupPattern",
+              "type": "INTEGER",
+              "uuid": "ECUC:a52c277d-177f-4992-b089-be89fe0aa5ed"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPdAcceptedStartupRange",
+              "description": "Expanded range of measured clock deviation allowed for startup frames during integration [Microticks].",
+              "isOptional": false,
+              "max": 2743,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPdAcceptedStartupRange",
+              "type": "INTEGER",
+              "uuid": "ECUC:4ac029b8-197f-4cc4-83ca-25020717392a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPdListenTimeout",
+              "description": "Value for the startup listen timeout and wakeup listen timeout. Although this is a node local parameter, the real time equivalent of this value should be the s…",
+              "isOptional": false,
+              "max": 2567692,
+              "min": 1284,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPdListenTimeout",
+              "type": "INTEGER",
+              "uuid": "ECUC:0dbbe505-256f-425c-ab34-174f06f85168"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPAllowHaltDueToClock",
+              "description": "Boolean flag that controls the transition to the POC:halt state due to a clock synchronization errors. If set to true, the CC is allowed to transition to POC:h…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPAllowHaltDueToClock",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:3f506b12-a90f-41c1-adb7-983f01e34a7c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPExternalSync",
+              "description": "Flag indicating whether the node is externally synchronized (operating as time gateway sink in an TT-E cluster) or locally synchronized.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPExternalSync",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:61a1d599-e805-4930-99fe-5e1bf35fd853"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPFallBackInternal",
+              "description": "Flag indicating whether a time gateway sink node will switch to local clock operation when synchronization with the time gateway source node is lost (FrPFallBa…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPFallBackInternal",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:2005326b-79c7-49c1-970f-add1213853cc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPKeySlotOnlyEnabled",
+              "description": "Flag indicating whether or not the node shall enter key slot only mode following startup.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPKeySlotOnlyEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d48290b7-aa14-422e-9a84-9097fc549a38"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPKeySlotUsedForStartup",
+              "description": "Flag indicating whether the key slot is used to transmit a startup frame.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPKeySlotUsedForStartup",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:810f7e48-5750-4a4e-8b21-152b66f130ea"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPKeySlotUsedForSync",
+              "description": "Flag indicating whether the key slot is used to transmit a sync frame.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPKeySlotUsedForSync",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:1696b596-e09b-490b-bd0d-f9e18828881c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPNmVectorEarlyUpdate",
+              "description": "Flag indicating when the update of the Network Management Vector",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPNmVectorEarlyUpdate",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:2742b5f9-78a1-4afe-9302-a991716fe921"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPTwoKeySlotMode",
+              "description": "Flag indicating whether node operates as a coldstart node in a TT-E or TT-L cluster.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPTwoKeySlotMode",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f9bc7991-84b4-4006-9293-4b069ef7e008"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPChannels",
+              "description": "Channels to which the node is connected.",
+              "enumValues": [
+                "FR_CHANNEL_A",
+                "FR_CHANNEL_AB",
+                "FR_CHANNEL_B"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPChannels",
+              "type": "ENUM",
+              "uuid": "ECUC:89ff60e9-30c8-447e-a909-381b3a08180f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPSamplesPerMicrotick",
+              "description": "Number of samples per microtick. Remark: Allowed range N1SAMPLES, N2SAMPLES for FlexRay Protocol 3.0 compliance.",
+              "enumValues": [
+                "N1SAMPLES",
+                "N2SAMPLES",
+                "N4SAMPLES"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPSamplesPerMicrotick",
+              "type": "ENUM",
+              "uuid": "ECUC:1ef53e04-3f48-4b0e-abc6-75e397bc291e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPWakeupChannel",
+              "description": "Channel used by the node to send a wakeup pattern.",
+              "enumValues": [
+                "FR_CHANNEL_A",
+                "FR_CHANNEL_B"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPWakeupChannel",
+              "type": "ENUM",
+              "uuid": "ECUC:5f91c8c6-e7c5-4c9d-a5d2-68ee4dfad7d5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrPdMicrotick",
+              "description": "Duration of a microtick.",
+              "enumValues": [
+                "T100NS",
+                "T12_5NS",
+                "T200NS",
+                "T25NS",
+                "T50NS"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrPdMicrotick",
+              "type": "ENUM",
+              "uuid": "ECUC:725263ab-2b44-4e77-b194-00c92500df40"
+            }
+          ],
+          "references": [],
+          "shortName": "FrController",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrAbsoluteTimer",
+              "description": "Specifies the absolute timer configuration parameters of the Fr.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrAbsoluteTimer/FrAbsTimerIdx",
+                  "description": "Contains the index of an absolute timer contained in Fr on a certain FlexRay CC.",
+                  "isOptional": false,
+                  "max": 254,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrAbsTimerIdx",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:506f6ded-1210-4382-9eae-e064b94ed945"
+                }
+              ],
+              "references": [],
+              "shortName": "FrAbsoluteTimer",
+              "subContainers": [],
+              "uuid": "ECUC:a0b8d859-52ca-42da-98ae-4e83337a8c9a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrControllerDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occur…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrControllerDemEventParameterRefs/FR_E_CTRL_TESTRESULT",
+                  "description": "Reference to DEM event Id that is reported for FlexRay",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FR_E_CTRL_TESTRESULT",
+                  "uuid": "ECUC:875582b1-4980-463c-a9f2-b1f9b1b2e00a"
+                }
+              ],
+              "shortName": "FrControllerDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:ab12d9ad-0d6a-497b-ace4-5d9638033158"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo",
+              "description": "One First In First Out (FIFO) queued receive structure, defining the admittance criteria to the FIFO, and mandating the ability to admit messages into the FIFO…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrAdmitWithoutMessageId",
+                  "description": "Determines whether or not frames received in the dynamic segment that don't contain a message ID will be admitted into the FIFO.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrAdmitWithoutMessageId",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:26ee1fad-7fb9-490f-a2d0-54e10ba61e1d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrBaseCycle",
+                  "description": "FIFO cycle counter acceptance criteria.",
+                  "isOptional": false,
+                  "max": 63,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrBaseCycle",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:318f7ec1-ad27-45b9-91b7-720d884775d3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrCycleRepetition",
+                  "description": "FIFO cycle counter acceptance criteria. Valid values are 1,2,4,5,8,10,16,20,32,40,50,64.",
+                  "isOptional": false,
+                  "max": 64,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrCycleRepetition",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:454b7138-41d8-4c73-94ec-a6552230728f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrFifoDepth",
+                  "description": "FrFifoDepth configures the maximum number of rx-frames which can be contained in the FIFO.",
+                  "isOptional": false,
+                  "max": 2048,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrFifoDepth",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a3d62a6e-c11e-48b7-be8e-16b4a996ae36"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrMsgIdMask",
+                  "description": "FIFO message identifier acceptance criteria (Mask filter).",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrMsgIdMask",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fe24e9f9-ac78-4890-8ae7-8f612d08af57"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrMsgIdMatch",
+                  "description": "FIFO message identifier acceptance criteria (Match filter).",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrMsgIdMatch",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:31e96e81-1722-4483-a674-8c1ac007e9b9"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrChannels",
+                  "description": "FIFO channel admittance criteria.",
+                  "enumValues": [
+                    "FR_CHANNEL_A",
+                    "FR_CHANNEL_AB",
+                    "FR_CHANNEL_B"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrChannels",
+                  "type": "ENUM",
+                  "uuid": "ECUC:ed2ae862-5f03-4f1d-bbd7-453c14c506c0"
+                }
+              ],
+              "references": [],
+              "shortName": "FrFifo",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrRange",
+                  "description": "FIFO Frame Id range acceptance criteria.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrRange/FrRangeMax",
+                      "description": "Last FrameId of this range that will be accepted by the FIFO.",
+                      "isOptional": false,
+                      "max": 2047,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrRangeMax",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:7217fbcd-ccbf-4958-a5ca-12d7c84c9410"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrFifo/FrRange/FrRangeMin",
+                      "description": "First FrameId of this range that will be accepted by the FIFO.",
+                      "isOptional": false,
+                      "max": 2047,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrRangeMin",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:1ea0cf4e-710f-4137-9df4-ce3975680ede"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "FrRange",
+                  "subContainers": [],
+                  "uuid": "ECUC:f989ae03-b776-4ea2-a8d3-f2d0b872350f"
+                }
+              ],
+              "uuid": "ECUC:8cef4957-b4d3-49e6-a231-b775f3644c93"
+            }
+          ],
+          "uuid": "ECUC:6757a371-4453-46b9-9e8d-a290a0727138"
+        }
+      ],
+      "uuid": "ECUC:b6bb3a2a-b636-4ae2-98ff-ae92b378962e"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Fr",
+  "description": "Configuration of the Fr (FlexRay driver) module.",
+  "importWarnings": [
+    "FR_E_CTRL_TESTRESULT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Fr",
+  "version": "4.2.2"
+}

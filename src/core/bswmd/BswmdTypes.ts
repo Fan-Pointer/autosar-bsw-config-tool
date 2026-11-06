@@ -71,6 +71,12 @@ export interface BswmdParameter {
   regularExpression?: string;
   /** Definition-owned editing restriction, also enforced by batch edits. */
   readOnly?: boolean;
+  /** Source enumeration has no portable choices; a vendor definition is required. */
+  vendorSpecific?: boolean;
+  /** Invalid source default retained for diagnostics, never used as an editor suggestion. */
+  sourceDefaultValue?: string;
+  /** Definition-level limitation displayed in field help and the module catalog. */
+  definitionIssue?: string;
   /** Optional semantic column role for the DTC CSV projection. */
   exportRole?: 'dtcValue' | 'severity' | 'wwhObdClass' | 'eventId';
   uuid: string;
@@ -100,7 +106,7 @@ export interface BswmdReference {
   /** 全部候选目标定义路径。普通引用 1 个；CHOICE 引用多个（来自 DESTINATION-REFS）。 */
   destinationRefs?: string[];
   /** 引用种类：普通 / 多候选（CHOICE） / 外部（FOREIGN） / 实例（INSTANCE）。 */
-  kind?: 'reference' | 'choice' | 'foreign' | 'instance';
+  kind?: 'reference' | 'choice' | 'foreign' | 'instance' | 'symbolic';
   /** 目标不在本模块内（外部或实例引用），编辑器不能从当前配置集挑选。 */
   isExternal?: boolean;
   /** Optional relation role for the DTC CSV projection. */

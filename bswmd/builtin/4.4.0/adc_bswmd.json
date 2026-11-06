@@ -1,0 +1,844 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "d5e8ef844f4683d27703ca011dac704eba43d8876952bae8ba638e53fa04ec10",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Adc module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "AdcConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit",
+          "description": "This container contains the Driver configuration (parameters) depending on grouping of channels",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionIssue": "标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+              "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcClockSource",
+              "description": "The ADC module specific clock input for the conversion unit can",
+              "enumValues": [],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "readOnly": true,
+              "shortName": "AdcClockSource",
+              "type": "ENUM",
+              "uuid": "ECUC:08f7956c-d858-438f-9504-12df1ba10e73",
+              "vendorSpecific": true
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionIssue": "标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+              "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcHwUnitId",
+              "description": "Description: Numeric ID of the HW Unit. This symbolic name allows accessing Hw Unit data. Enumeration literals are defined vendor specific.",
+              "enumValues": [],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "readOnly": true,
+              "shortName": "AdcHwUnitId",
+              "type": "ENUM",
+              "uuid": "ECUC:7aa61340-e385-4037-b899-40ce3e595755",
+              "vendorSpecific": true
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcPrescale",
+              "description": "Optional ADC module specific clock prescale factor, if supported by hardware.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "AdcPrescale",
+              "type": "INTEGER",
+              "uuid": "ECUC:ea7f8f6d-5d98-4bc4-808e-dc02c4c233ac"
+            }
+          ],
+          "references": [],
+          "shortName": "AdcHwUnit",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel",
+              "description": "This container contains the channel configuration (parameters) depending on the hardware capability.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelConvTime",
+                  "description": "Configuration of conversion time, i.e. the time during which the analogue value is converted into digital representation, (in clock cycles) for each channel, i…",
+                  "isOptional": true,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelConvTime",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:cda3fa6e-3f00-43a3-a05e-5c97744e6aaf"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelHighLimit",
+                  "description": "High limit - used for limit checking.",
+                  "isOptional": true,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelHighLimit",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:65b39edf-db50-479b-becd-268512557336"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelId",
+                  "description": "This parameter defines the assignment of the channel to the physical ADC hardware channel.",
+                  "isOptional": false,
+                  "max": 1024,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:482b876b-9787-4e46-875a-559b7a1427f2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelLowLimit",
+                  "description": "Low limit - used for limit checking.",
+                  "isOptional": true,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelLowLimit",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bd3f78a2-2b94-419a-961c-5ad47f5a8bcb"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelResolution",
+                  "description": "Channel resolution in bits.",
+                  "isOptional": true,
+                  "max": 63,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelResolution",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c05e44f5-f418-4772-9ed3-ba767591baf1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelSampTime",
+                  "description": "Configuration of sampling time, i.e. the time during which the value is sampled, (in clock cycles) for each channel, if supported by hardware.",
+                  "isOptional": true,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelSampTime",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:d11259ac-99d0-488f-9cc6-a66170fbb368"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelLimitCheck",
+                  "description": "Enables or disables limit checking for an ADC channel.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelLimitCheck",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:6c8938e0-f362-4cdc-8711-6d4b429215b3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelRangeSelect",
+                  "description": "In case of active limit checking: defines which conversion values are taken into account related to the boarders defined with AdcChannelLowLimit and AdcChannel…",
+                  "enumValues": [
+                    "ADC_RANGE_ALWAYS",
+                    "ADC_RANGE_BETWEEN",
+                    "ADC_RANGE_NOT_BETWEEN",
+                    "ADC_RANGE_NOT_OVER_HIGH",
+                    "ADC_RANGE_NOT_UNDER_LOW",
+                    "ADC_RANGE_OVER_HIGH",
+                    "ADC_RANGE_UNDER_LOW"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcChannelRangeSelect",
+                  "type": "ENUM",
+                  "uuid": "ECUC:8b1c1853-c817-448a-982b-cb15f700c87d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionIssue": "标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelRefVoltsrcHigh",
+                  "description": "Upper reference voltage source for each channel.",
+                  "enumValues": [],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "readOnly": true,
+                  "shortName": "AdcChannelRefVoltsrcHigh",
+                  "type": "ENUM",
+                  "uuid": "ECUC:94395609-bae2-465a-9878-df86ada9bffb",
+                  "vendorSpecific": true
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionIssue": "标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel/AdcChannelRefVoltsrcLow",
+                  "description": "Lower reference voltage source for each channel.",
+                  "enumValues": [],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "readOnly": true,
+                  "shortName": "AdcChannelRefVoltsrcLow",
+                  "type": "ENUM",
+                  "uuid": "ECUC:582225d2-20d0-47eb-a3c1-f387a68cb7c4",
+                  "vendorSpecific": true
+                }
+              ],
+              "references": [],
+              "shortName": "AdcChannel",
+              "subContainers": [],
+              "uuid": "ECUC:bfd7d43b-017d-4755-9a41-2bf12e38403d"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup",
+              "description": "This container contains the Group configuration (parameters).",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupAccessMode",
+                  "description": "Type of access mode to group conversion results.",
+                  "enumValues": [
+                    "ADC_ACCESS_MODE_SINGLE",
+                    "ADC_ACCESS_MODE_STREAMING"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "AdcGroupAccessMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:faad1eb6-43b4-4195-bacc-6245556acb07"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupConversionMode",
+                  "description": "Type of conversion mode supported by the driver.",
+                  "enumValues": [
+                    "ADC_CONV_MODE_CONTINUOUS",
+                    "ADC_CONV_MODE_ONESHOT"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "AdcGroupConversionMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:25721d0a-d8a7-4ea3-96ab-49ced3030fce"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupReplacement",
+                  "description": "Replacement mechanism, which is used on ADC group level, if a group conversion is interrupted by a group which has a higher priority.",
+                  "enumValues": [
+                    "ADC_GROUP_REPL_ABORT_RESTART",
+                    "ADC_GROUP_REPL_SUSPEND_RESUME"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcGroupReplacement",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f348b1d0-aabc-46ee-a71a-02cc6e49dca6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupTriggSrc",
+                  "description": "Type of source event that starts a group conversion.",
+                  "enumValues": [
+                    "ADC_TRIGG_SRC_HW",
+                    "ADC_TRIGG_SRC_SW"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "AdcGroupTriggSrc",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1fb3e310-c03a-4a29-b2d2-f8d71765c6fc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcHwTrigSignal",
+                  "description": "Configures on which edge of the hardware trigger signal the driver should react, i.e. start the conversion (only if supported by the ADC hardware).",
+                  "enumValues": [
+                    "ADC_HW_TRIG_BOTH_EDGES",
+                    "ADC_HW_TRIG_FALLING_EDGE",
+                    "ADC_HW_TRIG_RISING_EDGE"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcHwTrigSignal",
+                  "type": "ENUM",
+                  "uuid": "ECUC:70c09b6d-3cac-4db1-bee8-aafef6b9d2cf"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcStreamingBufferMode",
+                  "description": "Configure streaming buffer as \"linear buffer\" (i.e. the ADC Driver stops the conversion as soon as the stream buffer is full) or as \"ring buffer\" (wraps around…",
+                  "enumValues": [
+                    "ADC_STREAM_BUFFER_CIRCULAR",
+                    "ADC_STREAM_BUFFER_LINEAR"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "AdcStreamingBufferMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:7ea9390c-d8f5-44c3-baf2-d2575ef9e9c8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupId",
+                  "description": "Numeric ID of the group. This parameter is the symbolic name to be used on the API. This symbolic name allows accessing Channel Group data. This value will be …",
+                  "isOptional": false,
+                  "max": 1023,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "AdcGroupId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:65e3660c-73a4-4172-8d28-4edb71e96153"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupPriority",
+                  "description": "Priority level of the AdcGroup.",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcGroupPriority",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c3c0273d-3fbb-48ea-b64a-6c6592d6a05c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcHwTrigTimer",
+                  "description": "Reload value of the ADC module embedded timer (only if supported by ADC hardware).",
+                  "isOptional": true,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcHwTrigTimer",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ac85f536-5cf6-43f3-a6a7-d824eed38461"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 1,
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcStreamingNumSamples",
+                  "description": "Number of ADC values to be acquired per channel in streaming access mode.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "AdcStreamingNumSamples",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ba5e660f-1505-40bb-9b17-7ce8a5655235"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcNotification",
+                  "description": "Callback function for each group",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "AdcNotification",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:f43bffda-8d3a-4520-b424-b558fcbe752c"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupDefinition",
+                  "description": "Assignment of AdcChannels to a AdcGroups.",
+                  "destinationContainerType": "AdcChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcChannel"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "AdcGroupDefinition",
+                  "uuid": "ECUC:fc412877-d8ab-4b65-96e8-0498ac13762e"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcConfigSet/AdcHwUnit/AdcGroup/AdcGroupEcucPartitionRef",
+                  "description": "Maps an ADC channel group to zero or multiple ECUC partitions to limit the access to this channel group. The ECUC partitions referenced are a subset of the ECU…",
+                  "destinationContainerType": "EcucPartition",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "AdcGroupEcucPartitionRef",
+                  "uuid": "ECUC:39370532-a5e1-4b76-bb7a-6095473b2d1d"
+                }
+              ],
+              "shortName": "AdcGroup",
+              "subContainers": [],
+              "uuid": "ECUC:21b450f5-989b-4095-a451-d237d777751c"
+            }
+          ],
+          "uuid": "ECUC:c67e7c58-3daf-455b-a213-95ae94b248d8"
+        }
+      ],
+      "uuid": "ECUC:fc6e0617-8c73-4b71-b09e-dfb10b76e50d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral",
+      "description": "General configuration (parameters) of the ADC Driver software module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcDeInitApi",
+          "description": "Adds / removes the service Adc_DeInit() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcDeInitApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:16c0e8fd-6160-4ffb-b5a0-0fa22757dbae"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:db321b92-621a-4a62-8778-09b8845d8f2c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcEnableLimitCheck",
+          "description": "Enables or disables limit checking feature in the ADC driver.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcEnableLimitCheck",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:36543fc4-cdc1-453b-9706-844d76e6fa30"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcEnableQueuing",
+          "description": "Determines, if the queuing mechanism is active in case of priority mechanism disabled.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcEnableQueuing",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:cf5318b5-011b-4128-8393-02dd46fe52b5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcEnableStartStopGroupApi",
+          "description": "Adds / removes the services Adc_StartGroupConversion() and Adc_StopGroupConversion() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcEnableStartStopGroupApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:94b12c2c-4231-424c-90c9-a55ee72663fe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcGrpNotifCapability",
+          "description": "Determines, if the group notification mechanism (the functions to enable and disable the notifications) is available at runtime.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcGrpNotifCapability",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b2cfcb7b-0a84-4c50-bebd-32ee405e4300"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcHwTriggerApi",
+          "description": "Adds / removes the services Adc_EnableHardwareTrigger() and Adc_DisableHardwareTrigger() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcHwTriggerApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e5c85e73-38e2-47ae-85e9-c39d1b361249"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcLowPowerStatesSupport",
+          "description": "Adds / removes all power state management related APIs (ADC_SetPowerState, ADC_GetCurrentPowerState, ADC_GetTargetPowerState, ADC_PreparePowerState, ADC_Main_P…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "AdcLowPowerStatesSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c44c41aa-bff4-460d-980a-79bde5bad6c5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcPowerStateAsynchTransitionMode",
+          "description": "Enables / disables support of the ADCDriver to the asynchronous power state transition.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "AdcPowerStateAsynchTransitionMode",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:01a8d9c1-3bfd-4b88-8ab6-7d5bebca802c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcReadGroupApi",
+          "description": "Adds / removes the service Adc_ReadGroup() and from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcReadGroupApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6fe4295d-02b9-4c34-b9f2-337c2df6bd58"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcVersionInfoApi",
+          "description": "Adds / removes the service Adc_GetVersionInfo() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8ea4cb56-cf5e-4afc-95ce-cebac08ac0e6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcPriorityImplementation",
+          "description": "Determines whether a priority mechanism is available for prioritization of the conversion requests and if available, the type of prioritization mechanism. The …",
+          "enumValues": [
+            "ADC_PRIORITY_HW",
+            "ADC_PRIORITY_HW_SW",
+            "ADC_PRIORITY_NONE"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcPriorityImplementation",
+          "type": "ENUM",
+          "uuid": "ECUC:7e0e69e5-6004-4264-a9b3-f0559f2409d6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcResultAlignment",
+          "description": "Alignment of ADC raw results in ADC result buffer (left/right alignment).",
+          "enumValues": [
+            "ADC_ALIGN_LEFT",
+            "ADC_ALIGN_RIGHT"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcResultAlignment",
+          "type": "ENUM",
+          "uuid": "ECUC:b269a17e-8b68-4182-8879-338205ac27ca"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcEcucPartitionRef",
+          "description": "Maps the ADC driver to zero or multiple ECUC partitions to make the driver API available in the according partition. Tags: atp.Status=draft",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "AdcEcucPartitionRef",
+          "uuid": "ECUC:4bd1f0ab-6132-4e98-b99b-e5e845698305"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcKernelEcucPartitionRef",
+          "description": "Maps the ADC kernel to zero or one ECUC partitions to assign the driver kernel to a certain core. The ECUC partition referenced is a subset of the ECUC partiti…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "AdcKernelEcucPartitionRef",
+          "uuid": "ECUC:29ba6727-407c-4d16-b4be-57bac9d50481"
+        }
+      ],
+      "shortName": "AdcGeneral",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcPowerStateConfig",
+          "description": "Each instance of this parameter defines a power state and the callback to be called when this power state is reached.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcPowerStateConfig/AdcPowerState",
+              "description": "Each instance of this parameter describes a different power state supported by the ADC HW. It should be defined by the HW supplier and used by the ADCDriver to…",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "AdcPowerState",
+              "type": "INTEGER",
+              "uuid": "ECUC:7b71ca9d-846d-4ebe-bb34-f0defbf45e09"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcGeneral/AdcPowerStateConfig/AdcPowerStateReadyCbkRef",
+              "description": "Each instance of this parameter contains a reference to a power mode callback defined in a CDD or IoHwAbs component.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "AdcPowerStateReadyCbkRef",
+              "type": "FUNCTION",
+              "uuid": "ECUC:13cdc2fe-cf3c-4a68-93cb-a3676a293fd3"
+            }
+          ],
+          "references": [],
+          "shortName": "AdcPowerStateConfig",
+          "subContainers": [],
+          "uuid": "ECUC:5cd16e43-9c9f-4be1-933d-cc22cd917ec0"
+        }
+      ],
+      "uuid": "ECUC:da0aaff6-3ed6-4a15-824e-dc32f3a8bd93"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcPublishedInformation",
+      "description": "Additional published parameters not covered by \"Common\" Published Information. Note that these parameters have \"PUBLISHED-INFORMATION\" configuration class sett…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcPublishedInformation/AdcChannelValueSigned",
+          "description": "Information whether the result value of the ADC driver has sign information (true) or not (false). If the result shall be interpreted as signed value it shall …",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcChannelValueSigned",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f002ab5c-bf89-4fc2-ba13-6909a2c2e75a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcPublishedInformation/AdcGroupFirstChannelFixed",
+          "description": "Information whether the first channel of an ADC Channel group can be configured (false) or is fixed (true) to a value determined by the ADC HW Unit.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcGroupFirstChannelFixed",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1c22f85b-d656-4563-86ec-1823df41ebed"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Adc/AdcPublishedInformation/AdcMaxChannelResolution",
+          "description": "Maximum Channel resolution in bits (does not specify accuracy).",
+          "isOptional": false,
+          "max": 63,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "AdcMaxChannelResolution",
+          "type": "INTEGER",
+          "uuid": "ECUC:8f00599e-47d5-4046-bce8-9cbefac7e41a"
+        }
+      ],
+      "references": [],
+      "shortName": "AdcPublishedInformation",
+      "subContainers": [],
+      "uuid": "ECUC:e435c52c-58b2-4506-ae6c-da9a9b76ad99"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Adc",
+  "description": "Configuration of the Adc (Analog Digital Conversion) module.",
+  "importWarnings": [
+    "AdcChannelRefVoltsrcHigh：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+    "AdcChannelRefVoltsrcLow：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+    "AdcGroupDefinition：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "AdcGroupEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "AdcGroupEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "AdcClockSource：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+    "AdcHwUnitId：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+    "AdcEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "AdcEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "AdcKernelEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Adc",
+  "version": "4.4.0"
+}

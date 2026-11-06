@@ -1,0 +1,1235 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "69809cc93e77ba101765eeca0dbfbe7184495093f14ba99d6fcf5e4529c3921f",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules",
+      "description": "Each container describes a specific BSW module that the SoAd shall interface to.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdIf",
+          "description": "Specifies if the BSW module supports the Communication Interface APIs or not. Value true means that the APIs are supported. A module can have both Communicatio…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdIf",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:61c7651e-6ad8-41c3-abc3-2dd2cee6a53e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdIfTriggerTransmit",
+          "description": "Specifies if the BSW module supports the TriggerTransmit API or not. Value true means that the API is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdIfTriggerTransmit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:69f17a2e-4075-40ca-b055-2cca5f9c23fb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdIfTxConfirmation",
+          "description": "Specifies if the BSW module supports the TxConfirmation API or not. Value true means that the API is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdIfTxConfirmation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8e120498-e9dc-4049-9ad9-4637c25402cd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdLocalIpAddrAssigmentChg",
+          "description": "Specifies if the BSW module supports the LocalIpAddrAssigmentChg API or not. Value true means that the API is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdLocalIpAddrAssigmentChg",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9de9200d-13d9-4459-8f2c-0f928ebfcf1d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdSoConModeChg",
+          "description": "Specifies if the BSW module supports the SoConModeChg API or not. Value true means that the API is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdSoConModeChg",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2851d043-899d-43c6-8c1d-cf6218cc7bd0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdTp",
+          "description": "Specifies if the BSW module supports the TransportProtocol APIs or not. Value true means that the APIs are supported. A module can have both Communication Inte…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdTp",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2825d602-fc8e-4d64-a2c7-30226d4a826e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdUseCallerInfix",
+          "description": "Specifies if SoAd shall use (TRUE) the infix \"SoAd\" when calling an upper layer module function or not (FALSE). E.g. if SoAdUseCallerInfix is TRUE for the uppe…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdUseCallerInfix",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ae620584-c765-4574-90e9-6f9c7690b6e5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdUseTypeInfix",
+          "description": "Specifies if SoAd shall use (TRUE) the API type infix \"Tp\" or \"If\" when calling an upper layer module function or not (FALSE). E.g. if SoAdUseTypeInfix is TRUE…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdUseTypeInfix",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:103a7f7b-0839-4d90-ac0a-830925ad10ea"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules/SoAdBswModuleRef",
+          "description": "This is a reference to one BSW module's configuration (i.e. not the ECUC parameter definition template).",
+          "destinationContainerType": "SoAdBswModuleRef",
+          "destinationRefs": [],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "foreign",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdBswModuleRef",
+          "uuid": "ECUC:bc97b938-7b4a-4243-8833-22afec289625"
+        }
+      ],
+      "shortName": "SoAdBswModules",
+      "subContainers": [],
+      "uuid": "ECUC:38cf01c7-4a15-4541-a1a4-ddbdff0a6d2d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR SoAd module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "SoAdConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute",
+          "description": "Describes the path of a PDU from an upper layer of the SoAd to the socket in the TCP/IP stack for transmission. This PDU can consume meta data items of type SO…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "SOAD_COLLECT_QUEUED",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdTxPduCollectionSemantics",
+              "description": "Specifies if this PDU shall be collected using a queued or last-is-best semantics. This parameter is only relevant if the PDU collection feature is enabled. Sh…",
+              "enumValues": [
+                "SOAD_COLLECT_LAST_IS_BEST",
+                "SOAD_COLLECT_QUEUED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdTxPduCollectionSemantics",
+              "type": "ENUM",
+              "uuid": "ECUC:541be150-6329-4ad6-82f6-7c41e1593832"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdTxUpperLayerType",
+              "description": "Specifies the upper layer interface type (must be \"IF\" in case of multiple PduRoutes).",
+              "enumValues": [
+                "IF",
+                "TP"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdTxUpperLayerType",
+              "type": "ENUM",
+              "uuid": "ECUC:56642173-affc-4c54-b407-ea215fc4a9d8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdTxPduId",
+              "description": "Tx PDU ID of the PDU coming from the PDU Router.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdTxPduId",
+              "type": "INTEGER",
+              "uuid": "ECUC:0607b193-60b3-4acf-8ca0-f903cc227bd7"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdTxPduRef",
+              "description": "Reference to the global PDU structure",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdTxPduRef",
+              "uuid": "ECUC:c753c894-c1eb-47ee-88e7-6396ea183e05"
+            }
+          ],
+          "shortName": "SoAdPduRoute",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdPduRouteDest",
+              "description": "Specifies the PDU route destination.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdPduRouteDest/SoAdTxPduHeaderId",
+                  "description": "ID to be sent on the TCP/IP connection if the PDU header option is enabled.",
+                  "isOptional": true,
+                  "max": 4294967296,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdTxPduHeaderId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:f9cd4c91-4e8f-404d-a6b9-1fa911afb222"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdPduRouteDest/SoAdTxUdpTriggerMode",
+                  "description": "Specifies whether a PDU triggers the transmission of the nPduUdpTxBuffer.",
+                  "enumValues": [
+                    "TRIGGER_ALWAYS",
+                    "TRIGGER_NEVER"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdTxUdpTriggerMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:8a5d9e39-36fb-4b39-8c27-859278c3f153"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdPduRouteDest/SoAdTxUdpTriggerTimeout",
+                  "description": "Specifies the timeout in [s] the nPduUdpTxBuffer shall be transmitted at the latest after this PDU is put into the buffer. This optional parameter is only rele…",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdTxUdpTriggerTimeout",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:c9ca6016-a93c-4495-8899-231966519c98"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdPduRouteDest/SoAdTxRoutingGroupRef",
+                  "description": "Reference to the routing group.",
+                  "destinationContainerType": "SoAdRoutingGroup",
+                  "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                  ],
+                  "isExternal": false,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "SoAdTxRoutingGroupRef",
+                  "uuid": "ECUC:1ffd982b-fc0d-4ce9-aab8-4b67e71bd8e7"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdPduRoute/SoAdPduRouteDest/SoAdTxSocketConnOrSocketConnBundleRef",
+                  "description": "Choice Reference to a SocketConnection or to a SocketConnectionGroup on which the PDU is to be sent on. The reference to a SocketConnectionGroup shall only be …",
+                  "destinationContainerType": "SoAdSocketConnection",
+                  "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection",
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "choice",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdTxSocketConnOrSocketConnBundleRef",
+                  "uuid": "ECUC:22ca0917-bfb5-45f5-9765-f859d37d0482"
+                }
+              ],
+              "shortName": "SoAdPduRouteDest",
+              "subContainers": [],
+              "uuid": "ECUC:608916f0-a352-48d1-9911-cd629867e984"
+            }
+          ],
+          "uuid": "ECUC:db0b3473-ac6c-42ba-8d58-21770ad5d14f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+          "description": "Each container describes a specific routing group which can be enabled or disabled. A routing group consists of PDUs. Routing of PDUs can either be forwarding …",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup/SoAdRoutingGroupId",
+              "description": "Unique ID of Routing Group",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdRoutingGroupId",
+              "type": "INTEGER",
+              "uuid": "ECUC:c01186c2-1b38-46d0-a36a-cca2e2dc98e3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup/SoAdRoutingGroupIsEnabledAtInit",
+              "description": "If set to true this routing group will be enabled after initializing the SoAd module (i.e. enabled in the SoAd_Init function).",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdRoutingGroupIsEnabledAtInit",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:fb184258-ebc6-43ad-b6df-4bac46074bc2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup/SoAdRoutingGroupTxTriggerable",
+              "description": "Specifies if the If-TxPDUs related to the PduRouteDest containers",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdRoutingGroupTxTriggerable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:aaa3d81d-9664-4c66-b322-d06217a9a89d"
+            }
+          ],
+          "references": [],
+          "shortName": "SoAdRoutingGroup",
+          "subContainers": [],
+          "uuid": "ECUC:fc04d0a2-e032-46ec-b1f6-1951663947c7"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup",
+          "description": "Specifies the configuration of a socket connection group, i.e. specifies the socket connections belonging to the group and the parameters which are common for …",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdPduHeaderEnable",
+              "description": "Enables the transmission of the PDU header (ID, length) on this socket connection.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdPduHeaderEnable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:410309ba-cede-4382-895d-35b0025664f5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketAutomaticSoConSetup",
+              "description": "Specifies if the setup of the socket connection shall be done automatically (TRUE) or manually (FALSE) via SoAd_OpenSoCon() and SoAd_CloseSoCon().",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketAutomaticSoConSetup",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:40c95585-89c4-4ca2-ae2d-5a0c639ea0c4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketIpAddrAssignmentChgNotification",
+              "description": "Specifies if the local IP address assignment change notification callback function of the upper layer shall be called if the assignment of the local IP address…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketIpAddrAssignmentChgNotification",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:4ceb0609-a4e0-4022-bb2c-63f13206cd82"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketMsgAcceptanceFilterEnabled",
+              "description": "Specifies if the message acceptance filter is enabled (TRUE) or not (FALSE).",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketMsgAcceptanceFilterEnabled",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f1edc6f3-aa71-429b-9005-d78fe8ff68d3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketPathMTUEnable",
+              "description": "Specifies if path MTU discovery shall be performed for this connection. If this optional parameter is not available the default behavior configured for the con…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketPathMTUEnable",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:cd4150cf-50fa-4789-8646-a4d059973839"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketSoConModeChgNotification",
+              "description": "Specifies if the SoCon mode change notification callback function of the upper layer shall be called in case of SoCon mode change.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketSoConModeChgNotification",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:2e4db225-90bc-4a6c-9d2e-b1f84b63318b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketDifferentiatedServicesField",
+              "description": "The 6-bit Differentiated Service Field in the IP headers may be used for classifying network traffic. If not set a value of zero is used to indicate packets th…",
+              "isOptional": true,
+              "max": 63,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketDifferentiatedServicesField",
+              "type": "INTEGER",
+              "uuid": "ECUC:b58d1e11-ac85-4db0-b8ea-2e4612e8e977"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketFlowLabel",
+              "description": "The 20-bit Flow Label field in the IPv6 header may be used by a source to label sequences of packets for which it requests special handling by the IPv6 routers…",
+              "isOptional": true,
+              "max": 1048575,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketFlowLabel",
+              "type": "INTEGER",
+              "uuid": "ECUC:deafd969-c5fe-4e50-8f14-4f0a3b992d2f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketFramePriority",
+              "description": "Specifies the priority of the Ethernet frame.",
+              "isOptional": true,
+              "max": 7,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketFramePriority",
+              "type": "INTEGER",
+              "uuid": "ECUC:785737d3-b1bb-46f7-be70-a3a689d38251"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketLocalPort",
+              "description": "Local UDP or TCP port used for this connection. If this parameter set to 0 SoAd requests TcpIp to select an ephemeral port.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketLocalPort",
+              "type": "INTEGER",
+              "uuid": "ECUC:c6e53314-62e5-4f81-8f47-3c5cb6a19260"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketTpRxBufferMin",
+              "description": "Specifies the amount of data in bytes (PDU data for the upper layer and PDU Header if used) the SoAd shall at least be able to buffer for data reception via ea…",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketTpRxBufferMin",
+              "type": "INTEGER",
+              "uuid": "ECUC:f1daede7-ba0e-4dbc-9ee7-6c3e6299c67b"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketLocalAddressRef",
+              "description": "Local IP address and interface used for this connection.",
+              "destinationContainerType": "TcpIpLocalAddr",
+              "destinationRef": "/AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpLocalAddr",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpLocalAddr"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketLocalAddressRef",
+              "uuid": "ECUC:5f8d7d9a-ea26-4a66-b188-8f9a5d39e808"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketSoConModeChgNotifUpperLayerRef",
+              "description": "Reference to an additional upper layer that shall receive socket connection state changes (although it is not a direct upper layer of the socket connection).",
+              "destinationContainerType": "SoAdBswModules",
+              "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/SoAd/SoAdBswModules"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SoAdSocketSoConModeChgNotifUpperLayerRef",
+              "uuid": "ECUC:ec6bf375-a112-46b2-abb0-3087dea4736d"
+            }
+          ],
+          "shortName": "SoAdSocketConnectionGroup",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection",
+              "description": "Specifies the socket connection (Id and remote address information).",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection/SoAdSocketId",
+                  "description": "Socket connection identifier used as SoConId in the interaction with upper layers.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdSocketId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:f4c911ee-b2ee-42a9-9193-e80a9e168aca"
+                }
+              ],
+              "references": [],
+              "shortName": "SoAdSocketConnection",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection/SoAdSocketRemoteAddress",
+                  "description": "Subcontainer of SoAdSocketConnection to specify the remote address (IP address and port) for a socket connection.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection/SoAdSocketRemoteAddress/SoAdSocketRemoteIpAddress",
+                      "description": "IP address of remote node. The configured address must be of the same TcpIpDomainType (i.e. IPv4 or IPv6) as the TcpIpLocalAddr referred by SoAdSocketLocalAddr…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketRemoteIpAddress",
+                      "type": "STRING",
+                      "uuid": "ECUC:bb1fc885-6e6e-4cf5-9df0-d8ccbdbe059f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection/SoAdSocketRemoteAddress/SoAdSocketRemotePort",
+                      "description": "Remote UDP or TCP port used for this connection.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketRemotePort",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d92ba3b3-f3db-4249-877f-97905d97d603"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "SoAdSocketRemoteAddress",
+                  "subContainers": [],
+                  "uuid": "ECUC:61d6f4d9-7fe5-44a5-9c03-17ad0895a2f9"
+                }
+              ],
+              "uuid": "ECUC:e21ff4b2-9c1b-4704-aacb-498a1675c0ca"
+            },
+            {
+              "choice": {
+                "candidateRefs": [
+                  "ECUC:2fd748e9-1c58-4419-a869-f1583dab6a51",
+                  "ECUC:7365929a-7420-4e93-b00a-6f1576bd11d9"
+                ]
+              },
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol",
+              "description": "Specifies the transport protocol and transport protocol specific parameters used for the socket connections of the socket connection group.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "SoAdSocketProtocol",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp",
+                  "description": "Specifies that TCP is used as transport protocol for the socket connection group and parameters only related to TCP socket connections.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpImmediateTpTxConfirmation",
+                      "description": "If set to FALSE, SoAd notifies the TP upper layer via transmit confirmation after a Tcp Ack has been received. If set to TRUE, SoAd notifies the TP upper layer…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpImmediateTpTxConfirmation",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:c6ad7d55-2e5d-49c0-9f7a-e42599a33a50"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpInitiate",
+                      "description": "Specifies the initiator for this TCP connection. It will not be defined for UDP sockets.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpInitiate",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:544ba1ab-6419-42e8-99dc-635daba8c15f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpKeepAlive",
+                      "description": "Specifies to use the keep-alive mechanism for this connection. It will not be defined for UDP sockets.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpKeepAlive",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:225b680b-49a8-4dd9-ad4c-51e9d5fa70af"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpNoDelay",
+                      "description": "Specifies not to use the congestion control mechanism for this connection. It will not be defined for UDP sockets.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpNoDelay",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:babda4bd-27c8-4502-ad52-3b21483c2bb6"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpKeepAliveInterval",
+                      "description": "Specifies the interval in seconds between subsequent keepalive probes.",
+                      "isOptional": true,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpKeepAliveInterval",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:55d0475c-c4a4-4185-b9fc-2d7bbc7d1704"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": 7200,
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpKeepAliveTime",
+                      "description": "Specifies the time in seconds between the last data packet sent and the first keepalive probe.",
+                      "isOptional": true,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpKeepAliveTime",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:3a0fbe14-e493-43af-b169-7ee4fa002459"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpKeepAliveProbesMax",
+                      "description": "Maximum number of times that TCP retransmits an individual data segment before aborting the connection.",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpKeepAliveProbesMax",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:52cde23e-faae-496b-9318-b75317681adf"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpTxQuota",
+                      "description": "Specifies the maximum amount of bytes (PDU data provided by the upper layer and PDU Header if used) the SoAd may queue for transmission via TCP at the TcpIp mo…",
+                      "isOptional": true,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpTxQuota",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:a8df0686-4cc6-4284-987d-e8e01d20d77f"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTCPOptionFilterRef",
+                      "description": "Specifies which TCP option filter shall be applied on the related socket.",
+                      "destinationContainerType": "TcpIpTcpConfigOptionFilter",
+                      "destinationRef": "/AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTcpConfig/TcpIpTcpConfigOptionFilter",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTcpConfig/TcpIpTcpConfigOptionFilter"
+                      ],
+                      "isExternal": true,
+                      "isOptional": true,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTCPOptionFilterRef",
+                      "uuid": "ECUC:144ac19d-4277-45b7-bfc9-25cede7101c8"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketTcp/SoAdSocketTcpTlsConnectionRef",
+                      "description": "If set the TCP socket is assigned to a TLS connection. The SoAd need to call Tcpip_ChangeParameter with the refrence to the TLS connection as athe parameter. T…",
+                      "destinationContainerType": "TcpIpTlsConnection",
+                      "destinationRef": "/AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTlsConfig/TcpIpTlsConnection",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTlsConfig/TcpIpTlsConnection"
+                      ],
+                      "isExternal": true,
+                      "isOptional": true,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketTcpTlsConnectionRef",
+                      "uuid": "ECUC:cc5c2115-813d-4404-b117-60e23e2f424d"
+                    }
+                  ],
+                  "shortName": "SoAdSocketTcp",
+                  "subContainers": [],
+                  "uuid": "ECUC:2fd748e9-1c58-4419-a869-f1583dab6a51"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketUdp",
+                  "description": "Specifies that UDP is used as transport protocol for the socket connection group and parameters only related to UDP socket connections.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketUdp/SoAdSocketnPduUdpTxBufferMin",
+                      "description": "Specifies the amount of data in bytes (PDU data provided by the upper layer and PDU Header if used) the SoAd shall be able to buffer for data transmission via …",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketnPduUdpTxBufferMin",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:35773a86-d1bf-4d8b-82a4-5120276e4d33"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketUdp/SoAdSocketUdpAliveSupervisionTimeout",
+                      "description": "Specifies the time in [s] a UDP socket connection remains in the mode SOAD_SOCON_ONLINE after the latest reception of a frame from the remote peer specified by…",
+                      "isOptional": true,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketUdpAliveSupervisionTimeout",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:f35c1589-030c-40d2-9757-9878b3c6bbd1"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketUdp/SoAdSocketUdpTriggerTimeout",
+                      "description": "Specifies the timeout in [s] a nPduUdpTxBuffer is waiting for a PDU with TriggerMode = TRIGGER_ALWAYS, i.e. when the timeout expires the nPduUdpTxBuffer is tra…",
+                      "isOptional": true,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketUdpTriggerTimeout",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:ca90e8f9-cc0d-49e9-bebb-c1b79a3c0ef5"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": true,
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketUdp/SoAdSocketUdpChecksumEnabled",
+                      "description": "Specifies if UDP checksum calculation shall be enabled (TRUE) or skipped (FALSE) on the related socket. FALSE implies that the upper layer of the socket connec…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketUdpChecksumEnabled",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:d25f1919-37ad-4f9c-8514-5e267a582994"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketUdp/SoAdSocketUdpListenOnly",
+                      "description": "Specifies if the socket connection group is only used for reception (TRUE) or used for both reception and transmission (FALSE).",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketUdpListenOnly",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:d290a4ee-dd54-4e7d-b4d2-1df95c069f5b"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketProtocol/SoAdSocketUdp/SoAdSocketUdpStrictHeaderLenCheckEnabled",
+                      "description": "Specifies if UDP messages shall be dropped (TRUE) if the length of all contained PDUs does not match the length of the whole message or not (FALSE). Shall only…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "SoAdSocketUdpStrictHeaderLenCheckEnabled",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:0c09f922-af2c-43c1-a903-fa88c9819ddb"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "SoAdSocketUdp",
+                  "subContainers": [],
+                  "uuid": "ECUC:7365929a-7420-4e93-b00a-6f1576bd11d9"
+                }
+              ],
+              "uuid": "ECUC:eb8a2965-1cce-423b-be4e-e617127d909f"
+            }
+          ],
+          "uuid": "ECUC:abae0f3b-aa69-47ae-82df-bac364d52b6c"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute",
+          "description": "Describes the path of a PDU from a socket in the TCP/IP stack to an upper layer of the SoAd after reception in the TCP/IP Stack.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute/SoAdRxPduHeaderId",
+              "description": "ID contained in the packet received on the TCP/IP connection if the PDU header option is enabled.",
+              "isOptional": true,
+              "max": 4294967296,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "SoAdRxPduHeaderId",
+              "type": "INTEGER",
+              "uuid": "ECUC:e71a64bd-f0cd-471d-96c8-2b92f5751301"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute/SoAdRxSocketConnOrSocketConnBundleRef",
+              "description": "Choice Reference to a SocketConnection or to a SocketConnectionGroup on which the PDU was received. The reference to a SocketConnectionGroup shall only be used…",
+              "destinationContainerType": "SoAdSocketConnection",
+              "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup/SoAdSocketConnection",
+                "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketConnectionGroup"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "choice",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SoAdRxSocketConnOrSocketConnBundleRef",
+              "uuid": "ECUC:f4f02f3d-d765-4a84-88ec-01a80b047fe0"
+            }
+          ],
+          "shortName": "SoAdSocketRoute",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute/SoAdSocketRouteDest",
+              "description": "Describes the upper layer destination PDU for a message received on a TcpIp socket. This PDU can produce meta data items of type SOCKET_CONNECTION_ID_16.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute/SoAdSocketRouteDest/SoAdRxPduId",
+                  "description": "This unique identifier is used for a receive cancellation request from an upper layer of the SoAd.",
+                  "isOptional": true,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a420c5fd-18c3-4bfb-96e8-9f12c650aef8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute/SoAdSocketRouteDest/SoAdRxUpperLayerType",
+                  "description": "Specifies the upper layer interface type (must be \"IF\" in case of multiple RxPdus).",
+                  "enumValues": [
+                    "IF",
+                    "TP"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdRxUpperLayerType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1ad3be2c-e898-4c78-a3e5-b9c54698e2ed"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute/SoAdSocketRouteDest/SoAdRxPduRef",
+                  "description": "Reference to the global PDU structure",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "SoAdRxPduRef",
+                  "uuid": "ECUC:7f29b096-bb12-495e-9d74-21c032008ada"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdSocketRoute/SoAdSocketRouteDest/SoAdRxRoutingGroupRef",
+                  "description": "Reference to the routing group.",
+                  "destinationContainerType": "SoAdRoutingGroup",
+                  "destinationRef": "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/SoAd/SoAdConfig/SoAdRoutingGroup"
+                  ],
+                  "isExternal": false,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "SoAdRxRoutingGroupRef",
+                  "uuid": "ECUC:8a4e0666-fa03-4bb5-99fd-10c2bf83e9ed"
+                }
+              ],
+              "shortName": "SoAdSocketRouteDest",
+              "subContainers": [],
+              "uuid": "ECUC:c9313315-2428-474e-bf2b-fa9f9491ab64"
+            }
+          ],
+          "uuid": "ECUC:6d408df2-0d97-411f-bede-b1b3f2335c97"
+        }
+      ],
+      "uuid": "ECUC:3fef2e18-01c5-4810-ae65-27fba17d97c0"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral",
+      "description": "This container contains all global configuration parameters of SoAd.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral/SoAdDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:794cba6f-b434-4d3e-bbd0-964f43cbe9c3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral/SoAdGetAndResetMeasurementDataApi",
+          "description": "Enables / Disables the Get and Reset Measurement Data API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdGetAndResetMeasurementDataApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d4b70d8d-5550-4e5a-863f-e613a3d03bda"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral/SoAdIPv6AddressEnabled",
+          "description": "Allows for increased memory allocation to store IPv6 addresses.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdIPv6AddressEnabled",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1476fc8f-53cd-449b-87fb-290eaf61abc6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral/SoAdVersionInfoApi",
+          "description": "Activates the SoAd_GetVersionInfo() API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e37f5bb1-2a02-48b6-8f8b-5bdabdd69153"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral/SoAdMainFunctionPeriod",
+          "description": "Determines the frequency at which the SoAd_MainFunction() is called in [s].",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:0d68aaf1-6ac6-4703-9f87-6ed9bc77fcb3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral/SoAdRoutingGroupMax",
+          "description": "Specifies the maximum number of SoAd routing groups. Furthermore it defines the platform type used for RoutingGroupIdType. If SoAdRoutingGroupMax is not greate…",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdRoutingGroupMax",
+          "type": "INTEGER",
+          "uuid": "ECUC:c09a057f-1b6c-4158-be7d-a8be2c930896"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SoAd/SoAdGeneral/SoAdSoConMax",
+          "description": "Specifies the maximum number of SoAd socket connections.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SoAdSoConMax",
+          "type": "INTEGER",
+          "uuid": "ECUC:0b9eb24e-bc16-469d-be91-0ac798b57ea6"
+        }
+      ],
+      "references": [],
+      "shortName": "SoAdGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:4202ade9-3a6c-48f5-a9dc-23b17eff1b56"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/SoAd",
+  "description": "Configuration of the SoAd (Socket Adaptor) module.",
+  "importWarnings": [
+    "SoAdBswModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "SoAdTxRoutingGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "SoAdTxSocketConnOrSocketConnBundleRef：多候选引用，可在 2 个候选目标中选一个。",
+    "SoAdTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SoAdSocketProtocol：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "SoAdSocketTCPOptionFilterRef：目标 /AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTcpConfig/TcpIpTcpConfigOptionFilter 位于本模块之外；编辑器只读展示。",
+    "SoAdSocketTcpTlsConnectionRef：目标 /AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpTlsConfig/TcpIpTlsConnection 位于本模块之外；编辑器只读展示。",
+    "SoAdSocketLocalAddressRef：目标 /AUTOSAR/EcucDefs/TcpIp/TcpIpConfig/TcpIpLocalAddr 位于本模块之外；编辑器只读展示。",
+    "SoAdRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SoAdRxRoutingGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "SoAdRxSocketConnOrSocketConnBundleRef：多候选引用，可在 2 个候选目标中选一个。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "SoAd",
+  "version": "4.4.0"
+}

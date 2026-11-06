@@ -1,0 +1,2204 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "a4a890d92946a6f753ed4abc3304a9f7c5bf5ed76b93f075dee5404be8c9da34",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm",
+      "description": "An OsAlarm may be used to asynchronously inform or activate a specific task. It is possible to start alarms automatically at system start-up depending on the a…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAccessingApplication",
+          "description": "Reference to applications which have an access to this object.",
+          "destinationContainerType": "OsApplication",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsApplication"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsAlarmAccessingApplication",
+          "uuid": "ECUC:7fe87d8e-e45a-4ce7-a368-b19db06f21cf"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmCounterRef",
+          "description": "Reference to the assigned counter for that alarm",
+          "destinationContainerType": "OsCounter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsCounter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsCounter"
+          ],
+          "isExternal": false,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsAlarmCounterRef",
+          "uuid": "ECUC:2cfca734-698f-4fbe-b67f-60309f9d1df0"
+        }
+      ],
+      "shortName": "OsAlarm",
+      "subContainers": [
+        {
+          "choice": {
+            "candidateRefs": [
+              "ECUC:778af345-37da-4297-a5cf-617140faa94f",
+              "ECUC:d5df234a-b9c3-40e5-b30e-6ee6919a6c8e",
+              "ECUC:e7f3faba-d482-41dd-9a78-a1bf24e96207",
+              "ECUC:135c6787-8aad-4ca3-9c1b-f9db78eea4c0"
+            ]
+          },
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction",
+          "description": "This container defines which type of notification is used when the alarm expires.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "OsAlarmAction",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmActivateTask",
+              "description": "This container specifies the parameters to activate a task.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmActivateTask/OsAlarmActivateTaskRef",
+                  "description": "Reference to the task that will be activated by that alarm action",
+                  "destinationContainerType": "OsTask",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsTask",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsTask"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsAlarmActivateTaskRef",
+                  "uuid": "ECUC:9d760cf7-d9fc-4fcf-a65f-1e5ac5d57eaf"
+                }
+              ],
+              "shortName": "OsAlarmActivateTask",
+              "subContainers": [],
+              "uuid": "ECUC:778af345-37da-4297-a5cf-617140faa94f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmCallback",
+              "description": "This container specifies the parameters to call a callback OS alarm action.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmCallback/OsAlarmCallbackName",
+                  "description": "Name of the function that is called when this alarm callback is triggered.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsAlarmCallbackName",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:146cd561-a131-447a-8070-26ea050189b9"
+                }
+              ],
+              "references": [],
+              "shortName": "OsAlarmCallback",
+              "subContainers": [],
+              "uuid": "ECUC:d5df234a-b9c3-40e5-b30e-6ee6919a6c8e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmIncrementCounter",
+              "description": "This container specifies the parameters to increment a counter.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmIncrementCounter/OsAlarmIncrementCounterRef",
+                  "description": "Reference to the counter that will be incremented by that alarm action",
+                  "destinationContainerType": "OsCounter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsCounter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsCounter"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsAlarmIncrementCounterRef",
+                  "uuid": "ECUC:f011f6a5-29e7-446b-85f5-b91034e9f12b"
+                }
+              ],
+              "shortName": "OsAlarmIncrementCounter",
+              "subContainers": [],
+              "uuid": "ECUC:e7f3faba-d482-41dd-9a78-a1bf24e96207"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmSetEvent",
+              "description": "This container specifies the parameters to set an event",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmSetEvent/OsAlarmSetEventRef",
+                  "description": "Reference to the event that will be set by that alarm action",
+                  "destinationContainerType": "OsEvent",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsEvent",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsEvent"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsAlarmSetEventRef",
+                  "uuid": "ECUC:1f077d18-ca8d-42bd-b867-4e59ce3d8e50"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAction/OsAlarmSetEvent/OsAlarmSetEventTaskRef",
+                  "description": "Reference to the task that will be activated by that event",
+                  "destinationContainerType": "OsTask",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsTask",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsTask"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsAlarmSetEventTaskRef",
+                  "uuid": "ECUC:db071009-6743-496a-ae4a-bb272eeb975a"
+                }
+              ],
+              "shortName": "OsAlarmSetEvent",
+              "subContainers": [],
+              "uuid": "ECUC:135c6787-8aad-4ca3-9c1b-f9db78eea4c0"
+            }
+          ],
+          "uuid": "ECUC:2acfb5a0-b476-4fa4-a34c-08e4acfe9858"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAutostart",
+          "description": "If present this container defines if an alarm is started automatically at system start-up depending on the application mode.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAutostart/OsAlarmAlarmTime",
+              "description": "The relative or absolute tick value when the alarm expires for the first time. Note that for an alarm which is RELATIVE the value must be at bigger than 0.",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsAlarmAlarmTime",
+              "type": "INTEGER",
+              "uuid": "ECUC:60cfd12a-e181-4369-9286-c0432e6e5cf5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAutostart/OsAlarmCycleTime",
+              "description": "Cycle time of a cyclic alarm in ticks. If the value is 0 than the alarm is not cyclic.",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsAlarmCycleTime",
+              "type": "INTEGER",
+              "uuid": "ECUC:3ad7702f-8f33-4b7d-87df-1fb32d89fb61"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAutostart/OsAlarmAutostartType",
+              "description": "This specifies the type of autostart for the alarm..",
+              "enumValues": [
+                "ABSOLUTE",
+                "RELATIVE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsAlarmAutostartType",
+              "type": "ENUM",
+              "uuid": "ECUC:3aeb1a3f-7305-4179-b995-e284a9efb475"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAlarm/OsAlarmAutostart/OsAlarmAppModeRef",
+              "description": "Reference to the application modes for which the AUTOSTART shall be performed",
+              "destinationContainerType": "OsAppMode",
+              "destinationRef": "/AUTOSAR/EcucDefs/Os/OsAppMode",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Os/OsAppMode"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "OsAlarmAppModeRef",
+              "uuid": "ECUC:a1c6da78-4cb0-4df2-92ae-69875adaedeb"
+            }
+          ],
+          "shortName": "OsAlarmAutostart",
+          "subContainers": [],
+          "uuid": "ECUC:964053de-2482-4575-a091-31f2b2d62db1"
+        }
+      ],
+      "uuid": "ECUC:f5bf116f-a0a2-4a8b-9f6a-1b023e6d9a13"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsAppMode",
+      "description": "OsAppMode is the object used to define OSEK OS properties for an OSEK OS application mode.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "OsAppMode",
+      "subContainers": [],
+      "uuid": "ECUC:44b2af00-f4af-494b-9b23-6c4bd5ea9ca7"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication",
+      "description": "An AUTOSAR OS must be capable of supporting a collection of OS objects (tasks, interrupts, alarms, hooks etc.) that form a cohesive functional unit. This colle…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsTrusted",
+          "description": "Parameter to specify if an OS-Application is trusted or not.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsTrusted",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:97ddd259-bb90-4c42-af70-aa8b24630faf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsTrustedApplicationDelayTimingViolationCall",
+          "description": "Parameter to specify if a timing violation which occurs within an trusted OS-Application is raised immediately of if it is delayed until the current task retur…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsTrustedApplicationDelayTimingViolationCall",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fd5344b6-872d-4e27-a451-f55587b0a918"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsTrustedApplicationWithProtection",
+          "description": "Parameter to specify if a trusted OS-Application is executed with memory protection or not.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsTrustedApplicationWithProtection",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e8a533a6-6a5d-4154-9ac4-2d7f90f12d44"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsAppAlarmRef",
+          "description": "Specifies the OsAlarms that belong to the OsApplication.",
+          "destinationContainerType": "OsAlarm",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsAlarm",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsAlarm"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsAppAlarmRef",
+          "uuid": "ECUC:f682f3ec-e731-4683-9429-6f3139967bc4"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsAppCounterRef",
+          "description": "References the OsCounters that belong to the OsApplication.",
+          "destinationContainerType": "OsCounter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsCounter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsCounter"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsAppCounterRef",
+          "uuid": "ECUC:4a2dbf82-5e24-4d1b-b778-6691fa1cde23"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsAppEcucPartitionRef",
+          "description": "Denotes which \"EcucPartition\" is implemented by this \"OSApplication\".",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsAppEcucPartitionRef",
+          "uuid": "ECUC:493ffec7-e80e-4945-bc55-09cfe0eb4c78"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsAppIsrRef",
+          "description": "references which OsIsrs belong to the OsApplication",
+          "destinationContainerType": "OsIsr",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsIsr",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsIsr"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsAppIsrRef",
+          "uuid": "ECUC:ff388a32-96e2-44e3-852f-b565616152fb"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsAppScheduleTableRef",
+          "description": "References the OsScheduleTables that belong to the OsApplication.",
+          "destinationContainerType": "OsScheduleTable",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsScheduleTable",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsScheduleTable"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsAppScheduleTableRef",
+          "uuid": "ECUC:80e78dc3-aacf-442e-8c44-5b7ede865f44"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsAppTaskRef",
+          "description": "references which OsTasks belong to the OsApplication",
+          "destinationContainerType": "OsTask",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsTask",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsTask"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsAppTaskRef",
+          "uuid": "ECUC:934a7899-f255-444b-a117-7d4ffead78e9"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsRestartTask",
+          "description": "Optionally one task of an OS-Application may be defined as Restart Task.",
+          "destinationContainerType": "OsTask",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsTask",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsTask"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsRestartTask",
+          "uuid": "ECUC:d87bac0e-011a-4578-bfea-01885c0240f3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsApplicationCoreRef",
+          "description": "Reference to the Core Definition in the Ecuc Module where the CoreId is defined. This reference is used to describe to which Core the OsApplication is bound.",
+          "destinationContainerType": "EcucCoreDefinition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsApplicationCoreRef",
+          "uuid": "ECUC:487eb46e-c2de-4b01-8138-31906865ee1f"
+        }
+      ],
+      "shortName": "OsApplication",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsApplicationHooks",
+          "description": "Container to structure the OS-Application-specific hooks",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsApplicationHooks/OsAppErrorHook",
+              "description": "Select the OS-Application error hook.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsAppErrorHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:dae2e0ce-2b38-4991-81df-93f1ebd88c4f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsApplicationHooks/OsAppShutdownHook",
+              "description": "Select the OS-Application specific shutdown hook for the OS-Application.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsAppShutdownHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:b0d64ef8-4929-4647-ac16-2c7e541a19a4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsApplicationHooks/OsAppStartupHook",
+              "description": "Select the OS-Application specific startup hook for the OS-Application.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsAppStartupHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d30c7023-7afc-468a-86da-70498ba04654"
+            }
+          ],
+          "references": [],
+          "shortName": "OsApplicationHooks",
+          "subContainers": [],
+          "uuid": "ECUC:504b9c2f-8c8f-4650-878e-fbaa905cd5c6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsApplicationTrustedFunction",
+          "description": "Container to structure the configuration parameters of trusted functions",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsApplication/OsApplicationTrustedFunction/OsTrustedFunctionName",
+              "description": "Trusted function (as part of a trusted OS-Application) available to other OS-Applications. This also supersedes the OSEK OIL attribute TRUSTED in APPLICATION b…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsTrustedFunctionName",
+              "type": "FUNCTION",
+              "uuid": "ECUC:af3592ef-5e5c-4a29-8c5f-a3f80aa67ae7"
+            }
+          ],
+          "references": [],
+          "shortName": "OsApplicationTrustedFunction",
+          "subContainers": [],
+          "uuid": "ECUC:727531f6-47c8-441a-b36f-15d71e958b91"
+        }
+      ],
+      "uuid": "ECUC:3fe22410-f7c0-4ae4-a89a-e6d8c2861115"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter",
+      "description": "Configuration information for the counters that belong to the OsApplication.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsCounterMaxAllowedValue",
+          "description": "Maximum possible allowed value of the system counter in ticks.",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsCounterMaxAllowedValue",
+          "type": "INTEGER",
+          "uuid": "ECUC:deceab52-a44e-40eb-9737-8eea4e860802"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsCounterMinCycle",
+          "description": "The MINCYCLE attribute specifies the minimum allowed number of counter ticks for a cyclic alarm linked to the counter.",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsCounterMinCycle",
+          "type": "INTEGER",
+          "uuid": "ECUC:4a0415c2-c296-49d6-b76a-3ce3e75112f3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsCounterTicksPerBase",
+          "description": "The TICKSPERBASE attribute specifies the number of ticks required to reach a counterspecific unit. The interpretation is implementation-specific.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsCounterTicksPerBase",
+          "type": "INTEGER",
+          "uuid": "ECUC:25d694e2-85d2-4c8a-9ceb-6abafafbf40b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsCounterType",
+          "description": "This parameter contains the natural type or unit of the counter.",
+          "enumValues": [
+            "HARDWARE",
+            "SOFTWARE"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsCounterType",
+          "type": "ENUM",
+          "uuid": "ECUC:77593730-3c82-4979-ba08-f9678e001cf3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsSecondsPerTick",
+          "description": "Time of one counter tick in seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsSecondsPerTick",
+          "type": "FLOAT",
+          "uuid": "ECUC:7cbe21f0-2e73-4fc2-928e-3337f481cb10"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsCounterAccessingApplication",
+          "description": "Reference to applications which have an access to this object.",
+          "destinationContainerType": "OsApplication",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsApplication"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsCounterAccessingApplication",
+          "uuid": "ECUC:48c50338-5eac-440a-860d-4158ed36ae2d"
+        }
+      ],
+      "shortName": "OsCounter",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsDriver",
+          "description": "This Container contains the information who will drive the counter.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsDriver/OsGptChannelRef",
+              "description": "Reference to the GPT channel.",
+              "destinationContainerType": "GptChannelConfiguration",
+              "destinationRef": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsGptChannelRef",
+              "uuid": "ECUC:7a91b0f3-8545-4fb3-aa38-252294367014"
+            }
+          ],
+          "shortName": "OsDriver",
+          "subContainers": [],
+          "uuid": "ECUC:5187c6ca-a5b2-4939-b6e0-1d5775ef679e"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsTimeConstant",
+          "description": "Allows the user to define constants which can be e.g. used to compare time values with timer tick values.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsCounter/OsTimeConstant/OsTimeValue",
+              "description": "This parameter contains the value of the constant in seconds.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsTimeValue",
+              "type": "FLOAT",
+              "uuid": "ECUC:daba8b10-b46e-4dc9-a6d3-8f6ab1126f30"
+            }
+          ],
+          "references": [],
+          "shortName": "OsTimeConstant",
+          "subContainers": [],
+          "uuid": "ECUC:6488e442-e1ab-4d9a-9974-22cb3a102f4a"
+        }
+      ],
+      "uuid": "ECUC:027f4979-a1d4-4ba0-a615-19a5a8081073"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsEvent",
+      "description": "Representation of OS events in the configuration context. Adopted from the OSEK OIL specification.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsEvent/OsEventMask",
+          "description": "If event mask would be set to AUTO in OIL, this parameter should be omitted here.",
+          "isOptional": true,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsEventMask",
+          "type": "INTEGER",
+          "uuid": "ECUC:51c76d97-345c-4b78-9e45-25dd67fe7095"
+        }
+      ],
+      "references": [],
+      "shortName": "OsEvent",
+      "subContainers": [],
+      "uuid": "ECUC:08ff8745-1b33-4b16-829b-c1d7190a6ae6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc",
+      "description": "Configuration of the IOC (Inter OS Application Communicator).",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "OsIoc",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication",
+          "description": "Representation of a 1:1 or N:1 or N:M (unqueued only) communication between software parts located in different OS-Applications that are bound to the same or t…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocBufferLength",
+              "description": "This attribute defines the size of the IOC internal queue to be allocated for a queued communication.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsIocBufferLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:c70d8576-6d52-46f7-b8ff-17c313e635ea"
+            }
+          ],
+          "references": [],
+          "shortName": "OsIocCommunication",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocDataProperties",
+              "description": "Data properties of the data to be transferred on the IOC communication channel.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocDataProperties/OsIocDataPropertyIndex",
+                  "description": "This parameter is used to define in which order the data is send, e.g. whether IocSendGroup(A,B) or IocSendGroup(B,A) shall be used.",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocDataPropertyIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ac4396f5-cb92-4713-b285-e5f8ea079275"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocDataProperties/OsIocInitValue",
+                  "description": "Initial Value for the data to be transferred on the IOC communication channel.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocInitValue",
+                  "type": "STRING",
+                  "uuid": "ECUC:8986f06e-9232-4f20-aec6-a8dcd936d1e8"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocDataProperties/OsIocDataTypeRef",
+                  "description": "This is the type of the data to be transferred on the IOC communication channel. This attribute is necessary to generate the parameter type of the Ioc function…",
+                  "destinationContainerType": "OsIocDataTypeRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "foreign",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocDataTypeRef",
+                  "uuid": "ECUC:37e02eb6-462c-41c1-9ca8-05f8ffd1c014"
+                }
+              ],
+              "shortName": "OsIocDataProperties",
+              "subContainers": [],
+              "uuid": "ECUC:5c503fab-e8a7-4dce-84b9-6d58467b7611"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocReceiverProperties",
+              "description": "Representation of receiver properties for one communication. For each OsIocCommunication one (1:1) or many receivers (N:M) have to be defined. This container s…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "DO_NOT_CARE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocReceiverProperties/OsIocFunctionImplementationKind",
+                  "description": "This parameter is used to select whether this communication is implemented as a macro or as a function.",
+                  "enumValues": [
+                    "DO_NOT_CARE",
+                    "FUNCTION",
+                    "MACRO"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocFunctionImplementationKind",
+                  "type": "ENUM",
+                  "uuid": "ECUC:7d3d9611-afaf-921c-4cc6-9a6878ace501"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocReceiverProperties/OsIocReceiverPullCB",
+                  "description": "This attribute defines the name of a callback function that the IOC shall call on the receiving core for each data reception.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocReceiverPullCB",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:6a5d33f7-6833-492a-a7df-60cbc722edd6"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocReceiverProperties/OsIocReceivingOsApplicationRef",
+                  "description": "This attribute is a reference to the receiving OsApplication instance defined in the configuration file of the OS.",
+                  "destinationContainerType": "OsApplication",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsApplication"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocReceivingOsApplicationRef",
+                  "uuid": "ECUC:4f6d8b5f-01eb-47c6-a977-9ac5a00359fd"
+                }
+              ],
+              "shortName": "OsIocReceiverProperties",
+              "subContainers": [],
+              "uuid": "ECUC:7748837c-c78f-4d1d-be0a-96a61a7b5d03"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocSenderProperties",
+              "description": "Representation of sender properties for one communication. For each OsIocCommunication one (1:1) or many senders (N:1 or N:M) have to be defined. Multiplicity …",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "DO_NOT_CARE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocSenderProperties/OsIocFunctionImplementationKind",
+                  "description": "This parameter is used to select whether this communication is implemented as a macro or as a function.",
+                  "enumValues": [
+                    "DO_NOT_CARE",
+                    "FUNCTION",
+                    "MACRO"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocFunctionImplementationKind",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1f4c56ce-199b-9178-1257-e6a439af3eec"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocSenderProperties/OsIocSenderId",
+                  "description": "Representation of a sender in a N:1 or N:M communication to distinguish between senders.",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocSenderId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:37e0ea2c-99bb-44bc-bd7c-022e8bfe7d41"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIoc/OsIocCommunication/OsIocSenderProperties/OsIocSendingOsApplicationRef",
+                  "description": "This attribute is a reference to the sending OS-Application instance defined in the configuration file of the OS.",
+                  "destinationContainerType": "OsApplication",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsApplication"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsIocSendingOsApplicationRef",
+                  "uuid": "ECUC:45c166df-7068-47de-84b7-75ed075aab39"
+                }
+              ],
+              "shortName": "OsIocSenderProperties",
+              "subContainers": [],
+              "uuid": "ECUC:19574439-317b-4c79-839b-e2e1db7db6ee"
+            }
+          ],
+          "uuid": "ECUC:aba13287-7385-453e-9e67-fbdbe8c9f86f"
+        }
+      ],
+      "uuid": "ECUC:8b83effd-234a-4731-8213-0b637df7eefc"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr",
+      "description": "The OsIsr container represents an OSEK interrupt service routine.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrCategory",
+          "description": "This attribute specifies the category of this ISR.",
+          "enumValues": [
+            "CATEGORY_1",
+            "CATEGORY_2"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsIsrCategory",
+          "type": "ENUM",
+          "uuid": "ECUC:5d95ea52-e3b6-4b84-bc0c-20a37ebfd672"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrResourceRef",
+          "description": "This reference defines the resources accessed by this ISR.",
+          "destinationContainerType": "OsResource",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsResource",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsResource"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsIsrResourceRef",
+          "uuid": "ECUC:eb6f779e-e5dd-4870-a9cb-8f784fcccebe"
+        }
+      ],
+      "shortName": "OsIsr",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection",
+          "description": "This container contains all parameters which are related to timing protection",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection/OsIsrAllInterruptLockBudget",
+              "description": "This parameter contains the maximum time for which the ISR is allowed to lock all interrupts (via SuspendAllInterrupts() or DisableAllInterrupts()) (in seconds…",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsIsrAllInterruptLockBudget",
+              "type": "FLOAT",
+              "uuid": "ECUC:911b5d2a-86c8-4a1c-9741-d1ada875c94e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection/OsIsrExecutionBudget",
+              "description": "The parameter contains the maximum allowed execution time of the interrupt (in seconds).",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsIsrExecutionBudget",
+              "type": "FLOAT",
+              "uuid": "ECUC:ff435610-1cde-4530-8b4d-1818caf9bf0f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection/OsIsrOsInterruptLockBudget",
+              "description": "This parameter contains the maximum time for which the ISR is allowed to lock all Category 2 interrupts (via SuspendOSInterrupts()) (in seconds).",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsIsrOsInterruptLockBudget",
+              "type": "FLOAT",
+              "uuid": "ECUC:f13180b1-a237-4132-9f90-2e6e93e191cf"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection/OsIsrTimeFrame",
+              "description": "This parameter contains the minimum inter-arrival time between successive interrupts (in seconds).",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsIsrTimeFrame",
+              "type": "FLOAT",
+              "uuid": "ECUC:3d855434-c46e-40a1-adcc-985f085d2efb"
+            }
+          ],
+          "references": [],
+          "shortName": "OsIsrTimingProtection",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection/OsIsrResourceLock",
+              "description": "This container contains a list of times the interrupt uses resources.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection/OsIsrResourceLock/OsIsrResourceLockBudget",
+                  "description": "This parameter contains the maximum time the interrupt is allowed to hold the given resource (in seconds).",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsIsrResourceLockBudget",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:3b769901-8b89-42be-b408-244ff46e3cbd"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsIsr/OsIsrTimingProtection/OsIsrResourceLock/OsIsrResourceLockResourceRef",
+                  "description": "Reference to the resource the locking time is depending on",
+                  "destinationContainerType": "OsResource",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsResource",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsResource"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsIsrResourceLockResourceRef",
+                  "uuid": "ECUC:7f296c7f-70f7-40db-85ce-c48b5974edb7"
+                }
+              ],
+              "shortName": "OsIsrResourceLock",
+              "subContainers": [],
+              "uuid": "ECUC:2e290a5c-ef82-4b7d-8f75-d4bf62b2c3ab"
+            }
+          ],
+          "uuid": "ECUC:ed417020-f2f2-47e0-8abb-64e54cb4e8fd"
+        }
+      ],
+      "uuid": "ECUC:7d5716e3-c20e-4559-ba9c-2d90f50cfd28"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS",
+      "description": "OS is the object used to define OSEK OS properties for an OSEK application.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsNumberOfCores",
+          "description": "Maximum number of cores that are controlled by the OS.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsNumberOfCores",
+          "type": "INTEGER",
+          "uuid": "ECUC:1369dbe1-88b9-4ff5-83d3-a62c5cf4106a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsScalabilityClass",
+          "description": "A scalability class for each System Object \"OS\" has to be selected. In order to customize the operating system to the needs of the user and to take full advant…",
+          "enumValues": [
+            "SC1",
+            "SC2",
+            "SC3",
+            "SC4"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsScalabilityClass",
+          "type": "ENUM",
+          "uuid": "ECUC:a4c62701-41c5-417c-8b66-16c90d6d111f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsStatus",
+          "description": "The Status attribute specifies whether a system with standard or extended status has to be used. Automatic assignment is not supported for this attribute.",
+          "enumValues": [
+            "EXTENDED",
+            "STANDARD"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsStatus",
+          "type": "ENUM",
+          "uuid": "ECUC:75a1986f-1458-49fb-9feb-b84c6e58956e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsStackMonitoring",
+          "description": "Select stack monitoring of Tasks/Category 2 ISRs",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsStackMonitoring",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:5e09948e-f8cb-44c6-9e7a-3595c1a2a6c4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsUseGetServiceId",
+          "description": "As defined by OSEK",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsUseGetServiceId",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:412bc048-fac1-432d-af87-1267b11f565b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsUseParameterAccess",
+          "description": "As defined by OSEK",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsUseParameterAccess",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:742e833a-68cd-431e-94d8-2321a014481d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": true,
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsUseResScheduler",
+          "description": "The OsUseResScheduler attribute defines whether the resource RES_SCHEDULER is used within the application.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsUseResScheduler",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ca31f39a-5057-484b-8408-ca0d0ed82a46"
+        }
+      ],
+      "references": [],
+      "shortName": "OsOS",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsHooks",
+          "description": "Container to structure all hooks belonging to the OS",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsHooks/OsErrorHook",
+              "description": "Error hook as defined by OSEK",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsErrorHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:825a1254-49f2-4f16-aa94-d9eedd045480"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsHooks/OsPostTaskHook",
+              "description": "Post-task hook as defined by OSEK",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsPostTaskHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:67f9db57-53e9-4e0e-8e47-23cc534733b5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsHooks/OsPreTaskHook",
+              "description": "Pre-task hook as defined by OSEK",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsPreTaskHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:fbfe7932-0338-461a-b87d-58af3a85bbcb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsHooks/OsProtectionHook",
+              "description": "Switch to enable/disable the call to the (user supplied) protection hook.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsProtectionHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:bafbef31-9d83-4b29-b534-300490f20f1f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsHooks/OsShutdownHook",
+              "description": "Shutdown hook as defined by OSEK",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsShutdownHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:69032d37-2751-420e-9b13-75625e8f3e9f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsOS/OsHooks/OsStartupHook",
+              "description": "Startup hook as defined by OSEK",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsStartupHook",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:591b0fc5-9552-4b15-99d8-74b85ac249bd"
+            }
+          ],
+          "references": [],
+          "shortName": "OsHooks",
+          "subContainers": [],
+          "uuid": "ECUC:e03dab8e-c227-44c9-bf9b-38f0564bd4df"
+        }
+      ],
+      "uuid": "ECUC:037fee7c-9826-4ab9-9067-69b24b57fe12"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsResource",
+      "description": "An OsResource object is used to co-ordinate the concurrent access by tasks and ISRs to a shared resource, e.g. the scheduler, any program sequence, memory or a…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsResource/OsResourceProperty",
+          "description": "This specifies the type of the resource.",
+          "enumValues": [
+            "INTERNAL",
+            "LINKED",
+            "STANDARD"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsResourceProperty",
+          "type": "ENUM",
+          "uuid": "ECUC:00ff7313-1773-4a7c-a3f0-236baeb9dab5"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsResource/OsResourceAccessingApplication",
+          "description": "Reference to applications which have an access to this object.",
+          "destinationContainerType": "OsApplication",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsApplication"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsResourceAccessingApplication",
+          "uuid": "ECUC:feec2b3b-2a1e-4939-a9bf-f1debcd01166"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsResource/OsResourceLinkedResourceRef",
+          "description": "The link to the resource. Must be valid if OsResourceProperty is LINKED. If OsResourceProperty is not LINKED the value is ignored.",
+          "destinationContainerType": "OsResource",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsResource",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsResource"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsResourceLinkedResourceRef",
+          "uuid": "ECUC:9ce7daad-5838-4fdb-aedd-031c7f5691cd"
+        }
+      ],
+      "shortName": "OsResource",
+      "subContainers": [],
+      "uuid": "ECUC:8a186c09-bd3e-413f-869f-40b71e71b89e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable",
+      "description": "An OsScheduleTable addresses the synchronization issue by providing an encapsulation of a statically defined set of alarms that cannot be modified at runtime.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableDuration",
+          "description": "This parameter defines the modulus of the schedule table (in ticks).",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsScheduleTableDuration",
+          "type": "INTEGER",
+          "uuid": "ECUC:65aea8af-eeef-43c7-81bf-bec539d2290d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableRepeating",
+          "description": "true: first expiry point on the schedule table shall be processed at final expiry point delay ticks after the final expiry point is processed.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsScheduleTableRepeating",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c901492e-c50c-45d9-9c20-9448c2f26a40"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsSchTblAccessingApplication",
+          "description": "Reference to applications which have an access to this object.",
+          "destinationContainerType": "OsApplication",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsApplication"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsSchTblAccessingApplication",
+          "uuid": "ECUC:f3dc4356-37e5-4f5e-9aa9-6f9fbe362508"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableCounterRef",
+          "description": "This parameter contains a reference to the counter which drives the schedule table.",
+          "destinationContainerType": "OsCounter",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsCounter",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsCounter"
+          ],
+          "isExternal": false,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsScheduleTableCounterRef",
+          "uuid": "ECUC:f1c26a81-2cfd-4626-8d21-ad2e90b780ad"
+        }
+      ],
+      "shortName": "OsScheduleTable",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableAutostart",
+          "description": "This container specifies if and how the schedule table is started on startup of the Operating System. The options to start a schedule table correspond to the A…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableAutostart/OsScheduleTableAutostartType",
+              "description": "This specifies the type of the autostart for the schedule table.",
+              "enumValues": [
+                "ABSOLUTE",
+                "RELATIVE",
+                "SYNCHRON"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsScheduleTableAutostartType",
+              "type": "ENUM",
+              "uuid": "ECUC:b3a89925-bcbd-4c14-b18d-ce7ab18eab54"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableAutostart/OsScheduleTableStartValue",
+              "description": "Absolute autostart tick value when the schedule table starts. Only used if the OsScheduleTableAutostartType is ABSOLUTE.",
+              "isOptional": true,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsScheduleTableStartValue",
+              "type": "INTEGER",
+              "uuid": "ECUC:3253c9f1-8291-4424-9258-bd5e22b64bf8"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableAutostart/OsScheduleTableAppModeRef",
+              "description": "Reference in which application modes the schedule table should be started during startup",
+              "destinationContainerType": "OsAppMode",
+              "destinationRef": "/AUTOSAR/EcucDefs/Os/OsAppMode",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Os/OsAppMode"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "OsScheduleTableAppModeRef",
+              "uuid": "ECUC:a1e5af6a-7900-4b84-a608-d0199790ed2d"
+            }
+          ],
+          "shortName": "OsScheduleTableAutostart",
+          "subContainers": [],
+          "uuid": "ECUC:ddae46d1-ae87-4bf1-9142-d38f36e01718"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint",
+          "description": "The point on a Schedule Table at which the OS activates tasks and/or sets events",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTblExpPointOffset",
+              "description": "The offset from zero (in ticks) at which the expiry point is to be processed.",
+              "isOptional": false,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsScheduleTblExpPointOffset",
+              "type": "INTEGER",
+              "uuid": "ECUC:ae9487c7-72d2-455b-84e3-0789069652ed"
+            }
+          ],
+          "references": [],
+          "shortName": "OsScheduleTableExpiryPoint",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTableEventSetting",
+              "description": "Event that is triggered by that schedule table.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTableEventSetting/OsScheduleTableSetEventRef",
+                  "description": "Reference to event that will be set by action",
+                  "destinationContainerType": "OsEvent",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsEvent",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsEvent"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsScheduleTableSetEventRef",
+                  "uuid": "ECUC:5b6d6723-ab99-4855-b3a1-7307dcfb568c"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTableEventSetting/OsScheduleTableSetEventTaskRef",
+                  "destinationContainerType": "OsTask",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsTask",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsTask"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsScheduleTableSetEventTaskRef",
+                  "uuid": "ECUC:9c00d427-05c7-4bf2-960f-818e9c527827"
+                }
+              ],
+              "shortName": "OsScheduleTableEventSetting",
+              "subContainers": [],
+              "uuid": "ECUC:da6a454f-c51f-499f-bf85-327d654b710d"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTableTaskActivation",
+              "description": "Task that is triggered by that schedule table.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTableTaskActivation/OsScheduleTableActivateTaskRef",
+                  "description": "Reference to task that will be activated by action",
+                  "destinationContainerType": "OsTask",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsTask",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsTask"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsScheduleTableActivateTaskRef",
+                  "uuid": "ECUC:a39530bb-23f0-4ff3-96c7-07c979bcfa55"
+                }
+              ],
+              "shortName": "OsScheduleTableTaskActivation",
+              "subContainers": [],
+              "uuid": "ECUC:f65324cd-90ca-4bd5-9ba2-7abc0b9a6489"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTblAdjustableExpPoint",
+              "description": "Adjustable expiry point",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTblAdjustableExpPoint/OsScheduleTableMaxLengthen",
+                  "description": "The maximum positive adjustment that can be made to the expiry point offset (in ticks).",
+                  "isOptional": false,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsScheduleTableMaxLengthen",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6dfec9f1-1edd-4155-9aee-bcc5a7eff09d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableExpiryPoint/OsScheduleTblAdjustableExpPoint/OsScheduleTableMaxShorten",
+                  "description": "The maximum negative adjustment that can be made to the expiry point offset (in ticks).",
+                  "isOptional": false,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsScheduleTableMaxShorten",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:24814103-54dd-4a15-86ac-e315b1791fd0"
+                }
+              ],
+              "references": [],
+              "shortName": "OsScheduleTblAdjustableExpPoint",
+              "subContainers": [],
+              "uuid": "ECUC:4517e21c-7943-450e-8038-ac3dc14794f6"
+            }
+          ],
+          "uuid": "ECUC:c7cd0a08-1a1b-4d8f-aba8-a93a48a1a2a8"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableSync",
+          "description": "This container specifies the synchronization parameters of the schedule table.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableSync/OsScheduleTblExplicitPrecision",
+              "description": "This configuration is only valid if the explicit synchronization is used.",
+              "isOptional": true,
+              "max": 18446744073709552000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsScheduleTblExplicitPrecision",
+              "type": "INTEGER",
+              "uuid": "ECUC:123e7dad-40fd-4311-9cd7-bb56c0a5c4de"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "NONE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsScheduleTable/OsScheduleTableSync/OsScheduleTblSyncStrategy",
+              "description": "AUTOSAR OS provides support for synchronization in two ways: explicit and implicit.",
+              "enumValues": [
+                "EXPLICIT",
+                "IMPLICIT",
+                "NONE"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OsScheduleTblSyncStrategy",
+              "type": "ENUM",
+              "uuid": "ECUC:b2420449-8111-4d58-8338-b9068501a1a6"
+            }
+          ],
+          "references": [],
+          "shortName": "OsScheduleTableSync",
+          "subContainers": [],
+          "uuid": "ECUC:6242bbd5-43d6-45a6-9128-fad562be2af9"
+        }
+      ],
+      "uuid": "ECUC:523c4517-6584-40ca-957a-8327c5c01843"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsSpinlock",
+      "description": "An OsSpinlock object is used to co-ordinate concurrent access by TASKs/ISR2s on different cores to a shared resource.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": "LOCK_NOTHING",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsSpinlock/OsSpinlockLockMethod",
+          "description": "Lock method which is used when a spinlock is taken. Note that it is possible that a user (e.g. a Task) might hold more than one spinlock. In this case the last…",
+          "enumValues": [
+            "LOCK_ALL_INTERRUPTS",
+            "LOCK_CAT2_INTERRUPTS",
+            "LOCK_NOTHING",
+            "LOCK_WITH_RES_SCHEDULER"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsSpinlockLockMethod",
+          "type": "ENUM",
+          "uuid": "ECUC:a6a46311-b3c8-4178-acab-c75fa0d24275"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsSpinlock/OsSpinlockAccessingApplication",
+          "description": "Reference to OsApplications that have an access to this object.",
+          "destinationContainerType": "OsApplication",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsApplication"
+          ],
+          "isExternal": false,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "shortName": "OsSpinlockAccessingApplication",
+          "uuid": "ECUC:804a40be-efb2-4923-b684-7466bf088f7e"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsSpinlock/OsSpinlockSuccessor",
+          "description": "Reference to OsApplications that have an access to this object.",
+          "destinationContainerType": "OsSpinlock",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsSpinlock",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsSpinlock"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OsSpinlockSuccessor",
+          "uuid": "ECUC:de2b3a13-fb51-4c88-980d-89bd9a102d2a"
+        }
+      ],
+      "shortName": "OsSpinlock",
+      "subContainers": [],
+      "uuid": "ECUC:d693c889-237d-481d-836b-62c73ad00d48"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask",
+      "description": "This container represents an OSEK task.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskActivation",
+          "description": "This attribute defines the maximum number of queued activation requests for the task. A value equal to \"1\" means that at any time only a single activation is p…",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsTaskActivation",
+          "type": "INTEGER",
+          "uuid": "ECUC:f53345d4-aac0-420f-ba25-d5b65b0dc33d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskPriority",
+          "description": "The priority of a task is defined by the value of this attribute. This value has to be understood as a relative value, i.e. the values show only the relative o…",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsTaskPriority",
+          "type": "INTEGER",
+          "uuid": "ECUC:61428e85-21e3-4df8-980f-9a985a02ede4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskSchedule",
+          "description": "The OsTaskSchedule attribute defines the preemptability of the task.",
+          "enumValues": [
+            "FULL",
+            "NON"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OsTaskSchedule",
+          "type": "ENUM",
+          "uuid": "ECUC:f9b59379-7036-4b07-ab5c-2adfabf501c9"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskAccessingApplication",
+          "description": "Reference to applications which have an access to this object.",
+          "destinationContainerType": "OsApplication",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsApplication",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsApplication"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsTaskAccessingApplication",
+          "uuid": "ECUC:171cf36f-49fc-411f-a6a6-1d7b2ad3980c"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskEventRef",
+          "description": "This reference defines the list of events the extended task may react on.",
+          "destinationContainerType": "OsEvent",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsEvent",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsEvent"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsTaskEventRef",
+          "uuid": "ECUC:7044fce9-f730-49ac-a996-dc177040d49e"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskResourceRef",
+          "description": "This reference defines a list of resources accessed by this task.",
+          "destinationContainerType": "OsResource",
+          "destinationRef": "/AUTOSAR/EcucDefs/Os/OsResource",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Os/OsResource"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "OsTaskResourceRef",
+          "uuid": "ECUC:62e61405-1641-428b-8bb0-16f229d5e20e"
+        }
+      ],
+      "shortName": "OsTask",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskAutostart",
+          "description": "This container determines whether the task is activated during the system start-up procedure or not for some specific application modes.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskAutostart/OsTaskAppModeRef",
+              "description": "Reference to application modes in which that task is activated on startup of the OS",
+              "destinationContainerType": "OsAppMode",
+              "destinationRef": "/AUTOSAR/EcucDefs/Os/OsAppMode",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Os/OsAppMode"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "OsTaskAppModeRef",
+              "uuid": "ECUC:e7ace4a7-9613-4f24-908c-30ccc5bf56e6"
+            }
+          ],
+          "shortName": "OsTaskAutostart",
+          "subContainers": [],
+          "uuid": "ECUC:e9cb3483-f89a-4318-bbc9-ad010cc385b3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection",
+          "description": "This container contains all parameters regarding timing protection of the task.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection/OsTaskAllInterruptLockBudget",
+              "description": "This parameter contains the maximum time for which the task is allowed to lock all interrupts (via SuspendAllInterrupts() or DisableAllInterrupts()) (in second…",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsTaskAllInterruptLockBudget",
+              "type": "FLOAT",
+              "uuid": "ECUC:8081828e-63a1-4557-aa36-499a08c8c7f5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection/OsTaskExecutionBudget",
+              "description": "This parameter contains the maximum allowed execution time of the task (in seconds).",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsTaskExecutionBudget",
+              "type": "FLOAT",
+              "uuid": "ECUC:dfe8bdba-81ab-4678-9590-d572e5f51e63"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection/OsTaskOsInterruptLockBudget",
+              "description": "This parameter contains the maximum time for which the task is allowed to lock all Category 2 interrupts (via SuspendOSInterrupts()) (in seconds).",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsTaskOsInterruptLockBudget",
+              "type": "FLOAT",
+              "uuid": "ECUC:76ffc748-10a8-4e58-8a72-eabb96ee8ec2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection/OsTaskTimeFrame",
+              "description": "The minimum inter-arrival time between activations and/or releases of a task (in seconds).",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OsTaskTimeFrame",
+              "type": "FLOAT",
+              "uuid": "ECUC:faa19133-57b3-47fe-9ad3-3e028e0c5884"
+            }
+          ],
+          "references": [],
+          "shortName": "OsTaskTimingProtection",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection/OsTaskResourceLock",
+              "description": "This container contains the worst case time between getting and releasing a given resource (in seconds).",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection/OsTaskResourceLock/OsTaskResourceLockBudget",
+                  "description": "This parameter contains the maximum time the task is allowed to lock the resource (in seconds)",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsTaskResourceLockBudget",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:d22b3f26-8cf9-4334-a8e8-cd3657d64f9d"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Os/OsTask/OsTaskTimingProtection/OsTaskResourceLock/OsTaskResourceLockResourceRef",
+                  "description": "Reference to the resource used by the task",
+                  "destinationContainerType": "OsResource",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Os/OsResource",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Os/OsResource"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "OsTaskResourceLockResourceRef",
+                  "uuid": "ECUC:ac350ae8-5ba7-4294-930a-d2e9c7cd6bc8"
+                }
+              ],
+              "shortName": "OsTaskResourceLock",
+              "subContainers": [],
+              "uuid": "ECUC:4c924269-ca89-4c10-9481-cdccacc1a866"
+            }
+          ],
+          "uuid": "ECUC:84e81766-4a5b-4236-9108-ef70def0f89f"
+        }
+      ],
+      "uuid": "ECUC:f9cd89d3-97e4-4f05-ad16-d8f577b726d0"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Os",
+  "description": "Configuration of the Os (Operating System) module.",
+  "importWarnings": [
+    "OsAlarmAction：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "OsAlarmAppModeRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsAlarmAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsAppAlarmRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsAppCounterRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsAppEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "OsAppIsrRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsAppScheduleTableRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsAppTaskRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsApplicationCoreRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition 位于本模块之外；编辑器只读展示。",
+    "OsGptChannelRef：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+    "OsCounterAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsIocDataTypeRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "OsIsrResourceRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsResourceAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsScheduleTableAppModeRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsSchTblAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsSpinlockAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsTaskAppModeRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsTaskAccessingApplication：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsTaskEventRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OsTaskResourceRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Os",
+  "version": "4.2.2"
+}

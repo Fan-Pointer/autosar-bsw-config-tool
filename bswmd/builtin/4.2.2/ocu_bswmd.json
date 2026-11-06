@@ -1,0 +1,466 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "41a5402332134aba099f5280b5092faecbd68685352c27f8acaafd9311abb033",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet",
+      "description": "This container is the base of a Configuration Set, which contains the configured OCU channels. This way, different configuration sets can be defined for post-b…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": "OCU_UPCOUNTING",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuCountdirection",
+          "description": "This parameter indicates the count direction for the whole OCU driver.",
+          "enumValues": [
+            "OCU_DOWNCOUNTING",
+            "OCU_UPCOUNTING"
+          ],
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "OcuCountdirection",
+          "type": "ENUM",
+          "uuid": "ECUC:c2bbb410-5753-45e3-a775-df91cb2517de"
+        }
+      ],
+      "references": [],
+      "shortName": "OcuConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel",
+          "description": "Configuration of an individual OCU channel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuAssignedHardwareChannel",
+              "description": "The physical hardware channel that is assigned to this logical channel.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OcuAssignedHardwareChannel",
+              "type": "INTEGER",
+              "uuid": "ECUC:9c795ca1-61ba-4c2d-827e-36de73c8bb13"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuChannelId",
+              "description": "Channel Id of the OCU channel. This value will be assigned to the symbolic name derived from the OcuChannel container short name. It defines the assignment of …",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OcuChannelId",
+              "type": "INTEGER",
+              "uuid": "ECUC:886c0d42-b594-4a74-9900-ee040e4fc513"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuChannelTickDuration",
+              "description": "Specifies the tick duration of the counter of the channel. This parameter is the number of the input clock edges (rising edges or falling edges exclusively) co…",
+              "isOptional": false,
+              "max": 32768,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OcuChannelTickDuration",
+              "type": "INTEGER",
+              "uuid": "ECUC:2a5c5bb3-5b7f-495b-bb9d-51402d46acb5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuDefaultThreshold",
+              "description": "Value of comparison threshold used for Initialization.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OcuDefaultThreshold",
+              "type": "INTEGER",
+              "uuid": "ECUC:1720e99c-a652-4c42-9bf1-79676c4151a5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuHardwareTriggeredAdc",
+              "description": "This parameter is used to allow the OCU channel to trigger an ADC channel upon compare match, if this is supported by hardware. The value of the parameter repr…",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OcuHardwareTriggeredAdc",
+              "type": "INTEGER",
+              "uuid": "ECUC:954fd7bc-a2b9-4561-913e-e7f64009c0f9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuHardwareTriggeredDMA",
+              "description": "This parameter is used to allow the OCU channel to trigger a DMA channel upon compare match, if this is supported by hardware. The value of the parameter repre…",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OcuHardwareTriggeredDMA",
+              "type": "INTEGER",
+              "uuid": "ECUC:13fd5615-ebe0-4355-bbb7-c463a8d0cbca"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuMaxCounterValue",
+              "description": "Maximum value in ticks, the counter of the OCU channel is able to count.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OcuMaxCounterValue",
+              "type": "INTEGER",
+              "uuid": "ECUC:bdfef2e5-45dd-4d48-87d0-e1803b9ccc3d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuNotification",
+              "description": "Definition of a function pointer to a Callback function.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OcuNotification",
+              "type": "FUNCTION",
+              "uuid": "ECUC:fa8b80e7-80af-46d6-ab00-4b4824f11ce6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuOuptutPinUsed",
+              "description": "Information about the usage of an output pin on this channel.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OcuOuptutPinUsed",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:6e816ecb-78d9-4084-8954-6c4aeb5de2e2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel/OcuOutputPinDefaultState",
+              "description": "The parameter OcuOutputPinDefaultState represents the state that a pin associated with a channel shall be set to after initialisation.",
+              "enumValues": [
+                "OCU_HIGH",
+                "OCU_LOW"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "OcuOutputPinDefaultState",
+              "type": "ENUM",
+              "uuid": "ECUC:3cb6c8a7-1cfe-4a65-9f85-402d00d8688e"
+            }
+          ],
+          "references": [],
+          "shortName": "OcuChannel",
+          "subContainers": [],
+          "uuid": "ECUC:e88a1d0f-132b-4956-9864-707d68da3489"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuGroup",
+          "description": "This container contains the parameters for configuring an OCU group.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuGroup/OcuGroupId",
+              "description": "Numeric ID of the group. This parameter is the symbolic name of the group.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "OcuGroupId",
+              "type": "INTEGER",
+              "uuid": "ECUC:db2a2d12-e0af-424a-b1c8-e71aaa9259db"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuGroup/OcuGroupDefinition",
+              "description": "Assignment of OcuChannels to an OcuGroup.",
+              "destinationContainerType": "OcuChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuChannel"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "OcuGroupDefinition",
+              "uuid": "ECUC:a93b7394-19f3-4b2b-9bee-21d741f7eb7c"
+            }
+          ],
+          "shortName": "OcuGroup",
+          "subContainers": [],
+          "uuid": "ECUC:9b03f8ea-f80b-42a8-b7f5-c9cb70869d68"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuHWSpecificSettings",
+          "description": "This container contains Ocu-specific parameters for selecting the clock source and setting optional prescalers if supported by hardware.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionIssue": "标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuHWSpecificSettings/OcuClockSource",
+              "description": "The OCU driver specific clock input for the unit can statically be configured to select different clock sources if provided by hardware. Enumeration literals a…",
+              "enumValues": [],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "readOnly": true,
+              "shortName": "OcuClockSource",
+              "type": "ENUM",
+              "uuid": "ECUC:cac98a9b-63c8-4156-85d9-bb801075e1b9",
+              "vendorSpecific": true
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionIssue": "标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+              "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigSet/OcuHWSpecificSettings/OcuPrescale",
+              "description": "Optional OCU driver specific clock prescale factor, if supported by hardware. Implementation is defined vendor specific.",
+              "enumValues": [],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "readOnly": true,
+              "shortName": "OcuPrescale",
+              "type": "ENUM",
+              "uuid": "ECUC:52e0de61-eeaf-49f2-ada4-5e69b1b341a5",
+              "vendorSpecific": true
+            }
+          ],
+          "references": [],
+          "shortName": "OcuHWSpecificSettings",
+          "subContainers": [],
+          "uuid": "ECUC:dcea9ee9-4968-40fe-9ee6-bd4f9bea8e81"
+        }
+      ],
+      "uuid": "ECUC:708b6105-962d-46a4-86e6-92d896d5ecde"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis",
+      "description": "Configuration of optional APIs.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuDeInitApi",
+          "description": "Adds / removes the service Ocu_DeInit() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuDeInitApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ece1e485-7112-4cc3-af64-f9e7d1c5f761"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuGetCounterApi",
+          "description": "Adds / removes the service Ocu_GetCounter() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuGetCounterApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2b6a491c-9f49-4ce5-8bb5-ebc72f7acd8a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuNotificationSupported",
+          "description": "Adds / removes the services Ocu_EnableNotification() and Ocu_DisableNotification() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuNotificationSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a078c655-6060-433b-8e43-e007388c733b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuSetAbsoluteThresholdApi",
+          "description": "Adds / removes the service Ocu_SetAbsoluteThreshold() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuSetAbsoluteThresholdApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1d04356b-a77f-4adc-b124-141cd519ad93"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuSetPinActionApi",
+          "description": "Adds / removes the service Ocu_SetPinAction() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuSetPinActionApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fcab4421-8eda-4da4-9c69-24801273fab7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuSetPinStateApi",
+          "description": "Adds / removes the service Ocu_SetPinState() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuSetPinStateApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c36e8660-4995-4cbe-b664-645a361723c9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuSetRelativeThresholdApi",
+          "description": "Adds / removes the service Ocu_SetRelativeThreshold() from the code.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuSetRelativeThresholdApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:aa3df9f3-f48b-402f-b1a2-e05546637c64"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuConfigurationOfOptionalApis/OcuVersionInfoApi",
+          "description": "Switch to indicate that the Ocu_GetVersionInfo() is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:aece3736-8fed-4937-8fa3-90f560dc6b2c"
+        }
+      ],
+      "references": [],
+      "shortName": "OcuConfigurationOfOptionalApis",
+      "subContainers": [],
+      "uuid": "ECUC:3b497cda-e5be-4ddd-a1eb-b03026591a87"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuGeneral",
+      "description": "This container contains the module-wide configuration parameters of the OCU Driver.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Ocu/OcuGeneral/OcuDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "OcuDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fa74e280-1309-474e-a17f-06568b6c5212"
+        }
+      ],
+      "references": [],
+      "shortName": "OcuGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:95eb7fd8-be1a-4fc7-b857-a748a2ba401d"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Ocu",
+  "description": "Configuration of Ocu (Output Compare Unit) module.",
+  "importWarnings": [
+    "OcuGroupDefinition：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "OcuClockSource：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+    "OcuPrescale：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Ocu",
+  "version": "4.2.2"
+}

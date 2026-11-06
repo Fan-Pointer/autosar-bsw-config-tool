@@ -1,0 +1,1080 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "8abf7da48cefe8dc44cbb57d840ca8e7d2f76bc7393cbf82954e0cba204539cf",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet",
+      "description": "Collecting container for all parameters with post-build configuration classes.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "EthIfConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController",
+          "description": "This container contains the configuration of EthIfController.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController/EthIfCtrlIdx",
+              "description": "This parameter provides a zero-based consecutive index of the Ethernet Communication Controllers. Upper layer BSW modules and the EthIf itself use this index t…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfCtrlIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:11f8c68f-cb6d-48f9-b8a6-b4f8cd0aa940"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController/EthIfCtrlMtu",
+              "description": "Specifies the maximum transmission unit (MTU) of the EthIfCtrl in [bytes].",
+              "isOptional": false,
+              "max": 9000,
+              "min": 64,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfCtrlMtu",
+              "type": "INTEGER",
+              "uuid": "ECUC:5c7b376a-c30d-4dad-86e9-3d006d5eeeac"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController/EthIfMaxTxBufsTotal",
+              "description": "Limits the total number of transmit buffers.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfMaxTxBufsTotal",
+              "type": "INTEGER",
+              "uuid": "ECUC:a44750e3-3109-41f0-bee8-aa9994ce0a0a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController/EthIfVlanId",
+              "description": "A virtual-LAN is identified by this attribute according to IEEE 802.1Q.",
+              "isOptional": true,
+              "max": 4095,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfVlanId",
+              "type": "INTEGER",
+              "uuid": "ECUC:3f77c980-3fb1-4f5c-b6d9-36dc500a86fb"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController/EthIfEthTrcvRef",
+              "description": "Reference to an Ethernet transceiver, which is handled by the Ethernet Interface.",
+              "destinationContainerType": "EthIfTransceiver",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTransceiver",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTransceiver"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfEthTrcvRef",
+              "uuid": "ECUC:54c10002-0930-476d-8d0b-a178bf138d77"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController/EthIfPhysControllerRef",
+              "description": "Reference to a physical Ethernet controller, which is handled by the Ethernet Interface.",
+              "destinationContainerType": "EthIfPhysController",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfPhysControllerRef",
+              "uuid": "ECUC:569eb05a-1907-4b7d-b59f-6ee27ec7608f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController/EthIfSwitchRefOrPortGroupRef",
+              "description": "The choice reference allows to configure either the EthIfController references an EthIfSwitch or an EthIfSwitchPortGroup.",
+              "destinationContainerType": "EthIfSwitch",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitch",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitch",
+                "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "choice",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchRefOrPortGroupRef",
+              "uuid": "ECUC:cd3ca8d1-b17b-4b15-8e42-b91f7d5bcf6c"
+            }
+          ],
+          "shortName": "EthIfController",
+          "subContainers": [],
+          "uuid": "ECUC:b0742c53-b8e3-4b1f-90d5-44cf6cf0f904"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfFrameOwnerConfig",
+          "description": "Configuration of Ethernet frame owner",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfFrameOwnerConfig/EthIfFrameType",
+              "description": "Selects the Ethernet frame type.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfFrameType",
+              "type": "INTEGER",
+              "uuid": "ECUC:9f885a46-fd04-4ac7-8a13-08dc4756902e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfFrameOwnerConfig/EthIfOwner",
+              "description": "Selects the owner of an Ethernet frame type. The owner is a zero based index into the callback function configuration 'EthIfRxIndicationConfig'. I.e. an Ethern…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfOwner",
+              "type": "INTEGER",
+              "uuid": "ECUC:3182eb85-f911-4fa6-9999-22536204c451"
+            }
+          ],
+          "references": [],
+          "shortName": "EthIfFrameOwnerConfig",
+          "subContainers": [],
+          "uuid": "ECUC:37e0f750-2616-4d3f-81d1-086be3a639c1"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController",
+          "description": "This container contains the configuration of EthIfPhysController.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController/EthIfPhysControllerIdx",
+              "description": "This parameter provides a zero-based consecutive index of the physical Ethernet controllers. Upper layer BSW modules and the Ethernet Interface itself use this…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfPhysControllerIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:03db8723-70fd-40c6-912c-6e22b8516907"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController/EthIfEthCtrlRef",
+              "description": "Reference to a physical Ethernet controller, which is handled by a specific Ethernet controller driver.",
+              "destinationContainerType": "EthCtrlConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfEthCtrlRef",
+              "uuid": "ECUC:746d6f68-70e1-4893-85d9-973fd32a40d7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController/EthIfWEthCtrlRef",
+              "description": "Reference to a physical Wireless Ethernet controller, which is handled by a specific Wireless Ethernet controller driver.",
+              "destinationContainerType": "WEthCtrlConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfWEthCtrlRef",
+              "uuid": "ECUC:68994dd5-4fd9-4143-9f41-71640413495f"
+            }
+          ],
+          "shortName": "EthIfPhysController",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController/EthIfPhysCtrlRxMainFunctionPriorityProcessing",
+              "description": "Configuration of ingress FIFO based main function processing.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController/EthIfPhysCtrlRxMainFunctionPriorityProcessing/EthIfPhysCtrlRxIndicationIterations",
+                  "description": "Max number of Ethernet frames polled per main function invocation.",
+                  "isOptional": false,
+                  "max": 18446744073709552000,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthIfPhysCtrlRxIndicationIterations",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:21c3065f-c494-4ccf-897f-48d2eab0ee00"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController/EthIfPhysCtrlRxMainFunctionPriorityProcessing/EthIfPhysCtrlRxMainFunctionPeriod",
+                  "description": "Specifies the period of main function in seconds.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthIfPhysCtrlRxMainFunctionPeriod",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:9c46982b-1e16-4e10-b146-010d2e665007"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfPhysController/EthIfPhysCtrlRxMainFunctionPriorityProcessing/EthIfPhysCtrlRxIngressFifoRef",
+                  "description": "Reference to the reception FIFO.",
+                  "destinationContainerType": "EthCtrlConfigIngressFifo",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlConfigIngress/EthCtrlConfigIngressFifo",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlConfigIngress/EthCtrlConfigIngressFifo"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthIfPhysCtrlRxIngressFifoRef",
+                  "uuid": "ECUC:1bd0b2f8-daad-4ff8-9400-9e5e62df4f8f"
+                }
+              ],
+              "shortName": "EthIfPhysCtrlRxMainFunctionPriorityProcessing",
+              "subContainers": [],
+              "uuid": "ECUC:4c835b40-f1d5-478a-9cf3-c03ee4af8bf6"
+            }
+          ],
+          "uuid": "ECUC:37573f19-c997-4d30-a1b0-f42f2121f6a7"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfRxIndicationConfig",
+          "description": "Configuration of receive callback functions.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfRxIndicationConfig/EthIfRxIndicationFunction",
+              "description": "Specifies receive indication callback function.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfRxIndicationFunction",
+              "type": "FUNCTION",
+              "uuid": "ECUC:9f914ccb-963f-40a4-855f-aedec4c921fb"
+            }
+          ],
+          "references": [],
+          "shortName": "EthIfRxIndicationConfig",
+          "subContainers": [],
+          "uuid": "ECUC:da2f1421-087a-40d5-b0bb-233f38c04fb3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitch",
+          "description": "This container contains the configuration of EthIfSwitches.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitch/EthIfSwitchIdx",
+              "description": "This parameter provides a zero-based consecutive index of the Ethernet Interface Switches. Upper layer BSW modules and the EthIf itself use this index to ident…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:8db0ed6c-2d4b-4ee2-9de6-60e16a969032"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitch/EthIfSwitchRef",
+              "description": "Reference to a Ethernet Switch, which is handled by a specific Ethernet Switch driver.",
+              "destinationContainerType": "EthSwtConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchRef",
+              "uuid": "ECUC:3a89e878-fbdd-403d-bada-2677c416df67"
+            }
+          ],
+          "shortName": "EthIfSwitch",
+          "subContainers": [],
+          "uuid": "ECUC:3e994395-5f10-4f07-8fde-b86834e5a651"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchMgmtInfoIndicationConfig",
+          "description": "Configuration of Switch Management callback function.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchMgmtInfoIndicationConfig/EthIfSwitchMgmtInfoIndicationFunction",
+              "description": "Enables/Disables the ingress Switch management info indication redirected call to upper layers who registered for the call.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchMgmtInfoIndicationFunction",
+              "type": "FUNCTION",
+              "uuid": "ECUC:56db3135-67a8-494b-82e1-531695e0ed91"
+            }
+          ],
+          "references": [],
+          "shortName": "EthIfSwitchMgmtInfoIndicationConfig",
+          "subContainers": [],
+          "uuid": "ECUC:2caa658c-76a0-4275-845d-ef38600c00fa"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup",
+          "description": "This container contains the configuration of EthIfSwitchPortGroups.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup/EthIfSwitchPortGroupIdx",
+              "description": "This parameter provides a zero-based consecutive index of the Ethernet Switch Port Groups. Upper layer BSW modules and the EthIf itself use this index to ident…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchPortGroupIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:e3893ebf-2ab8-4a81-b558-683f62b8246b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup/EthIfSwitchPortGroupRefSemantics",
+              "description": "Defines how the EthIfSwitchRefOrPortGroupRef refering to a EthIfSwitchPortGroup shall be interpreted.",
+              "enumValues": [
+                "ETHIF_SWITCH_PORT_GROUP_CONTROL",
+                "ETHIF_SWITCH_PORT_GROUP_LINK_INFO"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchPortGroupRefSemantics",
+              "type": "ENUM",
+              "uuid": "ECUC:c6a41e40-cf16-4c3d-8296-9b1750ca2aae"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchPortGroup/EthIfPortRef",
+              "description": "Reference to an Ethernet Switch Port.",
+              "destinationContainerType": "EthSwtPort",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "EthIfPortRef",
+              "uuid": "ECUC:7b2cb9bb-ba70-4e02-8db6-35daff4879ac"
+            }
+          ],
+          "shortName": "EthIfSwitchPortGroup",
+          "subContainers": [],
+          "uuid": "ECUC:cfa90cbc-346e-4e07-81e4-b77b9e8fa509"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchTimeStampIndicationConfig",
+          "description": "Configuration of Switch timestamp indications.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchTimeStampIndicationConfig/EthIfSwitchEgressTimeStampIndicationFunction",
+              "description": "Enables/Disables to upper layers an egress timestamp indication function.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchEgressTimeStampIndicationFunction",
+              "type": "FUNCTION",
+              "uuid": "ECUC:1cbfbc01-4956-42fb-88ba-6ff409b4c450"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfSwitchTimeStampIndicationConfig/EthIfSwitchIngressTimeStampIndicationFunction",
+              "description": "Enables/Disables to upper layers an ingress timestamp indication function.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfSwitchIngressTimeStampIndicationFunction",
+              "type": "FUNCTION",
+              "uuid": "ECUC:1b917e6b-6cdf-42e5-8be7-ae630edc6ed4"
+            }
+          ],
+          "references": [],
+          "shortName": "EthIfSwitchTimeStampIndicationConfig",
+          "subContainers": [],
+          "uuid": "ECUC:8626f291-0537-47bb-bc8c-5586789009f0"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTransceiver",
+          "description": "This container contains the configuration of EthIfTransceiver.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTransceiver/EthIfTransceiverIdx",
+              "description": "This parameter provides a zero-based consecutive index of the Ethernet transceivers. Upper layer BSW modules and the Ethernet Interface itself use this index t…",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfTransceiverIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:81d365c7-b414-4e29-8f0e-9638a0ac44e2"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTransceiver/EthIfEthTrcvRef",
+              "description": "Reference to an Ethernet transceiver, which is handled by a specific Ethernet transceiver driver.",
+              "destinationContainerType": "EthTrcvConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfEthTrcvRef",
+              "uuid": "ECUC:134179d8-eb26-413d-b59a-69f08f1f38d3"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTransceiver/EthIfWEthTrcvRef",
+              "description": "Reference to an Wireless Ethernet transceiver, which is handled by a specific Wireless Ethernet transceiver driver.",
+              "destinationContainerType": "WEthTrcvConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthIfWEthTrcvRef",
+              "uuid": "ECUC:e2c33baf-ab11-4ad0-b539-1c1271b031f7"
+            }
+          ],
+          "shortName": "EthIfTransceiver",
+          "subContainers": [],
+          "uuid": "ECUC:a26859f2-c119-451c-a50c-81fd5377b064"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTrcvLinkStateChgConfig",
+          "description": "Specifies link state change callback function",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTrcvLinkStateChgConfig/EthIfTrcvLinkStateChgFunction",
+              "description": "Specifies link state change callback function",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfTrcvLinkStateChgFunction",
+              "type": "FUNCTION",
+              "uuid": "ECUC:690388af-20c9-48dc-b8f7-2652cce939f7"
+            }
+          ],
+          "references": [],
+          "shortName": "EthIfTrcvLinkStateChgConfig",
+          "subContainers": [],
+          "uuid": "ECUC:d948a757-1808-40e8-8790-ada11854d9dd"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTxConfirmationConfig",
+          "description": "Configuration of transmit indication callback functions.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfTxConfirmationConfig/EthIfTxConfirmationFunction",
+              "description": "Specifies transmit indication callback function",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthIfTxConfirmationFunction",
+              "type": "FUNCTION",
+              "uuid": "ECUC:0066da3a-acae-4b4d-8d01-26abd02c73d1"
+            }
+          ],
+          "references": [],
+          "shortName": "EthIfTxConfirmationConfig",
+          "subContainers": [],
+          "uuid": "ECUC:b423970d-2818-47ed-9d91-b62cbccc1f47"
+        }
+      ],
+      "uuid": "ECUC:2e80d7a0-8c5e-4418-90e5-7566219aa6e2"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral",
+      "description": "This container contains the general configuration parameters of the Ethernet Interface.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0749db1b-7fdd-4e28-92c7-b583b40e921f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfEnableRxInterrupt",
+          "description": "Enables / Disables receive interrupt.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfEnableRxInterrupt",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:cd0c0315-e5ac-4c42-804e-04f5a8289812"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfEnableSignalQualityApi",
+          "description": "Enable/disable the APIs read and clear the signal quality.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfEnableSignalQualityApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d1fc9c47-8cd4-447e-a3c2-238f33d5be63"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfEnableTxInterrupt",
+          "description": "Enables / Disables the transmit interrupt.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfEnableTxInterrupt",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a3457b20-2449-49ad-99c5-69f0b70c5cc3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfEnableWEthApi",
+          "description": "Enables / Disables API's for WEth / WEthTrcv",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthIfEnableWEthApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9eafb305-92b9-44bb-aa1b-5baa6e583e9c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfGetAndResetMeasurementDataApi",
+          "description": "Enables / Disables the Get and Reset Measurement Data API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfGetAndResetMeasurementDataApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f6d7cd06-6712-4b97-9019-417f28773986"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfGetBaudRate",
+          "description": "Enables / Disables GetBaudRate API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfGetBaudRate",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f8834dcb-ef9a-49da-a68f-954aa34117d2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfGetCounterState",
+          "description": "Enables / Disables GetCounterState API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfGetCounterState",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:59d038be-b122-43b8-b1e1-1ff5a6cd34bc"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfGetCtrlIdxList",
+          "description": "Enables / Disables GetCtrlIdxList API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfGetCtrlIdxList",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7f1e6bc2-42a7-4226-b0c7-5470606736ab"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfGetTransceiverWakeupModeApi",
+          "description": "Enables / Disables EthIf_GetTransceiverWakeupMode API",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthIfGetTransceiverWakeupModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2cca3893-d494-4422-875a-58f117a74e93"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfGetVlanIdSupport",
+          "description": "Enables / Disables GetVlanId API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfGetVlanIdSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:09413628-e914-485d-85ca-aab11f495e70"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfGlobalTimeSupport",
+          "description": "Enables/Disables the Global Time APIs used amongst others by Global Time Synchronization over Ethernet.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfGlobalTimeSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1e274416-517b-496a-99a9-d0a0d02c9640"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfSetForwardingModeApi",
+          "description": "Enables /disables EthIf_SetForwardingMode API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfSetForwardingModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ae0b4b1d-cb56-40b3-8abd-9fde9278f135"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfStartAutoNegotiation",
+          "description": "Enables / Disables StartAutoNegotiation API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfStartAutoNegotiation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6b03cae0-33a9-4658-bc68-c31d66ebc0f3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfSwitchManagementSupport",
+          "description": "Enables/Disables the Switch management APIs to support a Switch-port specific communication attribute access.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfSwitchManagementSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:19579db3-f70f-4d21-8d77-ed19b88487bd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfVerifyConfigApi",
+          "description": "Enables /disables EthIf_VerifyConfig API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfVerifyConfigApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f26c229b-22a1-470c-964c-ff2dfcfead83"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfVersionInfoApi",
+          "description": "Enables / Disables version info API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:70813955-bcf5-4158-9146-b95b832fa699"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfVersionInfoApiMacro",
+          "description": "Enables / Disables version info API macro implementation.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfVersionInfoApiMacro",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8f788107-3d3e-4280-ae24-0ad29b191410"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfWakeUpSupport",
+          "description": "Configures if wakeup is supported or not.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfWakeUpSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c8da15d1-4bf9-4d08-b710-afe890855205"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfMainFunctionPeriod",
+          "description": "Specifies the period of main function EthIf_MainFunctionRx and EthIf_MainFunctionTx in seconds. Ethernet Interface does not require this information but the BS…",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:c1682f48-b9fb-4e01-8919-e43f11888af3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfMainFunctionStatePeriod",
+          "description": "Specifies the period of main function EthIf_MainFunctionState in seconds. Ethernet Interface does not require this information but the BSW scheduler.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthIfMainFunctionStatePeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:a458bfef-b78e-4e03-881d-0e827627ae1c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfPortStartupActiveTime",
+          "description": "Denote the time delay after the mode \"ETHTRCV_MODE_ACTIVE\" of all EthIfSwitchPorts are requested via EthIf_StartAllPorts.",
+          "isOptional": true,
+          "max": 65.535,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthIfPortStartupActiveTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:614ff812-60de-4304-a9e8-0ceabfcaef7d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfSignalQualityCheckPeriod",
+          "description": "Specifies the period in units of seconds in which the signal quality it polled in the context of EthIf_MainfunctionState. The value shall be an integral multip…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthIfSignalQualityCheckPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:dd71a3db-7a04-488a-baf1-59d144a893f1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfSwitchOffPortTimeDelay",
+          "description": "Denote the time delay after the mode \"ETHTRCV_MODE_DOWN\" of a EthIfSwitchPortGroup will be executed.",
+          "isOptional": true,
+          "max": 65.535,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthIfSwitchOffPortTimeDelay",
+          "type": "FLOAT",
+          "uuid": "ECUC:c3fdc046-2946-452a-b5ee-94de9eb4e3b9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfMaxTrcvsTotal",
+          "description": "Limits the total number of transceivers.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfMaxTrcvsTotal",
+          "type": "INTEGER",
+          "uuid": "ECUC:0fc1d4ae-0f92-43b8-bf65-4d1036eb0d9b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfRxIndicationIterations",
+          "description": "Maximum number of Ethernet frames per Ethernet controller polled from the Ethernet driver within EthIf_MainFunctionRx.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthIfRxIndicationIterations",
+          "type": "INTEGER",
+          "uuid": "ECUC:22700c8d-6b97-4d16-8111-31116560b83f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfTrcvLinkStateChgMainReload",
+          "description": "Specifies the frequency of transceiver link state change checks in each",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIfTrcvLinkStateChgMainReload",
+          "type": "INTEGER",
+          "uuid": "ECUC:2c506165-9e0f-4c80-aa09-1edc85118c86"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthIf/EthIfGeneral/EthIfPublicCddHeaderFile",
+          "description": "Defines header files for callback functions which shall be included in case of CDDs. Range of characters is 1.. 32.",
+          "isOptional": true,
+          "maxLength": 32,
+          "minLength": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "EthIfPublicCddHeaderFile",
+          "type": "STRING",
+          "uuid": "ECUC:adf95694-ff36-49a7-b4da-d89f61524404"
+        }
+      ],
+      "references": [],
+      "shortName": "EthIfGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:6c8794b3-e72e-43f7-b296-4c01cf430dbc"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EthIf",
+  "description": "Configuration of the EthIf (Ethernet Interface) module.",
+  "importWarnings": [
+    "EthIfSwitchRefOrPortGroupRef：多候选引用，可在 2 个候选目标中选一个。",
+    "EthIfPhysCtrlRxIngressFifoRef：目标 /AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlConfigIngress/EthCtrlConfigIngressFifo 位于本模块之外；编辑器只读展示。",
+    "EthIfEthCtrlRef：目标 /AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig 位于本模块之外；编辑器只读展示。",
+    "EthIfWEthCtrlRef：目标 /AUTOSAR/EcucDefs/WEth/WEthConfigSet/WEthCtrlConfig 位于本模块之外；编辑器只读展示。",
+    "EthIfSwitchRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig 位于本模块之外；编辑器只读展示。",
+    "EthIfPortRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EthIfPortRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort 位于本模块之外；编辑器只读展示。",
+    "EthIfEthTrcvRef：目标 /AUTOSAR/EcucDefs/EthTrcv/EthTrcvConfigSet/EthTrcvConfig 位于本模块之外；编辑器只读展示。",
+    "EthIfWEthTrcvRef：目标 /AUTOSAR/EcucDefs/WEthTrcv/WEthTrcvConfigSet/WEthTrcvConfig 位于本模块之外；编辑器只读展示。",
+    "EthIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "EthIf",
+  "version": "4.4.0"
+}

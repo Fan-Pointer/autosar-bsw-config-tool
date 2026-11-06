@@ -1,0 +1,1288 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "d6b446dd536358f6c8cf41a79b958f23fe8a5374d8fcf197dfbcabbbf7307264",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR DoIP module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPEid",
+          "description": "Configured EID (Entity ID of) for vehicle identification/vehicle announcement. Only necessary if DoIPUseMacAddressForIdentification is set to FALSE.",
+          "isOptional": true,
+          "max": 281474976710655,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "DoIPEid",
+          "type": "INTEGER",
+          "uuid": "ECUC:d5e790de-0e97-43dd-8af4-75f0a2b59082"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPGid",
+          "description": "Configured GID (Group ID of) for vehicle identification/vehicle announcement.",
+          "isOptional": true,
+          "max": 281474976710655,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "DoIPGid",
+          "type": "INTEGER",
+          "uuid": "ECUC:6ae455ce-c20e-4a97-b23a-c2bbb93fecea"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPLogicalAddress",
+          "description": "Describes the logical address of the DoIP entity, i.e. the LA that will route diagnostic requests to the Dcm of the DoIP entity.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPLogicalAddress",
+          "type": "INTEGER",
+          "uuid": "ECUC:de58f8a2-7680-4522-bae5-18d4b0444ed9"
+        }
+      ],
+      "references": [],
+      "shortName": "DoIPConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel",
+          "description": "Configuration of one DoIPChannel.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 65536
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPChannelSARef",
+              "description": "Reference to the DoIPTester.",
+              "destinationContainerType": "DoIPTester",
+              "destinationRef": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPTester",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPTester"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DoIPChannelSARef",
+              "uuid": "ECUC:893cf71a-c06b-4044-812c-8df50e45d13e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPChannelTARef",
+              "description": "Reference to the target address.",
+              "destinationContainerType": "DoIPTargetAddress",
+              "destinationRef": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTargetAddress",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTargetAddress"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DoIPChannelTARef",
+              "uuid": "ECUC:cbe1685e-4306-4efc-8345-5a1446b28405"
+            }
+          ],
+          "shortName": "DoIPChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPPduRRxPdu",
+              "description": "This container contains the Rx Pdus to connect with the Rx Pdus of the PduR.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPPduRRxPdu/DoIPPduRRxPduId",
+                  "description": "The DoIPPduRRxPduId is required by the API call DoIP_TpCancelReceive.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPPduRRxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:affbfe09-cf4f-43ed-91f0-957c1e71f17f"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPPduRRxPdu/DoIPPduRRxPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPPduRRxPduRef",
+                  "uuid": "ECUC:0fb53490-8f12-418b-a048-feaf0c60d6b0"
+                }
+              ],
+              "shortName": "DoIPPduRRxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:63341ec1-b4ca-4bbc-82b5-a883d528b7c1"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPPduRTxPdu",
+              "description": "This container contains the Tx Pdus to connect with the Tx Pdus of the PduR. If the parameter is not configured the channel is for functional addressing.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPPduRTxPdu/DoIPPduRTxPduId",
+                  "description": "The DoIPPduRTxPduId is required by DoIP_TpTransmit or DoIP_IfTransmit and DoIP_TpCancelTransmit.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPPduRTxPduId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:4ec22559-5780-41ca-af56-0b32ecdd6dae"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "DOIP_TPPDU",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPPduRTxPdu/DoIPPduType",
+                  "description": "API Type to use for communication with PduR. DOIP_IFPDU for UUDT messages, DOIP_TPPDU for all other diagnostic messages.",
+                  "enumValues": [
+                    "DOIP_IFPDU",
+                    "DOIP_TPPDU"
+                  ],
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPPduType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:17c8aace-cda8-471d-8cb2-e474dda9c61a"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPChannel/DoIPPduRTxPdu/DoIPPduRTxPduRef",
+                  "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPPduRTxPduRef",
+                  "uuid": "ECUC:f703fb82-d2e7-4545-a97c-3275ff0bfc5d"
+                }
+              ],
+              "shortName": "DoIPPduRTxPdu",
+              "subContainers": [],
+              "uuid": "ECUC:ecf769bc-a264-4426-a107-185d357d42b4"
+            }
+          ],
+          "uuid": "ECUC:ce8927a0-58c7-4099-a996-3ee43001e9e8"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections",
+          "description": "Container contains all lower layer connection specific information, i.e. the single Pdu References and Handle IDs to the SoAd.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "DoIPConnections",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTargetAddress",
+              "description": "This container describes a possible TargetAddress that is supported by DoIP.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 65535
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTargetAddress/DoIPTargetAddressValue",
+                  "description": "Valid Target Address of a DoIP target address.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPTargetAddressValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c46011a4-ab1a-42cf-a2f8-b71632fcfd59"
+                }
+              ],
+              "references": [],
+              "shortName": "DoIPTargetAddress",
+              "subContainers": [],
+              "uuid": "ECUC:11b8faaf-bc59-49fe-97b5-29df73fa6ee7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection",
+              "description": "This container describes a TCP connection to the lower layer SoAd module.",
+              "multiplicity": {
+                "lower": 2,
+                "upper": 255
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": true,
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection/DoIPRequestAddressAssignment",
+                  "description": "The DoIP module shall request IP address assignment by calling SoAd_RequestIpAddrAssignment() for the TcpIpLocalAddr related to this DoIpConnection.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRequestAddressAssignment",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:5fac5a9e-0915-86f1-5a0e-df77eade14b8"
+                }
+              ],
+              "references": [],
+              "shortName": "DoIPTcpConnection",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection/DoIPSoAdTcpRxPdu",
+                  "description": "This container describes a Rx PDU received via SoAd over TCP",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection/DoIPSoAdTcpRxPdu/DoIPSoAdTcpRxPduId",
+                      "description": "The DoIPSoAdTcpRxPduId is required by the API call DoIP_SoAdTpRxIndication to receive I-PDUs from the SoAd.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdTcpRxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:87bc6f78-b949-44dd-a958-16f6c2003d78"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection/DoIPSoAdTcpRxPdu/DoIPSoAdTcpRxPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdTcpRxPduRef",
+                      "uuid": "ECUC:7fa9533f-a369-48ce-8666-1982b51d007d"
+                    }
+                  ],
+                  "shortName": "DoIPSoAdTcpRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:f8ff31c4-d60d-4316-b021-67cb31934ee7"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection/DoIPSoAdTcpTxPdu",
+                  "description": "This container describes a Tx PDU sent via SoAd over TCP",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection/DoIPSoAdTcpTxPdu/DoIPSoAdTcpTxPduId",
+                      "description": "The DoIPSoAdTcpTxPduId is required by the API call DoIP_SoAdTpTxConfirmation that is called by the SoAd to confirm that the IPdu has been transmitted successfu…",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdTcpTxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:18866fc8-b1b6-4749-866c-8d0dff665d6e"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTcpConnection/DoIPSoAdTcpTxPdu/DoIPSoAdTcpTxPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdTcpTxPduRef",
+                      "uuid": "ECUC:71678586-2f21-4e4f-aefc-997db5b282a4"
+                    }
+                  ],
+                  "shortName": "DoIPSoAdTcpTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:b94850e4-7ec7-4c7a-95d7-e883570c386f"
+                }
+              ],
+              "uuid": "ECUC:e3ccdc1d-8a6b-40a0-abbf-59a1db67e267"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection",
+              "description": "This Container describes a Udp connection to the lower layer SoAd module.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 255
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": true,
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection/DoIPRequestAddressAssignment",
+                  "description": "The DoIP module shall request IP address assignment by calling SoAd_RequestIpAddrAssignment() for the TcpIpLocalAddr related to this DoIpConnection.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRequestAddressAssignment",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:8d1ae703-ec0c-9471-4b05-edd862510501"
+                }
+              ],
+              "references": [],
+              "shortName": "DoIPUdpConnection",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection/DoIPSoAdUdpRxPdu",
+                  "description": "This container describes a Rx PDU received via SoAd over UDP.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection/DoIPSoAdUdpRxPdu/DoIPSoAdUdpRxPduId",
+                      "description": "The DoIPSoAdUdpRxPduId is required by the API call DoIP_SoAdIfRxIndication to receive I-PDUs from the SoAd.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdUdpRxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:103f1b68-c87a-4b28-ad2b-a9a27b600be2"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection/DoIPSoAdUdpRxPdu/DoIPSoAdUdpRxPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdUdpRxPduRef",
+                      "uuid": "ECUC:fd7f5cdf-7cf4-45f4-a627-2d343a8f7ed5"
+                    }
+                  ],
+                  "shortName": "DoIPSoAdUdpRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:799689c9-1f1f-4245-8228-18b7bf0c2dee"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection/DoIPSoAdUdpTxPdu",
+                  "description": "This container describes a Tx PDU sent via SoAd over UDP.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection/DoIPSoAdUdpTxPdu/DoIPSoAdUdpTxPduId",
+                      "description": "The DoIPSoAdUdpTxPduId is required by the API call DoIP_SoAdIfTxConfirmation that is called by the SoAd to confirm that the IPdu has been transmitted successfu…",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdUdpTxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:2f55a1ec-664b-4bd6-9da3-2f80f2a73746"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpConnection/DoIPSoAdUdpTxPdu/DoIPSoAdUdpTxPduRef",
+                      "description": "Reference to the \"global\" Pdu structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdUdpTxPduRef",
+                      "uuid": "ECUC:c31e5dee-28e5-4b32-8cec-51f54e77a3a3"
+                    }
+                  ],
+                  "shortName": "DoIPSoAdUdpTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:b3d21ded-7966-4862-8d48-ddf2775239cc"
+                }
+              ],
+              "uuid": "ECUC:113b6883-6d62-4e20-9cb6-680252dad2b0"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpVehicleAnnouncementConnection",
+              "description": "This container describes the UDP multicast connections to the lower layer SoAd module.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 255
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": true,
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpVehicleAnnouncementConnection/DoIPRequestAddressAssignment",
+                  "description": "The DoIP module shall request IP address assignment by calling SoAd_RequestIpAddrAssignment() for the TcpIpLocalAddr related to this DoIpConnection.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRequestAddressAssignment",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:67eff5dd-1c6e-902a-5fca-f998126ea83e"
+                }
+              ],
+              "references": [],
+              "shortName": "DoIPUdpVehicleAnnouncementConnection",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpVehicleAnnouncementConnection/DoIPSoAdUdpVehicleAnnouncementTxPdu",
+                  "description": "This container describes the vehicle announcement TxPdu sent via the SoAd.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpVehicleAnnouncementConnection/DoIPSoAdUdpVehicleAnnouncementTxPdu/DoIPSoAdUdpVehicleAnnouncementTxPduId",
+                      "description": "The DoIPSoAdUdpVehicleAnnouncementTxPduId is required by the API call DoIP_SoAdIfTxConfirmation() that is called by the SoAd to confirm that the IPdu has been …",
+                      "isOptional": false,
+                      "max": 4294967295,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdUdpVehicleAnnouncementTxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:d714703b-f033-4dcf-91de-1b6f531e9af7"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPUdpVehicleAnnouncementConnection/DoIPSoAdUdpVehicleAnnouncementTxPdu/DoIPSoAdUdpVehicleAnnouncementTxPduRef",
+                      "description": "Reference to the \"global\" PDU structure to allow harmonization of handle IDs in the COM-Stack.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "DoIPSoAdUdpVehicleAnnouncementTxPduRef",
+                      "uuid": "ECUC:90da376e-29ea-4262-aa92-05bf32a3971e"
+                    }
+                  ],
+                  "shortName": "DoIPSoAdUdpVehicleAnnouncementTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:ca2c98f1-142e-4d74-b3e2-a2c7a5d2a5a7"
+                }
+              ],
+              "uuid": "ECUC:ec10775c-9dc4-49d9-b17b-73c202f875ed"
+            }
+          ],
+          "uuid": "ECUC:06a174a5-5ad6-4b7a-8ce8-c64883f2e5c5"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation",
+          "description": "This container describes the routing activation possibilities by representing for each container a possible routing activation request message to the DoIP enti…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 255
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationNumber",
+              "description": "Identifies the Routing activation Number which is received for a DoIP routing activation request message.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DoIPRoutingActivationNumber",
+              "type": "INTEGER",
+              "uuid": "ECUC:335e310b-8d47-48bf-b643-5c12468a5f01"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPTargetAddressRef",
+              "description": "Reference to all DoIPTargetAddress which are activated on this Routing activation.",
+              "destinationContainerType": "DoIPTargetAddress",
+              "destinationRef": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTargetAddress",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPConnections/DoIPTargetAddress"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 65535
+              },
+              "shortName": "DoIPTargetAddressRef",
+              "uuid": "ECUC:ebc9f44b-f588-4a77-a371-08bfa7d33272"
+            }
+          ],
+          "shortName": "DoIPRoutingActivation",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationAuthenticationCallback",
+              "description": "Container describes the Callbackfunction to call on a Routing Activation Request for Authentication. If this container is configured but the DoIPRoutingActivat…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationAuthenticationCallback/DoIPRoutingActivationAuthenticationFunc",
+                  "description": "Direct C Callback function to trigger the authentication function for routing activation. If the DoIPRoutingActivationAuthenticationFunc parameter is present, …",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRoutingActivationAuthenticationFunc",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:05ef7a06-64da-467c-be24-d40bac66acc3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationAuthenticationCallback/DoIPRoutingActivationAuthenticationReqLength",
+                  "description": "Describes the amount of bytes used to handle to the authentication function on routing activation. If 0 is configured as length the parameter AuthenticationReq…",
+                  "isOptional": false,
+                  "max": 4,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRoutingActivationAuthenticationReqLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:2abdcf96-9b8e-4936-afc0-ede76b21f3a7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationAuthenticationCallback/DoIPRoutingActivationAuthenticationResLength",
+                  "description": "Describes the amount of bytes used to read by the authentication function on routing activation. If 0 is configured as length the parameter AuthenticationResDa…",
+                  "isOptional": false,
+                  "max": 4,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRoutingActivationAuthenticationResLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:45e1fc22-6491-40ed-87b8-7917007771a8"
+                }
+              ],
+              "references": [],
+              "shortName": "DoIPRoutingActivationAuthenticationCallback",
+              "subContainers": [],
+              "uuid": "ECUC:726377c7-0039-4edc-b57c-dd98bc5e99b7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationConfirmationCallback",
+              "description": "Container describes the Callbackfunction to call on a Routing Activation Request for Confirmation. If this container is configured but the DoIPRoutingActivatio…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationConfirmationCallback/DoIPRoutingActivationConfirmationFunc",
+                  "description": "Direct C Callback function to trigger the confirmation function for routing activation. If the DoIPRoutingActivationConfirmationFunc parameter is present the D…",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRoutingActivationConfirmationFunc",
+                  "type": "FUNCTION",
+                  "uuid": "ECUC:4630dc00-f4e8-4bf0-b18c-1a98a4f2f7c9"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationConfirmationCallback/DoIPRoutingActivationConfirmationReqLength",
+                  "description": "Describes the amount of bytes used to handle to the confirmation function on routing activation. If 0 is configured as length the parameter ConfirmedReqData wi…",
+                  "isOptional": false,
+                  "max": 4,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRoutingActivationConfirmationReqLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:b5b1030f-ad9f-4bbf-b2a0-9674bf5f20a7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation/DoIPRoutingActivationConfirmationCallback/DoIPRoutingActivationConfirmationResLength",
+                  "description": "Describes the amount of bytes used to read by the confirmation function on routing activation. If 0 is configured as length the parameter ConfirmedResData will…",
+                  "isOptional": false,
+                  "max": 4,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "DoIPRoutingActivationConfirmationResLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:701e1997-d200-4ee4-8372-e5eb0dc94c56"
+                }
+              ],
+              "references": [],
+              "shortName": "DoIPRoutingActivationConfirmationCallback",
+              "subContainers": [],
+              "uuid": "ECUC:7e1d1ce3-eff6-43ab-a071-e6b83dfa4855"
+            }
+          ],
+          "uuid": "ECUC:8c07e2b0-4dd1-45fc-89ae-19a97da7e734"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPTester",
+          "description": "This container describes the properties of the possible connectable Tester for the DoIP entity.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 255
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPTester/DoIPNumByteDiagAckNack",
+              "description": "Specifies the number of original Diagnostic request bytes the DoIP entity responses on a NACK of a diagnostic response message to the Tester.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DoIPNumByteDiagAckNack",
+              "type": "INTEGER",
+              "uuid": "ECUC:2cdb3b03-189a-4c0d-847c-ec5cbe717265"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPTester/DoIPTesterSA",
+              "description": "Source Address of the Tester sent via routing activation or diagnostic message.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "DoIPTesterSA",
+              "type": "INTEGER",
+              "uuid": "ECUC:44ccb383-1ad0-47a4-a3c4-5056f05a922d"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPTester/DoIPRoutingActivationRef",
+              "description": "Reference to a DoIPRoutingActivation describing the possible routing activations of the DoIPTester",
+              "destinationContainerType": "DoIPRoutingActivation",
+              "destinationRef": "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/DoIP/DoIPConfigSet/DoIPRoutingActivation"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 255
+              },
+              "shortName": "DoIPRoutingActivationRef",
+              "uuid": "ECUC:cc241bfa-5d3c-4e9b-b190-f764add15a77"
+            }
+          ],
+          "shortName": "DoIPTester",
+          "subContainers": [],
+          "uuid": "ECUC:5ec2063c-2a23-4da2-be67-e7cd0a80ee93"
+        }
+      ],
+      "uuid": "ECUC:85344a97-562f-4f0e-adc3-13050ee9e73e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral",
+      "description": "This container specifies the general configuration parameters of the DoIP module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPAliveCheckResponseTimeout",
+          "description": "Timeout in [s] for waiting for a response to an Alive Check request before the connection is considered to be disconnected. Represents parameter T_TCP_AliveChe…",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPAliveCheckResponseTimeout",
+          "type": "FLOAT",
+          "uuid": "ECUC:a680c7fa-c06d-4139-b2a8-e60b1ee21fa6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPGeneralInactivityTime",
+          "description": "Timeout in [s] for maximum inactivity of a TCP socket connection before the DoIP module will close the according socket connection. Represents parameter T_TCP_…",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPGeneralInactivityTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:3c672e92-2dff-4c0d-98eb-0c9379bcafec"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPInitialInactivityTime",
+          "description": "Timeout in [s] used for initial inactivity of a connected TCP socket connection directly after socket connection. Represents parameter T_TCP_Initial_Inactivity…",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPInitialInactivityTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:f455792f-afbc-4de1-ab70-30d56a927828"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPInitialVehicleAnnouncementTime",
+          "description": "Time to wait in [s] for sending first vehicle anouncement message after IP address assignment. Represents parameter A_DoIP_Announce_Wait of ISO 13400-2:2012",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPInitialVehicleAnnouncementTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:f2ce0a2d-fc67-453a-8b22-6f0f033507b2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPMainFunctionPeriod",
+          "description": "Determines the frequency at which the DoIP_MainFunction() is called in [s].",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:08d2196f-07da-4e92-9e85-e94ec4872d9f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPVehicleAnnouncementInterval",
+          "description": "Time to wait in [s] for sending subsequent vehicle anouncement messages. Represents parameter A_DoIP_Announce_Interval of ISO 13400-2:2012",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPVehicleAnnouncementInterval",
+          "type": "FLOAT",
+          "uuid": "ECUC:53d5e0b6-56d1-459d-a3ec-69ce6e1c46c1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPDevelopmentErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPDevelopmentErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c1c0e3b1-0dc6-4f3c-9d70-953eba050f40"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPDhcpOptionVinUse",
+          "description": "If DoIPDhcpOptionVinUse is set to true the DoIP module will add the VIN to the Dhcp host name if no valid Dhcp host name is already set.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPDhcpOptionVinUse",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a4f92c71-7156-4f63-9bad-b033de1542ec"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPEntityStatusMaxByteFieldUse",
+          "description": "This parameter is used to distinguish the optional support of the Max data size element of a diagnostic entity status response.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPEntityStatusMaxByteFieldUse",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d061ccc9-9f47-4d86-9000-dddb6d5ba3bf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPUseEIDasGID",
+          "description": "Specifies if the DoIP entity shall use its EID if it is the Master for vehicle identification gid on the vehicle identification/vehicle announcement.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPUseEIDasGID",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e1729cb0-25db-4ce1-a1da-4a815be137df"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPUseMacAddressForIdentification",
+          "description": "Provided the information if a configured EID at vehicle identification response/vehicle announment is used or the MAC address.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPUseMacAddressForIdentification",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:364c701f-a202-4a4b-b7bc-ee6cf58cddb3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPUseVehicleIdentificationSyncStatus",
+          "description": "Defines if the optional VIN/GID synchronization status is used additionally in the vehicle identification/announcement.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPUseVehicleIdentificationSyncStatus",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:77dc8eda-649f-4728-9915-a08f25f81905"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPVersionInfoApi",
+          "description": "Activates the DoIP_GetVersionInfo() API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ce728d18-abea-4a65-aa34-18bdcf4bc0dc"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPVinGidMaster",
+          "description": "Specifies if the DoIP entity is the Vehicle identification Master for the GID (Group ID).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPVinGidMaster",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fb5b9a75-01e9-4f62-8b7e-35e1862a0337"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPGIDInvalidityPattern",
+          "description": "Specifies the Byte pattern that is used for response messages if no valid GID could be retrieved.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPGIDInvalidityPattern",
+          "type": "INTEGER",
+          "uuid": "ECUC:a3d2dcfc-1823-47f3-b1d6-848b9c2c4807"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPHostNameSizeMax",
+          "description": "Maximum Size of the DHCP HostName in ASCII. This parameter is necessary to reserve the correct amount of bytes for working with the DHCP HostName option. Minim…",
+          "isOptional": false,
+          "max": 255,
+          "min": 5,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPHostNameSizeMax",
+          "type": "INTEGER",
+          "uuid": "ECUC:457138fe-602c-49e1-b1a2-5a0ca1d93822"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPMaxRequestBytes",
+          "description": "Specifies the maximum allowed bytes of a DoIP message request without the DoIP header.",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPMaxRequestBytes",
+          "type": "INTEGER",
+          "uuid": "ECUC:430ceac3-db33-4e01-ad0d-fb005261a2cd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPMaxTesterConnections",
+          "description": "Maximum ammount of tester connections that shall be maintained at one time before alive check is performed.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPMaxTesterConnections",
+          "type": "INTEGER",
+          "uuid": "ECUC:4ee8c2a0-3924-41c7-a5d1-3bcf431efb0e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPMaxUDPRequestPerMessage",
+          "description": "This parameter captures the maximum amont of UDP Requests necessary to handle paralel within a single UDP connection.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPMaxUDPRequestPerMessage",
+          "type": "INTEGER",
+          "uuid": "ECUC:86cffc9d-35c7-48cf-ae60-9953f6fa47f9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPVehicleAnnouncementCount",
+          "description": "Number of vehicle announcement messages on IP address assignment. Represents parameter A_DoIP_Announce_Num of ISO 13400-2:2012.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPVehicleAnnouncementCount",
+          "type": "INTEGER",
+          "uuid": "ECUC:18720174-b4fb-4222-8e3b-9de228019753"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPVinInvalidityPattern",
+          "description": "Specifies the Byte pattern that is used for response messages if no valid VIN could be retrieved.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPVinInvalidityPattern",
+          "type": "INTEGER",
+          "uuid": "ECUC:71cdeb3f-0bca-40a4-89da-e9be192fb5ed"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPNodeType",
+          "description": "Describes the Type of the DoIP node.",
+          "enumValues": [
+            "DOIP_GATEWAY",
+            "DOIP_NODE"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "DoIPNodeType",
+          "type": "ENUM",
+          "uuid": "ECUC:1d1d1908-d758-4af2-8758-2921f217c5ea"
+        }
+      ],
+      "references": [],
+      "shortName": "DoIPGeneral",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPFurtherActionByteCallback",
+          "description": "This container describes the Callbackfunction to get the Further Action byte. This container shall always be present. If the DoIPFurtherActionByteDirect parame…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPFurtherActionByteCallback/DoIPFurtherActionByteDirect",
+              "description": "Direct C Callback function to get the OEM specific Further Action Byte for the DoIP vehicle identification response/vehicle announcement. If the DoIPFurtherAct…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "DoIPFurtherActionByteDirect",
+              "type": "FUNCTION",
+              "uuid": "ECUC:b16ec364-7eb2-447e-ad3a-c55fe58378cb"
+            }
+          ],
+          "references": [],
+          "shortName": "DoIPFurtherActionByteCallback",
+          "subContainers": [],
+          "uuid": "ECUC:5aac8f6a-2a4d-4d01-af2e-645e910e158d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPGetGidCallback",
+          "description": "This container describes the usage of a callback function to get the GID. (If this container is not present no callback function shall be used by DoIP module t…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPGetGidCallback/DoIPGetGidDirect",
+              "description": "If the DoIPGetGidDirect parameter exist the DoIP module shall call the configured callback function (<User>_DoIPGetGID) direct. (It is not needed to specify a …",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "DoIPGetGidDirect",
+              "type": "FUNCTION",
+              "uuid": "ECUC:87f4a179-208a-48a0-b9ab-a7c412972e7f"
+            }
+          ],
+          "references": [],
+          "shortName": "DoIPGetGidCallback",
+          "subContainers": [],
+          "uuid": "ECUC:e5a263bf-c784-4f01-8ea8-8d5d92fcde5b"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPPowerModeCallback",
+          "description": "This container describes the usage of a callback function to retrieve the current power mode. This container shall always be present.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPPowerModeCallback/DoIPPowerModeDirect",
+              "description": "If the DoIPPowerModeDirect parameter exist the DoIP module shall call the configured callback function (<User>_DoIPGetPowerModeCallback) direct. (It is not nee…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "DoIPPowerModeDirect",
+              "type": "FUNCTION",
+              "uuid": "ECUC:cf0e90d1-c77e-42c9-a19e-5b3ee1c9aab8"
+            }
+          ],
+          "references": [],
+          "shortName": "DoIPPowerModeCallback",
+          "subContainers": [],
+          "uuid": "ECUC:2ff29d7f-73d8-4d8e-b0f9-80290df3875f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPTriggerGidSyncCallback",
+          "description": "This container describes the usage of a callback function to trigger the GID synchronization. (If this container does not exist no callback function shall be u…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/DoIP/DoIPGeneral/DoIPTriggerGidSyncCallback/DoIPTriggerGidSyncDirect",
+              "description": "If the DoIPTriggerGidSyncDirect parameter exist the DoIP module shall call the configured callback function (<User>_DoIPTriggerGidSyncCallback) direct. (It is …",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "DoIPTriggerGidSyncDirect",
+              "type": "FUNCTION",
+              "uuid": "ECUC:7d270003-ea90-4e43-b236-689b211e8fe9"
+            }
+          ],
+          "references": [],
+          "shortName": "DoIPTriggerGidSyncCallback",
+          "subContainers": [],
+          "uuid": "ECUC:927e37ff-e9b9-4d89-b2ea-649d6e4d5a69"
+        }
+      ],
+      "uuid": "ECUC:3b3debc7-1a0d-4018-8cd1-4a22d0aefe1c"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/DoIP",
+  "description": "Configuration of the DoIP (Diagnostic over IP) module.",
+  "importWarnings": [
+    "DoIPPduRRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "DoIPPduRTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "DoIPSoAdTcpRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "DoIPSoAdTcpTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "DoIPSoAdUdpRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "DoIPSoAdUdpTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "DoIPSoAdUdpVehicleAnnouncementTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "DoIPTargetAddressRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "DoIPRoutingActivationRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "DoIP",
+  "version": "4.4.0"
+}

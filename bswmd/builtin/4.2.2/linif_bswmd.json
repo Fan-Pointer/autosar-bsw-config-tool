@@ -1,0 +1,933 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "252f9d623f4320383323db9c7764e028c4d3a95f973e3c632787d55c547b5b5a",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral",
+      "description": "This container contains the general parameters of LIN Interface module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfCancelTransmitSupported",
+          "description": "Global Pre-Compile Switch to enable/disable the APIs LinIf_CancelTransmit/LinTp_CancelReceive.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfCancelTransmitSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d6679d00-fe67-48c5-9a7a-ffaeb82ebc57"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:1786d1df-f161-4bd4-be94-d671b4335008"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfMultipleDriversSupported",
+          "description": "States if multiple drivers are supported by the LIN Interface or not. The reason for this parameter is to reduce the size of LIN Interface if multiple drivers …",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfMultipleDriversSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c3f20a68-c3db-4a68-b9e8-254e8873f238"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfMultipleTrcvDriverSupported",
+          "description": "States if multiple transceiver drivers are supported by the LIN Interface or not. The reason for this parameter is to reduce the size of LIN Interface if multi…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfMultipleTrcvDriverSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2265c857-1c3c-48fc-9e10-adeaa218d4d3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfNcOptionalRequestSupported",
+          "description": "States if the node configuration commands Assign NAD and Conditional Change NAD are supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfNcOptionalRequestSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:43093996-93e3-461d-b50f-58021a6b42bc"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfTpSupported",
+          "description": "States if the TP is included in the LIN Interface or not. The reason for this parameter is to reduce the size of LIN Interface if the TP is not used.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfTpSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:395fa338-8613-4555-b427-29807f920ac3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfTrcvDriverSupported",
+          "description": "States if transceiver driver support is included in the LIN Interface or not. The reason for this parameter is to reduce the size of LIN Interface if transceiv…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfTrcvDriverSupported",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:021681e4-7dd7-48b9-a0ae-f46ba162c147"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfVersionInfoApi",
+          "description": "Switches the LinIf_GetVersionInfo function ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8e091b33-0f2b-41ea-bdcd-4e7f273f4746"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGeneral/LinIfPublicCddHeaderFile",
+          "description": "Defines header files for callback functions which shall be included in case of CDDs. Range of characters is 1.. 32.",
+          "isOptional": true,
+          "maxLength": 32,
+          "minLength": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "LinIfPublicCddHeaderFile",
+          "type": "STRING",
+          "uuid": "ECUC:90188127-bfd2-42e2-aacc-20d2a3283e45"
+        }
+      ],
+      "references": [],
+      "shortName": "LinIfGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:dc9a773a-d7ca-42ff-a751-8f35fc1171e3"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig",
+      "description": "This container contains the global configuration parameters of the LinIf.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfTimeBase",
+          "description": "Defines the interval of calls to main functions in seconds.",
+          "isOptional": false,
+          "max": 0.255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LinIfTimeBase",
+          "type": "FLOAT",
+          "uuid": "ECUC:d3d4848c-709e-4d4b-b219-c54ea93f1156"
+        }
+      ],
+      "references": [],
+      "shortName": "LinIfGlobalConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel",
+          "description": "Describes each LIN channel the LinIf is connected to.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfGotoSleepConfirmationUL",
+              "description": "This parameter defines the upper layer (UL) module to which the confirmation of the goto-sleep command shall be sent.",
+              "enumValues": [
+                "CDD",
+                "LIN_SM"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinIfGotoSleepConfirmationUL",
+              "type": "ENUM",
+              "uuid": "ECUC:40dc162a-06e8-4aa7-846f-43facbc0272d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleRequestConfirmationUL",
+              "description": "This parameter defines the upper layer (UL) module to which the confirmation of the successfully performed schedule table change shall be sent.",
+              "enumValues": [
+                "CDD",
+                "LIN_SM"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinIfScheduleRequestConfirmationUL",
+              "type": "ENUM",
+              "uuid": "ECUC:8ed4be31-285b-4f4c-b944-2e349fe7185b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfStartupState",
+              "description": "Defines the state of each LIN channel after startup",
+              "enumValues": [
+                "NORMAL",
+                "SLEEP"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinIfStartupState",
+              "type": "ENUM",
+              "uuid": "ECUC:59a7fb27-4bdc-49b5-9d06-fe139cf39575"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfWakeupConfirmationUL",
+              "description": "This parameter defines the upper layer (UL) module to which the confirmation of the wake-up shall be sent.",
+              "enumValues": [
+                "CDD",
+                "LIN_SM"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinIfWakeupConfirmationUL",
+              "type": "ENUM",
+              "uuid": "ECUC:6eef5240-87ec-4625-bcd3-e7462d2b305c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfMaxFrameCnt",
+              "description": "Maximum number of Frames. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinIfMaxFrameCnt",
+              "type": "INTEGER",
+              "uuid": "ECUC:600ada2e-ed6c-4545-a849-7c9b2c3ae02a"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfCddRef",
+              "description": "Reference to the CDD module description. This parameter is only required when LinIfWakeupConfirmationUL, LinIfScheduleRequestConfirmationUL, and/or LinIfGotoSl…",
+              "destinationContainerType": "LinIfCddRef",
+              "destinationRefs": [],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "foreign",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LinIfCddRef",
+              "uuid": "ECUC:27d8e1c6-76b5-4b60-97a6-6e70607c32d0"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfChannelRef",
+              "description": "Reference to the channel definition in the LIN driver.",
+              "destinationContainerType": "LinChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinIfChannelRef",
+              "uuid": "ECUC:8715c30d-96ef-473d-bad1-16e8692c606c"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfComMNetworkHandleRef",
+              "description": "Unique handle to identify one LIN network. Reference to one of the network handles configured for the ComM.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "symbolic",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LinIfComMNetworkHandleRef",
+              "uuid": "ECUC:d5db781e-486d-447c-93ff-e6a9cb25adcf"
+            }
+          ],
+          "shortName": "LinIfChannel",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame",
+              "description": "Generic container for all types of LIN frames.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfChecksumType",
+                  "description": "Type of checksum that the frame is using.",
+                  "enumValues": [
+                    "CLASSIC",
+                    "ENHANCED"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfChecksumType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1c4bccbb-94d9-47a9-8818-ab3f131f67a4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfFrameType",
+                  "description": "Type of frame/slot. A sporadic slot may be used by a set of unconditional frames in the role of substitution frames.",
+                  "enumValues": [
+                    "ASSIGN",
+                    "ASSIGN_FRAME_ID_RANGE",
+                    "ASSIGN_NAD",
+                    "CONDITIONAL",
+                    "EVENT_TRIGGERED",
+                    "FREE",
+                    "MRF",
+                    "SAVE_CONFIGURATION",
+                    "SPORADIC",
+                    "SRF",
+                    "UNASSIGN",
+                    "UNCONDITIONAL"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfFrameType",
+                  "type": "ENUM",
+                  "uuid": "ECUC:b9735872-2db9-41ef-9047-01d69eb83851"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfFrameId",
+                  "description": "ID of the LIN frame. The Protected ID including parity is calculated by the generation tool.",
+                  "isOptional": true,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfFrameId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:8b81ef22-eb65-4119-842a-05a565724755"
+                }
+              ],
+              "references": [],
+              "shortName": "LinIfFrame",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfFixedFrameSdu",
+                  "description": "In case this is a fixed frame this is the SDU (response).",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "LinIfFixedFrameSdu",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfFixedFrameSdu/LinIfFixedFrameSduByte",
+                      "description": "This container represents a byte within the 8 byte array.",
+                      "multiplicity": {
+                        "lower": 8,
+                        "upper": 8
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfFixedFrameSdu/LinIfFixedFrameSduByte/LinIfFixedFrameSduBytePos",
+                          "description": "Index of the Byte in the SDU (response) 8 byte array.",
+                          "isOptional": false,
+                          "max": 7,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfFixedFrameSduBytePos",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:0ab4ee67-172e-439e-bc01-1b107c277c05"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfFixedFrameSdu/LinIfFixedFrameSduByte/LinIfFixedFrameSduByteVal",
+                          "description": "Byte value in the SDU (response) 8-byte array.",
+                          "isOptional": false,
+                          "max": 255,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfFixedFrameSduByteVal",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:76133907-c78a-453d-bff1-c84964c755e6"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "LinIfFixedFrameSduByte",
+                      "subContainers": [],
+                      "uuid": "ECUC:0aa8d449-7336-45d1-acf2-a79b1451a9ff"
+                    }
+                  ],
+                  "uuid": "ECUC:839c724c-3ce5-4a4f-8258-f9473b61cbd0"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfSubstitutionFrames",
+                  "description": "List of sporadic frames that can be sent in a",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfSubstitutionFrames/LinIfFramePriority",
+                      "description": "Priority of sporadic frame.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "LinIfFramePriority",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:52c7ca27-7e7c-41f9-8a29-9660a446d4f7"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfSubstitutionFrames/LinIfSubstitutionFrameRef",
+                      "description": "Reference to an unconditional Frame that is used as sporadic frame.",
+                      "destinationContainerType": "LinIfFrame",
+                      "destinationRef": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "LinIfSubstitutionFrameRef",
+                      "uuid": "ECUC:d92f4f29-dbe9-4834-b3dd-031a34675f81"
+                    }
+                  ],
+                  "shortName": "LinIfSubstitutionFrames",
+                  "subContainers": [],
+                  "uuid": "ECUC:c9f2d77f-3e93-450d-b8d7-c9e1940c044d"
+                },
+                {
+                  "choice": {
+                    "candidateRefs": [
+                      "ECUC:c126513a-cf29-4918-bb7e-aea26cd3f5df",
+                      "ECUC:13322c3b-51f2-40eb-b615-dfc3e665e5e8",
+                      "ECUC:01088ba1-2498-4a9a-ab0c-a5fa045e5621",
+                      "ECUC:7640ebc8-a9e9-4673-9ccd-ce63404a29ce"
+                    ]
+                  },
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection",
+                  "description": "Direction of the frame",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "parameters": [],
+                  "references": [],
+                  "shortName": "LinIfPduDirection",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfInternalPdu",
+                      "description": "Represents a Diagnostic or Configuration frame : no Message ID (no PduId).",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [],
+                      "references": [],
+                      "shortName": "LinIfInternalPdu",
+                      "subContainers": [],
+                      "uuid": "ECUC:c126513a-cf29-4918-bb7e-aea26cd3f5df"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfRxPdu",
+                      "description": "represents a received PDU/frame",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfRxPdu/LinIfRxIndicationUL",
+                          "description": "This parameter defines the name of the <User_RxIndication>. This parameter depends on the parameter LinIfUserRxIndicationUL.",
+                          "isOptional": true,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfRxIndicationUL",
+                          "type": "FUNCTION",
+                          "uuid": "ECUC:29e68358-16ae-4dc8-b4da-1173c87ca2a4"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfRxPdu/LinIfUserRxIndicationUL",
+                          "description": "This parameter defines the upper layer (UL) module to which the indication of the successfully received LinIfRxPdu has to be routed via <User_RxIndication>.",
+                          "enumValues": [
+                            "CDD",
+                            "PDUR"
+                          ],
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfUserRxIndicationUL",
+                          "type": "ENUM",
+                          "uuid": "ECUC:27972d9b-34b5-4115-bee3-e76a7f66edb5"
+                        }
+                      ],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfRxPdu/LinIfRxPduRef",
+                          "description": "Reference to the PDU that is received in this frame.",
+                          "destinationContainerType": "Pdu",
+                          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                          ],
+                          "isExternal": true,
+                          "isOptional": false,
+                          "kind": "reference",
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfRxPduRef",
+                          "uuid": "ECUC:a4b0259f-0d05-4a0e-b86a-89c2558bb7ba"
+                        }
+                      ],
+                      "shortName": "LinIfRxPdu",
+                      "subContainers": [],
+                      "uuid": "ECUC:13322c3b-51f2-40eb-b615-dfc3e665e5e8"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfSlaveToSlavePdu",
+                      "description": "Represents a slave-to-slave PDU/frame. Master does only send the header but doesn't receive the response.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [],
+                      "references": [],
+                      "shortName": "LinIfSlaveToSlavePdu",
+                      "subContainers": [],
+                      "uuid": "ECUC:01088ba1-2498-4a9a-ab0c-a5fa045e5621"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfTxPdu",
+                      "description": "represents a transmitted PDU/frame",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfTxPdu/LinIfTxConfirmationUL",
+                          "description": "This parameter defines the name of the <User_TxConfirmation>. This parameter depends on the parameter LinIfUserTxUL.",
+                          "isOptional": true,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfTxConfirmationUL",
+                          "type": "FUNCTION",
+                          "uuid": "ECUC:5ffc9a8f-527a-4206-9862-d45ec09056df"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfTxPdu/LinIfTxTriggerTransmitUL",
+                          "description": "This parameter defines the name of the <User_TriggerTransmit>. This parameter depends on the parameter LinIfUserTxUL. If LinIfUserTxUL equals PDUR, the name of…",
+                          "isOptional": true,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfTxTriggerTransmitUL",
+                          "type": "FUNCTION",
+                          "uuid": "ECUC:02bbc963-0110-4f5b-8693-b62cab0c86af"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfTxPdu/LinIfTxPduId",
+                          "description": "Identifier of the Pdu for the upper layer.",
+                          "isOptional": false,
+                          "max": 65535,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfTxPduId",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:dd139fd4-fcb7-4f6e-8311-f18bb2cfe5c3"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfTxPdu/LinIfUserTxUL",
+                          "description": "This parameter defines the upper layer (UL) module to which the trigger of the transmitted LinTxPdu (via the <User_TriggerTransmit>) or the confirmation of the…",
+                          "enumValues": [
+                            "CDD",
+                            "PDUR"
+                          ],
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfUserTxUL",
+                          "type": "ENUM",
+                          "uuid": "ECUC:fe2c0d05-82ea-4af2-84db-989658a33d89"
+                        }
+                      ],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame/LinIfPduDirection/LinIfTxPdu/LinIfTxPduRef",
+                          "description": "Reference to the PDU that is transmitted in this frame.",
+                          "destinationContainerType": "Pdu",
+                          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                          ],
+                          "isExternal": true,
+                          "isOptional": false,
+                          "kind": "reference",
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "LinIfTxPduRef",
+                          "uuid": "ECUC:78cf5840-3ad7-412d-ac03-c32aec40298b"
+                        }
+                      ],
+                      "shortName": "LinIfTxPdu",
+                      "subContainers": [],
+                      "uuid": "ECUC:7640ebc8-a9e9-4673-9ccd-ce63404a29ce"
+                    }
+                  ],
+                  "uuid": "ECUC:ad560145-2b51-46ad-91c3-219c5c976f4c"
+                }
+              ],
+              "uuid": "ECUC:1c7be285-63c0-4176-87e9-7af9e12e9593"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfMaster",
+              "description": "Each Master can only be connected to one physical channel. This could be compared to the Node parameter in a LDF file.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfMaster/LinIfJitter",
+                  "description": "The jitter specifies the differences between the maximum and minimum delay from time base tick to the header sending start point in seconds.",
+                  "isOptional": false,
+                  "max": 0.255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfJitter",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:120714ea-419a-4e88-aa67-01082afdc636"
+                }
+              ],
+              "references": [],
+              "shortName": "LinIfMaster",
+              "subContainers": [],
+              "uuid": "ECUC:4f684fcc-d115-41c2-be8a-62a09a31f5e5"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable",
+              "description": "Describes a schedule table. Each LinIfChannel may have several schedule tables. Each schedule table can only be connected to one channel.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfResumePosition",
+                  "description": "Defines where a schedule table shall proceed in case it has been interrupted by a RUN_ONCE table.",
+                  "enumValues": [
+                    "CONTINUE_AT_IT_POINT",
+                    "START_FROM_BEGINNING"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfResumePosition",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1241c21b-2b43-4b02-a0a5-d95aca248cfb"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfRunMode",
+                  "description": "The schedule table can be executed in two different modes.",
+                  "enumValues": [
+                    "RUN_CONTINUOUS",
+                    "RUN_ONCE"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfRunMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1281d31b-3c9b-41a9-96cf-c05155bc3364"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfScheduleTableIndex",
+                  "description": "This is the unique index used by upper layers to identify a schedule. Note that the NULL_SCHEDULE for each channel must have index 0.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfScheduleTableIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fd890a6a-8cf9-4e03-b6dd-058f8d7dd274"
+                }
+              ],
+              "references": [],
+              "shortName": "LinIfScheduleTable",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfEntry",
+                  "description": "Describes an entry in the schedule table (also known as Frame Slot).",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfEntry/LinIfDelay",
+                      "description": "Delay to next entry in schedule table in seconds.",
+                      "isOptional": false,
+                      "max": 0.255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "LinIfDelay",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:d4db710c-4063-4b8d-81e4-d8cea455b14a"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfEntry/LinIfEntryIndex",
+                      "description": "Position of the Frame Entry in the Schedule Table. The first entry index in the schedule table is 0.",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "LinIfEntryIndex",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f0b28166-a295-4302-8662-4774593acd65"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfEntry/LinIfCollisionResolvingRef",
+                      "description": "Reference to the schedule table, which resolves the collision. This parameter is only used if the referenced frames are event triggered frames.",
+                      "destinationContainerType": "LinIfScheduleTable",
+                      "destinationRef": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable"
+                      ],
+                      "isExternal": false,
+                      "isOptional": true,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "LinIfCollisionResolvingRef",
+                      "uuid": "ECUC:b0729f03-6459-4a96-b816-9e8aa89cab6e"
+                    },
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfScheduleTable/LinIfEntry/LinIfFrameRef",
+                      "description": "Reference to the frames that belong to this schedule table entry.",
+                      "destinationContainerType": "LinIfFrame",
+                      "destinationRef": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfFrame"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "LinIfFrameRef",
+                      "uuid": "ECUC:5be22eba-daf3-4d41-b2ab-d9fe94e681a3"
+                    }
+                  ],
+                  "shortName": "LinIfEntry",
+                  "subContainers": [],
+                  "uuid": "ECUC:5856d22c-f08e-4597-aa05-a2fa836b7ec8"
+                }
+              ],
+              "uuid": "ECUC:36bc9661-3231-4789-92b9-add11de9e32d"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfTransceiverDrvConfig",
+              "description": "This container contains the configuration parameters of each underlying LIN Transceiver Driver.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/LinIf/LinIfGlobalConfig/LinIfChannel/LinIfTransceiverDrvConfig/LinIfTrcvIdRef",
+                  "description": "Logical handle of the underlying LIN transceiver to be served by the LIN Interface.",
+                  "destinationContainerType": "LinTrcvChannel",
+                  "destinationRef": "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "LinIfTrcvIdRef",
+                  "uuid": "ECUC:df3c8eae-155e-48a0-bdac-7438e0cdd781"
+                }
+              ],
+              "shortName": "LinIfTransceiverDrvConfig",
+              "subContainers": [],
+              "uuid": "ECUC:3ddbe282-a769-4c24-b63c-ec4af3e5b96c"
+            }
+          ],
+          "uuid": "ECUC:acb64525-220b-48db-b6f0-5bb8fdb46ff1"
+        }
+      ],
+      "uuid": "ECUC:25d2741f-e24d-4278-923e-13bb5b219004"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/LinIf",
+  "description": "Configuration of the LinIf (LIN Interface) module.",
+  "importWarnings": [
+    "LinIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "LinIfPduDirection：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "LinIfRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "LinIfTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "LinIfTrcvIdRef：目标 /AUTOSAR/EcucDefs/LinTrcv/LinTrcvChannel 位于本模块之外；编辑器只读展示。",
+    "LinIfCddRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "LinIfChannelRef：目标 /AUTOSAR/EcucDefs/Lin/LinGlobalConfig/LinChannel 位于本模块之外；编辑器只读展示。",
+    "LinIfComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "LinIf",
+  "version": "4.2.2"
+}

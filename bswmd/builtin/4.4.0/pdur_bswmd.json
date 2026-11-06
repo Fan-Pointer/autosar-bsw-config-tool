@@ -1,0 +1,717 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "c3100dc87a921f2f24f36dd37e20edefbfe246dca2a1da940a51a257d7c271c8",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules",
+      "description": "Each container describes a specific BSW module (upper/CDD/lower/IpduM) that the PDU Router shall interface to.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRCancelReceive",
+          "description": "Specifies if the Transport protocol module supports the CancelReceive API or not. Value true the API is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRCancelReceive",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4dc154b1-b714-4c7b-b8c4-a1c2ebcfcf45"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRCancelTransmit",
+          "description": "Specifies if the BSW module supports the CancelTransmit API or not. Value true the API is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRCancelTransmit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7ff785b2-60cb-4bcb-a1aa-6aa874772c77"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRCommunicationInterface",
+          "description": "Specifies if the BSW module supports the Communication Interface APIs or not. Value true the APIs are supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRCommunicationInterface",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6c9ea706-3cd4-48c2-b7df-d5421edc59c4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRLowerModule",
+          "description": "The PduRLowerModule will decide who will call the APIs and who will implement the APIs.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRLowerModule",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c20d973d-127f-45d4-9a6a-ef154ccb7e07"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRRetransmission",
+          "description": "If set to true this means that the destination transport protocol module will use the retransmission feature. This parameter might be set to false if the retra…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRRetransmission",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a3f90acf-2c9a-4438-a2c2-6701847a1b59"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRTransportProtocol",
+          "description": "The PDU Router module shall use the API parameters specified for transport protocol interface.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRTransportProtocol",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4ac6882a-dc4f-4b05-a4d7-cfced6cc2756"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRTriggertransmit",
+          "description": "Specifies if the BSW module supports the TriggerTransmit API or not. Value true means that the BSW module supports the TriggerTransmit interface which a lower …",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRTriggertransmit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0e442b0f-7d31-4ded-a613-2baeaaf68da8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRTxConfirmation",
+          "description": "Specifies if the BSW module supports the TxConfirmation API or not. Value true the API is supported.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRTxConfirmation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:2713176a-55c3-4062-9ec9-a7358e2faed8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRUpperModule",
+          "description": "The PduRUpperModule will decide who will call the APIs and who will implement the APIs.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRUpperModule",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c1a824b7-1988-4486-9e22-e6f984fa970b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRUseTag",
+          "description": "This parameter, if set to true, enables the usage of the tag (<up>) in the following API calls:",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRUseTag",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8193a707-ad69-46d8-ad08-50365d2f2f2c"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRBswModules/PduRBswModuleRef",
+          "description": "This is a reference to one BSW module's configuration (i.e. not the ECUC parameter definition template).",
+          "destinationContainerType": "PduRBswModuleRef",
+          "destinationRefs": [],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "foreign",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRBswModuleRef",
+          "uuid": "ECUC:43b65d8a-1610-46bb-9997-0fb06b6a52f8"
+        }
+      ],
+      "shortName": "PduRBswModules",
+      "subContainers": [],
+      "uuid": "ECUC:9d14c1e3-3ffa-4e41-b827-3cdbdc976db5"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRGeneral",
+      "description": "This container is a subcontainer of PduR and specifies the general configuration parameters of the PDU Router.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRGeneral/PduRDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:87e2a6a8-4a23-42d9-895d-8829dacb4181"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRGeneral/PduRMetaDataSupport",
+          "description": "Enable support for MetaData handling. The MetaData is defined by the referenced MetaDataType of the global PDU definitions. This feature may be used for effici…",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "PduRMetaDataSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7ab03392-462e-4382-8cee-6d6d06f6bf70"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRGeneral/PduRVersionInfoApi",
+          "description": "If true the PduR_GetVersionInfo API is available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:32d6ed3e-46fd-4315-a3db-aa69215a7163"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRGeneral/PduRZeroCostOperation",
+          "description": "If set the PduR configuration generator will report an error if zero-cost-operation cannot be fulfilled.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRZeroCostOperation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b9d6831c-1933-4de2-ae7c-5f83dee1dcef"
+        }
+      ],
+      "references": [],
+      "shortName": "PduRGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:92bfa44f-5c0a-408f-b100-ca90c67b8b61"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths",
+      "description": "Represents one table of routing paths.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRConfigurationId",
+          "description": "Identification of the configuration of the PduR configuration. This identification can be read using the PduR API.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PduRConfigurationId",
+          "type": "INTEGER",
+          "uuid": "ECUC:bf4f85f7-161c-4c10-8f21-684f008c9fdf"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRMaxRoutingPathCnt",
+          "description": "Maximum number of RoutingPaths in all RoutingTables. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "PduRMaxRoutingPathCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:1a51b6ea-84a8-4a88-a329-32250896d7a6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRMaxRoutingPathGroupCnt",
+          "description": "Maximum number of RoutingPathGroups. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "PduRMaxRoutingPathGroupCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:4edb6c71-f2ec-4bab-a2ec-0d25ba8f0ae1"
+        }
+      ],
+      "references": [],
+      "shortName": "PduRRoutingPaths",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRDestPdu",
+          "description": "This container is a subcontainer of PduRRoutingPath and specifies one destination for the PDU to be routed.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRDestPdu/PduRDestPduDataProvision",
+              "description": "Specifies how data are provided: direct (as part of the Transmit call) or via",
+              "enumValues": [
+                "PDUR_DIRECT",
+                "PDUR_TRIGGERTRANSMIT"
+              ],
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PduRDestPduDataProvision",
+              "type": "ENUM",
+              "uuid": "ECUC:28bfa72a-3116-4c8d-a7be-f4fcbc364c52"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRDestPdu/PduRDestPduHandleId",
+              "description": "PDU identifier assigned by PDU Router. Used by communication interface and transport protocol modules for confirmation (PduR_<Lo>TxConfirmation) and for Trigge…",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PduRDestPduHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:1ba27146-785d-4d14-b4af-c8ce7a67ee2a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRDestPdu/PduRTransmissionConfirmation",
+              "description": "This parameter is only for communication interfaces. Transport protocol modules will always call the TxConfirmation function.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRTransmissionConfirmation",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:52c9d454-13f2-4658-a44c-fb5e437eb037"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRDestPdu/PduRDestPduRef",
+              "description": "Destination PDU reference; reference to unique PDU identifier which shall be used by the PDU Router instead of the source PDU ID when calling the related funct…",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRDestPduRef",
+              "uuid": "ECUC:d2f89120-03a9-496c-8c3b-01e022063a67"
+            }
+          ],
+          "shortName": "PduRDestPdu",
+          "subContainers": [],
+          "uuid": "ECUC:b454f3f4-3809-451b-9d41-9e2a9439efa4"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath",
+          "description": "This container is a subcontainer of PduRRoutingTable and specifies the routing path of a PDU.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRQueueDepth",
+              "description": "This parameter defines the queue depth for this routing path.",
+              "isOptional": true,
+              "max": 255,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PduRQueueDepth",
+              "type": "INTEGER",
+              "uuid": "ECUC:5d20e2d0-f5c2-47fc-9500-52796969d204"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRTpThreshold",
+              "description": "This parameter is only relevant for TP routings.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PduRTpThreshold",
+              "type": "INTEGER",
+              "uuid": "ECUC:5f377d0a-4d8f-4d86-a1de-d229bb138759"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRDestPduRRef",
+              "destinationContainerType": "PduRDestPdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRDestPdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRDestPdu"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRDestPduRRef",
+              "uuid": "ECUC:0a01792d-5977-4bf5-90a6-be44b4a87803"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRDestTxBufferRef",
+              "description": "Reference to a buffer in the PduR. This buffer is required for communication interface gatewaying, and for transport protocol gatewaying.",
+              "destinationContainerType": "PduRTxBuffer",
+              "destinationRef": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRTxBuffer",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRTxBuffer"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "PduRDestTxBufferRef",
+              "uuid": "ECUC:6dcee2de-24d2-42c5-a3c2-90f3f3e7ae72"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRRoutingPathGroupRef",
+              "description": "Reference to routing path destinations.",
+              "destinationContainerType": "PduRRoutingPathGroup",
+              "destinationRef": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPathGroup",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPathGroup"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PduRRoutingPathGroupRef",
+              "uuid": "ECUC:aec3f7af-e5fd-4278-a8da-c2077fe5576e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRSrcPduRRef",
+              "destinationContainerType": "PduRSrcPdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRSrcPdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRSrcPdu"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRSrcPduRRef",
+              "uuid": "ECUC:e496640e-4f91-4c14-aeb7-6cf9ef80f168"
+            }
+          ],
+          "shortName": "PduRRoutingPath",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRDefaultValue",
+              "description": "Specifies the default value of the I-PDU. Only required for gateway operation and if at least one PDU specified by PduRDestPdu uses TriggerTransmit Data provis…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "PduRDefaultValue",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRDefaultValue/PduRDefaultValueElement",
+                  "description": "Each value element is represented by the element and the position in an array.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRDefaultValue/PduRDefaultValueElement/PduRDefaultValueElement",
+                      "description": "The default value consists of a number of elements. Each element is one byte long and the number of elements is specified by SduLength. The position of this pa…",
+                      "isOptional": false,
+                      "max": 255,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "PduRDefaultValueElement",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:ba80d004-c08d-4071-9649-9dd8b030575b"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPath/PduRDefaultValue/PduRDefaultValueElement/PduRDefaultValueElementBytePosition",
+                      "description": "This parameter specifies the byte position of the element within the default value",
+                      "isOptional": false,
+                      "max": 4294967294,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "PduRDefaultValueElementBytePosition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f70a2789-5103-4cec-9e84-9bba77bf25f8"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "PduRDefaultValueElement",
+                  "subContainers": [],
+                  "uuid": "ECUC:d3da5970-3037-44e6-9144-add5b3ec9f62"
+                }
+              ],
+              "uuid": "ECUC:1f0d235b-3a07-49ff-82f3-f44f25001666"
+            }
+          ],
+          "uuid": "ECUC:b34f639c-dc43-4ee1-874f-2af20abf1420"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPathGroup",
+          "description": "This container groups routing path destinations. Destinations are used instead of routing paths since a routing path can be 1:n. It is desirable to be able to …",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPathGroup/PduRIsEnabledAtInit",
+              "description": "If set to true this routing path group will be enabled after initializing the PDU Router module (i.e. enabled in the PduR_Init function).",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRIsEnabledAtInit",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:08bfffe3-e6dc-43c7-85b3-2324e0005b2e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRRoutingPathGroup/PduRRoutingPathGroupId",
+              "description": "Identification of the routing group.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRRoutingPathGroupId",
+              "type": "INTEGER",
+              "uuid": "ECUC:47f4043a-68dc-4e5a-92b2-37abd8b4d2dc"
+            }
+          ],
+          "references": [],
+          "shortName": "PduRRoutingPathGroup",
+          "subContainers": [],
+          "uuid": "ECUC:227b5ecb-d5eb-4221-b99f-52bb63ffbdcd"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRSrcPdu",
+          "description": "This container is a subcontainer of PduRRoutingPath and specifies the source of the PDU to be routed.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRSrcPdu/PduRSourcePduBlockSize",
+              "description": "Minimum amount of buffer space required by receiving transport protocol layer to continue reception.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "PduRSourcePduBlockSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:9fd7925c-feff-4bda-8b0a-b1ca2d5ffc09"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRSrcPdu/PduRSourcePduHandleId",
+              "description": "PDU identifier assigned by PDU Router.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRSourcePduHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:9281db8e-b425-4608-8acf-8622ee8969fd"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRSrcPdu/PduRSrcPduUpTxConf",
+              "description": "When enabled, the TxConfirmation will be",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRSrcPduUpTxConf",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:4d325423-79c1-4342-af95-a93eb533504d"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRSrcPdu/PduRSrcPduRef",
+              "description": "Source PDU reference; reference to unique PDU identifier which shall be used for the requested PDU Router operation.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRSrcPduRef",
+              "uuid": "ECUC:96fa6c63-feae-4e75-bc15-ad55c4eac4af"
+            }
+          ],
+          "shortName": "PduRSrcPdu",
+          "subContainers": [],
+          "uuid": "ECUC:91525ed0-6a1c-468b-91ec-479bc8da0b78"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRTxBuffer",
+          "description": "Specifies a buffer used for gatewaying via communication interfaces or transport protocols.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/PduR/PduRRoutingPaths/PduRTxBuffer/PduRPduMaxLength",
+              "description": "Length of the Tx buffer in bytes. This parameter limits the size of buffered routed PDUs.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduRPduMaxLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:5b99114f-dfc8-451b-abc9-b4190f4e3de0"
+            }
+          ],
+          "references": [],
+          "shortName": "PduRTxBuffer",
+          "subContainers": [],
+          "uuid": "ECUC:49403503-38ea-4903-a735-464e90ac37c3"
+        }
+      ],
+      "uuid": "ECUC:21e5e0e0-f062-4273-937e-556059ca8e9f"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/PduR",
+  "description": "Configuration of the PduR (PDU Router) module.",
+  "importWarnings": [
+    "PduRBswModuleRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "PduRDestPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "PduRDestTxBufferRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "PduRSrcPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "PduR",
+  "version": "4.4.0"
+}

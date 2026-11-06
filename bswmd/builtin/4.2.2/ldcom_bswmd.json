@@ -1,0 +1,281 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "708dc2b1634462e5d701322e59df7a926bea92cc8ec95881faafaf9c70748d45",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR LdCom module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "LdComConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu",
+          "description": "Contains the configuration parameters of the IPdu inside LdCom.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComApiType",
+              "description": "Defines if this I-PDU is a normal I-PDU that shall be sent unfragmented or if this is a large I-PDU that shall be sent via the Transport Protocol of the underl…",
+              "enumValues": [
+                "LDCOM_IF",
+                "LDCOM_TP"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LdComApiType",
+              "type": "ENUM",
+              "uuid": "ECUC:2cb18a94-1bd2-4457-b2f2-a2b97fa56f68"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComIPduDirection",
+              "description": "The direction defines if this IPdu, and therefore the contributing signal, shall be sent or received.",
+              "enumValues": [
+                "LDCOM_RECEIVE",
+                "LDCOM_SEND"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LdComIPduDirection",
+              "type": "ENUM",
+              "uuid": "ECUC:584d4fdb-5e5f-44b7-9de3-63d3d7fa701c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComHandleId",
+              "description": "This is the ID used by RTE to invoke LdCom.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LdComHandleId",
+              "type": "INTEGER",
+              "uuid": "ECUC:550fa4bf-01cb-4d2b-aee6-9361bba43cea"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComRxCopyRxData",
+              "description": "Only on receiver side: Name of Rte_LdComCbkCopyRxData callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComRxCopyRxData",
+              "type": "FUNCTION",
+              "uuid": "ECUC:25aafa89-1e18-4391-ad74-ff8347a5076c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComRxIndication",
+              "description": "Only on receiver side: Name of Rte_LdComCbkRxIndication callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComRxIndication",
+              "type": "FUNCTION",
+              "uuid": "ECUC:dbcfc69e-de89-4be6-9706-642ac3d379f3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComRxStartOfReception",
+              "description": "Only on receiver side: Name of Rte_LdComCbkStartOfReception callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComRxStartOfReception",
+              "type": "FUNCTION",
+              "uuid": "ECUC:1a42de48-7c6e-492d-bd27-6982695d5b3f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComTpRxIndication",
+              "description": "Only on receiver side: Name of Rte_LdComCbkTpRxIndication callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComTpRxIndication",
+              "type": "FUNCTION",
+              "uuid": "ECUC:0ec1fdcd-757b-4c6a-8500-791541b4709b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComTpTxConfirmation",
+              "description": "Only on sender side: Name of Rte_LdComCbkTpTxConfirmation callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComTpTxConfirmation",
+              "type": "FUNCTION",
+              "uuid": "ECUC:562cc338-ceff-4091-b462-4f1be9b51a47"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComTxConfirmation",
+              "description": "Only on sender side: Name of Rte_LdComCbkTxConfirmation callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComTxConfirmation",
+              "type": "FUNCTION",
+              "uuid": "ECUC:af75cb14-ca99-4dd2-ad38-9f73c349a94f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComTxCopyTxData",
+              "description": "Only on sender side: Name of Rte_LdComCbkCopyTxData callback function to be called.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComTxCopyTxData",
+              "type": "FUNCTION",
+              "uuid": "ECUC:3e5e23c6-96d8-45e6-990f-4ffd95f82ba3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComTxTriggerTransmit",
+              "description": "Only on sender side: Name of Rte_LdComCbkTriggerTransmit callback function to be called. If defined TriggerTransmit has to be supported for this signal.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComTxTriggerTransmit",
+              "type": "FUNCTION",
+              "uuid": "ECUC:ee4700f6-8f63-46f0-a9bc-6e1fc6e63106"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComSystemTemplateSignalRef",
+              "description": "Reference to the ISignalToIPduMapping that contains a reference to the ISignal (System Template) which this LdCom signal represents.",
+              "destinationContainerType": "LdComSystemTemplateSignalRef",
+              "destinationRefs": [],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "foreign",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "LdComSystemTemplateSignalRef",
+              "uuid": "ECUC:904977b7-f989-469b-9dd9-f4019ca233a5"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComConfig/LdComIPdu/LdComPduRef",
+              "description": "Reference to the global Pdu.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "LdComPduRef",
+              "uuid": "ECUC:86e906cb-70bc-4bd0-96f2-d0bd3d89ef50"
+            }
+          ],
+          "shortName": "LdComIPdu",
+          "subContainers": [],
+          "uuid": "ECUC:fb1e60ed-acf7-4bee-88a2-eeea915aef57"
+        }
+      ],
+      "uuid": "ECUC:2fb115b2-840c-476a-be4e-e1ac407c8037"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComGeneral",
+      "description": "Contains the general configuration parameters of the LdCom module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComGeneral/LdComDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LdComDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:bf47fe2a-0cce-4acc-8ad7-78e8e736cbf2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/LdCom/LdComGeneral/LdComVersionInfoApi",
+          "description": "Activate/Deactivate the version information API (LdCom_GetVersionInfo).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "LdComVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:edd3a3a9-5b4b-49ca-b335-2eaf6dddf556"
+        }
+      ],
+      "references": [],
+      "shortName": "LdComGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:dd5e0122-ade9-4292-9bc2-f603b5b0fdaf"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/LdCom",
+  "description": "Configuration of the AUTOSAR LdCom module.",
+  "importWarnings": [
+    "LdComSystemTemplateSignalRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "LdComPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "LdCom",
+  "version": "4.2.2"
+}

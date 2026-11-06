@@ -1,0 +1,164 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "38e1254e08bf8b880fa543baee4fa886973906088efad0ad6361830203b19694",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfChannel",
+      "description": "Container for incorporation of CryIfChannel.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfChannel/CryIfChannelId",
+          "description": "Identifier of the crypto channel.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryIfChannelId",
+          "type": "INTEGER",
+          "uuid": "ECUC:43acad41-c59f-4466-8adf-bc360be57dd5"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfChannel/CryIfDriverObjectRef",
+          "description": "This parameter refers to a Crypto Driver Object.",
+          "destinationContainerType": "CryptoDriverObject",
+          "destinationRef": "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryIfDriverObjectRef",
+          "uuid": "ECUC:f56cbf45-f3bb-4689-b2e2-48b08b010a55"
+        }
+      ],
+      "shortName": "CryIfChannel",
+      "subContainers": [],
+      "uuid": "ECUC:811caabf-7f8c-424a-b39f-c1b02af01d29"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfGeneral",
+      "description": "Container for incorporation of CryIfGeneral.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfGeneral/CryIfDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryIfDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7bcf6da5-3795-4e40-8fbf-818b7fea8318"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfGeneral/CryIfVersionInfoApi",
+          "description": "Pre-processor switch to enable and disable availability of the API CryIf_GetVersionInfo().",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryIfVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fc024cbe-a144-47e9-89e6-d971eb4cff1b"
+        }
+      ],
+      "references": [],
+      "shortName": "CryIfGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:ada71f00-f20c-4d90-89a1-23dd0d03c418"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfKey",
+      "description": "Container for incorporation of CryIfKey.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfKey/CryIfKeyId",
+          "description": "Identifier of the CryIf key.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryIfKeyId",
+          "type": "INTEGER",
+          "uuid": "ECUC:eb4e9720-f4a5-4059-931e-6e8c7224a569"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CryIf/CryIfKey/CryIfKeyRef",
+          "description": "This parameter refers to the crypto driver key.",
+          "destinationContainerType": "CryptoKey",
+          "destinationRef": "/AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryIfKeyRef",
+          "uuid": "ECUC:a960c8c2-4b6f-4496-acc8-78168be09078"
+        }
+      ],
+      "shortName": "CryIfKey",
+      "subContainers": [],
+      "uuid": "ECUC:fd1b8c5a-e707-4cf0-8028-51bde6f74834"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/CryIf",
+  "description": "Configuration of the Crypto Interface.",
+  "importWarnings": [
+    "CryIfDriverObjectRef：目标 /AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject 位于本模块之外；编辑器只读展示。",
+    "CryIfKeyRef：目标 /AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "CryIf",
+  "version": "4.4.0"
+}

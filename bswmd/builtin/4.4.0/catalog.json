@@ -1,0 +1,1857 @@
+{
+  "format": "onesar-module-catalog/1",
+  "release": "4.4.0",
+  "source": {
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf",
+    "bytes": 15447041
+  },
+  "entries": [
+    {
+      "shortName": "Adc",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "adc_bswmd.json",
+      "contentSha256": "d5e8ef844f4683d27703ca011dac704eba43d8876952bae8ba638e53fa04ec10",
+      "status": "limited",
+      "parsed": true,
+      "reason": "含供应商/硬件特定字段，只读且需要补充定义；跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [
+        "AdcClockSource：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+        "AdcHwUnitId：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+        "AdcChannelRefVoltsrcHigh：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+        "AdcChannelRefVoltsrcLow：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。"
+      ],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Arti",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "arti_bswmd.json",
+      "contentSha256": "f4fced79ed235aeadd56875110b0723f777747eea06afa8f42aa3f8fcd06c73e",
+      "status": "available",
+      "parsed": true,
+      "reason": "",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "roundtrip",
+        "cGeneration": "generated"
+      }
+    },
+    {
+      "shortName": "ArtiGeneric",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "artigeneric_bswmd.json",
+      "contentSha256": "a42db447660f6de74a131f34c8d32c935a41da33c01d8a83d00ba450e9c38e16",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "roundtrip",
+        "cGeneration": "generated"
+      }
+    },
+    {
+      "shortName": "ArtiHardware",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "artihardware_bswmd.json",
+      "contentSha256": "475f51c51b966ea3e46fd51fc68855c09aa8bce2ce2ac6751ae4f73156ed77ef",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "ArtiOs",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "artios_bswmd.json",
+      "contentSha256": "513da6ce809a529b80d44b25a6b029fdb9e636122aa72c7a8667baf647f45318",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "roundtrip",
+        "cGeneration": "generated"
+      }
+    },
+    {
+      "shortName": "BswM",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "bswm_bswmd.json",
+      "contentSha256": "8aa3328521af59575aaa6b09b41cf372605f00e145a186e6b9d3beb2690598b8",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Can",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "can_bswmd.json",
+      "contentSha256": "eee63c5298f6aef2e350dc7d5cb0e7a18ea36bef95c0b1a11501ad926ae7d8cb",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "CanIf",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "canif_bswmd.json",
+      "contentSha256": "5d82f526175322e8901d3daa7b585ce0ab4c0d3b8863df16cea74dda751b4420",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "CanNm",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "cannm_bswmd.json",
+      "contentSha256": "c699ca05827f7825a86190aebfc3b12aa6b747d5bab4a83c6acc16617bc7b3fd",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "CanSM",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "cansm_bswmd.json",
+      "contentSha256": "444654904e8e3b723bfb2ed3cb55469ee931fb25d8d85af4245e2ffcdbf09f7b",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "CanTSyn",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "cantsyn_bswmd.json",
+      "contentSha256": "4db7a3e9234f82ab2e2454fd20377875ee26e3b4eb07a684ef5172830cb11983",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "CanTp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "cantp_bswmd.json",
+      "contentSha256": "38903f884fb7b1811a21364bd292a093a1dada854499c95d34ff91576887a24b",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "CanTrcv",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "cantrcv_bswmd.json",
+      "contentSha256": "ba25783dbc207c439f6a2b6d0ac41354009afdfd7b4a984efa9664a89e57e866",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Cdd",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "cdd_bswmd.json",
+      "contentSha256": "39d7ca0aea67439c45aa5bc5dd20e6035f97a5b8cb6c4475c29c6d9a650d47e1",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "roundtrip",
+        "cGeneration": "generated"
+      }
+    },
+    {
+      "shortName": "Com",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "com_bswmd.json",
+      "contentSha256": "6653f7fcd76c854c22d33d03dc286581a99610b50c0f5993269a1d73efa8bf35",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "ComM",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "comm_bswmd.json",
+      "contentSha256": "18770b3bc14cd63328be5c322f2a3c6ed6edc3a7b8dbead22b68744f0e9393a4",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "CorTst",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "cortst_bswmd.json",
+      "contentSha256": "0296ee0b182d692c9ae2276d44be9bd0571366d3d818aa76614e8a43a82702fc",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Crc",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "crc_bswmd.json",
+      "contentSha256": "69306462d876f7c63ae8eeaacd926e9f4c8daf2dd98d3a4bc118ba4afa8a7255",
+      "status": "available",
+      "parsed": true,
+      "reason": "",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "roundtrip",
+        "cGeneration": "generated"
+      }
+    },
+    {
+      "shortName": "CryIf",
+      "release": "4.4.0",
+      "group": "安全与加密",
+      "asset": "cryif_bswmd.json",
+      "contentSha256": "38e1254e08bf8b880fa543baee4fa886973906088efad0ad6361830203b19694",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Crypto",
+      "release": "4.4.0",
+      "group": "安全与加密",
+      "asset": "crypto_bswmd.json",
+      "contentSha256": "a89e6ee4b89b7f34979f7ac328275a5f0d2d52dbf522c8803074b7f49951cefc",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Csm",
+      "release": "4.4.0",
+      "group": "安全与加密",
+      "asset": "csm_bswmd.json",
+      "contentSha256": "59e102218a354ac662562721e0caf99370eacd261646946cd149206481520bd9",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Dcm",
+      "release": "4.4.0",
+      "group": "诊断服务",
+      "asset": null,
+      "contentSha256": null,
+      "status": "unsupported",
+      "parsed": false,
+      "reason": "DcmDspOdxDataDescription: 不支持的参数类型 ECUC-ADD-INFO-PARAM-DEF",
+      "batch": "B2-ADD-INFO",
+      "diagnostics": [],
+      "verification": null
+    },
+    {
+      "shortName": "Dem",
+      "release": "4.4.0",
+      "group": "诊断服务",
+      "asset": "dem_bswmd.json",
+      "contentSha256": "709cdde682d4a0f31f157cae3f8a0687f95f939c303e914c901d13816f72c23a",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Det",
+      "release": "4.4.0",
+      "group": "诊断服务",
+      "asset": "det_bswmd.json",
+      "contentSha256": "00651cbecd4fae36c3b4104e0249fe74add9ef28bbf04e55a7253317adffd089",
+      "status": "limited",
+      "parsed": true,
+      "reason": "多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Dio",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "dio_bswmd.json",
+      "contentSha256": "3df0cd161ea07cb6bd6928f23f48fa130178853974c4e1f30cfc735f5abe791f",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Dlt",
+      "release": "4.4.0",
+      "group": "诊断服务",
+      "asset": "dlt_bswmd.json",
+      "contentSha256": "ca2bb4fadb655f4726269b3fae32f2627c09ed0ddd91d7b6c442e6e6d0d5b0ab",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "DoIP",
+      "release": "4.4.0",
+      "group": "诊断服务",
+      "asset": "doip_bswmd.json",
+      "contentSha256": "d6b446dd536358f6c8cf41a79b958f23fe8a5374d8fcf197dfbcabbbf7307264",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Ea",
+      "release": "4.4.0",
+      "group": "存储服务",
+      "asset": "ea_bswmd.json",
+      "contentSha256": "79fdf821528b444f64229f13d96390e0d317d330b23e79d81a0d0e9beb4532f5",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "EcuC",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "ecuc_bswmd.json",
+      "contentSha256": "2d09df5b3fe5669a98d4e70ccd5ddd70cd519a7ed7b99d45fe08073de98b50c9",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "roundtrip",
+        "cGeneration": "generated"
+      }
+    },
+    {
+      "shortName": "EcuM",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "ecum_bswmd.json",
+      "contentSha256": "34ea0f0790fa58c8779b8f9648f74cfe67fee8e68f476e7f4750b954b72eeb7b",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Eep",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "eep_bswmd.json",
+      "contentSha256": "b9eb58d3a1751b9ee3005cd6545f8c39392892e106e309e37e6ad4d08ddc03b7",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Eth",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "eth_bswmd.json",
+      "contentSha256": "eb2daf28a1acebf1784c0667cefd24d6a4420277c2d061a2dc71bd9ffdb19792",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "EthIf",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "ethif_bswmd.json",
+      "contentSha256": "8abf7da48cefe8dc44cbb57d840ca8e7d2f76bc7393cbf82954e0cba204539cf",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "EthSM",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "ethsm_bswmd.json",
+      "contentSha256": "7303604c3d6c341849f2a5f917a983c11f14607a6844523029e4ed5d6275d208",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "EthSwt",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "ethswt_bswmd.json",
+      "contentSha256": "7a09211a62e081aa1ad8bfa4fc74ed23a0676b18ffc5a63b18b315338c4bdb0b",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "EthTSyn",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "ethtsyn_bswmd.json",
+      "contentSha256": "6704ad2c7e89c57ce4aad170dc31f553e5f42d20fc9321f1418aabe779006764",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "EthTrcv",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "ethtrcv_bswmd.json",
+      "contentSha256": "d854e2ca98cc1f6a48883ec96052f1e2c6981fb9643ac9360f12dd5d793325fd",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Fee",
+      "release": "4.4.0",
+      "group": "存储服务",
+      "asset": "fee_bswmd.json",
+      "contentSha256": "6b69d061560c9b2389198d041eae90e9f1a8cda7f70924c6390315a9d9cc7cb6",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FiM",
+      "release": "4.4.0",
+      "group": "诊断服务",
+      "asset": "fim_bswmd.json",
+      "contentSha256": "d1957e36ac6187ae8a12fde7f75007ef68a0e4880ea528fde519654a7dbfe43d",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Fls",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "fls_bswmd.json",
+      "contentSha256": "cc88262d7347d2df1d9f4d5bb151cc61f6ff0bbbacdcf59de28cf8619d3fa028",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FlsTst",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "flstst_bswmd.json",
+      "contentSha256": "57d545d2514146f95d8ba4e58f74e61aa6dad2f46919d183817ef05e988bfc6e",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Fr",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "fr_bswmd.json",
+      "contentSha256": "eaf60e61cdf3e22df1912119cac5ac6f5fdd8d909215ba3e3260286df1398880",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FrArTp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "frartp_bswmd.json",
+      "contentSha256": "b20ccfde66349ba71b6562dfb94e7989512c473d032a7f4785ef1f359106d3e1",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FrIf",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "frif_bswmd.json",
+      "contentSha256": "a1a9030f8f5ca50c891b3fedb777a2096ade8d4293e30c92c8afabeadae0e159",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FrNm",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "frnm_bswmd.json",
+      "contentSha256": "8eb89860f90e34984f0a17aaccc36905a698e3e543caec34850c0837b3a36228",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FrSM",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "frsm_bswmd.json",
+      "contentSha256": "dbf9698498eda916c00c6ed45cc694f79ad6a21437b8fbf7ff05e38542f5e22c",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FrTSyn",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "frtsyn_bswmd.json",
+      "contentSha256": "d6b428addb1259f1ae414fc2874887e983c3c9338988cc6f400cd3142afb35e2",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FrTp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "frtp_bswmd.json",
+      "contentSha256": "0d72d0df42dfd778620cccaa2a4115d80598a4a8adc8e4ed82864d9f5576a776",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "FrTrcv",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "frtrcv_bswmd.json",
+      "contentSha256": "adab7ad51f16e7779813b92b459a45a8721777d0d39063c656a117fbac0e9591",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Gpt",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "gpt_bswmd.json",
+      "contentSha256": "ebf69c3b2846edbff1622cf15b513d8aa2591c64b4dcc40dc16d6cf8916fc4b0",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "HTTMS",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "httms_bswmd.json",
+      "contentSha256": "c293e0004cded916163ecfa4af54529633453f3fb275311a70273e380a7bfde8",
+      "status": "available",
+      "parsed": true,
+      "reason": "",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Icu",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "icu_bswmd.json",
+      "contentSha256": "252dc51e134730518cd0f8123e71f2419fb11e62b3e4ae1b3e1a856e98b8d8d6",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "IpduM",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "ipdum_bswmd.json",
+      "contentSha256": "f14877c3b29ae55e703c6073480ab56f39c39f8d38eadc6a7e198c1eadc662d5",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "J1939Dcm",
+      "release": "4.4.0",
+      "group": "诊断服务",
+      "asset": "j1939dcm_bswmd.json",
+      "contentSha256": "4dd910b3fdd193258227da018fa8787a1f06606da058ed9b8aaeebd816b52bfa",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "J1939Nm",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "j1939nm_bswmd.json",
+      "contentSha256": "3a041e32e37e75b6019f542df337f25ae751a5ac93cc0a42cac9b6ce0deeabb0",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "J1939Rm",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "j1939rm_bswmd.json",
+      "contentSha256": "64f37d796332bc393cb87ef8c1a40af1eff68c0b00d4e3f3efc758082a65eacc",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "J1939Tp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "j1939tp_bswmd.json",
+      "contentSha256": "2728bc7417a4dee45facf516d4a4420043ebf05c9901006cd30df47c054f6fec",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "KeyM",
+      "release": "4.4.0",
+      "group": "安全与加密",
+      "asset": "keym_bswmd.json",
+      "contentSha256": "d6c17fa52eafcffa44be161aa3197f681ba517710ef71104791b10f35dd336c1",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "LdCom",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "ldcom_bswmd.json",
+      "contentSha256": "b0b6e32e52c1dff2d3ec159b5324c0854afaf304729aedf5613e7b29e351676e",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Lin",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "lin_bswmd.json",
+      "contentSha256": "ef3efd2dbbda992332713f42552e8b22508f0b9d58ba828913d3b75d80083806",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "LinIf",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "linif_bswmd.json",
+      "contentSha256": "997b6a505d0f7c62df7efa52266a84e778eacf4631cd9f309833ca0115ef5672",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "LinNm",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "linnm_bswmd.json",
+      "contentSha256": "722719123292f13a3d6c49e3b44e72963384f4954f601cba68b5190e9d6cf0c7",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "LinSM",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "linsm_bswmd.json",
+      "contentSha256": "4712a800c22ef6c99f811eb524576080b766dc0ccd67c44cec9a70b7f73b6d50",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "LinTp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "lintp_bswmd.json",
+      "contentSha256": "cad9befda8cf3323900cfe38c2514bf1a9acf6067cf92e49195ddea21a6bd763",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "LinTrcv",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "lintrcv_bswmd.json",
+      "contentSha256": "88a087cfa0e2fdc7be58d865db24e0965e004f973259fb8f31f0a02fa496d239",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Mcu",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "mcu_bswmd.json",
+      "contentSha256": "3e631b8118adda7811abed15feec18e5704d1e346bb6de7ce3bb03e80c4d0c85",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "MemIf",
+      "release": "4.4.0",
+      "group": "存储服务",
+      "asset": "memif_bswmd.json",
+      "contentSha256": "64157ccd74b732cb7b4bd4457048ae7c2e02ba5058676f7ecf65ac8e51db7d3d",
+      "status": "available",
+      "parsed": true,
+      "reason": "",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "MemMap",
+      "release": "4.4.0",
+      "group": "存储服务",
+      "asset": null,
+      "contentSha256": null,
+      "status": "unsupported",
+      "parsed": false,
+      "reason": "MemMapAddressingModeStart: 不支持的参数类型 ECUC-MULTILINE-STRING-PARAM-DEF",
+      "batch": "B2-MULTILINE",
+      "diagnostics": [],
+      "verification": null
+    },
+    {
+      "shortName": "Mirror",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "mirror_bswmd.json",
+      "contentSha256": "907d23914effd3c00896c7feabec6f7936e43245b6509fcf7b5d8de4de69d129",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Nm",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "nm_bswmd.json",
+      "contentSha256": "78b61ff358f901c702737d640a40b5c379b7442da0a6fd32f7148469a905ec89",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "NvM",
+      "release": "4.4.0",
+      "group": "存储服务",
+      "asset": "nvm_bswmd.json",
+      "contentSha256": "73e054fc77f108ed64f1d9a2d29168bda21b2fb0c6eedc99cceafeae75f2b0ec",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Ocu",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "ocu_bswmd.json",
+      "contentSha256": "6d0c7408ff923415bddebcd4a0ce77f7857ee8eff965c66be1f92d8ef4a23429",
+      "status": "limited",
+      "parsed": true,
+      "reason": "含供应商/硬件特定字段，只读且需要补充定义；跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [
+        "OcuClockSource：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。",
+        "OcuPrescale：标准定义未提供枚举选项，需要供应商/硬件定义；当前字段只读。"
+      ],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Os",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "os_bswmd.json",
+      "contentSha256": "23f432ee6ff07e77d4fcf4e99833f0960342b57a40c7980d202c2165be0faa1a",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "PduR",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "pdur_bswmd.json",
+      "contentSha256": "c3100dc87a921f2f24f36dd37e20edefbfe246dca2a1da940a51a257d7c271c8",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Port",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "port_bswmd.json",
+      "contentSha256": "450167b7850d663cf45291fbfc8ded11b0062c50d65210826ee16978a5515f10",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Pwm",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "pwm_bswmd.json",
+      "contentSha256": "f8458bb56463b1a4c32f4228e20469b6a3bc0097342a97aca67801414e8eae4f",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "RamTst",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "ramtst_bswmd.json",
+      "contentSha256": "5f81cd5c2026a7b495971d5f5f7a8f66db9ff28442d92d14a08656c9870ce328",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Rte",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": null,
+      "contentSha256": null,
+      "status": "unsupported",
+      "parsed": false,
+      "reason": "RteRipsFillRoutineRef: 不支持的引用类型 ECUC-URI-REFERENCE-DEF",
+      "batch": "B2-URI",
+      "diagnostics": [],
+      "verification": null
+    },
+    {
+      "shortName": "Sd",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "sd_bswmd.json",
+      "contentSha256": "f4d7c49bf3cd86648a596e33518972a9e7524ef5b2876270b041140333c36b98",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "SecOC",
+      "release": "4.4.0",
+      "group": "安全与加密",
+      "asset": "secoc_bswmd.json",
+      "contentSha256": "135c570bbb2a6a5ea61efde2fe1e8983be79405c727b6c27d8d9cc8420913ab5",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "SoAd",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "soad_bswmd.json",
+      "contentSha256": "69809cc93e77ba101765eeca0dbfbe7184495093f14ba99d6fcf5e4529c3921f",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "SomeIpTp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "someiptp_bswmd.json",
+      "contentSha256": "7b8b4659951c1da90f3159a9ccb159a48581dedfe20eba74c9514ef2e1631609",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Spi",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "spi_bswmd.json",
+      "contentSha256": "c2221edc6984d0d8d684d42b62abf018205f4340a96058d088585dcb1e61eb3a",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "StbM",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "stbm_bswmd.json",
+      "contentSha256": "0b163d02ef9408f88e64e45e6daf643f90cd9f3baa643c0df8f83f8748559739",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "TcpIp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "tcpip_bswmd.json",
+      "contentSha256": "b47430926e597d7773a6cd5490d945ccabd922b57ae287ca30fdecdb5cbf3edc",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Tm",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "tm_bswmd.json",
+      "contentSha256": "584e67a336d70e50fd6d2a1ddf2c4727ebc9f7db980c1a7b57b0922ece79c840",
+      "status": "available",
+      "parsed": true,
+      "reason": "",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "UdpNm",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": "udpnm_bswmd.json",
+      "contentSha256": "0ba24f0d0fed85f366c7b8cd9a32b878598060a3daff6ce41b8b143bca5d84cf",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "V2xBtp",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "v2xbtp_bswmd.json",
+      "contentSha256": "97fcb4917b269e51522413c7d8ec1c94a9c51f31e3e4a10a2d37dac84dcce93d",
+      "status": "available",
+      "parsed": true,
+      "reason": "",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "V2xFac",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "v2xfac_bswmd.json",
+      "contentSha256": "cce9a534c1954af6f1c17965204010d90cdc08df5eb89ff87b9d578934cea020",
+      "status": "available",
+      "parsed": true,
+      "reason": "",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "V2xGn",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "v2xgn_bswmd.json",
+      "contentSha256": "c27f3db2517b49b4570e45d3517adf79d81ae5ccbf25411d669cbb843effdc13",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "V2xM",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "v2xm_bswmd.json",
+      "contentSha256": "6397b876dbd6fde1acab302f3371dd3a50b4de3d6042c096112f3d3caaac7740",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "WEth",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "weth_bswmd.json",
+      "contentSha256": "d8468862bdcebb4f92c6450cf5d8e03f8737fdf4e69f700fdd007b9dba8f9326",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "WEthTrcv",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "wethtrcv_bswmd.json",
+      "contentSha256": "6953f65965fb729589f40c5e4d0e1e93c8e3f3ff4950f46903ed2bd843bf9429",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Wdg",
+      "release": "4.4.0",
+      "group": "微控制器与驱动",
+      "asset": "wdg_bswmd.json",
+      "contentSha256": "cd399c177b90991ea168d449553b945e8b80dfed8813355f65b0158484ee3d63",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "WdgIf",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "wdgif_bswmd.json",
+      "contentSha256": "cfdc88373b16fb0bc798ac1d7b6a987ef52540659d8f6e7ca5d1f9bd9582c07c",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "WdgM",
+      "release": "4.4.0",
+      "group": "系统服务",
+      "asset": "wdgm_bswmd.json",
+      "contentSha256": "f6ee102a9e848c589d73b7cb53da9a90361605d22ed3a5ec096a86066ef3341a",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行；多值字段当前仅编辑单值",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    },
+    {
+      "shortName": "Xcp",
+      "release": "4.4.0",
+      "group": "通信服务",
+      "asset": null,
+      "contentSha256": null,
+      "status": "unsupported",
+      "parsed": false,
+      "reason": "XcpOdtEntryAddress: 不支持的参数类型 ECUC-LINKER-SYMBOL-DEF",
+      "batch": "B2-LINKER",
+      "diagnostics": [],
+      "verification": null
+    },
+    {
+      "shortName": "Xfrm",
+      "release": "4.4.0",
+      "group": "其他标准模块",
+      "asset": "xfrm_bswmd.json",
+      "contentSha256": "498924a0cd056f0c34db363ca23e7fcedcbfe208416eab32e729d0e3899de307",
+      "status": "limited",
+      "parsed": true,
+      "reason": "跨模块引用当前只读，配置后输出按校验结果放行",
+      "batch": null,
+      "diagnostics": [],
+      "verification": {
+        "creation": true,
+        "jsonRoundtrip": true,
+        "validation": true,
+        "arxml": "expected-rejection",
+        "cGeneration": "expected-rejection"
+      }
+    }
+  ]
+}

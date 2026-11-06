@@ -110,7 +110,7 @@ function parameterValue(value: unknown, definition: BswmdParameter, path: string
 export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInstance {
   const data = record(raw, '配置');
   const moduleRef = string(data.moduleRef, 'moduleRef');
-  const version = string(data.version, 'version');
+  const version = string(data.version ?? '4.4.0', 'version');
   const module = modules.find((item) => item.shortName === moduleRef && item.version === version);
   if (!module) throw new Error(`未加载 BSWMD：${moduleRef} (${version})`);
   const occurrences = new Map<unknown, number>();

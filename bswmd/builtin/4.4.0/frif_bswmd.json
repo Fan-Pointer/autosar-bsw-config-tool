@@ -1,0 +1,2012 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "a1a9030f8f5ca50c891b3fedb777a2096ade8d4293e30c92c8afabeadae0e159",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR FrIf module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfMaxPduCnt",
+          "description": "Maximum number of Pdus. This parameter is needed only in case of post-build loadable implementation using static memory allocation.",
+          "isOptional": true,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrIfMaxPduCnt",
+          "type": "INTEGER",
+          "uuid": "ECUC:88404790-3f2e-4e63-bdcb-d64c84a94d9d"
+        }
+      ],
+      "references": [],
+      "shortName": "FrIfConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster",
+          "description": "This container specifies a FrIf Cluster and all related data which is required to enable communication of the Cluster. A Cluster may consist of more than one C…",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClstIdx",
+              "description": "This parameter provides a zero-based consecutive index of the FlexRay Clusters. Upper layer BSW modules and the FrIf itself use this index to identify a FlexRa…",
+              "isOptional": false,
+              "max": 63,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfClstIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:acba36f8-adeb-4c36-98e4-837e0f616935"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGColdStartAttempts",
+              "description": "Maximum number of times a node in the cluster is permitted to attempt to start the cluster by initiating schedule synchronization",
+              "isOptional": false,
+              "max": 31,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGColdStartAttempts",
+              "type": "INTEGER",
+              "uuid": "ECUC:fd06e4ae-2179-4ce0-855c-f4aa7f03b3b7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGCycleCountMax",
+              "description": "Maximum cycle counter value in a given cluster.",
+              "isOptional": false,
+              "max": 63,
+              "min": 7,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGCycleCountMax",
+              "type": "INTEGER",
+              "uuid": "ECUC:5fd22705-bf85-4659-bf98-be6bfcc0abed"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdActionPointOffset",
+              "description": "Number of macroticks the action point is offset from the beginning of a static slot.",
+              "isOptional": false,
+              "max": 63,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdActionPointOffset",
+              "type": "INTEGER",
+              "uuid": "ECUC:7dad1bd0-f203-45cf-bed2-b8c487b27c60"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdCasRxLowMax",
+              "description": "Upper limit of the CAS acceptance windows [gdBit]",
+              "isOptional": false,
+              "max": 254,
+              "min": 28,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdCasRxLowMax",
+              "type": "INTEGER",
+              "uuid": "ECUC:8e414515-2806-468b-810d-a2a0345e8757"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdDynamicSlotIdlePhase",
+              "description": "Duration of the idle phase within a dynamic slot [Minislots].",
+              "isOptional": false,
+              "max": 2,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdDynamicSlotIdlePhase",
+              "type": "INTEGER",
+              "uuid": "ECUC:36b405ab-0c5a-4b1e-b055-03cff003fc6d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdIgnoreAfterTx",
+              "description": "Duration for which the bitstrobing is paused after transmission [gdBit].",
+              "isOptional": false,
+              "max": 15,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdIgnoreAfterTx",
+              "type": "INTEGER",
+              "uuid": "ECUC:55227fbf-ff62-4f17-86eb-fb3be77f6517"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdMinislot",
+              "description": "Duration of a minislot [Macroticks]",
+              "isOptional": false,
+              "max": 63,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdMinislot",
+              "type": "INTEGER",
+              "uuid": "ECUC:d925ca4b-2c55-4554-9e82-cb7e117367e7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdMiniSlotActionPointOffset",
+              "description": "Number of Macroticks the Minislot action point is offset from the beginning of a Minislot [Macroticks].",
+              "isOptional": false,
+              "max": 31,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdMiniSlotActionPointOffset",
+              "type": "INTEGER",
+              "uuid": "ECUC:b31a710c-5b2f-41a2-8861-3902a6b62530"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdNit",
+              "description": "Duration of the Network Idle Time [Macroticks]",
+              "isOptional": false,
+              "max": 15978,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdNit",
+              "type": "INTEGER",
+              "uuid": "ECUC:8d38067a-6d89-4e82-9dd2-28af28190db3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdStaticSlot",
+              "description": "Duration of a static slot [Macroticks].",
+              "isOptional": false,
+              "max": 664,
+              "min": 3,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdStaticSlot",
+              "type": "INTEGER",
+              "uuid": "ECUC:86eef347-5af3-44b5-ac4a-e799aed9ac97"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdSymbolWindow",
+              "description": "Duration of the symbol window [Macroticks].",
+              "isOptional": false,
+              "max": 162,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdSymbolWindow",
+              "type": "INTEGER",
+              "uuid": "ECUC:3168f855-09f2-4dab-bbad-e53571fb477e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdSymbolWindowActionPointOffset",
+              "description": "Number of macroticks the action point offset is from the beginning of the symbol window [Macroticks].",
+              "isOptional": false,
+              "max": 63,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdSymbolWindowActionPointOffset",
+              "type": "INTEGER",
+              "uuid": "ECUC:c828edea-75dd-496a-92f9-4a69eb5279d8"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdTSSTransmitter",
+              "description": "Number of bits in the Transmission Start Sequence [gdBits].",
+              "isOptional": false,
+              "max": 15,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdTSSTransmitter",
+              "type": "INTEGER",
+              "uuid": "ECUC:cd257190-952b-419a-8536-ff98206ba70a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdWakeupRxIdle",
+              "description": "Number of bits used by the node to test the duration of the 'idle' or HIGH phase of a received wakeup [gdBit]. Remarks: This parameter maps to FlexRay Protocol…",
+              "isOptional": false,
+              "max": 59,
+              "min": 8,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdWakeupRxIdle",
+              "type": "INTEGER",
+              "uuid": "ECUC:5700e5c3-21b8-492e-a15a-e7b9f8890a47"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdWakeupRxLow",
+              "description": "Number of bits used by the node to test the duration of the LOW phase of a received wakeup [gdBit].",
+              "isOptional": false,
+              "max": 59,
+              "min": 8,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdWakeupRxLow",
+              "type": "INTEGER",
+              "uuid": "ECUC:49d8c5b9-e6ee-495e-8f08-214b329352ae"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdWakeupRxWindow",
+              "description": "The size of the window used to detect wakeups [gdBit].",
+              "isOptional": false,
+              "max": 485,
+              "min": 76,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdWakeupRxWindow",
+              "type": "INTEGER",
+              "uuid": "ECUC:02c38e9b-73e1-4d76-b72b-cd837212b26b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdWakeupTxActive",
+              "description": "Number of bits used by the node to transmit the LOW phase of awakeup symbol and the HIGH and LOW phases of a WUDOP [gdBit].",
+              "isOptional": false,
+              "max": 60,
+              "min": 15,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdWakeupTxActive",
+              "type": "INTEGER",
+              "uuid": "ECUC:87fda236-4246-4548-b42e-a2bb02e6842f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdWakeupTxIdle",
+              "description": "Number of bits used by the node to transmit the 'idle' part of a",
+              "isOptional": false,
+              "max": 180,
+              "min": 45,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdWakeupTxIdle",
+              "type": "INTEGER",
+              "uuid": "ECUC:5e28082c-931c-43e2-9d26-58297c3c9457"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGListenNoise",
+              "description": "Upper limit for the start up listen timeout and wake up listen timeout in the presence of noise. It is used as a multiplier of the node",
+              "isOptional": false,
+              "max": 16,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGListenNoise",
+              "type": "INTEGER",
+              "uuid": "ECUC:05659b06-1760-4f5a-af1f-35f0844d2a3a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGMacroPerCycle",
+              "description": "Number of macroticks in a communication cycle.",
+              "isOptional": false,
+              "max": 16000,
+              "min": 8,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGMacroPerCycle",
+              "type": "INTEGER",
+              "uuid": "ECUC:9b6b8aa9-7ad4-454b-a721-51641bb65c5b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGMaxWithoutClockCorrectFatal",
+              "description": "Threshold used for testing the vClockCorrectionFailed counter. Defines the number of consecutive even/odd Cycle pairs with missing clock correction terms that …",
+              "isOptional": false,
+              "max": 15,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGMaxWithoutClockCorrectFatal",
+              "type": "INTEGER",
+              "uuid": "ECUC:df1cf583-bf38-49a2-b150-95275930adf0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGMaxWithoutClockCorrectPassive",
+              "description": "Threshold used for testing the vClockCorrectionFailed counter. Defines the number of consecutive even/odd Cycle pairs with missing clock correction terms that …",
+              "isOptional": false,
+              "max": 15,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGMaxWithoutClockCorrectPassive",
+              "type": "INTEGER",
+              "uuid": "ECUC:9ab93616-b25c-4f80-aaa1-af10c35a2927"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGNetworkManagementVectorLength",
+              "description": "Length of the Network Management vector in a cluster [bytes]",
+              "isOptional": false,
+              "max": 12,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGNetworkManagementVectorLength",
+              "type": "INTEGER",
+              "uuid": "ECUC:bbde5f64-38de-40ee-a656-1e4c515b3e38"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGNumberOfMinislots",
+              "description": "Number of minislots in the dynamic segment",
+              "isOptional": false,
+              "max": 7988,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGNumberOfMinislots",
+              "type": "INTEGER",
+              "uuid": "ECUC:d9f67d2c-e7dd-45f9-993e-3242ef59b478"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGNumberOfStaticSlots",
+              "description": "Number of static slots in the static segment",
+              "isOptional": false,
+              "max": 1023,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGNumberOfStaticSlots",
+              "type": "INTEGER",
+              "uuid": "ECUC:9210d68d-a1ee-436e-b951-3dc34765cb23"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGPayloadLengthStatic",
+              "description": "Payload length of a static frame [16 bit words]",
+              "isOptional": false,
+              "max": 127,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGPayloadLengthStatic",
+              "type": "INTEGER",
+              "uuid": "ECUC:7182990c-c42b-4d6a-a5ff-b542fcb4cd36"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGSyncFrameIDCountMax",
+              "description": "Maximum number of distinct syncframe identifiers present in a given cluster. This parameter maps to FlexRay Protocol 2.1 Rev. A parameter gSyncNodeMax.",
+              "isOptional": false,
+              "max": 15,
+              "min": 2,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGSyncFrameIDCountMax",
+              "type": "INTEGER",
+              "uuid": "ECUC:f38bcebd-b881-4dac-9af7-53dcc1c26961"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfSafetyMargin",
+              "description": "Additional timespan in macroticks which takes jitter into account to be able to set the JobListPointer to the next possible job which can be executed in case t…",
+              "isOptional": false,
+              "max": 1024000,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfSafetyMargin",
+              "type": "INTEGER",
+              "uuid": "ECUC:2263fb3c-0a7b-44bd-b166-315865d5e4ee"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfDetectNITError",
+              "description": "Indicates whether NIT error status of each cluster shall be detected or not.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfDetectNITError",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:cb95f335-435b-40cf-b7fd-5279da55e4a3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGChannels",
+              "description": "The channels that are used by the cluster.",
+              "enumValues": [
+                "FR_CHANNEL_A",
+                "FR_CHANNEL_AB",
+                "FR_CHANNEL_B"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGChannels",
+              "type": "ENUM",
+              "uuid": "ECUC:64cc84b8-ea52-4c55-a4cb-73f10cae16ab"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdBit",
+              "description": "Nominal bit time in seconds",
+              "enumValues": [
+                "T100NS",
+                "T200NS",
+                "T400NS"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdBit",
+              "type": "ENUM",
+              "uuid": "ECUC:90293137-f6e3-4280-b2b5-7ed9d9309231"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdSampleClockPeriod",
+              "description": "Sample clock period",
+              "enumValues": [
+                "T12_5NS",
+                "T25NS",
+                "T50NS"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdSampleClockPeriod",
+              "type": "ENUM",
+              "uuid": "ECUC:074f785a-9b8a-4ff6-a534-cfa494526c18"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdCycle",
+              "description": "Length of the cycle, expressed in [s]",
+              "isOptional": false,
+              "max": 0.016,
+              "min": 0.000024,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdCycle",
+              "type": "FLOAT",
+              "uuid": "ECUC:ef2961ff-251f-429b-abc4-31886a5e4554"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfGdMacrotick",
+              "description": "Duration of the cluster wide nominal macrotick, expressed in s",
+              "isOptional": false,
+              "max": 0.000006,
+              "min": 0.000001,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfGdMacrotick",
+              "type": "FLOAT",
+              "uuid": "ECUC:2ddc7ccb-cf16-4c68-8a38-0f6bbcf7a302"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfMainFunctionPeriod",
+              "description": "The execution cycle of the FrIf_MainFunction_<FrIfCluster.ShortName>() in seconds. The FrIf does not require this information but the BSW scheduler, which invo…",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfMainFunctionPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:2b9c1311-89e5-40f8-bab5-cc2348c63164"
+            }
+          ],
+          "references": [],
+          "shortName": "FrIfCluster",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClusterDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClusterDemEventParameterRefs/FRIF_E_ACS_CH_A",
+                  "description": "Reference to the DemEventParameter which shall be issued when an error in ACS on channel A was detected. If the reference is not configured the error shall not…",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FRIF_E_ACS_CH_A",
+                  "uuid": "ECUC:eecb417f-3543-46e4-a490-b4fa44b5e7fe"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClusterDemEventParameterRefs/FRIF_E_ACS_CH_B",
+                  "description": "Reference to the DemEventParameter which shall be issued when an error in ACS on channel B was detected. If the reference is not configured the error shall not…",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FRIF_E_ACS_CH_B",
+                  "uuid": "ECUC:fed44e24-f3a4-48ea-92c5-a85a3c783c3a"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClusterDemEventParameterRefs/FRIF_E_NIT_CH_A",
+                  "description": "Reference to the DemEventParameter which shall be issued when an error in NIT on channel A was detected. If the reference is not configured the error shall not…",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FRIF_E_NIT_CH_A",
+                  "uuid": "ECUC:3ed9a300-0edf-46a7-8738-ed2a39b39bcd"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClusterDemEventParameterRefs/FRIF_E_NIT_CH_B",
+                  "description": "Reference to the DemEventParameter which shall be issued when an error in NIT on channel B was detected. If the reference is not configured the error shall not…",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FRIF_E_NIT_CH_B",
+                  "uuid": "ECUC:7e84dc55-d758-475f-b52b-7339e0806d5f"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClusterDemEventParameterRefs/FRIF_E_SW_CH_A",
+                  "description": "Reference to the DemEventParameter which shall be issued when an error in SW on channel A was detected. If the reference is not configured the error shall not …",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FRIF_E_SW_CH_A",
+                  "uuid": "ECUC:9f331ab9-6d57-49e9-858d-ed1891b44a9a"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfClusterDemEventParameterRefs/FRIF_E_SW_CH_B",
+                  "description": "Reference to the DemEventParameter which shall be issued when an error in SW on channel B was detected. If the reference is not configured the error shall not …",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FRIF_E_SW_CH_B",
+                  "uuid": "ECUC:99ddec77-a532-48bd-9392-bc321a74c5cb"
+                }
+              ],
+              "shortName": "FrIfClusterDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:9ab089b7-07d7-440d-bd6d-c70f77e37907"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController",
+              "description": "This container contains the configuration of FlexRay CC.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfCtrlIdx",
+                  "description": "This parameter provides a zero-based consecutive index of the FlexRay Communication Controllers. Upper layer BSW modules and the FrIf itself use this index to …",
+                  "isOptional": false,
+                  "max": 31,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrIfCtrlIdx",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:5ef23942-3937-48ff-9a21-7da86923efa2"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrCtrlRef",
+                  "description": "Reference to a Controller, which is handled by a specific Driver. This reference is unique for the ECU.",
+                  "destinationContainerType": "FrController",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrIfFrCtrlRef",
+                  "uuid": "ECUC:e2246aac-2074-48cb-a7b1-5d27c4d6b912"
+                }
+              ],
+              "shortName": "FrIfController",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering",
+                  "description": "A Frame triggering contains the communication parameters of the FlexRay Frame as well as a reference to the Frame Construction Plan.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfAllowDynamicLSduLength",
+                      "description": "Allows L-PDU length reduction ('FrIfLSduLength' defines max. length) and indicates that the related CC buffer has to be reconfigured for the actual length and …",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfAllowDynamicLSduLength",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:e7730a8c-8ca8-42b2-b19c-4d579b622edf"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfAlwaysTransmit",
+                      "description": "Defines whether the driver's API function Fr_TransmitTxLPdu() shall always be called for this L-PDU.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfAlwaysTransmit",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:4584bcbb-2679-4e49-85dc-0336bc90238f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfPayloadPreamble",
+                      "description": "Switching the Payload Preamble bit.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfPayloadPreamble",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:e1e62334-6870-46e2-b687-35576bace368"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfBaseCycle",
+                      "description": "This parameter contains the FlexRay Base Cycle used to transmit this FlexRay Frame.",
+                      "isOptional": false,
+                      "max": 63,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfBaseCycle",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:efe1b6a1-df0c-4b38-9f7a-50c6ae57547a"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfCycleRepetition",
+                      "description": "This parameter contains the FlexRay Cycle Repetition used to transmit this FlexRay Frame.",
+                      "isOptional": false,
+                      "max": 64,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfCycleRepetition",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:22ef3362-122d-484f-8da2-76180f177444"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfLSduLength",
+                      "description": "The payload length of the Frame is given here. This parameter is required for validation if configured PDUs and update information fits into the Frame at confi…",
+                      "isOptional": false,
+                      "max": 254,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfLSduLength",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:b4a19cfd-baa4-44ee-9dcc-068fff0c1aba"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfMessageId",
+                      "description": "The first two bytes of the payload segment of the FlexRay frame format for frames transmitted in the",
+                      "isOptional": true,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfMessageId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:b9158572-bb6a-42e3-b4ba-79060379728b"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfSlotId",
+                      "description": "This parameter contains the FlexRay Slot ID used to transmit this FlexRay Frame.",
+                      "isOptional": false,
+                      "max": 2047,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfSlotId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f7261522-87b8-4eed-b7db-d75e9b120582"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfChannel",
+                      "description": "This parameter contains the FlexRay Channel used to transmit this FlexRay Frame.",
+                      "enumValues": [
+                        "FRIF_CHANNEL_A",
+                        "FRIF_CHANNEL_AB",
+                        "FRIF_CHANNEL_B"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfChannel",
+                      "type": "ENUM",
+                      "uuid": "ECUC:f9a10bc2-ba77-4ae4-9289-b04ab9217eb0"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfFrameStructureRef",
+                      "description": "Reference to the Construction Plan of the FlexRay Frame.",
+                      "destinationContainerType": "FrIfFrameStructure",
+                      "destinationRef": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfFrameStructureRef",
+                      "uuid": "ECUC:d6e4667a-efce-4b60-b62d-e4b4da099dff"
+                    }
+                  ],
+                  "shortName": "FrIfFrameTriggering",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfFrameTriggeringDemEventParameterRefs",
+                      "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering/FrIfFrameTriggeringDemEventParameterRefs/FRIF_E_LPDU_SLOTSTATUS",
+                          "description": "Reference to DEM event Id that is reported when FlexRay driver module detects slot errors. If this parameter is not configured, no event reporting happens.",
+                          "destinationContainerType": "DemEventParameter",
+                          "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                          ],
+                          "isExternal": true,
+                          "isOptional": true,
+                          "kind": "reference",
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "FRIF_E_LPDU_SLOTSTATUS",
+                          "uuid": "ECUC:c605160c-eb64-4bcc-a837-c62ad6941b8b"
+                        }
+                      ],
+                      "shortName": "FrIfFrameTriggeringDemEventParameterRefs",
+                      "subContainers": [],
+                      "uuid": "ECUC:5bdf8934-4088-4ae8-b0d0-281ce795dced"
+                    }
+                  ],
+                  "uuid": "ECUC:11018403-37a7-41de-a035-32dd93a0a75b"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfLPdu",
+                  "description": "Reference to a L-PDU index",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfLPdu/FrIfLPduIdx",
+                      "description": "This parameter identifies the L-PDU in the interaction between FlexRay Interface and FlexRay Driver.",
+                      "isOptional": false,
+                      "max": 4095,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfLPduIdx",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:f35915a8-fadb-430b-a3b6-9d5e157ecceb"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfLPdu/FrIfReconfigurable",
+                      "description": "This parameter specifies that this LPdu is reconfigurable using FrIf_ReconfigLPdu. This means that this LPdu can be assigned to a different FrameTriggering at …",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfReconfigurable",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:f7c78928-7331-4999-b9a2-d15f9ab61411"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfLPdu/FrIfVBTriggeringRef",
+                      "description": "Reference to the assigned Frame triggering.",
+                      "destinationContainerType": "FrIfFrameTriggering",
+                      "destinationRef": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfFrameTriggering"
+                      ],
+                      "isExternal": false,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfVBTriggeringRef",
+                      "uuid": "ECUC:d72bf6de-9dad-4275-a2c9-861a4a43ce54"
+                    }
+                  ],
+                  "shortName": "FrIfLPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:21590a50-51af-4b3c-928e-8d087639ea4e"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfTransceiver",
+                  "description": "Up to two FlexRay Transceivers may connect a Controller to a Cluster. This container realizes a Controller-Transceiver assignment.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 2
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfTransceiver/FrIfClusterChannel",
+                      "description": "This parameter identifies to which one of the two Channels (A, B, A and B) of the Cluster the Transceiver is connected. FrIfClusterChannel shall map to Fr_Chan…",
+                      "enumValues": [
+                        "FRIF_CHANNEL_A",
+                        "FRIF_CHANNEL_B"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfClusterChannel",
+                      "type": "ENUM",
+                      "uuid": "ECUC:dbf99760-3f35-415d-b4fd-b93477da72d5"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfTransceiver/FrIfFrTrcvChannelRef",
+                      "description": "Reference to a Transceiver Driver Channel. This reference is unique for the ECU.",
+                      "destinationContainerType": "FrTrcvChannel",
+                      "destinationRef": "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfFrTrcvChannelRef",
+                      "uuid": "ECUC:f9e24fbf-0c59-4b0f-8cc1-f3a810c3336b"
+                    }
+                  ],
+                  "shortName": "FrIfTransceiver",
+                  "subContainers": [],
+                  "uuid": "ECUC:e031c398-1244-4908-8654-e4e58a1cbf51"
+                }
+              ],
+              "uuid": "ECUC:319d659e-1521-466e-a809-a086ba548c28"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList",
+              "description": "This container specifies a list of all FlexRay Jobs of the Cluster to be performed by FrIf_JobListExec_<FrIfCluster.ShortName>().",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfAbsTimerRef",
+                  "description": "Reference to the absolute timer to be used to trigger the interrupt whose ISR contains the FrIf_JobListExec_<FrIfCluster.ShortName>() function.",
+                  "destinationContainerType": "FrAbsoluteTimer",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrAbsoluteTimer",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrAbsoluteTimer"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrIfAbsTimerRef",
+                  "uuid": "ECUC:1e2599bc-e492-4a05-afec-e92422c80f62"
+                }
+              ],
+              "shortName": "FrIfJobList",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob",
+                  "description": "A job may contain more than one operation that are executed at a specific point in time.",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfCycle",
+                      "description": "The FlexRay Cycle in which the communication operation will execute this job",
+                      "isOptional": false,
+                      "max": 63,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfCycle",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:bfa2d171-ca87-48e2-817f-a74548011b9b"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfMacrotick",
+                      "description": "Macrotick offset in the Cycle [Macrotick]",
+                      "isOptional": false,
+                      "max": 10240000,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfMacrotick",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:44c6c409-9910-45fc-a634-f49e68633235"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfMaxIsrDelay",
+                      "description": "The maximum delay in macroticks the FrIf_JobListExec_<FrIfCluster.ShortName>() function is processed after the absolute timer interrupt was triggered.",
+                      "isOptional": false,
+                      "max": 10240000,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfMaxIsrDelay",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:336dfed2-bd0c-41a6-977d-eeda4d0431b6"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "FrIfJob",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfCommunicationOperation",
+                      "description": "A separate operation which is part of a FlexRay Job and defines what type of action is executed.",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": "unbounded"
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfCommunicationOperation/FrIfCommunicationAction",
+                          "description": "The action to be performed in the FlexRay Operation",
+                          "enumValues": [
+                            "DECOUPLED_TRANSMISSION",
+                            "FREE_OP_A",
+                            "FREE_OP_B",
+                            "PREPARE_LPDU",
+                            "RECEIVE_AND_INDICATE",
+                            "RECEIVE_AND_STORE",
+                            "RX_INDICATION",
+                            "TX_CONFIRMATION"
+                          ],
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "FrIfCommunicationAction",
+                          "type": "ENUM",
+                          "uuid": "ECUC:dc3b2d40-c065-44ee-8560-b142f21dc4d5"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfCommunicationOperation/FrIfCommunicationOperationIdx",
+                          "description": "For each FlexRay Communication Job, this index spans a range of zero-based consecutive values and thus defines the order of the FlexRay Communication Operation…",
+                          "isOptional": false,
+                          "max": 255,
+                          "min": 0,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "FrIfCommunicationOperationIdx",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:342471c5-1d12-48e4-aad6-1a0dc9670f48"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfCommunicationOperation/FrIfRxComOpMaxLoop",
+                          "description": "Defines the maximum number of loops for the receive RECEIVE_AND_INDICATE (Use case: emptying a FIFO).",
+                          "isOptional": true,
+                          "max": 512,
+                          "min": 1,
+                          "multiplicity": {
+                            "lower": 0,
+                            "upper": 1
+                          },
+                          "shortName": "FrIfRxComOpMaxLoop",
+                          "type": "INTEGER",
+                          "uuid": "ECUC:0814d3ca-b9b5-4c62-8cc6-037b9cefd9f9"
+                        }
+                      ],
+                      "references": [
+                        {
+                          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfJobList/FrIfJob/FrIfCommunicationOperation/FrIfLPduIdxRef",
+                          "description": "Reference to a L-PDu index",
+                          "destinationContainerType": "FrIfLPdu",
+                          "destinationRef": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfLPdu",
+                          "destinationRefs": [
+                            "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster/FrIfController/FrIfLPdu"
+                          ],
+                          "isExternal": false,
+                          "isOptional": false,
+                          "kind": "reference",
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "FrIfLPduIdxRef",
+                          "uuid": "ECUC:6027b4eb-5347-490a-a19b-dafb005075e0"
+                        }
+                      ],
+                      "shortName": "FrIfCommunicationOperation",
+                      "subContainers": [],
+                      "uuid": "ECUC:3151a42c-115f-4efe-bae7-b98607b1ed0c"
+                    }
+                  ],
+                  "uuid": "ECUC:8ff6b311-4355-4f43-8089-12e995828aee"
+                }
+              ],
+              "uuid": "ECUC:55b15d51-51ba-463d-897e-aa9fdd385c07"
+            }
+          ],
+          "uuid": "ECUC:9c2eb2ed-9528-45d7-a875-28de20a06488"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure",
+          "description": "The Frame structure specifies a Construction Plan how a Frame is assembled with PDUs and their respective Update-Bits.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure/FrIfByteOrder",
+              "description": "This parameter defines the ByteOrder of all Pdus that are mapped into the Frame.",
+              "enumValues": [
+                "BIG_ENDIAN",
+                "LITTLE_ENDIAN"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrIfByteOrder",
+              "type": "ENUM",
+              "uuid": "ECUC:62ea32bc-7998-40bb-85c0-e25bdd260376"
+            }
+          ],
+          "references": [],
+          "shortName": "FrIfFrameStructure",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure/FrIfPdusInFrame",
+              "description": "This container holds all the information about a PDU in a FlexRay Frame.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure/FrIfPdusInFrame/FrIfPduOffset",
+                  "description": "The value specifies the offset of the PDU within the Frame [bytes].",
+                  "isOptional": false,
+                  "max": 253,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrIfPduOffset",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c5a3bed9-c29b-4599-aaba-26b8b0d9dc5d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure/FrIfPdusInFrame/FrIfPduUpdateBitOffset",
+                  "description": "This value specifies where the PDU's Update-Bit is stored in the Frame (bit location of PDU's Update-Bit in the FlexRay Frame).",
+                  "isOptional": true,
+                  "max": 2031,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "FrIfPduUpdateBitOffset",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:dfce126e-f600-4f8d-a070-d6726efdcda2"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfFrameStructure/FrIfPdusInFrame/FrIfPduRef",
+                  "description": "This is the reference to the local definition of a PDU.",
+                  "destinationContainerType": "FrIfPdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FrIfPduRef",
+                  "uuid": "ECUC:c2d16d19-b167-4725-939d-8798a06455da"
+                }
+              ],
+              "shortName": "FrIfPdusInFrame",
+              "subContainers": [],
+              "uuid": "ECUC:a237f92f-48d2-45d7-bcc3-527874a9c0d3"
+            }
+          ],
+          "uuid": "ECUC:86823166-8a4c-4ed0-86e4-b0a7f1061baf"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu",
+          "description": "Contains PDU information. A PDU may be either a transmission PDU or a reception PDU.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "FrIfPdu",
+          "subContainers": [
+            {
+              "choice": {
+                "candidateRefs": [
+                  "ECUC:ec547c45-8289-40de-92a3-ee0e3abfe98c",
+                  "ECUC:e1e2ec3c-b595-4259-be3d-d4f86ffc03c0"
+                ]
+              },
+              "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection",
+              "description": "A PDU is either transmit or receive",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "FrIfPduDirection",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfRxPdu",
+                  "description": "Receive PDU",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfRxPdu/FrIfRxIndicationName",
+                      "description": "This parameter defines the name of the <User_RxIndication>. This parameter depends on the parameter FrIfUserRxIndicationUL. If FrIfUserRxIndicationUL equals FR…",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfRxIndicationName",
+                      "type": "FUNCTION",
+                      "uuid": "ECUC:dd2860dc-ad58-429d-bb84-83fb954a0c7c"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfRxPdu/FrIfUserRxIndicationUL",
+                      "description": "This parameter defines the upper layer (UL) module to which the indication of the successfully received FrIfRxPdu has to be routed via <User_RxIndication>. Thi…",
+                      "enumValues": [
+                        "CDD",
+                        "FR_AR_TP",
+                        "FR_NM",
+                        "FR_TP",
+                        "FR_TSYN",
+                        "PDUR",
+                        "XCP"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfUserRxIndicationUL",
+                      "type": "ENUM",
+                      "uuid": "ECUC:5696974a-27c8-4ab3-a10c-9bc55592e3f4"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfRxPdu/FrIfRxPduRef",
+                      "description": "Reference to the external PDU definition.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfRxPduRef",
+                      "uuid": "ECUC:7190286e-add2-4918-8f5b-300faefa5e9b"
+                    }
+                  ],
+                  "shortName": "FrIfRxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:ec547c45-8289-40de-92a3-ee0e3abfe98c"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu",
+                  "description": "This container specifies transmission PDUs.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfConfirm",
+                      "description": "Defines whether the transmission of a PDU should be checked and confirmed to the PDU owning BSW module. If \"FrIfUserTxUL\" is configured as FR_TSYN then this pa…",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfConfirm",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:572e1bf7-2cc9-4839-a685-06b9d25779da"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfImmediate",
+                      "description": "Defines whether the PDU is transmitted immediate or decoupled.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfImmediate",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:428461f7-aec1-48b0-b34b-9e60ca3b89eb"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "defaultValue": false,
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfNoneMode",
+                      "description": "Using the \"None-Mode\" which means that there is no API FrIf_Transmit call of the upper layer for this PDU.",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfNoneMode",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:8d686556-bea1-49a2-b933-397cc46d55a2"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfCounterLimit",
+                      "description": "This value states the maximum number of indication of ready PDU data to the FrIf (i.e. maximum number of invocations of FrIf_Transmit) without an intermediate …",
+                      "isOptional": true,
+                      "max": 255,
+                      "min": 1,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfCounterLimit",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:c2fc5dd3-b3c4-4cd7-8be6-ac7f6d0578ab"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfTxPduId",
+                      "description": "The global PDU identifier, which has to be used by the upper layer BSW module. The identifier has to be zero based and consecutive.",
+                      "isOptional": false,
+                      "max": 65535,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfTxPduId",
+                      "type": "INTEGER",
+                      "uuid": "ECUC:70a26482-2bb2-4f98-9e2c-50872cffe5c6"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfTxConfirmationName",
+                      "description": "This parameter defines the name of the <User_TxConfirmation>. This parameter depends on the parameter FrIfUserTxUL. If FrIfUserTxUL equals FR_TP, FR_AR_TP, FR_…",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfTxConfirmationName",
+                      "type": "FUNCTION",
+                      "uuid": "ECUC:ab1a488a-7143-4c2a-a9c8-b1b974f5ad4f"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfUserTriggerTransmitName",
+                      "description": "This parameter defines the name of the <User_TriggerTransmit>. This parameter depends on the parameter FrIfUserTxUL. If FrIfUserTxUL equals FR_TP, FR_AR_TP, FR…",
+                      "isOptional": true,
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfUserTriggerTransmitName",
+                      "type": "FUNCTION",
+                      "uuid": "ECUC:a9f34f10-e503-47d7-919a-6e2962c07b92"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfUserTxUL",
+                      "description": "This parameter defines the upper layer (UL) module to which the trigger of the Pdu to be transmitted (via the <User_TriggerTransmit>) or the confirmation of th…",
+                      "enumValues": [
+                        "CDD",
+                        "FR_AR_TP",
+                        "FR_NM",
+                        "FR_TP",
+                        "FR_TSYN",
+                        "PDUR",
+                        "XCP"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfUserTxUL",
+                      "type": "ENUM",
+                      "uuid": "ECUC:54b68088-e78d-4488-84ca-c9a553e541be"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfPdu/FrIfPduDirection/FrIfTxPdu/FrIfTxPduRef",
+                      "description": "Reference to the external PDU definition.",
+                      "destinationContainerType": "Pdu",
+                      "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                      "destinationRefs": [
+                        "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                      ],
+                      "isExternal": true,
+                      "isOptional": false,
+                      "kind": "reference",
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "FrIfTxPduRef",
+                      "uuid": "ECUC:4a970f9f-975c-4907-8ca7-b54068ef093f"
+                    }
+                  ],
+                  "shortName": "FrIfTxPdu",
+                  "subContainers": [],
+                  "uuid": "ECUC:e1e2ec3c-b595-4259-be3d-d4f86ffc03c0"
+                }
+              ],
+              "uuid": "ECUC:625dad92-ff44-4e22-b7c4-33b165770f14"
+            }
+          ],
+          "uuid": "ECUC:6d311fa0-67ff-41db-a650-88f3f78a0738"
+        }
+      ],
+      "uuid": "ECUC:0d627762-ad82-4f1b-91b1-20185e6a5a31"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral",
+      "description": "This container contains the general configuration parameters of the FlexRay Interface.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfAbsTimerIdx",
+          "description": "Maximum number of supported absolute timers.",
+          "isOptional": false,
+          "max": 15,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfAbsTimerIdx",
+          "type": "INTEGER",
+          "uuid": "ECUC:20fe6d05-3697-42fd-8135-3a9e3ac09367"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfNumClstSupported",
+          "description": "Maximum number of FlexRay Clusters that the FlexRay Interface supports.",
+          "isOptional": false,
+          "max": 15,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfNumClstSupported",
+          "type": "INTEGER",
+          "uuid": "ECUC:1c250d63-196a-4a2d-b884-cb526bea7053"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfNumCtrlSupported",
+          "description": "Maximum number of FlexRay CCs that the FlexRay Interface supports",
+          "isOptional": false,
+          "max": 15,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfNumCtrlSupported",
+          "type": "INTEGER",
+          "uuid": "ECUC:23ab6efa-d8ba-48d2-bea2-0a750fe70c7f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfUnusedBitValue",
+          "description": "Set unused bits of transmitted Pdus to a defined value.",
+          "isOptional": true,
+          "max": 1,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrIfUnusedBitValue",
+          "type": "INTEGER",
+          "uuid": "ECUC:91765af9-a9d5-4ad2-a08f-c48777b57527"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfAllSlotsSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable/disable of switching from key-slot / single-slot mode to all slot mode.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfAllSlotsSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c70c486e-90f1-436e-b993-9ed8c0936ff7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfBusMirroringSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable/disable reporting received/transmitted frames to the Bus Mirroring module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfBusMirroringSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9e5888c2-607c-4c22-ae6c-ca99632e26cd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfCancelTransmitSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to request the cancellation of the I-PDU transmission to FrDrv.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfCancelTransmitSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f396e40a-e843-4a4b-bbcb-a7aaae0add58"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:7bc14870-c4d6-415e-884c-82d4c5b7632f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfDisableLPduSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to disables the hardware resource of a LPdu for transmission/reception.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfDisableLPduSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:50cc77d5-9e7a-4fae-b8e9-936f52340c9e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfDisableTransceiverBranchSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to disable branches of an active star.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfDisableTransceiverBranchSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:21cd0aca-0b01-42b6-82a9-adfd58975766"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfEnableTransceiverBranchSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable branches of an active star.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfEnableTransceiverBranchSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a53b9f4e-0034-4ae8-b4fe-0088a9d2bea5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfGetClockCorrectionSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable/disable of polling the FlexRay Driver to getting CC clock correction values.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfGetClockCorrectionSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e0c069dd-c930-4dad-91af-5eb7b49d739a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfGetGetChannelStatusSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable/disable of polling the FlexRay Driver to getting error information about the FlexRay communica…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfGetGetChannelStatusSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9d05a8c2-9782-476d-8e38-53f74f790f6d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfGetNmVectorSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to request the FlexRay hardware NMVector.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfGetNmVectorSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e2a802b2-ee34-41d2-8551-f4a5658cec43"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfGetNumOfStartupFramesSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable/disable of polling the FlexRay Driver for the actual number of received startup frames on the …",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfGetNumOfStartupFramesSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d01cf312-d59f-4746-a0f2-381ceacba66c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfGetSyncFrameListSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable/disable of polling the FlexRay Driver to getting a list of actual received sync frames.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfGetSyncFrameListSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3890b9ac-7bca-4b7c-821d-a35f9cf6447d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfGetTransceiverErrorSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to get the FlexRay Transceiver errors by calling the FlexRay Transceiver module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfGetTransceiverErrorSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:16aacd37-c3a0-40c2-8a2b-474ba2b38337"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfGetWakeupRxStatusSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to get the wakeup received information from the FlexRay controller.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfGetWakeupRxStatusSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b1536c2c-6dec-4875-b347-7f1d59f4ebba"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfReadCCConfigApi",
+          "description": "Configuration parameter to enable/disable the optional FrIf_ReadCCConfig API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfReadCCConfigApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:dba81588-b4e5-4e63-a111-3ac268ed361b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfReconfigLPduSupport",
+          "description": "Configuration parameter to enable/disable FrIf support to enable/disable the reconfiguration of a given LPdu according to the parameters (FrameId, Channel, Cyc…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfReconfigLPduSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:836cf683-2406-40d6-a0a5-2993a236e434"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfVersionInfoApi",
+          "description": "Enables/disables the existence of the FrIf_GetVersionInfo() API service",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrIfVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:012c4e5d-40a0-45d2-9dff-8a7009566ea6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfFreeOpAApiName",
+          "description": "API name that is called when FREE_OP_A is selected as communication operation. See also chapter 8.8.3 Configurable Interfaces.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrIfFreeOpAApiName",
+          "type": "STRING",
+          "uuid": "ECUC:281ddf2a-84b4-4948-93ef-4215bdb225f9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfFreeOpBApiName",
+          "description": "API name that is called when FREE_OP_B is selected as communication operation. See also chapter 8.8.3 Configurable Interfaces.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrIfFreeOpBApiName",
+          "type": "STRING",
+          "uuid": "ECUC:ca8662de-f342-4d06-9c4e-51643751cf40"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfFreeOpsHeader",
+          "description": "Defines header file for configurable FREE_OP_A / FREE_OP_B functions.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrIfFreeOpsHeader",
+          "type": "STRING",
+          "uuid": "ECUC:56f153db-3aeb-435f-9d3f-653f33925408"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfPublicCddHeaderFile",
+          "description": "Defines header files for callback functions which shall be included in case of CDDs. Range of characters is 1.. 32.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "FrIfPublicCddHeaderFile",
+          "type": "STRING",
+          "uuid": "ECUC:caf460de-92ad-4847-b316-38f05cb0586e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfTxConflictNotificationHeaderName",
+          "description": "Configuration of the header file name that defines the UL_TxConflictNotification.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrIfTxConflictNotificationHeaderName",
+          "type": "STRING",
+          "uuid": "ECUC:1001af9f-d551-43aa-96ce-a63a062d34c6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrIf/FrIfGeneral/FrIfTxConflictNotificationName",
+          "description": "Configuration of the API name that is called in case a TxConflict has been detected.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrIfTxConflictNotificationName",
+          "type": "STRING",
+          "uuid": "ECUC:67a9c4bc-840e-4935-849b-30c9b3d432f9"
+        }
+      ],
+      "references": [],
+      "shortName": "FrIfGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:c545a70b-e5a0-44d2-a641-bb3071fc0dee"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/FrIf",
+  "description": "Configuration of the FrIf (FlexRay Interface) module.",
+  "importWarnings": [
+    "FRIF_E_ACS_CH_A：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRIF_E_ACS_CH_B：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRIF_E_NIT_CH_A：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRIF_E_NIT_CH_B：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRIF_E_SW_CH_A：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRIF_E_SW_CH_B：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRIF_E_LPDU_SLOTSTATUS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FrIfFrTrcvChannelRef：目标 /AUTOSAR/EcucDefs/FrTrcv/FrTrcvChannel 位于本模块之外；编辑器只读展示。",
+    "FrIfFrCtrlRef：目标 /AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController 位于本模块之外；编辑器只读展示。",
+    "FrIfAbsTimerRef：目标 /AUTOSAR/EcucDefs/Fr/FrMultipleConfiguration/FrController/FrAbsoluteTimer 位于本模块之外；编辑器只读展示。",
+    "FrIfPduDirection：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "FrIfRxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrIfTxPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "FrIfPublicCddHeaderFile：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "FrIf",
+  "version": "4.4.0"
+}

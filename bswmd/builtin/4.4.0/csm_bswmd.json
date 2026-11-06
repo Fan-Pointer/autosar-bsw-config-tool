@@ -1,0 +1,3420 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "59e102218a354ac662562721e0caf99370eacd261646946cd149206481520bd9",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCallbacks",
+      "description": "Container for callback function configurations",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmCallbacks",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCallbacks/CsmCallback",
+          "description": "Container for configuration of a callback function",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCallbacks/CsmCallback/CsmCallbackFunc",
+              "description": "Callback function to be called if an asynchronous operation has finished. The corresponding job has to be configured to be processed asynchronously.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackFunc",
+              "type": "FUNCTION",
+              "uuid": "ECUC:8910f32b-f0d3-452b-af95-a6113b1948e6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmCallbacks/CsmCallback/CsmCallbackId",
+              "description": "Identifier of the callback function. The set of actually configured identifiers shall be consecutive and gapless.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmCallbackId",
+              "type": "INTEGER",
+              "uuid": "ECUC:22f166b4-b135-4f34-b96b-dc1093f504ad"
+            }
+          ],
+          "references": [],
+          "shortName": "CsmCallback",
+          "subContainers": [],
+          "uuid": "ECUC:f46ce319-6f0f-48c5-ab0a-d1686863df2d"
+        }
+      ],
+      "uuid": "ECUC:17aec06b-89e1-4337-b5b2-80f3d69e6d3d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral",
+      "description": "Container for common configuration options.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmAsymPrivateKeyMaxLength",
+          "description": "Maximum length in bytes of an asymmetric public key for all algorithm",
+          "isOptional": true,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPrivateKeyMaxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:7486afb1-c9d6-4ba0-aaa3-f07614dfab34"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmAsymPublicKeyMaxLength",
+          "description": "Maximum length in bytes of an asymmetric key for all algorithm",
+          "isOptional": true,
+          "max": 4294967295,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CsmAsymPublicKeyMaxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:a468cec8-37b2-47d0-9ddb-1ce754ef4228"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0db81420-ae1c-47d2-95d3-30fe6f1a96ce"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmUseDeprecated",
+          "description": "Decides if the deprecated interfaces shall be used (Backwards combatibility).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmUseDeprecated",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:4b6ed1d6-0ad3-434f-a21e-5e11705e3697"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmVersionInfoApi",
+          "description": "Pre-processor switch to enable and disable availability of the API Csm_GetVersionInfo().",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CsmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:03c4c49a-20f9-472f-8d44-f1a3be5c9c90"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmGeneral/CsmMainFunctionPeriod",
+          "description": "Specifies the period of main function Csm_MainFunction in seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CsmMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:aed60e37-b7d3-483e-9cd3-d53b9d541dc2"
+        }
+      ],
+      "references": [],
+      "shortName": "CsmGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:d6aec539-c985-4963-8aff-af50f114a59f"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections",
+      "description": "Configuration for CSM redirection configurations",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmInOutRedirections",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection",
+          "description": "Container for configuration of a CSM redirection.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmInputKeyElementId",
+              "description": "Identifier of the key element used as input",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmInputKeyElementId",
+              "type": "INTEGER",
+              "uuid": "ECUC:2020a2e9-66be-4ef6-bccb-644c2f193e05"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmOutputKeyElementId",
+              "description": "Identifier of the key element used as output.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmOutputKeyElementId",
+              "type": "INTEGER",
+              "uuid": "ECUC:e3bab57b-86e3-4297-b3c8-b295eede335c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmSecondaryInputKeyElementId",
+              "description": "Identifier of the key element used as secondary input.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmSecondaryInputKeyElementId",
+              "type": "INTEGER",
+              "uuid": "ECUC:acf2dda1-52c5-4ca4-bd9b-72275461fdc7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmSecondaryOutputKeyElementId",
+              "description": "Identifier of the key element used as secondary output.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmSecondaryOutputKeyElementId",
+              "type": "INTEGER",
+              "uuid": "ECUC:72adca3b-2b05-42fa-a34c-c42d47975255"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmTertiaryInputKeyElementId",
+              "description": "Identifier of the key element used as tertiary input.",
+              "isOptional": true,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmTertiaryInputKeyElementId",
+              "type": "INTEGER",
+              "uuid": "ECUC:7dc0b707-83ec-4208-b170-abf9a77c8a47"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmInputKeyRef",
+              "description": "This parameter refers to the key used as input.",
+              "destinationContainerType": "CsmKey",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmInputKeyRef",
+              "uuid": "ECUC:01e462c0-00a8-4df7-9806-465baeb6658a"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmOutputKeyRef",
+              "description": "This parameter refers to the key used as output.",
+              "destinationContainerType": "CsmKey",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmOutputKeyRef",
+              "uuid": "ECUC:c088125b-8611-4719-9d9b-214eef202e2c"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmSecondaryInputKeyRef",
+              "description": "This parameter refers to the key used as secondary input.",
+              "destinationContainerType": "CsmKey",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmSecondaryInputKeyRef",
+              "uuid": "ECUC:c3ee527b-f03e-421d-9da2-1e141e763a34"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmSecondaryOutputKeyRef",
+              "description": "This parameter refers to the key used as secondary output.",
+              "destinationContainerType": "CsmKey",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmSecondaryOutputKeyRef",
+              "uuid": "ECUC:9744d2d8-b451-4219-830d-13f737cde0d7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections/CsmInOutRedirection/CsmTertiaryInputKeyRef",
+              "description": "This parameter refers to the key used as tertiary input.",
+              "destinationContainerType": "CsmKey",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmTertiaryInputKeyRef",
+              "uuid": "ECUC:ce64fbac-ef7e-4424-9fe8-156d762521dc"
+            }
+          ],
+          "shortName": "CsmInOutRedirection",
+          "subContainers": [],
+          "uuid": "ECUC:e6cb58d4-2140-4201-a9d9-eba18764686d"
+        }
+      ],
+      "uuid": "ECUC:19437704-884c-4fb9-a41e-ba6314261c2b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs",
+      "description": "Container for configuration of CSM jobs.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmJobs",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob",
+          "description": "Container for configuration of CSM job. The container name serves as a symbolic name for the identifier of a job configuration.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobId",
+              "description": "Identifier of the CSM job. The set of actually configured identifiers shall be consecutive and gapless.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmJobId",
+              "type": "INTEGER",
+              "uuid": "ECUC:4b81b3b5-a0f6-456c-b111-4dfafd8f4b88"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobPriority",
+              "description": "Priority of the job.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmJobPriority",
+              "type": "INTEGER",
+              "uuid": "ECUC:3364fcf0-d030-468b-b4e7-20861e972905"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobInterfaceUsePort",
+              "description": "Does the job need RTE interfaces?",
+              "enumValues": [
+                "CRYPTO_USE_FNC",
+                "CRYPTO_USE_PORT",
+                "CRYPTO_USE_PORT_OPTIMIZED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmJobInterfaceUsePort",
+              "type": "ENUM",
+              "uuid": "ECUC:b20ae2dd-c1a9-4804-ba21-df007079d03c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmProcessingMode",
+              "description": "Determines how the interface shall be used for that job. Synchronous processing returns with the result while asynchronous processing returns without processin…",
+              "enumValues": [
+                "CRYPTO_PROCESSING_ASYNC",
+                "CRYPTO_PROCESSING_SYNC"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmProcessingMode",
+              "type": "ENUM",
+              "uuid": "ECUC:d5aa979a-5b6a-4e3a-a2c3-1271c72f9bd0"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobPrimitiveCallbackUpdateNotification",
+              "description": "This parameter indicates, whether the callback function shall be called, if the UPDATE operation has been finished.",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmJobPrimitiveCallbackUpdateNotification",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:adad5ee8-d77a-4803-9a82-328bad27cbed"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmInOutRedirectionRef",
+              "description": "This parameter refers to the used redirection.",
+              "destinationContainerType": "CsmInOutRedirections",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmInOutRedirections"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmInOutRedirectionRef",
+              "uuid": "ECUC:29ebd350-cf7a-4cd9-aef8-d9ef2793893e"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobKeyRef",
+              "description": "This parameter refers to the key which shall be used for the CsmPrimitive. It's possible to use a CsmKey for different jobs",
+              "destinationContainerType": "CsmKey",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmJobKeyRef",
+              "uuid": "ECUC:8e760e20-777a-45ec-b5d9-e4704768c603"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobPrimitiveCallbackRef",
+              "description": "This parameter refers to the used CsmCallback.",
+              "destinationContainerType": "CsmCallback",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmCallbacks/CsmCallback",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmCallbacks/CsmCallback"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CsmJobPrimitiveCallbackRef",
+              "uuid": "ECUC:46425a5c-2e99-4ccd-9095-7b988fcec564"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobPrimitiveRef",
+              "description": "This parameter refers to the used CsmPrimitive.",
+              "destinationContainerType": "CsmPrimitives",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmPrimitives"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmJobPrimitiveRef",
+              "uuid": "ECUC:24cc13d7-3c38-4c55-985c-d4d1962cc626"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmJobs/CsmJob/CsmJobQueueRef",
+              "description": "This parameter refers to the queue.",
+              "destinationContainerType": "CsmQueue",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmJobQueueRef",
+              "uuid": "ECUC:85dc07b5-61a7-4daf-b07b-0d56e057c565"
+            }
+          ],
+          "shortName": "CsmJob",
+          "subContainers": [],
+          "uuid": "ECUC:75675207-874d-4e87-90cf-bbcfea193f79"
+        }
+      ],
+      "uuid": "ECUC:4efab50f-be3b-4a96-9879-0068de021306"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeys",
+      "description": "Container for CSM key configurations.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmKeys",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+          "description": "Container for configuration of a CSM key. The container name serves as a symbolic name for the identifier of a key configuration.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey/CsmKeyId",
+              "description": "Identifier of the CsmKey. The set of actually configured identifiers shall be consecutive and gapless.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyId",
+              "type": "INTEGER",
+              "uuid": "ECUC:606498be-15db-40e1-a3ab-356ec95c8702"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey/CsmKeyUsePort",
+              "description": "Does the key need RTE interfaces?",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyUsePort",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:25abaf78-07c2-4d6b-ab55-4cdc2326ac90"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey/CsmKeyRef",
+              "description": "This parameter refers to the used CryIfKey. The underlying CryIfKey refers to a specific CryptoKey in the Crypto Driver.",
+              "destinationContainerType": "CryIfKey",
+              "destinationRef": "/AUTOSAR/EcucDefs/CryIf/CryIfKey",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/CryIf/CryIfKey"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmKeyRef",
+              "uuid": "ECUC:f0d3d98c-2b82-426d-b8a5-d85048db6792"
+            }
+          ],
+          "shortName": "CsmKey",
+          "subContainers": [],
+          "uuid": "ECUC:50935a39-b32e-4d0b-b51b-931119e16115"
+        }
+      ],
+      "uuid": "ECUC:8239994b-964b-4d87-af74-371cfee37d07"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives",
+      "description": "Container for configuration of CsmPrimitives",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmPrimitives",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt",
+          "description": "Configuration of AEAD decryption primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmAEADDecrypt",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig",
+              "description": "Container for configuration of a CSM decryption interface. The container name serves as a symbolic name for the identifier of an decryption interface.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_CUSTOM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:57e2df55-02cf-483a-a5fe-7ad74597b138"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_GCM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:5b4637b9-1c7e-45a5-8c0d-31517dc007fc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptAlgorithmFamilyCustom",
+                  "description": "This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmAEADDecryptAlgorithmFamily.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:8352425c-974b-4844-9f91-b6d8b935fde2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:82b3bb2f-cf4f-4db4-a6f9-edc99e99ba90"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptAlgorithmKeyLength",
+                  "description": "Size of the AEAD decryption key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptAlgorithmKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bb5f0f5e-b5f3-40cf-adff-89c390bc26d4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptAssociatedDataMaxLength",
+                  "description": "Max size of the input associated data length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptAssociatedDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:62866c2a-9e77-4900-8b1a-34b1806dc3d5"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptCiphertextMaxLength",
+                  "description": "Max size of the input ciphertext in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptCiphertextMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:26a02245-2409-403e-891e-08ddb071b209"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptPlaintextMaxLength",
+                  "description": "Size of the output plaintext length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptPlaintextMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:a5c43000-95c8-49af-92c5-0366aa99ca11"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptTagLength",
+                  "description": "Size of the input Tag length in BITS",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptTagLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:d38f7538-d8e7-4e31-8015-1ef1e32a268b"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptKeyRef",
+                  "description": "This parameter refers to the key used for that decryption primitive.",
+                  "destinationContainerType": "CsmKey",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptKeyRef",
+                  "uuid": "ECUC:26c9ed3a-2f38-4976-85c0-64061c68926c"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADDecrypt/CsmAEADDecryptConfig/CsmAEADDecryptQueueRef",
+                  "description": "This parameter refers to the queue used for that decryption primitive.",
+                  "destinationContainerType": "CsmQueue",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADDecryptQueueRef",
+                  "uuid": "ECUC:42dd8335-9c5b-48ed-8b8b-081c3195f9b0"
+                }
+              ],
+              "shortName": "CsmAEADDecryptConfig",
+              "subContainers": [],
+              "uuid": "ECUC:153c3497-b4ef-443e-80ea-3814cc63eb46"
+            }
+          ],
+          "uuid": "ECUC:67869701-f665-4a69-87ab-18e57011a91b"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt",
+          "description": "Configuration of AEAD encryption primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmAEADEncrypt",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig",
+              "description": "Container for configuration of a CSM encryption interface. The container name serves as a symbolic name for the identifier of an encryption interface.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_CUSTOM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:ec2635b9-61cc-4333-befc-af1093cbcda6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_GCM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:603aa16e-d918-48a9-9693-2b81d5ce9a7c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptAlgorithmFamilyCustom",
+                  "description": "This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmAEADEncryptAlgorithmFamily.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:f02fbb29-cbc5-48f0-ae74-8645cc4222e8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:2e0f026d-ae5a-4e4d-ab75-ae72ebb75643"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptAlgorithmKeyLength",
+                  "description": "Size of the AEAD encryption key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptAlgorithmKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:dbc71aa1-c0bc-4562-a104-da67625d2e74"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptAssociatedDataMaxLength",
+                  "description": "Max size of the input associated data length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptAssociatedDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:24e51bcd-05b8-4358-b025-5cfcb75a3f64"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptCiphertextMaxLength",
+                  "description": "Max size of the output ciphertext length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptCiphertextMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c0351ad9-ea9e-46c3-b099-98ebe107702f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptPlaintextMaxLength",
+                  "description": "Max size of the input plaintext length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptPlaintextMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c65eaf86-f3fb-4f8d-a7d6-ad8fa9c3055b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptTagLength",
+                  "description": "Size of the output Tag length in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptTagLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:42b1c7d0-a883-4758-a00a-c5bb461dc323"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptKeyRef",
+                  "description": "This parameter refers to the key used for that encryption primitive.",
+                  "destinationContainerType": "CsmKey",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Csm/CsmKeys/CsmKey"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptKeyRef",
+                  "uuid": "ECUC:faa84dea-2ffb-4a6a-a409-1497dc1e78c4"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmAEADEncrypt/CsmAEADEncryptConfig/CsmAEADEncryptQueueRef",
+                  "description": "This parameter refers to the queue used for that encryption primitive.",
+                  "destinationContainerType": "CsmQueue",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue"
+                  ],
+                  "isExternal": false,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmAEADEncryptQueueRef",
+                  "uuid": "ECUC:dc4756be-9c66-45dc-9001-3bc66312a973"
+                }
+              ],
+              "shortName": "CsmAEADEncryptConfig",
+              "subContainers": [],
+              "uuid": "ECUC:40f5483d-2bb6-4c27-a220-4ddd03de7742"
+            }
+          ],
+          "uuid": "ECUC:19d6b0e3-e987-434f-b16f-11a63bf99fbe"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt",
+          "description": "Configurations of Decryption primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmDecrypt",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig",
+              "description": "Container for configuration of a CSM decryption interface. The container name serves as a symbolic name for the identifier of an decryption interface.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_CHACHA",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_ECIES",
+                    "CRYPTO_ALGOFAM_RSA"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:8821f6ed-48f7-4db5-b504-2e77420cf617"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_12ROUNDS",
+                    "CRYPTO_ALGOMODE_20ROUNDS",
+                    "CRYPTO_ALGOMODE_8ROUNDS",
+                    "CRYPTO_ALGOMODE_CBC",
+                    "CRYPTO_ALGOMODE_CFB",
+                    "CRYPTO_ALGOMODE_CTR",
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_ECB",
+                    "CRYPTO_ALGOMODE_OFB",
+                    "CRYPTO_ALGOMODE_RSAES_OAEP",
+                    "CRYPTO_ALGOMODE_RSAES_PKCS1_v1_5",
+                    "CRYPTO_ALGOMODE_XTS"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:744ae93b-56f3-4859-9e25-62ba9d7e3ff6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptAlgorithmSecondaryFamily",
+                  "description": "Determines the secondary algorithm family used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1d7e9a22-909c-474c-9d52-628779c137d2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmDecryptAlgorithmFamily.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:fbc5adb9-8e96-448b-aeaf-025b03a16157"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:5887540e-0438-435a-a782-e349c130c8c4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptAlgorithmSecondaryFamilyCustom",
+                  "description": "Name of the custom secondary algorithm family used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:2bca33ff-b495-468d-bf7e-1a21dcd63edc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptAlgorithmKeyLength",
+                  "description": "Size of the encryption key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptAlgorithmKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:d59e7005-7c84-4e71-b94d-e8d9bc2c363c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptDataMaxLength",
+                  "description": "Max size of the input ciphertext length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:78cfe64a-0555-452d-9487-32655469b5ad"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmDecrypt/CsmDecryptConfig/CsmDecryptResultMaxLength",
+                  "description": "Max size of the output plaintext length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmDecryptResultMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:f633ae8d-e8f0-4379-9467-101fccf82586"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmDecryptConfig",
+              "subContainers": [],
+              "uuid": "ECUC:bef00fa6-1f90-4670-b862-46910dabd28a"
+            }
+          ],
+          "uuid": "ECUC:4f08c9a7-ab70-44f8-97ab-144bf668c887"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt",
+          "description": "Configurations of Encryption primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmEncrypt",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig",
+              "description": "Container for configuration of a CSM encryption interface. The container name serves as a symbolic name for the identifier of an encryption interface.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_CHACHA",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_ECIES",
+                    "CRYPTO_ALGOFAM_RSA"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:673b2f3a-6102-4e4d-bb3a-701e9434524f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_12ROUNDS",
+                    "CRYPTO_ALGOMODE_20ROUNDS",
+                    "CRYPTO_ALGOMODE_8ROUNDS",
+                    "CRYPTO_ALGOMODE_CBC",
+                    "CRYPTO_ALGOMODE_CFB",
+                    "CRYPTO_ALGOMODE_CTR",
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_ECB",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_OFB",
+                    "CRYPTO_ALGOMODE_RSAES_OAEP",
+                    "CRYPTO_ALGOMODE_RSAES_PKCS1_v1_5",
+                    "CRYPTO_ALGOMODE_XTS"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:bd6e3765-45cf-4b10-b3f7-5f7cb84c7d2e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:6b69764e-aaba-44ee-ad81-49a21160dfba"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptAlgorithmFamilyCustom",
+                  "description": "This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmEncryptAlgorithmFamily.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:55a30bc8-3aa5-4f4b-ad14-9a0b352d8058"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:44f9c643-406f-4591-838a-5281c1afb7d3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptAlgorithmSecondaryFamilyCustom",
+                  "description": "Name of the custom secondary algorithm family used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:ec99dc30-6f3d-400c-b327-8978a7132722"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptAlgorithmKeyLength",
+                  "description": "Size of the encryption key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptAlgorithmKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:9b2efa37-8bec-468e-b352-d6b355801362"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptDataMaxLength",
+                  "description": "Max size of the input plaintext length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:1b77e206-f855-4b1c-9f5c-b053d709eba7"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmEncrypt/CsmEncryptConfig/CsmEncryptResultMaxLength",
+                  "description": "Max size of the output cipher length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmEncryptResultMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:3decce72-69bb-4851-963f-6bce6393ad17"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmEncryptConfig",
+              "subContainers": [],
+              "uuid": "ECUC:316c70ab-1c8d-4414-b7e0-ec479c9816ed"
+            }
+          ],
+          "uuid": "ECUC:c17f59fe-57c4-4cba-bc0e-953110ecb536"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash",
+          "description": "Container for Hash Configurations",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmHash",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig",
+              "description": "Container for configuration of a CSM hash. The container name serves as a symbolic name for the identifier of a key configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_BLAKE_1_256",
+                    "CRYPTO_ALGOFAM_BLAKE_1_512",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_RIPEMD160",
+                    "CRYPTO_ALGOFAM_SHA1",
+                    "CRYPTO_ALGOFAM_SHA2_224",
+                    "CRYPTO_ALGOFAM_SHA2_256",
+                    "CRYPTO_ALGOFAM_SHA2_384",
+                    "CRYPTO_ALGOFAM_SHA2_512",
+                    "CRYPTO_ALGOFAM_SHA2_512_224",
+                    "CRYPTO_ALGOFAM_SHA2_512_256",
+                    "CRYPTO_ALGOFAM_SHA3_224",
+                    "CRYPTO_ALGOFAM_SHA3_256",
+                    "CRYPTO_ALGOFAM_SHA3_384",
+                    "CRYPTO_ALGOFAM_SHA3_512",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE128",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE256"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:df738ccd-d9b5-48c4-bbd0-3a2aceeff488"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOMODE_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f51e9b38-1fa4-4271-8d0e-79ede96b4e27"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:8d3cc39b-3651-443e-b718-142335a86bdc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashAlgorithmFamilyCustom",
+                  "description": "This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmHashAlgorithmFamily.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:6428cdd8-c60f-4d07-837e-c0d08492ea6b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashAlgorithmModeCustom",
+                  "description": "Name of the custom primitive mode.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:2fcb237f-0c38-49ee-8833-6432d0d05cb3"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashAlgorithmSecondaryFamilyCustom",
+                  "description": "This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is set as CsmHashAlgorithmSecondaryFamily.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:b37fb654-037b-4137-b2c7-07e7456f09d5"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashDataMaxLength",
+                  "description": "Max size of the input data length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:03f0601c-db59-4c0a-960c-fa66ced8eb7c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmHash/CsmHashConfig/CsmHashResultLength",
+                  "description": "Size of the output hash length in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmHashResultLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fef3288f-ffcc-4be9-80d1-61f283a86b39"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmHashConfig",
+              "subContainers": [],
+              "uuid": "ECUC:7d3eba97-b28a-439a-89c8-515f5f0f0b8d"
+            }
+          ],
+          "uuid": "ECUC:ceeb31a3-656c-494c-905c-63c5e925c96c"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse",
+          "description": "Configurations of CertificateParse primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobCertificateParse",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse/CsmJobCertificateParseConfig",
+              "description": "Container for configuration of a CSM CsmJobCertificateParse. The container name serves as a symbolic name for the identifier of a key configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse/CsmJobCertificateParseConfig/CsmJobCertificateParseAlgorithmFamilyCustom",
+                  "description": "This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateParseAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:33b0096c-43be-4d04-ba10-e432d2f3587f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse/CsmJobCertificateParseConfig/CsmJobCertificateParseAlgorithmModeCustom",
+                  "description": "Name of the custom primitive mode.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateParseAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:9cb72fb4-1570-4ed6-bd36-5fd7d29bdc70"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse/CsmJobCertificateParseConfig/CsmJobCertificateParseAlgorithmSecondaryFamilyCustom",
+                  "description": "This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateParseAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:2447fdf4-d556-4587-8c96-97af3edafbcf"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse/CsmJobCertificateParseConfig/CsmJobCertificateParseAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateParseAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f5a56834-ac1f-4b35-9308-98e1fa2b0b1b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse/CsmJobCertificateParseConfig/CsmJobCertificateParseAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateParseAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:744f282e-7b63-48c5-b4da-c81dc4245a9c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateParse/CsmJobCertificateParseConfig/CsmJobCertificateParseDataMaxLength",
+                  "description": "Max size of the input data length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateParseDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:b6dcb131-b10b-4bf3-b4a9-624ef6f389b7"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmJobCertificateParseConfig",
+              "subContainers": [],
+              "uuid": "ECUC:ad4a320b-66b5-4112-8245-b300d79519da"
+            }
+          ],
+          "uuid": "ECUC:352639ab-2865-444b-8a8b-697eb73426c6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify",
+          "description": "Configurations of CertificateVerify primitves",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobCertificateVerify",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig",
+              "description": "Container for configuration of a CSM CsmJobCertificateVerify. The container name serves as a symbolic name for the identifier of a key configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig/CsmJobCertificateVerifyAlgorithmFamiliy",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateVerifyAlgorithmFamiliy",
+                  "type": "ENUM",
+                  "uuid": "ECUC:33ea9e47-e330-4bba-a7fe-1e034c887326"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig/CsmJobCertificateVerifyAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateVerifyAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:11662379-7554-4333-ae8d-0bd0b2eb37bb"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig/CsmJobCertificateVerifyAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateVerifyAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:20f4837d-0707-441b-898e-845a4f526c5d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig/CsmJobCertificateVerifyAlgorithmFamilyCustom",
+                  "description": "This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateVerifyAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:ca4184eb-3808-42e5-9562-18a56ed32bd5"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig/CsmJobCertificateVerifyAlgorithmModeCustom",
+                  "description": "Name of the custom primitive mode.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateVerifyAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:8d3e811d-cf4e-4dbe-b6cf-6b3a6808d008"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig/CsmJobCertificateVerifyAlgorithmSecondaryFamilyCustom",
+                  "description": "This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateVerifyAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:29b81ede-f6a9-4140-bf64-eea4c0ac937c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobCertificateVerify/CsmJobCertificateVerifyConfig/CsmJobCertificateVerifyDataMaxLength",
+                  "description": "Max size of the input data length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobCertificateVerifyDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:5ab6bb55-a894-4e12-8a94-36f10d58c082"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmJobCertificateVerifyConfig",
+              "subContainers": [],
+              "uuid": "ECUC:fb41306d-0d64-4a8a-84a1-e1c0a6e50bc0"
+            }
+          ],
+          "uuid": "ECUC:18673484-3464-426d-bad6-7410c106450d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyDerive",
+          "description": "Configurations of KeyDerive primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobKeyDerive",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyDerive/CsmJobKeyDeriveConfig",
+              "description": "Container for configuration of a CSM key derive operation. The container name serves as a symbolic name for the identifier of a key derive configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyDerive/CsmJobKeyDeriveConfig/CsmJobKeyDeriveAlgorithmFamiliy",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_HKDF",
+                    "CRYPTO_ALGOFAM_KDFX963",
+                    "CRYPTO_ALGOFAM_PBKDF2"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyDeriveAlgorithmFamiliy",
+                  "type": "ENUM",
+                  "uuid": "ECUC:e2e1947c-56b3-4995-84dc-8984adf49ae1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyDerive/CsmJobKeyDeriveConfig/CsmJobKeyDeriveAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CMAC",
+                    "CRYPTO_ALGOMODE_CTRDRBG",
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_GMAC",
+                    "CRYPTO_ALGOMODE_HMAC",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_SIPHASH_2_4",
+                    "CRYPTO_ALGOMODE_SIPHASH_4_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyDeriveAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:5e12c6ef-0c5d-49e0-ad1e-ac93b500469e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyDerive/CsmJobKeyDeriveConfig/CsmJobKeyDeriveAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyDeriveAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:196a0654-4dcc-4157-ae19-66757d30a07f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyDerive/CsmJobKeyDeriveConfig/CsmJobKeyDeriveAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyDeriveAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:cc9ccbc0-ef48-4cfa-aaac-27392e87cd8d"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmJobKeyDeriveConfig",
+              "subContainers": [],
+              "uuid": "ECUC:d84a6f9a-a994-4afc-9757-624d7586703d"
+            }
+          ],
+          "uuid": "ECUC:53b77825-64c1-4888-829e-2af34ef68a34"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal",
+          "description": "Configurations of KeyExchangeCalcPubVal primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobKeyExchangeCalcPubVal",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal/CsmJobKeyExchangeCalcPubValConfig",
+              "description": "Container for configuration of a CSM JobKeyExchangeCalcPubVal. The container name serves as a symbolic name for the identifier of a key configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal/CsmJobKeyExchangeCalcPubValConfig/CsmJobKeyExchangeCalcPubValAlgorithmFamiliy",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_DH",
+                    "CRYPTO_ALGOFAM_RSA"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcPubValAlgorithmFamiliy",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f99633be-eda9-415f-91a0-c7fa1925dd66"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal/CsmJobKeyExchangeCalcPubValConfig/CsmJobKeyExchangeCalcPubValAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcPubValAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:bc0cf839-a5a5-48e8-92e0-6affa37c8ff1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal/CsmJobKeyExchangeCalcPubValConfig/CsmJobKeyExchangeCalcPubValAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcPubValAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:ae9181ef-9633-4126-9980-fe409355d940"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal/CsmJobKeyExchangeCalcPubValConfig/CsmJobKeyExchangeCalcPubValAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family used for the crypto service.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcPubValAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:e3bb54d0-08a6-4e87-8ed2-59e27eef0439"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal/CsmJobKeyExchangeCalcPubValConfig/CsmJobKeyExchangeCalcPubValAlgorithmModeCustom",
+                  "description": "Name of the custom primitive mode.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcPubValAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:6d65d7cd-e796-48f4-8a05-e1df22493155"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcPubVal/CsmJobKeyExchangeCalcPubValConfig/CsmJobKeyExchangeCalcPubValAlgorithmSecondaryFamilyCustom",
+                  "description": "This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used .",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcPubValAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:959acb50-4c9f-49e7-a48c-83273ddc447b"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmJobKeyExchangeCalcPubValConfig",
+              "subContainers": [],
+              "uuid": "ECUC:5063c6c6-f895-4a83-b91d-96c5f9d13db9"
+            }
+          ],
+          "uuid": "ECUC:e2d1907b-699f-470b-ac6b-75be22a3a228"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret",
+          "description": "Configurations of KeyExchangeCalcSecret primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobKeyExchangeCalcSecret",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret/CsmJobKeyExchangeCalcSecretConfig",
+              "description": "Container for configuration of a CSM JobKeyExchangeCalcSecret. The container name serves as a symbolic name for the identifier of a JobKeyExchangeCalcSecret co…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret/CsmJobKeyExchangeCalcSecretConfig/CsmJobKeyExchangeCalcSecretAlgorithmFamiliy",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_DH",
+                    "CRYPTO_ALGOFAM_RSA"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcSecretAlgorithmFamiliy",
+                  "type": "ENUM",
+                  "uuid": "ECUC:7140ef59-e111-4e86-b43e-4053fcd84ef5"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret/CsmJobKeyExchangeCalcSecretConfig/CsmJobKeyExchangeCalcSecretAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcSecretAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:5597640d-ed0a-4050-9eed-cba491c28b8d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret/CsmJobKeyExchangeCalcSecretConfig/CsmJobKeyExchangeCalcSecretAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcSecretAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:814bdd7f-7237-40cb-a1f1-14c1825ff821"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret/CsmJobKeyExchangeCalcSecretConfig/CsmJobKeyExchangeCalcSecretAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family used for the crypto service.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcSecretAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:162c550d-33a2-483c-a1ac-a76da0c4ac2d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret/CsmJobKeyExchangeCalcSecretConfig/CsmJobKeyExchangeCalcSecretAlgorithmModeCustom",
+                  "description": "Name of the custom primitive mode.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcSecretAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:2ee92015-b746-4b51-89c3-bfce54489d9d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyExchangeCalcSecret/CsmJobKeyExchangeCalcSecretConfig/CsmJobKeyExchangeCalcSecretAlgorithmSecondaryFamilyCustom",
+                  "description": "This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyExchangeCalcSecretAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:c3ddd81d-63c6-42d9-86bf-7083ccbae30e"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmJobKeyExchangeCalcSecretConfig",
+              "subContainers": [],
+              "uuid": "ECUC:4c37233d-5e44-446f-80bb-7a65377773d2"
+            }
+          ],
+          "uuid": "ECUC:2e359f01-4baa-4130-a0b8-8014c004a526"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyGenerate",
+          "description": "Configurations of KeyGenerate primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobKeyGenerate",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyGenerate/CsmJobKeyGenerateConfig",
+              "description": "Container for configuration of a CSM key generate operation. The container name serves as a symbolic name for the identifier of a key generate configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyGenerate/CsmJobKeyGenerateConfig/CsmJobKeyGenerateAlgorithmFamiliy",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyGenerateAlgorithmFamiliy",
+                  "type": "ENUM",
+                  "uuid": "ECUC:5f09a83d-4f40-4afc-8b25-6cc2ce312d2e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOMODE_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyGenerate/CsmJobKeyGenerateConfig/CsmJobKeyGenerateAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyGenerateAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:ad03e3d1-08af-4e3b-a026-dd4abc9053bb"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyGenerate/CsmJobKeyGenerateConfig/CsmJobKeyGenerateAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyGenerateAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:b46ee503-86a7-4708-aa69-a8d3b5b4b17b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeyGenerate/CsmJobKeyGenerateConfig/CsmJobKeyGenerateAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobKeyGenerateAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:6dc8ac02-87e9-4f20-ae93-12d44b6ae455"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmJobKeyGenerateConfig",
+              "subContainers": [],
+              "uuid": "ECUC:f4f61545-9a98-4670-a43c-db83206647e8"
+            }
+          ],
+          "uuid": "ECUC:b26b35bd-2d0d-411c-bc63-1d16c67c3cf9"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeySetValid",
+          "description": "Configurations of KeySetValid primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobKeySetValid",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobKeySetValid/CsmJobKeySetValidConfig",
+              "description": "Container for configuration of a CSM key set valid operation. The container name serves as a symbolic name for the identifier of a key configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "CsmJobKeySetValidConfig",
+              "subContainers": [],
+              "uuid": "ECUC:312a7796-669e-428f-a810-c969f38e6a7b"
+            }
+          ],
+          "uuid": "ECUC:4f9a4574-5f66-4954-aaab-dde960570d9a"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed",
+          "description": "Configurations of RandomSeed primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmJobRandomSeed",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed/CsmJobRandomSeedConfig",
+              "description": "Container for configuration of a CSM random seed operation. The container name serves as a symbolic name for the identifier of a random seed configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed/CsmJobRandomSeedConfig/CsmJobRandomSeedAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family used for the crypto service. This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobRandomSeedAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:15b673d1-f8b3-477e-9162-6dea379087a8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed/CsmJobRandomSeedConfig/CsmJobRandomSeedAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service. This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobRandomSeedAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:554610da-2ece-4607-96d8-76550b306fde"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed/CsmJobRandomSeedConfig/CsmJobRandomSeedAlgorithmSecondaryFamilyCustom",
+                  "description": "Name of the custom secondary algorithm family used for the crypto service. This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is …",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobRandomSeedAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:148bd35f-dc99-44a6-9ad5-a6cb924e8ff2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed/CsmJobRandomSeedConfig/CsmJobRandomSeedAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CMAC",
+                    "CRYPTO_ALGOMODE_CTRDRBG",
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_GMAC",
+                    "CRYPTO_ALGOMODE_HMAC",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_SIPHASH_2_4",
+                    "CRYPTO_ALGOMODE_SIPHASH_4_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobRandomSeedAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:4958446a-c6f1-4bdd-ae43-e0886cb6c87b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed/CsmJobRandomSeedConfig/CsmJobRandomSeedAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmJobRandomSeedAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:5f604ee2-ae70-4952-941a-66d331861adf"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmJobRandomSeed/CsmJobRandomSeedConfig/CsmRandomSeedAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_BLAKE_1_256",
+                    "CRYPTO_ALGOFAM_BLAKE_1_512",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                    "CRYPTO_ALGOFAM_CHACHA",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_RIPEMD160",
+                    "CRYPTO_ALGOFAM_RNG",
+                    "CRYPTO_ALGOFAM_SHA1",
+                    "CRYPTO_ALGOFAM_SHA2_224",
+                    "CRYPTO_ALGOFAM_SHA2_256",
+                    "CRYPTO_ALGOFAM_SHA2_384",
+                    "CRYPTO_ALGOFAM_SHA2_512",
+                    "CRYPTO_ALGOFAM_SHA2_512_224",
+                    "CRYPTO_ALGOFAM_SHA2_512_256",
+                    "CRYPTO_ALGOFAM_SHA3_224",
+                    "CRYPTO_ALGOFAM_SHA3_256",
+                    "CRYPTO_ALGOFAM_SHA3_384",
+                    "CRYPTO_ALGOFAM_SHA3_512",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE128",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE256"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomSeedAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1ee4c0b4-a552-455d-95cf-693ed57bc176"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmJobRandomSeedConfig",
+              "subContainers": [],
+              "uuid": "ECUC:e53b1f15-2da2-495e-bae9-3a881782d688"
+            }
+          ],
+          "uuid": "ECUC:7f43df3f-bcf7-4dfe-9d32-f47a14d54e47"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate",
+          "description": "Configurations of MacGenerate primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmMacGenerate",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig",
+              "description": "Container for configuration of a CSM mac generation interface. The container name serves as a symbolic name for the identifier of a MAC generation interface.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_BLAKE_1_256",
+                    "CRYPTO_ALGOFAM_BLAKE_1_512",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                    "CRYPTO_ALGOFAM_CHACHA",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_RIPEMD160",
+                    "CRYPTO_ALGOFAM_RNG",
+                    "CRYPTO_ALGOFAM_SHA1",
+                    "CRYPTO_ALGOFAM_SHA2_224",
+                    "CRYPTO_ALGOFAM_SHA2_256",
+                    "CRYPTO_ALGOFAM_SHA2_384",
+                    "CRYPTO_ALGOFAM_SHA2_512",
+                    "CRYPTO_ALGOFAM_SHA2_512_224",
+                    "CRYPTO_ALGOFAM_SHA2_512_256",
+                    "CRYPTO_ALGOFAM_SHA3_224",
+                    "CRYPTO_ALGOFAM_SHA3_256",
+                    "CRYPTO_ALGOFAM_SHA3_384",
+                    "CRYPTO_ALGOFAM_SHA3_512",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE128",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE256",
+                    "CRYPTO_ALGOFAM_SIPHASH"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:504d8580-47c4-4092-b605-de2a6e8e96e8"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CMAC",
+                    "CRYPTO_ALGOMODE_CTRDRBG",
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_GMAC",
+                    "CRYPTO_ALGOMODE_HMAC",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_SIPHASH_2_4",
+                    "CRYPTO_ALGOMODE_SIPHASH_4_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:85aaea7a-8bbf-4c26-a273-e42134e11dba"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateAlgorithmSecondaryFamily",
+                  "description": "Determines the secondary algorithm family used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_NOT_SET",
+                    "CRYPTO_ALGOMODE_CUSTOM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:167fbd0f-c47e-43b7-a759-5775e8a63eb0"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateAlgorithmFamilyCustom",
+                  "description": "This is the name of the custom algorithm family,",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:4fdb4d7e-539a-4bee-ac71-8f86ae85822e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:7fac1c2d-f053-48f9-b14d-4e780d5bbe5b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateAlgorithmSecondaryFamilyCustom",
+                  "description": "This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is set as CsmHashAlgorithmSecondaryFamilyCustom.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:468acf10-4d9b-44ae-bae1-aa854a335aef"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateAlgorithmKeyLength",
+                  "description": "Size of the MAC key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateAlgorithmKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:ab68dea1-06c2-4bbf-960e-60ef9d41bbc9"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateDataMaxLength",
+                  "description": "Max size of the input data length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:8481035e-3333-4243-9fd8-f2d34bd32ede"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacGenerate/CsmMacGenerateConfig/CsmMacGenerateResultLength",
+                  "description": "Size of the output MAC length in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacGenerateResultLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:7b8befb8-abe2-4ed5-b821-145e27e0c2b1"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmMacGenerateConfig",
+              "subContainers": [],
+              "uuid": "ECUC:9cd12418-3c1d-40f4-a867-d67693e92b9f"
+            }
+          ],
+          "uuid": "ECUC:0aa1ef5e-95cf-4e82-85f1-6de674a4d7e4"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify",
+          "description": "Configurations of MacVerify primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmMacVerify",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig",
+              "description": "Container for configuration of a CSM MAC verification interface. The container name serves as a symbolic name for the identifier of a MAC generation interface",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_BLAKE_1_256",
+                    "CRYPTO_ALGOFAM_BLAKE_1_512",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                    "CRYPTO_ALGOFAM_CHACHA",
+                    "CRYPTO_ALGOFAM_RIPEMD160",
+                    "CRYPTO_ALGOFAM_RNG",
+                    "CRYPTO_ALGOFAM_SHA1",
+                    "CRYPTO_ALGOFAM_SHA2_224",
+                    "CRYPTO_ALGOFAM_SHA2_256",
+                    "CRYPTO_ALGOFAM_SHA2_384",
+                    "CRYPTO_ALGOFAM_SHA2_512",
+                    "CRYPTO_ALGOFAM_SHA2_512_224",
+                    "CRYPTO_ALGOFAM_SHA2_512_256",
+                    "CRYPTO_ALGOFAM_SHA3_224",
+                    "CRYPTO_ALGOFAM_SHA3_256",
+                    "CRYPTO_ALGOFAM_SHA3_384",
+                    "CRYPTO_ALGOFAM_SHA3_512",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE128",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE256",
+                    "CRYPTO_ALGOFAM_SIPHASH",
+                    "CRYPTO_ALGOMODE_CUSTOM"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:3e1f75c7-cc60-47f6-bb10-46bef1cbd876"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CMAC",
+                    "CRYPTO_ALGOMODE_CTRDRBG",
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_GMAC",
+                    "CRYPTO_ALGOMODE_HMAC",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_SIPHASH_2_4",
+                    "CRYPTO_ALGOMODE_SIPHASH_4_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:672c7d52-b21e-4fca-8882-336a6b15f573"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyAlgorithmSecondaryFamily",
+                  "description": "Determines the secondary algorithm family used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:cbbecc25-c897-4a0f-82ff-22f48ac2c02a"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:82fcccd8-363e-4544-92fe-c7c1fd200d17"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:db649d9c-318a-4f8d-8ff0-704e8e2d0a05"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyAlgorithmSecondaryFamilyCustom",
+                  "description": "This is the second the name of the custom algorithm, if CRYPTO_ALGOFAM_CUSTOM is set as CsmMacVerifyAlgorithmSecondaryFamily",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:58c003f4-7951-4ff1-b386-342ac9497d84"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyAlgorithmKeyLength",
+                  "description": "Size of the MAC key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyAlgorithmKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:e9dae40a-7f09-422c-8025-ddcbe0c09891"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyCompareLength",
+                  "description": "Size of the input MAC length, that shall be verified, in BITS",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyCompareLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:6ca06236-0ba6-474f-b267-cee26e25df2f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmMacVerify/CsmMacVerifyConfig/CsmMacVerifyDataMaxLength",
+                  "description": "Max size of the input data length, for whichs MAC shall be verified, in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmMacVerifyDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fe1e4feb-cd91-4107-80c0-8803baaf0f58"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmMacVerifyConfig",
+              "subContainers": [],
+              "uuid": "ECUC:42149bca-2db1-4074-b595-17e1b5337626"
+            }
+          ],
+          "uuid": "ECUC:a632bc1b-e9fa-4aca-95d5-0620be2af736"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate",
+          "description": "Configurations of RandomGenerate primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmRandomGenerate",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig",
+              "description": "Container for configuration of a CSM random generator. The container name serves as a symbolic name for the identifier of a random generator configuration.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_3DES",
+                    "CRYPTO_ALGOFAM_AES",
+                    "CRYPTO_ALGOFAM_BLAKE_1_256",
+                    "CRYPTO_ALGOFAM_BLAKE_1_512",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                    "CRYPTO_ALGOFAM_CHACHA",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_RIPEMD160",
+                    "CRYPTO_ALGOFAM_RNG",
+                    "CRYPTO_ALGOFAM_SHA1",
+                    "CRYPTO_ALGOFAM_SHA2_224",
+                    "CRYPTO_ALGOFAM_SHA2_256",
+                    "CRYPTO_ALGOFAM_SHA2_384",
+                    "CRYPTO_ALGOFAM_SHA2_512",
+                    "CRYPTO_ALGOFAM_SHA2_512_224",
+                    "CRYPTO_ALGOFAM_SHA2_512_256",
+                    "CRYPTO_ALGOFAM_SHA3_224",
+                    "CRYPTO_ALGOFAM_SHA3_256",
+                    "CRYPTO_ALGOFAM_SHA3_384",
+                    "CRYPTO_ALGOFAM_SHA3_512",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE128",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE256"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomGenerateAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:8e40bd4d-809e-4d6a-955f-69f449f650f4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CMAC",
+                    "CRYPTO_ALGOMODE_CTRDRBG",
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_GMAC",
+                    "CRYPTO_ALGOMODE_HMAC",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_SIPHASH_2_4",
+                    "CRYPTO_ALGOMODE_SIPHASH_4_8"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomGenerateAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:9b764c67-a761-4168-b235-6944b5490c39"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomGenerateAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:8c5fda5f-8a56-4176-8588-aac50bcabac6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family used for the crypto service. This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmRandom…",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomGenerateAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:91065eea-328a-44ba-9d74-d1f2180aeb9b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service. This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmRandomGe…",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomGenerateAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:2869339f-d55f-44a1-86f1-1e205eda5dc6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateAlgorithmSecondaryFamilyCustom",
+                  "description": "Name of the custom secondary algorithm family used for the crypto service. This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is …",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomGenerateAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:95dfb68c-e83c-422a-b47c-e2dc1dfecce6"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmRandomGenerate/CsmRandomGenerateConfig/CsmRandomGenerateResultLength",
+                  "description": "Size of the random generate key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmRandomGenerateResultLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:bb6061d6-a2fa-45b4-a8f9-d1426ae336b1"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmRandomGenerateConfig",
+              "subContainers": [],
+              "uuid": "ECUC:63c59491-8223-4c7e-8622-70659ef1eb96"
+            }
+          ],
+          "uuid": "ECUC:d4e98f62-4b2c-4ad6-9279-1e8df7202250"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate",
+          "description": "Configurations of SignatureGenerate primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmSignatureGenerate",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig",
+              "description": "Container for configuration of a CSM signature generation interface. The container name serves as a symbolic name for the identifier of signature generation in…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_BRAINPOOL",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_ECCNIST",
+                    "CRYPTO_ALGOFAM_ED25519",
+                    "CRYPTO_ALGOFAM_RSA"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:c7e811d6-74be-47f6-8e5d-a27a680838bc"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_RSASSA_PKCS1_v1_5",
+                    "CRYPTO_ALGOMODE_RSASSA_PSS"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:1f1ef884-33d2-4d85-b121-8edc4a854070"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": "CRYPTO_ALGOFAM_NOT_SET",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_BLAKE_1_256",
+                    "CRYPTO_ALGOFAM_BLAKE_1_512",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET",
+                    "CRYPTO_ALGOFAM_RIPEMD160",
+                    "CRYPTO_ALGOFAM_SHA1",
+                    "CRYPTO_ALGOFAM_SHA2_224",
+                    "CRYPTO_ALGOFAM_SHA2_256",
+                    "CRYPTO_ALGOFAM_SHA2_384",
+                    "CRYPTO_ALGOFAM_SHA2_512",
+                    "CRYPTO_ALGOFAM_SHA2_512_224",
+                    "CRYPTO_ALGOFAM_SHA2_512_256",
+                    "CRYPTO_ALGOFAM_SHA3_224",
+                    "CRYPTO_ALGOFAM_SHA3_256",
+                    "CRYPTO_ALGOFAM_SHA3_384",
+                    "CRYPTO_ALGOFAM_SHA3_512",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE128",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE256"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:22a24978-bd0a-400a-9508-672bcd4d3a0c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family used for the crypto service.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:a3bd53fa-8208-41b1-bf9d-76114d8050e5"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:b7e3e419-f1cd-4504-8a81-b9b0c7b78a07"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateAlgorithmSecondaryFamilyCustom",
+                  "description": "Name of the custom secondary algorithm family used for the crypto service. This is the second name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is …",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:5e0835c7-9d42-4289-b2ec-934cbb3b591b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateDataMaxLength",
+                  "description": "Size of the input data length in bytes",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:5a811d49-2806-4f51-9bf9-329a45fa744d"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateKeyLength",
+                  "description": "Size of the signature generate key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:60d6ee7c-b9fc-4bcf-880b-ee3fbaff6470"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig/CsmSignatureGenerateResultLength",
+                  "description": "Size of the output signature length in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureGenerateResultLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c0922cd8-084d-4b49-8816-34242e20b852"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmSignatureGenerateConfig",
+              "subContainers": [],
+              "uuid": "ECUC:26ba39b4-efa2-426e-9fc9-e3d88fb2d2d9"
+            }
+          ],
+          "uuid": "ECUC:8d35a4fa-0721-41f9-b8b3-655cfe7f2cb0"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify",
+          "description": "Configurations of SignatureVerify primitives",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CsmSignatureVerify",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig",
+              "description": "Container for configuration of a CSM signature verification interface. The container name serves as a symbolic name for the identifier of signature verificatio…",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyAlgorithmFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_BRAINPOOL",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_ECCNIST",
+                    "CRYPTO_ALGOFAM_ED25519",
+                    "CRYPTO_ALGOFAM_RSA"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyAlgorithmFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:f475dd61-f704-44f7-9a91-e547d5f05005"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyAlgorithmMode",
+                  "description": "Determines the algorithm mode used for the crypto service",
+                  "enumValues": [
+                    "CRYPTO_ALGOMODE_CUSTOM",
+                    "CRYPTO_ALGOMODE_NOT_SET",
+                    "CRYPTO_ALGOMODE_RSASSA_PKCS1_v1_5",
+                    "CRYPTO_ALGOMODE_RSASSA_PSS"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyAlgorithmMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:6744af6a-407a-4b15-83e4-6f95f7e73296"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyAlgorithmSecondaryFamily",
+                  "description": "Determines the algorithm family used for the crypto service. This parameter defines the most significant part of the algorithm.",
+                  "enumValues": [
+                    "CRYPTO_ALGOFAM_BLAKE_1_256",
+                    "CRYPTO_ALGOFAM_BLAKE_1_512",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                    "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                    "CRYPTO_ALGOFAM_CUSTOM",
+                    "CRYPTO_ALGOFAM_NOT_SET",
+                    "CRYPTO_ALGOFAM_RIPEMD160",
+                    "CRYPTO_ALGOFAM_SHA1",
+                    "CRYPTO_ALGOFAM_SHA2_224",
+                    "CRYPTO_ALGOFAM_SHA2_256",
+                    "CRYPTO_ALGOFAM_SHA2_384",
+                    "CRYPTO_ALGOFAM_SHA2_512",
+                    "CRYPTO_ALGOFAM_SHA2_512_224",
+                    "CRYPTO_ALGOFAM_SHA2_512_256",
+                    "CRYPTO_ALGOFAM_SHA3_224",
+                    "CRYPTO_ALGOFAM_SHA3_256",
+                    "CRYPTO_ALGOFAM_SHA3_384",
+                    "CRYPTO_ALGOFAM_SHA3_512",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE128",
+                    "CRYPTO_ALGOFAM_SHA3_SHAKE256"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyAlgorithmSecondaryFamily",
+                  "type": "ENUM",
+                  "uuid": "ECUC:8249259d-656d-44de-b612-49e8ea5056c2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyAlgorithmFamilyCustom",
+                  "description": "Name of the custom algorithm family used for the crypto service. This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as CsmSignat…",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyAlgorithmFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:c7fc391f-9a9a-429d-9323-adecc4078ced"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyAlgorithmModeCustom",
+                  "description": "Name of the custom algorithm mode used for the crypto service",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyAlgorithmModeCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:3e8aee5b-37a4-44ea-b099-1859840026da"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyAlgorithmSecondaryFamilyCustom",
+                  "description": "Name of the custom secondary algorithm family used for the crypto service. This is the name of the custom algorithm family, if CRYPTO_ALGOFAM_CUSTOM is used as…",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyAlgorithmSecondaryFamilyCustom",
+                  "type": "STRING",
+                  "uuid": "ECUC:ac63fdfe-33b3-4cd5-a7ae-aaa6ebc3b41b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyCompareLength",
+                  "description": "Number of the least significant bytes of the signature, for which the verification shall be calculated.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyCompareLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:30f351e7-c198-4ce5-a227-efd004753797"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyDataMaxLength",
+                  "description": "Max size of the input data, for which the signature shall be verified, in bytes.",
+                  "isOptional": true,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyDataMaxLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:d5fdf276-59c3-4e8f-97c2-cb345a643951"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig/CsmSignatureVerifyKeyLength",
+                  "description": "Size of the signature verify key in bytes",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CsmSignatureVerifyKeyLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:4968fc45-5cd3-4922-8d2f-60d2de6f42c8"
+                }
+              ],
+              "references": [],
+              "shortName": "CsmSignatureVerifyConfig",
+              "subContainers": [],
+              "uuid": "ECUC:efbe07d9-8fd8-4c89-b771-17cf4ab75264"
+            }
+          ],
+          "uuid": "ECUC:a59bbaa9-e45e-485d-a87e-5e18dea90793"
+        }
+      ],
+      "uuid": "ECUC:aba47722-0037-4e28-8eea-9471aa47ee97"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmQueues",
+      "description": "Container for CSM queue configurations",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CsmQueues",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue",
+          "description": "Container for configuration of a CSM queue.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue/CsmQueueSize",
+              "description": "Size of the CsmQueue. If jobs cannot be processed by the underlying hardware since the hardware is busy, the jobs stay in the prioritized queue. If the queue i…",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmQueueSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:d4e34a1f-a687-4a06-9c81-2b97b589504c"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Csm/CsmQueues/CsmQueue/CsmChannelRef",
+              "description": "Refers to the underlying Crypto Interface channel.",
+              "destinationContainerType": "CryIfChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/CryIf/CryIfChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/CryIf/CryIfChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CsmChannelRef",
+              "uuid": "ECUC:4ccf8207-7130-4d78-9924-1fb09569ae21"
+            }
+          ],
+          "shortName": "CsmQueue",
+          "subContainers": [],
+          "uuid": "ECUC:2d4d8a8d-5b9a-4b88-b80e-36dd28d0967d"
+        }
+      ],
+      "uuid": "ECUC:ae0b60fd-5832-4d55-ac44-c51bd5d041d9"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Csm",
+  "description": "Configuration of the Csm (CryptoServiceManager) module.",
+  "importWarnings": [
+    "CsmKeyRef：目标 /AUTOSAR/EcucDefs/CryIf/CryIfKey 位于本模块之外；编辑器只读展示。",
+    "CsmChannelRef：目标 /AUTOSAR/EcucDefs/CryIf/CryIfChannel 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Csm",
+  "version": "4.4.0"
+}

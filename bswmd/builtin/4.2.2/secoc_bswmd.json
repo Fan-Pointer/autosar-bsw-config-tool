@@ -1,0 +1,760 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "be42fd8342ca00e6c855f1173d6362b8dd5a6e1d2c957953e502863711d70f91",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCGeneral",
+      "description": "Contains the general configuration parameters of the SecOC module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCGeneral/SecOCDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b350a403-5388-4f68-9cf1-1c1349445692"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCGeneral/SecOCVersionInfoApi",
+          "description": "If true the SecOC_GetVersionInfo API is available.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:6a9ce3ed-77e5-4cd3-bbb9-6f22ed1626a1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCGeneral/SecOCMainFunctionPeriod",
+          "description": "Allows to configure the time for the MainFunction (as float in seconds).",
+          "isOptional": false,
+          "max": 0.255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:e98911f2-9c55-4584-9857-8426b140cf41"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCGeneral/SecOCMaxAlignScalarType",
+          "description": "The scalar type which has the maximum alignment restrictions on the given platform. This type can be e.g. uint8, uint16 or uint32.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCMaxAlignScalarType",
+          "type": "STRING",
+          "uuid": "ECUC:a7746493-ddf2-45f5-bdbc-410ccc7aff78"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCGeneral/SecOCVerificationStatusCallout",
+          "description": "Entry address of the customer specific call out routine which shall be invoked in case of a verification attempt.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "SecOCVerificationStatusCallout",
+          "type": "FUNCTION",
+          "uuid": "ECUC:88f43685-965b-48a5-99cd-724c925ab9bc"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCGeneral/SecOCNvMBlockDescriptor",
+          "description": "Reference to NVRAM block containing the none volatile data. If this parameter is not configured it means that no NVRAM is used at all.",
+          "destinationContainerType": "NvMBlockDescriptor",
+          "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCNvMBlockDescriptor",
+          "uuid": "ECUC:8b4c3e66-ee72-474a-aa2d-04cbbd622c23"
+        }
+      ],
+      "shortName": "SecOCGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:d974b231-dfd7-4419-9f0d-489b957b765b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing",
+      "description": "Contains the parameters to configure the RxPdus to be verified by the SecOC module.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCAuthInfoTxLength",
+          "description": "This parameter defines the length in bits of the authentication code to be included in the payload of the Secured I-PDU.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCAuthInfoTxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:1d737833-2f08-8744-4b14-5954fb59a1d9"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCDataId",
+          "description": "This parameter defines a unique numerical identifier for the Secured I-PDU.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCDataId",
+          "type": "INTEGER",
+          "uuid": "ECUC:62a5b06c-7e84-8fef-5f12-44cc3ef04d4f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCFreshnessCounterSyncAttempts",
+          "description": "This parameter defines the number of Freshness Counter re-synchronization attempts when a verification failed for a Secured I-PDU. If the value is zero, there …",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessCounterSyncAttempts",
+          "type": "INTEGER",
+          "uuid": "ECUC:820d157e-5325-4a93-ac29-1ca018350d3a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCFreshnessTimestampTimePeriodFactor",
+          "description": "This parameter defines a factor that specifies the time period for the Freshness Timestamp. It holds a multiplication factor that specifies the concrete meanin…",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessTimestampTimePeriodFactor",
+          "type": "INTEGER",
+          "uuid": "ECUC:bdde31a7-7be8-88d2-43d3-e7fa91076f97"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCFreshnessValueId",
+          "description": "This parameter defines the Id of the Freshness Value.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessValueId",
+          "type": "INTEGER",
+          "uuid": "ECUC:7e2042fb-6eaf-8b3c-5bc5-6746e75a807f"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCFreshnessValueLength",
+          "description": "This parameter defines the complete length in bits of the Freshness Value. As long as the key doesn't change the counter shall not overflow. The length of the …",
+          "isOptional": false,
+          "max": 64,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessValueLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:0325c14a-6710-89b7-6789-82ba4a4c96f1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCFreshnessValueTxLength",
+          "description": "This parameter defines the length in bits of the Freshness Value to be included in the payload of the Secured I-PDU. This length is specific to the least signi…",
+          "isOptional": false,
+          "max": 64,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessValueTxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:b30f81b7-9bab-8d92-6a67-e79c10523977"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCKeyId",
+          "description": "This parameter specifies the local Key identifier of the stored Key used to generate or verify a MAC.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCKeyId",
+          "type": "INTEGER",
+          "uuid": "ECUC:5d3cf1a8-45d0-8601-5b91-765475233aac"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCSecondaryFreshnessValueId",
+          "description": "This parameter defines the Id of the Secondary Freshness Value.",
+          "isOptional": true,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SecOCSecondaryFreshnessValueId",
+          "type": "INTEGER",
+          "uuid": "ECUC:b0ab5902-546c-4b58-b7e9-5456697829d3"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCRxAcceptanceWindow",
+          "description": "This parameter defines the maximum allowed deviation in seconds from the expected timestamp for which a Secured I-PDU is still deemed authentic.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SecOCRxAcceptanceWindow",
+          "type": "FLOAT",
+          "uuid": "ECUC:1638b955-3d15-450d-935c-fe1cf72ee7bc"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCUseFreshnessTimestamp",
+          "description": "This parameter specifies whether the Freshness Value is generated through individual Freshness Counters or by a Timestamps. The value is set to TRUE when Times…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCUseFreshnessTimestamp",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:48d2b971-5afb-84d6-3ae0-e598fb746011"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCVerificationStatusPropagationMode",
+          "description": "This parameter is used to describe the propagation of the status of each verification attempt from the SecOC module to SWCs.",
+          "enumValues": [
+            "BOTH",
+            "FAILURE_ONLY",
+            "NONE"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCVerificationStatusPropagationMode",
+          "type": "ENUM",
+          "uuid": "ECUC:f3484e24-4b91-438e-bb7c-4bc7469c5ca7"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCRxAuthServiceConfigRef",
+          "description": "This choice container is used to define which module and which service is used for verification.",
+          "destinationContainerType": "CalMacVerifyConfig",
+          "destinationRef": "/AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyConfig",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyConfig",
+            "/AUTOSAR/EcucDefs/Cal/CalSignatureVerify/CalSignatureVerifyConfig",
+            "/AUTOSAR/EcucDefs/Csm/CsmMacVerify/CsmMacVerifyConfig",
+            "/AUTOSAR/EcucDefs/Csm/CsmSignatureVerify/CsmSignatureVerifyConfig"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "choice",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCRxAuthServiceConfigRef",
+          "uuid": "ECUC:135e1ad2-b132-4b29-b4f7-577ceba4d50f"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCSameBufferPduRef",
+          "description": "This reference is used to collect Pdus that are using the same SecOC buffer.",
+          "destinationContainerType": "SecOCSameBufferPduCollection",
+          "destinationRef": "/AUTOSAR/EcucDefs/SecOC/SecOCSameBufferPduCollection",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/SecOC/SecOCSameBufferPduCollection"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SecOCSameBufferPduRef",
+          "uuid": "ECUC:e2fdffb8-2e63-869a-340b-807e017f95be"
+        }
+      ],
+      "shortName": "SecOCRxPduProcessing",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCRxAuthenticPduLayer",
+          "description": "This container specifies the Pdu that is transmitted by the SecOC module to the PduR after the Mac was verified.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCRxAuthenticPduLayer/SecOCRxAuthenticLayerPduRef",
+              "description": "Reference to the global Pdu.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SecOCRxAuthenticLayerPduRef",
+              "uuid": "ECUC:8a365fa6-92e8-426b-83ce-2447690ce342"
+            }
+          ],
+          "shortName": "SecOCRxAuthenticPduLayer",
+          "subContainers": [],
+          "uuid": "ECUC:fe87ddb5-fcdc-45ff-ba4b-d688a3943e5d"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCRxSecuredPduLayer",
+          "description": "This container specifies the Pdu that is received by the SecOC module from the PduR. For this Pdu the Mac verification is provided.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCRxSecuredPduLayer/SecOCRxSecuredLayerPduId",
+              "description": "PDU identifier assigned by SecOC module. Used by PduR for SecOC_PduRRxIndication.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SecOCRxSecuredLayerPduId",
+              "type": "INTEGER",
+              "uuid": "ECUC:4e926dd6-0c6f-4ac2-8abb-5ed5687c5a69"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCRxPduProcessing/SecOCRxSecuredPduLayer/SecOCRxSecuredLayerPduRef",
+              "description": "Reference to the global Pdu.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SecOCRxSecuredLayerPduRef",
+              "uuid": "ECUC:ee06badc-d404-4032-afa3-f09f8849e756"
+            }
+          ],
+          "shortName": "SecOCRxSecuredPduLayer",
+          "subContainers": [],
+          "uuid": "ECUC:0d17ebb7-f591-4e4e-b2f0-0ccedce78b25"
+        }
+      ],
+      "uuid": "ECUC:84ac6f7d-9b6b-4033-afe4-6ea5dcd6b15d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCSameBufferPduCollection",
+      "description": "SecOCBuffer configuration that may be used by a collection of Pdus.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCSameBufferPduCollection/SecOCBufferLength",
+          "description": "This parameter defines the Buffer in bytes that is used by the SecOC module.",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCBufferLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:ce097fa0-d6cf-4f98-ba0f-726d0ee6803e"
+        }
+      ],
+      "references": [],
+      "shortName": "SecOCSameBufferPduCollection",
+      "subContainers": [],
+      "uuid": "ECUC:38a259eb-8522-47b9-8d04-b2ccdf116e02"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing",
+      "description": "Contains the parameters to configure the TxPdus to be secured by the SecOC module.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCAuthInfoTxLength",
+          "description": "This parameter defines the length in bits of the authentication code to be included in the payload of the Secured I-PDU.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCAuthInfoTxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:55f75cbe-efc3-9654-5a8d-59acd6a143d7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCAuthenticationRetries",
+          "description": "This parameter defines the additional number of authentication attempts that are to be carried out when the generation of the authentication information failed…",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCAuthenticationRetries",
+          "type": "INTEGER",
+          "uuid": "ECUC:2aec7719-a6bb-407d-baaa-f9022438a2fe"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCDataId",
+          "description": "This parameter defines a unique numerical identifier for the Secured I-PDU.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCDataId",
+          "type": "INTEGER",
+          "uuid": "ECUC:9b2994f8-3f3f-9eff-6e8b-45241a37ef4d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCFreshnessTimestampTimePeriodFactor",
+          "description": "This parameter defines a factor that specifies the time period for the Freshness Timestamp. It holds a multiplication factor that specifies the concrete meanin…",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessTimestampTimePeriodFactor",
+          "type": "INTEGER",
+          "uuid": "ECUC:f6621633-3ca3-97e2-534c-e8526c4f1195"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCFreshnessValueId",
+          "description": "This parameter defines the Id of the Freshness Value.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessValueId",
+          "type": "INTEGER",
+          "uuid": "ECUC:b6a42787-2f6a-9a4c-6b3e-679ec2a2227d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCFreshnessValueLength",
+          "description": "This parameter defines the complete length in bits of the Freshness Value. As long as the key doesn't change the counter shall not overflow. The length of the …",
+          "isOptional": false,
+          "max": 64,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessValueLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:3ba9a5d6-27cb-98c7-7702-8312259438ef"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCFreshnessValueTxLength",
+          "description": "This parameter defines the length in bits of the Freshness Value to be included in the payload of the Secured I-PDU. This length is specific to the least signi…",
+          "isOptional": false,
+          "max": 64,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCFreshnessValueTxLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:eb936643-5c66-9ca2-79e0-e7f3eb99db75"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCKeyId",
+          "description": "This parameter specifies the local Key identifier of the stored Key used to generate or verify a MAC.",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCKeyId",
+          "type": "INTEGER",
+          "uuid": "ECUC:95c0d634-068b-9511-6b0a-76ac506adcaa"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCUseFreshnessTimestamp",
+          "description": "This parameter specifies whether the Freshness Value is generated through individual Freshness Counters or by a Timestamps. The value is set to TRUE when Times…",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCUseFreshnessTimestamp",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:81569dfd-1bb6-93e6-4a59-e5f0d6bc020f"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCTxAuthServiceConfigRef",
+          "description": "This choice container is used to define which module and which service is used for authentication.",
+          "destinationContainerType": "CalMacGenerateConfig",
+          "destinationRef": "/AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateConfig",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateConfig",
+            "/AUTOSAR/EcucDefs/Cal/CalSignatureGenerate/CalSignatureGenerateConfig",
+            "/AUTOSAR/EcucDefs/Csm/CsmMacGenerate/CsmMacGenerateConfig",
+            "/AUTOSAR/EcucDefs/Csm/CsmSignatureGenerate/CsmSignatureGenerateConfig"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "choice",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "SecOCTxAuthServiceConfigRef",
+          "uuid": "ECUC:0e085d61-00be-4364-841d-fb7fdc670ed7"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCSameBufferPduRef",
+          "description": "This reference is used to collect Pdus that are using the same SecOC buffer.",
+          "destinationContainerType": "SecOCSameBufferPduCollection",
+          "destinationRef": "/AUTOSAR/EcucDefs/SecOC/SecOCSameBufferPduCollection",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/SecOC/SecOCSameBufferPduCollection"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "SecOCSameBufferPduRef",
+          "uuid": "ECUC:1b81e443-ef1e-95aa-4384-80d5dcc737bc"
+        }
+      ],
+      "shortName": "SecOCTxPduProcessing",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCTxAuthenticPduLayer",
+          "description": "This container specifies the Pdu that is received by the SecOC module from the PduR. For this Pdu the Mac generation is provided.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCTxAuthenticPduLayer/SecOCTxAuthenticLayerPduId",
+              "description": "PDU identifier assigned by SecOC module. Used by PduR for SecOC_PduRTransmit.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SecOCTxAuthenticLayerPduId",
+              "type": "INTEGER",
+              "uuid": "ECUC:6d3ef2f7-0768-4e56-8ed5-25d006a9b48b"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCTxAuthenticPduLayer/SecOCTxAuthenticLayerPduRef",
+              "description": "Reference to the global Pdu.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SecOCTxAuthenticLayerPduRef",
+              "uuid": "ECUC:f3889cc4-627c-4e47-b2e0-8936f0298dd1"
+            }
+          ],
+          "shortName": "SecOCTxAuthenticPduLayer",
+          "subContainers": [],
+          "uuid": "ECUC:88fc782a-117f-4db3-88d6-e3e263ea3988"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCTxSecuredPduLayer",
+          "description": "This container specifies the Pdu that is transmitted by the SecOC module to the PduR after the Mac was generated.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCTxSecuredPduLayer/SecOCTxSecuredLayerPduId",
+              "description": "PDU identifier assigned by SecOC module. Used by PduR for confirmation (SecOC_PduRTxConfirmation) and for TriggerTransmit.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SecOCTxSecuredLayerPduId",
+              "type": "INTEGER",
+              "uuid": "ECUC:37a3a0b7-9500-4659-92c0-0100526f02ac"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/SecOC/SecOCTxPduProcessing/SecOCTxSecuredPduLayer/SecOCTxSecuredLayerPduRef",
+              "description": "Reference to the global Pdu.",
+              "destinationContainerType": "Pdu",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "SecOCTxSecuredLayerPduRef",
+              "uuid": "ECUC:f4f69e53-8605-4d16-acbe-45db1e6eb0d4"
+            }
+          ],
+          "shortName": "SecOCTxSecuredPduLayer",
+          "subContainers": [],
+          "uuid": "ECUC:f28c4013-a122-48f9-8116-a9c2e70746e8"
+        }
+      ],
+      "uuid": "ECUC:bd305409-5c26-4f43-bf5d-6efdb81e535b"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/SecOC",
+  "description": "Configuration of the SecOC (SecureOnboardCommunication) module.",
+  "importWarnings": [
+    "SecOCVerificationStatusCallout：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "SecOCNvMBlockDescriptor：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+    "SecOCRxAuthenticLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SecOCRxSecuredLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SecOCRxAuthServiceConfigRef：目标 /AUTOSAR/EcucDefs/Cal/CalMacVerify/CalMacVerifyConfig 位于本模块之外；编辑器只读展示。",
+    "SecOCTxAuthenticLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SecOCTxSecuredLayerPduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "SecOCTxAuthServiceConfigRef：目标 /AUTOSAR/EcucDefs/Cal/CalMacGenerate/CalMacGenerateConfig 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "SecOC",
+  "version": "4.2.2"
+}

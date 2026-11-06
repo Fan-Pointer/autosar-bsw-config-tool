@@ -316,7 +316,7 @@ describe('import preview UI and project menus', () => {
       'text/csv;charset=utf-8',
     ]);
     expect(wrapper.get('.module-tab [role=tab]').attributes('title')).toBe(
-      '模块：Dem\n配置集：IO Project'
+      '模块：Dem · CP TEST-SYNTHETIC-1\n配置集：IO Project'
     );
     await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
     button('导入›').click();

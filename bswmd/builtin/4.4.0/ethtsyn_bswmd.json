@@ -1,0 +1,938 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "6704ad2c7e89c57ce4aad170dc31f553e5f42d20fc9321f1418aabe779006764",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral",
+      "description": "This container holds the general parameters of the Ethernet-specific Synchronized Time-base Manager",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": "01:80:C2:00:00:0E",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynDestPhyAddr",
+          "description": "Destination Physical Address (MAC-Address).",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynDestPhyAddr",
+          "type": "STRING",
+          "uuid": "ECUC:7381302c-c2e6-42d7-82ca-00782fb8fe67"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:97c1bf48-863c-4419-bdfa-7a95e310d14b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynHardwareTimestampSupport",
+          "description": "Activate/Deactivate the hardware time stamping functionality of the Ethernet hardware.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynHardwareTimestampSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3f62e37c-2192-48e6-8a7c-55c0e9390d01"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynMasterSlaveConflictDetection",
+          "description": "Enables master / slave conflict detection and notification.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynMasterSlaveConflictDetection",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:c1298a59-de67-4cfa-bec9-6364393c5c5a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynMessageCompliance",
+          "description": "* true: IEEE 802.1AS compliant message format will be used.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynMessageCompliance",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:38b378b4-5457-4bd9-9a24-f43c2f60aa21"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynVersionInfoApi",
+          "description": "Activate/Deactivate the version information API (EthTSyn_GetVersionInfo). True: version information API activated False: version information API deactivated.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b2dd9067-201b-46f0-97fb-f28dd9b030d8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynGlobalTimeRxToUplinkSwitchResidenceTime",
+          "description": "This parameter is specifying the default value used for the residence time of the Ethernet Switch [Ingress to Uplink].",
+          "isOptional": true,
+          "max": 4,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthTSynGlobalTimeRxToUplinkSwitchResidenceTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:d722990e-2646-43d8-b978-f4e415d2ad6e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynGlobalTimeUplinkToTxSwitchResidenceTime",
+          "description": "This parameter is specifying the default value used for the residence time of the Ethernet Switch [Uplink to Egress].",
+          "isOptional": true,
+          "max": 4,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthTSynGlobalTimeUplinkToTxSwitchResidenceTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:4d897de5-d99b-4a55-b2c9-042466b1c463"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynMainFunctionPeriod",
+          "description": "Schedule period of the main function EthTSyn_MainFunction.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:7b8bdf27-fc9a-4fbc-97bd-7a50abb0fa2e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 10,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynSwitchMgmtRxMessageBufferCount",
+          "description": "This parameter is used to determine the amount of Rx message buffers available in the EthTSyn when EthTSyn is used in a Bridge configuration.",
+          "isOptional": true,
+          "max": 254,
+          "min": 1,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthTSynSwitchMgmtRxMessageBufferCount",
+          "type": "INTEGER",
+          "uuid": "ECUC:661f6b20-3cc2-4cee-931f-8b71fc456a3f"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynEthIfFrameType",
+          "description": "The chosen frame owner determines which frames (in respect to ethertype) are received.",
+          "destinationContainerType": "EthIfFrameOwnerConfig",
+          "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfFrameOwnerConfig",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfFrameOwnerConfig"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynEthIfFrameType",
+          "uuid": "ECUC:e87231df-9332-41c5-bd06-593bd93288f1"
+        }
+      ],
+      "shortName": "EthTSynGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:4abfff0e-f4a2-4116-9884-99088bd9f63c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain",
+      "description": "This represents the existence of a global time domain on Ethernet. The EthTSyn module can administrate several global time domains at the same time that in its…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeDomainId",
+          "description": "The global time domain ID.",
+          "isOptional": false,
+          "max": 31,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynGlobalTimeDomainId",
+          "type": "INTEGER",
+          "uuid": "ECUC:62241e1e-05ed-4b34-bd22-fa839f74b3a1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeSecureTmacLength",
+          "description": "Represents the number of bytes for the used Truncated Message Authentication Code (TMAC). If 0, no message authentication will be used. Tags: atp.Status=draft",
+          "isOptional": false,
+          "max": 16,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynGlobalTimeSecureTmacLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:671014e4-2295-4054-b110-e58630db8f46"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynSynchronizedTimeBaseRef",
+          "description": "Mandatory reference to the required synchronized time-base.",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynSynchronizedTimeBaseRef",
+          "uuid": "ECUC:e2e57238-23bd-4436-8aac-2b4dac409201"
+        }
+      ],
+      "shortName": "EthTSynGlobalTimeDomain",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeFollowUpDataIDList",
+          "description": "The DataIDList for Follow_Up message ensures the identification of data elements due to CRC calculation and message authentication process.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "EthTSynGlobalTimeFollowUpDataIDList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeFollowUpDataIDList/EthTSynGlobalTimeFollowUpDataIDListElement",
+              "description": "Element of the DataIDList for Follow_Up message ensures the identification of data elements due to CRC calculation and message authentication process.",
+              "multiplicity": {
+                "lower": 16,
+                "upper": 16
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeFollowUpDataIDList/EthTSynGlobalTimeFollowUpDataIDListElement/EthTSynGlobalTimeFollowUpDataIDListIndex",
+                  "description": "Index of the DataIDList for Follow_Up message ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTSynGlobalTimeFollowUpDataIDListIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:55411683-3e13-4d90-98d6-99505fa5a5c1"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeFollowUpDataIDList/EthTSynGlobalTimeFollowUpDataIDListElement/EthTSynGlobalTimeFollowUpDataIDListValue",
+                  "description": "Value of the DataIDList for Follow_Up message ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTSynGlobalTimeFollowUpDataIDListValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:7d17dddb-b1d5-42be-84fe-3752dc2c7cb8"
+                }
+              ],
+              "references": [],
+              "shortName": "EthTSynGlobalTimeFollowUpDataIDListElement",
+              "subContainers": [],
+              "uuid": "ECUC:02a18ef2-cba3-4e31-9cb4-289dae7bffec"
+            }
+          ],
+          "uuid": "ECUC:3266d7c3-85f8-46b9-b687-4d604f27c81a"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig",
+          "description": "Configuration of the EthTSyn-Ports within the TimeDomain.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynFramePrio",
+              "description": "This optional parameter, if present, indicates the priority of outgoing EthTSyn messages, if sent via VLAN (used for the 3-bit PCP field of the VLAN tag). If t…",
+              "isOptional": true,
+              "max": 7,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthTSynFramePrio",
+              "type": "INTEGER",
+              "uuid": "ECUC:0c68e20c-5bb4-4169-bf48-c720edffbca4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynGlobalTimeDebounceTime",
+              "description": "This represents the configuration of a TX debounce time for Sync and Follow_Up messages compared to a message before with the same PDU. Unit: seconds",
+              "isOptional": false,
+              "max": 4,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeDebounceTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:ff066b4c-5397-4dc8-b07c-0a06dea0361f"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynGlobalTimeMinMsgGap",
+              "description": "This parameter represents the configuration of a minimum message gap time for received Timesync messages compared to a message before with the same PDU. If PDU…",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeMinMsgGap",
+              "type": "FLOAT",
+              "uuid": "ECUC:dc2f166c-b26e-4e75-97a7-5c450026e1ee"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynGlobalTimeEthIfRef",
+              "description": "This represents the reference to the Ethernet interface taken to fetch the global time information.",
+              "destinationContainerType": "EthIfController",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeEthIfRef",
+              "uuid": "ECUC:1bded4f0-74ac-4076-9640-77079dad74c7"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynSwitchManagementEthSwitchPortRef",
+              "description": "In an AVB-Bridge config, this reference is used to assign the EthTSyn-Port to an Ethernet Switch-Port.",
+              "destinationContainerType": "EthSwtPort",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthTSynSwitchManagementEthSwitchPortRef",
+              "uuid": "ECUC:fe05d31a-8e41-4eed-83b3-4e5361a417d0"
+            }
+          ],
+          "shortName": "EthTSynPortConfig",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPdelayConfig",
+              "description": "Configuration of cyclic propagation delay measurement.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": true,
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPdelayConfig/EthTSynGlobalTimePdelayRespEnable",
+                  "description": "This parameter allows disabling Pdelay_Resp / Pdelay_Resp_Follow_Up transmission, if no Pdelay_Req messages are expected.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTSynGlobalTimePdelayRespEnable",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:801fc9cf-21c0-4977-beb0-57cb1db20804"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPdelayConfig/EthTSynGlobalTimePropagationDelay",
+                  "description": "If cyclic propagation delay measurement is enabled, this parameter represents the default value of the propagation delay until the first actually measured prop…",
+                  "isOptional": false,
+                  "max": 4,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTSynGlobalTimePropagationDelay",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:2ff48583-f371-41e0-a76e-8d8c6171f1bf"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPdelayConfig/EthTSynGlobalTimeTxPdelayReqPeriod",
+                  "description": "This represents configuration of the TX period for Pdelay_Req messages.",
+                  "isOptional": false,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTSynGlobalTimeTxPdelayReqPeriod",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:b3917c56-18e1-41c9-860d-1ac6c182b41e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0.00001,
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPdelayConfig/EthTSynPdelayLatencyThreshold",
+                  "description": "Threshold for calculated Pdelay. If a measured Pdelay exceeds EthTSynPdelayLatencyThreshold, this value is discarded.",
+                  "isOptional": true,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "EthTSynPdelayLatencyThreshold",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:9186b7ee-cb37-41f1-a81e-04e2bbb5cb67"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPdelayConfig/EthTSynPdelayRespAndRespFollowUpTimeout",
+                  "description": "Timeout value for Pdelay_Resp and Pdelay_Resp_Follow_Up after a Pdelay_Req has been transmitted resp. a Pdelay_Resp has been received.",
+                  "isOptional": false,
+                  "max": 4,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "EthTSynPdelayRespAndRespFollowUpTimeout",
+                  "type": "FLOAT",
+                  "uuid": "ECUC:b43f54d3-14dd-46ed-b0ae-45c1bf2c8b17"
+                }
+              ],
+              "references": [],
+              "shortName": "EthTSynPdelayConfig",
+              "subContainers": [],
+              "uuid": "ECUC:a9d33232-960f-46a3-8b1f-7213b86b07a7"
+            },
+            {
+              "choice": {
+                "candidateRefs": [
+                  "ECUC:20d1e409-b2eb-4086-bbe6-0525aff7c21c",
+                  "ECUC:06ad6036-fb6a-450e-a8c1-7509babd6012"
+                ]
+              },
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole",
+              "description": "Specifying the Role of the EthTSyn-Port (Master or Slave).",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [],
+              "shortName": "EthTSynPortRole",
+              "subContainers": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster",
+                  "description": "Configuration of the global time master. Each global time domain is required to have exactly one global time master. This master may or may not exist on the co…",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCyclicMsgResumeTime",
+                      "description": "Defines the time where the 1st regular cycle time based message transmission takes place, after an immediate transmission before. Unit: seconds",
+                      "isOptional": false,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynCyclicMsgResumeTime",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:7bf17a76-df16-4b50-a941-00f73076e879"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynGlobalTimeTxPeriod",
+                      "description": "This represents configuration of the TX period. Unit: seconds",
+                      "isOptional": false,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynGlobalTimeTxPeriod",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:895a28b4-2c4e-4b59-ac47-70aadc1de237"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynGlobalTimeTxCrcSecured",
+                      "description": "This represents the configuration of whether or not CRC is supported.",
+                      "enumValues": [
+                        "CRC_NOT_SUPPORTED",
+                        "CRC_SUPPORTED"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynGlobalTimeTxCrcSecured",
+                      "type": "ENUM",
+                      "uuid": "ECUC:a968328a-0af9-4e9a-a9f8-09a63361f29d"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynTxTmacCalculated",
+                      "description": "This parameter controls whether or not TMAC calculation shall be supported. Tags: atp.Status=draft",
+                      "enumValues": [
+                        "TMAC_CALCULATED",
+                        "TMAC_NOT_CALCULATED"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynTxTmacCalculated",
+                      "type": "ENUM",
+                      "uuid": "ECUC:7b954e87-109a-4dc9-ab7b-4b875b7450ed"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynImmediateTimeSync",
+                      "description": "Enables/Disables the cyclic polling of StbM_GetTimeBaseUpdateCounter() within EthTSyn_MainFunction().",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynImmediateTimeSync",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:8a1c201a-aadc-4861-877a-7516549965df"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynTLVFollowUpOFSSubTLV",
+                      "description": "This represents the configuration of whether an AUTOSAR Follow_Up TLV OFS Sub-TLV is used or not.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynTLVFollowUpOFSSubTLV",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:c17972ba-16b8-4c9a-863e-dc16febf963e"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynTLVFollowUpStatusSubTLV",
+                      "description": "This represents the configuration of whether an AUTOSAR Follow_Up TLV Status Sub-TLV is used or not.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynTLVFollowUpStatusSubTLV",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:7792586e-71d7-4ce3-bf7f-1e1efd22ce69"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynTLVFollowUpTimeSubTLV",
+                      "description": "This represents the configuration of whether an AUTOSAR Follow_Up TLV Time Sub-TLV is used or not.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynTLVFollowUpTimeSubTLV",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:e11aff70-3879-4d1e-9bd8-d4740a910d1e"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynTLVFollowUpUserDataSubTLV",
+                      "description": "This represents the configuration of whether an AUTOSAR Follow_Up TLV UserData Sub-TLV is used or not.",
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynTLVFollowUpUserDataSubTLV",
+                      "type": "BOOLEAN",
+                      "uuid": "ECUC:2c6f3bd9-1f7e-4b1c-b290-4608c7339298"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "EthTSynGlobalTimeMaster",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCrcTimeFlagsTxSecured",
+                      "description": "This container collects definitions which parts of the Follow_Up message elements shall be used for CRC calculation.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCrcTimeFlagsTxSecured/EthTSynCrcCorrectionField",
+                          "description": "correctionField from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcCorrectionField",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:6458078f-308c-9762-0cc5-947ad3ef3b72"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCrcTimeFlagsTxSecured/EthTSynCrcDomainNumber",
+                          "description": "domainNumber from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcDomainNumber",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:2b184225-a081-8b9c-440f-385e0739e43d"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCrcTimeFlagsTxSecured/EthTSynCrcMessageLength",
+                          "description": "messageLength from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcMessageLength",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:bd46fb52-c29e-9a2a-09a8-f0620e2203f1"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": true,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCrcTimeFlagsTxSecured/EthTSynCrcPreciseOriginTimestamp",
+                          "description": "preciseOriginTimestamp from the Follow_Up Message Field shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcPreciseOriginTimestamp",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:e6475574-5a20-9738-1808-4edf24308a2b"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCrcTimeFlagsTxSecured/EthTSynCrcSequenceId",
+                          "description": "sequenceId from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcSequenceId",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:8ade3424-79bd-8b78-1a92-99d8a0aadaa0"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeMaster/EthTSynCrcTimeFlagsTxSecured/EthTSynCrcSourcePortIdentity",
+                          "description": "sourcePortIdentity from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcSourcePortIdentity",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:07aa7f8c-b1dc-97fb-1950-d0594b9f1920"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "EthTSynCrcTimeFlagsTxSecured",
+                      "subContainers": [],
+                      "uuid": "ECUC:b5382ff6-ba89-4aa8-8455-6ae63fc1d83d"
+                    }
+                  ],
+                  "uuid": "ECUC:20d1e409-b2eb-4086-bbe6-0525aff7c21c"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave",
+                  "description": "Configuration of a time slave. Each global time domain is required to have at least one time slave. The configured ECU may or may not represent a time slave.",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "parameters": [
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynGlobalTimeFollowUpTimeout",
+                      "description": "Timeout value of the Follow_Up message (of the subsequent Sync message).",
+                      "isOptional": false,
+                      "max": 4,
+                      "min": 0,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynGlobalTimeFollowUpTimeout",
+                      "type": "FLOAT",
+                      "uuid": "ECUC:3e7d4950-7a0a-4eb9-93d1-daa525f08113"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynRxCrcValidated",
+                      "description": "Definition of whether or not validation of the CRC takes place.",
+                      "enumValues": [
+                        "CRC_IGNORED",
+                        "CRC_NOT_VALIDATED",
+                        "CRC_OPTIONAL",
+                        "CRC_VALIDATED"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynRxCrcValidated",
+                      "type": "ENUM",
+                      "uuid": "ECUC:cca19f12-fe8f-4485-8f8d-d23eb3fef243"
+                    },
+                    {
+                      "configClass": "PRE_COMPILE",
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynRxTmacValidated",
+                      "description": "This parameter controls whether or not TMAC validation shall be supported. Tags: atp.Status=draft",
+                      "enumValues": [
+                        "TMAC_NOT_VALIDATED",
+                        "TMAC_VALIDATED"
+                      ],
+                      "isOptional": false,
+                      "multiplicity": {
+                        "lower": 1,
+                        "upper": 1
+                      },
+                      "shortName": "EthTSynRxTmacValidated",
+                      "type": "ENUM",
+                      "uuid": "ECUC:b4abf8c1-165c-4813-ac08-22efcd356dd0"
+                    }
+                  ],
+                  "references": [],
+                  "shortName": "EthTSynGlobalTimeSlave",
+                  "subContainers": [
+                    {
+                      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynCrcFlagsRxValidated",
+                      "description": "This container collects definitions which parts of the Follow_Up message elements shall be included in CRC validation.",
+                      "multiplicity": {
+                        "lower": 0,
+                        "upper": 1
+                      },
+                      "parameters": [
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynCrcFlagsRxValidated/EthTSynCrcCorrectionField",
+                          "description": "correctionField from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcCorrectionField",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:d12d4248-aabf-8eb4-09fb-d8dc567cdb6b"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynCrcFlagsRxValidated/EthTSynCrcDomainNumber",
+                          "description": "domainNumber from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcDomainNumber",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:97ed7cdf-1ab4-82ee-4145-7cbf89c78436"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynCrcFlagsRxValidated/EthTSynCrcMessageLength",
+                          "description": "messageLength from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcMessageLength",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:2a1c360c-3cd1-917c-06df-34c390afa3ea"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": true,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynCrcFlagsRxValidated/EthTSynCrcPreciseOriginTimestamp",
+                          "description": "preciseOriginTimestamp from the Follow_Up Message Field shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcPreciseOriginTimestamp",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:531c902d-d453-8e8a-153e-9340a6be2a24"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynCrcFlagsRxValidated/EthTSynCrcSequenceId",
+                          "description": "sequenceId from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcSequenceId",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:f7b36edd-f3f0-82ca-17c8-de3a23387a99"
+                        },
+                        {
+                          "configClass": "PRE_COMPILE",
+                          "defaultValue": false,
+                          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynPortConfig/EthTSynPortRole/EthTSynGlobalTimeSlave/EthTSynCrcFlagsRxValidated/EthTSynCrcSourcePortIdentity",
+                          "description": "sourcePortIdentity from the Follow_Up Message Header shall be included in CRC calculation.",
+                          "isOptional": false,
+                          "multiplicity": {
+                            "lower": 1,
+                            "upper": 1
+                          },
+                          "shortName": "EthTSynCrcSourcePortIdentity",
+                          "type": "BOOLEAN",
+                          "uuid": "ECUC:747fba46-2c0f-8f4d-1687-14bace2cb919"
+                        }
+                      ],
+                      "references": [],
+                      "shortName": "EthTSynCrcFlagsRxValidated",
+                      "subContainers": [],
+                      "uuid": "ECUC:220d6ab0-34bc-41fa-818b-af47c24f7836"
+                    }
+                  ],
+                  "uuid": "ECUC:06ad6036-fb6a-450e-a8c1-7509babd6012"
+                }
+              ],
+              "uuid": "ECUC:3afae85d-1b27-44cb-bf56-55ae79e25b23"
+            }
+          ],
+          "uuid": "ECUC:58b27c34-99a1-4daa-8f49-58553cf0cfbd"
+        }
+      ],
+      "uuid": "ECUC:ee0c077f-5d03-463d-9144-6a3c3f3bc7ef"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn",
+  "description": "Configuration of the Synchronized Time-base Manager (StbM) module with respect to global time handling on Ethernet.",
+  "importWarnings": [
+    "EthTSynEthIfFrameType：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfFrameOwnerConfig 位于本模块之外；编辑器只读展示。",
+    "EthTSynPortRole：CHOICE 分组需选择一个候选后导出；切换候选可撤销。",
+    "EthTSynGlobalTimeEthIfRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。",
+    "EthTSynSwitchManagementEthSwitchPortRef：目标 /AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort 位于本模块之外；编辑器只读展示。",
+    "EthTSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "EthTSyn",
+  "version": "4.4.0"
+}

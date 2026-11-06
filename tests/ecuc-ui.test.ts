@@ -135,7 +135,7 @@ describe('official module manager and persisted editing', () => {
       .trigger('click');
     await flushPromises();
     expect(store.modules.map((module) => module.shortName)).toEqual(['Dem', 'NvM']);
-    expect(store.modulePreferences.NvM.included).toBe(true);
+    expect(store.getModulePreference('NvM').included).toBe(true);
     await store.createConfigSet('Imported NvM', 'NvM');
     const view = await workspace();
     expect(view.text()).toContain('NvM');

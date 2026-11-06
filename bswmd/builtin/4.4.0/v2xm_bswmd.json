@@ -1,0 +1,277 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "6397b876dbd6fde1acab302f3371dd3a50b4de3d6042c096112f3d3caaac7740",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMConfig",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR V2xM module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "V2xMConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMConfig/V2xMSecurityConfig",
+          "description": "Configuration of the security services of V2xM.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMConfig/V2xMSecurityConfig/V2xMSecurityVerificationOnDemand",
+              "description": "Switches the Verification on Demand (VoD) ON or OFF.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "V2xMSecurityVerificationOnDemand",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:a6305b35-7002-4769-888c-f7ba45037708"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMConfig/V2xMSecurityConfig/V2xMSecurityNvMBlockDescriptorLongTermCertificates",
+              "description": "Reference to NVRAM block containing the none volatile data of long term certificates.",
+              "destinationContainerType": "NvMBlockDescriptor",
+              "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "V2xMSecurityNvMBlockDescriptorLongTermCertificates",
+              "uuid": "ECUC:7857257c-19f5-481b-831a-d339c06efb9f"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMConfig/V2xMSecurityConfig/V2xMSecurityNvMBlockDescriptorPseudonymCertificates",
+              "description": "Reference to NVRAM block containing the none volatile data of pseudonym certificates.",
+              "destinationContainerType": "NvMBlockDescriptor",
+              "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "V2xMSecurityNvMBlockDescriptorPseudonymCertificates",
+              "uuid": "ECUC:c68734ff-7fbb-4f09-9499-9bd84b3a6016"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMConfig/V2xMSecurityConfig/V2xMSignatureGenerationConfigRef",
+              "description": "Select CSM service configuration that is used for authentication.",
+              "destinationContainerType": "CsmSignatureGenerateConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "V2xMSignatureGenerationConfigRef",
+              "uuid": "ECUC:65956103-5329-4136-9bff-fb6a755ddbc3"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMConfig/V2xMSecurityConfig/V2xMSignatureVerifyConfigRef",
+              "description": "Select CSM service configuration that is used for authentication.",
+              "destinationContainerType": "CsmSignatureVerifyConfig",
+              "destinationRef": "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "V2xMSignatureVerifyConfigRef",
+              "uuid": "ECUC:6f933c37-20fe-473a-975e-34587d81aeb9"
+            }
+          ],
+          "shortName": "V2xMSecurityConfig",
+          "subContainers": [],
+          "uuid": "ECUC:67c83349-0833-4853-9c1f-859646aa579f"
+        }
+      ],
+      "uuid": "ECUC:58bde15b-660a-4274-9dfc-b34505ba4834"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral",
+      "description": "General configuration of V2xM module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral/V2xMDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d7da0a31-89f1-4500-945a-a58e21200402"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral/V2xMVersionInfoApi",
+          "description": "Enable/disables the API for reading the version information of the V2xM Module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:07b77317-dc30-46b8-ae0c-67acdb2769ec"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral/V2xMMainFunctionPeriod",
+          "description": "This parameter defines the schedule period of V2xM_MainFunction.Unit: [s]",
+          "isOptional": false,
+          "max": 0.1,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xMMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:af8c4d51-624a-4d66-a1cf-fb918a6091b4"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral/V2xMEthIfCtrlRef",
+          "description": "Reference to EthIf controller where the channel and radio parameters should be read and written to.",
+          "destinationContainerType": "EthIfController",
+          "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xMEthIfCtrlRef",
+          "uuid": "ECUC:ba616d4e-73c4-403e-abf0-9d924afee109"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral/V2xMGptChannelConfigurationRef",
+          "description": "Reference to General Purpose Timer.",
+          "destinationContainerType": "GptChannelConfiguration",
+          "destinationRef": "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "V2xMGptChannelConfigurationRef",
+          "uuid": "ECUC:3631704c-3697-44ed-a720-7c5a6ce78201"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral/V2xMNvMBlockDescriptor",
+          "description": "Reference to NVRAM block containing the none volatile data.",
+          "destinationContainerType": "NvMBlockDescriptor",
+          "destinationRef": "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xMNvMBlockDescriptor",
+          "uuid": "ECUC:5602c458-ed2c-40bd-a086-e73e24732af5"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xM/V2xMGeneral/V2xMStbMSynchronizedTimeBaseRef",
+          "description": "Reference to synchronized time-base.",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "V2xMStbMSynchronizedTimeBaseRef",
+          "uuid": "ECUC:781c57d0-98b5-4ad7-bd92-1463c894ad9e"
+        }
+      ],
+      "shortName": "V2xMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:ff261ba2-dbe4-4701-a443-aa0d330281b7"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/V2xM",
+  "description": "Configuration of the V2xM (V2XManagement) module.",
+  "importWarnings": [
+    "V2xMSecurityNvMBlockDescriptorLongTermCertificates：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+    "V2xMSecurityNvMBlockDescriptorPseudonymCertificates：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+    "V2xMSignatureGenerationConfigRef：目标 /AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureGenerate/CsmSignatureGenerateConfig 位于本模块之外；编辑器只读展示。",
+    "V2xMSignatureVerifyConfigRef：目标 /AUTOSAR/EcucDefs/Csm/CsmPrimitives/CsmSignatureVerify/CsmSignatureVerifyConfig 位于本模块之外；编辑器只读展示。",
+    "V2xMEthIfCtrlRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。",
+    "V2xMGptChannelConfigurationRef：目标 /AUTOSAR/EcucDefs/Gpt/GptChannelConfigSet/GptChannelConfiguration 位于本模块之外；编辑器只读展示。",
+    "V2xMNvMBlockDescriptor：目标 /AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor 位于本模块之外；编辑器只读展示。",
+    "V2xMStbMSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "V2xM",
+  "version": "4.4.0"
+}

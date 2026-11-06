@@ -1,0 +1,548 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "c27f3db2517b49b4570e45d3517adf79d81ae5ccbf25411d669cbb843effdc13",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnBeaconService",
+      "description": "This container contains the GeoNetworking configuration parameters related to the beacon service.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.75,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnBeaconService/V2xGnItsGnBeaconServiceMaxJitter",
+          "description": "Maximum beacon jitter [s]. The Jitter is used for the beacon retransmission. The actual jitter value is a random number between 0 and V2xGnItsGnBeaconServiceMa…",
+          "isOptional": false,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnBeaconServiceMaxJitter",
+          "type": "FLOAT",
+          "uuid": "ECUC:7cfaea24-b560-464c-a550-bf31fb7476f5"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 3,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnBeaconService/V2xGnItsGnBeaconServiceRetransmitTimer",
+          "description": "Duration of Beacon service retransmit timer [s].",
+          "isOptional": false,
+          "min": 0.001,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnBeaconServiceRetransmitTimer",
+          "type": "FLOAT",
+          "uuid": "ECUC:f5b779a6-6ed3-4050-b428-10c705bb2e70"
+        }
+      ],
+      "references": [],
+      "shortName": "V2xGnBeaconService",
+      "subContainers": [],
+      "uuid": "ECUC:49b92744-6853-4e0a-9f5e-ce17292803f1"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral",
+      "description": "This container specifies the general configuration parameters of the V2xGn module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:555f0f3c-0d75-4a13-8e95-15b1b9199566"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnTxConfirmation",
+          "description": "When enabled, transmission status information will be forwarded to the upper layer.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnTxConfirmation",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0425d541-1bfb-4af2-9918-3f2f41511a3e"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnVersionInfoApi",
+          "description": "Enable/disables the API for reading the version information of the V2xGn Module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:ab7eeb4f-9c81-4abd-8be1-3d1c1c86ca05"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 20,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnLifetimeLocTE",
+          "description": "Location table maintenance: Lifetime of an entry in the location table in [s]",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnLifetimeLocTE",
+          "type": "FLOAT",
+          "uuid": "ECUC:2ac1cb4f-6c8d-401d-bc47-2c65e2ec3c4c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnMinUpdateFrequencyEPV",
+          "description": "Minimum update frequency of ego position vector (EPV) in [s].",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnMinUpdateFrequencyEPV",
+          "type": "FLOAT",
+          "uuid": "ECUC:9ddd8860-b60a-4b7f-8789-7a2c1ee5df22"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.001,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnMainFunctionPeriod",
+          "description": "Specifies the period of main function V2xGn_MainFunction in seconds. V2xGn does not require this information but the BSW scheduler.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:746e68fb-c7c7-4324-bfc8-629662dd7cdc"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnLocalGnAddr",
+          "description": "64bit GeoNetworking Address.",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnLocalGnAddr",
+          "type": "INTEGER",
+          "uuid": "ECUC:d5572173-702b-423f-b48d-23cf212dcff8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 88,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnMaxGeoNetworkingHeaderSize",
+          "description": "Maximum size of GeoNetworking header in [Byte].",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnMaxGeoNetworkingHeaderSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:9bea2086-be95-4984-a9be-9da710793f10"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1398,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnMaxSduSize",
+          "description": "Maximum size of GN-SDU in [Byte].",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnMaxSduSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:40fb9cf9-76fa-427e-b786-b905fbd0d2a7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 80,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnPaiInterval",
+          "description": "Distance related to the confidence interval for latitude and longitude [m]. Used to determine the PAI.",
+          "isOptional": false,
+          "max": 100,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnPaiInterval",
+          "type": "INTEGER",
+          "uuid": "ECUC:0f833db9-3271-4726-b632-e2822c8576d2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnProtocolVersion",
+          "description": "GeoNetworking protocol version as defined in Annex H of [14]",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnProtocolVersion",
+          "type": "INTEGER",
+          "uuid": "ECUC:6e3444dc-db2b-4eb9-a0b8-476e1c85e28d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnSnDecapResultHandling",
+          "description": "Indicates the handling of the V2xM_ReqDecap result code.",
+          "enumValues": [
+            "V2XGN_NON_STRICT_SEC_HANDLING",
+            "V2XGN_STRICT_SEC_HANDLING"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnSnDecapResultHandling",
+          "type": "ENUM",
+          "uuid": "ECUC:1d353fc3-5907-4dda-9dfc-18789fe16115"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnItsGnStationType",
+          "description": "Station Type used in GeoNetworking protocol, RoadSideUnit (15) not supported by AUTOSAR.",
+          "enumValues": [
+            "V2XFAC_ST_BUS",
+            "V2XFAC_ST_CYCLIST",
+            "V2XFAC_ST_HEAVYTRUCK",
+            "V2XFAC_ST_LIGHTTRUCK",
+            "V2XFAC_ST_MOPED",
+            "V2XFAC_ST_MOTORCYCLE",
+            "V2XFAC_ST_PASSENGERCAR",
+            "V2XFAC_ST_PEDESTRIAN",
+            "V2XFAC_ST_SPECIALVEHICLES",
+            "V2XFAC_ST_TRAILER",
+            "V2XFAC_ST_TRAM",
+            "V2XFAC_ST_UNKNOWN"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnStationType",
+          "type": "ENUM",
+          "uuid": "ECUC:78c4397d-3352-420c-8e65-2cf5e223b499"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnGeneral/V2xGnEthIfRef",
+          "description": "This represents the reference to the Ethernet interface taken to transmit the V2X-Packets to.",
+          "destinationContainerType": "EthIfController",
+          "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnEthIfRef",
+          "uuid": "ECUC:762fe608-a791-46e6-a20c-798550bcb9e5"
+        }
+      ],
+      "shortName": "V2xGnGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:23dbe3a0-4bc7-4f36-9046-b486970d9de3"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding",
+      "description": "This container contains the GeoNetworking configuration parameters related to packet forwarding.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1024000,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnBcForwardingPacketBufferSize",
+          "description": "Size of BC forwarding packet buffer [Byte].",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnBcForwardingPacketBufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:e7a60fa6-f4d1-4d4b-a247-37f092592f07"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 256000,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnCbfPacketBufferSize",
+          "description": "Size of CBF packet buffer [Byte]",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnCbfPacketBufferSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:8b2f7978-3da4-482f-aac6-076890078fbc"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 10,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnDefaultHopLimit",
+          "description": "Default hop limit indicating the maximum number of hops a packet travels.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnDefaultHopLimit",
+          "type": "INTEGER",
+          "uuid": "ECUC:5a2021ce-d041-4488-aff7-a1368ff6b164"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 1000,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnDefaultMaxCommunicationRange",
+          "description": "Default theoretical maximum communication range [m]",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnDefaultMaxCommunicationRange",
+          "type": "INTEGER",
+          "uuid": "ECUC:648bb2dc-1b4c-46bc-9ec8-c52e7cb78e4d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnDefaultTrafficClass",
+          "description": "Forwarding: Default traffic class",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnDefaultTrafficClass",
+          "type": "INTEGER",
+          "uuid": "ECUC:094dba2a-5b7d-4f9a-8ed7-7b32cbfb30ff"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 8,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnDplLength",
+          "description": "Length of Duplicate Packet List (DPL) per source (clause A.2 of [18])",
+          "isOptional": false,
+          "max": 65535,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnDplLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:8f4c38b6-eb29-45d4-befe-1cbd71d81552"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 80,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnMaxGeoAreaSize",
+          "description": "Maximum size of the geographical area for a GBC and GAC packet [km2]. If the geographical area size exceeds the maximum value, the GeoNetworking packet shall n…",
+          "isOptional": false,
+          "max": 18446744073709552000,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnMaxGeoAreaSize",
+          "type": "INTEGER",
+          "uuid": "ECUC:90a27345-0a4c-450b-8646-1203b99f7084"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 100000,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnMaxPacketDataRate",
+          "description": "Maximum packet data rate for a GeoAdhoc router [Byte/s]. If the mean (EMA) packet data rate a of a GeoAdhoc router exceeds the value, packets from this GeoAdho…",
+          "isOptional": false,
+          "max": 4294967295,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnMaxPacketDataRate",
+          "type": "INTEGER",
+          "uuid": "ECUC:5970941c-0328-4302-940f-60cada84d11b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.001,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnCbfMaxTime",
+          "description": "Maximum duration a GeoNetworking packet shall be buffered in the CBF packet buffer [s]",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnCbfMaxTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:818d5c25-b3fa-48ea-9720-2b70bc861210"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.001,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnCbfMinTime",
+          "description": "Minimum duration a GeoNetworking packet shall be buffered in the CBF packet buffer [s]",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnCbfMinTime",
+          "type": "FLOAT",
+          "uuid": "ECUC:f93e6eee-cfa8-4dcb-be92-6a94eddd84aa"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 60,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnDefaultPacketLifetime",
+          "description": "Default packet lifetime [s].",
+          "isOptional": false,
+          "max": 6300,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnDefaultPacketLifetime",
+          "type": "FLOAT",
+          "uuid": "ECUC:209d82d7-ffbd-4d1a-8a80-a1584ff0fd9d"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.9,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnMaxPacketDataRateEmaBeta",
+          "description": "Weight factor for the Exponential Moving Average of the packet data rate PDR in percent.",
+          "isOptional": false,
+          "max": 1,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnMaxPacketDataRateEmaBeta",
+          "type": "FLOAT",
+          "uuid": "ECUC:990bfd6c-ba06-4014-9b42-355bc4600ade"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 600,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnMaxPacketLifetime",
+          "description": "Upper limit of the maximum lifetime [s]",
+          "isOptional": false,
+          "max": 6300,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnMaxPacketLifetime",
+          "type": "FLOAT",
+          "uuid": "ECUC:10a4355f-5120-4dc5-aca5-b45e28ebff07"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xGn/V2xGnPacketForwarding/V2xGnItsGnGeoAreaLineForwardingUsed",
+          "description": "Forwarding of GBC/GAC packet if GeoAdhoc router is located outside the destination GeoArea.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xGnItsGnGeoAreaLineForwardingUsed",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b57cc451-f052-40d5-82b9-8b6b099c7a11"
+        }
+      ],
+      "references": [],
+      "shortName": "V2xGnPacketForwarding",
+      "subContainers": [],
+      "uuid": "ECUC:e4604085-2973-453d-8f01-4f8bc5331d51"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/V2xGn",
+  "description": "Configuration of the V2xGn (Vehicle-2-X Geo Networking) module.",
+  "importWarnings": [
+    "V2xGnEthIfRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "V2xGn",
+  "version": "4.4.0"
+}

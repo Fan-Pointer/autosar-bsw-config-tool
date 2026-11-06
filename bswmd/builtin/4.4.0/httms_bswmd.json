@@ -1,0 +1,78 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "c293e0004cded916163ecfa4af54529633453f3fb275311a70273e380a7bfde8",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/HTTMS/HTTMSSConfigSet",
+      "description": "This is the base container that contains the configuration parameters & sub containers of HTMSS module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "HTTMSSConfigSet",
+      "subContainers": [],
+      "uuid": "ECUC:b4af895b-b897-42f5-b41a-2095e4c51b80"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/HTTMS/HTTMSSGeneral",
+      "description": "This container holds the general parameters of the HTMSS module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/HTTMS/HTTMSSGeneral/HTMSSDevErrorDetect",
+          "description": "Switch for enabling the DET.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "HTMSSDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d43b6975-c232-4e1f-8f79-49bc1bac9666"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/HTTMS/HTTMSSGeneral/HTMSSVersionInfoApi",
+          "description": "Activate/Deactivate the version information API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "HTMSSVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e541dbf6-7683-46c1-b5ff-2735fb3600eb"
+        }
+      ],
+      "references": [],
+      "shortName": "HTTMSSGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:410642b4-a12a-4d38-a70f-5ec08c3b20ca"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/HTTMS",
+  "description": "Configuration of the Hardware Test Management start up and shutdown (HTMSS) module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "HTTMS",
+  "version": "4.4.0"
+}

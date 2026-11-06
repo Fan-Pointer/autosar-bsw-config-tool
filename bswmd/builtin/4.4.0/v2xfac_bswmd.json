@@ -1,0 +1,168 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "cce9a534c1954af6f1c17965204010d90cdc08df5eb89ff87b9d578934cea020",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral",
+      "description": "This container contains the general configuration parameters of the Vehicle-2-X Basic Transport.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacCaBsMainFunctionPeriod",
+          "description": "This parameter defines the schedule period of V2xFac_CaBs_MainFunction.Unit: [s]",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacCaBsMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:a8c8332e-3fda-421b-908f-0a779ab90fed"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacDenBsMainFunctionPeriod",
+          "description": "This parameter defines the schedule period of V2xFac_DenBs_MainFunction.Unit: [s]",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacDenBsMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:319d04d0-6ed7-437e-9ea0-c99c2bb37dac"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacIviSMainFunctionPeriod",
+          "description": "This parameter defines the schedule period of V2xFac_IviS_MainFunction.Unit: [s]",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacIviSMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:94f59eab-d070-4ac3-8b56-2bc2d674052a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacRltSMainFunctionPeriod",
+          "description": "This parameter defines the schedule period of V2xFac_RltS_MainFunction.Unit: [s]",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacRltSMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:a439da00-dd9f-45f5-9466-e66fcf9d01ff"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0.1,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacTlmSMainFunctionPeriod",
+          "description": "This parameter defines the schedule period of V2xFac_TlmS_MainFunction. Unit: [s]",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacTlmSMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:4df2778f-4a6d-4f37-8c93-673e6450f7d0"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:0e3ddf16-d269-4608-a5d7-cf297e36dfca"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacVersionInfoApi",
+          "description": "Enable/disables the API for reading the version information of the V2xFac Module.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:433b941a-de81-40b6-8176-bb7ac8f4a678"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": "V2XFAC_ST_UNKNOWN",
+          "definitionPath": "/AUTOSAR/EcucDefs/V2xFac/V2xFacGeneral/V2xFacStationType",
+          "description": "This configuration value defines the station type information of the originating ITS-S, RoadSideUnit (15) not supported by AUTOSAR.",
+          "enumValues": [
+            "V2XFAC_ST_BUS",
+            "V2XFAC_ST_CYCLIST",
+            "V2XFAC_ST_HEAVYTRUCK",
+            "V2XFAC_ST_LIGHTTRUCK",
+            "V2XFAC_ST_MOPED",
+            "V2XFAC_ST_MOTORCYCLE",
+            "V2XFAC_ST_PASSENGERCAR",
+            "V2XFAC_ST_PEDESTRIAN",
+            "V2XFAC_ST_SPECIALVEHICLES",
+            "V2XFAC_ST_TRAILER",
+            "V2XFAC_ST_TRAM",
+            "V2XFAC_ST_UNKNOWN"
+          ],
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "V2xFacStationType",
+          "type": "ENUM",
+          "uuid": "ECUC:236b4d0d-8d1e-4414-89f5-02127ddf9f5f"
+        }
+      ],
+      "references": [],
+      "shortName": "V2xFacGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:921780f9-c4a6-4c2c-aeaa-dc3a07c06bd4"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/V2xFac",
+  "description": "Configuration of the V2xFac module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "V2xFac",
+  "version": "4.4.0"
+}

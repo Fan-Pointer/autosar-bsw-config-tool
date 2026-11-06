@@ -167,7 +167,7 @@ describe('screenshot replica interactions', () => {
     (dialog.querySelector('[aria-label="移除模块"]') as HTMLButtonElement).click();
     await flushPromises();
     expect(dialog.querySelector('tbody tr')).toBeNull();
-    (dialog.querySelector('.catalog-item input') as HTMLInputElement).click();
+    (dialog.querySelector('[aria-label="选择 ' + name + '"]') as HTMLInputElement).click();
     await flushPromises();
     (dialog.querySelector('[aria-label="加入模块"]') as HTMLButtonElement).click();
     await flushPromises();
@@ -177,14 +177,14 @@ describe('screenshot replica interactions', () => {
       .find((item) => item.textContent?.trim() === '确定')!
       .click();
     await flushPromises();
-    expect(store.modulePreferences[name]).toEqual({
+    expect(store.getModulePreference(name, store.modules[0].version)).toEqual({
       included: true,
       generation: false,
       validation: true,
     });
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([false]);
     await store.loadConfig();
-    expect(store.modulePreferences[name].generation).toBe(false);
+    expect(store.getModulePreference(name, store.modules[0].version).generation).toBe(false);
   });
 
   async function workspace() {
@@ -232,7 +232,7 @@ describe('screenshot replica interactions', () => {
       .find((item) => item.text().startsWith('模块管理'))!
       .trigger('click');
     await flushPromises();
-    expect(document.querySelector('.module-transfer')).not.toBeNull();
+    expect(document.querySelector('.module-selector')).not.toBeNull();
   });
 
   it('keeps disabled optional fields absent through save and restore', async () => {

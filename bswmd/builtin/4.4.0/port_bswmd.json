@@ -1,0 +1,320 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "450167b7850d663cf45291fbfc8ded11b0062c50d65210826ee16978a5515f10",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Port module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "PortConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer",
+          "description": "Container collecting the PortPins.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortNumberOfPortPins",
+              "description": "The number of specified PortPins in this PortContainer.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PortNumberOfPortPins",
+              "type": "INTEGER",
+              "uuid": "ECUC:7356db38-0423-454b-ba4f-7e399810f532"
+            }
+          ],
+          "references": [],
+          "shortName": "PortContainer",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin",
+              "description": "Configuration of the individual port pins.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinDirection",
+                  "description": "The initial direction of the pin (IN or OUT). If the direction is not changeable, the value configured here is fixed.",
+                  "enumValues": [
+                    "PORT_PIN_IN",
+                    "PORT_PIN_OUT"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "PortPinDirection",
+                  "type": "ENUM",
+                  "uuid": "ECUC:038b480e-bd05-4336-a32a-bf7cb3a68c2e"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinInitialMode",
+                  "description": "Port pin mode from mode list for use with Port_Init() function.",
+                  "enumValues": [
+                    "PORT_PIN_MODE_ADC",
+                    "PORT_PIN_MODE_CAN",
+                    "PORT_PIN_MODE_DIO",
+                    "PORT_PIN_MODE_DIO_GPT",
+                    "PORT_PIN_MODE_DIO_WDG",
+                    "PORT_PIN_MODE_FLEXRAY",
+                    "PORT_PIN_MODE_ICU",
+                    "PORT_PIN_MODE_LIN",
+                    "PORT_PIN_MODE_MEM",
+                    "PORT_PIN_MODE_PWM",
+                    "PORT_PIN_MODE_SPI"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "PortPinInitialMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:c95f0a90-5907-4ef7-9b50-3584bb8538ba"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinLevelValue",
+                  "description": "Port Pin Level value from Port pin list.",
+                  "enumValues": [
+                    "PORT_PIN_LEVEL_HIGH",
+                    "PORT_PIN_LEVEL_LOW"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "PortPinLevelValue",
+                  "type": "ENUM",
+                  "uuid": "ECUC:83fdd686-ae98-423f-bdfb-c46dad6783f4"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinMode",
+                  "description": "Port pin mode from mode list.",
+                  "enumValues": [
+                    "PORT_PIN_MODE_ADC",
+                    "PORT_PIN_MODE_CAN",
+                    "PORT_PIN_MODE_DIO",
+                    "PORT_PIN_MODE_DIO_GPT",
+                    "PORT_PIN_MODE_DIO_WDG",
+                    "PORT_PIN_MODE_FLEXRAY",
+                    "PORT_PIN_MODE_ICU",
+                    "PORT_PIN_MODE_LIN",
+                    "PORT_PIN_MODE_MEM",
+                    "PORT_PIN_MODE_PWM",
+                    "PORT_PIN_MODE_SPI"
+                  ],
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "PortPinMode",
+                  "type": "ENUM",
+                  "uuid": "ECUC:ff163464-81af-4158-8eeb-53f4fa69f397"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinDirectionChangeable",
+                  "description": "Parameter to indicate if the direction is changeable on a port pin during runtime.",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "PortPinDirectionChangeable",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:686de592-2deb-4cdb-a0d1-e99d6f499e1b"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinModeChangeable",
+                  "description": "Parameter to indicate if the mode is changeable on a port pin during runtime. True: Port Pin mode changeable allowed. False: Port Pin mode changeable not permi…",
+                  "isOptional": false,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "PortPinModeChangeable",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:512d1759-4b72-4f02-bdec-2faa5bb45295"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinId",
+                  "description": "Pin Id of the port pin. This value will be assigned to the symbolic name derived from the port pin container short name.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 1,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "PortPinId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:91633d90-a96c-46a2-b4fb-22d23da0c927"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Port/PortConfigSet/PortContainer/PortPin/PortPinEcucPartitionRef",
+                  "description": "Maps the Port pin to zero a multiple ECUC partitions. The ECUC partitions referenced are a subset of the ECUC partitions where the Port driver is mapped to. Ta…",
+                  "destinationContainerType": "EcucPartition",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": "unbounded"
+                  },
+                  "shortName": "PortPinEcucPartitionRef",
+                  "uuid": "ECUC:c189e343-33ec-4956-8488-9e36db56c0e9"
+                }
+              ],
+              "shortName": "PortPin",
+              "subContainers": [],
+              "uuid": "ECUC:1768f065-a030-4205-8de9-30b561da3ba3"
+            }
+          ],
+          "uuid": "ECUC:6aa61659-c6de-4d25-8713-ac864fdf5e37"
+        }
+      ],
+      "uuid": "ECUC:d97c27ef-38b0-4bdf-8384-d10c0a3bba83"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Port/PortGeneral",
+      "description": "Module wide configuration parameters of the PORT driver.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Port/PortGeneral/PortDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PortDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:348d2d10-2ba2-4a1e-aaa8-002dac40f627"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Port/PortGeneral/PortSetPinDirectionApi",
+          "description": "Pre-processor switch to enable / disable the use of the function Port_SetPinDirection().",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PortSetPinDirectionApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3fc8ef56-7ddc-49ae-ae97-635ac0a7ab16"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Port/PortGeneral/PortSetPinModeApi",
+          "description": "Pre-processor switch to enable / disable the use of the function Port_SetPinMode().",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PortSetPinModeApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9be9eec7-c8d6-41d4-a9ca-c27c3c5a83d6"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Port/PortGeneral/PortVersionInfoApi",
+          "description": "Pre-processor switch to enable / disable the API to read out the modules version information.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "PortVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:512568ee-3407-4c5d-bd4c-6a0b65a83fba"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Port/PortGeneral/PortEcucPartitionRef",
+          "description": "Maps the Port driver to zero a multiple ECUC partitions to make the modules API available in this partition. Tags: atp.Status=draft",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "PortEcucPartitionRef",
+          "uuid": "ECUC:ff23140d-f9b0-42e0-8090-e1fb31bbe127"
+        }
+      ],
+      "shortName": "PortGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:9d811d70-8cc9-4c5c-bb07-fc5de786d2ec"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Port",
+  "description": "Configuration of the Port module.",
+  "importWarnings": [
+    "PortPinMode：多值参数的 multiplicity 已保留，当前编辑器只编辑一个值。",
+    "PortPinEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "PortPinEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "PortEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "PortEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Port",
+  "version": "4.4.0"
+}

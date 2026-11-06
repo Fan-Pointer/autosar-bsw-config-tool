@@ -14,7 +14,9 @@ export function createParameterValue(definition: BswmdParameter): ConfigParamete
       case 'FLOAT':
         return definition.min ?? 0;
       case 'ENUM':
-        return definition.enumValues?.[0] ?? '';
+        return definition.sourceDefaultValue !== undefined
+          ? ''
+          : (definition.enumValues?.[0] ?? '');
       default:
         return '';
     }

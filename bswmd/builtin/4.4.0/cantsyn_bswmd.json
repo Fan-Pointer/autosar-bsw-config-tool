@@ -1,0 +1,703 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "4db7a3e9234f82ab2e2454fd20377875ee26e3b4eb07a684ef5172830cb11983",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGeneral",
+      "description": "This container holds the general parameters of the CAN-specific Synchronized Time-base Manager",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGeneral/CanTSynDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTSynDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:20d72b9e-168f-496d-a253-7205a230ae2a"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGeneral/CanTSynVersionInfoApi",
+          "description": "Activate/Deactivate the version information API (CanTSyn_GetVersionInfo). True: version information API activated False: version information API deactivated.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTSynVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:d296ff0f-50b5-4d5e-9178-302ecdc22a86"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGeneral/CanTSynMainFunctionPeriod",
+          "description": "Schedule period of the main function CanTSyn_MainFunction. Unit: [s].",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTSynMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:6912c04d-042a-4186-94ef-d8a6c7a6d461"
+        }
+      ],
+      "references": [],
+      "shortName": "CanTSynGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:02a0a14a-86e3-40a8-a811-a5cbc17c2aae"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain",
+      "description": "This represents the existence of a global time domain on CAN. The CanTSyn module can administrate several global time domains at the same time that in itself f…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeDomainId",
+          "description": "The global time domain ID.",
+          "isOptional": false,
+          "max": 31,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTSynGlobalTimeDomainId",
+          "type": "INTEGER",
+          "uuid": "ECUC:f6ad8a08-a1be-4d15-9351-d5c855dd5461"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": 0,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSecureTmacLength",
+          "description": "Represents the number of bytes for the used Truncated Message Authentication Code (TMAC). If 0, no message authentication will be used. Tags: atp.Status=draft",
+          "isOptional": false,
+          "max": 16,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTSynGlobalTimeSecureTmacLength",
+          "type": "INTEGER",
+          "uuid": "ECUC:eb08092a-3604-47ea-aaf0-35c4cd3ca8a7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynUseExtendedMsgFormat",
+          "description": "Switches support for 16 Byte Timesync messages on or off (for CAN FD only)",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTSynUseExtendedMsgFormat",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e212434b-42cb-4ce2-96b1-4ac324375d34"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynSynchronizedTimeBaseRef",
+          "description": "Mandatory reference to the required synchronized time-base.",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CanTSynSynchronizedTimeBaseRef",
+          "uuid": "ECUC:5edfeb0d-45c7-42d0-8089-f0a608cbeeed"
+        }
+      ],
+      "shortName": "CanTSynGlobalTimeDomain",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeFupDataIDList",
+          "description": "The DataIDList for FUP messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CanTSynGlobalTimeFupDataIDList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeFupDataIDList/CanTSynGlobalTimeFupDataIDListElement",
+              "description": "Element of the DataIDList for FUP messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+              "multiplicity": {
+                "lower": 16,
+                "upper": 16
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeFupDataIDList/CanTSynGlobalTimeFupDataIDListElement/CanTSynGlobalTimeFupDataIDListIndex",
+                  "description": "Index of the DataIDList for FUP messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeFupDataIDListIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:0252fc76-81cf-4537-9ee4-81a5c4bba99f"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeFupDataIDList/CanTSynGlobalTimeFupDataIDListElement/CanTSynGlobalTimeFupDataIDListValue",
+                  "description": "Value of the DataIDList for FUP messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeFupDataIDListValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:48586ce3-ee92-4c63-b162-197ade1807bb"
+                }
+              ],
+              "references": [],
+              "shortName": "CanTSynGlobalTimeFupDataIDListElement",
+              "subContainers": [],
+              "uuid": "ECUC:deb2e88e-f8a9-477f-acf5-7e27044cc69b"
+            }
+          ],
+          "uuid": "ECUC:abc1d52e-6df4-4042-8017-444e921ac4ec"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster",
+          "description": "Configuration of the global time master. Each global time domain is required to have exactly one global time master. This master may or may not exist on the co…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynCyclicMsgResumeTime",
+              "description": "Defines the time where the 1st regular cycle time based message transmission takes place, after an immediate transmission before. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynCyclicMsgResumeTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:b498400e-64dc-4c5a-8491-0b185d152ea2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynGlobalTimeDebounceTime",
+              "description": "This represents the configuration of a TX debounce time for SYNC, FUP, OFS and OFNS messages compared to a message before with the same PDU. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynGlobalTimeDebounceTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:a10ed78e-4e7c-43d6-abff-7e566918a74b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynGlobalTimeTxPeriod",
+              "description": "This represents configuration of the TX period. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynGlobalTimeTxPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:6f787960-e6d3-4cd8-9be0-b8b8f1cfd6fa"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynMasterConfirmationTimeout",
+              "description": "This represents the confirmation timeout after transmission of each Timesync message.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynMasterConfirmationTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:5134b771-783b-49e8-aa30-7b1c92f56e2a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynGlobalTimeTxCrcSecured",
+              "description": "This represents the configuration of whether or not CRC is supported.",
+              "enumValues": [
+                "CRC_NOT_SUPPORTED",
+                "CRC_SUPPORTED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynGlobalTimeTxCrcSecured",
+              "type": "ENUM",
+              "uuid": "ECUC:688ff3f8-829d-4ffe-a058-d39f4094eb3b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynTxTmacCalculated",
+              "description": "This parameter controls whether or not TMAC calculation shall be supported. Tags: atp.Status=draft",
+              "enumValues": [
+                "TMAC_CALCULATED",
+                "TMAC_NOT_CALCULATED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynTxTmacCalculated",
+              "type": "ENUM",
+              "uuid": "ECUC:bed9ef3b-eec5-4e82-8845-8e8aa702038d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynImmediateTimeSync",
+              "description": "Enables/Disables the cyclic polling of StbM_GetTimeBaseUpdateCounter() within CanTSyn_MainFunction().",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynImmediateTimeSync",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:ebca5b87-af6f-48c1-9aa2-e82ad75f4a24"
+            }
+          ],
+          "references": [],
+          "shortName": "CanTSynGlobalTimeMaster",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynGlobalTimeMasterPdu",
+              "description": "This container encloses the configuration of the PDU that is supposed to contain the global time information.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynGlobalTimeMasterPdu/CanTSynGlobalTimeMasterConfirmationHandleId",
+                  "description": "This represents the handle ID of the PDU that contains the global time information.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeMasterConfirmationHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:19d98c8e-3bc0-4332-9f2f-53900e56fa17"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeMaster/CanTSynGlobalTimeMasterPdu/CanTSynGlobalTimePduRef",
+                  "description": "This represents the reference to the Pdu taken to transmit the global time information. The global time master of a global time domain acts as the sender of th…",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimePduRef",
+                  "uuid": "ECUC:6847e4d6-07d1-953f-4c6a-eb3652785f28"
+                }
+              ],
+              "shortName": "CanTSynGlobalTimeMasterPdu",
+              "subContainers": [],
+              "uuid": "ECUC:d5318374-9ff0-4dea-abdf-12e25c4fc4fd"
+            }
+          ],
+          "uuid": "ECUC:cff9a851-6d70-4e41-a02c-77f9b7a76422"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfnsDataIDList",
+          "description": "The DataIDList for OFNS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CanTSynGlobalTimeOfnsDataIDList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfnsDataIDList/CanTSynGlobalTimeOfnsDataIDListElement",
+              "description": "Element of the DataIDList for OFNS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+              "multiplicity": {
+                "lower": 16,
+                "upper": 16
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfnsDataIDList/CanTSynGlobalTimeOfnsDataIDListElement/CanTSynGlobalTimeOfnsDataIDListIndex",
+                  "description": "Index of the DataIDList for OFNS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeOfnsDataIDListIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:fdf8cdfc-7e96-45a9-a4df-69231bc76599"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfnsDataIDList/CanTSynGlobalTimeOfnsDataIDListElement/CanTSynGlobalTimeOfnsDataIDListValue",
+                  "description": "Value of the DataIDList for OFNS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeOfnsDataIDListValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:4af36e4e-d14a-4c28-b314-7fb50d25f8cd"
+                }
+              ],
+              "references": [],
+              "shortName": "CanTSynGlobalTimeOfnsDataIDListElement",
+              "subContainers": [],
+              "uuid": "ECUC:043eac8f-d650-4961-bcc7-e9333e5d08d5"
+            }
+          ],
+          "uuid": "ECUC:dfb15310-255c-4300-8b18-a0358d7715d6"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfsDataIDList",
+          "description": "The DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CanTSynGlobalTimeOfsDataIDList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfsDataIDList/CanTSynGlobalTimeOfsDataIDListElement",
+              "description": "Element of the DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+              "multiplicity": {
+                "lower": 16,
+                "upper": 16
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfsDataIDList/CanTSynGlobalTimeOfsDataIDListElement/CanTSynGlobalTimeOfsDataIDListIndex",
+                  "description": "Index of the DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeOfsDataIDListIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:2f032f6a-4a7f-4889-8caa-64ea7469d5db"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeOfsDataIDList/CanTSynGlobalTimeOfsDataIDListElement/CanTSynGlobalTimeOfsDataIDListValue",
+                  "description": "Value of the DataIDList for OFS messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeOfsDataIDListValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:d1a8db01-fb51-4af5-a947-2733f1c1910d"
+                }
+              ],
+              "references": [],
+              "shortName": "CanTSynGlobalTimeOfsDataIDListElement",
+              "subContainers": [],
+              "uuid": "ECUC:b7844e27-1032-4657-99db-2ac78efe1383"
+            }
+          ],
+          "uuid": "ECUC:e4a4477c-b6df-4583-8a10-1e3998161b99"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave",
+          "description": "Configuration of a global time slave. Each global time domain is required to have at least one time slave. The configured ECU may or may not represent a time s…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynGlobalTimeFollowUpTimeout",
+              "description": "Rx timeout for the follow-up message. This is only relevant for selected bus systems Unit:seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynGlobalTimeFollowUpTimeout",
+              "type": "FLOAT",
+              "uuid": "ECUC:0d5073b6-c81e-4f08-9fb7-4638128c5801"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": 0,
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynGlobalTimeMinMsgGap",
+              "description": "This parameter represents the configuration of a minimum message gap time for received Timesync messages compared to a message before with the same PDU. If PDU…",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynGlobalTimeMinMsgGap",
+              "type": "FLOAT",
+              "uuid": "ECUC:03346a12-717f-4795-a508-a2b0f7b206a2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynGlobalTimeSequenceCounterJumpWidth",
+              "description": "The SequenceCounterJumpWidth specifies the maximum allowed gap of the Sequence Counter between two SYNC resp. two OFS messages.",
+              "isOptional": false,
+              "max": 15,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynGlobalTimeSequenceCounterJumpWidth",
+              "type": "INTEGER",
+              "uuid": "ECUC:e77f7729-6186-4ac0-9020-5d883541ea54"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynRxCrcValidated",
+              "description": "Definition of whether or not validation of the CRC is supported.",
+              "enumValues": [
+                "CRC_IGNORED",
+                "CRC_NOT_VALIDATED",
+                "CRC_OPTIONAL",
+                "CRC_VALIDATED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynRxCrcValidated",
+              "type": "ENUM",
+              "uuid": "ECUC:7784397b-19ae-463b-a28c-5e41dba352aa"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynRxTmacValidated",
+              "description": "This parameter controls whether or not TMAC validation shall be supported. Tags: atp.Status=draft",
+              "enumValues": [
+                "TMAC_NOT_VALIDATED",
+                "TMAC_VALIDATED"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CanTSynRxTmacValidated",
+              "type": "ENUM",
+              "uuid": "ECUC:bb66806e-07cb-4752-aa1e-69873f0ae91c"
+            }
+          ],
+          "references": [],
+          "shortName": "CanTSynGlobalTimeSlave",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynGlobalTimeSlavePdu",
+              "description": "This container encloses the configuration of the PDU that is supposed to contain the global time information.",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynGlobalTimeSlavePdu/CanTSynGlobalTimeSlaveHandleId",
+                  "description": "This represents the handle ID of the PDU that contains the global time information.",
+                  "isOptional": false,
+                  "max": 65535,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeSlaveHandleId",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:f7af8e82-c061-4415-9619-25e5c1bccf67"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSlave/CanTSynGlobalTimeSlavePdu/CanTSynGlobalTimePduRef",
+                  "description": "This represents the reference to the Pdu taken to transmit the global time information. The global time master of a global time domain acts as the sender of th…",
+                  "destinationContainerType": "Pdu",
+                  "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimePduRef",
+                  "uuid": "ECUC:2bbbd19e-465d-9600-2136-67a1ed1c8571"
+                }
+              ],
+              "shortName": "CanTSynGlobalTimeSlavePdu",
+              "subContainers": [],
+              "uuid": "ECUC:98a5703c-de7c-4eab-80aa-8f4df6f3eb46"
+            }
+          ],
+          "uuid": "ECUC:453b6e91-cb63-4fdc-b77d-2204844ed77a"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSyncDataIDList",
+          "description": "The DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [],
+          "references": [],
+          "shortName": "CanTSynGlobalTimeSyncDataIDList",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSyncDataIDList/CanTSynGlobalTimeSyncDataIDListElement",
+              "description": "Element of the DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+              "multiplicity": {
+                "lower": 16,
+                "upper": 16
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSyncDataIDList/CanTSynGlobalTimeSyncDataIDListElement/CanTSynGlobalTimeSyncDataIDListIndex",
+                  "description": "Index for the DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 15,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeSyncDataIDListIndex",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:1e79e595-d2c7-412b-a23f-afa0763fb6f2"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn/CanTSynGlobalTimeDomain/CanTSynGlobalTimeSyncDataIDList/CanTSynGlobalTimeSyncDataIDListElement/CanTSynGlobalTimeSyncDataIDListValue",
+                  "description": "Value of the DataIDList for SYNC messages ensures the identification of data elements due to CRC calculation and message authentication process.",
+                  "isOptional": false,
+                  "max": 255,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "CanTSynGlobalTimeSyncDataIDListValue",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:308d7e86-9415-4519-9698-d1773b851afe"
+                }
+              ],
+              "references": [],
+              "shortName": "CanTSynGlobalTimeSyncDataIDListElement",
+              "subContainers": [],
+              "uuid": "ECUC:2b135526-8dc8-4081-945d-6883ea7e6139"
+            }
+          ],
+          "uuid": "ECUC:17dbc6e9-2139-482c-a18d-65f2aa7563a8"
+        }
+      ],
+      "uuid": "ECUC:e4a9aecb-0fe0-4597-9f3b-8f156d9ac964"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/CanTSyn",
+  "description": "Configuration of the Synchronized Time-base Manager (StbM) module with respect to global time handling on CAN.",
+  "importWarnings": [
+    "CanTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanTSynGlobalTimePduRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu 位于本模块之外；编辑器只读展示。",
+    "CanTSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "CanTSyn",
+  "version": "4.4.0"
+}

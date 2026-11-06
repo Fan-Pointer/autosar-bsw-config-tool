@@ -1,0 +1,434 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "d8bae485c02dec381469f8a1fb5abed21267d939939fb3305a320e264e16d2b8",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the global PduCollection.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "EcucConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection",
+          "description": "Collection of all Pdu objects flowing through the Com-Stack.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/PduIdTypeEnum",
+              "description": "The PduIdType is used within the entire AUTOSAR Com Stack except for bus drivers. The size of this global type depends on the maximum number of PDUs used withi…",
+              "enumValues": [
+                "UINT16",
+                "UINT8"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduIdTypeEnum",
+              "type": "ENUM",
+              "uuid": "ECUC:58955203-89bd-4dcf-b3d4-c5e83c87080b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/PduLengthTypeEnum",
+              "description": "The PduLengthType is used within the entire AUTOSAR Com Stack except for bus drivers. The size of this global type depends on the maximum length of PDUs to be …",
+              "enumValues": [
+                "UINT16",
+                "UINT32",
+                "UINT8"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PduLengthTypeEnum",
+              "type": "ENUM",
+              "uuid": "ECUC:3ffce745-6c26-4c88-a57f-cd785b21e467"
+            }
+          ],
+          "references": [],
+          "shortName": "EcucPduCollection",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu",
+              "description": "One Pdu flowing through the COM-Stack.",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "parameters": [
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu/J1939Requestable",
+                  "description": "Pdu can be triggered by the J1939 request message.",
+                  "isOptional": true,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "J1939Requestable",
+                  "type": "BOOLEAN",
+                  "uuid": "ECUC:5f51de6e-5995-4e90-b083-1d5b7a90848c"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "defaultValue": 0,
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu/MetaDataLength",
+                  "description": "Number of additional bytes in PDU data that contain auxiliary information (MetaData) for the PDU, e.g. the CAN ID. These bytes are handled as part of the PDU d…",
+                  "isOptional": true,
+                  "max": 4,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "MetaDataLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:c838922b-b316-448d-9231-b37db46d7178"
+                },
+                {
+                  "configClass": "PRE_COMPILE",
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu/PduLength",
+                  "description": "Length of the Pdu in bytes. It should be noted that in former AUTOSAR releases (Rel 2.1, Rel 3.0, Rel 3.1, Rel 4.0 Rev. 1) this parameter was defined in bits.",
+                  "isOptional": false,
+                  "max": 4294967295,
+                  "min": 0,
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "PduLength",
+                  "type": "INTEGER",
+                  "uuid": "ECUC:3996a201-ffdf-43d1-a5e8-f88592a78a35"
+                }
+              ],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu/SysTPduToFrameTriggeringRef",
+                  "description": "Reference to the FrameTriggering from the SystemTemplate which this Pdu belongs to.",
+                  "destinationContainerType": "SysTPduToFrameTriggeringRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "foreign",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SysTPduToFrameTriggeringRef",
+                  "uuid": "ECUC:c540d959-e145-47c1-b8d4-7bba46200f34"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucConfigSet/EcucPduCollection/Pdu/SysTPduToPduTriggeringRef",
+                  "description": "Reference to the PduTriggering from the SystemTemplate which this Pdu represents.",
+                  "destinationContainerType": "SysTPduToPduTriggeringRef",
+                  "destinationRefs": [],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "foreign",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "SysTPduToPduTriggeringRef",
+                  "uuid": "ECUC:8ae470f5-d0b3-40ad-b681-a858fc793be3"
+                }
+              ],
+              "shortName": "Pdu",
+              "subContainers": [],
+              "uuid": "ECUC:422a7abf-add2-418a-81a6-af5cdeae1930"
+            }
+          ],
+          "uuid": "ECUC:cece0b62-6981-43fb-a5b7-d573fdfb2344"
+        }
+      ],
+      "uuid": "ECUC:37cb0ecf-a6ac-4b05-aaf8-d97ec61f1ae8"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucHardware",
+      "description": "Hardware definition of this Ecu.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "EcucHardware",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition",
+          "description": "Definition of one Core on this Ecu.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition/EcucCoreId",
+              "description": "ID of the core.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EcucCoreId",
+              "type": "INTEGER",
+              "uuid": "ECUC:9127a2e5-b908-4f76-b741-655836d78c67"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucHardware/EcucCoreDefinition/EcucCoreHwRef",
+              "description": "Optional reference to the HwElement of HwCategory ProcessingUnit that represents this Core in the ECU Resource Template.",
+              "destinationContainerType": "EcucCoreHwRef",
+              "destinationRefs": [],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "foreign",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EcucCoreHwRef",
+              "uuid": "ECUC:7ad013ef-fbcb-4c2a-aef2-be260c5016b4"
+            }
+          ],
+          "shortName": "EcucCoreDefinition",
+          "subContainers": [],
+          "uuid": "ECUC:e12b8e86-0925-4854-b1a6-adee8a2cf090"
+        }
+      ],
+      "uuid": "ECUC:4494efcd-a0fa-42f6-9f5d-25817cdc0188"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection",
+      "description": "Collection of Partitions defined for this ECU.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "EcucPartitionCollection",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "description": "Definition of one Partition on this ECU.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition/EcucPartitionBswModuleExecution",
+              "description": "Denotes that this partition will execute BSW Modules. BSW Modules can only be executed in such partitions.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EcucPartitionBswModuleExecution",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:72f87183-bf87-4f64-a990-38b29817aa2c"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": true,
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition/EcucPartitionQmBswModuleExecution",
+              "description": "Denotes that this partition will execute QM BSW.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EcucPartitionQmBswModuleExecution",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:1248216f-2cb5-4a86-9bb1-210ea8a1de75"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition/PartitionCanBeRestarted",
+              "description": "Specifies the requirement whether the Partition can be restarted. If set to true all software executing in this partition shall be capable of handling a restar…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "PartitionCanBeRestarted",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:4fbca4af-d17a-463a-9b70-fad218ab42a9"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition/EcucPartitionBswModuleDistinguishedPartition",
+              "description": "This maps the abstract partition of the Bsw Module to a concrete Partition existing in the ECU.",
+              "destinationContainerType": "EcucPartitionBswModuleDistinguishedPartition",
+              "destinationRefs": [],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "foreign",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "EcucPartitionBswModuleDistinguishedPartition",
+              "uuid": "ECUC:1772e02e-3cd8-4f8f-b959-5ec38aafef41"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition/EcucPartitionSoftwareComponentInstanceRef",
+              "description": "References the SW Component instances from the Ecu Extract that shall be executed in this partition.",
+              "destinationContainerType": "EcucPartitionSoftwareComponentInstanceRef",
+              "destinationRefs": [],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "instance",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "EcucPartitionSoftwareComponentInstanceRef",
+              "uuid": "ECUC:fcd3eca6-d43f-42f7-86a1-80043415256b"
+            }
+          ],
+          "shortName": "EcucPartition",
+          "subContainers": [],
+          "uuid": "ECUC:c11de67e-41cd-4da2-8cfc-01c5e34209be"
+        }
+      ],
+      "uuid": "ECUC:ed28c0d5-4e0c-4826-89fa-449203a3ce8e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPostBuildVariants",
+      "description": "Collection of toplevel PostBuildSelectable variants. The PredefinedVariants linked inside this container will determine how many PostBuildSelectableVariants ex…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucPostBuildVariants/EcucPostBuildVariantRef",
+          "description": "Reference to a PredefinedVariant that defines one toplevel postBuild configuration set (covering all post-build capable BSW modules). PredefinedVariants that a…",
+          "destinationContainerType": "EcucPostBuildVariantRef",
+          "destinationRefs": [],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "foreign",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "shortName": "EcucPostBuildVariantRef",
+          "uuid": "ECUC:6e75f9c8-e66b-4ca6-8d0b-c14951c14811"
+        }
+      ],
+      "shortName": "EcucPostBuildVariants",
+      "subContainers": [],
+      "uuid": "ECUC:154a283d-82e3-45cd-a7a1-f3264adee18b"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucUnitGroupAssignment",
+      "description": "Collection of UnitGroup references to support the generation of ASAM MCD file.",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucUnitGroupAssignment/EcucUnitGroupRef",
+          "description": "Optional reference to the UnitGroup to support the generation of ASAM MCD file. These UnitGroups are selecting a set of units for a specific country.",
+          "destinationContainerType": "EcucUnitGroupRef",
+          "destinationRefs": [],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "foreign",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "shortName": "EcucUnitGroupRef",
+          "uuid": "ECUC:bdb68486-b9c6-47e4-baac-ff65e646115f"
+        }
+      ],
+      "shortName": "EcucUnitGroupAssignment",
+      "subContainers": [],
+      "uuid": "ECUC:2b261d84-fed7-4fd0-b94b-2cac2e4fb5fe"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucVariationResolver",
+      "description": "Collection of PredefinedVariant elements containing definition of values for SwSystemconst which shall be applied when resolving the variability during ECU Con…",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EcuC/EcucVariationResolver/PredefinedVariantRef",
+          "destinationContainerType": "PredefinedVariantRef",
+          "destinationRefs": [],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "foreign",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "shortName": "PredefinedVariantRef",
+          "uuid": "ECUC:84013509-59a1-46d4-ba0d-5bcfb76b941f"
+        }
+      ],
+      "shortName": "EcucVariationResolver",
+      "subContainers": [],
+      "uuid": "ECUC:973d00a5-5e98-4b38-8b7b-ddd518d40317"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EcuC",
+  "description": "Virtual module to collect ECU Configuration specific / global configuration information.",
+  "importWarnings": [
+    "SysTPduToFrameTriggeringRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "SysTPduToPduTriggeringRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcucCoreHwRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcucPartitionBswModuleDistinguishedPartition：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcucPartitionBswModuleDistinguishedPartition：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcucPartitionSoftwareComponentInstanceRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcucPartitionSoftwareComponentInstanceRef：instance 引用无静态目标（实例引用），编辑器只读展示。",
+    "EcucPostBuildVariantRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcucPostBuildVariantRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "EcucUnitGroupRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "EcucUnitGroupRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。",
+    "PredefinedVariantRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "PredefinedVariantRef：foreign 引用无静态目标（跨模块引用），编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "EcuC",
+  "version": "4.2.2"
+}

@@ -2,7 +2,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createPinia, setActivePinia } from 'pinia';
 import { mount, flushPromises, type VueWrapper } from '@vue/test-utils';
 import { createMemoryHistory, createRouter } from 'vue-router';
-import ElementPlus from 'element-plus';
+import ElementPlus, { ElMessageBox } from 'element-plus';
+import ModuleManager from '../src/ui/Modules/ModuleManager.vue';
+import ModuleSelector from '../src/ui/Modules/ModuleSelector.vue';
+import { moduleKey } from '../src/core/bswmd/ModuleKey';
+import { exportJson, importJson } from '../src/core/io/ConfigJson';
 import { useConfigStore } from '../src/stores/configStore';
 import ProjectWizard from '../src/ui/Projects/ProjectWizard.vue';
 import HomeView from '../src/views/HomeView.vue';
@@ -40,6 +44,185 @@ beforeEach(() => {
 });
 afterEach(() => {
   wrappers.splice(0).forEach((w) => w.unmount());
+  vi.restoreAllMocks();
+});
+
+describe('TASK-021 version-scoped project module lifecycle', () => {
+  it('creates, edits and restores real 4.2.2 and 4.4.0 Dem with independent definitions and preferences', async () => {
+    const store = useConfigStore();
+    for (const release of ['4.2.2', '4.4.0']) {
+      expect(
+        await store.createProject({
+          ...input,
+          name: release,
+          autosarVersion: release,
+          moduleShortNames: ['Dem'],
+        })
+      ).toBe(true);
+      expect(store.config?.version).toBe(release);
+      const entry = store.entries.find((e) =>
+        e.definition.parameters.some((p) => p.type === 'BOOLEAN')
+      )!;
+      store.selectContainer(entry.container.uuid);
+      const field = entry.definition.parameters.find((p) => p.type === 'BOOLEAN')!;
+      store.setParameterValue(field.uuid, release === '4.2.2');
+      store.modulePreferences[moduleKey('Dem', release)].generation = release !== '4.2.2';
+      await store.saveConfig();
+      expect(importJson(exportJson(store.config!), store.modules)).toEqual(store.config);
+      store.validate();
+      expect(store.violations.length).toBeGreaterThan(0);
+    }
+    const before = store.configSets.map(exportJson);
+    setActivePinia(createPinia());
+    const loaded = useConfigStore();
+    db.write.mockClear();
+    expect(await loaded.initialize()).toBe(true);
+    expect(db.write).not.toHaveBeenCalled();
+    expect(loaded.configSets.map(exportJson)).toEqual(before);
+    expect(loaded.getModulePreference('Dem', '4.2.2').generation).toBe(false);
+    expect(loaded.getModulePreference('Dem', '4.4.0').generation).toBe(true);
+    for (const project of loaded.projects) {
+      expect(await loaded.openProject(project.projectUuid)).toBe(true);
+      expect(loaded.module?.version).toBe(project.autosarVersion);
+      expect(loaded.config?.version).toBe(project.autosarVersion);
+    }
+  });
+
+  it('adds, detaches and restores exact configurations across reload; another project is never borrowed', async () => {
+    const store = useConfigStore();
+    await store.createProject({ ...input, moduleShortNames: ['Dem'] });
+    const first = store.activeProject!.projectUuid;
+    const originalId = store.activeUuid!;
+    store.renameContainer('RetainedRoot');
+    await store.saveConfig();
+    const original = exportJson(store.config!);
+    expect(await store.updateProjectModules(first, ['Dem', 'CanIf'])).toBe(true);
+    expect(store.activeProject?.moduleShortNames).toEqual(['Dem', 'CanIf']);
+    expect(await store.updateProjectModules(first, ['CanIf'])).toBe(true);
+    expect(store.activeProject?.moduleShortNames).toEqual(['CanIf']);
+    expect(store.unassignedSets.some((s) => s.uuid === originalId)).toBe(true);
+    expect(exportJson(store.configSets.find((s) => s.uuid === originalId)!)).toBe(original);
+    await store.createProject({ ...input, name: 'Other', moduleShortNames: ['Dem'] });
+    const other = store.activeUuid;
+    setActivePinia(createPinia());
+    const loaded = useConfigStore();
+    await loaded.initialize();
+    expect(await loaded.updateProjectModules(first, ['CanIf', 'Dem'])).toBe(true);
+    expect(loaded.activeProject?.setUuids).toContain(originalId);
+    expect(loaded.activeProject?.setUuids).not.toContain(other);
+    expect(exportJson(loaded.configSets.find((s) => s.uuid === originalId)!)).toBe(original);
+    expect(await loaded.updateProjectModules(first, [])).toBe(true);
+    expect(loaded.activeProject?.projectUuid).toBe(first);
+    expect(loaded.activeProject?.setUuids).toEqual([]);
+    expect(loaded.configSets).toHaveLength(3);
+    setActivePinia(createPinia());
+    const empty = useConfigStore();
+    await empty.initialize();
+    expect(await empty.openProject(first)).toBe(true);
+    expect(empty.activeProject?.projectUuid).toBe(first);
+    expect(await empty.updateProjectModules(first, ['Dem'])).toBe(true);
+    expect(empty.activeUuid).toBe(originalId);
+  });
+
+  it('rolls back both project membership and configuration data if persistence fails', async () => {
+    const store = useConfigStore();
+    await store.createProject({ ...input, moduleShortNames: ['Dem'] });
+    const before = JSON.stringify(db.data.get(projectsKey));
+    const values = store.configSets.map(exportJson),
+      active = store.activeUuid;
+    db.write.mockImplementation(async (key: string, value: unknown) => {
+      if (key === libraryKey) throw new Error('quota exceeded');
+      db.data.set(key, JSON.parse(JSON.stringify(value)));
+      return value;
+    });
+    expect(await store.updateProjectModules(store.activeProject!.projectUuid, ['NvM'])).toBe(false);
+    expect(JSON.stringify(db.data.get(projectsKey))).toBe(before);
+    expect(store.configSets.map(exportJson)).toEqual(values);
+    expect(store.activeUuid).toBe(active);
+  });
+
+  it('normalizes missing release and legacy preferences only in memory without rewriting old data', async () => {
+    const store = useConfigStore();
+    await store.createConfigSet('Legacy baseline');
+    const raw = db.data.get(libraryKey) as {
+      sets: { version?: string }[];
+      modulePreferences: Record<string, unknown>;
+    };
+    delete raw.sets[0].version;
+    raw.modulePreferences = { Dem: { included: true, generation: false, validation: true } };
+    const bytes = JSON.stringify(raw);
+    db.write.mockClear();
+    setActivePinia(createPinia());
+    const loaded = useConfigStore();
+    await loaded.initialize();
+    expect(loaded.config?.version).toBe('4.4.0');
+    expect(loaded.getModulePreference('Dem', '4.4.0').generation).toBe(false);
+    expect(loaded.getModulePreference('Dem', '4.2.2').generation).toBe(true);
+    expect(db.write).not.toHaveBeenCalled();
+    expect(JSON.stringify(db.data.get(libraryKey))).toBe(bytes);
+  });
+
+  it('shows all 84/98 names, disabled reasons and deduplicated transfers through the shared selector', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    const wrapper = mount(ModuleManager, {
+      props: { modelValue: true },
+      global: { plugins: [ElementPlus], stubs: { teleport: true } },
+    });
+    wrappers.push(wrapper);
+    await flushPromises();
+    expect(wrapper.findComponent(ModuleSelector).exists()).toBe(true);
+    expect(wrapper.findAll('.module-option').length + wrapper.findAll('tbody tr').length).toBe(98);
+    await wrapper.get('[aria-label="模块目录版本"]').setValue('4.2.2');
+    expect(wrapper.findAll('.module-option')).toHaveLength(84);
+    expect(wrapper.get('[aria-label="选择 Dcm"]').attributes('disabled')).toBeDefined();
+    expect(
+      wrapper
+        .findAll('.module-option')
+        .find((w) => w.text().includes('Dcm'))!
+        .attributes('title')
+    ).toContain('ADD-INFO');
+    await wrapper.get('[aria-label="搜索可用模块"]').setValue('dem');
+    expect(wrapper.findAll('.module-option')).toHaveLength(1);
+    await wrapper.get('[aria-label="选择 Dem"]').setValue(true);
+    await wrapper.get('[aria-label="加入模块"]').trigger('click');
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1);
+    expect(wrapper.get('tbody tr').text()).toContain('4.2.2');
+    await wrapper.get('[aria-label="加入模块"]').trigger('click');
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1);
+    expect(db.write).not.toHaveBeenCalled();
+  });
+
+  it('cancels membership confirmation without writes and applies the same selection after confirmation', async () => {
+    const store = useConfigStore();
+    await store.createProject({ ...input, moduleShortNames: ['Dem'] });
+    const wrapper = mount(ModuleManager, {
+      props: { modelValue: true },
+      global: { plugins: [ElementPlus], stubs: { teleport: true } },
+    });
+    wrappers.push(wrapper);
+    await flushPromises();
+    await wrapper.get('[aria-label="选择模块 Dem"]').setValue(true);
+    await wrapper.get('[aria-label="移除模块"]').trigger('click');
+    const confirm = vi.spyOn(ElMessageBox, 'confirm').mockRejectedValue('cancel');
+    const button = wrapper.findAll('button').find((w) => w.text() === '确定')!;
+    const bytes = JSON.stringify([...db.data]);
+    db.write.mockClear();
+    await button.trigger('click');
+    await flushPromises();
+    expect(confirm).toHaveBeenCalled();
+    expect(db.write).not.toHaveBeenCalled();
+    expect(JSON.stringify([...db.data])).toBe(bytes);
+    expect(store.activeProject?.moduleShortNames).toEqual(['Dem']);
+    // Element Plus intersects the prompt and confirm result types; this overload resolves Action.
+    confirm.mockImplementation(
+      () => Promise.resolve('confirm') as ReturnType<typeof ElMessageBox.confirm>
+    );
+    await button.trigger('click');
+    await flushPromises();
+    expect(store.activeProject?.moduleShortNames).toEqual([]);
+    expect(store.configSets).toHaveLength(1);
+  });
 });
 
 describe('project metadata with real shipped definitions', () => {
@@ -135,7 +318,7 @@ describe('project metadata with real shipped definitions', () => {
   it('rejects unsupported releases and original-library locks without sidecar writes', async () => {
     const store = useConfigStore();
     await store.initialize();
-    await expect(store.createProject({ ...input, autosarVersion: '4.2.2' })).rejects.toThrow(
+    await expect(store.createProject({ ...input, autosarVersion: '4.5.0' })).rejects.toThrow(
       '待接入'
     );
     store.dataSafety.locked = true;
@@ -212,7 +395,7 @@ describe('project wizard and portal navigation', () => {
         .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
       await flushPromises();
     };
-    expect(dialog().querySelector('option[value="4.2.2"]')?.hasAttribute('disabled')).toBe(true);
+    expect(dialog().querySelector('option[value="4.2.2"]')?.hasAttribute('disabled')).toBe(false);
     await fill();
     expect(dialog().textContent).toContain('CanIf');
     expect(db.write).not.toHaveBeenCalled();
@@ -226,6 +409,8 @@ describe('project wizard and portal navigation', () => {
       checkbox.dispatchEvent(new Event('change', { bubbles: true }));
       await flushPromises();
     }
+    (dialog().querySelector('[aria-label="加入模块"]') as HTMLButtonElement).click();
+    await flushPromises();
     dialog()
       .querySelector('form')!
       .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));

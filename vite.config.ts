@@ -20,7 +20,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('/bswmd/') && id.endsWith('.json?raw'))
-            return 'definition-' + id.split('/').pop()!.split('_')[0];
+            return 'definition-' + id.split('/bswmd/')[1].replace(/[^a-zA-Z0-9-]/g, '-');
         },
       },
     },

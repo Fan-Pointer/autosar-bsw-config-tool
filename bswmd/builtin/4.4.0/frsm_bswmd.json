@@ -1,0 +1,408 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "dbf9698498eda916c00c6ed45cc694f79ad6a21437b8fbf7ff05e38542f5e22c",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig",
+      "description": "This container comprises the cluster specific configuration of the FlexRay State Manager.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "FrSMConfig",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster",
+          "description": "This container specifies a FlexRay cluster and all related data. A FlexRay cluster may consist of more than one controller per ECU.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMCheckWakeupReason",
+              "description": "If FrSMCheckWakeupReason is true, the FrSM will check the wakeup reason in order to skip the wakeup in case of wakeup by bus. If FrSMCheckWakeupReason is false…",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMCheckWakeupReason",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:44f793fc-177a-4598-b96a-a0cd92f520e2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMDelayStartupWithoutWakeup",
+              "description": "If true, timer t1 shall be started instead of immediately calling FrIf_AllowColdstart in case of a startup without wakeup.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMDelayStartupWithoutWakeup",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:6cec37d5-45df-413b-a43e-039bc6eb3805"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMIsColdstartEcu",
+              "description": "True: The ECU is a coldstart node for this FlexRay cluster.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMIsColdstartEcu",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d006fe48-3419-4c48-9b4f-0c79d70b17a5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMIsWakeupEcu",
+              "description": "True: FrSM shall perform a wakeup for this cluster.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMIsWakeupEcu",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:775480ae-171e-4527-8024-c8c94e5b7844"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMDurationT1",
+              "description": "The duration of timer t1 in seconds.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMDurationT1",
+              "type": "FLOAT",
+              "uuid": "ECUC:d062fcc7-b32d-4669-ab94-f0cbfa827199"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMDurationT2",
+              "description": "The duration of timer t2 in seconds.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMDurationT2",
+              "type": "FLOAT",
+              "uuid": "ECUC:df901f89-f193-4d1e-8ea0-387ca7ff1fd5"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMDurationT3",
+              "description": "The duration of timer t3 in seconds. The value of this parameter shall be larger than the value of FrSMDurationT1 parameter.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMDurationT3",
+              "type": "FLOAT",
+              "uuid": "ECUC:d68c5e6b-b23e-4437-8cc3-bb9444d5069d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMDurationT4",
+              "description": "The timer t4 ensures that a dual channel node will eventually clear its coldstart inhibit bit and become a leading coldstarter.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMDurationT4",
+              "type": "FLOAT",
+              "uuid": "ECUC:684c7f6d-a97e-4401-ad72-ede2daf0708e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMMainFunctionCycleTime",
+              "description": "This parameter defines the cycle time in seconds of the periodic calling of FrSM main function.",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMMainFunctionCycleTime",
+              "type": "FLOAT",
+              "uuid": "ECUC:db31e4f1-2f37-495e-ab4d-465746a7d5a3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMTrcvStdbyDelay",
+              "description": "The duration of timer t_TrcvStdbyDelay in seconds. The granularity of this parameter shall be restricted to full FlexRay cycles (FrIfGdCycle).",
+              "isOptional": true,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrSMTrcvStdbyDelay",
+              "type": "FLOAT",
+              "uuid": "ECUC:6e6d4f2d-77c9-4b3b-a051-4f42b4e97849"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMMinNumberOfColdstarter",
+              "description": "This parameter defines the number of coldstarter that should not be underrun. If this parameter is not configured the mainfunction shall not check the number o…",
+              "isOptional": true,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrSMMinNumberOfColdstarter",
+              "type": "INTEGER",
+              "uuid": "ECUC:68fdc9b4-34e0-4c84-9828-47f0a4738e51"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMNumWakeupPatterns",
+              "description": "Maximum number of Wakeup Patterns the node may send before going to FRSM_STARTUP.",
+              "isOptional": false,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMNumWakeupPatterns",
+              "type": "INTEGER",
+              "uuid": "ECUC:4cd61d2c-be6c-46ff-a7b8-764e9ab3dd1b"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMStartupRepetitions",
+              "description": "The number of times an ECU may repeat the startup procedure for a FlexRay cluster.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrSMStartupRepetitions",
+              "type": "INTEGER",
+              "uuid": "ECUC:d56fbbc1-2025-4426-89b4-b830a9025719"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMStartupRepetitionsWithWakeup",
+              "description": "The number of times an ECU may repeat the startup procedure including a wakeup for a FlexRay cluster.",
+              "isOptional": true,
+              "max": 65535,
+              "min": 0,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "FrSMStartupRepetitionsWithWakeup",
+              "type": "INTEGER",
+              "uuid": "ECUC:254df245-0739-438d-9785-f139d395c9df"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMComMNetworkHandleRef",
+              "description": "Reference to the unique handle to identify one certain FlexRay network correspond to one of the network handles of the ComM configuration.",
+              "destinationContainerType": "ComMChannel",
+              "destinationRef": "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMComMNetworkHandleRef",
+              "uuid": "ECUC:e2b79c8a-5548-4ed9-af29-350b61ae85df"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMFrIfClusterRef",
+              "description": "References the cluster configuration in the FlexRay Interface configuration.",
+              "destinationContainerType": "FrIfCluster",
+              "destinationRef": "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "FrSMFrIfClusterRef",
+              "uuid": "ECUC:dd461cfe-0a31-43a8-8446-3d8f2358423f"
+            }
+          ],
+          "shortName": "FrSMCluster",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMClusterDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The …",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMClusterDemEventParameterRefs/FRSM_E_CLUSTER_STARTUP",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"FRSM_E_CLUSTER_STARTUP\" has occurred. If the reference is not configured the error sha…",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FRSM_E_CLUSTER_STARTUP",
+                  "uuid": "ECUC:637b2fa5-031c-4c62-8b02-eb0313e3b92d"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMConfig/FrSMCluster/FrSMClusterDemEventParameterRefs/FRSM_E_CLUSTER_SYNC_LOSS",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"FRSM_E_CLUSTER_SYNC_LOSS\" has occurred. If the reference is not configured the error s…",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": false,
+                  "kind": "reference",
+                  "multiplicity": {
+                    "lower": 1,
+                    "upper": 1
+                  },
+                  "shortName": "FRSM_E_CLUSTER_SYNC_LOSS",
+                  "uuid": "ECUC:30585f0b-2439-441e-8cbd-d7d6e7b51ae1"
+                }
+              ],
+              "shortName": "FrSMClusterDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:9f8654da-17b0-427d-8b3f-bdb04c809a83"
+            }
+          ],
+          "uuid": "ECUC:06ffd925-d47c-4e72-ac9f-f4c5493e0f74"
+        }
+      ],
+      "uuid": "ECUC:88a6c179-1037-456f-b051-ba1e0e60df4e"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMGeneral",
+      "description": "This container contains the general configuration parameters of the FlexRay State Manager.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMGeneral/FrSMAllSlotsSupport",
+          "description": "Configuration parameter to enable/disable FrSM support to enable/disable the switching from key-slot/single-slot mode to all-slot mode.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrSMAllSlotsSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8f4124ce-8edf-4cd4-b758-e71735ad93dd"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMGeneral/FrSMDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrSMDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:876430b3-a273-44c7-b9cb-2a55ab4c5382"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMGeneral/FrSMVersionInfoApi",
+          "description": "Enables and disables the version info API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "FrSMVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:687f878a-ab78-487e-afd6-9cea1d16e990"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/FrSM/FrSMGeneral/FrSMSyncLossErrorIndicationName",
+          "description": "Name of <Cdd>_SyncLossErrorIndication function that shall be called on loss of synchronization. If this parameter is omitted no indication shall take place.",
+          "isOptional": true,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "FrSMSyncLossErrorIndicationName",
+          "type": "FUNCTION",
+          "uuid": "ECUC:36e196cd-aca7-4ede-be0c-36684a5d4382"
+        }
+      ],
+      "references": [],
+      "shortName": "FrSMGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:c7bab0a0-434a-4b1b-9cbc-a4fa164375e0"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/FrSM",
+  "description": "Configuration of the FlexRay State Manager",
+  "importWarnings": [
+    "FRSM_E_CLUSTER_STARTUP：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FRSM_E_CLUSTER_SYNC_LOSS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "FrSMComMNetworkHandleRef：目标 /AUTOSAR/EcucDefs/ComM/ComMConfigSet/ComMChannel 位于本模块之外；编辑器只读展示。",
+    "FrSMFrIfClusterRef：目标 /AUTOSAR/EcucDefs/FrIf/FrIfConfig/FrIfCluster 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "FrSM",
+  "version": "4.4.0"
+}

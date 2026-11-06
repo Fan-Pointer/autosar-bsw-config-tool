@@ -82,8 +82,23 @@ export class BswmdParser {
         shortName: requiredString(data, 'shortName', 'module'),
         definitionPath: optionalString(data.definitionPath, 'module.definitionPath'),
         $source: data.$source === undefined ? undefined : object(data.$source, 'module.$source'),
-        version: optionalString(data.version, 'module.version') ?? 'unknown',
+        version: optionalString(data.version, 'module.version') ?? '4.4.0',
         description: optionalString(data.description, 'module.description'),
+        multiplicity:
+          data.multiplicity === undefined
+            ? undefined
+            : this.multiplicity(data.multiplicity, 'module'),
+        importWarnings: array(data.importWarnings, 'module.importWarnings').map((value) => {
+          if (typeof value !== 'string') throw new Error('module.importWarnings: expected text');
+          return value;
+        }),
+        arxmlExportBlockers: array(data.arxmlExportBlockers, 'module.arxmlExportBlockers').map(
+          (value) => {
+            if (typeof value !== 'string')
+              throw new Error('module.arxmlExportBlockers: expected text');
+            return value;
+          }
+        ),
         containers: this.containers(data.containers, 'module.containers', ids, 0),
       };
     } catch (error) {
@@ -198,7 +213,8 @@ export class BswmdParser {
               throw new Error(`${label}.enumValues[${i}]: expected a string`);
             return item;
           });
-    if (type === 'ENUM' && !enumValues?.length)
+    const vendorSpecific = optionalFlag(data.vendorSpecific, `${label}.vendorSpecific`);
+    if (type === 'ENUM' && !enumValues?.length && !vendorSpecific)
       throw new Error(`${label}.enumValues: ENUM requires choices`);
     const defaultValue = data.defaultValue;
     if (defaultValue !== undefined) {
@@ -228,7 +244,15 @@ export class BswmdParser {
       ),
       type,
       configClass,
-      readOnly: optionalFlag(data.readOnly, `${label}.readOnly`),
+      readOnly: vendorSpecific || optionalFlag(data.readOnly, `${label}.readOnly`),
+      ...(vendorSpecific ? { vendorSpecific } : {}),
+      sourceDefaultValue: optionalString(data.sourceDefaultValue, `${label}.sourceDefaultValue`),
+      definitionIssue: optionalString(data.definitionIssue, `${label}.definitionIssue`),
+      multiplicity:
+        data.multiplicity === undefined ? undefined : this.multiplicity(data.multiplicity, label),
+      minLength: optionalNumber(data.minLength, `${label}.minLength`),
+      maxLength: optionalNumber(data.maxLength, `${label}.maxLength`),
+      regularExpression: optionalString(data.regularExpression, `${label}.regularExpression`),
       defaultValue,
       min,
       max,
@@ -239,7 +263,7 @@ export class BswmdParser {
 
   private reference(raw: unknown, path: string, ids: Set<string>): BswmdReference {
     const data = object(raw, path);
-    const kinds = ['reference', 'choice', 'foreign', 'instance'] as const;
+    const kinds = ['reference', 'choice', 'foreign', 'instance', 'symbolic'] as const;
     const kind = data.kind === undefined ? undefined : kinds.find((value) => value === data.kind);
     if (data.kind !== undefined && kind === undefined)
       throw new Error(`${path}.kind: unsupported reference kind`);
@@ -255,6 +279,8 @@ export class BswmdParser {
               return ref;
             }),
       kind,
+      multiplicity:
+        data.multiplicity === undefined ? undefined : this.multiplicity(data.multiplicity, path),
       isExternal:
         data.isExternal === undefined
           ? undefined

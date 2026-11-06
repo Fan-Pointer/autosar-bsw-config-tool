@@ -157,12 +157,18 @@
               <summary><span class="folder">▱</span>BSW Modules</summary>
               <button
                 v-for="item in includedModules"
-                :key="item.shortName"
+                :key="moduleKey(item.shortName, item.version)"
                 class="module-node"
-                :class="{ selected: activeOpen && store.module?.shortName === item.shortName }"
-                @click="openModule(item.shortName)"
+                :class="{
+                  selected:
+                    activeOpen &&
+                    store.module?.shortName === item.shortName &&
+                    store.module?.version === item.version,
+                }"
+                @click="openModule(item.shortName, item.version)"
               >
-                <span class="module-symbol">M</span>{{ item.shortName }}
+                <span class="module-symbol">M</span>{{ item.shortName
+                }}<small v-if="!store.activeProject"> · {{ item.version }}</small>
               </button>
             </details>
           </details>
@@ -429,6 +435,7 @@ import {
   VideoPlay,
 } from '@element-plus/icons-vue';
 import { useConfigStore } from '@/stores/configStore';
+import { moduleKey } from '@/core/bswmd/ModuleKey';
 import { CGenerator } from '@/core/generator/CGenerator';
 import type { GeneratedFile } from '@/core/generator/TemplateEngine';
 import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
@@ -557,10 +564,11 @@ watch(
   }
 );
 const includedModules = computed(() =>
-  store.modules.filter(
-    (item) =>
-      store.modulePreferences[item.shortName]?.included &&
-      (!store.activeProject || store.activeProject.moduleShortNames.includes(item.shortName))
+  store.modules.filter((item) =>
+    store.activeProject
+      ? item.version === store.activeProject.autosarVersion &&
+        store.activeProject.moduleShortNames.includes(item.shortName)
+      : store.getModulePreference(item.shortName, item.version).included
   )
 );
 const breadcrumb = computed(() => {
@@ -581,8 +589,13 @@ const menuItems = [
   { label: '关闭配置集', action: 'close' },
 ];
 watch(
-  () => store.activeUuid,
-  (uuid) => {
+  () => [
+    store.activeUuid,
+    store.activeProject?.projectUuid,
+    store.activeProject?.setUuids.join('|'),
+  ],
+  () => {
+    const uuid = store.activeUuid;
     outputError.value = '';
     contextMenu.value = undefined;
     showGenerated.value = false;
@@ -594,7 +607,7 @@ watch(
     if (
       uuid &&
       store.module &&
-      store.modulePreferences[store.module.shortName]?.included &&
+      store.getModulePreference(store.module.shortName, store.module.version).included &&
       !opened.value.includes(uuid)
     )
       opened.value.push(uuid);
@@ -621,7 +634,9 @@ function warnUnsaved(event: BeforeUnloadEvent): void {
 }
 function operationEnabled(operation: 'generation' | 'validation'): boolean {
   return Boolean(
-    store.config && store.module && store.modulePreferences[store.module.shortName]?.[operation]
+    store.config &&
+    store.module &&
+    store.getModulePreference(store.module.shortName, store.module.version)[operation]
   );
 }
 function tabLabel(uuid: string): string {
@@ -630,7 +645,9 @@ function tabLabel(uuid: string): string {
 }
 function tabTooltip(uuid: string): string {
   const set = store.configSets.find((item) => item.uuid === uuid);
-  return set ? `模块：${set.moduleRef}\n配置集：${set.name ?? set.moduleRef}` : '';
+  return set
+    ? `模块：${set.moduleRef} · CP ${set.version}\n配置集：${set.name ?? set.moduleRef}`
+    : '';
 }
 function reopenImported(): void {
   if (store.activeUuid && !opened.value.includes(store.activeUuid))
@@ -659,17 +676,19 @@ function ioAction(action: string, format: ExportFormat): void {
     ElMessage.error(reason instanceof Error ? reason.message : String(reason));
   }
 }
-async function openModule(name: string): Promise<void> {
+async function openModule(name: string, release: string): Promise<void> {
   const existing = store.configSets.find(
     (item) =>
       item.moduleRef === name &&
+      item.version === release &&
       (store.activeProject
         ? store.activeProject.setUuids.includes(item.uuid)
         : store.unassignedSets.some((set) => set.uuid === item.uuid))
   );
   if (existing) {
     if (!(await store.switchConfigSet(existing.uuid).catch(() => false))) return;
-  } else if (!(await store.createConfigSet(name + ' 配置', name).catch(() => false))) return;
+  } else if (!(await store.createConfigSet(name + ' 配置', name, release).catch(() => false)))
+    return;
   if (store.activeUuid && !opened.value.includes(store.activeUuid))
     opened.value.push(store.activeUuid);
 }
@@ -682,7 +701,12 @@ async function closeTab(uuid: string): Promise<void> {
 function reconcileModules(): void {
   opened.value = opened.value.filter((id) => {
     const set = store.configSets.find((item) => item.uuid === id);
-    return set && store.modulePreferences[set.moduleRef]?.included;
+    return (
+      set &&
+      (store.activeProject
+        ? store.activeProject.setUuids.includes(id)
+        : store.getModulePreference(set.moduleRef, set.version).included)
+    );
   });
 }
 async function addFirst(uuid: string): Promise<void> {

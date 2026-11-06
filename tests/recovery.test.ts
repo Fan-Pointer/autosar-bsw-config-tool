@@ -217,7 +217,7 @@ describe('safe library recovery', () => {
       'module',
       'preference',
     ]);
-    expect(store.modulePreferences.Dem.generation).toBe(false);
+    expect(store.getModulePreference('Dem').generation).toBe(false);
     expect(local.saved.get(LIBRARY)).toEqual(raw);
   });
   it('preserves malformed whole libraries and never overwrites an unreadable storage source', async () => {

@@ -1,0 +1,117 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "584e67a336d70e50fd6d2a1ddf2c4727ebc9f7db980c1a7b57b0922ece79c840",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Tm/TmGeneral",
+      "description": "General configuration of Time Service module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Tm/TmGeneral/TmDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "TmDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e25eb1cf-6363-4cdf-9b75-ca5a954b16f2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Tm/TmGeneral/TmEnablePredefTimer100us32bit",
+          "description": "Specifies if the Predef Timer 100µs32bit shall be enabled (functionality and set of API services). ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "TmEnablePredefTimer100us32bit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:765a3b71-fdce-4c9c-b049-38bf84b6a282"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Tm/TmGeneral/TmEnablePredefTimer1us16bit",
+          "description": "Specifies if the Predef Timer 1µs16bit shall be enabled (functionality and set of API services). ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "TmEnablePredefTimer1us16bit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:9d54e50b-6096-47df-a432-9fe476fc8d36"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Tm/TmGeneral/TmEnablePredefTimer1us24bit",
+          "description": "Specifies if the Predef Timer 1µs24bit shall be enabled (functionality and set of API services). ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "TmEnablePredefTimer1us24bit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:f7983121-4973-47de-addf-515557af8f4c"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Tm/TmGeneral/TmEnablePredefTimer1us32bit",
+          "description": "Specifies if the Predef Timer 1µs32bit shall be enabled (functionality and set of API services). ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "TmEnablePredefTimer1us32bit",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:a70e8970-623a-4d36-a349-bed50569c0b8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Tm/TmGeneral/TmVersionInfoApi",
+          "description": "Adds / removes the service Tm_GetVersionInfo() from the code. ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "TmVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fdf3532a-a3e7-4950-8f06-8e5156028e27"
+        }
+      ],
+      "references": [],
+      "shortName": "TmGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:658f6f40-c199-4db4-863c-35d7b0c8b8d4"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Tm",
+  "description": "Configuration of the Time Service module.",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Tm",
+  "version": "4.4.0"
+}

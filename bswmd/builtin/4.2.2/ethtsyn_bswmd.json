@@ -1,0 +1,305 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "ce73afa999f6f270d98b267e4255383f55bcb7143805639a26e028b99d6fd6c4",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral",
+      "description": "This container holds the general parameters of the Ethernet-specific Synchronized Time-base Manager",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:97c1bf48-863c-4419-bdfa-7a95e310d14b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynHardwareTimestampSupport",
+          "description": "Activate/Deactivate the hardware time stamping functionality of the Ethernet hardware.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynHardwareTimestampSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3f62e37c-2192-48e6-8a7c-55c0e9390d01"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynVersionInfo",
+          "description": "Activate/Deactivate the version information API (EthTSyn_GetVersionInfo). True: version information API activated False: version information API deactivated.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynVersionInfo",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:b2dd9067-201b-46f0-97fb-f28dd9b030d8"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGeneral/EthTSynMainFunctionPeriod",
+          "description": "Schedule period of the main function EthTSyn_MainFunction. Unit: [s].",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:7b8bdf27-fc9a-4fbc-97bd-7a50abb0fa2e"
+        }
+      ],
+      "references": [],
+      "shortName": "EthTSynGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:4abfff0e-f4a2-4116-9884-99088bd9f63c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain",
+      "description": "This represents the existence of a global time domain on Ethernet. The EthTSyn module can administrate several global time domains at the same time that in its…",
+      "multiplicity": {
+        "lower": 1,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeDomainId",
+          "description": "This Parameter is deprecated and will be removed in future. Tags: atp.Status=obsolete, atp.StatusRevisionBegin=4.2.2",
+          "isOptional": true,
+          "max": 31,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "EthTSynGlobalTimeDomainId",
+          "type": "INTEGER",
+          "uuid": "ECUC:ff017776-276e-443f-a9d2-7abe546ebf62"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeFollowUpTimeout",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynGlobalTimeFollowUpTimeout",
+          "type": "FLOAT",
+          "uuid": "ECUC:adab14e1-14ee-447e-a1c8-ead773249f38"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynSynchronizedTimeBaseRef",
+          "description": "Mandatory reference to the required synchronized time-base.",
+          "destinationContainerType": "StbMSynchronizedTimeBase",
+          "destinationRef": "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase"
+          ],
+          "isExternal": true,
+          "isOptional": false,
+          "kind": "symbolic",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthTSynSynchronizedTimeBaseRef",
+          "uuid": "ECUC:e2e57238-23bd-4436-8aac-2b4dac409201"
+        }
+      ],
+      "shortName": "EthTSynGlobalTimeDomain",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeMaster",
+          "description": "Configuration of the global time master. Each global time domain is required to have exactly one global time master. This master may or may not exist on the co…",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeMaster/EthTSynGlobalTimeTxFollowUpOffset",
+              "description": "This represents configuration of the TX offset for Follow_Up / Pdelay_Resp_Follow_Up messages. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeTxFollowUpOffset",
+              "type": "FLOAT",
+              "uuid": "ECUC:144256e5-4ef8-8799-714a-f1273c3b0ee6"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeMaster/EthTSynGlobalTimeTxPdelayReqPeriod",
+              "description": "This represents configuration of the TX period for Pdelay_Req messages. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeTxPdelayReqPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:20432b32-7ee2-81fc-6476-e8f0ef2d1ef4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeMaster/EthTSynGlobalTimeTxPeriod",
+              "description": "This represents configuration of the TX period. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeTxPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:895a28b4-2c4e-4b59-ac47-70aadc1de237"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeMaster/EthTSynGlobalTimeEthIfRef",
+              "description": "This represents the reference to the Ethernet interface taken to fetch the global time information.",
+              "destinationContainerType": "EthIfController",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeEthIfRef",
+              "uuid": "ECUC:c6496c14-1aaf-8d15-615b-86889b88b373"
+            }
+          ],
+          "shortName": "EthTSynGlobalTimeMaster",
+          "subContainers": [],
+          "uuid": "ECUC:20d1e409-b2eb-4086-bbe6-0525aff7c21c"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeSlave",
+          "description": "Configuration of a time slave. Each global time domain is required to have at least one time slave. The configured ECU may or may not represent a time slave.",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeSlave/EthTSynGlobalTimeTxFollowUpOffset",
+              "description": "This represents configuration of the TX offset for Follow_Up / Pdelay_Resp_Follow_Up messages. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeTxFollowUpOffset",
+              "type": "FLOAT",
+              "uuid": "ECUC:fa1dd312-9777-8c21-5e26-610b4700acdc"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeSlave/EthTSynGlobalTimeTxPdelayReqPeriod",
+              "description": "This represents configuration of the TX period for Pdelay_Req messages. Unit: seconds",
+              "isOptional": false,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeTxPdelayReqPeriod",
+              "type": "FLOAT",
+              "uuid": "ECUC:061ea75f-c761-8684-5152-58d4f9f2bcea"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeSlave/EthTSynTimeHardwareCorrectionThreshold",
+              "description": "This parameter can be taken to define the maximum deviation between the local time and the time obtained from SYNC message that triggers a correction of the ti…",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthTSynTimeHardwareCorrectionThreshold",
+              "type": "FLOAT",
+              "uuid": "ECUC:b7b5155b-b081-440e-9987-7ec76ab8e9d9"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn/EthTSynGlobalTimeDomain/EthTSynGlobalTimeSlave/EthTSynGlobalTimeEthIfRef",
+              "description": "This represents the reference to the Ethernet interface taken to fetch the global time information.",
+              "destinationContainerType": "EthIfController",
+              "destinationRef": "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController"
+              ],
+              "isExternal": true,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTSynGlobalTimeEthIfRef",
+              "uuid": "ECUC:ac24e841-632e-919d-4e36-f66ca64e5169"
+            }
+          ],
+          "shortName": "EthTSynGlobalTimeSlave",
+          "subContainers": [],
+          "uuid": "ECUC:06ad6036-fb6a-450e-a8c1-7509babd6012"
+        }
+      ],
+      "uuid": "ECUC:ee0c077f-5d03-463d-9144-6a3c3f3bc7ef"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/EthTSyn",
+  "description": "Configuration of the Synchronized Time-base Manager (StbM) module with respect to global time handling on Ethernet.",
+  "importWarnings": [
+    "EthTSynGlobalTimeEthIfRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。",
+    "EthTSynGlobalTimeEthIfRef：目标 /AUTOSAR/EcucDefs/EthIf/EthIfConfigSet/EthIfController 位于本模块之外；编辑器只读展示。",
+    "EthTSynSynchronizedTimeBaseRef：目标 /AUTOSAR/EcucDefs/StbM/StbMSynchronizedTimeBase 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "EthTSyn",
+  "version": "4.2.2"
+}

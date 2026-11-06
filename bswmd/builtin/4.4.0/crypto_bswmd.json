@@ -1,0 +1,699 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "a89e6ee4b89b7f34979f7ac328275a5f0d2d52dbf522c8803074b7f49951cefc",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects",
+      "description": "Container for CRYPTO Objects",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CryptoDriverObjects",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject",
+          "description": "Configuration of a CryptoDriverObject",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoDriverObjectId",
+              "description": "Identifier of the Crypto Driver Object. The Crypto Driver Object offers different crypto primitives.",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoDriverObjectId",
+              "type": "INTEGER",
+              "uuid": "ECUC:184214e8-50e9-404c-9cce-6ec074c107a2"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoQueueSize",
+              "description": "Size of the queue in the Crypto Driver. Defines the maximum number of jobs in the Crypto Driver Object queue. If it is set to 0, queueing is disabled in the Cr…",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoQueueSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:96ee780d-0ae8-44c4-a010-86ad1f6e1923"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoDriverObjectEcucPartitionRef",
+              "description": "Maps a crypto driver object to zero or multiple ECUC partitions. The ECUC partition referenced is a subset of the ECUC partitions where the Crypto driver is ma…",
+              "destinationContainerType": "EcucPartition",
+              "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+              ],
+              "isExternal": true,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "unbounded"
+              },
+              "shortName": "CryptoDriverObjectEcucPartitionRef",
+              "uuid": "ECUC:5a5b8fb7-ff98-460e-8ad3-073e26eb65de"
+            },
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoDriverObjects/CryptoDriverObject/CryptoPrimitiveRef",
+              "description": "Refers to primitive in the CRYPTO.",
+              "destinationContainerType": "CryptoPrimitive",
+              "destinationRef": "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "CryptoPrimitiveRef",
+              "uuid": "ECUC:80edad5c-16b4-4ee0-ba96-bda6e02c2c9f"
+            }
+          ],
+          "shortName": "CryptoDriverObject",
+          "subContainers": [],
+          "uuid": "ECUC:ff2e21d8-4e16-439c-8782-5f560503fb55"
+        }
+      ],
+      "uuid": "ECUC:8bfb756a-0a3d-4cf7-b36f-e827bb56e718"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoGeneral",
+      "description": "Container for common configuration options",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoGeneral/CryptoDevErrorDetect",
+          "description": "Switches the development error detection and notification on or off.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryptoDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:fa00ef6b-ef2e-48a8-82d8-9ac859b82c59"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoGeneral/CryptoVersionInfoApi",
+          "description": "Pre-processor switch to enable and disable availability of the API Crypto_GetVersionInfo().",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryptoVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:8c156a69-957a-46b7-9e29-3353983b72fb"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoGeneral/CryptoInstanceId",
+          "description": "Instance ID of the crypto driver. This ID is used to discern several crypto drivers in case more than one driver is used in the same ECU.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "CryptoInstanceId",
+          "type": "INTEGER",
+          "uuid": "ECUC:3d5e98b1-35e6-4e2d-b1fd-d43aa3722b80"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoGeneral/CryptoMainFunctionPeriod",
+          "description": "Specifies the period of main function Crypto_MainFunction in seconds.",
+          "isOptional": true,
+          "min": 0,
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "CryptoMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:d7196c6e-6bbd-428d-ba75-552584f18fc1"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoGeneral/CryptoEcucPartitionRef",
+          "description": "Maps the Crypto driver to zero or multiple ECUC partitions to make the modules API available in this partition. The module will operate as an independent insta…",
+          "destinationContainerType": "EcucPartition",
+          "destinationRef": "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"
+          ],
+          "isExternal": true,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "shortName": "CryptoEcucPartitionRef",
+          "uuid": "ECUC:275b0028-7774-4bf6-ad1e-ce7f29b813f1"
+        }
+      ],
+      "shortName": "CryptoGeneral",
+      "subContainers": [],
+      "uuid": "ECUC:52ae2270-d711-460d-b08f-82ed9ed064e6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements",
+      "description": "Container for Crypto key elements",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CryptoKeyElements",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement",
+          "description": "Configuration of a CryptoKeyElement",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementAllowPartialAccess",
+              "description": "Enable or disable writing and reading the key element with data smaller than the size of the element.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementAllowPartialAccess",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:d546ad2f-c66a-4cdc-9688-1056e2934f51"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": false,
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementPersist",
+              "description": "Enable or disable persisting of the key element in non-volatile storage.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementPersist",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f3e5f9e1-88f0-4dcd-b253-1d65abe6c37e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementFormat",
+              "description": "Defines the format for the key element. This is the format used to provide or extract the key data from the driver.",
+              "enumValues": [
+                "CRYPTO_KE_FORMAT_BIN_CERT_CVC",
+                "CRYPTO_KE_FORMAT_BIN_CERT_X509_V3",
+                "CRYPTO_KE_FORMAT_BIN_IDENT_PRIVATEKEY_PKCS8",
+                "CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY",
+                "CRYPTO_KE_FORMAT_BIN_OCTET",
+                "CRYPTO_KE_FORMAT_BIN_RSA_PRIVATEKEY",
+                "CRYPTO_KE_FORMAT_BIN_RSA_PUBLICKEY",
+                "CRYPTO_KE_FORMAT_BIN_SHEKEYS"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementFormat",
+              "type": "ENUM",
+              "uuid": "ECUC:5f151295-b33b-462c-b95f-7345724d71f4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementReadAccess",
+              "description": "Define the reading access rights of the key element.",
+              "enumValues": [
+                "CRYPTO_RA_ALLOWED",
+                "CRYPTO_RA_DENIED",
+                "CRYPTO_RA_ENCRYPTED",
+                "CRYPTO_RA_INTERNAL_COPY"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementReadAccess",
+              "type": "ENUM",
+              "uuid": "ECUC:cfe5b2f0-b2a8-4627-9c61-97a0c5f9598e"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementWriteAccess",
+              "description": "Define the writing access rights of the key element",
+              "enumValues": [
+                "CRYPTO_WA_ALLOWED",
+                "CRYPTO_WA_DENIED",
+                "CRYPTO_WA_ENCRYPTED",
+                "CRYPTO_WA_INTERNAL_COPY"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementWriteAccess",
+              "type": "ENUM",
+              "uuid": "ECUC:22a68509-d888-4612-af42-c1d514d982c3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementId",
+              "description": "Identifier of the CRYPTO key element",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementId",
+              "type": "INTEGER",
+              "uuid": "ECUC:f3b10c50-dcf8-480d-97f4-a461605e57eb"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementSize",
+              "description": "Maximum Size size of a CRYPTO key element in bytes",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 1,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementSize",
+              "type": "INTEGER",
+              "uuid": "ECUC:ee48d0b6-2cee-44db-b565-b17abc2b4e1a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "defaultValue": "0",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementInitValue",
+              "description": "Value which will be used to fill the key element during startup",
+              "isOptional": true,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementInitValue",
+              "type": "STRING",
+              "uuid": "ECUC:60b3b90e-435c-4c88-8e00-ad06c97fd0b9"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement/CryptoKeyElementVirtualTargetRef",
+              "description": "Refers to a key element which will contain the actual data. If the Reference is configured, the key element will be a virtual key element.",
+              "destinationContainerType": "CryptoKeyElement",
+              "destinationRef": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement"
+              ],
+              "isExternal": false,
+              "isOptional": true,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyElementVirtualTargetRef",
+              "uuid": "ECUC:e138b5ba-f5a2-4e81-8256-1d29b55827ae"
+            }
+          ],
+          "shortName": "CryptoKeyElement",
+          "subContainers": [],
+          "uuid": "ECUC:5f161b28-5b12-4c9b-b07a-1f95a35b6041"
+        }
+      ],
+      "uuid": "ECUC:02e782b3-b472-45cc-9b7c-4f0d09576f7c"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyTypes",
+      "description": "Container for CRYPTO key types",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CryptoKeyTypes",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyTypes/CryptoKeyType",
+          "description": "Configuration of a CryptoKeyType",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyTypes/CryptoKeyType/CryptoKeyElementRef",
+              "description": "Refers to a pointer in the CRYPTOCrypto Key Element, which holds the data of the crypto key element.",
+              "destinationContainerType": "CryptoKeyElement",
+              "destinationRef": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": "unbounded"
+              },
+              "shortName": "CryptoKeyElementRef",
+              "uuid": "ECUC:3846dd86-ac67-463a-a90c-0fd997b527b2"
+            }
+          ],
+          "shortName": "CryptoKeyType",
+          "subContainers": [],
+          "uuid": "ECUC:50a54a5d-0bb5-4b70-9bbf-5c9ea7a093a9"
+        }
+      ],
+      "uuid": "ECUC:64aad910-e3a3-4ede-8aa2-73b96566ced6"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeys",
+      "description": "Container for CRYPTO keys",
+      "multiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CryptoKeys",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey",
+          "description": "Configuration of a CryptoKey",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey/CryptoKeyId",
+              "description": "Identifier of the CRYPTO Key",
+              "isOptional": false,
+              "max": 4294967295,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyId",
+              "type": "INTEGER",
+              "uuid": "ECUC:12278a60-a4ed-4f17-9676-8f68b8a68cf6"
+            }
+          ],
+          "references": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey/CryptoKeyTypeRef",
+              "description": "Refers to a pointer in the CRYPTOto a CryptoKeyType. The CryptoKeyType provides the information which key elements are contained in a CryptoKey.",
+              "destinationContainerType": "CryptoKeyType",
+              "destinationRef": "/AUTOSAR/EcucDefs/Crypto/CryptoKeyTypes/CryptoKeyType",
+              "destinationRefs": [
+                "/AUTOSAR/EcucDefs/Crypto/CryptoKeyTypes/CryptoKeyType"
+              ],
+              "isExternal": false,
+              "isOptional": false,
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoKeyTypeRef",
+              "uuid": "ECUC:e68f7fcd-0b36-48c7-908e-7b3bd4b1bf18"
+            }
+          ],
+          "shortName": "CryptoKey",
+          "subContainers": [],
+          "uuid": "ECUC:bd39e0fa-f470-420a-92b9-c290a72800f5"
+        }
+      ],
+      "uuid": "ECUC:51a40c6c-7039-4372-a45f-1939c3f0860d"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives",
+      "description": "Container for CRYPTO primitives",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "CryptoPrimitives",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive",
+          "description": "Configuration of a CryptoPrimitive",
+          "multiplicity": {
+            "lower": 0,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive/CryptoPrimitiveAlgorithmFamily",
+              "description": "Determines the algorithm family used for the crypto service",
+              "enumValues": [
+                "CRYPTO_ALGOFAM_3DES",
+                "CRYPTO_ALGOFAM_AES",
+                "CRYPTO_ALGOFAM_BLAKE_1_256",
+                "CRYPTO_ALGOFAM_BLAKE_1_512",
+                "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                "CRYPTO_ALGOFAM_BRAINPOOL",
+                "CRYPTO_ALGOFAM_CHACHA",
+                "CRYPTO_ALGOFAM_CUSTOM",
+                "CRYPTO_ALGOFAM_DH",
+                "CRYPTO_ALGOFAM_DRBG",
+                "CRYPTO_ALGOFAM_ECCANSI",
+                "CRYPTO_ALGOFAM_ECCNIST",
+                "CRYPTO_ALGOFAM_ECCSEC",
+                "CRYPTO_ALGOFAM_ECIES",
+                "CRYPTO_ALGOFAM_ED25519",
+                "CRYPTO_ALGOFAM_FIPS186",
+                "CRYPTO_ALGOFAM_KDFX963",
+                "CRYPTO_ALGOFAM_NOT_SET",
+                "CRYPTO_ALGOFAM_PADDING_ONEWITHZEROS",
+                "CRYPTO_ALGOFAM_PADDING_PKCS7",
+                "CRYPTO_ALGOFAM_PBKDF2",
+                "CRYPTO_ALGOFAM_RIPEMD160",
+                "CRYPTO_ALGOFAM_RNG",
+                "CRYPTO_ALGOFAM_RSA",
+                "CRYPTO_ALGOFAM_SHA1",
+                "CRYPTO_ALGOFAM_SHA2_224",
+                "CRYPTO_ALGOFAM_SHA2_256",
+                "CRYPTO_ALGOFAM_SHA2_384",
+                "CRYPTO_ALGOFAM_SHA2_512",
+                "CRYPTO_ALGOFAM_SHA2_512_224",
+                "CRYPTO_ALGOFAM_SHA2_512_256",
+                "CRYPTO_ALGOFAM_SHA3_224",
+                "CRYPTO_ALGOFAM_SHA3_256",
+                "CRYPTO_ALGOFAM_SHA3_384",
+                "CRYPTO_ALGOFAM_SHA3_512",
+                "CRYPTO_ALGOFAM_SHAKE128",
+                "CRYPTO_ALGOFAM_SHAKE256",
+                "CRYPTO_ALGOFAM_SIPHASH"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoPrimitiveAlgorithmFamily",
+              "type": "ENUM",
+              "uuid": "ECUC:9ba3ac89-69cf-4e7c-8722-b6338b0181f9"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive/CryptoPrimitiveAlgorithmMode",
+              "description": "Determines the algorithm mode used for the crypto service",
+              "enumValues": [
+                "CRYPTO_ALGOMODE_12ROUNDS",
+                "CRYPTO_ALGOMODE_20ROUNDS",
+                "CRYPTO_ALGOMODE_8ROUNDS",
+                "CRYPTO_ALGOMODE_CBC",
+                "CRYPTO_ALGOMODE_CFB",
+                "CRYPTO_ALGOMODE_CMAC",
+                "CRYPTO_ALGOMODE_CTR",
+                "CRYPTO_ALGOMODE_CTRDRBG",
+                "CRYPTO_ALGOMODE_CUSTOM",
+                "CRYPTO_ALGOMODE_ECB",
+                "CRYPTO_ALGOMODE_GCM",
+                "CRYPTO_ALGOMODE_GMAC",
+                "CRYPTO_ALGOMODE_HMAC",
+                "CRYPTO_ALGOMODE_NOT_SET",
+                "CRYPTO_ALGOMODE_OFB",
+                "CRYPTO_ALGOMODE_PXXXR",
+                "CRYPTO_ALGOMODE_RSAES_OAEP",
+                "CRYPTO_ALGOMODE_RSAES_PKCS1_v1_5",
+                "CRYPTO_ALGOMODE_RSASSA_PKCS1_v1_5",
+                "CRYPTO_ALGOMODE_RSASSA_PSS",
+                "CRYPTO_ALGOMODE_SIPHASH_2_4",
+                "CRYPTO_ALGOMODE_SIPHASH_4_8",
+                "CRYPTO_ALGOMODE_XTS"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoPrimitiveAlgorithmMode",
+              "type": "ENUM",
+              "uuid": "ECUC:f9fbbf04-ec0b-495a-9de3-5f9340102e40"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive/CryptoPrimitiveAlgorithmSecondaryFamily",
+              "description": "Determines the algorithm secondary family used for the crypto service",
+              "enumValues": [
+                "CRYPTO_ALGOFAM_3DES",
+                "CRYPTO_ALGOFAM_AES",
+                "CRYPTO_ALGOFAM_BLAKE_1_256",
+                "CRYPTO_ALGOFAM_BLAKE_1_512",
+                "CRYPTO_ALGOFAM_BLAKE_2s_256",
+                "CRYPTO_ALGOFAM_BLAKE_2s_512",
+                "CRYPTO_ALGOFAM_BRAINPOOL",
+                "CRYPTO_ALGOFAM_CHACHA",
+                "CRYPTO_ALGOFAM_CUSTOM",
+                "CRYPTO_ALGOFAM_DRBG",
+                "CRYPTO_ALGOFAM_ECCANSI",
+                "CRYPTO_ALGOFAM_ECCNIST",
+                "CRYPTO_ALGOFAM_ECCSEC",
+                "CRYPTO_ALGOFAM_ECIES",
+                "CRYPTO_ALGOFAM_ED25519",
+                "CRYPTO_ALGOFAM_FIPS186",
+                "CRYPTO_ALGOFAM_NOT_SET",
+                "CRYPTO_ALGOFAM_PADDING_ONEWITHZEROS",
+                "CRYPTO_ALGOFAM_PADDING_PKCS7",
+                "CRYPTO_ALGOFAM_RIPEMD160",
+                "CRYPTO_ALGOFAM_RNG",
+                "CRYPTO_ALGOFAM_RSA",
+                "CRYPTO_ALGOFAM_SHA1",
+                "CRYPTO_ALGOFAM_SHA2_224",
+                "CRYPTO_ALGOFAM_SHA2_256",
+                "CRYPTO_ALGOFAM_SHA2_384",
+                "CRYPTO_ALGOFAM_SHA2_512",
+                "CRYPTO_ALGOFAM_SHA2_512_224",
+                "CRYPTO_ALGOFAM_SHA2_512_256",
+                "CRYPTO_ALGOFAM_SHA3_224",
+                "CRYPTO_ALGOFAM_SHA3_256",
+                "CRYPTO_ALGOFAM_SHA3_384",
+                "CRYPTO_ALGOFAM_SHA3_512",
+                "CRYPTO_ALGOFAM_SHAKE128",
+                "CRYPTO_ALGOFAM_SHAKE256",
+                "CRYPTO_ALGOFAM_SIPHASH"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoPrimitiveAlgorithmSecondaryFamily",
+              "type": "ENUM",
+              "uuid": "ECUC:ba685378-f161-4115-9ad1-c88283978e9d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive/CryptoPrimitiveService",
+              "description": "Determines the crypto service used for defining the capabilities",
+              "enumValues": [
+                "AEAD_DECRYPT",
+                "AEAD_ENCRYPT",
+                "DECRYPT",
+                "ENCRYPT",
+                "HASH",
+                "MAC_GENERATE",
+                "MAC_VERIFY",
+                "RANDOM",
+                "SIGNATURE_GENERATE",
+                "SIGNATURE_VERIFY"
+              ],
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "CryptoPrimitiveService",
+              "type": "ENUM",
+              "uuid": "ECUC:e5750a9c-a708-4203-bc14-2e2a104eebbe"
+            }
+          ],
+          "references": [],
+          "shortName": "CryptoPrimitive",
+          "subContainers": [],
+          "uuid": "ECUC:1111d06f-8a89-4297-8805-9a25208d5233"
+        }
+      ],
+      "uuid": "ECUC:508c73fd-56b3-4933-ad9d-f21ecf980357"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Crypto",
+  "description": "Configuration of the Crypto (CryptoDriver) module",
+  "importWarnings": [
+    "CryptoDriverObjectEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "CryptoDriverObjectEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "CryptoPrimitiveRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "CryptoEcucPartitionRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。",
+    "CryptoEcucPartitionRef：目标 /AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition 位于本模块之外；编辑器只读展示。",
+    "CryptoKeyElementRef：多值引用的 multiplicity 已保留，当前编辑器只编辑一个目标。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Crypto",
+  "version": "4.4.0"
+}

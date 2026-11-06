@@ -1,0 +1,321 @@
+{
+  "$source": {
+    "bytes": 15447041,
+    "contentSha256": "f4fced79ed235aeadd56875110b0723f777747eea06afa8f42aa3f8fcd06c73e",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.4.4.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.4.0",
+    "sha256": "c01fbd950dfbb78d7c6662582d6e41f8700d13452ac169f825198a59093209bf"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiConstant",
+      "description": "This container holds a constant value. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiConstant/ArtiConstantString",
+          "description": "This is the constant value for a specific parameter. Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiConstantString",
+          "type": "STRING",
+          "uuid": "ECUC:0a007e52-6426-4b2d-80fb-3e05379d598f"
+        }
+      ],
+      "references": [],
+      "shortName": "ArtiConstant",
+      "subContainers": [],
+      "uuid": "ECUC:c161abde-e451-46ea-8dba-d7db465845ee"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiExpression",
+      "description": "This container holds a C like expression that a debugger can evaluate. This is similar to what is already done in ORTI. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiExpression/ArtiExpressionString",
+          "description": "This string represents a C like expression that a debugger can evaluate. Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiExpressionString",
+          "type": "STRING",
+          "uuid": "ECUC:dfcfe0ed-0e16-4049-969b-78a5d40b4491"
+        }
+      ],
+      "references": [],
+      "shortName": "ArtiExpression",
+      "subContainers": [],
+      "uuid": "ECUC:cc7289be-08d8-4286-91af-79259f674241"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiHook",
+      "description": "This container represents an ARTI hook that is present in the module. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiHook/ArtiHookClass",
+          "description": "Name of the (schedule) class of macros. Classes can be one of the predefined classes or user defined. Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiHookClass",
+          "type": "STRING",
+          "uuid": "ECUC:00a1fa88-924d-4a55-8215-5a48f98ba9c1"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiHook/ArtiHookEventName",
+          "description": "The name of the event as defined for a particular class, or an arbitrary name for generic classes. Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiHookEventName",
+          "type": "STRING",
+          "uuid": "ECUC:ec285046-62b2-4145-ae17-79253c2fe836"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiHook/ArtiHookInstance",
+          "description": "Name of an instance of the (schedule) class. Tags: atp.Status=draft",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "ArtiHookInstance",
+          "type": "STRING",
+          "uuid": "ECUC:cb5240f2-7b27-42ab-b327-42a3902e03fb"
+        }
+      ],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiHook/ArtiHookEventParameterTypeRef",
+          "description": "Refers to a parameter type to interpret the hook event number. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiParameterTypeMap",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiHookEventParameterTypeRef",
+          "uuid": "ECUC:d22b8331-8951-49cb-96a3-3bbc2560d20e"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiHook/ArtiHookInstanceParameterTypeRef",
+          "description": "Refers to a parameter type to interpret the hook instance number. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiParameterTypeMap",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiHookInstanceParameterTypeRef",
+          "uuid": "ECUC:4df421d6-b105-4baf-9768-ee004ef81c6e"
+        }
+      ],
+      "shortName": "ArtiHook",
+      "subContainers": [],
+      "uuid": "ECUC:81392ce4-93b8-4934-b9fe-7f01dcc2da72"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter",
+      "description": "This container represents a parameter of an Arti object class definition. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiObjectClassParameter/ArtiParameterTypeMapRef",
+          "description": "Refers to a parameter type to interpret the instance parameter value. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiParameterTypeMap",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiParameterTypeMapRef",
+          "uuid": "ECUC:c715d81a-354a-4048-8aef-a286b8082e74"
+        }
+      ],
+      "shortName": "ArtiObjectClassParameter",
+      "subContainers": [],
+      "uuid": "ECUC:1c08a76b-96f1-4c04-abf7-5415edcb7bbb"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter",
+      "description": "This container represents a parameter of an Arti object instance. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter/ArtiConstantRef",
+          "description": "Refers to a constant representing the value of this parameter. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiConstant",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiConstant",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiConstant"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiConstantRef",
+          "uuid": "ECUC:47fc42b3-bf66-4fe3-9ff5-bec32cc927a5"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter/ArtiExpressionRef",
+          "description": "Refers to an expression that evaluates the value of this parameter. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiExpression",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiExpression",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiExpression"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiExpressionRef",
+          "uuid": "ECUC:b19c6494-e2d8-427d-872d-ef02f4cc11b3"
+        },
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiObjectInstanceParameter/ArtiHookRef",
+          "description": "Refers to a hook that records this parameter. Tags: atp.Status=draft",
+          "destinationContainerType": "ArtiHook",
+          "destinationRef": "/AUTOSAR/EcucDefs/Arti/ArtiHook",
+          "destinationRefs": [
+            "/AUTOSAR/EcucDefs/Arti/ArtiHook"
+          ],
+          "isExternal": false,
+          "isOptional": true,
+          "kind": "reference",
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "shortName": "ArtiHookRef",
+          "uuid": "ECUC:dbbd7880-78a6-4814-9702-0c1f420f4333"
+        }
+      ],
+      "shortName": "ArtiObjectInstanceParameter",
+      "subContainers": [],
+      "uuid": "ECUC:6575b287-9552-4ee7-8014-9d0b93ba9acb"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap",
+      "description": "This container represents a map of key/value pairs to map a parameter value to a display string. Tags: atp.Status=draft",
+      "multiplicity": {
+        "lower": 0,
+        "upper": "unbounded"
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "ArtiParameterTypeMap",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap/ArtiParameterTypeMapPair",
+          "description": "A key/value pair to map a parameter value to a display string. Tags: atp.Status=draft",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap/ArtiParameterTypeMapPair/ArtiParameterTypeMapPairInput",
+              "description": "The value given by a parameter to translate. Tags: atp.Status=draft",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ArtiParameterTypeMapPairInput",
+              "type": "STRING",
+              "uuid": "ECUC:83031463-4053-4dbb-bfaf-237015e31ced"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Arti/ArtiParameterTypeMap/ArtiParameterTypeMapPair/ArtiParameterTypeMapPairOutput",
+              "description": "The string to display for the Input value. Tags: atp.Status=draft",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "ArtiParameterTypeMapPairOutput",
+              "type": "STRING",
+              "uuid": "ECUC:0bc154c3-6242-45b2-beee-247d35a47561"
+            }
+          ],
+          "references": [],
+          "shortName": "ArtiParameterTypeMapPair",
+          "subContainers": [],
+          "uuid": "ECUC:b141b4df-cead-4a92-aac5-ec2ecf7ec3f6"
+        }
+      ],
+      "uuid": "ECUC:522ccfe6-c7f4-400d-8817-54f1041e9fad"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Arti",
+  "description": "The Arti Module contains all parameters for ARTI that are filled by the generators (OS, RTE, ...). Tags: atp.Status=draft",
+  "importWarnings": [],
+  "multiplicity": {
+    "lower": 0,
+    "upper": 1
+  },
+  "shortName": "Arti",
+  "version": "4.4.0"
+}

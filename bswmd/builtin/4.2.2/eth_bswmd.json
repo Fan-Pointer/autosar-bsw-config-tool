@@ -1,0 +1,571 @@
+{
+  "$source": {
+    "bytes": 12562336,
+    "contentSha256": "53c7efe3358c3ac4056cf6c3ddf9d9139db884ce8176860106c0b171969e5938",
+    "descriptionLimit": 160,
+    "file": "AUTOSAR_MOD_ECUConfigurationParameters_4.2.2.arxml",
+    "generator": "scripts/gen-bswmd-from-arxml.mjs",
+    "release": "4.2.2",
+    "sha256": "b5828bbdbf09fd5cd80eb8959742453ffc0563ea94f20d8b674aa792b4b8328c"
+  },
+  "arxmlExportBlockers": [],
+  "containers": [
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet",
+      "description": "This container contains the configuration parameters and sub containers of the AUTOSAR Eth module.",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [],
+      "references": [],
+      "shortName": "EthConfigSet",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig",
+          "description": "Configuration of the individual controller",
+          "multiplicity": {
+            "lower": 1,
+            "upper": "unbounded"
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlEnableMii",
+              "description": "Enables / Disables Media Independent Interface (MII) for transceiver access",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlEnableMii",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:5292ca43-a021-40dc-ad36-08a935433941"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlEnableRxInterrupt",
+              "description": "Enables / Disables receive interrupt",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlEnableRxInterrupt",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:1750d5cc-afcb-4d21-93b0-e29e9a41ea26"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlEnableTxInterrupt",
+              "description": "Enables / Disables transmit interrupt",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlEnableTxInterrupt",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:064b39a9-dca2-4886-a425-973de461e3d7"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlIdx",
+              "description": "Specifies the instance ID of the configured controller.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlIdx",
+              "type": "INTEGER",
+              "uuid": "ECUC:57bc491e-62f2-4d20-943a-0bf28cca2ac1"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlRxBufLenByte",
+              "description": "Limits the maximum receive buffer length (frame length) in bytes.",
+              "isOptional": false,
+              "max": 1522,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlRxBufLenByte",
+              "type": "INTEGER",
+              "uuid": "ECUC:6164a17c-2277-4d64-81a0-c03e219bdf8d"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlTxBufLenByte",
+              "description": "Limits the maximum transmit buffer length (frame length) in bytes.",
+              "isOptional": false,
+              "max": 1522,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlTxBufLenByte",
+              "type": "INTEGER",
+              "uuid": "ECUC:f4b834a6-9fce-4cf9-9f80-98e4a6ad9eec"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthRxBufTotal",
+              "description": "Configures the number of receive buffers.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthRxBufTotal",
+              "type": "INTEGER",
+              "uuid": "ECUC:139da546-28f2-4245-8429-9c05fa63efde"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthTxBufTotal",
+              "description": "Configures the number of transmit buffers.",
+              "isOptional": false,
+              "max": 255,
+              "min": 0,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthTxBufTotal",
+              "type": "INTEGER",
+              "uuid": "ECUC:3ea8a022-70b8-493a-9cf8-13ae8489d6b4"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlPhyAddress",
+              "description": "Specifies the unique 48-bit physical address (MAC address) of the controller in network byte order.",
+              "isOptional": true,
+              "maxLength": 17,
+              "minLength": 17,
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "shortName": "EthCtrlPhyAddress",
+              "type": "STRING",
+              "uuid": "ECUC:b7e156c0-3a45-42f1-b2f9-feb287415200"
+            }
+          ],
+          "references": [],
+          "shortName": "EthCtrlConfig",
+          "subContainers": [
+            {
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs",
+              "description": "Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus in case the corresponding error occurs. T…",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "parameters": [],
+              "references": [
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_ACCESS",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Controller access failed\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_ACCESS",
+                  "uuid": "ECUC:b4651d05-f83d-44c9-9d1e-21089a781293"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_ALIGNMENT",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Alignment Error\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_ALIGNMENT",
+                  "uuid": "ECUC:632e47af-42fb-4224-8fbb-7909494d6151"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_CRC",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"CRC Failure\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_CRC",
+                  "uuid": "ECUC:a08dd4d7-e2ac-4afc-83e9-71b18bd82675"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_LATECOLLISION",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Late Collisions\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_LATECOLLISION",
+                  "uuid": "ECUC:a6f98810-856a-422f-8f20-5af275bd96b2"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_MULTIPLECOLLISION",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Multiple Collisions\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_MULTIPLECOLLISION",
+                  "uuid": "ECUC:d2e620f0-7f00-4c5d-a2bb-cec828a2786a"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_OVERSIZEFRAME",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Oversized Frame\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_OVERSIZEFRAME",
+                  "uuid": "ECUC:71866e3f-ce4b-418a-9115-cf80032d67ec"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_RX_FRAMES_LOST",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"receive frames lost\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_RX_FRAMES_LOST",
+                  "uuid": "ECUC:58dc8751-6779-4cf2-a369-71007d00354c"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_SINGLECOLLISION",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Single Collisions\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_SINGLECOLLISION",
+                  "uuid": "ECUC:191bedeb-c2b9-413d-9fe2-e0974c5712c9"
+                },
+                {
+                  "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthDemEventParameterRefs/ETH_E_UNDERSIZEFRAME",
+                  "description": "Reference to the DemEventParameter which shall be issued when the error \"Undersized Frame\" has occured.",
+                  "destinationContainerType": "DemEventParameter",
+                  "destinationRef": "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter",
+                  "destinationRefs": [
+                    "/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"
+                  ],
+                  "isExternal": true,
+                  "isOptional": true,
+                  "kind": "symbolic",
+                  "multiplicity": {
+                    "lower": 0,
+                    "upper": 1
+                  },
+                  "shortName": "ETH_E_UNDERSIZEFRAME",
+                  "uuid": "ECUC:c82783ce-7229-4673-97db-0a7b539ef538"
+                }
+              ],
+              "shortName": "EthDemEventParameterRefs",
+              "subContainers": [],
+              "uuid": "ECUC:6c163108-f8fb-4e94-aee0-19a511446ffc"
+            }
+          ],
+          "uuid": "ECUC:56cd8c81-2738-4e37-9187-eb8d6838c4c6"
+        }
+      ],
+      "uuid": "ECUC:5038b196-90f1-4b1e-991a-59d361bf33c9"
+    },
+    {
+      "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral",
+      "description": "General configuration of Ethernet Driver module",
+      "multiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "parameters": [
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthDevErrorDetect",
+          "description": "Switches the Default Error Tracer (Det) detection and notification ON or OFF.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthDevErrorDetect",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e9f29dc0-4e38-4c7a-89f6-67505e301506"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthGetDropCountApi",
+          "description": "Enables / Disables Eth_GetDropCount API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthGetDropCountApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:e0c4707b-44a4-45ac-b02a-03c0c5eb92a2"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthGetEtherStatsApi",
+          "description": "Enables / Disables Eth_GetEtherStats API.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthGetEtherStatsApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:159a77b6-3904-4bd6-84f5-77417e699ec4"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthGlobalTimeSupport",
+          "description": "Enables/Disables the GlobalTime APIs used amongst others by Global Time Synchronization over Ethernet.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthGlobalTimeSupport",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:64fab11f-9698-4408-961d-e08197101883"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "defaultValue": false,
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthUpdatePhysAddrFilter",
+          "description": "Enables/Disables optional API Eth_UpdatePhysAddrFilter.",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthUpdatePhysAddrFilter",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:3f2394e5-bdde-4327-b254-10bfcbda919b"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthVersionInfoApi",
+          "description": "Enables / Disables version info API",
+          "isOptional": false,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthVersionInfoApi",
+          "type": "BOOLEAN",
+          "uuid": "ECUC:aec58ac0-ad1c-4331-a535-7f4301e98577"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthIndex",
+          "description": "Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.",
+          "isOptional": false,
+          "max": 255,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthIndex",
+          "type": "INTEGER",
+          "uuid": "ECUC:8f9f2801-a733-45ba-92c1-4f76e7239397"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthMaxCtrlsSupported",
+          "description": "Limits the total number of supported controllers.",
+          "isOptional": false,
+          "max": 255,
+          "min": 1,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthMaxCtrlsSupported",
+          "type": "INTEGER",
+          "uuid": "ECUC:5dd19540-c70f-4e65-b839-510b53e355c7"
+        },
+        {
+          "configClass": "PRE_COMPILE",
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthMainFunctionPeriod",
+          "description": "Specifies the period of main function Eth_MainFunction in seconds. Ethernet driver does not require this information but the BSW scheduler.",
+          "isOptional": false,
+          "min": 0,
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "shortName": "EthMainFunctionPeriod",
+          "type": "FLOAT",
+          "uuid": "ECUC:ca545039-b3f3-4a63-8b04-29ebac136e9d"
+        }
+      ],
+      "references": [],
+      "shortName": "EthGeneral",
+      "subContainers": [
+        {
+          "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthCtrlOffloading",
+          "description": "Configuration of hardware offloading features.",
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "parameters": [
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthCtrlOffloading/EthCtrlEnableOffloadChecksumICMP",
+              "description": "Enables / Disables hardware offloading for ICMP checksums.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlEnableOffloadChecksumICMP",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:39ceb7ae-86fb-4a40-a65e-fa797e0daf7a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthCtrlOffloading/EthCtrlEnableOffloadChecksumIPv4",
+              "description": "Enables / Disables hardware offloading for IPv4 checksums.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlEnableOffloadChecksumIPv4",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:710505ff-ac85-45fe-a1c9-c8c5ac860ee3"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthCtrlOffloading/EthCtrlEnableOffloadChecksumTCP",
+              "description": "Enables / Disables hardware offloading for TCP checksums.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlEnableOffloadChecksumTCP",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:bd7596bc-d545-4b56-a46f-35eaf7bf3c8a"
+            },
+            {
+              "configClass": "PRE_COMPILE",
+              "definitionPath": "/AUTOSAR/EcucDefs/Eth/EthGeneral/EthCtrlOffloading/EthCtrlEnableOffloadChecksumUDP",
+              "description": "Enables / Disables hardware offloading for UDP checksums.",
+              "isOptional": false,
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "shortName": "EthCtrlEnableOffloadChecksumUDP",
+              "type": "BOOLEAN",
+              "uuid": "ECUC:f386414c-101f-4f4f-8838-41b35cfe74c7"
+            }
+          ],
+          "references": [],
+          "shortName": "EthCtrlOffloading",
+          "subContainers": [],
+          "uuid": "ECUC:44ab9e6d-ad97-4fd3-b26c-b2620681a83b"
+        }
+      ],
+      "uuid": "ECUC:6f42d612-0b76-4acc-a377-9a35f3decf57"
+    }
+  ],
+  "definitionPath": "/AUTOSAR/EcucDefs/Eth",
+  "description": "Configuration of the Eth (Ethernet Driver) module.",
+  "importWarnings": [
+    "ETH_E_ACCESS：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_ALIGNMENT：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_CRC：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_LATECOLLISION：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_MULTIPLECOLLISION：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_OVERSIZEFRAME：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_RX_FRAMES_LOST：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_SINGLECOLLISION：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。",
+    "ETH_E_UNDERSIZEFRAME：目标 /AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter 位于本模块之外；编辑器只读展示。"
+  ],
+  "multiplicity": {
+    "lower": 0,
+    "upper": "unbounded"
+  },
+  "shortName": "Eth",
+  "version": "4.2.2"
+}
