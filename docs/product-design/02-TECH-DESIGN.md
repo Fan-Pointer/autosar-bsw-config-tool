@@ -31,8 +31,12 @@ interface OutputCheckResult {
 declare function evaluateOutputReadiness(
   config: ConfigInstance, module: BswmdModule, extraRules?: ConstraintRule[]
 ): OutputCheckResult;
-// 语义：isConfigured=false 的必填 → ERROR；CHOICE 未选 → ERROR；
-//       可选未配 → 不出现在输出（不是错误也不是建议值）；false/0 已配置不误报
+// 语义：isConfigured=false 的必填（参数与引用同等对待）→ ERROR；
+//       引用拒绝原因分两类：「必填引用未配置」与「目标跨模块（本期不支持，ADR-11/G05）」
+//       —— 已核实实例：CanIfCtrlDrvNameRef/CanIfCtrlCanCtrlRef→/…/Can（跨模块），
+//          NvMNameOfEaBlock/FeeBlock→/…/Ea,/…/Fee（跨模块），
+//          CanIfCtrlDrvInitHohConfigRef→本模块 CanIfInitHohCfg（模块内可修复）；
+//       CHOICE 未选 → ERROR；可选未配 → 不出现在输出；false/0 已配置不误报
 // 求值语义（2026-11-06 R2 裁定）：闸门是纯函数，各消费方在自己动作的事务点
 // 调用同一函数【重新求值】；禁止①入口另写校验逻辑（重复逻辑）②跨动作缓存复用
 // 结果对象（陈旧）。模块规则由 store 层统一注入（core 不知道模块名）；

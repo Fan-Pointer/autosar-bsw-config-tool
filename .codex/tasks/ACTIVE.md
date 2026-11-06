@@ -1,4 +1,4 @@
-# ACTIVE TASK — TASK-014（v2，并入 CONTRACT_CLARIFY 三项裁定）
+# ACTIVE TASK — TASK-014（v3，并入 REQUIRED-REF 裁定）
 
 > 本文件是 Codex 唯一的任务契约来源。开始实现前必须完整读取；**不得修改本文件**。
 > 契约哈希由评审方写入 `STATE.json` 的 `task.contractHash`，篡改会导致调度器拒绝派发。
@@ -8,6 +8,7 @@
 > R1 验收 4 废弃「官方 15→15」旧合成口径 → 官方改为**集合恒等断言**（已配置集 = ARXML VALUE 集 = C 字段集）+ 必填门槛不削弱；合成 fixture 保留精确等式回归。
 > R2 闸门 = **纯函数重新求值**语义（见 A1/A2 修订）：禁止重复校验逻辑，也禁止跨动作复用结果对象（陈旧风险）；规则注入由 store 统一完成。
 > R3 Arxml.ts 允许**仅路径取值接线**白名单（definitionPath 优先、缺省回退）+ A2 闸门消费接线；namespace/引用候选/DEST/结构标签仍归 TASK-015。
+> **v3 修订（2026-11-06 10:00，REQUIRED-REF 裁定）**：闸门拦截对象明确覆盖**必填引用**（不只参数）。旧官方成功导出用例建立在遗漏必填引用上（评审方已独立核实：CanIfCtrlDrvNameRef/CanIfCtrlCanCtrlRef 目标=/…/Can/**跨模块**；NvMNameOfEaBlock/FeeBlock 目标=/…/Ea、/…/Fee**跨模块**；CanIfCtrlDrvInitHohConfigRef 目标=本模块 CanIfInitHohCfg**模块内**）。拒绝原因分两类：**必填引用未配置（模块内可修复）**与**目标跨模块（本期不支持）**——均逐项列出，不静默、不伪造、不改官方 isOptional。详见 A4。
 
 | 项 | 值 |
 |---|---|
@@ -26,7 +27,7 @@
 
 | 编号 | 交付内容 |
 |---|---|
-| A1 | 新增 `src/core/output/OutputGate.ts`：`isOutputReady(config, module)` 单一事实源。语义：`isConfigured=false` 的必填 → ERROR；CHOICE 未选 → ERROR；可选未配 → **不出现于输出**（不是错误也不是建议值）；`false/0` 已配置**不误报**；issue 携带 `severity/path/reason/anchor{containerUuid, definitionRef?}` |
+| A1 | 新增 `src/core/output/OutputGate.ts`：`isOutputReady(config, module)` 单一事实源。语义：`isConfigured=false` 的必填（**参数与引用同等对待**）→ ERROR，引用按原因分类：「必填引用未配置」与「目标跨模块（本期不支持，沿 ADR-11/G05）」；CHOICE 未选 → ERROR；可选未配 → **不出现于输出**（不是错误也不是建议值）；`false/0` 已配置**不误报**；issue 携带 `severity/path/reason/anchor{containerUuid, definitionRef?}` |
 | A2 | 消费方接线与求值语义（R2 裁定）：闸门为**纯函数** `evaluateOutputReadiness(config, module, extraRules?)`——通用检查内置 core，模块规则（如 `DemConstraints`）由 **store 层统一注入**（core 不知道模块名）。四个消费方（校验面板 / exportArxml / exportCsv / CGenerator）**各自在自己动作的事务点调用同一函数重新求值**；**禁止**两件事：①任一入口另写校验逻辑（重复逻辑）②跨动作缓存复用结果对象（陈旧）。同一动作链内求值一次并传递。建议 store 提供薄封装（如 `getOutputCheck(configId)`）作为唯一注入点 |
 | A3 | **一致性断言**：同一配置下，校验面板显示的问题集合 ≡ 四类输出的拒绝原因集合（要么都可输出，要么报同一批问题）；「验证通过却拒绝导出 28 项」（L08 缺陷）回归用例必须存在且通过 |
 
@@ -52,6 +53,19 @@
 | D1 | 测试收集守卫：断言收集文件数 === 磁盘 `.test.ts` 数（防宿主静默漏收导致误判） |
 | D2 | 删除 `tests/helpers/legacy-map.json`（已无代码引用；如需留档移 `docs/archive/`） |
 | D3 | `02-TECH-DESIGN.md` §5 补 fixture 双轨选型规则两行（评审方文档，Codex 提供要点即可） |
+
+### A4. 三个旧官方成功导出用例的修订边界（REQUIRED-REF 裁定）
+
+| 用例 | 修订为 | 保留 |
+|---|---|---|
+| arxml-fidelity CanIf 45 参数往返 | **拒绝断言**：必填引用逐项列出——`CanIfCtrlDrvNameRef`/`CanIfCtrlCanCtrlRef` 原因=目标跨模块（/…/Can）；`CanIfCtrlDrvInitHohConfigRef` 原因=必填引用未配置（目标 /…/CanIf/CanIfInitCfg/CanIfInitHohCfg 为**模块内**，属可修复项） | JSON 全树无损往返（JSON 永不拦截，ADR-06） |
+| choice NvM 候选 0/1 | **拒绝断言**：选中候选后 NvMNameOfEaBlock（/…/Ea）/ NvMNameOfFeeBlock（/…/Fee）必填外部引用逐项拒绝，原因=跨模块；CHOICE 解析/互斥/切换的**解析级断言保留** | 既有合成 CHOICE 两候选 ARXML 成功往返 |
+| CanIf 合法子集（新增） | 构造**不含 lower=0 的 CanIfCtrlDrvCfg 实例**的合法 CanIf 配置 → 全部必填天然满足 → 45 参数中可输出部分继续成功导出，保留官方成功路径覆盖；**不改定义、不删容器定义** | 官方成功输出覆盖 |
+| 官方 Dem 两个模块内必填引用 | 构造合法 `DemOperationCycle`/`DemEventMemorySet` 目标并关联 → 保留官方成功往返 | 成功路径 |
+
+**分层规则（其余 9 处采纳）**：格式编码边界测试（C 转义/CSV 转义/ARXML 格式编码）用**合成 fixture**（测编码能力，不经业务就绪）；业务就绪测试用官方定义；两者不得互相借用。CSV 转义用合成 STRING 语义；C 转义场景不再被无关的实例命名预校验误拦（预校验属业务就绪层）。
+
+**禁止**：伪造当前模块内目标冒充跨模块引用修复；修改官方定义 isOptional；绕过闸门维持旧"通过"；把跨模块成功导出记为已完成（未完成状态记入报告与 00-SCOPE G05，待跨模块方案立项后验收）。
 
 ## 2. 验收标准
 
