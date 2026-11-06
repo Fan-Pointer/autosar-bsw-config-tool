@@ -1,0 +1,10 @@
+NewTargetRef 引用配置
+不选择目标（清除引用）
+
+确定后创建并引用：模块根/NewTarget；取消不会创建。
+
+暂无 NewTarget 实例，请先新增
+
+新增 模块根/NewTarget
+取消
+确定

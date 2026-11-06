@@ -99,7 +99,7 @@ describe('TASK-009 UI selection and default confirmation', () => {
     const before = exportJson(store.config!);
     await buttons[1].trigger('click');
     await flushPromises();
-    expect(confirm.mock.calls[0][0]).toContain('将丢失「NvMEaRef」的配置');
+    expect(confirm.mock.calls[0][0]).toHaveProperty('type', 'div');
     expect(document.querySelector('.el-message-box')?.textContent).toContain(
       '将丢失「NvMEaRef」的配置'
     );

@@ -1,7 +1,10 @@
 <template>
   <div class="validation-panel">
     <div class="panel-header">
-      <span class="title">验证结果</span>
+      <span class="title"
+        >问题（{{ violations.length + (operationError ? 1 : 0) }}） · 错误 {{ errorCount }} / 警告
+        {{ warningCount }}</span
+      >
       <el-badge :value="errorCount" :hidden="errorCount === 0" type="danger">
         <el-badge :value="warningCount" :hidden="warningCount === 0" type="warning">
           <el-button size="small" @click="runValidation">
@@ -10,11 +13,15 @@
           </el-button>
         </el-badge>
       </el-badge>
+      <button aria-label="关闭验证结果" class="collapse-button" @click="emit('collapse')">
+        收起
+      </button>
     </div>
 
     <div class="panel-content">
+      <el-alert v-if="operationError" :title="operationError" type="error" :closable="false" />
       <!-- 无错误 -->
-      <div v-if="violations.length === 0 && !isValidating" class="empty-state">
+      <div v-if="violations.length === 0 && !isValidating && !operationError" class="empty-state">
         <el-icon :size="40" color="var(--color-success)"><SuccessFilled /></el-icon>
         <p>{{ validated ? '验证通过' : '尚未验证' }}</p>
       </div>
@@ -26,7 +33,10 @@
       </div>
 
       <!-- 验证结果列表 -->
-      <div v-else class="violations-list">
+      <div v-else-if="violations.length" class="violations-list">
+        <div class="issue-columns" aria-hidden="true">
+          <span>严重度</span><span>路径</span><span>原因 / 建议</span><span>操作</span>
+        </div>
         <div
           v-for="(violation, index) in violations"
           :key="`${violation.ruleId}-${violation.containerUuid}-${index}`"
@@ -42,15 +52,24 @@
             <el-tag :type="getSeverityType(violation.severity)" size="small">
               {{ violation.severity }}
             </el-tag>
-            <span class="rule-id">{{ violation.ruleId }}</span>
-          </div>
-          <div class="violation-message">{{ violation.message }}</div>
-          <div v-if="violation.suggestion" class="violation-suggestion">
-            建议: {{ violation.suggestion }}
           </div>
           <div v-if="violation.path" class="violation-path">
             {{ violation.path }}
           </div>
+          <div>
+            <div class="violation-message">{{ violation.message }}</div>
+            <small class="rule-id">{{ violation.ruleId }}</small>
+            <div v-if="violation.suggestion" class="violation-suggestion">
+              建议: {{ violation.suggestion }}
+            </div>
+          </div>
+          <button
+            class="locate-button"
+            :aria-label="'定位 ' + violation.path"
+            @click.stop="onViolationClick(violation)"
+          >
+            定位
+          </button>
         </div>
       </div>
     </div>
@@ -66,20 +85,25 @@ interface Props {
   violations?: ConstraintViolation[];
   isValidating?: boolean;
   validated?: boolean;
+  operationError?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   violations: () => [],
   isValidating: false,
   validated: false,
+  operationError: '',
 });
 
 const emit = defineEmits<{
   validate: [];
   navigate: [violation: ConstraintViolation];
+  collapse: [];
 }>();
 
-const errorCount = computed(() => props.violations.filter((v) => v.severity === 'ERROR').length);
+const errorCount = computed(
+  () => props.violations.filter((v) => v.severity === 'ERROR').length + (props.operationError ? 1 : 0)
+);
 const warningCount = computed(
   () => props.violations.filter((v) => v.severity === 'WARNING').length
 );
@@ -125,7 +149,9 @@ defineExpose({ runValidation });
 }
 
 .panel-header {
-  height: 48px;
+  min-height: 40px;
+  flex-shrink: 0;
+  gap: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -141,8 +167,9 @@ defineExpose({ runValidation });
 
 .panel-content {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  padding: 16px;
+  padding: 8px 16px;
 }
 
 .empty-state,
@@ -151,7 +178,7 @@ defineExpose({ runValidation });
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  min-height: 80px;
   color: var(--color-muted);
 }
 
@@ -163,15 +190,40 @@ defineExpose({ runValidation });
 .violations-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
 }
 
 .violation-item {
-  padding: 12px;
+  padding: 8px;
   border-radius: 4px;
   border-left: 3px solid var(--color-border);
   cursor: pointer;
   transition: background-color 0.2s;
+}
+.violation-item,
+.issue-columns {
+  display: grid;
+  grid-template-columns: 90px minmax(180px, 1fr) minmax(240px, 2fr) 56px;
+  align-items: start;
+  gap: 12px;
+  overflow-wrap: anywhere;
+}
+.issue-columns {
+  padding: 4px 8px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+.collapse-button,
+.locate-button {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  color: var(--color-accent);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.collapse-button {
+  margin-left: auto;
 }
 
 .violation-item:hover {

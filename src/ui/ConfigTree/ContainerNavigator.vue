@@ -28,9 +28,9 @@
       <button title="未核实，待补充截图" disabled aria-label="上移">↑</button>
       <button title="未核实，待补充截图" disabled aria-label="下移">↓</button>
       <button
-        title="在选中容器定义下新增实例"
-        aria-label="新增实例"
-        :disabled="!store.config"
+        :title="addReason ?? '添加实例：定义节点创建该类实例，实例节点选择子容器'"
+        aria-label="添加实例"
+        :disabled="!store.config || store.isLoading || store.isImporting || Boolean(addReason)"
         @click="add"
       >
         ＋
@@ -70,6 +70,7 @@ import { useConfigStore } from '@/stores/configStore';
 const props = defineProps<{ width: number }>();
 const emit = defineEmits<{
   actions: [];
+  'add-children': [];
   context: [event: MouseEvent, target: ContainerContextTarget];
   selected: [];
 }>();
@@ -89,6 +90,14 @@ const hiddenTabs = computed(() => tabs.value.filter((item) => !visibleTabs.value
 const addDefinition = computed(
   () => selectedDefinition.value ?? (store.selectedEntry ? undefined : { uuid: activeId.value })
 );
+const addReason = computed(() => {
+  const target = addDefinition.value;
+  if (!target?.uuid) return store.childOptions.length ? undefined : '没有可添加的子容器';
+  const option = store
+    .addOptionsFor('parentUuid' in target ? (target.parentUuid ?? null) : null)
+    .find((item) => item.definition.uuid === target.uuid);
+  return option?.disabledReason ?? (option ? undefined : '当前父容器不允许添加该定义');
+});
 watch(
   () => store.activeUuid,
   () => {
@@ -155,12 +164,11 @@ function context(
 async function add(): Promise<void> {
   const target = addDefinition.value;
   if (!target?.uuid) {
-    emit('actions');
+    emit('add-children');
     return;
   }
   try {
-    store.selectContainer(target.parentUuid ?? '');
-    store.addContainerInstance(target.uuid);
+    store.addContainerInstance(target.uuid, target.parentUuid ?? null);
     selectedDefinition.value = undefined;
     await store.saveConfig();
     emit('selected');

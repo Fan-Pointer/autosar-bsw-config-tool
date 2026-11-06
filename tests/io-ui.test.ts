@@ -147,7 +147,7 @@ describe('transactional store IO', () => {
     const session = store.prepareImport(text, 'json');
     store.setParameterValue('fixture-dem-dtc-value', 3);
     expect(await store.applyImport(session, 'overwrite')).toBe(false);
-    expect(store.error).toContain('工程已在预览后更改');
+    expect(store.error).toContain('配置集已在预览后更改');
     expect(store.selectedEntry!.container.parameters.get('fixture-dem-dtc-value')?.value).toBe(3);
   });
   it('does not publish staged state while writing and prevents concurrent editor actions', async () => {
@@ -217,7 +217,7 @@ describe('import preview UI and project menus', () => {
     const wrapper = await dialog(text);
     expect(
       [...document.querySelectorAll('.conflict-table th')].map((node) => node.textContent)
-    ).toEqual(['冲突实例路径', '参数名', '文件生成值 / 文件引用值', '工程配置值 / 工程引用值']);
+    ).toEqual(['冲突实例路径', '参数名', '文件生成值 / 文件引用值', '配置集值 / 配置集引用值']);
     expect(
       [...document.querySelectorAll('.conflict-table td')].map((node) => node.textContent)
     ).toEqual(['DemConfigSet/DemDTC', 'DemDtcValue', '42', '1']);

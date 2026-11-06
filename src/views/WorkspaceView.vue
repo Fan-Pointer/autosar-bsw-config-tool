@@ -117,9 +117,9 @@
         :style="{ width: (projectCollapsed ? 30 : projectWidth) + 'px' }"
       >
         <div class="project-heading">
-          <span v-if="!projectCollapsed">🗂工程目录</span
+          <span v-if="!projectCollapsed">配置集与模块</span
           ><button
-            :aria-label="projectCollapsed ? '展开工程目录' : '折叠工程目录'"
+            :aria-label="projectCollapsed ? '展开配置集目录' : '折叠配置集目录'"
             @click="projectCollapsed = !projectCollapsed"
           >
             {{ projectCollapsed ? '›' : '‹' }}
@@ -133,7 +133,7 @@
             @keydown.shift.f10.prevent="openProjectMenu"
           >
             <span class="folder">▱</span
-            ><span class="project-name">{{ store.config?.name ?? '本机工程' }}</span
+            ><span class="project-name">{{ store.config?.name ?? '本机配置集' }}</span
             ><span>⌃</span>
           </div>
           <details open>
@@ -153,17 +153,6 @@
               </button>
             </details>
           </details>
-          <details
-            v-for="folder in ['RTE', 'AUTOSAR文件', '输出文件', '输入文件']"
-            :key="folder"
-            class="project-folder"
-          >
-            <summary
-              :title="folder === '输出文件' ? '生成代码后可在预览中下载' : '未核实，待补充截图'"
-            >
-              <span class="folder">▱</span>{{ folder }}
-            </summary>
-          </details>
           <button v-if="!store.config" class="empty-project" @click.stop="showSets = true">
             暂无配置集 · 点击创建
           </button>
@@ -173,7 +162,7 @@
         v-if="!projectCollapsed"
         class="splitter"
         role="separator"
-        aria-label="工程目录宽度"
+        aria-label="配置集目录宽度"
         aria-orientation="vertical"
         tabindex="0"
         @pointerdown="startResize('project', $event)"
@@ -211,6 +200,7 @@
             <ContainerNavigator
               :width="treeWidth"
               @actions="showActions = !showActions"
+              @add-children="openAddChildren"
               @context="openContextMenu"
               @selected="
                 showActions = false;
@@ -258,10 +248,14 @@
                 :reference-add-options="store.referenceAddOptions"
                 :dangling-references="store.danglingReferences"
                 :selected-field-uuid="store.selectedFieldUuid"
+                :configured-fields="configuredFields"
+                :field-errors="selectedFieldErrors"
+                :readonly="store.isImporting || store.isLoading"
                 @parameter-change="store.setParameterValue"
                 @reference-change="store.setReferenceTarget"
                 @create-reference-target="store.createReferenceTarget"
               />
+              <ReferenceRelations @navigate="navigateRelation" />
               <details
                 v-if="
                   !store.selectedEntry.definition.choice &&
@@ -304,15 +298,14 @@
       </div>
       <ConfigSetManager @opened="showSets = false" />
     </section>
-    <section v-show="showValidation" class="utility-panel validation-popup" @click.stop>
-      <div class="utility-heading">
-        验证结果<button aria-label="关闭验证结果" @click="showValidation = false">×</button>
-      </div>
+    <section v-show="showValidation" class="validation-dock" aria-label="问题面板" @click.stop>
       <ValidationPanel
         :violations="store.violations"
         :validated="store.validated"
-        @validate="store.validate()"
+        :operation-error="outputError"
+        @validate="validate"
         @navigate="navigateViolation"
+        @collapse="showValidation = false"
       />
     </section>
     <section
@@ -323,6 +316,7 @@
     >
       <ContainerActions
         v-if="store.config"
+        ref="actionsPanel"
         @navigate="navigateViolation"
         @opening="contextMenu = undefined"
       />
@@ -344,13 +338,10 @@
     >
       <template v-for="(item, index) in menuItems" :key="index">
         <hr v-if="item.separator" />
-        <span
-          v-else
-          :title="item.disabled ? '未核实，待补充截图' : undefined"
-          class="project-menu-entry"
+        <span v-else class="project-menu-entry"
           ><button
             role="menuitem"
-            :disabled="item.disabled || (item.action === 'export' && !store.config)"
+            :disabled="item.action === 'export' && !store.config"
             :aria-expanded="
               item.action === 'import' || item.action === 'export'
                 ? projectSubmenu === item.action
@@ -410,6 +401,7 @@ import { useConfigStore } from '@/stores/configStore';
 import { CGenerator } from '@/core/generator/CGenerator';
 import type { GeneratedFile } from '@/core/generator/TemplateEngine';
 import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
+import { OutputValidationError } from '@/core/output/OutputGate';
 import DynamicForm from '@/ui/FormEditor/DynamicForm.vue';
 import ContainerNavigator from '@/ui/ConfigTree/ContainerNavigator.vue';
 import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
@@ -427,6 +419,7 @@ import type { ExportFormat, ImportFormat } from '@/core/io/IoTypes';
 import { useHistory } from '@/ui/History/useHistory';
 import BatchEditPanel from '@/ui/BatchEdit/BatchEditPanel.vue';
 import ChoiceSelector from '@/ui/FormEditor/ChoiceSelector.vue';
+import ReferenceRelations from '@/ui/FormEditor/ReferenceRelations.vue';
 import RequiredDefaultsAction from '@/ui/FormEditor/RequiredDefaultsAction.vue';
 import GlobalSearch from '@/ui/Search/GlobalSearch.vue';
 import type { SearchResult } from '@/core/search/ConfigSearch';
@@ -441,6 +434,38 @@ const showSets = ref(false),
   showValidation = ref(false),
   showActions = ref(false);
 const opened = ref<string[]>([]);
+const actionsPanel = ref<InstanceType<typeof ContainerActions>>();
+async function openAddChildren(): Promise<void> {
+  contextMenu.value = undefined;
+  showActions.value = false;
+  await nextTick();
+  actionsPanel.value?.openAdd();
+}
+const outputError = ref('');
+const configuredFields = computed(() =>
+  Object.fromEntries([
+    ...[...(store.selectedEntry?.container.parameters.values() ?? [])].map((value) => [
+      value.definitionRef,
+      value.isConfigured,
+    ]),
+    ...[...(store.selectedEntry?.container.references.values() ?? [])].map((value) => [
+      value.definitionRef,
+      value.isConfigured,
+    ]),
+  ])
+);
+const selectedFieldErrors = computed(() =>
+  Object.fromEntries(
+    store.violations
+      .filter(
+        (issue) =>
+          issue.severity === 'ERROR' &&
+          issue.containerUuid === store.selectedEntry?.container.uuid &&
+          issue.definitionRef
+      )
+      .map((issue) => [issue.definitionRef!, issue.message])
+  )
+);
 const contextMenu = ref<{
     x: number;
     y: number;
@@ -471,8 +496,6 @@ const breadcrumb = computed(() => {
   return path;
 });
 const menuItems = [
-  { label: '新建', submenu: true, disabled: true },
-  { label: '工程管理', submenu: true, disabled: true },
   { label: '模块管理', submenu: true, action: 'modules' },
   { separator: true },
   { label: '代码验证', action: 'validate' },
@@ -480,12 +503,12 @@ const menuItems = [
   { label: '导入', submenu: true, action: 'import' },
   { label: '导出', submenu: true, action: 'export' },
   { separator: true },
-  { label: '自动计算', disabled: true },
-  { label: '关闭工程', action: 'close' },
+  { label: '关闭配置集', action: 'close' },
 ];
 watch(
   () => store.activeUuid,
   (uuid) => {
+    outputError.value = '';
     contextMenu.value = undefined;
     showGenerated.value = false;
     opened.value = opened.value.filter((id) => store.configSets.some((set) => set.uuid === id));
@@ -542,6 +565,7 @@ function ioAction(action: string, format: ExportFormat): void {
     return;
   }
   try {
+    outputError.value = '';
     const content = store.exportConfig(format);
     const mime =
       format === 'json' ? 'application/json' : format === 'csv' ? 'text/csv' : 'application/xml';
@@ -552,6 +576,7 @@ function ioAction(action: string, format: ExportFormat): void {
     anchor.click();
     setTimeout(() => URL.revokeObjectURL(url), 0);
   } catch (reason) {
+    showOutputFailure(reason);
     ElMessage.error(reason instanceof Error ? reason.message : String(reason));
   }
 }
@@ -633,6 +658,7 @@ async function projectAction(action?: string): Promise<void> {
     opened.value = [];
 }
 function validate(): void {
+  outputError.value = '';
   store.validate();
   showValidation.value = true;
 }
@@ -651,8 +677,21 @@ function navigateViolation(violation: ConstraintViolation): void {
   if (store.activeUuid && !opened.value.includes(store.activeUuid))
     opened.value.push(store.activeUuid);
   store.selectContainer(violation.containerUuid, violation.definitionRef);
-  showValidation.value = false;
   void focusField(violation.definitionRef);
+}
+function navigateRelation(uuid: string, fieldUuid?: string): void {
+  store.selectContainer(uuid, fieldUuid);
+  void focusField(fieldUuid);
+}
+function showOutputFailure(reason: unknown): void {
+  // Validation has already populated the shared issue list; operational failures are shown separately.
+  outputError.value =
+    reason instanceof OutputValidationError
+      ? ''
+      : reason instanceof Error
+        ? reason.message
+        : String(reason);
+  showValidation.value = true;
 }
 function navigateSearch(result: SearchResult): void {
   reopenImported();
@@ -666,6 +705,7 @@ async function saveConfig(): Promise<void> {
 }
 async function generateCode(): Promise<void> {
   if (!store.config || !store.module) return;
+  outputError.value = '';
   const check = store.getOutputCheck();
   store.validate(check);
   if (!check.ready) {
@@ -681,6 +721,7 @@ async function generateCode(): Promise<void> {
     ]);
     showGenerated.value = true;
   } catch (reason) {
+    showOutputFailure(reason);
     ElMessage.error(reason instanceof Error ? reason.message : String(reason));
   }
 }
@@ -1084,12 +1125,13 @@ function stopResize(): void {
   top: 40px;
   max-width: 720px;
 }
-.validation-popup {
-  right: 20px;
-  top: 40px;
-  width: 420px;
-  max-height: calc(100vh - 60px);
-  overflow: auto;
+.validation-dock {
+  height: min(260px, 34vh);
+  min-height: 120px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  overflow: hidden;
 }
 .instance-actions {
   top: 114px;

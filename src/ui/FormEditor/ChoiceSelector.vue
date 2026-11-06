@@ -20,9 +20,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, h, ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { useConfigStore } from '@/stores/configStore';
+import { serializeConfig } from '@/core/io/ConfigJson';
+import { choiceImpact } from './choiceImpact';
 
 const store = useConfigStore();
 const pending = ref(false);
@@ -39,15 +41,52 @@ async function choose(candidateRef: string): Promise<void> {
   const group = entry.value?.container;
   const setUuid = store.activeUuid;
   if (!group || selected.value?.definitionRef === candidateRef) return;
-  const previous = group.subContainers.map((child) => child.uuid).join(',');
+  const previous = JSON.stringify(serializeConfig(store.config!));
   pending.value = true;
   try {
     if (group.subContainers.length) {
       try {
+        const impact = choiceImpact(store.entries, group.uuid);
         await ElMessageBox.confirm(
-          `切换候选将丢失「${group.subContainers.map((child) => child.shortName).join('、')}」的配置。可通过一次撤销恢复。`,
+          h('div', { class: 'choice-impact' }, [
+            h(
+              'p',
+              `切换候选将丢失「${group.subContainers.map((child) => child.shortName).join('、')}」的配置。新候选按定义重新创建；不复制不兼容字段。可通过一次撤销恢复。`
+            ),
+            h(
+              'p',
+              `将创建：${candidates.value.find((candidate) => candidate.uuid === candidateRef)?.shortName}；替换 ${group.subContainers.length} 个候选分支。`
+            ),
+            impact.length
+              ? h('div', { style: 'max-height:280px;overflow:auto' }, [
+                  h(
+                    'table',
+                    {
+                      'aria-label': 'CHOICE 替换预览',
+                      style: 'width:100%;font-size:12px;overflow-wrap:anywhere',
+                    },
+                    [
+                      h('thead', [
+                        h('tr', [h('th', '字段路径'), h('th', '当前值 / 目标'), h('th', '影响')]),
+                      ]),
+                      h(
+                        'tbody',
+                        impact.map((row) =>
+                          h('tr', [h('td', row.path), h('td', row.value), h('td', row.effect)])
+                        )
+                      ),
+                    ]
+                  ),
+                ])
+              : h('p', '此候选没有已确认的参数值或引用。'),
+          ]),
           '切换 CHOICE 候选',
-          { type: 'warning', confirmButtonText: '确认切换', cancelButtonText: '取消' }
+          {
+            type: 'warning',
+            confirmButtonText: '确认切换',
+            cancelButtonText: '取消',
+            customClass: 'choice-preview-dialog',
+          }
         );
       } catch {
         return;
@@ -57,7 +96,9 @@ async function choose(candidateRef: string): Promise<void> {
     const current = store.entries.find((item) => item.container.uuid === group.uuid)?.container;
     if (
       store.activeUuid !== setUuid ||
-      current?.subContainers.map((child) => child.uuid).join(',') !== previous
+      !current ||
+      !store.config ||
+      JSON.stringify(serializeConfig(store.config)) !== previous
     )
       throw new Error('配置已变化，请重新选择候选');
     store.selectChoice(group.uuid, candidateRef);
@@ -70,6 +111,10 @@ async function choose(candidateRef: string): Promise<void> {
 </script>
 
 <style scoped>
+:global(.choice-preview-dialog) {
+  width: min(880px, 94vw);
+  max-width: 94vw;
+}
 .choice-selector {
   padding: 12px 20px;
   border-bottom: 1px solid var(--color-border);

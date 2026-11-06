@@ -3,9 +3,8 @@ import { flushPromises, mount, type VueWrapper } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import { createPinia, setActivePinia } from 'pinia';
 import { createMemoryHistory, createRouter } from 'vue-router';
-import ElementPlus, { ElSelect } from 'element-plus';
+import ElementPlus from 'element-plus';
 import WorkspaceView from '../src/views/WorkspaceView.vue';
-import DynamicForm from '../src/ui/FormEditor/DynamicForm.vue';
 import GlobalSearch from '../src/ui/Search/GlobalSearch.vue';
 import { useConfigStore } from '../src/stores/configStore';
 import { ConfigInstanceManager } from '../src/core/config/ConfigInstance';
@@ -252,12 +251,17 @@ describe('TASK-006 workspace interactions', () => {
     await nextTick();
     await wrapper.get('[aria-label="选择 DemDTCAttributesRef"]').trigger('click');
     await flushPromises();
-    const form = wrapper.getComponent(DynamicForm);
-    const select = form
-      .findAllComponents(ElSelect)
-      .find((select) => select.props('ariaLabel') === '引用目标');
-    expect(select).toBeDefined();
-    select!.vm.$emit('update:modelValue', target.uuid);
+    const before = exportJson(store.config!);
+    const option = [
+      ...document.querySelectorAll<HTMLInputElement>('[role="radiogroup"] input'),
+    ].find((input) => input.getAttribute('aria-label')?.endsWith(target.shortName))!;
+    expect(option).toBeDefined();
+    option.click();
+    await nextTick();
+    expect(exportJson(store.config!)).toBe(before);
+    [...document.querySelectorAll<HTMLButtonElement>('[role="dialog"] button')]
+      .find((button) => button.textContent?.trim() === '确定')!
+      .click();
     await nextTick();
     expect(store.referenceData['fixture-dem-dtc-attributes-ref']).toBe(target.uuid);
     expect(store.undoLabel).toBe('修改引用 DemDTCAttributesRef');

@@ -32,7 +32,7 @@
       >
     </div>
     <p class="import-help">
-      文件仅在本机处理。预览后点击“应用导入”才会保存。未在文件中出现的工程容器会保留。
+      文件仅在本机处理。预览后点击“应用导入”才会保存。未在文件中出现的配置集容器会保留。
     </p>
     <fieldset class="strategies" :disabled="store.isImporting">
       <legend>冲突解决策略</legend>
@@ -79,7 +79,7 @@
               <th>冲突实例路径</th>
               <th>参数名</th>
               <th>文件生成值 / 文件引用值</th>
-              <th>工程配置值 / 工程引用值</th>
+              <th>配置集值 / 配置集引用值</th>
             </tr>
           </thead>
           <tbody>
@@ -203,7 +203,7 @@ async function apply(): Promise<void> {
     ElMessage.success('导入完成，已保存到本机');
     emit('imported');
     emit('update:modelValue', false);
-  } else error.value = store.error ?? '导入失败，工程未改变';
+  } else error.value = store.error ?? '导入失败，配置集未改变';
 }
 </script>
 

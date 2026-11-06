@@ -1,7 +1,9 @@
 <template>
   <div class="container-actions">
-    <el-button :disabled="!store.childOptions.length || store.isLoading" @click="openAdd"
-      >新增子项</el-button
+    <el-button
+      :disabled="!store.childOptions.length || store.isLoading || store.isImporting"
+      @click="openAdd"
+      >添加</el-button
     >
     <span :title="store.cloneReason">
       <el-button :disabled="Boolean(store.cloneReason) || store.isLoading" @click="clone"
@@ -82,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 import type { ContainerAddOption } from '@/core/config/ConfigInstance';
@@ -93,6 +95,12 @@ const store = useConfigStore();
 const showAdd = ref(false);
 const filter = ref('');
 const searchInput = ref<{ focus: () => void } | null>(null);
+watch(
+  () => [store.activeUuid, store.selectedEntry?.container.uuid],
+  () => {
+    showAdd.value = false;
+  }
+);
 const firstError = computed(() =>
   store.violations.find(
     (item) =>
@@ -180,6 +188,7 @@ async function clone(): Promise<void> {
 }
 async function remove(): Promise<void> {
   const container = store.selectedEntry?.container;
+  const configUuid = store.activeUuid;
   if (!container) return;
   try {
     await ElMessageBox.confirm(`删除实例「${container.shortName}」及其子项？`, '删除实例', {
@@ -190,12 +199,18 @@ async function remove(): Promise<void> {
   } catch {
     return;
   }
+  if (
+    store.activeUuid !== configUuid ||
+    !store.entries.some((entry) => entry.container.uuid === container.uuid)
+  )
+    return;
   await perform(() => store.removeContainerInstance(container.uuid));
 }
 function locate(): void {
   if (firstError.value) emit('navigate', firstError.value);
   emit('close');
 }
+defineExpose({ openAdd });
 </script>
 
 <style scoped>

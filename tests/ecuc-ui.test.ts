@@ -274,6 +274,11 @@ describe('D3 reference empty state', () => {
     const before = exportJson(store.config!);
     (dialog.querySelector('button') as HTMLButtonElement).click();
     await nextTick();
+    expect(exportJson(store.config!)).toBe(before);
+    [...document.querySelectorAll<HTMLButtonElement>('[role="dialog"] button')]
+      .find((button) => button.textContent?.trim() === '确定')!
+      .click();
+    await nextTick();
     expect(store.referenceData[byPath('DemConfigSet/DemDTC/DemDTCAttributesRef')]).not.toBe('');
     expect(store.entries.some((entry) => entry.definition.shortName === 'DemDTCAttributes')).toBe(
       true

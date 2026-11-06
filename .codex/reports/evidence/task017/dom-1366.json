@@ -1,0 +1,105 @@
+{
+  "bodyWidth": 1366,
+  "emptyBranches": false,
+  "fields": [
+    {
+      "bounds": {
+        "bottom": 191,
+        "height": 65.5,
+        "left": 484,
+        "right": 1329,
+        "top": 125.5,
+        "width": 845,
+        "x": 484,
+        "y": 125.5
+      },
+      "field": "flag",
+      "state": "configured"
+    },
+    {
+      "bounds": {
+        "bottom": 258.5,
+        "height": 67.5,
+        "left": 484,
+        "right": 1329,
+        "top": 191,
+        "width": 845,
+        "x": 484,
+        "y": 191
+      },
+      "field": "count",
+      "state": "configured"
+    },
+    {
+      "bounds": {
+        "bottom": 326,
+        "height": 67.5,
+        "left": 484,
+        "right": 1329,
+        "top": 258.5,
+        "width": 845,
+        "x": 484,
+        "y": 258.5
+      },
+      "field": "optional",
+      "state": "optional"
+    },
+    {
+      "bounds": {
+        "bottom": 426.5,
+        "height": 67.5,
+        "left": 484,
+        "right": 1329,
+        "top": 359,
+        "width": 845,
+        "x": 484,
+        "y": 359
+      },
+      "field": "memory",
+      "state": "configured"
+    },
+    {
+      "bounds": {
+        "bottom": 494,
+        "height": 67.5,
+        "left": 484,
+        "right": 1329,
+        "top": 426.5,
+        "width": 845,
+        "x": 484,
+        "y": 426.5
+      },
+      "field": "create",
+      "state": "optional"
+    },
+    {
+      "bounds": {
+        "bottom": 561.5,
+        "height": 67.5,
+        "left": 484,
+        "right": 1329,
+        "top": 494,
+        "width": 845,
+        "x": 484,
+        "y": 494
+      },
+      "field": "inbound",
+      "state": "configured"
+    }
+  ],
+  "form": {
+    "bottom": 577.5,
+    "height": 468,
+    "left": 462,
+    "right": 1351,
+    "top": 109.5,
+    "width": 889,
+    "x": 462,
+    "y": 109.5
+  },
+  "newTargetAfterUndo": "--",
+  "viewport": [
+    1366,
+    768
+  ]
+}

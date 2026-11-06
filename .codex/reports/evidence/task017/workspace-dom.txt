@@ -1,0 +1,159 @@
+- banner:
+  - generic: ☷
+  - generic: BSW Configurator
+  - button "撤销": ↶
+  - button "重做": ↷
+  - button "保存到本机":
+  - button "代码验证" [active]:
+  - button "生成 C 代码":
+    - generic: 生成 C 代码
+  - button "配置集管理":
+  - button "模块管理":
+  - button "验证结果":
+  - button "返回配置集列表":
+  - generic "配置有未保存修改": ●
+  - textbox "全局搜索":
+    - /placeholder: 搜索参数、值或实例路径
+  - button "切换主题": 深色
+  - generic: 简体中文⌄
+  - generic: 配
+- main:
+  - complementary:
+    - generic: 配置集与模块
+    - button "折叠配置集目录": ‹
+    - generic: ▱
+    - generic: TASK-017 隔离内存验收
+    - generic: ⌃
+    - generic "⚙ 模块管理 ⌃":
+      - generic: ⚙
+      - text: 模块管理 ⌃
+    - generic "▱ BSW Modules ⌃":
+      - generic: ▱
+      - text: BSW Modules ⌃
+    - button "M Dem":
+      - generic: M
+      - text: Dem
+    - button "M Edit":
+      - generic: M
+      - text: Edit
+  - separator "配置集目录宽度"
+  - tablist "模块":
+    - tab "M Edit(TASK-017 隔离内存验收)" [selected]:
+      - generic: M
+      - text: Edit(TASK-017 隔离内存验收)
+    - button "关闭 Edit(TASK-017 隔离内存验收)": ×
+  - region "必填建议值":
+    - button "一键确认建议值":
+      - generic: 一键确认建议值
+    - generic: 仅确认当前配置集的必填默认值，可一次撤销
+  - complementary:
+    - tablist "顶级容器":
+      - tab "Root" [selected]
+      - tab "First"
+      - button "更多顶级容器": …
+    - button "实例操作": ▤
+    - button "上移" [disabled]: ↑
+    - button "下移" [disabled]: ↓
+    - button "添加实例": ＋
+    - textbox "搜索配置树":
+      - /placeholder: 请输入文字搜索
+    - generic: ⌕
+    - tree:
+      - treeitem "已配置：必填齐全 ⊞ Root" [expanded]:
+        - generic "已配置：必填齐全"
+        - generic: ⊞
+        - generic: Root
+        - treeitem "已配置：必填齐全 i Root" [expanded]:
+          - generic "已配置：必填齐全"
+          - generic: i
+          - generic: Root
+          - treeitem "已配置：必填齐全 ⊞ Choice" [expanded]:
+            - generic "已配置：必填齐全"
+            - generic: ⊞
+            - generic: Choice
+            - treeitem "已配置：必填齐全 i Choice" [expanded]:
+              - generic "已配置：必填齐全"
+              - generic: i
+              - generic: Choice
+              - treeitem "已配置：必填齐全 ⊞ A" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: A
+                - treeitem "已配置：必填齐全 i A" [expanded]:
+                  - generic "已配置：必填齐全"
+                  - generic: i
+                  - generic: A
+              - treeitem "已配置：必填齐全 ⊞ B" [expanded]:
+                - generic "已配置：必填齐全"
+                - generic: ⊞
+                - generic: B
+    - generic "树状态图例":
+      - generic: 已选 1 项
+      - generic: 已配置
+      - generic: 警告
+      - generic: 错误
+      - generic: Ctrl / Cmd 切换选择 · Shift 连选
+  - separator "配置树宽度"
+  - navigation "实例路径":
+    - generic: ▱
+    - generic: Edit
+    - generic: ›
+    - generic: Root
+    - generic: ›
+    - generic: Root
+  - generic: 实例名称
+  - textbox "实例名称": Root
+  - region "参数":
+    - generic "False is an explicit, valid configured value.": Enabled
+    - generic: ☑ 已配置
+    - switch "Enabled"
+    - generic "Enabled 字段说明": 字段说明
+    - generic: Count
+    - generic: ☑ 已配置
+    - spinbutton "Count": "20"
+    - combobox "Count 进制":
+      - option "DEC" [selected]
+      - option "HEX"
+    - generic "Count 字段说明": 字段说明
+    - checkbox "启用 OptionalText"
+    - generic: OptionalText
+    - generic: ☐ 可选
+    - textbox "OptionalText" [disabled]
+    - generic "OptionalText 字段说明": 字段说明
+  - region "引用":
+    - generic: MemoryRef
+    - generic: ☑ 已配置
+    - textbox "MemoryRef": First
+    - generic "选择引用目标":
+      - button "选择 MemoryRef": ▤
+    - generic "MemoryRef 字段说明": 字段说明
+    - generic: NewTargetRef
+    - generic: ☐ 可选
+    - textbox "NewTargetRef": "--"
+    - generic "选择引用目标":
+      - button "选择 NewTargetRef": ▤
+    - generic "NewTargetRef 字段说明": 字段说明
+    - generic: CandidateRef
+    - generic: ☑ 已配置
+    - textbox "CandidateRef": Root/Choice/A
+    - generic "选择引用目标":
+      - button "选择 CandidateRef": ▤
+    - generic "CandidateRef 字段说明": 字段说明
+  - group "实例引用关系":
+    - generic "引用关系 · 入站 0 / 出站 3"
+    - heading "入站：引用此实例的位置" [level=4]
+    - paragraph: 暂无入站引用
+    - list
+    - heading "出站：此实例的引用目标" [level=4]
+    - list:
+      - text: MemoryRef →
+      - button "First"
+      - listitem: NewTargetRef → 未选择目标
+      - text: CandidateRef →
+      - button "Root/Choice/A"
+- region "问题面板":
+  - generic: 问题（0） · 错误 0 / 警告 0
+  - button "验证":
+    - text: 验证
+  - button "关闭验证结果": 收起
+  - paragraph: 验证通过

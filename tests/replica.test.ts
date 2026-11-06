@@ -107,7 +107,7 @@ describe('screenshot replica interactions', () => {
       .findAll('.node-label')
       .find((item) => item.text() === definition.shortName)!
       .trigger('click');
-    await wrapper.get('[aria-label="新增实例"]').trigger('click');
+    await wrapper.get('[aria-label="添加实例"]').trigger('click');
     await flushPromises();
     expect(store.selectedEntry?.definition.uuid).toBe(definition.uuid);
     expect(parent.subContainers).toHaveLength(1);
@@ -219,12 +219,14 @@ describe('screenshot replica interactions', () => {
     expect(store.activeUuid).toBe(uuid);
   });
 
-  it('keeps unobserved context actions disabled and opens the module dialog', async () => {
+  it('removes empty placeholder actions, keeps real output guards and opens the module dialog', async () => {
     const { wrapper } = await workspace();
     await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
-    expect(wrapper.findAll('.project-menu [role=menuitem]')).toHaveLength(9);
-    // Import is now available; export requires an active set. Unverified actions remain disabled.
-    expect(wrapper.findAll('.project-menu button[disabled]')).toHaveLength(4);
+    expect(wrapper.findAll('.project-menu [role=menuitem]')).toHaveLength(6);
+    expect(wrapper.findAll('.project-menu button[disabled]')).toHaveLength(1);
+    expect(wrapper.get('.project-menu').text()).not.toContain('工程管理');
+    expect(wrapper.get('.project-menu').text()).not.toContain('自动计算');
+    expect(wrapper.findAll('.project-folder')).toHaveLength(0);
     await wrapper
       .findAll('.project-menu button')
       .find((item) => item.text().startsWith('模块管理'))!

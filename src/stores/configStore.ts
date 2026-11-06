@@ -420,11 +420,13 @@ export const useConfigStore = defineStore('config', () => {
       };
     })
   );
-  const childOptions = computed(() =>
-    config.value
-      ? manager.getAddOptions(config.value, selectedEntry.value?.container.uuid ?? null)
-      : []
-  );
+  /** Read core add options for an explicit parent without changing editor selection.
+   * @param parentUuid Parent instance, null for module roots. @returns Current core decisions.
+   */
+  function addOptionsFor(parentUuid: string | null) {
+    return config.value ? manager.getAddOptions(config.value, parentUuid) : [];
+  }
+  const childOptions = computed(() => addOptionsFor(selectedEntry.value?.container.uuid ?? null));
   /** Resolve lifecycle options for an explicit target without changing editor selection.
    * @param uuid Context instance UUID. @returns Core options and existing editing restrictions.
    */
@@ -1351,7 +1353,7 @@ export const useConfigStore = defineStore('config', () => {
    */
   function previewImport(session: ImportSession, strategy: ConflictStrategy): ImportPlan {
     if (session.baseline !== importBaseline())
-      throw new Error('工程已在预览后更改，请重新读取文件并预览');
+      throw new Error('配置集已在预览后更改，请重新读取文件并预览');
     const definition = modules.value.find(
       (item) =>
         item.shortName === session.incoming.moduleRef && item.version === session.incoming.version
@@ -1489,6 +1491,7 @@ export const useConfigStore = defineStore('config', () => {
     activeUuid,
     summaries,
     childOptions,
+    addOptionsFor,
     containerActionsFor,
     removalReason,
     cloneReason,

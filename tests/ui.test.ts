@@ -317,7 +317,7 @@ describe('TASK-003 user interactions', () => {
     const actions = wrapper.findComponent(ContainerActions);
     await actions
       .findAll('button')
-      .find((button) => button.text() === '新增子项')!
+      .find((button) => button.text() === '添加')!
       .trigger('click');
     await flushPromises();
     const dialog = [...document.querySelectorAll('[role="dialog"]')].find((item) =>
@@ -591,7 +591,7 @@ describe('TASK-003 user interactions', () => {
     await wrapper
       .findComponent(ContainerActions)
       .findAll('button')
-      .find((item) => item.text() === '新增子项')!
+      .find((item) => item.text() === '添加')!
       .trigger('click');
     await flushPromises();
     expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);

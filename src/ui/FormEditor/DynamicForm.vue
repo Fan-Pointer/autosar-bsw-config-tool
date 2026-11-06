@@ -9,6 +9,7 @@
         :class="{
           'is-required': !param.isOptional,
           'selected-field': selectedFieldUuid === param.uuid,
+          'has-error': Boolean(fieldErrors[param.uuid]),
         }"
         :data-field="param.uuid"
       >
@@ -23,9 +24,11 @@
         />
         <span v-else class="optional-space" />
         <label :title="param.description" :for="'input-' + param.uuid">{{ param.shortName }}</label>
-        <span class="required-mark" :title="!param.isOptional ? '必填参数' : undefined">{{
-          !param.isOptional ? '⊗' : ''
-        }}</span>
+        <FieldState
+          :configured="configuredFields[param.uuid] === true"
+          :optional="Boolean(param.isOptional)"
+          :message="fieldErrors[param.uuid]"
+        />
         <div
           class="field-control"
           :class="{ numeric: param.type === 'INTEGER' || param.type === 'FLOAT' }"
@@ -107,6 +110,27 @@
         <span v-if="numericErrors[param.uuid]" class="field-error" role="alert">{{
           numericErrors[param.uuid]
         }}</span>
+        <span v-if="fieldErrors[param.uuid]" class="field-error" role="alert">{{
+          fieldErrors[param.uuid]
+        }}</span>
+        <details class="field-help">
+          <summary :aria-label="param.shortName + ' 字段说明'">字段说明</summary>
+          <p>{{ param.description || '此字段未提供说明' }}</p>
+          <p>
+            {{
+              param.definitionPath ??
+              (container.definitionPath ?? container.shortName) + '/' + param.shortName
+            }}
+          </p>
+          <p>
+            类型：{{ param.type
+            }}<template v-if="param.min !== undefined || param.max !== undefined">
+              · 范围：{{ param.min ?? '不限' }} ～ {{ param.max ?? '不限' }}</template
+            ><template v-if="param.enumValues?.length">
+              · 选项：{{ param.enumValues.join('、') }}</template
+            >
+          </p>
+        </details>
       </div>
     </section>
     <section v-if="container.references.length" class="reference-section" aria-label="引用">
@@ -119,6 +143,7 @@
           'is-required': !reference.isOptional,
           'selected-field': selectedFieldUuid === reference.uuid,
           'dangling-reference': danglingReferences.includes(reference.uuid),
+          'has-error': Boolean(fieldErrors[reference.uuid]),
         }"
         :data-field="reference.uuid"
       >
@@ -126,7 +151,11 @@
         <label :title="reference.description" :for="'input-' + reference.uuid">{{
           reference.shortName
         }}</label>
-        <span class="required-mark">{{ !reference.isOptional ? '⊗' : '' }}</span>
+        <FieldState
+          :configured="configuredFields[reference.uuid] === true"
+          :optional="Boolean(reference.isOptional)"
+          :message="fieldErrors[reference.uuid]"
+        />
         <div class="field-control reference-control">
           <el-input
             :id="'input-' + reference.uuid"
@@ -141,7 +170,7 @@
               type="button"
               :disabled="readonly || reference.isExternal"
               :aria-label="'选择 ' + reference.shortName"
-              @click="referencePicker = reference.uuid"
+              @click="openReference(reference.uuid)"
             >
               ▤
             </button></span
@@ -160,6 +189,26 @@
             清除引用
           </button>
         </span>
+        <span v-if="fieldErrors[reference.uuid]" class="field-error" role="alert">{{
+          fieldErrors[reference.uuid]
+        }}</span>
+        <details class="field-help">
+          <summary :aria-label="reference.shortName + ' 字段说明'">字段说明</summary>
+          <p>{{ reference.description || '此引用未提供说明' }}</p>
+          <p>
+            {{
+              reference.definitionPath ??
+              (container.definitionPath ?? container.shortName) + '/' + reference.shortName
+            }}
+          </p>
+          <p>
+            目标：{{
+              reference.destinationRefs?.join('、') ||
+              reference.destinationRef ||
+              reference.destinationContainerType
+            }}
+          </p>
+        </details>
       </div>
     </section>
     <p v-if="!container.parameters.length && !container.references.length" class="no-fields">
@@ -167,26 +216,50 @@
     </p>
     <el-dialog
       :model-value="Boolean(referencePicker)"
-      title="选择引用目标"
-      width="480px"
+      :title="(activeReference?.shortName ?? '') + ' 引用配置'"
+      width="min(640px, 94vw)"
       @close="referencePicker = undefined"
     >
       <template v-if="referencePicker">
-        <el-select
-          :model-value="referenceData[referencePicker] || undefined"
-          aria-label="引用目标"
+        <el-input
+          v-model="referenceSearch"
+          aria-label="搜索引用目标"
+          placeholder="搜索实例名称或路径"
           clearable
-          filterable
-          placeholder="选择目标实例"
-          @update:model-value="chooseReference"
-        >
-          <el-option
-            v-for="option in referenceOptions[referencePicker] ?? []"
+        />
+        <div class="reference-candidates" role="radiogroup" aria-label="引用目标">
+          <label class="reference-candidate" :class="{ picked: !referenceDraft && !createDraft }">
+            <input
+              type="radio"
+              name="reference-target"
+              :checked="!referenceDraft && !createDraft"
+              @change="stageReference('')"
+            />
+            <span>不选择目标（清除引用）</span>
+          </label>
+          <label
+            v-for="option in filteredReferences"
             :key="option.uuid"
-            :value="option.uuid"
-            :label="option.label"
-          />
-        </el-select>
+            class="reference-candidate"
+            :class="{ picked: referenceDraft === option.uuid && !createDraft }"
+          >
+            <input
+              type="radio"
+              name="reference-target"
+              :aria-label="option.label"
+              :checked="referenceDraft === option.uuid && !createDraft"
+              @change="stageReference(option.uuid)"
+            />
+            <span
+              ><strong>{{ option.label.split('/').pop() }}</strong
+              ><small>{{ option.label }}</small></span
+            >
+          </label>
+          <p v-if="referenceSearch && !filteredReferences.length">没有匹配的实例</p>
+        </div>
+        <p v-if="createDraft" role="status">
+          确定后创建并引用：{{ createDraft.label }}；取消不会创建。
+        </p>
         <div
           v-if="!referenceOptions[referencePicker]?.length"
           class="reference-empty"
@@ -205,14 +278,7 @@
             :key="String(option.parentUuid) + option.definitionUuid"
             :disabled="readonly || Boolean(option.disabledReason)"
             :title="option.disabledReason"
-            @click="
-              emit(
-                'create-reference-target',
-                referencePicker,
-                option.definitionUuid,
-                option.parentUuid
-              )
-            "
+            @click="createDraft = option"
             >新增 {{ option.label }}</el-button
           >
           <p v-if="!referenceAddOptions[referencePicker]?.length">
@@ -220,13 +286,20 @@
           </p>
         </div>
       </template>
+      <template #footer>
+        <el-button @click="referencePicker = undefined">取消</el-button>
+        <el-button type="primary" :disabled="!canApplyReference" @click="applyReference"
+          >确定</el-button
+        >
+      </template>
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import type { BswmdContainer, BswmdParameter } from '@/core/bswmd/BswmdTypes';
+import FieldState from './FieldState.vue';
 const props = withDefaults(
   defineProps<{
     container: BswmdContainer;
@@ -246,6 +319,8 @@ const props = withDefaults(
     readonly?: boolean;
     selectedFieldUuid?: string;
     danglingReferences?: string[];
+    configuredFields?: Record<string, boolean>;
+    fieldErrors?: Record<string, string>;
   }>(),
   {
     configData: () => ({}),
@@ -254,6 +329,8 @@ const props = withDefaults(
     referenceAddOptions: () => ({}),
     readonly: false,
     danglingReferences: () => [],
+    configuredFields: () => ({}),
+    fieldErrors: () => ({}),
   }
 );
 const emit = defineEmits<{
@@ -274,15 +351,71 @@ watch(
   { deep: true }
 );
 const referencePicker = ref<string>();
-function chooseReference(target: string | undefined): void {
-  if (
-    referencePicker.value &&
-    !props.readonly &&
-    !props.container.references.find((ref) => ref.uuid === referencePicker.value)?.isExternal
+const referenceDraft = ref('');
+const referenceSearch = ref('');
+const createDraft = ref<{
+  definitionUuid: string;
+  parentUuid: string | null;
+  label: string;
+  disabledReason?: string;
+}>();
+const activeReference = computed(() =>
+  props.container.references.find((ref) => ref.uuid === referencePicker.value)
+);
+const filteredReferences = computed(() =>
+  (props.referenceOptions[referencePicker.value ?? ''] ?? []).filter((option) =>
+    option.label.toLowerCase().includes(referenceSearch.value.trim().toLowerCase())
   )
-    emit('reference-change', referencePicker.value, target ?? '');
+);
+const canApplyReference = computed(
+  () =>
+    !props.readonly &&
+    activeReference.value &&
+    !activeReference.value.isExternal &&
+    (createDraft.value
+      ? (props.referenceAddOptions[referencePicker.value ?? ''] ?? []).some(
+          (option) =>
+            option.definitionUuid === createDraft.value!.definitionUuid &&
+            option.parentUuid === createDraft.value!.parentUuid &&
+            !option.disabledReason
+        )
+      : !referenceDraft.value ||
+        (props.referenceOptions[referencePicker.value ?? ''] ?? []).some(
+          (option) => option.uuid === referenceDraft.value
+        ))
+);
+function openReference(uuid: string): void {
+  if (props.readonly || props.container.references.find((ref) => ref.uuid === uuid)?.isExternal)
+    return;
+  referenceDraft.value = props.referenceData[uuid] ?? '';
+  referenceSearch.value = '';
+  createDraft.value = undefined;
+  referencePicker.value = uuid;
+}
+function stageReference(uuid: string): void {
+  referenceDraft.value = uuid;
+  createDraft.value = undefined;
+}
+function applyReference(): void {
+  if (!referencePicker.value || !canApplyReference.value) return;
+  if (createDraft.value)
+    emit(
+      'create-reference-target',
+      referencePicker.value,
+      createDraft.value.definitionUuid,
+      createDraft.value.parentUuid
+    );
+  else emit('reference-change', referencePicker.value, referenceDraft.value);
   referencePicker.value = undefined;
 }
+// A history replay, external edit or selection change invalidates an open draft; cancellation writes nothing.
+watch(
+  () => [props.container.uuid, props.readonly, props.referenceData],
+  () => {
+    referencePicker.value = undefined;
+  },
+  { deep: true }
+);
 function rawValue(parameter: BswmdParameter): unknown {
   // Explicit undefined means an unchecked optional field, not a request to restore the default.
   return Object.prototype.hasOwnProperty.call(props.configData, parameter.uuid)
@@ -290,6 +423,12 @@ function rawValue(parameter: BswmdParameter): unknown {
     : parameter.defaultValue;
 }
 function enabled(parameter: BswmdParameter): boolean {
+  // Suggested defaults are not enabled optional fields until the user confirms them.
+  if (
+    parameter.isOptional &&
+    Object.prototype.hasOwnProperty.call(props.configuredFields, parameter.uuid)
+  )
+    return props.configuredFields[parameter.uuid];
   return !parameter.isOptional || rawValue(parameter) !== undefined;
 }
 function numberValue(parameter: BswmdParameter): number | undefined {
@@ -409,7 +548,7 @@ defineExpose({ resetForm, getFormData });
 .parameter-row {
   position: relative;
   display: grid;
-  grid-template-columns: 20px minmax(170px, 245px) 20px 270px;
+  grid-template-columns: 20px minmax(170px, 245px) 76px 270px;
   align-items: center;
   min-height: 53px;
   gap: 8px;
@@ -500,6 +639,52 @@ defineExpose({ resetForm, getFormData });
   color: var(--color-error);
   font-size: 12px;
 }
+.has-error > label {
+  color: var(--color-error);
+}
+.field-help {
+  grid-column: 2 / -1;
+  font-size: 12px;
+  color: var(--color-muted);
+  padding-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+.field-help summary {
+  cursor: pointer;
+  width: fit-content;
+}
+.field-help p {
+  margin: 8px 0;
+  white-space: normal;
+}
+.reference-candidates {
+  max-height: 300px;
+  overflow: auto;
+  margin-top: 12px;
+}
+.reference-candidate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  margin: 4px 0;
+  cursor: pointer;
+}
+.reference-candidate.picked {
+  background: var(--color-selected);
+  border-color: var(--color-accent);
+}
+.reference-candidate span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.reference-candidate small {
+  display: block;
+  color: var(--color-muted);
+  margin-top: 4px;
+}
 .no-fields {
   color: var(--color-muted);
   font-size: 13px;
@@ -516,7 +701,7 @@ defineExpose({ resetForm, getFormData });
 }
 @media (max-width: 1200px) {
   .parameter-row {
-    grid-template-columns: 18px minmax(130px, 1fr) 18px 240px;
+    grid-template-columns: 18px minmax(130px, 1fr) 76px 240px;
     padding-left: 0;
   }
   .field-control {
