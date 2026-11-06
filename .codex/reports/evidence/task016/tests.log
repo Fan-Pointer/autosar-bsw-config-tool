@@ -1,0 +1,114 @@
+
+> autosar-bsw-config-tool@0.1.0 test:verify
+> vitest run --reporter=default --reporter=./scripts/test-collection-guard.ts
+
+
+ RUN  v2.1.9 D:/ProFile/教培业务/配置器/autosar-bsw-config-tool
+
+ ✓ tests/arxml-editor.test.ts (3 tests) 123ms
+stdout | tests/choice.test.ts > TASK-009 choice values and round trips > rejects actual NvM candidate 0 with a required external reference while preserving lossless JSON
+NvM candidate=NvMEaRef; defaults=11; manual=26; required external reference rejected; JSON roundTrip=equal
+
+stdout | tests/choice.test.ts > TASK-009 choice values and round trips > rejects actual NvM candidate 1 with a required external reference while preserving lossless JSON
+NvM candidate=NvMFeeRef; defaults=11; manual=26; required external reference rejected; JSON roundTrip=equal
+
+ ✓ tests/choice.test.ts (12 tests) 431ms
+stdout | tests/arxml-fidelity.test.ts > official module regressions > CanIf: 45 suggestions require confirmation and mandatory local/external references block output without blocking JSON
+CanIf: 45 suggestions blocked; 25 required parameters confirmed; three required references block output; JSON flags/timestamps/descriptions equal
+
+ ✓ tests/arxml-fidelity.test.ts (27 tests) 500ms
+ ✓ tests/lifecycle.test.ts (15 tests) 356ms
+ ✓ tests/io.test.ts (27 tests) 766ms
+   ✓ ARXML structure and security > rejects oversized files before reading, and oversized JSON/ARXML strings before parsing 423ms
+stdout | tests/ecuc.test.ts > official ECUC selected-module importer > preserves all containers, fields and source UUIDs for NvM
+NvM: 6 containers, 51 parameters, 9 references
+
+stdout | tests/ecuc.test.ts > official ECUC selected-module importer > preserves all containers, fields and source UUIDs for CanIf
+CanIf: 20 containers, 82 parameters, 16 references
+
+ ✓ tests/ecuc.test.ts (32 tests) 864ms
+   ✓ official ECUC selected-module importer > keeps fixtures compact and structurally complete 317ms
+ ✓ tests/recovery.test.ts (15 tests) 806ms
+stdout | tests/editor.test.ts > bounded editor history > restores byte-identical JSON after twenty undo/redo steps, including timestamps and flags
+20-step undo: 21.85 ms
+
+stdout | tests/editor.test.ts > global search and local theme > indexes and searches 500 instances in at most 200 ms
+500-instance index + search: 28.17 ms
+
+ ✓ tests/editor.test.ts (28 tests) 863ms
+   ✓ global search and local theme > indexes and searches 500 instances in at most 200 ms 373ms
+stdout | tests/output.test.ts > one output gate across actions > official Dem emits exactly the confirmed parameter set in ARXML and C after all mandatory choices and internal references are configured
+Official Dem gcc -std=c11 -Wall -Wextra -Werror -pedantic -fsyntax-only: exit=0
+Official Dem output identity: 40 configured = 40 VALUE = 40 C parameter fields
+
+ ✓ tests/output.test.ts (9 tests) 900ms
+   ✓ one output gate across actions > official Dem emits exactly the confirmed parameter set in ARXML and C after all mandatory choices and internal references are configured 595ms
+ ✓ tests/definition-metadata.test.ts (3 tests) 23ms
+ ✓ tests/ecuc-cache.test.ts (1 test) 298ms
+ ✓ tests/core.test.ts (43 tests) 461ms
+ ✓ tests/container-menu.test.ts (5 tests) 8ms
+stderr | tests/ecuc-ui.test.ts > official module manager and persisted editing > lists every file module, imports a selected definition and renders the official tree and form
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+ ✓ tests/replica.test.ts (8 tests) 1596ms
+   ✓ screenshot replica interactions > moves a hidden top-level tab into view when selected from overflow 313ms
+   ✓ screenshot replica interactions > closes a module to an empty editor and reopens its saved data 652ms
+ ✓ tests/io-ui.test.ts (17 tests) 1884ms
+   ✓ import preview UI and project menus > opens import/export submenus, downloads all three formats and distinguishes module/set tooltips 839ms
+stderr | tests/ecuc-ui.test.ts > official module manager and persisted editing > reports required and range errors and navigates from the real validation panel to the imported field
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+stdout | tests/choice-ui.test.ts > TASK-009 UI selection and default confirmation > confirms only actual default values across all 37 required NvM parameters in one undo operation
+NvM defaults UI: required=37, confirmed=11, remaining=26, one Ctrl+Z restores exact JSON
+
+ ✓ tests/choice-ui.test.ts (4 tests) 2164ms
+   ✓ TASK-009 UI selection and default confirmation > shows candidate buttons, confirms data loss, cancels safely and restores a switch with one Ctrl+Z 1193ms
+   ✓ TASK-009 UI selection and default confirmation > confirms only actual default values across all 37 required NvM parameters in one undo operation 910ms
+stdout | tests/ecuc-ui.test.ts > official module manager and persisted editing > renders the official definition tree within 500 ms
+official NvM first tree render (jsdom): 33.31 ms
+
+stderr | tests/ecuc-ui.test.ts > D3 reference empty state > names the missing target, creates and assigns it, and undoes the entire operation
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+stderr | tests/ecuc-ui.test.ts > D3 reference empty state > explains why cross-module targets cannot be created instead of making invalid local instances
+[Vue Router warn]: No active route record was found when calling `onBeforeRouteLeave()`. Make sure you call this function inside a component child of <router-view>. Maybe you called it inside of App.vue?
+
+ ✓ tests/ecuc-ui.test.ts (9 tests) 3396ms
+   ✓ official module manager and persisted editing > lists every file module, imports a selected definition and renders the official tree and form 1271ms
+   ✓ official module manager and persisted editing > reports required and range errors and navigates from the real validation panel to the imported field 778ms
+   ✓ D3 reference empty state > names the missing target, creates and assigns it, and undoes the entire operation 672ms
+   ✓ D3 reference empty state > explains why cross-module targets cannot be created instead of making invalid local instances 303ms
+stdout | tests/editor-ui.test.ts > TASK-006 workspace interactions > renders 500-instance search results within 200 ms from input
+500-instance input-to-render: 99.02 ms
+
+stdout | tests/editor-ui.test.ts > TASK-006 workspace interactions > renders twenty undo steps within 500 ms and restores the full configuration
+20-step undo with workspace rendering: 441.66 ms
+
+ ✓ tests/editor-ui.test.ts (9 tests) 5353ms
+   ✓ TASK-006 workspace interactions > uses toolbar and Ctrl/Cmd shortcuts but preserves native input/IME/contenteditable undo 1054ms
+   ✓ TASK-006 workspace interactions > supports Ctrl/Shift selection, shared parameters, skip summaries and one-step batch undo 1095ms
+   ✓ TASK-006 workspace interactions > marks imported dangling references in tree and form, navigates errors, clears and undoes them 651ms
+   ✓ TASK-006 workspace interactions > searches across sets, highlights literal matches and focuses the selected parameter after switching 736ms
+   ✓ TASK-006 workspace interactions > exposes reference target choice through the form and records the selection 359ms
+   ✓ TASK-006 workspace interactions > renders twenty undo steps within 500 ms and restores the full configuration 712ms
+ ✓ tests/ui.test.ts (22 tests) 7556ms
+   ✓ definition-driven components > renders enum, boolean, numeric and string controls with required markers and bounds 526ms
+   ✓ workspace integration and local persistence > navigates from a real violation to the field and generates C after fixing the reference 764ms
+   ✓ TASK-003 user interactions > shows a real create action in the empty workspace and opens a named set with the DTC guide 648ms
+   ✓ TASK-003 user interactions > uses confirmation for instance deletion and immediately selects its surviving parent 444ms
+   ✓ TASK-003 user interactions > requires set deletion confirmation and switches to the first remaining set 440ms
+   ✓ TASK-003 user interactions > colors every conflicting node and focuses its exact field when a violation is clicked 389ms
+   ✓ TASK-003 user interactions > creates under the right-click instance without changing selection on open, lists every child, and supports undo/redo 499ms
+   ✓ TASK-003 user interactions > never borrows the previous instance for a definition context menu 350ms
+   ✓ TASK-003 user interactions > clones and deletes the explicit context target, closes before confirmation, and cancel writes nothing 517ms
+   ✓ TASK-003 user interactions > supports arrows, Home/End, Enter, Escape, empty children and focus restoration 333ms
+   ✓ TASK-003 user interactions > closes on outside pointer, toolbar chooser opening, other dialogs, import, and configuration switch 441ms
+   ✓ TASK-003 user interactions > uses core CHOICE/upper-limit reasons and blocks writes while importing 479ms
+   ✓ TASK-003 user interactions > saves edits when returning home and opens the persisted set through the home list 404ms
+
+ Test Files  19 passed (19)
+      Tests  289 passed (289)
+   Start at  11:51:53
+   Duration  21.75s (transform 7.60s, setup 0ms, collect 74.24s, tests 28.35s, environment 53.12s, prepare 7.32s)
+
+Test collection guard: 19/19 disk test files collected

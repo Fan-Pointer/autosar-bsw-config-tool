@@ -421,19 +421,42 @@ export const useConfigStore = defineStore('config', () => {
       ? manager.getAddOptions(config.value, selectedEntry.value?.container.uuid ?? null)
       : []
   );
-  const removalReason = computed(() =>
-    config.value && selectedEntry.value
-      ? manager.getRemovalReason(config.value, selectedEntry.value.container.uuid)
-      : '请选择容器'
-  );
-  const cloneReason = computed(() => {
-    if (!config.value || !selectedEntry.value) return '请选择容器';
-    const parent = manager.findParent(config.value, selectedEntry.value.container.uuid);
-    return manager
+  /** Resolve lifecycle options for an explicit target without changing editor selection.
+   * @param uuid Context instance UUID. @returns Core options and existing editing restrictions.
+   */
+  function containerActionsFor(uuid?: string) {
+    const entry = entries.value.find((item) => item.container.uuid === uuid);
+    const editReason = isImporting.value
+      ? '正在应用导入，请稍后编辑'
+      : isLoading.value
+        ? '正在读写配置，请稍后编辑'
+        : undefined;
+    if (!config.value || !entry)
+      return {
+        entry,
+        childOptions: [],
+        editReason: editReason ?? '请选择容器实例',
+        removalReason: '请选择容器实例',
+        cloneReason: '请选择容器实例',
+      };
+    const parent = manager.findParent(config.value, entry.container.uuid);
+    const cloneReason = manager
       .getAddOptions(config.value, parent?.uuid ?? null)
-      .find((item) => item.definition.uuid === selectedEntry.value?.container.definitionRef)
-      ?.disabledReason;
-  });
+      .find((item) => item.definition.uuid === entry.container.definitionRef)?.disabledReason;
+    return {
+      entry,
+      editReason,
+      childOptions: manager.getAddOptions(config.value, entry.container.uuid),
+      removalReason: manager.getRemovalReason(config.value, entry.container.uuid),
+      cloneReason,
+    };
+  }
+  const removalReason = computed(
+    () => containerActionsFor(selectedEntry.value?.container.uuid).removalReason
+  );
+  const cloneReason = computed(
+    () => containerActionsFor(selectedEntry.value?.container.uuid).cloneReason
+  );
 
   /** Select an instance and optionally a field.
    * @param uuid Instance UUID.
@@ -707,17 +730,17 @@ export const useConfigStore = defineStore('config', () => {
 
   /** Add a direct child through core lifecycle validation and select the inserted instance.
    * @param definitionUuid Definition allowed under the selected parent (or module root).
+   * @param parentUuid Explicit context parent; omitted for the toolbar's selected parent.
    * @returns New instance, or undefined when no set is open.
    */
-  function addContainerInstance(definitionUuid: string): ConfigContainer | undefined {
+  function addContainerInstance(
+    definitionUuid: string,
+    parentUuid: string | null = selectedEntry.value?.container.uuid ?? null
+  ): ConfigContainer | undefined {
     assertEditable();
     if (!config.value) return undefined;
     return edit('新增实例', () => {
-      const added = manager.addContainerInstance(
-        config.value!,
-        selectedEntry.value?.container.uuid ?? null,
-        definitionUuid
-      );
+      const added = manager.addContainerInstance(config.value!, parentUuid, definitionUuid);
       selectContainer(added.uuid);
       return added;
     });
@@ -774,17 +797,17 @@ export const useConfigStore = defineStore('config', () => {
     });
   }
 
-  /** Clone the selected subtree through the core and select its copy.
+  /** Clone a subtree through the core and select its copy.
+   * @param uuid Explicit context target; omitted for the toolbar's selected instance.
    * @returns New subtree, or undefined without a selection.
    */
-  function cloneContainerInstance(): ConfigContainer | undefined {
+  function cloneContainerInstance(
+    uuid = selectedEntry.value?.container.uuid
+  ): ConfigContainer | undefined {
     assertEditable();
-    if (!config.value || !selectedEntry.value) return undefined;
+    if (!config.value || !uuid) return undefined;
     return edit('复制实例', () => {
-      const clone = manager.cloneContainerInstance(
-        config.value!,
-        selectedEntry.value!.container.uuid
-      );
+      const clone = manager.cloneContainerInstance(config.value!, uuid);
       selectContainer(clone.uuid);
       return clone;
     });
@@ -1440,6 +1463,7 @@ export const useConfigStore = defineStore('config', () => {
     activeUuid,
     summaries,
     childOptions,
+    containerActionsFor,
     removalReason,
     cloneReason,
     initialize,

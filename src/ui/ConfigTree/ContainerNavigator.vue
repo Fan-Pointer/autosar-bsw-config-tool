@@ -65,9 +65,14 @@
 import { computed, ref, watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import ConfigTree from './ConfigTree.vue';
+import type { ContainerContextTarget } from './containerMenuPosition';
 import { useConfigStore } from '@/stores/configStore';
 const props = defineProps<{ width: number }>();
-const emit = defineEmits<{ actions: []; context: [event: MouseEvent]; selected: [] }>();
+const emit = defineEmits<{
+  actions: [];
+  context: [event: MouseEvent, target: ContainerContextTarget];
+  selected: [];
+}>();
 const store = useConfigStore();
 const activeId = ref('');
 const query = ref('');
@@ -140,8 +145,12 @@ function context(
   event: MouseEvent,
   node: { type: string; containerUuid?: string; parentUuid?: string; definitionRef?: string }
 ): void {
-  select(node);
-  emit('context', event);
+  // Context actions carry their own target; opening a menu must not retarget the form.
+  emit('context', event, {
+    type: node.type === 'definition' ? 'definition' : 'instance',
+    containerUuid: node.containerUuid,
+    definitionRef: node.definitionRef,
+  });
 }
 async function add(): Promise<void> {
   const target = addDefinition.value;

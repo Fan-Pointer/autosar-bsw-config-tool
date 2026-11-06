@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="container-actions"
-    :class="{ 'context-menu': context }"
-    :role="context ? 'menu' : undefined"
-  >
+  <div class="container-actions">
     <el-button :disabled="!store.childOptions.length || store.isLoading" @click="openAdd"
       >新增子项</el-button
     >
@@ -25,7 +21,6 @@
     <small v-if="store.removalReason && store.selectedEntry" class="limit-reason">{{
       store.removalReason
     }}</small>
-    <el-button v-if="context" link @click="emit('close')">关闭菜单</el-button>
     <el-dialog
       v-model="showAdd"
       title="选择允许的子定义"
@@ -93,8 +88,7 @@ import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 import type { ContainerAddOption } from '@/core/config/ConfigInstance';
 import { useConfigStore } from '@/stores/configStore';
 
-defineProps<{ context?: boolean }>();
-const emit = defineEmits<{ navigate: [violation: ConstraintViolation]; close: [] }>();
+const emit = defineEmits<{ navigate: [violation: ConstraintViolation]; close: []; opening: [] }>();
 const store = useConfigStore();
 const showAdd = ref(false);
 const filter = ref('');
@@ -156,6 +150,7 @@ const visibleOptions = computed(() => {
 });
 
 function openAdd(): void {
+  emit('opening');
   filter.value = '';
   showAdd.value = true;
 }

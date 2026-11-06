@@ -20,6 +20,10 @@ import WorkspaceView from '../src/views/WorkspaceView.vue';
 import HomeView from '../src/views/HomeView.vue';
 import ConfigSetManager from '../src/ui/ConfigSets/ConfigSetManager.vue';
 import ContainerActions from '../src/ui/ConfigTree/ContainerActions.vue';
+import ContainerContextMenu from '../src/ui/ConfigTree/ContainerContextMenu.vue';
+import ContainerNavigator from '../src/ui/ConfigTree/ContainerNavigator.vue';
+import { importEcucModuleArxml } from '../src/core/bswmd/EcucArxmlImporter';
+import { readFileSync } from 'node:fs';
 import { useConfigStore } from '../src/stores/configStore';
 import rawDefinition from './fixtures/synthetic-dem.json';
 import type { ConstraintViolation } from '../src/core/constraint/ConstraintTypes';
@@ -404,7 +408,7 @@ describe('TASK-003 user interactions', () => {
     const { store, wrapper } = await workspace();
     await store.createConfigSet('界面测试');
     await nextTick();
-    const root = wrapper.findAll('.node-label').find((item) => item.text() === 'DemConfigSet')!;
+    const root = wrapper.get(`[data-container-id="${store.selectedEntry!.container.uuid}"]`);
     await root.trigger('contextmenu', { clientX: 100, clientY: 150 });
     await nextTick();
     expect(wrapper.find('.floating-menu').exists()).toBe(true);
@@ -412,11 +416,251 @@ describe('TASK-003 user interactions', () => {
     const remove = wrapper
       .get('.floating-menu')
       .findAll('button')
-      .find((item) => item.text() === '删除实例')!;
+      .find((item) => item.text().includes('删除实例'))!;
     expect(remove.attributes('disabled')).toBeDefined();
     expect(store.selectedEntry?.container.shortName).toBe('DemConfigSet');
     await wrapper.trigger('keydown', { key: 'Escape' });
     expect(wrapper.find('.floating-menu').exists()).toBe(false);
+  });
+
+  it('creates under the right-click instance without changing selection on open, lists every child, and supports undo/redo', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('菜单目标');
+    const root = store.config!.containers[0];
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
+    await nextTick();
+    await wrapper
+      .get(`[data-container-id="${root.uuid}"]`)
+      .trigger('contextmenu', { clientX: 200, clientY: 220 });
+    await flushPromises();
+    expect(store.selectedEntry?.container.uuid).toBe(dtc.uuid);
+    const menu = wrapper.findComponent(ContainerContextMenu);
+    await menu.get('[aria-haspopup="menu"]').trigger('click');
+    await flushPromises();
+    expect(
+      menu.findAll('[data-definition-id]').map((item) => item.attributes('data-definition-id'))
+    ).toEqual(module.containers[0].subContainers.map((item) => item.uuid));
+    expect(menu.text()).not.toContain('克隆实例'); // parent panel is removed, not stacked
+    await menu.get('[data-definition-id="fixture-dem-dtc-def"]').trigger('click');
+    await flushPromises();
+    const added = store.selectedEntry!.container.uuid;
+    expect(store.config!.containers[0].subContainers.map((item) => item.uuid)).toEqual([
+      dtc.uuid,
+      added,
+    ]);
+    expect(
+      store.entries.find((item) => item.container.uuid === dtc.uuid)!.container.subContainers
+    ).toEqual([]);
+    expect(wrapper.find('.container-context-menu').exists()).toBe(false);
+    store.undo();
+    expect(store.config!.containers[0].subContainers.map((item) => item.uuid)).toEqual([dtc.uuid]);
+    store.redo();
+    expect(store.config!.containers[0].subContainers.map((item) => item.uuid)).toEqual([
+      dtc.uuid,
+      added,
+    ]);
+  });
+
+  it('never borrows the previous instance for a definition context menu', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('定义右键');
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
+    await nextTick();
+    const saved = JSON.stringify(store.config);
+    const marker = wrapper.get('[data-node-id="root:definition:fixture-dem-configset-def"]');
+    await marker.trigger('contextmenu');
+    await flushPromises();
+    const menu = wrapper.findComponent(ContainerContextMenu);
+    expect(menu.text()).toContain('这是容器定义');
+    expect(menu.findAll('button:disabled')).toHaveLength(4);
+    for (const item of menu.findAll('button:disabled')) await item.trigger('click');
+    expect(store.selectedEntry?.container.uuid).toBe(dtc.uuid);
+    expect(JSON.stringify(store.config)).toBe(saved);
+  });
+
+  it('clones and deletes the explicit context target, closes before confirmation, and cancel writes nothing', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('确认语义');
+    const root = store.config!.containers[0];
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
+    store.selectContainer(root.uuid);
+    await nextTick();
+    const openDtc = async () => {
+      await wrapper.get(`[data-container-id="${dtc.uuid}"]`).trigger('contextmenu');
+      await flushPromises();
+      return wrapper.findComponent(ContainerContextMenu);
+    };
+    const menu = await openDtc();
+    await menu
+      .findAll('button')
+      .find((item) => item.text().includes('克隆实例'))!
+      .trigger('click');
+    await flushPromises();
+    expect(store.config!.containers[0].subContainers).toHaveLength(2);
+    expect(store.selectedEntry?.container.uuid).not.toBe(dtc.uuid);
+    const before = JSON.stringify(store.config);
+    local.setItem.mockClear();
+    const deleting = await openDtc();
+    await deleting
+      .findAll('button')
+      .find((item) => item.text().includes('删除实例'))!
+      .trigger('click');
+    await flushPromises();
+    expect(wrapper.find('.container-context-menu').exists()).toBe(false);
+    expect(document.querySelector('.el-message-box')?.textContent).toContain(dtc.shortName);
+    await answerConfirmation('取消');
+    expect(JSON.stringify(store.config)).toBe(before);
+    expect(local.setItem).not.toHaveBeenCalled();
+    const again = await openDtc();
+    await again
+      .findAll('button')
+      .find((item) => item.text().includes('删除实例'))!
+      .trigger('click');
+    await answerConfirmation('确认删除');
+    expect(store.entries.some((item) => item.container.uuid === dtc.uuid)).toBe(false);
+    store.undo();
+    expect(store.entries.some((item) => item.container.uuid === dtc.uuid)).toBe(true);
+  });
+
+  it('supports arrows, Home/End, Enter, Escape, empty children and focus restoration', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('键盘菜单');
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
+    await nextTick();
+    const node = wrapper.get(`[data-container-id="${dtc.uuid}"]`);
+    await node.trigger('contextmenu');
+    await flushPromises();
+    const menu = wrapper.findComponent(ContainerContextMenu);
+    await menu.trigger('keydown', { key: 'ArrowRight' });
+    await flushPromises();
+    expect(menu.text()).toContain('此容器没有子定义');
+    await menu.trigger('keydown', { key: 'ArrowLeft' });
+    await flushPromises();
+    await menu.trigger('keydown', { key: 'End' });
+    expect(document.activeElement?.textContent).toContain('关闭菜单');
+    await menu.trigger('keydown', { key: 'Home' });
+    expect(document.activeElement?.textContent).toContain('新建');
+    await menu.trigger('keydown', { key: 'ArrowDown' });
+    expect(document.activeElement?.textContent).toContain('克隆实例');
+    await menu.trigger('keydown', { key: 'ArrowUp' });
+    await menu.trigger('keydown', { key: 'Enter' });
+    await flushPromises();
+    expect(menu.attributes('aria-label')).toBe('新建子容器');
+    await menu.trigger('keydown', { key: 'Escape' });
+    await flushPromises();
+    expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);
+    expect(document.activeElement).toBe(node.element.closest('[role="treeitem"]'));
+  });
+
+  it('locates the error on the context target rather than the selected form instance', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('错误定位目标');
+    const root = store.config!.containers[0];
+    const dtc = store.addContainerInstance('fixture-dem-dtc-def')!;
+    store.selectContainer(root.uuid);
+    await nextTick();
+    await wrapper.get(`[data-container-id="${dtc.uuid}"]`).trigger('contextmenu');
+    await flushPromises();
+    const menu = wrapper.findComponent(ContainerContextMenu);
+    await menu
+      .findAll('button')
+      .find((item) => item.text().includes('定位错误'))!
+      .trigger('click');
+    await flushPromises();
+    expect(store.selectedEntry?.container.uuid).toBe(dtc.uuid);
+    expect(store.selectedFieldUuid).toBeDefined();
+    expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);
+  });
+
+  it('closes on outside pointer, toolbar chooser opening, other dialogs, import, and configuration switch', async () => {
+    const { store, wrapper } = await workspace();
+    await store.createConfigSet('关闭菜单');
+    const first = store.activeUuid!;
+    const open = async () => {
+      await wrapper
+        .get(`[data-container-id="${store.config!.containers[0].uuid}"]`)
+        .trigger('contextmenu');
+      await flushPromises();
+      expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(true);
+    };
+    await open();
+    document.body.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await nextTick();
+    expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);
+    await open();
+    await wrapper
+      .findComponent(ContainerActions)
+      .findAll('button')
+      .find((item) => item.text() === '新增子项')!
+      .trigger('click');
+    await flushPromises();
+    expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);
+    expect(
+      [...document.querySelectorAll('[role="dialog"]')].some((item) =>
+        item.textContent?.includes('选择允许的子定义')
+      )
+    ).toBe(true);
+    await open();
+    const modules = wrapper.findComponent({ name: 'ModuleManager' });
+    modules.vm.$emit('update:modelValue', true);
+    await nextTick();
+    expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);
+    modules.vm.$emit('update:modelValue', false);
+    await nextTick();
+    await open();
+    store.isImporting = true;
+    await nextTick();
+    expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);
+    store.isImporting = false;
+    await store.createConfigSet('另一个配置');
+    await open();
+    await store.switchConfigSet(first);
+    await nextTick();
+    expect(wrapper.findComponent(ContainerContextMenu).exists()).toBe(false);
+  });
+
+  it('uses core CHOICE/upper-limit reasons and blocks writes while importing', async () => {
+    const { store, wrapper } = await workspace();
+    const nvm = importEcucModuleArxml(readFileSync('tests/fixtures/ecuc-nvm.arxml', 'utf8'), 'NvM');
+    await store.importModuleDefinitions([nvm]);
+    await store.createConfigSet('NvM 菜单', 'NvM');
+    const group = store.entries.find((item) => item.definition.choice)!;
+    store.selectChoice(group.container.uuid, group.definition.subContainers[0].uuid);
+    await nextTick();
+    // Target may be under another root tab; the navigator event still carries its real UUID.
+    wrapper.findComponent(ContainerNavigator).vm.$emit('context', new MouseEvent('contextmenu'), {
+      type: 'instance',
+      containerUuid: group.container.uuid,
+    });
+    await flushPromises();
+    let menu = wrapper.findComponent(ContainerContextMenu);
+    await menu.get('[aria-haspopup="menu"]').trigger('click');
+    await flushPromises();
+    const options = store.containerActionsFor(group.container.uuid).childOptions;
+    expect(options.length).toBeGreaterThan(1);
+    for (const option of options) {
+      const row = menu.get(`[data-definition-id="${option.definition.uuid}"]`);
+      expect(row.attributes('disabled')).toBeDefined();
+      expect(row.text()).toContain(option.disabledReason);
+      expect(option.disabledReason).toContain('CHOICE');
+    }
+    const before = JSON.stringify(store.config);
+    for (const row of menu.findAll('[data-definition-id]')) await row.trigger('click');
+    expect(JSON.stringify(store.config)).toBe(before);
+    store.isImporting = true;
+    await nextTick();
+    wrapper.findComponent(ContainerNavigator).vm.$emit('context', new MouseEvent('contextmenu'), {
+      type: 'instance',
+      containerUuid: group.container.uuid,
+    });
+    await flushPromises();
+    menu = wrapper.findComponent(ContainerContextMenu);
+    expect(menu.text()).toContain('正在应用导入，请稍后编辑');
+    expect(menu.get('[aria-haspopup="menu"]').attributes('disabled')).toBeDefined();
+    expect(() =>
+      store.addContainerInstance(group.definition.subContainers[0].uuid, group.container.uuid)
+    ).toThrow('正在应用导入');
+    store.isImporting = false;
   });
 
   it('saves edits when returning home and opens the persisted set through the home list', async () => {

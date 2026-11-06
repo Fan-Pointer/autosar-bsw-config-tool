@@ -212,7 +212,10 @@
               :width="treeWidth"
               @actions="showActions = !showActions"
               @context="openContextMenu"
-              @selected="showActions = false"
+              @selected="
+                showActions = false;
+                contextMenu = undefined;
+              "
             />
           </aside>
           <div
@@ -318,19 +321,22 @@
       :style="{ left: projectWidth + treeWidth + 'px' }"
       @click.stop
     >
-      <ContainerActions v-if="store.config" @navigate="navigateViolation" />
+      <ContainerActions
+        v-if="store.config"
+        @navigate="navigateViolation"
+        @opening="contextMenu = undefined"
+      />
     </section>
-    <ContainerActions
+    <ContainerContextMenu
       v-if="contextMenu"
-      context
-      class="floating-menu"
-      :style="{ left: contextMenu.x + 'px', top: contextMenu.y + 'px' }"
-      @click.stop
+      :key="store.activeUuid"
+      v-bind="contextMenu"
       @close="contextMenu = undefined"
       @navigate="navigateViolation"
     />
     <div
       v-if="projectMenu"
+      ref="projectMenuPanel"
       class="project-menu"
       role="menu"
       :style="{ left: projectMenu.x + 'px', top: projectMenu.y + 'px' }"
@@ -410,6 +416,11 @@ import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
 import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 import ContainerActions from '@/ui/ConfigTree/ContainerActions.vue';
+import ContainerContextMenu from '@/ui/ConfigTree/ContainerContextMenu.vue';
+import {
+  placeContainerMenu,
+  type ContainerContextTarget,
+} from '@/ui/ConfigTree/containerMenuPosition';
 import ModuleManager from '@/ui/Modules/ModuleManager.vue';
 import ImportDialog from '@/ui/ImportExport/ImportDialog.vue';
 import type { ExportFormat, ImportFormat } from '@/core/io/IoTypes';
@@ -430,8 +441,14 @@ const showSets = ref(false),
   showValidation = ref(false),
   showActions = ref(false);
 const opened = ref<string[]>([]);
-const contextMenu = ref<{ x: number; y: number }>(),
+const contextMenu = ref<{
+    x: number;
+    y: number;
+    target: ContainerContextTarget;
+    returnFocus?: HTMLElement;
+  }>(),
   projectMenu = ref<{ x: number; y: number }>();
+const projectMenuPanel = ref<HTMLElement>();
 const projectWidth = ref(212),
   treeWidth = ref(240),
   projectCollapsed = ref(false);
@@ -482,6 +499,9 @@ watch(
   },
   { immediate: true }
 );
+watch([showSets, showModules, showImport, showGenerated, () => store.isImporting], () => {
+  contextMenu.value = undefined;
+});
 onMounted(async () => {
   await store.initialize();
   window.addEventListener('beforeunload', warnUnsaved);
@@ -570,18 +590,35 @@ function rename(name: string): void {
     ElMessage.error(reason instanceof Error ? reason.message : String(reason));
   }
 }
-function position(event: MouseEvent | KeyboardEvent) {
-  return {
-    x: Math.min('clientX' in event ? event.clientX : 160, window.innerWidth - 310),
-    y: Math.min('clientY' in event ? event.clientY : 80, window.innerHeight - 370),
+function openContextMenu(event: MouseEvent, target: ContainerContextTarget): void {
+  showActions.value = false;
+  projectMenu.value = undefined;
+  contextMenu.value = {
+    x: event.clientX,
+    y: event.clientY,
+    target,
+    returnFocus:
+      event.target instanceof Element
+        ? (event.target.closest<HTMLElement>('[role="treeitem"]') ?? undefined)
+        : undefined,
   };
 }
-function openContextMenu(event: MouseEvent): void {
-  contextMenu.value = position(event);
-}
-function openProjectMenu(event: MouseEvent | KeyboardEvent): void {
+async function openProjectMenu(event: MouseEvent | KeyboardEvent): Promise<void> {
+  contextMenu.value = undefined;
   projectSubmenu.value = undefined;
-  projectMenu.value = position(event);
+  const anchor = {
+    x: 'clientX' in event ? event.clientX : 160,
+    y: 'clientY' in event ? event.clientY : 80,
+  };
+  projectMenu.value = anchor;
+  await nextTick();
+  if (projectMenuPanel.value && projectMenu.value) {
+    const placed = placeContainerMenu(anchor, projectMenuPanel.value.getBoundingClientRect(), {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+    projectMenu.value = { x: placed.left, y: placed.top };
+  }
 }
 async function projectAction(action?: string): Promise<void> {
   if (action === 'import' || action === 'export') {
