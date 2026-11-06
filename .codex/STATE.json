@@ -2,27 +2,27 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-18",
-  "stageName": "S4 收尾插队：UI 简化（右键三项收敛/直选仅名称/禁用悬停/字段说明底部化）；S5 多模块随后",
+  "stage": "PHASE-19",
+  "stageName": "R3-S5 首契约：多模块并存（ADR-11：批量抽取/并存全链路/按工程导出 manifest/跨模块边界）",
   "task": {
-    "id": "TASK-018",
-    "title": "UI 简化优先插队：右键菜单三项收敛 + 直选仅名称 + 禁用悬停 + 字段说明底部统一展示",
-    "status": "SUBMITTED",
+    "id": "TASK-019",
+    "title": "S5 首契约：多模块并存（ADR-11）——批量抽取 + 并存全链路 + 按工程导出 manifest + 跨模块边界",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "a0ac1ce12d10547cf891955b893eb6da87bd59f0482f2f4716da40ec817bdff5",
+    "contractHash": "33bfc12d4d2f244f0daad6ae8a4436a8caa39d2b276438ee277c80d50b248b29",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T14:26:04+08:00",
-    "reportPath": ".codex/reports/TASK-018-REPORT.md",
+    "contractBoundAt": "2026-11-06T14:48:27+08:00",
+    "reportPath": ".codex/reports/TASK-019-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "65308eec999e6e230a511de5aec429890a82e382",
-    "createdAt": "2026-11-06T14:26:04+08:00",
-    "submittedAt": "2026-11-06T14:42:16+08:00",
+    "submissionCommit": null,
+    "createdAt": "2026-11-06T14:48:27+08:00",
+    "submittedAt": null,
     "approvedAt": null,
-    "designPath": "docs/product-design/01-IA-AND-SCREENS.md"
+    "designPath": "docs/product-design/03-ROADMAP-ACCEPTANCE.md"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
@@ -359,20 +359,35 @@
           "reviewPath": ".codex/review/TASK-017-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-018",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-06T14:48:27+08:00",
+      "submissionCommit": "65308eec999e6e230a511de5aec429890a82e382",
+      "note": "UI 简化优先插队(R1-R5, 用户 2026-11-06 指定) round 0 一次通过: 0 阻塞/0 重要/2 建议。独立复核: build(12.62s)/test:verify 22/22 守卫+317/317 全绿一次通过(315 基线+2 新增); src/core+src/stores 0 行、存储/恢复 0 diff; 评审方本机 20 步撤销 21.44ms(首跑 555ms 系与 build 并行资源竞争, 原始失败日志保留未改阈值, 两次运行间 git diff 仅 STATE 3 行——零代码改动核实)。要点: R1 三项菜单(定位错误/关闭菜单项删除, 定位由问题面板承载有专项用例); R2 子列表仅 shortName(menu-caption/small 全删, 官方 Dem 7 子定义实机); R3 aria-disabled+title+aria-description 三通道同源 core 原因, 键盘可聚焦读原因, 写入拒绝为函数守卫(Enter/逐行 click 后 config 逐字节不变+addContainerInstance 直调仍 throw); R4 定义节点短提示『请右键实例节点』+触发全部动作 exportJson 不变+never-borrows 保留; R5 .field-help 移除(inlineHelpBlocks=0)+FieldDescriptionPanel 读 BSWMD+底部双页签 v-show 共存(bottomDocks=1)+程序化 focus 不抢页签+切实例/切集清理。截图 04 亲眼复核(仅名称/末项灰显/返回箭头/底部参数说明|问题(33)共存)。🟡-1 vite 临时文件 gitignore→TASK-019 A0; 🟡-2 底部说明刷新不持久(会话内视图状态)→S7 文档。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "65308eec999e6e230a511de5aec429890a82e382",
+          "reviewPath": ".codex/review/TASK-018-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-017",
+    "taskId": "TASK-018",
     "round": 0,
-    "reviewedCommit": "b268625f618ee64fdb243ebf79ff243f99bb3480",
-    "at": "2026-11-06T14:26:05+08:00",
+    "reviewedCommit": "65308eec999e6e230a511de5aec429890a82e382",
+    "at": "2026-11-06T14:48:27+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
     "minors": 2,
-    "reviewPath": ".codex/review/TASK-017-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-017-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-018-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-018-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
