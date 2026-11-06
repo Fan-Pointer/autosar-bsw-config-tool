@@ -6,20 +6,20 @@
   "stageName": "B2 批次一：4.2.2 规范原文核对 + SYMBOLIC 语义补齐 + 60 模块逐项资格化",
   "task": {
     "id": "TASK-022",
-    "title": "B2-SYMBOLIC 首批：4.2.2 规范原文核对 + symbolicNameValue 语义补齐 + 60 模块逐项资格化",
+    "title": "功能补全批次一：多实例列表视图(G31) + 多值参数增删行(G32) + 进制切换(G33) + 参考数据导入入口预留(G38 最小版)",
     "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "cb8537e217e6fd295a4438bdc0b85c37ccdc418071e142758de1ebba7857b811",
+    "contractHash": "fc90f4dfcc0805a0c2339fd5134d6b38b17b3973ae496821b2d13517e659d18c",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T17:55:00+08:00",
+    "contractBoundAt": "2026-11-06T21:45:00+08:00",
     "reportPath": ".codex/reports/TASK-022-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
     "submissionCommit": null,
-    "createdAt": "2026-11-06T17:55:00+08:00",
+    "createdAt": "2026-11-06T21:45:00+08:00",
     "submittedAt": null,
     "approvedAt": null,
     "designPath": "docs/product-design/02-TECH-DESIGN.md"
@@ -34,27 +34,35 @@
   "queue": [
     {
       "taskId": "TASK-023",
-      "title": "EasySAR 吸收首批：多实例列表视图+列设置(G31)+多值参数增删行(G32)+进制切换(G33)",
+      "title": "EasySAR 吸收批次二：生成目录策略(G34)+芯片扩展(G35)+工程列表筛选分页(G36)+顺序管理(G37)",
       "stage": "PHASE-23（TASK-022 之后）",
       "contractPath": ".codex/tasks/TASK-023-CONTRACT.md",
       "contractHash": "恢复下发时以归档文件重算为准",
-      "note": "需求源=EasySAR调研手册（用户 2026-11-06 指令纳入），对照裁定见 docs/product-design/04-EASYSAR-ABSORPTION.md 与 SCOPE G31-G37。A+B 最低必交可分两轮；TASK-022 交付的资格化状态是其数据前提。TASK-024（G34-G37 收尾）随 023 评审后另拟。禁止提前实施。"
+      "note": "需求源 G34-G37（EasySAR 吸收）。A(G34)+D(G37) 最低必交，B/C 可顺延。禁止提前实施。"
     },
     {
       "taskId": "TASK-025",
-      "title": "参考数据导入三批：DBC(首批)→LDF→CDD(存档级)（G38，ADR-14）",
-      "stage": "PHASE-25（TASK-024 之后）",
+      "title": "参考数据解析展示批次：DBC(首批)→LDF→CDD(如实降级批)",
+      "stage": "PHASE-25",
       "contractPath": ".codex/tasks/TASK-025-CONTRACT.md",
       "contractHash": "恢复下发时以归档文件重算为准",
-      "note": "用户 2026-11-06 裁定 G29 修订为 G38（推翻旧不纳入边界）。定位=只读参考数据层（ADR-14）：查看面板+配置参照，第一期不做→ECUC 自动生成、不进校验/闸门；CDD 专有二进制仅存档+识别+下载，不做伪造解析。A+B(DBC) 最低必交，C/D 可顺延。禁止提前实施。"
+      "note": "导入入口预留已由 TASK-022 D 组交付；本契约仅做解析展示。CDD 专有二进制无规范则维持降级声明，不做伪造解析。禁止提前实施。"
+    },
+    {
+      "taskId": "TASK-026",
+      "title": "B2-SYMBOLIC 首批：4.2.2 规范原文核对 + symbolicNameValue 语义补齐 + 60 模块逐项资格化",
+      "stage": "PHASE-26（恢复下发时定）",
+      "contractPath": ".codex/tasks/TASK-026-CONTRACT.md",
+      "contractHash": "恢复下发时以归档文件重算为准（原 TASK-022 绑定 cb8537e2… 作废）",
+      "note": "用户 2026-11-06 指令「先做 EasySAR 吸收功能、参考数据先做导入入口预留」让位（未开工零沉没成本）。P1 前置（CP4.2.2 规范原文核对）条款有效。恢复下发时以归档文件重算哈希。禁止提前实施。"
     },
     {
       "taskId": "TASK-020",
-      "title": "S5 首契约：多模块并存（ADR-11/12）——批量抽取 + 并存全链路 + 按工程导出 manifest + 跨模块边界",
-      "stage": "PHASE-19 之后",
+      "title": "S5 多模块并存：按工程导出 manifest + 并存矩阵（验收 4 已校正为官方成功/拒绝矩阵+合成全绿）",
+      "stage": "PHASE-20（恢复下发时定）",
       "contractPath": ".codex/tasks/TASK-020-CONTRACT.md",
-      "contractHash": "以归档文件恢复时重算为准（原 TASK-019 绑定 33bfc12d…8b29 作废）",
-      "note": "用户 2026-11-06 PROJECT-WIZARD 三点优先指令让位（原 TASK-019 未实现零沉没成本）。已校正：验收 4 改为官方成功/拒绝矩阵（CanIf/NvM 必填外部引用拒绝属正确行为）+ 合成通用全绿测试；多模块归属 ADR-12 工程层。恢复下发时以归档文件为准重算哈希。禁止提前实施。"
+      "contractHash": "恢复下发时以归档文件重算为准",
+      "note": "验收 4 已校正；多模块归属 ADR-12 工程层。禁止提前实施。"
     }
   ],
   "history": [
