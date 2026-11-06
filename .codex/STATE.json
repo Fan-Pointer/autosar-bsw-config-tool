@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-018",
     "title": "UI 简化优先插队：右键菜单三项收敛 + 直选仅名称 + 禁用悬停 + 字段说明底部统一展示",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -18,9 +18,9 @@
     "reportPath": ".codex/reports/TASK-018-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "65308eec999e6e230a511de5aec429890a82e382",
     "createdAt": "2026-11-06T14:26:04+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-06T14:42:16+08:00",
     "approvedAt": null,
     "designPath": "docs/product-design/01-IA-AND-SCREENS.md"
   },
