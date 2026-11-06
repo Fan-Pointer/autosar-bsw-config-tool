@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-013",
     "title": "S2 测试基线重建：265 项全绿（0 fail），语义适配不削弱",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -18,9 +18,9 @@
     "reportPath": ".codex/reports/TASK-013-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "a15331500b46882c7591d17768d09b0ff4fc010e",
     "createdAt": "2026-11-06T09:19:54+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-06T01:36:09.763Z",
     "approvedAt": null,
     "designPath": "docs/product-design/00-SCOPE-AND-FEATURES.md"
   },
