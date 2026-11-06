@@ -2,27 +2,27 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-17",
-  "stageName": "R3-S4 编辑体验收尾（G09-G14/G20/G22 列表；W6 已由 TASK-016 交付；S5 多模块按 ADR-11 保留）",
+  "stage": "PHASE-18",
+  "stageName": "S4 收尾插队：UI 简化（右键三项收敛/直选仅名称/禁用悬停/字段说明底部化）；S5 多模块随后",
   "task": {
-    "id": "TASK-017",
-    "title": "S4 编辑体验收尾：术语/四态/入口收敛/CHOICE 预览/引用暂存/问题面板/撤销回归/引用列表",
-    "status": "SUBMITTED",
+    "id": "TASK-018",
+    "title": "UI 简化优先插队：右键菜单三项收敛 + 直选仅名称 + 禁用悬停 + 字段说明底部统一展示",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "bce835ceef48686197370fae48ffce41f5561539d4838896ebcc4db79a2ec3a1",
+    "contractHash": "a0ac1ce12d10547cf891955b893eb6da87bd59f0482f2f4716da40ec817bdff5",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T13:34:51+08:00",
-    "reportPath": ".codex/reports/TASK-017-REPORT.md",
+    "contractBoundAt": "2026-11-06T14:26:04+08:00",
+    "reportPath": ".codex/reports/TASK-018-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "b268625f618ee64fdb243ebf79ff243f99bb3480",
-    "createdAt": "2026-11-06T13:34:51+08:00",
-    "submittedAt": "2026-11-06T06:06:38.504Z",
+    "submissionCommit": null,
+    "createdAt": "2026-11-06T14:26:04+08:00",
+    "submittedAt": null,
     "approvedAt": null,
-    "designPath": "docs/product-design/03-ROADMAP-ACCEPTANCE.md"
+    "designPath": "docs/product-design/01-IA-AND-SCREENS.md"
   },
   "statusLegend": {
     "READY": "任务已下发，等待 Codex 实现",
@@ -344,20 +344,35 @@
           "reviewPath": ".codex/review/TASK-015-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-017",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-06T14:26:05+08:00",
+      "submissionCommit": "b268625f618ee64fdb243ebf79ff243f99bb3480",
+      "note": "S4 编辑体验收尾(A-G 全部交付) round 0 一次通过: 0 阻塞/0 重要/2 建议。独立复核: build(12.46s)/test:verify 22/22 守卫+315/315 全绿一次通过(302 基线+13 新增 editing-experience); src/core 0 行、W6 两文件 0 diff、存储/恢复 0 diff。要点: FieldState 四态区分 unconfirmed/confirmed false; 工具栏添加分流定义/实例, addOptionsFor 仅转发 core; CHOICE 预览 choiceImpact 派生已配值/出站/入站明细+『refuses confirmation when configuration changed after preview』快照拦截+按新候选重建策略(实测支撑, 一次 undo 完整恢复); 引用弹窗 draft 暂存 it.each 四退出方式×exportJson 逐字节不变+setItem 零调用, 空态创建先暂存后原子创建+引用同一历史; 问题面板底部停靠+生成失败自动打开+定位后列表保留+撤销归零; 20 步撤销/跨集独立/批量逐实例原因组合; ReferenceRelations 入站/出站双向跳转。零写入断言 14 处 exportJson 逐字节比对为项目最高密度。删除行逐条核对均为报告声明行为跟随且替换加严(配置集已在预览后更改拦截延续)。截图 02/05 亲眼复核(暂存高亮+背景旧值; CHOICE 三列明细+保留引用失效提示)。🟡-1 vite.config.ts.timestamp-*.mjs 临时文件建议 gitignore; 🟡-2 字段说明呈现→TASK-018 R5 承接。W1-W4 落地, S4 完成。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "b268625f618ee64fdb243ebf79ff243f99bb3480",
+          "reviewPath": ".codex/review/TASK-017-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
     "reviewer": "WorkBuddy",
-    "taskId": "TASK-015",
+    "taskId": "TASK-017",
     "round": 0,
-    "reviewedCommit": "d2606e790304738bf2da2eb49cb169a0095bac52",
-    "at": "2026-11-06T13:33:51+08:00",
+    "reviewedCommit": "b268625f618ee64fdb243ebf79ff243f99bb3480",
+    "at": "2026-11-06T14:26:05+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
     "minors": 2,
-    "reviewPath": ".codex/review/TASK-015-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-015-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-017-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-017-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
