@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-014",
     "title": "S3a 输出同源闸门：isOutputReady + C 生成保真 + BswmdParser 元数据保留",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -18,9 +18,9 @@
     "reportPath": ".codex/reports/TASK-014-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "ccb8f12832ba76512d749203eefe2da98c516a58",
     "createdAt": "2026-11-06T09:46:30+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-06T10:28:17.8502368+08:00",
     "approvedAt": null,
     "designPath": "docs/product-design/02-TECH-DESIGN.md",
     "contractRevision": "v2 (2026-11-06 09:53): CONTRACT_CLARIFY 三项裁定 — R1 官方输出改集合恒等断言(废弃15->15旧口径,必填门槛不削弱) / R2 闸门纯函数重新求值语义(禁重复逻辑禁跨动作缓存, store 统一注入模块规则) / R3 Arxml.ts 白名单=路径取值接线+闸门消费接线, 结构生成仍归 TASK-015; v3 (2026-11-06 10:00): REQUIRED-REF 裁定 — 闸门拦截覆盖必填引用(参数与引用同等), 拒绝原因分类 未配置/跨模块不支持(已核实 CanIf 2+NvM 2 跨模块, CanIfInitHohConfigRef 模块内可修复); 三旧官方成功用例改拒绝断言+CanIf 合法子集保留成功覆盖+Dem 模块内补合法目标; 禁伪造目标/改 isOptional/绕闸门; v4 (2026-11-06 10:16): CANIF-LOWER-CORRECTION — 撤销 CanIf 合法子集(实测 CanIfCtrlDrvCfg LOWER-MULTIPLICITY=1 必选不可移除); CanIf 完整成功输出=未支持记 G05; 官方成功 ARXML/C 集合验收由 Dem 承担; 禁删必选容器实例伪造子集"
