@@ -9,6 +9,7 @@ import type {
   ConfigParameterValue,
   ConfigReferenceValue,
 } from '@/core/config/ConfigTypes';
+import { referenceTargets } from '@/core/config/ConfigTypes';
 import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 import { BswmdLoader } from '@/core/bswmd/BswmdLoader';
 import { ConfigInstanceManager } from '@/core/config/ConfigInstance';
@@ -354,6 +355,27 @@ export const useConfigStore = defineStore('config', () => {
       ? `${selectedContainerUuid.value}:${selectedFieldUuid.value}`
       : selectedContainerUuid.value
   );
+  /** G42: 每个引用的目标列表（含标签），供表单按行渲染。 */
+  const referenceTargetsByRef = computed(() => {
+    const entry = selectedEntry.value;
+    if (!entry) return {} as Record<string, { uuid: string; label: string }[]>;
+    const options = referenceOptions.value;
+    return Object.fromEntries(
+      (entry.definition.references ?? []).map((definition) => {
+        const stored = entry.container.references.get(definition.uuid);
+        const labels = new Map(
+          (options[definition.uuid] ?? []).map((option) => [option.uuid, option.label])
+        );
+        return [
+          definition.uuid,
+          referenceTargets(stored).map((uuid) => ({
+            uuid,
+            label: labels.get(uuid) ?? uuid.slice(0, 8),
+          })),
+        ];
+      })
+    );
+  });
   const parameterData = computed(() =>
     Object.fromEntries(
       (selectedEntry.value?.definition.parameters ?? []).map((parameter) => {
@@ -1330,7 +1352,7 @@ export const useConfigStore = defineStore('config', () => {
     if (!selectedEntry.value) return;
     const entry = selectedEntry.value;
     const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
-    if (!definition || definition.readOnly) return;
+    if (!definition) return;
     const isArrayRows = Array.isArray(value);
     const current = entry.container.parameters.get(uuid);
     if (
@@ -1357,7 +1379,7 @@ export const useConfigStore = defineStore('config', () => {
     if (!selectedEntry.value) return;
     const entry = selectedEntry.value;
     const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
-    if (!definition || definition.readOnly) return;
+    if (!definition) return;
     const upper = definition.multiplicity?.upper;
     const current = entry.container.parameters.get(uuid);
     const rowCount = Array.isArray(current?.value) ? current.value.length : 0;
@@ -1383,7 +1405,7 @@ export const useConfigStore = defineStore('config', () => {
     if (!selectedEntry.value) return;
     const entry = selectedEntry.value;
     const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
-    if (!definition || definition.readOnly) return;
+    if (!definition) return;
     edit(`删除 ${definition.shortName} 行`, () => {
       manager.removeParameterValueRow(entry.container, uuid, index);
     });
@@ -1442,6 +1464,45 @@ export const useConfigStore = defineStore('config', () => {
           isConfigured: false,
         });
       manager.setReferenceTarget(entry.container, uuid, targetUuid);
+    });
+  }
+
+  /** 追加一个引用目标（G42）。仅多值引用（multiplicity 上限 >1）可用；
+   * 单值引用请走 setReferenceTarget。 */
+  function addReferenceTarget(uuid: string, targetUuid: string): void {
+    assertEditable();
+    if (!selectedEntry.value) return;
+    const entry = selectedEntry.value;
+    const definition = entry.definition.references.find((r) => r.uuid === uuid);
+    if (!definition) return;
+    if (definition.isExternal) throw new Error('外部引用只读：本期不支持跨模块目标');
+    if (!targetUuid) return;
+    edit(`追加引用 ${definition.shortName}`, () => {
+      if (!entry.container.references.has(uuid))
+        entry.container.references.set(uuid, {
+          definitionRef: uuid,
+          targetUuid: '',
+          isConfigured: false,
+        });
+      manager.addReferenceTarget(
+        entry.container,
+        uuid,
+        targetUuid,
+        definition.multiplicity?.upper
+      );
+    });
+  }
+
+  /** 删除一个引用目标（G42）。 */
+  function removeReferenceTarget(uuid: string, index: number): void {
+    assertEditable();
+    if (!selectedEntry.value) return;
+    const entry = selectedEntry.value;
+    const definition = entry.definition.references.find((r) => r.uuid === uuid);
+    if (!definition) return;
+    if (definition.isExternal) return;
+    edit(`删除引用 ${definition.shortName} 目标`, () => {
+      manager.removeReferenceTarget(entry.container, uuid, index);
     });
   }
 
@@ -2072,6 +2133,7 @@ export const useConfigStore = defineStore('config', () => {
     selectedKey,
     parameterData,
     parameterStates,
+    referenceTargetsByRef,
     referenceData,
     referenceOptions,
     isDirty,
@@ -2087,6 +2149,8 @@ export const useConfigStore = defineStore('config', () => {
     removeParameterValueRow,
     renameContainer,
     setReferenceTarget,
+    addReferenceTarget,
+    removeReferenceTarget,
     saveConfig,
     loadConfig,
   };

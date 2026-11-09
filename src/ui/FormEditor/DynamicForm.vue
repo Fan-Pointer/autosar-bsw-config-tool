@@ -202,24 +202,58 @@
           :message="fieldErrors[reference.uuid]"
         />
         <div class="field-control reference-control">
-          <el-input
-            :id="'input-' + reference.uuid"
-            :aria-label="reference.shortName"
-            :model-value="referenceLabel(reference.uuid)"
-            readonly
-          />
-          <span
-            :title="reference.isExternal ? '外部引用只读：本期不支持跨模块目标' : '选择引用目标'"
-            ><button
-              class="reference-picker"
+          <!-- G42：多值引用逐目标一行，＋ 追加、× 删除；单值引用保持原输入框形态。 -->
+          <div v-if="isMultiRef(reference)" class="reference-rows">
+            <div
+              v-for="(target, index) in referenceTargetsOf(reference.uuid)"
+              :key="index"
+              class="reference-row"
+            >
+              <el-input
+                :model-value="target.label"
+                readonly
+                :aria-label="reference.shortName + ' 目标 ' + (index + 1)"
+              />
+              <button
+                type="button"
+                class="reference-remove"
+                :disabled="readonly || reference.isExternal"
+                :aria-label="'删除 ' + reference.shortName + ' 目标 ' + (index + 1)"
+                @click="emit('reference-remove', reference.uuid, index)"
+              >
+                ×
+              </button>
+            </div>
+            <button
               type="button"
+              class="reference-add"
               :disabled="readonly || reference.isExternal"
-              :aria-label="'选择 ' + reference.shortName"
+              :aria-label="'添加 ' + reference.shortName + ' 目标'"
               @click="openReference(reference.uuid)"
             >
-              ▤
-            </button></span
-          >
+              ＋ 添加目标
+            </button>
+          </div>
+          <template v-else>
+            <el-input
+              :id="'input-' + reference.uuid"
+              :aria-label="reference.shortName"
+              :model-value="referenceLabel(reference.uuid)"
+              readonly
+            />
+            <span
+              :title="reference.isExternal ? '外部引用只读：本期不支持跨模块目标' : '选择引用目标'"
+              ><button
+                class="reference-picker"
+                type="button"
+                :disabled="readonly || reference.isExternal"
+                :aria-label="'选择 ' + reference.shortName"
+                @click="openReference(reference.uuid)"
+              >
+                ▤
+              </button></span
+            >
+          </template>
         </div>
         <small v-if="reference.isExternal" class="field-error"
           >外部引用只读：本期不支持跨模块目标</small
@@ -326,7 +360,8 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import type { BswmdContainer, BswmdParameter } from '@/core/bswmd/BswmdTypes';
+import type { BswmdContainer, BswmdParameter, BswmdReference } from '@/core/bswmd/BswmdTypes';
+import { isMultiReference } from '@/core/config/ConfigTypes';
 import FieldState from './FieldState.vue';
 const props = withDefaults(
   defineProps<{
@@ -351,6 +386,8 @@ const props = withDefaults(
     fieldErrors?: Record<string, string>;
     /** G39: per-row disabled state + business notice, computed by the store. */
     parameterStates?: Record<string, { disabled?: boolean; notice?: string }>;
+    /** G42: per-reference target list (multi-value references). */
+    referenceTargets?: Record<string, { uuid: string; label: string }[]>;
   }>(),
   {
     configData: () => ({}),
@@ -370,6 +407,8 @@ const emit = defineEmits<{
   'parameter-row-add': [paramUuid: string];
   'parameter-row-remove': [paramUuid: string, rowIndex: number];
   'reference-change': [refUuid: string, targetUuid: string];
+  'reference-add': [refUuid: string, targetUuid: string];
+  'reference-remove': [refUuid: string, index: number];
   'create-reference-target': [refUuid: string, definitionUuid: string, parentUuid: string | null];
 }>();
 // G32: a multi-value parameter exposes its rows through configData as an array.
@@ -468,6 +507,13 @@ function stageReference(uuid: string): void {
   referenceDraft.value = uuid;
   createDraft.value = undefined;
 }
+/** G42：多值引用（定义 multiplicity 上限 >1）逐目标编辑。 */
+function isMultiRef(reference: BswmdReference): boolean {
+  return isMultiReference(reference);
+}
+function referenceTargetsOf(uuid: string): { uuid: string; label: string }[] {
+  return props.referenceTargets?.[uuid] ?? [];
+}
 function applyReference(): void {
   if (!referencePicker.value || !canApplyReference.value) return;
   if (createDraft.value)
@@ -477,6 +523,8 @@ function applyReference(): void {
       createDraft.value.definitionUuid,
       createDraft.value.parentUuid
     );
+  else if (isMultiRef(activeReference.value!))
+    emit('reference-add', referencePicker.value, referenceDraft.value);
   else emit('reference-change', referencePicker.value, referenceDraft.value);
   referencePicker.value = undefined;
 }
@@ -622,6 +670,42 @@ defineExpose({ resetForm, getFormData });
 }
 .parameter-section {
   padding: 16px 0;
+}
+.reference-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+.reference-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.reference-remove {
+  border: 1px solid var(--color-border);
+  background: var(--color-panel);
+  color: var(--color-muted);
+  font: inherit;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.reference-add {
+  align-self: flex-start;
+  border: 1px dashed var(--color-border);
+  background: transparent;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.reference-add:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 .reference-section {
   padding: 16px 0;

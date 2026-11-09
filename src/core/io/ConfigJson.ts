@@ -250,9 +250,18 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
         if (ref.isConfigured !== undefined && typeof ref.isConfigured !== 'boolean')
           throw new Error(`${path}/${def.shortName}：isConfigured 应为布尔值`);
         const targetUuid = string(ref.targetUuid, path + '/' + def.shortName, true);
+        // G42：多值引用的目标数组；仅在存在且合法时保留（单值数据无该字段）。
+        let targetUuids: string[] | undefined;
+        if (ref.targetUuids !== undefined) {
+          const list = array(ref.targetUuids, path + '/' + def.shortName + '.targetUuids');
+          targetUuids = list.map((item, index) =>
+            string(item, `${path}/${def.shortName}.targetUuids[${index}]`, true)
+          );
+        }
         references.set(def.uuid, {
           definitionRef: def.uuid,
           targetUuid,
+          ...(targetUuids ? { targetUuids } : {}),
           // Legacy JSON predates the explicit flag; only a chosen target implied configuration.
           isConfigured: ref.isConfigured === undefined ? Boolean(targetUuid) : ref.isConfigured,
         });

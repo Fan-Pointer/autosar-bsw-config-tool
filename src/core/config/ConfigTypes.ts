@@ -60,8 +60,24 @@ export function isMultiValueParameter(
 export interface ConfigReferenceValue {
   /** 引用 BswmdReference.uuid */
   definitionRef: string;
-  /** 引用的容器 UUID；空字符串表示尚未选择目标。 */
+  /** 引用的容器 UUID；空字符串表示尚未选择目标（单值引用的兼容字段）。 */
   targetUuid: UUID;
+  /** G42 多值引用（multiplicity 上限 >1）：逐项目标；单值引用保持省略。 */
+  targetUuids?: string[];
   /** Whether the user explicitly selected this reference. */
   isConfigured: boolean;
+}
+
+/** 引用是否允许多目标（定义 multiplicity 上限 >1 或 unbounded）。 */
+export function isMultiReference(
+  reference: { multiplicity?: { lower: number; upper: number | 'unbounded' } } | undefined
+): boolean {
+  return isMultiValueParameter(reference);
+}
+
+/** 统一读取引用的目标列表：多值读数组，单值读兼容字段。 */
+export function referenceTargets(value: ConfigReferenceValue | undefined): string[] {
+  if (!value) return [];
+  if (Array.isArray(value.targetUuids)) return value.targetUuids.filter((item) => item !== '');
+  return value.targetUuid ? [value.targetUuid] : [];
 }

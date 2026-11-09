@@ -1,7 +1,8 @@
 import { XMLParser, XMLValidator } from 'fast-xml-parser';
 import { decodeXmlText, stripDoctype, withoutXmlComments } from './XmlSafety';
 import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
-import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
+import type { ConfigContainer, ConfigInstance, ConfigReferenceValue } from '../config/ConfigTypes';
+import { referenceTargets } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
 import { referenceDefinitionDest } from '../config/ReferenceCandidates';
 import { createParameterValue } from '../config/ConfigValues';
@@ -121,9 +122,15 @@ export function exportArxml(
         const references = definition.references
           .flatMap((def) => {
             const value = container.references.get(def.uuid);
-            return value ? [value] : [];
+            if (!value || value.isConfigured !== true) return [];
+            // G42：多值引用逐目标展开为独立元素（ARXML 语义：每个 VALUE-REF 一条）。
+            return referenceTargets(value).map((targetUuid) => ({
+              definitionRef: def.uuid,
+              targetUuid,
+              isConfigured: true,
+            }));
           })
-          .filter((ref) => ref.isConfigured === true && ref.targetUuid)
+          .filter((ref) => ref.targetUuid)
           .map((ref) => {
             const target = instancePaths.get(ref.targetUuid);
             if (!target) throw new Error(`${container.shortName}：引用目标不存在，无法导出 ARXML`);
@@ -345,7 +352,7 @@ export function importArxml(
   if (!module) throw new Error(`未加载模块定义：${modulePath} (${release})；不能跨版本套用定义`);
   const paths = definitionPaths(module);
   const targets = new Map<string, string>();
-  const pending: { ref: { definitionRef: string; targetUuid: string }; path: string }[] = [];
+  const pending: { ref: ConfigReferenceValue; paths: string[] }[] = [];
   const seenIds = new Set<string>();
   const uuid = (node: XmlNode): string => {
     const value = node['@_UUID'] === undefined ? generateUUID() : string(node['@_UUID'], 'UUID');
@@ -398,16 +405,25 @@ export function importArxml(
       const referenceNodes = single(node, 'REFERENCE-VALUES');
       if (nodes(referenceNodes, 'ECUC-INSTANCE-REFERENCE-VALUE').length)
         throw new Error(`${path}：实例引用含上下文目标，本期不支持导入，未丢弃原始数据`);
-      const references = nodes(referenceNodes, 'ECUC-REFERENCE-VALUE').map((r) => {
+      // G42：同一引用定义的多条 VALUE-REF 聚合为一个多值引用（顺序即文件顺序）。
+      const groupedReferences = new Map<string, { ref: ConfigReferenceValue; paths: string[] }>();
+      for (const r of nodes(referenceNodes, 'ECUC-REFERENCE-VALUE')) {
         uuid(r);
         const def = definition.references.find(
           (item) => paths.get(item.uuid) === text(r, 'DEFINITION-REF').trim()
         );
         if (!def) throw new Error(`${path}：引用定义路径不匹配`);
         if (emptyRefs.has(def.uuid)) throw new Error(`${path}：清空引用同时包含 VALUE-REF`);
-        const ref = { definitionRef: def.uuid, targetUuid: '', isConfigured: true };
-        pending.push({ ref, path: text(r, 'VALUE-REF').trim() });
-        return ref;
+        const entry = groupedReferences.get(def.uuid) ?? {
+          ref: { definitionRef: def.uuid, targetUuid: '', targetUuids: [], isConfigured: true },
+          paths: [],
+        };
+        entry.paths.push(text(r, 'VALUE-REF').trim());
+        groupedReferences.set(def.uuid, entry);
+      }
+      const references = [...groupedReferences.values()].map((entry) => {
+        pending.push({ ref: entry.ref, paths: entry.paths });
+        return entry.ref;
       });
       // Missing XML values remain unconfigured. Suggestions are editor-only and never exported as values.
       for (const def of definition.parameters) {
@@ -464,9 +480,14 @@ export function importArxml(
   );
   // Resolve only after the whole forest is indexed, so forward references never depend on file ordering.
   for (const item of pending) {
-    if (item.path && !targets.has(item.path))
-      throw new Error(`引用目标未包含在文件中：${item.path}`);
-    item.ref.targetUuid = targets.get(item.path) ?? '';
+    const resolved = item.paths.map((refPath) => {
+      if (refPath && !targets.has(refPath))
+        throw new Error(`引用目标未包含在文件中：${refPath}`);
+      return targets.get(refPath) ?? '';
+    });
+    // 单目标保持兼容字段（不写数组）；多目标另存数组（G42）。
+    item.ref.targetUuids = resolved.length > 1 ? resolved : undefined;
+    item.ref.targetUuid = resolved[0] ?? '';
   }
   const now = Date.now();
   const metadata = editorData(moduleNode);

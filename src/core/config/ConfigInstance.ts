@@ -492,8 +492,75 @@ export class ConfigInstanceManager {
       );
     }
 
+    // G42：多值引用写入数组（首目标同步兼容字段），单值引用保持原行为。
+    if (Array.isArray(ref.targetUuids)) {
+      ref.targetUuids = targetUuid ? [targetUuid] : [];
+      ref.targetUuid = targetUuid;
+      ref.isConfigured = ref.targetUuids.length > 0;
+      return;
+    }
     ref.targetUuid = targetUuid;
     ref.isConfigured = targetUuid !== '';
+  }
+
+  /**
+   * 追加一个引用目标（G42，多值引用）。
+   * @param container Container to edit.
+   * @param refDefUuid Reference definition UUID.
+   * @param targetUuid Target container UUID.
+   * @param upper Definition upper multiplicity.
+   * @returns The new target count; throws beyond the upper bound.
+   */
+  addReferenceTarget(
+    container: ConfigContainer,
+    refDefUuid: string,
+    targetUuid: string,
+    upper?: number | 'unbounded'
+  ): number {
+    const ref = this.referenceFor(container, refDefUuid);
+    const targets = Array.isArray(ref.targetUuids)
+      ? ref.targetUuids
+      : ref.targetUuid
+        ? [ref.targetUuid]
+        : [];
+    if (typeof upper === 'number' && targets.length >= upper)
+      throw new Error(`该引用最多 ${upper} 个目标`);
+    ref.targetUuids = [...targets, targetUuid];
+    ref.targetUuid = ref.targetUuids[0] ?? '';
+    ref.isConfigured = ref.targetUuids.length > 0;
+    return ref.targetUuids.length;
+  }
+
+  /**
+   * 删除一个引用目标（G42）。
+   * @param container Container to edit.
+   * @param refDefUuid Reference definition UUID.
+   * @param index Target row index.
+   * @returns Remaining target count; throws when out of range.
+   */
+  removeReferenceTarget(container: ConfigContainer, refDefUuid: string, index: number): number {
+    const ref = this.referenceFor(container, refDefUuid);
+    const targets = Array.isArray(ref.targetUuids)
+      ? [...ref.targetUuids]
+      : ref.targetUuid
+        ? [ref.targetUuid]
+        : [];
+    if (index < 0 || index >= targets.length)
+      throw new Error(`目标序号越界：${index}（共 ${targets.length} 项）`);
+    const remaining = targets.filter((_, item) => item !== index);
+    ref.targetUuids = remaining;
+    ref.targetUuid = remaining[0] ?? '';
+    ref.isConfigured = remaining.length > 0;
+    return remaining.length;
+  }
+
+  private referenceFor(container: ConfigContainer, refDefUuid: string): ConfigReferenceValue {
+    const ref = container.references.get(refDefUuid);
+    if (!ref)
+      throw new Error(
+        `Reference with definitionRef ${refDefUuid} not found in container ${container.shortName}`
+      );
+    return ref;
   }
 
   /**
