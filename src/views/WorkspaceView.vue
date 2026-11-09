@@ -178,6 +178,10 @@
               </button>
             </details>
           </details>
+          <details v-for="branch in fixedBranches" :key="branch.name" class="fixed-branch">
+            <summary><span class="folder">▱</span>{{ branch.name }}</summary>
+            <p class="branch-note">{{ branch.note }}</p>
+          </details>
           <button v-if="!store.config" class="empty-project" @click.stop="showSets = true">
             暂无配置集 · 点击创建
           </button>
@@ -252,6 +256,24 @@
                   part
                 }}</span></template
               >
+            </nav>
+            <nav
+              v-if="topContainers.length > 1"
+              class="top-container-tabs"
+              role="tablist"
+              aria-label="顶级容器"
+            >
+              <button
+                v-for="container in topContainers"
+                :key="container.uuid"
+                role="tab"
+                class="top-container-tab"
+                :class="{ active: store.selectedEntry?.container.uuid === container.uuid }"
+                :aria-selected="store.selectedEntry?.container.uuid === container.uuid"
+                @click="store.selectContainer(container.uuid)"
+              >
+                {{ container.shortName }}
+              </button>
             </nav>
             <BatchEditPanel v-if="store.selectedContainerUuids.length > 1" />
             <template v-else-if="store.selectedEntry">
@@ -647,6 +669,28 @@ watch(
     helpFieldUuid.value = undefined;
   }
 );
+/** G41: L2 top-level container tabs come from the instance tree, not a second model. */
+const topContainers = computed(() => store.config?.containers ?? []);
+/** Four fixed tree branches (G41). They are entry points: each states its real status
+ * instead of pretending to hold data. */
+const fixedBranches = [
+  {
+    name: 'RTE',
+    note: 'RTE 端口与运行实体配置暂未接入：当前版本只提供该入口。',
+  },
+  {
+    name: 'AUTOSAR 文件',
+    note: '通过「导入 → ARXML」加载的模块配置会进入对应模块；本节点仅作入口说明。',
+  },
+  {
+    name: '输出文件',
+    note: '生成的 C 配置文件在「模块右键 → 代码生成」或工具栏生成后查看与下载。',
+  },
+  {
+    name: '输入文件',
+    note: '参考数据（DBC / LDF / CDD）在起始页「参考数据」入口导入，解析展示待后续版本。',
+  },
+] as const;
 const includedModules = computed(() =>
   store.modules.filter((item) =>
     store.activeProject
@@ -1365,6 +1409,41 @@ function stopResize(): void {
 .empty-editor {
   flex: 1;
   background: var(--color-panel);
+}
+.top-container-tabs {
+  display: flex;
+  gap: 2px;
+  margin: 0 22px 0;
+  padding-bottom: 6px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--color-border);
+}
+.top-container-tab {
+  flex: 0 0 auto;
+  border: 1px solid transparent;
+  border-bottom: none;
+  background: transparent;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.top-container-tab.active {
+  color: var(--color-accent);
+  border-color: var(--color-border);
+  background: var(--color-panel);
+  border-radius: 4px 4px 0 0;
+}
+.fixed-branch summary {
+  cursor: pointer;
+}
+.branch-note {
+  margin: 2px 0 6px 26px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-muted);
 }
 .breadcrumbs {
   display: flex;

@@ -219,6 +219,21 @@ describe('screenshot replica interactions', () => {
     expect(store.activeUuid).toBe(uuid);
   });
 
+  it('renders the four fixed tree branches with honest empty states (G41)', async () => {
+    const { wrapper } = await workspace();
+    const branches = wrapper.findAll('.fixed-branch');
+    expect(branches).toHaveLength(4);
+    expect(branches.map((item) => item.get('summary').text())).toEqual([
+      expect.stringContaining('RTE'),
+      expect.stringContaining('AUTOSAR 文件'),
+      expect.stringContaining('输出文件'),
+      expect.stringContaining('输入文件'),
+    ]);
+    // 每个空分支给出准确说明，不伪装成有内容的节点。
+    expect(branches[0].text()).toContain('暂未接入');
+    expect(branches[3].text()).toContain('参考数据');
+  });
+
   it('removes empty placeholder actions, keeps real output guards and opens the module dialog', async () => {
     const { wrapper } = await workspace();
     await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
