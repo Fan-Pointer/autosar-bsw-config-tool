@@ -45,7 +45,18 @@
 1. **每完成一个任务立即 `git push origin main`**。教训：11-09 曾有 7 个提交未推，导致 Codex
    基于 11-06 的旧基线重复实现，两边界面出现"只有一边有"的功能。
 2. **每次功能完成后发布**到 `https://onesar-configurator.app.workbuddy.host/?sharecode=JBNIKOXRCN`：
-   `git archive HEAD` → `onesar-site-deploy/` → `npm run build` → 发布。只发布已提交且测试通过的版本。
+   ```bash
+   git archive HEAD | tar -x -C ../onesar-site-deploy
+   cd ../onesar-site-deploy && npm run build
+   node scripts/rewrite-sharecode.mjs dist JBNIKOXRCN   # ← 必须，否则白屏
+   ```
+   然后发布 `../onesar-site-deploy/dist`。只发布已提交且测试通过的版本。
+
+   > ⚠️ **白屏陷阱（2026-11-09 实测）**：平台网关只放行带 `?sharecode=` 的请求，
+   > HTML 里 `/assets/*.js` 等资源引用不带参数会全部 403，页面打不开。
+   > `scripts/rewrite-sharecode.mjs` 会把 dist 中 HTML/JS/CSS 的所有资源引用
+   > （含动态 import chunk、favicon、CSS url()）统一追加 `?sharecode=...`。
+   > 校验方式：`curl -o /dev/null -w "%{http_code}" "<host>/assets/index-xxx.js?sharecode=..."` 应为 200。
 3. **UI 细节以用户裁定为准**，需求文档写的功能不等于必须照搬（L2 顶级容器页签、实例名称行、
    行内 notice 均已被用户要求移除）。
 

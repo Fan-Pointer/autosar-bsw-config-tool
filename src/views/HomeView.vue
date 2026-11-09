@@ -11,7 +11,7 @@
           />连接在一个轻盈、专注的工作空间。
         </p>
         <div class="hero-tags">
-          <span>定义驱动</span><span>本机保存</span><span>可视化编辑</span>
+          <span>本机保存</span><span>可视化编辑</span>
         </div>
       </div>
       <figure class="catalog-blueprint" aria-label="汽车软件工程示意图">
@@ -234,13 +234,13 @@ async function removeProject(uuid: string, name: string): Promise<void> {
 .catalog-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
-  align-items: center;
+  align-items: start;
   gap: 32px;
 }
 .catalog-wordmark {
-  margin: 0 0 14px;
-  color: #60728a;
-  font-size: 13px;
+  margin: 0 0 16px;
+  color: #4d6076;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.02em;
 }

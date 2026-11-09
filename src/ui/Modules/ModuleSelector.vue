@@ -33,9 +33,7 @@
                 :aria-label="'选择 ' + entry.shortName"
                 :disabled="busy || entry.status === 'unsupported'"
               />
-              <span>{{ entry.shortName }}</span
-              ><small v-if="entry.status === 'unsupported'">待支持</small
-              ><small v-else-if="entry.status === 'limited'">有限制</small>
+              <span>{{ entry.shortName }}</span>
             </label>
           </div>
         </details>
@@ -75,7 +73,6 @@
             <tr>
               <th>选择</th>
               <th>模块</th>
-              <th>状态</th>
               <slot name="head" />
             </tr>
           </thead>
@@ -93,15 +90,6 @@
               <td>
                 <strong>{{ entry.shortName }}</strong
                 ><small>CP {{ entry.release }}</small>
-              </td>
-              <td>
-                {{
-                  entry.status === 'limited'
-                    ? '有限制'
-                    : entry.status === 'unsupported'
-                      ? '待支持'
-                      : '可配置'
-                }}
               </td>
               <slot name="row" :entry="entry" />
             </tr>
