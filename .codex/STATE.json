@@ -2,25 +2,25 @@
   "_comment": "本项目单一事实源。Codex 与评审方通过此文件握手，禁止手改 stage。",
   "protocolVersion": "1.1",
   "project": "autosar-bsw-config-tool",
-  "stage": "PHASE-22",
-  "stageName": "B2 批次一：4.2.2 规范原文核对 + SYMBOLIC 语义补齐 + 60 模块逐项资格化",
+  "stage": "PHASE-23",
+  "stageName": "EasySAR 吸收批次二：生成目录策略 + 芯片扩展 + 工程筛选分页 + 顺序管理",
   "task": {
-    "id": "TASK-022",
-    "title": "功能补全批次一：多实例列表视图(G31) + 多值参数增删行(G32) + 进制切换(G33) + 参考数据导入入口预留(G38 最小版)",
-    "status": "SUBMITTED",
+    "id": "TASK-023",
+    "title": "EasySAR 吸收批次二：G34 生成目录策略 + G35 芯片扩展 + G36 工程筛选分页 + G37 顺序管理",
+    "status": "READY",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
-    "contractHash": "fc90f4dfcc0805a0c2339fd5134d6b38b17b3973ae496821b2d13517e659d18c",
+    "contractHash": "373008929144c2f730979fc45df35743956177fa91ab38442bc016e8c3b8721f",
     "contractHashAlg": "sha256(utf8-no-bom, LF)",
     "contractBoundBy": "WorkBuddy",
-    "contractBoundAt": "2026-11-06T21:45:00+08:00",
-    "reportPath": ".codex/reports/TASK-022-REPORT.md",
+    "contractBoundAt": "2026-11-09T13:50:00+08:00",
+    "reportPath": ".codex/reports/TASK-023-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
-    "createdAt": "2026-11-06T21:45:00+08:00",
-    "submittedAt": "2026-11-09T13:40:00+08:00",
+    "submissionCommit": null,
+    "createdAt": "2026-11-09T13:50:00+08:00",
+    "submittedAt": null,
     "approvedAt": null,
     "designPath": "docs/product-design/02-TECH-DESIGN.md"
   },
@@ -32,14 +32,6 @@
     "BLOCKED": "等待人工决策"
   },
   "queue": [
-    {
-      "taskId": "TASK-023",
-      "title": "EasySAR 吸收批次二：生成目录策略(G34)+芯片扩展(G35)+工程列表筛选分页(G36)+顺序管理(G37)",
-      "stage": "PHASE-23（TASK-022 之后）",
-      "contractPath": ".codex/tasks/TASK-023-CONTRACT.md",
-      "contractHash": "恢复下发时以归档文件重算为准",
-      "note": "需求源 G34-G37（EasySAR 吸收）。A(G34)+D(G37) 最低必交，B/C 可顺延。禁止提前实施。"
-    },
     {
       "taskId": "TASK-025",
       "title": "参考数据解析展示批次：DBC(首批)→LDF→CDD(如实降级批)",
@@ -437,20 +429,35 @@
           "reviewPath": ".codex/review/TASK-021-ROUND-0-REVIEW.md"
         }
       ]
+    },
+    {
+      "taskId": "TASK-022",
+      "finalStatus": "APPROVED",
+      "closedAt": "2026-11-09T13:50:00+08:00",
+      "submissionCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
+      "note": "功能补全批次一 round 0 APPROVED(0/0/3)。实现者=WorkBuddy 代 Codex(用户授权), 评审同主体已披露并按独立标准执行。G31 列表视图+列设置(容器分组表格/排序/分页20/勾选批量/行打开, 视图层); G32 多值增删行(解除仅单值限制; value 数组语义, pre-G32 零 diff 由 346 基线实证; 三形态归一; ARXML 逐行展开; 约束报行号; C 逐行字段; store edit 可撤销); G33 TASK-021 已实现仅验收; G38 最小版(独立键 autosar-reference-data, 嗅探识别 DBC/LDF/CDD, 存档≤8MB+下载+删除, 解析展示后置明示)。验证: build 13.74s; 26/26 守卫; 353/354→editor-ui 撤销隔离 9/9(既定口径); +8 新用例全过。🟡: 列设置不持久化/remove 无 lower 强制/撤销粒度整次 edit。queue 剩 025→026→020。",
+      "rounds": [
+        {
+          "round": 0,
+          "verdict": "APPROVED",
+          "reviewedCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
+          "reviewPath": ".codex/review/TASK-022-ROUND-0-REVIEW.md"
+        }
+      ]
     }
   ],
   "lastReview": {
-    "reviewer": "WorkBuddy",
-    "taskId": "TASK-021",
+    "reviewer": "WorkBuddy(代)",
+    "taskId": "TASK-022",
     "round": 0,
-    "reviewedCommit": "c9e35798380e55064877d166cf914258ac51f70e",
-    "at": "2026-11-06T17:55:00+08:00",
+    "reviewedCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
+    "at": "2026-11-09T13:50:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
     "minors": 3,
-    "reviewPath": ".codex/review/TASK-021-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-021-ROUND-0-REVIEW.md"
+    "reviewPath": ".codex/review/TASK-022-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-022-ROUND-0-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
