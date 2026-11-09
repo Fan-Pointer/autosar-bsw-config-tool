@@ -219,19 +219,20 @@ describe('screenshot replica interactions', () => {
     expect(store.activeUuid).toBe(uuid);
   });
 
-  it('renders the four fixed tree branches with honest empty states (G41)', async () => {
+  it('renders three peer placeholder branches that expand to blank (G41, user 2026-11-09)', async () => {
     const { wrapper } = await workspace();
     const branches = wrapper.findAll('.fixed-branch');
-    expect(branches).toHaveLength(4);
+    // 用户裁定：AUTOSAR 文件节点去掉；RTE / 输入文件 / 输出文件 与 BSW Modules 同级。
+    expect(branches).toHaveLength(3);
     expect(branches.map((item) => item.get('summary').text())).toEqual([
       expect.stringContaining('RTE'),
-      expect.stringContaining('AUTOSAR 文件'),
-      expect.stringContaining('输出文件'),
       expect.stringContaining('输入文件'),
+      expect.stringContaining('输出文件'),
     ]);
-    // 每个空分支给出准确说明，不伪装成有内容的节点。
-    expect(branches[0].text()).toContain('暂未接入');
-    expect(branches[3].text()).toContain('参考数据');
+    // 展开后为空白，不再写说明文字。
+    for (const branch of branches) expect(branch.text()).toBe(branch.get('summary').text());
+    // 模块管理入口已从左侧树移除（工程右键仍可打开）。
+    expect(wrapper.text()).not.toContain('模块管理');
   });
 
   it('removes empty placeholder actions, keeps real output guards and opens the module dialog', async () => {

@@ -4,10 +4,9 @@
       :disabled="!store.config || store.isLoading || store.isImporting"
       title="确认当前配置集中尚未配置的必填参数，仅采用定义中的 DEFAULT-VALUE，保留已填写值"
       @click="confirm"
-      >一键确认建议值</el-button
+      >填充默认值</el-button
     >
     <span v-if="result" role="status">{{ result }}</span>
-    <small v-else>仅确认当前配置集的必填默认值，可一次撤销</small>
   </section>
 </template>
 

@@ -145,11 +145,7 @@
             }}</span
             ><span>⌃</span>
           </div>
-          <details open>
-            <summary class="module-management" @dblclick="showModules = true">
-              <span class="folder">⚙</span>模块管理
-            </summary>
-            <details open class="module-group">
+          <details open class="module-group">
               <summary><span class="folder">▱</span>BSW Modules</summary>
               <button
                 v-for="item in includedModules"
@@ -167,11 +163,9 @@
                 <span class="module-symbol">M</span>{{ item.shortName
                 }}<small v-if="!store.activeProject"> · {{ item.version }}</small>
               </button>
-            </details>
           </details>
           <details v-for="branch in fixedBranches" :key="branch.name" class="fixed-branch">
             <summary><span class="folder">▱</span>{{ branch.name }}</summary>
-            <p class="branch-note">{{ branch.note }}</p>
           </details>
           <button v-if="!store.config" class="empty-project" @click.stop="showSets = true">
             暂无配置集 · 点击创建
@@ -649,24 +643,8 @@ watch(
 );
 /** Four fixed tree branches (G41). They are entry points: each states its real status
  * instead of pretending to hold data. */
-const fixedBranches = [
-  {
-    name: 'RTE',
-    note: 'RTE 端口与运行实体配置暂未接入：当前版本只提供该入口。',
-  },
-  {
-    name: 'AUTOSAR 文件',
-    note: '通过「导入 → ARXML」加载的模块配置会进入对应模块；本节点仅作入口说明。',
-  },
-  {
-    name: '输出文件',
-    note: '生成的 C 配置文件在「模块右键 → 代码生成」或工具栏生成后查看与下载。',
-  },
-  {
-    name: '输入文件',
-    note: '参考数据（DBC / LDF / CDD）在起始页「参考数据」入口导入，解析展示待后续版本。',
-  },
-] as const;
+/** 与 BSW Modules 同级的三条占位分支（用户裁定：展开为空白，不再写说明）。 */
+const fixedBranches = [{ name: 'RTE' }, { name: '输入文件' }, { name: '输出文件' }] as const;
 const includedModules = computed(() =>
   store.modules.filter((item) =>
     store.activeProject
@@ -802,7 +780,7 @@ function operationEnabled(operation: 'generation' | 'validation'): boolean {
 }
 function tabLabel(uuid: string): string {
   const set = store.configSets.find((item) => item.uuid === uuid);
-  return set ? set.moduleRef + '(' + set.name + ')' : '';
+  return set ? set.moduleRef : '';
 }
 function tabTooltip(uuid: string): string {
   const set = store.configSets.find((item) => item.uuid === uuid);
@@ -1281,11 +1259,9 @@ function stopResize(): void {
 .project-tree details:not([open]) > summary::after {
   content: '⌄';
 }
-.module-management {
+.module-group > summary,
+.fixed-branch > summary {
   padding-left: 32px;
-}
-.module-group > summary {
-  padding-left: 53px;
 }
 .module-node {
   width: 100%;
@@ -1408,15 +1384,9 @@ function stopResize(): void {
   flex: 1;
   background: var(--color-panel);
 }
-.fixed-branch > summary {
-  padding-left: 74px;
+.fixed-branch > summary,
+.module-group > summary {
   cursor: pointer;
-}
-.branch-note {
-  margin: 2px 0 6px 26px;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--color-muted);
 }
 .crumb-ok {
   margin-left: 6px;

@@ -3,8 +3,8 @@
     <RecoveryPanel />
     <section class="catalog-hero" aria-labelledby="catalog-title">
       <div>
-        <p class="catalog-wordmark">OneSAR <span>汽车软件开发平台</span></p>
-        <h1 id="catalog-title">让每一项配置，<br />清晰有序。</h1>
+        <p class="catalog-wordmark">汽车软件开发平台</p>
+        <h1 id="catalog-title">让每一项配置，清晰有序。</h1>
         <p class="catalog-summary">
           从模块定义到工程配置，将编辑、校验与代码生成<br
             class="desktop-break"
@@ -71,7 +71,6 @@
     <section class="catalog-directory" aria-labelledby="directory-title">
       <div class="section-heading">
         <h2 id="directory-title">工具与服务</h2>
-        <span>一个起点，有序开展</span>
       </div>
       <div class="catalog-grid">
         <article class="catalog-config">
@@ -127,7 +126,6 @@
           本机工程
           <small>{{ store.projects.length + (store.unassignedSets.length ? 1 : 0) }}</small>
         </h2>
-        <span>保存在当前浏览器</span>
       </div>
       <p
         v-if="navigationError || store.error || store.projectError"
@@ -240,27 +238,20 @@ async function removeProject(uuid: string, name: string): Promise<void> {
   gap: 32px;
 }
 .catalog-wordmark {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 12px;
-  color: #1558c4;
-  font-size: 18px;
-  font-weight: 700;
-}
-.catalog-wordmark span {
-  padding-left: 12px;
-  border-left: 1px solid #c5d3e5;
+  margin: 0 0 14px;
   color: #60728a;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 h1 {
-  font-size: clamp(32px, 3.2vw, 46px);
+  font-size: clamp(30px, 2.8vw, 40px);
   font-weight: 650;
-  line-height: 1.28;
-  letter-spacing: -0.035em;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
   margin: 0;
+  max-width: 15em;
+  text-wrap: balance;
 }
 .catalog-summary {
   color: #607189;
