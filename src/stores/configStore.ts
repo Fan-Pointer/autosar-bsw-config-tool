@@ -32,6 +32,8 @@ import {
 } from '@/core/io/ConfigJson';
 import { exportArxml, importArxml } from '@/core/io/Arxml';
 import { evaluateParameterStates } from '@/core/constraint/ParameterStates';
+import { exportProjectArxml } from '@/core/io/Arxml';
+import { buildProjectPackage, type ProjectPackageManifest } from '@/core/io/ProjectPackage';
 import { exportCsv } from '@/core/io/Csv';
 import { planImport } from '@/core/io/ImportPlan';
 import type {
@@ -2061,6 +2063,39 @@ export const useConfigStore = defineStore('config', () => {
       : exportCsv(config.value, module.value, check);
   }
 
+  /** 工程级导出（G44）：当前工程的全部配置集与对应定义；无工程时退化为当前配置集。 */
+  function projectExportEntries(): { config: ConfigInstance; module: BswmdModule }[] {
+    const project = activeProject.value;
+    const sets = project
+      ? configSets.value.filter((set) => project.setUuids.includes(set.uuid))
+      : configSets.value.filter((set) => set.uuid === activeUuid.value);
+    return sets.flatMap((set) => {
+      const definition = modules.value.find(
+        (item) => item.shortName === set.moduleRef && item.version === set.version
+      );
+      return definition ? [{ config: set, module: definition }] : [];
+    });
+  }
+
+  /** 工程级 ARXML 内容（多模块合一文档）。 */
+  function exportProjectArxmlContent(): string {
+    return exportProjectArxml(projectExportEntries());
+  }
+
+  /** 工程包内容（zip：工程 ARXML + 模块 ARXML + C 代码 + manifest）。 */
+  async function exportProjectPackageContent(): Promise<{
+    zip: Uint8Array;
+    manifest: ProjectPackageManifest;
+  }> {
+    const project = activeProject.value;
+    return buildProjectPackage({
+      projectName: project?.name ?? config.value?.name ?? '本机配置集',
+      autosarVersion: project?.autosarVersion ?? module.value?.version ?? '',
+      chip: project?.chip.family ?? '',
+      entries: projectExportEntries(),
+    });
+  }
+
   return {
     projects,
     activeProject,
@@ -2071,6 +2106,9 @@ export const useConfigStore = defineStore('config', () => {
     createProject,
     updateProject,
     duplicateProject,
+    projectExportEntries,
+    exportProjectArxmlContent,
+    exportProjectPackageContent,
     openProject,
     removeProject,
     getOutputCheck,

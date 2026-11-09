@@ -305,7 +305,10 @@ describe('import preview UI and project menus', () => {
       await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
       button('导出›').click();
       await flushPromises();
-      expect(document.querySelectorAll('.io-submenu button')).toHaveLength(3);
+      // G44：导出子菜单在三种单模块格式外新增两项工程级导出。
+      expect(document.querySelectorAll('.io-submenu button')).toHaveLength(5);
+      expect(document.querySelector('.io-submenu')!.textContent).toContain('工程 ARXML');
+      expect(document.querySelector('.io-submenu')!.textContent).toContain('工程包');
       button(format).click();
       await flushPromises();
     }

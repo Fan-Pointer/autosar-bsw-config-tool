@@ -169,7 +169,53 @@ export function exportArxml(
     lastModified: String(checked.lastModified),
     name: checked.name,
   });
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<AUTOSAR xmlns="${AUTOSAR_NAMESPACE}"><AR-PACKAGES><AR-PACKAGE><SHORT-NAME>Config</SHORT-NAME><ELEMENTS><ECUC-MODULE-CONFIGURATION-VALUES UUID="${escapeXml(checked.uuid)}">${tag('SHORT-NAME', module.shortName)}${metadata}<DEFINITION-REF DEST="ECUC-MODULE-DEF">${escapeXml(module.definitionPath ?? `/AUTOSAR/EcucDefs/${module.shortName}`)}</DEFINITION-REF><IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT><CONTAINERS>${containers(checked.containers, module.containers)}</CONTAINERS></ECUC-MODULE-CONFIGURATION-VALUES></ELEMENTS></AR-PACKAGE></AR-PACKAGES></AUTOSAR>`;
+  return arxmlDocument([moduleValuesXml(checked, module, metadata, containers)]);
+}
+
+/** 单个模块的 ECUC-MODULE-CONFIGURATION-VALUES 段（G44 工程 ARXML 复用）。 */
+function moduleValuesXml(
+  checked: ConfigInstance,
+  module: BswmdModule,
+  metadata: string,
+  containersXml: (list: ConfigContainer[], definitions: BswmdContainer[]) => string
+): string {
+  return `<ECUC-MODULE-CONFIGURATION-VALUES UUID="${escapeXml(checked.uuid)}">${tag('SHORT-NAME', module.shortName)}${metadata}<DEFINITION-REF DEST="ECUC-MODULE-DEF">${escapeXml(module.definitionPath ?? `/AUTOSAR/EcucDefs/${module.shortName}`)}</DEFINITION-REF><IMPLEMENTATION-CONFIG-VARIANT>VARIANT-PRE-COMPILE</IMPLEMENTATION-CONFIG-VARIANT><CONTAINERS>${containersXml(checked.containers, module.containers)}</CONTAINERS></ECUC-MODULE-CONFIGURATION-VALUES>`;
+}
+
+/** 把若干模块段组装为一个 AUTOSAR 文档（单模块与工程级共用同一外壳）。 */
+function arxmlDocument(modules: string[]): string {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<AUTOSAR xmlns="${AUTOSAR_NAMESPACE}"><AR-PACKAGES><AR-PACKAGE><SHORT-NAME>Config</SHORT-NAME><ELEMENTS>${modules.join('')}</ELEMENTS></AR-PACKAGE></AR-PACKAGES></AUTOSAR>`;
+}
+
+/**
+ * 工程级 ARXML：把该工程的多个模块配置合入同一文档（G44 / FR-28）。
+ * 每个模块先过自己的输出闸门；任一模块未就绪则整体拒绝，并指明模块名。
+ * @param entries 工程的配置集与对应定义。
+ * @returns 单文档多模块 ARXML；失败时抛出列出模块与原因的聚合错误。
+ */
+export function exportProjectArxml(
+  entries: { config: ConfigInstance; module: BswmdModule }[]
+): string {
+  if (!entries.length) throw new Error('工程内没有可导出的配置集');
+  const failures: string[] = [];
+  const modules: string[] = [];
+  for (const { config, module } of entries) {
+    try {
+      // 单模块导出已内含输出闸门与定义路径校验；失败信息聚合后整体拒绝。
+      const single = exportArxml(config, module);
+      const start = single.indexOf('<ECUC-MODULE-CONFIGURATION-VALUES');
+      const end = single.lastIndexOf('</ECUC-MODULE-CONFIGURATION-VALUES>');
+      if (start < 0 || end < 0) throw new Error('模块配置段缺失');
+      modules.push(single.slice(start, end + '</ECUC-MODULE-CONFIGURATION-VALUES>'.length));
+    } catch (reason) {
+      const message = reason instanceof Error ? reason.message : String(reason);
+      const firstLine = message.split('\n').filter(Boolean).slice(0, 2).join('；');
+      failures.push(`${module.shortName}（${firstLine}）`);
+    }
+  }
+  if (failures.length)
+    throw new Error(`以下模块未通过输出校验，未生成工程 ARXML：\n${failures.join('\n')}`);
+  return arxmlDocument(modules);
 }
 
 function nodes(parent: XmlNode, key: string): XmlNode[] {

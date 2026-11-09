@@ -448,6 +448,14 @@
             >
               {{ format === 'csv' ? 'CSV（DTC 列表）' : format.toUpperCase() }}
             </button>
+            <template v-if="item.action === 'export'">
+              <button role="menuitem" @click="projectAction('export-project-arxml')">
+                工程 ARXML（全部模块）
+              </button>
+              <button role="menuitem" @click="projectAction('export-project-package')">
+                工程包（ZIP：ARXML+C）
+              </button>
+            </template>
           </div>
         </span>
       </template>
@@ -792,6 +800,15 @@ function reopenImported(): void {
   if (store.activeUuid && !opened.value.includes(store.activeUuid))
     opened.value.push(store.activeUuid);
 }
+/** 统一下载入口：立即 revoke，避免大文件长期占内存。 */
+function downloadBlob(name: string, blob: Blob): void {
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = name;
+  anchor.click();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
 function ioAction(action: string, format: ExportFormat): void {
   projectMenu.value = undefined;
   moduleMenu.value = undefined;
@@ -962,6 +979,30 @@ async function projectAction(action?: string): Promise<void> {
     } catch (reason) {
       ElMessage.error(reason instanceof Error ? reason.message : String(reason));
     }
+  }
+  if (action === 'export-project-arxml' || action === 'export-project-package') {
+    const base = (store.activeProject?.name ?? store.config?.name ?? '工程').replace(
+      /[\\/:*?"<>|]/g,
+      '_'
+    );
+    try {
+      outputError.value = '';
+      if (action === 'export-project-arxml') {
+        downloadBlob(`${base}.arxml`, new Blob([store.exportProjectArxmlContent()], { type: 'application/xml;charset=utf-8' }));
+        ElMessage.success('工程 ARXML 已导出');
+      } else {
+        const { zip, manifest } = await store.exportProjectPackageContent();
+        const bytes = new Uint8Array(zip);
+        downloadBlob(`${base}.zip`, new Blob([bytes], { type: 'application/zip' }));
+        ElMessage.success(
+          `工程包已导出：${manifest.modules.length} 个模块` +
+            (manifest.skipped.length ? `，${manifest.skipped.length} 个模块跳过 C 生成` : '')
+        );
+      }
+    } catch (reason) {
+      showOutputFailure(reason);
+    }
+    return;
   }
   if (action === 'modules') showModules.value = true;
   if (action === 'validate' && operationEnabled('validation')) validate();
