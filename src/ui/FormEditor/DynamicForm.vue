@@ -95,7 +95,7 @@
               :id="'input-' + param.uuid"
               :aria-label="param.shortName"
               :model-value="hexDrafts[param.uuid] ?? hexValue(param)"
-              :disabled="readonly || param.readOnly || !enabled(param)"
+              :disabled="rowDisabled(param)"
               @update:model-value="editHex(param, $event)"
             />
             <el-input
@@ -103,7 +103,7 @@
               :id="'input-' + param.uuid"
               :aria-label="param.shortName"
               :model-value="String(rawValue(param) ?? '')"
-              :disabled="readonly || param.readOnly || !enabled(param)"
+              :disabled="rowDisabled(param)"
               @update:model-value="editInvalidNumeric(param, $event)"
             />
             <el-input-number
@@ -116,14 +116,14 @@
               :step="param.type === 'FLOAT' ? 0.1 : 1"
               :precision="param.type === 'INTEGER' ? 0 : undefined"
               :controls="false"
-              :disabled="readonly || param.readOnly || !enabled(param)"
+              :disabled="rowDisabled(param)"
               @update:model-value="onValueChange(param.uuid, $event)"
             />
             <select
               class="radix"
               :aria-label="param.shortName + ' 进制'"
               :value="radices[param.uuid] ?? 'DEC'"
-              :disabled="readonly || param.readOnly || !enabled(param)"
+              :disabled="rowDisabled(param)"
               @change="radices[param.uuid] = ($event.target as HTMLSelectElement).value"
             >
               <option>DEC</option>
@@ -136,7 +136,7 @@
             :aria-label="param.shortName"
             :model-value="stringValue(param)"
             placeholder="请选择"
-            :disabled="readonly || param.readOnly || !enabled(param)"
+            :disabled="rowDisabled(param)"
             @update:model-value="onValueChange(param.uuid, $event)"
           >
             <el-option
@@ -151,7 +151,7 @@
             :id="'input-' + param.uuid"
             :aria-label="param.shortName"
             :model-value="rawValue(param) === true"
-            :disabled="readonly || param.readOnly || !enabled(param)"
+            :disabled="rowDisabled(param)"
             @update:model-value="onValueChange(param.uuid, $event)"
           />
           <el-input
@@ -159,7 +159,7 @@
             :id="'input-' + param.uuid"
             :aria-label="param.shortName"
             :model-value="stringValue(param)"
-            :disabled="readonly || param.readOnly || !enabled(param)"
+            :disabled="rowDisabled(param)"
             @update:model-value="onValueChange(param.uuid, $event)"
           />
         </div>
@@ -170,6 +170,9 @@
           fieldErrors[param.uuid]
         }}</span>
         </template>
+        <p v-if="rowNotice(param)" class="row-notice" role="note" data-row-notice>
+          {{ rowNotice(param) }}
+        </p>
       </div>
     </section>
     <section v-if="container.references.length" class="reference-section" aria-label="引用">
@@ -349,6 +352,8 @@ const props = withDefaults(
     danglingReferences?: string[];
     configuredFields?: Record<string, boolean>;
     fieldErrors?: Record<string, string>;
+    /** G39: per-row disabled state + business notice, computed by the store. */
+    parameterStates?: Record<string, { disabled?: boolean; notice?: string }>;
   }>(),
   {
     configData: () => ({}),
@@ -492,6 +497,19 @@ function rawValue(parameter: BswmdParameter): unknown {
     ? props.configData[parameter.uuid]
     : parameter.defaultValue;
 }
+/** G39: a row is locked when read-only, when the optional parameter is unticked,
+ * or when the declared row-state channel disables it. */
+function rowDisabled(parameter: BswmdParameter): boolean {
+  return (
+    props.readonly ||
+    Boolean(parameter.readOnly) ||
+    !enabled(parameter) ||
+    Boolean(props.parameterStates?.[parameter.uuid]?.disabled)
+  );
+}
+function rowNotice(parameter: BswmdParameter): string | undefined {
+  return props.parameterStates?.[parameter.uuid]?.notice;
+}
 function enabled(parameter: BswmdParameter): boolean {
   // Suggested defaults are not enabled optional fields until the user confirms them.
   if (
@@ -623,6 +641,15 @@ defineExpose({ resetForm, getFormData });
   min-height: 53px;
   gap: 8px;
   padding-left: 16px;
+}
+.row-notice {
+  grid-column: 1 / -1;
+  margin: -4px 0 6px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+.row-notice::before {
+  content: 'ⓘ ';
 }
 .parameter-name {
   border: 0;

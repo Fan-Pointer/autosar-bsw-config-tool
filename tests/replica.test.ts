@@ -222,9 +222,10 @@ describe('screenshot replica interactions', () => {
   it('removes empty placeholder actions, keeps real output guards and opens the module dialog', async () => {
     const { wrapper } = await workspace();
     await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
-    expect(wrapper.findAll('.project-menu [role=menuitem]')).toHaveLength(6);
+    // 需求 v3.0 §3.2：菜单含 新建工程 + 工程管理（编辑/复制/详情）+ 模块管理 + 验证 + 生成 + 导入 + 导出 + 关闭。
+    expect(wrapper.findAll('.project-menu [role=menuitem]')).toHaveLength(8);
     expect(wrapper.findAll('.project-menu button[disabled]')).toHaveLength(1);
-    expect(wrapper.get('.project-menu').text()).not.toContain('工程管理');
+    expect(wrapper.get('.project-menu').text()).toContain('工程管理');
     expect(wrapper.get('.project-menu').text()).not.toContain('自动计算');
     expect(wrapper.findAll('.project-folder')).toHaveLength(0);
     await wrapper

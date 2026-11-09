@@ -2,6 +2,8 @@
 export interface ProjectMetadata {
   projectUuid: string;
   name: string;
+  /** Optional project description (0-100 chars, G40). */
+  description?: string;
   autosarVersion: string;
   chip: { family: string; note?: string };
   moduleShortNames: string[];
@@ -9,9 +11,12 @@ export interface ProjectMetadata {
   /** Detached records remain in the library; re-adding may recover these unassigned records. */
   detachedSetUuids?: string[];
   createdAt: string;
+  /** Last metadata/config change timestamp (G40); absent on legacy records. */
+  updatedAt?: string;
 }
 export interface ProjectInput {
   name: string;
+  description?: string;
   autosarVersion: string;
   chip: { family: string; note?: string };
   moduleShortNames: string[];
@@ -53,6 +58,10 @@ export function parseProjects(raw: unknown): ProjectMetadata[] {
         !p.detachedSetUuids.every((id) => typeof id === 'string'))
     )
       throw new Error('工程已移除模块关联无效');
+    if (p.description !== undefined && typeof p.description !== 'string')
+      throw new Error('工程描述格式无效');
+    if (p.updatedAt !== undefined && typeof p.updatedAt !== 'string')
+      throw new Error('工程更新时间格式无效');
     if (ids.has(p.projectUuid as string)) throw new Error('工程 UUID 重复');
     ids.add(p.projectUuid as string);
     for (const id of p.setUuids as string[]) {

@@ -30,6 +30,7 @@ import {
   string,
 } from '@/core/io/ConfigJson';
 import { exportArxml, importArxml } from '@/core/io/Arxml';
+import { evaluateParameterStates } from '@/core/constraint/ParameterStates';
 import { exportCsv } from '@/core/io/Csv';
 import { planImport } from '@/core/io/ImportPlan';
 import type {
@@ -363,6 +364,18 @@ export const useConfigStore = defineStore('config', () => {
       })
     )
   );
+  /** G39: per-row disabled state + business notice for the selected container.
+   * Only declared sources (optional-not-confirmed, definition readOnly, module rules). */
+  const parameterStates = computed(() => {
+    const entry = selectedEntry.value;
+    if (!entry || !config.value || !module.value) return {};
+    return Object.fromEntries(
+      evaluateParameterStates(config.value, module.value, entry.container.uuid).map((state) => [
+        state.definitionRef,
+        { disabled: state.disabled, notice: state.notice },
+      ])
+    );
+  });
   const referenceData = computed(() =>
     Object.fromEntries(
       [...(selectedEntry.value?.container.references ?? [])].map(([id, reference]) => [
@@ -860,6 +873,100 @@ export const useConfigStore = defineStore('config', () => {
     } finally {
       projectBusy.value = false;
     }
+  }
+
+  /** Edit project metadata (G40). AUTOSAR version is intentionally immutable — changing it
+   * would invalidate the module definitions and every stored configuration.
+   * @param projectUuid Project identity. @param patch Editable fields; description ≤ 100 chars.
+   * @returns Success; throws a readable error on invalid input or persistence failure.
+   */
+  async function updateProject(
+    projectUuid: string,
+    patch: { name?: string; description?: string; chip?: { family: string; note?: string } }
+  ): Promise<boolean> {
+    assertEditable();
+    assertWritable();
+    const project = projects.value.find((item) => item.projectUuid === projectUuid);
+    if (!project) throw new Error('工程不存在');
+    const name = patch.name?.trim() ?? project.name;
+    if (!name) throw new Error('请输入工程名称');
+    const description =
+      patch.description === undefined ? project.description : patch.description.trim();
+    if (description !== undefined && description.length > 100)
+      throw new Error('工程描述不能超过 100 字');
+    const chip = patch.chip
+      ? { family: patch.chip.family, note: patch.chip.note?.trim() }
+      : project.chip;
+    if (!chip.family) throw new Error('请选择芯片型号');
+    const next = projects.value.map((item) =>
+      item.projectUuid === projectUuid
+        ? { ...item, name, description, chip, updatedAt: new Date().toISOString() }
+        : item
+    );
+    // Keep the derived set names in sync only when they still follow the "工程名 · 模块" pattern.
+    const prefix = project.name + ' · ';
+    const renamedSets = configSets.value.map((set) =>
+      project.setUuids.includes(set.uuid) && set.name?.startsWith(prefix)
+        ? { ...set, name: name + ' · ' + set.name.slice(prefix.length) }
+        : set
+    );
+    await writeProjectIndex({ schemaVersion: 1, projects: next });
+    projects.value = next;
+    configSets.value = renamedSets;
+    changed();
+    if (!(await saveConfig())) throw new Error(error.value ?? '配置保存失败');
+    return true;
+  }
+
+  /** Duplicate a project together with its configuration data (G40).
+   * Container instance UUIDs are regenerated so both projects keep independent
+   * selection/navigation targets; definition UUIDs stay untouched.
+   * @param projectUuid Source project. @returns The new project UUID; throws when missing.
+   */
+  async function duplicateProject(projectUuid: string): Promise<string> {
+    assertEditable();
+    assertWritable();
+    const source = projects.value.find((item) => item.projectUuid === projectUuid);
+    if (!source) throw new Error('工程不存在');
+    if (projectBusy.value) throw new Error('工程操作进行中，请稍后');
+    const name = `${source.name} 副本`;
+    const nextUuid = generateUUID();
+    const renameContainers = (containers: ConfigContainer[]): void => {
+      for (const container of containers) {
+        container.uuid = generateUUID();
+        renameContainers(container.subContainers);
+      }
+    };
+    const copies = configSets.value
+      .filter((set) => source.setUuids.includes(set.uuid))
+      .map((set) => {
+        const copy = cloneData(set);
+        copy.uuid = generateUUID();
+        copy.createdAt = Date.now();
+        copy.lastModified = Date.now();
+        const prefix = source.name + ' · ';
+        copy.name =
+          set.name?.startsWith(prefix) ? name + ' · ' + set.name.slice(prefix.length) : set.name;
+        renameContainers(copy.containers);
+        return copy;
+      });
+    const now = new Date().toISOString();
+    const project: ProjectMetadata = {
+      ...cloneData(source),
+      projectUuid: nextUuid,
+      name,
+      setUuids: copies.map((copy) => copy.uuid),
+      detachedSetUuids: [],
+      createdAt: now,
+      updatedAt: now,
+    };
+    const nextProjects = [...projects.value, project];
+    await writeProjectIndex({ schemaVersion: 1, projects: nextProjects });
+    projects.value = nextProjects;
+    configSets.value.push(...copies);
+    // Persist the copied configurations in the same library write path used elsewhere.
+    await saveConfig();
+    return nextUuid;
   }
 
   /** Apply an explicitly confirmed module selection, retaining removed configurations.
@@ -1901,6 +2008,8 @@ export const useConfigStore = defineStore('config', () => {
     projectError,
     projectBusy,
     createProject,
+    updateProject,
+    duplicateProject,
     openProject,
     removeProject,
     getOutputCheck,
@@ -1962,6 +2071,7 @@ export const useConfigStore = defineStore('config', () => {
     selectedEntry,
     selectedKey,
     parameterData,
+    parameterStates,
     referenceData,
     referenceOptions,
     isDirty,

@@ -120,6 +120,11 @@
       </button>
     </div>
     <ProjectWizard v-model="showProjectWizard" />
+    <ProjectSettingsDialog
+      v-model="showSettings"
+      :mode="settingsMode"
+      :project="store.activeProject ?? undefined"
+    />
     <RecoveryPanel />
     <el-alert v-if="store.error" :title="store.error" type="error" :closable="false" />
     <main class="workspace-main">
@@ -300,6 +305,7 @@
                 :dangling-references="store.danglingReferences"
                 :selected-field-uuid="helpFieldUuid ?? store.selectedFieldUuid"
                 :configured-fields="configuredFields"
+                :parameter-states="store.parameterStates"
                 :field-errors="selectedFieldErrors"
                 :readonly="store.isImporting || store.isLoading"
                 @parameter-change="store.setParameterValue"
@@ -413,7 +419,7 @@
             role="menuitem"
             :disabled="item.action === 'export' && !store.config"
             :aria-expanded="
-              item.action === 'import' || item.action === 'export'
+              item.action === 'import' || item.action === 'export' || Boolean(item.children)
                 ? projectSubmenu === item.action
                 : undefined
             "
@@ -422,6 +428,20 @@
             <span>{{ item.label }}</span
             ><span v-if="item.submenu">›</span>
           </button>
+          <div
+            v-if="projectSubmenu === item.action && item.children"
+            class="io-submenu"
+            role="menu"
+          >
+            <button
+              v-for="child in item.children"
+              :key="child.action"
+              role="menuitem"
+              @click="projectAction(child.action)"
+            >
+              {{ child.label }}
+            </button>
+          </div>
           <div
             v-if="
               projectSubmenu === item.action &&
@@ -479,7 +499,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import {
   HomeFilled,
   CircleCheck,
@@ -502,6 +522,7 @@ import ContainerNavigator from '@/ui/ConfigTree/ContainerNavigator.vue';
 import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
 import ProjectWizard from '@/ui/Projects/ProjectWizard.vue';
+import ProjectSettingsDialog from '@/ui/Projects/ProjectSettingsDialog.vue';
 import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 import ContainerActions from '@/ui/ConfigTree/ContainerActions.vue';
 import ContainerContextMenu from '@/ui/ConfigTree/ContainerContextMenu.vue';
@@ -534,6 +555,8 @@ watch(
 const generatedFiles = ref<GeneratedFile[]>([]),
   showGenerated = ref(false);
 const showProjectWizard = ref(false);
+const showSettings = ref(false);
+const settingsMode = ref<'edit' | 'detail'>('edit');
 const showSets = ref(false),
   showModules = ref(false),
   showValidation = ref(false),
@@ -640,8 +663,19 @@ const breadcrumb = computed(() => {
   return path;
 });
 const menuItems = [
-  { label: '模块管理', submenu: true, action: 'modules' },
+  { label: '新建工程', action: 'new-project' },
   { separator: true },
+  {
+    label: '工程管理',
+    submenu: true,
+    action: 'project-manage',
+    children: [
+      { label: '编辑工程', action: 'edit-project' },
+      { label: '复制工程', action: 'duplicate-project' },
+      { label: '工程详情', action: 'project-detail' },
+    ],
+  },
+  { label: '模块管理', submenu: true, action: 'modules' },
   { label: '代码验证', action: 'validate' },
   { label: '代码生成', action: 'generate' },
   { label: '导入', submenu: true, action: 'import' },
@@ -873,11 +907,42 @@ async function openProjectMenu(event: MouseEvent | KeyboardEvent): Promise<void>
   }
 }
 async function projectAction(action?: string): Promise<void> {
-  if (action === 'import' || action === 'export') {
+  if (action === 'import' || action === 'export' || action === 'project-manage') {
     projectSubmenu.value = projectSubmenu.value === action ? undefined : action;
     return;
   }
   projectMenu.value = undefined;
+  if (action === 'new-project') showProjectWizard.value = true;
+  if (action === 'edit-project' || action === 'project-detail') {
+    if (!store.activeProject) {
+      ElMessage.warning('请先打开工程');
+      return;
+    }
+    settingsMode.value = action === 'edit-project' ? 'edit' : 'detail';
+    showSettings.value = true;
+  }
+  if (action === 'duplicate-project') {
+    if (!store.activeProject) {
+      ElMessage.warning('请先打开工程');
+      return;
+    }
+    const project = store.activeProject;
+    try {
+      await ElMessageBox.confirm(
+        `将连同配置数据一起复制为「${project.name} 副本」，是否继续？`,
+        '复制工程',
+        { type: 'info', confirmButtonText: '复制', cancelButtonText: '取消' }
+      );
+    } catch {
+      return;
+    }
+    try {
+      await store.duplicateProject(project.projectUuid);
+      ElMessage.success(`已复制为「${project.name} 副本」`);
+    } catch (reason) {
+      ElMessage.error(reason instanceof Error ? reason.message : String(reason));
+    }
+  }
   if (action === 'modules') showModules.value = true;
   if (action === 'validate' && operationEnabled('validation')) validate();
   if (action === 'generate' && operationEnabled('generation')) await generateCode();
