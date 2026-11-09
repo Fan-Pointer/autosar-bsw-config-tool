@@ -257,35 +257,8 @@
                 }}</span></template
               >
             </nav>
-            <nav
-              v-if="topContainers.length > 1"
-              class="top-container-tabs"
-              role="tablist"
-              aria-label="顶级容器"
-            >
-              <button
-                v-for="container in topContainers"
-                :key="container.uuid"
-                role="tab"
-                class="top-container-tab"
-                :class="{ active: store.selectedEntry?.container.uuid === container.uuid }"
-                :aria-selected="store.selectedEntry?.container.uuid === container.uuid"
-                @click="store.selectContainer(container.uuid)"
-              >
-                {{ container.shortName }}
-              </button>
-            </nav>
             <BatchEditPanel v-if="store.selectedContainerUuids.length > 1" />
             <template v-else-if="store.selectedEntry">
-              <div class="instance-name">
-                <label for="instance-name">实例名称</label
-                ><el-input
-                  id="instance-name"
-                  v-model="instanceNameDraft"
-                  @change="rename"
-                  @blur="rename(instanceNameDraft)"
-                />
-              </div>
               <ChoiceSelector />
               <div
                 v-if="store.childInstanceGroups.length"
@@ -566,14 +539,6 @@ import { theme, setTheme } from '@/ui/Theme/theme';
 const router = useRouter(),
   store = useConfigStore();
 useHistory();
-const instanceNameDraft = ref('');
-watch(
-  () => [store.selectedEntry?.container.uuid, store.selectedEntry?.container.shortName],
-  () => {
-    instanceNameDraft.value = store.selectedEntry?.container.shortName ?? '';
-  },
-  { immediate: true }
-);
 const generatedFiles = ref<GeneratedFile[]>([]),
   showGenerated = ref(false);
 const showProjectWizard = ref(false);
@@ -669,8 +634,6 @@ watch(
     helpFieldUuid.value = undefined;
   }
 );
-/** G41: L2 top-level container tabs come from the instance tree, not a second model. */
-const topContainers = computed(() => store.config?.containers ?? []);
 /** Four fixed tree branches (G41). They are entry points: each states its real status
  * instead of pretending to hold data. */
 const fixedBranches = [
@@ -869,16 +832,6 @@ async function addFirst(uuid: string): Promise<void> {
     await store.saveConfig();
   } catch (reason) {
     ElMessage.error(String(reason));
-  }
-}
-function rename(name: string): void {
-  if (name === store.selectedEntry?.container.shortName) return;
-  try {
-    store.renameContainer(name);
-  } catch (reason) {
-    ElMessage.error(reason instanceof Error ? reason.message : String(reason));
-  } finally {
-    instanceNameDraft.value = store.selectedEntry?.container.shortName ?? '';
   }
 }
 function openContextMenu(event: MouseEvent, target: ContainerContextTarget): void {
@@ -1410,33 +1363,8 @@ function stopResize(): void {
   flex: 1;
   background: var(--color-panel);
 }
-.top-container-tabs {
-  display: flex;
-  gap: 2px;
-  margin: 0 22px 0;
-  padding-bottom: 6px;
-  overflow-x: auto;
-  border-bottom: 1px solid var(--color-border);
-}
-.top-container-tab {
-  flex: 0 0 auto;
-  border: 1px solid transparent;
-  border-bottom: none;
-  background: transparent;
-  color: var(--color-muted);
-  font: inherit;
-  font-size: 13px;
-  padding: 5px 12px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.top-container-tab.active {
-  color: var(--color-accent);
-  border-color: var(--color-border);
-  background: var(--color-panel);
-  border-radius: 4px 4px 0 0;
-}
-.fixed-branch summary {
+.fixed-branch > summary {
+  padding-left: 32px;
   cursor: pointer;
 }
 .branch-note {
@@ -1481,21 +1409,6 @@ function stopResize(): void {
   color: var(--color-accent);
   border-color: var(--color-accent);
   background: var(--color-selected);
-}
-.instance-name {
-  height: 71px;
-  margin: 0 22px;
-  border-bottom: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: 52px;
-  padding-left: 48px;
-}
-.instance-name label {
-  flex-shrink: 0;
-}
-.instance-name .el-input {
-  width: 270px;
 }
 .empty-children {
   margin: 24px 38px 32px;

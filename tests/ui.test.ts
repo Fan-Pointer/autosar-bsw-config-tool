@@ -278,25 +278,17 @@ describe('TASK-003 user interactions', () => {
     return { store, wrapper, router };
   }
 
-  it('retains the instance name draft until change, persists it, and follows undo', async () => {
+  it('no longer exposes the instance name input (user request 2026-11-09) and still persists set names', async () => {
     const { store, wrapper } = await workspace();
     await store.createConfigSet('Rename verification');
     await flushPromises();
-    const original = store.selectedEntry!.container.shortName;
-    const input = wrapper.get<HTMLInputElement>('#instance-name');
-    input.element.value = 'RenamedInstance';
-    await input.trigger('input');
-    await flushPromises();
-    expect(input.element.value).toBe('RenamedInstance');
-    expect(store.selectedEntry!.container.shortName).toBe(original);
-    await input.trigger('blur');
-    await flushPromises();
-    expect(store.selectedEntry!.container.shortName).toBe('RenamedInstance');
+    // 用户 2026-11-09 裁定：去掉参数区「实例名称」整行。
+    expect(wrapper.find('#instance-name').exists()).toBe(false);
+    expect(store.selectedEntry).toBeTruthy();
     expect(await store.saveConfig()).toBe(true);
-    expect(JSON.stringify(local.saved.get('autosar-config-sets-v3'))).toContain('RenamedInstance');
-    await wrapper.get('[aria-label="撤销"]').trigger('click');
-    await flushPromises();
-    expect(input.element.value).toBe(original);
+    expect(JSON.stringify(local.saved.get('autosar-config-sets-v3'))).toContain(
+      'Rename verification'
+    );
   });
 
   it('shows a real create action in the empty workspace and opens a named set with the DTC guide', async () => {

@@ -170,9 +170,6 @@
           fieldErrors[param.uuid]
         }}</span>
         </template>
-        <p v-if="rowNotice(param)" class="row-notice" role="note" data-row-notice>
-          {{ rowNotice(param) }}
-        </p>
       </div>
     </section>
     <section v-if="container.references.length" class="reference-section" aria-label="引用">
@@ -507,9 +504,6 @@ function rowDisabled(parameter: BswmdParameter): boolean {
     Boolean(props.parameterStates?.[parameter.uuid]?.disabled)
   );
 }
-function rowNotice(parameter: BswmdParameter): string | undefined {
-  return props.parameterStates?.[parameter.uuid]?.notice;
-}
 function enabled(parameter: BswmdParameter): boolean {
   // Suggested defaults are not enabled optional fields until the user confirms them.
   if (
@@ -641,15 +635,6 @@ defineExpose({ resetForm, getFormData });
   min-height: 53px;
   gap: 8px;
   padding-left: 16px;
-}
-.row-notice {
-  grid-column: 1 / -1;
-  margin: -4px 0 6px;
-  font-size: 12px;
-  color: var(--color-muted);
-}
-.row-notice::before {
-  content: 'ⓘ ';
 }
 .parameter-name {
   border: 0;

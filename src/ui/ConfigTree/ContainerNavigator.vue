@@ -273,6 +273,9 @@ button {
   background: var(--color-error);
 }
 .tree-legend small {
-  width: 100%;
+  display: block;
+  flex: 1 0 100%;
+  margin-left: 0;
+  text-align: left;
 }
 </style>
