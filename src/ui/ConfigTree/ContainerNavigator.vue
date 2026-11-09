@@ -57,7 +57,6 @@
       <span>已选 {{ store.selectedContainerUuids.length }} 项</span>
       <span><i class="ok" />已配置</span><span><i class="warning" />警告</span
       ><span><i class="error" />错误</span>
-      <small>Ctrl / Cmd 切换选择 · Shift 连选</small>
     </div>
   </div>
 </template>
@@ -272,10 +271,5 @@ button {
 .error {
   background: var(--color-error);
 }
-.tree-legend small {
-  display: block;
-  flex: 1 0 100%;
-  margin-left: 0;
-  text-align: left;
-}
+
 </style>

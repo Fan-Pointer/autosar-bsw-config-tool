@@ -130,18 +130,9 @@
     <main class="workspace-main">
       <aside
         class="project-panel"
-        :style="{ width: (projectCollapsed ? 30 : projectWidth) + 'px' }"
+        :style="{ width: projectWidth + 'px' }"
       >
-        <div class="project-heading">
-          <span v-if="!projectCollapsed">配置集与模块</span
-          ><button
-            :aria-label="projectCollapsed ? '展开配置集目录' : '折叠配置集目录'"
-            @click="projectCollapsed = !projectCollapsed"
-          >
-            {{ projectCollapsed ? '›' : '‹' }}
-          </button>
-        </div>
-        <div v-show="!projectCollapsed" class="project-tree">
+        <div class="project-tree">
           <div
             class="project-root"
             tabindex="0"
@@ -188,7 +179,6 @@
         </div>
       </aside>
       <div
-        v-if="!projectCollapsed"
         class="splitter"
         role="separator"
         aria-label="配置集目录宽度"
@@ -255,6 +245,14 @@
                 ><span :class="{ 'crumb-parent': index === breadcrumb.length - 2 }">{{
                   part
                 }}</span></template
+              >
+              <span
+                v-if="selectedContainerValid"
+                class="crumb-ok"
+                role="status"
+                aria-label="容器校验通过"
+                title="当前容器校验通过"
+                >✓</span
               >
             </nav>
             <BatchEditPanel v-if="store.selectedContainerUuids.length > 1" />
@@ -536,6 +534,7 @@ import RequiredDefaultsAction from '@/ui/FormEditor/RequiredDefaultsAction.vue';
 import GlobalSearch from '@/ui/Search/GlobalSearch.vue';
 import type { SearchResult } from '@/core/search/ConfigSearch';
 import { theme, setTheme } from '@/ui/Theme/theme';
+import { readScene, writeScene } from '@/ui/WorkspaceScene';
 const router = useRouter(),
   store = useConfigStore();
 useHistory();
@@ -584,6 +583,18 @@ function toggleValidation(): void {
   showValidation.value = !(showValidation.value && dockTab.value === 'issues');
   dockTab.value = 'issues';
 }
+/** G43/FR-26: green check when the current container has no ERROR in the last validation. */
+const selectedContainerValid = computed(() =>
+  Boolean(
+    store.validated &&
+      store.selectedEntry &&
+      !store.violations.some(
+        (item) =>
+          item.severity === 'ERROR' &&
+          item.containerUuid === store.selectedEntry!.container.uuid
+      )
+  )
+);
 const configuredFields = computed(() =>
   Object.fromEntries([
     ...[...(store.selectedEntry?.container.parameters.values() ?? [])].map((value) => [
@@ -617,8 +628,7 @@ const contextMenu = ref<{
   projectMenu = ref<{ x: number; y: number }>();
 const projectMenuPanel = ref<HTMLElement>();
 const projectWidth = ref(212),
-  treeWidth = ref(240),
-  projectCollapsed = ref(false);
+  treeWidth = ref(240);
 const showImport = ref(false),
   importFormat = ref<ImportFormat>('json');
 const projectSubmenu = ref<string>();
@@ -721,11 +731,43 @@ watch([showSets, showModules, showImport, showGenerated, () => store.isImporting
 });
 onMounted(async () => {
   await store.initialize();
+  await restoreScene();
   window.addEventListener('beforeunload', warnUnsaved);
   // Context menus close on any outside click (menu panels stop propagation themselves).
   document.addEventListener('click', closeContextMenus);
   document.addEventListener('contextmenu', closeContextMenus);
 });
+/** G43: restore tabs and selection from this tab's previous session (sessionStorage). */
+async function restoreScene(): Promise<void> {
+  const known = store.configSets.map((set) => set.uuid);
+  const scene = readScene(window.sessionStorage, known);
+  if (!scene) return;
+  try {
+    if (scene.activeUuid && scene.activeUuid !== store.activeUuid) {
+      if (!(await store.switchConfigSet(scene.activeUuid).catch(() => false))) return;
+    }
+    if (scene.opened.length) opened.value = scene.opened;
+    if (scene.containerUuid) store.selectContainer(scene.containerUuid, scene.fieldUuid);
+  } catch {
+    // 失效的现场不阻断编辑：直接忽略，保留正常初始状态。
+  }
+}
+watch(
+  () => [
+    opened.value.join('|'),
+    store.activeUuid,
+    store.selectedEntry?.container.uuid,
+    store.selectedFieldUuid,
+  ],
+  () => {
+    writeScene(window.sessionStorage, {
+      opened: opened.value,
+      activeUuid: store.activeUuid,
+      containerUuid: store.selectedEntry?.container.uuid,
+      fieldUuid: store.selectedFieldUuid,
+    });
+  }
+);
 onUnmounted(() => {
   window.removeEventListener('beforeunload', warnUnsaved);
   document.removeEventListener('click', closeContextMenus);
@@ -1198,7 +1240,7 @@ function stopResize(): void {
 }
 .project-tree {
   overflow: auto;
-  height: calc(100% - 31px);
+  height: 100%;
 }
 .project-root {
   height: 31px;
@@ -1364,7 +1406,7 @@ function stopResize(): void {
   background: var(--color-panel);
 }
 .fixed-branch > summary {
-  padding-left: 32px;
+  padding-left: 74px;
   cursor: pointer;
 }
 .branch-note {
@@ -1372,6 +1414,11 @@ function stopResize(): void {
   font-size: 12px;
   line-height: 1.5;
   color: var(--color-muted);
+}
+.crumb-ok {
+  margin-left: 6px;
+  color: var(--color-success);
+  font-weight: 700;
 }
 .breadcrumbs {
   display: flex;
