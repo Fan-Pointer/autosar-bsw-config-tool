@@ -7,13 +7,20 @@
           ? '☑ 已配置'
           : state === 'optional'
             ? '☐ 可选'
-            : '⚠ 未确认'
+            : state === 'default'
+              ? '默认值'
+              : '⚠ 未确认'
     }}
   </span>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
-const props = defineProps<{ configured: boolean; optional: boolean; message?: string }>();
+const props = defineProps<{
+  configured: boolean;
+  optional: boolean;
+  hasDefault?: boolean;
+  message?: string;
+}>();
 // Presentation only: error reasons come from the shared validator, never a second rule engine.
 const state = computed(() =>
   props.configured
@@ -22,7 +29,9 @@ const state = computed(() =>
       : 'configured'
     : props.optional
       ? 'optional'
-      : 'unconfirmed'
+      : props.hasDefault && !props.message
+        ? 'default'
+        : 'unconfirmed'
 );
 </script>
 <style scoped>
@@ -36,6 +45,9 @@ const state = computed(() =>
 }
 .unconfirmed {
   color: var(--color-warning);
+}
+.default {
+  color: var(--color-muted);
 }
 .error {
   color: var(--color-error);

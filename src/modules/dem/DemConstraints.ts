@@ -18,10 +18,11 @@ function parameter(entry: ContainerEntry, name: string) {
 }
 
 function optionalUnset(entry: ContainerEntry, name: string): boolean {
-  return (
-    entry.definition.parameters.some((field) => field.shortName === name && field.isOptional) &&
-    parameter(entry, name) === undefined
-  );
+  // 用户裁定（2026-11-09）默认值即配置：可选参数未被用户显式确认时，模块规则不对其
+  // 施加域检查（预填默认值不是用户选择，不因此产生 DTC 域违规）。
+  const field = entry.definition.parameters.find((item) => item.shortName === name);
+  if (!field) return true;
+  return Boolean(field.isOptional) && entry.container.parameters.get(field.uuid)?.isConfigured !== true;
 }
 
 function violation(

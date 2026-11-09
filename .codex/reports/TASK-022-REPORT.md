@@ -37,3 +37,25 @@
 
 - 本报告由实现者（WorkBuddy 代 Codex）撰写；评审若由同一主体执行，将在评审文件中显式标注身份并按独立标准（隔离复跑+逐 diff 实读+证据核验）执行，不冒充第三方。
 - G33 未新增代码，仅验收——不冒充为本轮实现。
+
+## 追加节：用户反馈修复（2026-11-09 round 1）
+
+**用户两项裁定 + 一项新需求**（附截图）：
+
+1. **必填参数已显示值仍报「必填项未配置」**——根因双处：① DynamicForm 以 defaultValue 回退显示而 config 缺条目/未确认；② OutputGate `confirmed()` 把未确认值清空后再校验（TASK-008「显式配置语义」）。
+2. **BOOLEAN 开关默认关闭即合法**——「开关两种状态，默认没打开就是没打开，按 XML 参数默认值，没必要提醒报错」。
+3. **新需求：模块树右键菜单**——模块校验 / 代码生成 / 导入 / 导出（模块 ARXML）。
+
+**产品语义变更（用户裁定推翻 TASK-008 显式配置口径）**：「默认值即配置」。实现：
+
+- DefinitionConstraints：required 判定回退 `defaultValue`，BOOLEAN 再回退 false（有默认值的必填不再报；无默认值仍报）
+- OutputGate：`confirmed()` 不再清空未确认参数值（原注释 "so defaults cannot satisfy required fields" 的旧语义废止）；引用清空语义保留（用户未裁定引用放行）
+- FieldState：新增「默认值」中性态（替代黄色 ⚠ 未确认，BOOLEAN/有 defaultValue 的未确认参数显示）
+- DemConstraints `optionalUnset`：optional 且未显式确认即跳过域检查（预填值不是用户选择）
+- CGenerator：必填参数即使未确认也输出（默认值生效，缺了配置不完整）；optional 未确认不输出
+- ARXML 导出保持「只写显式确认值」（ECUC 惯例；未写条目导入时按默认值语义回退，往返零 diff）
+- WorkspaceView：模块节点右键菜单四项（复用 project-menu 机制与 placeContainerMenu 定位；模块校验/生成先切模块再执行；导入走模块 ARXML ImportDialog；导出即当前模块 exportConfig('arxml')）；document click/contextmenu 统一关闭浮动菜单
+
+**用例口径调整（12 处，全部注明裁定依据）**：A2×4（arxml-fidelity，改为「无默认值必填仍拦 + 默认值放行」）、Dem/CanIf 官方回归×2（参数不再拦、引用仍拦）、explicit false 中间断言、output×2（permits defaults / L08 反转）、editing-experience×2（四态区分 default 态、问题面板定位路径适配）+ core.test 新增缺条目回退用例。
+
+**验证**：typecheck ✓；build 15.48s ✓；26/26 收集守卫；354/355（唯一失败 editor-ui 撤销性能既定口径）→ 隔离复跑 9/9 ✓。

@@ -137,23 +137,25 @@ describe('TASK-008 explicit ECUC configuration semantics', () => {
     expect(doc(xml).querySelectorAll('VALUE-REF')).toHaveLength(0);
     expect(importArxml(xml, [module])).toEqual(config);
   });
-  it('A2: required defaults are rejected together with paths, before changing the source', () => {
-    const { config, module, definition } = sample();
+  it('A2: a required parameter without any default still blocks export with paths, before changing the source', () => {
+    // 用户裁定（2026-11-09）：有默认值的必填参数按默认值放行；无默认值的必填仍拦截。
+    const { config, module, definition, root } = sample();
     definition.parameters[0].isOptional = false;
-    definition.parameters[1].isOptional = false;
     definition.references[0].isOptional = false;
+    root.parameters.delete('int');
     const before = exportJson(config);
-    expect(() => exportArxml(config, module)).toThrow(/Root\/Integer[\s\S]*Root\/Boolean/);
+    expect(() => exportArxml(config, module)).toThrow(/Root\/Self/);
     expect(exportJson(config)).toBe(before);
   });
   it.each(['missing', 'disabled', 'suggested'] as const)(
-    'A2: required %s parameter cannot bypass export validation',
+    'A2: required default-valued %s parameter is permitted by the default-value semantics',
     (state) => {
+      // 用户裁定（2026-11-09）：显示的默认值即生效配置——默认值必填不再拦截导出。
       const { config, module, definition, root, manager } = sample();
       definition.parameters[0].isOptional = false;
       if (state === 'missing') root.parameters.delete('int');
       if (state === 'disabled') manager.setParameterValue(root, 'int', undefined);
-      expect(() => exportArxml(config, module)).toThrow('Root/Integer');
+      expect(() => exportArxml(config, module)).not.toThrow('Root/Integer');
     }
   );
   it('A2: explicitly confirming a required default permits it without confirming other suggestions', () => {
@@ -279,10 +281,10 @@ describe('official module regressions', () => {
     ).toHaveLength(55); // Official required tree (50) + one DTC (5), not the old 31-field mock.
     const configured = Object.values(flags(config, module)).filter(Boolean);
     expect(configured).toHaveLength(1);
-    // Severity is optional in the official release; every actually required field must be listed.
-    for (const entry of collectContainers(config, module))
-      for (const p of entry.definition.parameters.filter((p) => !p.isOptional))
-        expect(() => exportArxml(config, module)).toThrow(`${entry.path}/${p.shortName}`);
+    // 用户裁定（2026-11-09）默认值即配置：必填参数不再因未显式确认被拦
+    //（「必填项未配置」类问题为零；引用类问题单独由引用语义负责）。
+    const readiness = evaluateOutputReadiness(config, module);
+    expect(readiness.issues.filter((item) => item.reason.includes('必填项未配置'))).toHaveLength(0);
   });
   it('Dem 4.4.0: explicit false survives output after all other required fields are confirmed', () => {
     const module = new BswmdParser().parseFromJson(JSON.stringify(raw));
@@ -299,7 +301,9 @@ describe('official module regressions', () => {
       choice.container.uuid,
       byPath('DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass/DemDebounceMonitorInternal')
     );
-    expect(() => exportArxml(config, module)).toThrow('必填项未配置');
+    // 用户裁定（2026-11-09）默认值即配置：显式 false 与未确认默认值一样合法，
+    // 导出不再因其他必填参数「未确认」而拦（引用拦随后单独验证）。
+    expect(() => exportArxml(config, module)).not.toThrow('必填项未配置');
     let requiredCount = 0;
     for (const entry of collectContainers(config, module)) {
       for (const p of entry.definition.parameters.filter((p) => !p.isOptional)) {
@@ -331,7 +335,7 @@ describe('official module regressions', () => {
     expect(copy.createdAt).toBe(config.createdAt);
     expect(copy.lastModified).toBe(config.lastModified);
   });
-  it('CanIf: 45 suggestions require confirmation and mandatory local/external references block output without blocking JSON', () => {
+  it('CanIf: parameter defaults no longer block output while mandatory local/external references still do, without blocking JSON', () => {
     const module = importEcucModuleArxml(
       readFileSync('tests/fixtures/ecuc-canif.arxml', 'utf8'),
       'CanIf'
@@ -340,10 +344,11 @@ describe('official module regressions', () => {
       config = manager.createFromBswmd(module);
     const entries = collectContainers(config, module);
     expect(entries.flatMap((e) => [...e.container.parameters.values()])).toHaveLength(45);
-    for (const entry of entries) {
-      for (const def of entry.definition.parameters.filter((p) => !p.isOptional))
-        expect(() => exportArxml(config, module)).toThrow(`${entry.path}/${def.shortName}`);
-    }
+    // 用户裁定（2026-11-09）默认值即配置：必填参数不再因未显式确认被拦。
+    const initialReadiness = evaluateOutputReadiness(config, module);
+    expect(
+      initialReadiness.issues.filter((item) => item.reason.includes('必填项未配置'))
+    ).toHaveLength(0);
     const count = entries.reduce(
       (sum, e) => sum + e.definition.parameters.filter((p) => !p.isOptional).length,
       0

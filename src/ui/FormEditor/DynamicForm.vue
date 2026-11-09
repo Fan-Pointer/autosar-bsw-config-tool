@@ -82,6 +82,7 @@
         <FieldState
           :configured="configuredFields[param.uuid] === true"
           :optional="Boolean(param.isOptional)"
+          :has-default="param.defaultValue !== undefined || param.type === 'BOOLEAN'"
           :message="fieldErrors[param.uuid]"
         />
         <div

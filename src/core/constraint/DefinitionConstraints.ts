@@ -38,7 +38,18 @@ export const DefinitionConstraints: ConstraintRule[] = [
                 value: row,
                 label: `${parameter.shortName}[${index}]`,
               }))
-            : [{ value: stored?.value, label: parameter.shortName }];
+            : [
+                {
+                  // 用户裁定（2026-11-09）：显示的默认值即生效配置——校验回退定义
+                  // defaultValue；BOOLEAN 开关缺省即 false（两种状态均为合法配置），
+                  // 不再对「等于默认值」的必填参数报 required。
+                  value:
+                    stored?.value ??
+                    parameter.defaultValue ??
+                    (parameter.type === 'BOOLEAN' ? false : undefined),
+                  label: parameter.shortName,
+                },
+              ];
           for (const row of rows) {
             const value = row.value;
             if (value === undefined || value === null) {

@@ -213,7 +213,7 @@ describe('TASK-017 editing workflows', () => {
   });
 
   it('switches help and issues in one dock, keeps issue location visible and clears help on instance/set changes', async () => {
-    const { store, wrapper } = await workspace();
+    const { store, root, wrapper } = await workspace();
     await wrapper.get('[aria-label="查看 Enabled 说明"]').trigger('click');
     await wrapper.get('[aria-label="代码验证"]').trigger('click');
     expect(wrapper.get('[aria-label="问题面板"]').isVisible()).toBe(true);
@@ -221,6 +221,9 @@ describe('TASK-017 editing workflows', () => {
     await wrapper.get('.locate-button').trigger('click');
     await flushPromises();
     expect(wrapper.get('[aria-label="问题面板"]').isVisible()).toBe(true);
+    // 用户裁定（2026-11-09）默认值即配置：定位后落在 CHOICE 问题容器；回到 Root 再看说明。
+    store.selectContainer(root.uuid);
+    await nextTick();
     await wrapper.get('[aria-label="查看 Enabled 说明"]').trigger('click');
     await wrapper.get('[role="tablist"][aria-label="底部信息"] [role="tab"]').trigger('click');
     expect(wrapper.get('[aria-label="参数说明面板"]').isVisible()).toBe(true);
@@ -340,10 +343,11 @@ describe('TASK-017 editing workflows', () => {
     expect(exportJson(store.config!)).toBe(before);
   });
 
-  it('distinguishes unconfirmed false, confirmed false, optional absence and validator errors', async () => {
+  it('distinguishes default false, confirmed false, optional absence and validator errors', async () => {
     const { store, wrapper } = await workspace();
+    // 用户裁定（2026-11-09）：BOOLEAN 开关默认 false 即合法配置，显示「默认值」态。
     expect(wrapper.get('[data-field="flag"] [data-state]').attributes('data-state')).toBe(
-      'unconfirmed'
+      'default'
     );
     expect(wrapper.get('[data-field="optional"] [data-state]').attributes('data-state')).toBe(
       'optional'
@@ -363,7 +367,7 @@ describe('TASK-017 editing workflows', () => {
     store.undo();
     await nextTick();
     expect(wrapper.get('[data-field="flag"] [data-state]').attributes('data-state')).toBe(
-      'unconfirmed'
+      'default'
     );
     store.setParameterValue('count', -1);
     store.validate();
@@ -461,7 +465,8 @@ describe('TASK-017 editing workflows', () => {
     await wrapper.get('[aria-label="生成 C 代码"]').trigger('click');
     await flushPromises();
     expect(wrapper.get('[aria-label="问题面板"]').isVisible()).toBe(true);
-    expect(wrapper.get('[aria-label="问题面板"]').text()).toContain('必填项未配置');
+    // 用户裁定（2026-11-09）默认值即配置：参数必填不再拦输出；此处拦截项是 CHOICE 未选候选。
+    expect(wrapper.get('[aria-label="问题面板"]').text()).toContain('CHOICE 尚未选择候选');
     await wrapper.get('.locate-button').trigger('click');
     await nextTick();
     expect(wrapper.get('[aria-label="问题面板"]').isVisible()).toBe(true);

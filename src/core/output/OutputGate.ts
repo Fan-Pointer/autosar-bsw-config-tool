@@ -33,19 +33,13 @@ export function evaluateOutputReadiness(
   try {
     if (config.moduleRef !== module.shortName || config.version !== module.version)
       throw new Error('Configuration moduleRef/version does not match BSWMD');
-    // Keep existing validators authoritative for types/domains/references. Present them only
-    // confirmed values, so defaults cannot satisfy required fields or create phantom errors.
+    // Keep existing validators authoritative for types/domains/references.
+    // 用户裁定（2026-11-09）默认值即配置：未显式确认的参数值（预填值/定义默认值）
+    // 原样参与导出校验，不再清空——「等于默认值」是合法配置状态。
+    // 引用保持旧语义：未确认引用按空目标校验（引用无默认值概念，仍需显式配置）。
     const confirmed = (container: ConfigContainer): ConfigContainer => ({
       ...container,
-      parameters: new Map(
-        [...container.parameters].map(([id, value]) => [
-          id,
-          {
-            ...value,
-            value: value.isConfigured ? value.value : undefined,
-          },
-        ])
-      ),
+      parameters: new Map([...container.parameters].map(([id, value]) => [id, { ...value }])),
       references: new Map(
         [...container.references].map(([id, value]) => [
           id,

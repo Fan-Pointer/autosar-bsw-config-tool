@@ -166,6 +166,7 @@
                     store.module?.version === item.version,
                 }"
                 @click="openModule(item.shortName, item.version)"
+                @contextmenu.prevent.stop="openModuleMenu(item, $event)"
               >
                 <span class="module-symbol">M</span>{{ item.shortName
                 }}<small v-if="!store.activeProject"> · {{ item.version }}</small>
@@ -441,6 +442,28 @@
         </span>
       </template>
     </div>
+    <div
+      v-if="moduleMenu"
+      ref="moduleMenuPanel"
+      class="project-menu module-menu"
+      role="menu"
+      :aria-label="moduleMenu.shortName + ' 模块菜单'"
+      :style="{ left: moduleMenu.x + 'px', top: moduleMenu.y + 'px' }"
+      @click.stop
+    >
+      <button role="menuitem" @click="moduleAction('validate')">
+        <span>模块校验</span>
+      </button>
+      <button role="menuitem" @click="moduleAction('generate')">
+        <span>代码生成</span>
+      </button>
+      <button role="menuitem" @click="moduleAction('import')">
+        <span>导入（模块 ARXML）</span>
+      </button>
+      <button role="menuitem" @click="moduleAction('export')">
+        <span>导出（模块 ARXML）</span>
+      </button>
+    </div>
     <ModuleManager v-model="showModules" @applied="reconcileModules" />
     <ImportDialog v-model="showImport" :format="importFormat" @imported="reopenImported" />
     <el-dialog v-model="showGenerated" title="生成的 C 配置文件" width="80%">
@@ -658,9 +681,14 @@ watch([showSets, showModules, showImport, showGenerated, () => store.isImporting
 onMounted(async () => {
   await store.initialize();
   window.addEventListener('beforeunload', warnUnsaved);
+  // Context menus close on any outside click (menu panels stop propagation themselves).
+  document.addEventListener('click', closeContextMenus);
+  document.addEventListener('contextmenu', closeContextMenus);
 });
 onUnmounted(() => {
   window.removeEventListener('beforeunload', warnUnsaved);
+  document.removeEventListener('click', closeContextMenus);
+  document.removeEventListener('contextmenu', closeContextMenus);
   stopResize();
 });
 onBeforeRouteLeave(() => !store.isDirty || store.saveConfig().catch(() => false));
@@ -669,6 +697,15 @@ function warnUnsaved(event: BeforeUnloadEvent): void {
     event.preventDefault();
     event.returnValue = '';
   }
+}
+/** Dismiss every floating context menu; used for outside-click closing. */
+function closeContextMenus(event: Event): void {
+  const insideMenu =
+    event.target instanceof Element &&
+    Boolean(event.target.closest('.project-menu, .io-submenu, .container-context-menu'));
+  if (insideMenu) return;
+  projectMenu.value = undefined;
+  moduleMenu.value = undefined;
 }
 function operationEnabled(operation: 'generation' | 'validation'): boolean {
   return Boolean(
@@ -693,6 +730,7 @@ function reopenImported(): void {
 }
 function ioAction(action: string, format: ExportFormat): void {
   projectMenu.value = undefined;
+  moduleMenu.value = undefined;
   if (action === 'import' && format !== 'csv') {
     importFormat.value = format;
     showImport.value = true;
@@ -777,6 +815,45 @@ function openContextMenu(event: MouseEvent, target: ContainerContextTarget): voi
         ? (event.target.closest<HTMLElement>('[role="treeitem"]') ?? undefined)
         : undefined,
   };
+}
+const moduleMenu = ref<{
+  x: number;
+  y: number;
+  shortName: string;
+  version: string;
+}>();
+const moduleMenuPanel = ref<HTMLElement>();
+/** Module-node context menu: open near the cursor and clamp into the viewport. */
+async function openModuleMenu(
+  item: { shortName: string; version: string },
+  event: MouseEvent
+): Promise<void> {
+  projectMenu.value = undefined;
+  contextMenu.value = undefined;
+  const anchor = { x: event.clientX, y: event.clientY };
+  moduleMenu.value = { ...anchor, shortName: item.shortName, version: item.version };
+  await nextTick();
+  if (moduleMenuPanel.value && moduleMenu.value) {
+    const placed = placeContainerMenu(anchor, moduleMenuPanel.value.getBoundingClientRect(), {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+    moduleMenu.value = { ...moduleMenu.value, x: placed.left, y: placed.top };
+  }
+}
+/** Module context actions: each opens the module first, then runs the operation on it. */
+async function moduleAction(action?: string): Promise<void> {
+  const menu = moduleMenu.value;
+  moduleMenu.value = undefined;
+  if (!menu) return;
+  await openModule(menu.shortName, menu.version);
+  if (action === 'validate') validate();
+  if (action === 'generate') await generateCode();
+  if (action === 'import') {
+    importFormat.value = 'arxml';
+    showImport.value = true;
+  }
+  if (action === 'export') ioAction('export', 'arxml');
 }
 async function openProjectMenu(event: MouseEvent | KeyboardEvent): Promise<void> {
   contextMenu.value = undefined;

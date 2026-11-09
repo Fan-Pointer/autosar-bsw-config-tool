@@ -151,7 +151,10 @@ const struct {
       const fields: GeneratedField[] = entry.definition.parameters.flatMap(
         (parameter, fieldIndex) => {
           const configured = entry.container.parameters.get(parameter.uuid);
-          if (!configured?.isConfigured || configured.value === undefined) return [];
+          // 用户裁定（2026-11-09）默认值即配置：必填参数即使未显式确认也输出
+          //（默认值生效，缺了配置不完整）；可选参数未确认不输出（用户未选择）。
+          if (configured?.value === undefined) return [];
+          if (!configured.isConfigured && parameter.isOptional) return [];
           // G32: a multi-value parameter stores rows as the value array; expand one field per row.
           const rows =
             Array.isArray(configured.value) && configured.value.length

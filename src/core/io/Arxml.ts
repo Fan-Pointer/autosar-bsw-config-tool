@@ -100,6 +100,8 @@ export function exportArxml(
             const entry = container.parameters.get(def.uuid);
             if (!entry) return [];
             // G32: a multi-value parameter stores rows as the value array; expand one element per row.
+            // 用户裁定（2026-11-09）默认值即配置：ARXML 只写显式确认值（ECUC 惯例，
+            // 未写条目在导入时按定义默认值语义回退）；C 代码侧由 CGenerator 输出必填默认值。
             const rows = Array.isArray(entry.value) && entry.value.length
               ? entry.value.map((row) => ({ value: row, isConfigured: true }))
               : [entry];

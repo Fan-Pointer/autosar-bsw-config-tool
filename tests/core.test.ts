@@ -533,6 +533,38 @@ describe('definition-driven diagnostic messages', () => {
     ]);
   });
 
+  it('treats a definition default value as a satisfied required parameter even when the entry is missing', () => {
+    // 用户裁定（2026-11-09）：显示的默认值即生效配置——导入后 Map 缺条目的参数，
+    // 只要定义带 defaultValue 就不再报 required（表单显示的默认值就是配置）。
+    const module = parser.parseFromJson(
+      JSON.stringify({
+        shortName: 'Defaults',
+        containers: [
+          {
+            uuid: 'defaults-root',
+            shortName: 'DefaultsRoot',
+            parameters: [
+              { uuid: 'with-def', shortName: 'WithDef', type: 'INTEGER', min: 1, max: 10, defaultValue: 3 },
+              { uuid: 'switch', shortName: 'Switch', type: 'BOOLEAN', isOptional: false },
+              { uuid: 'no-def', shortName: 'NoDef', type: 'STRING', isOptional: false },
+            ],
+          },
+        ],
+      })
+    );
+    const config = manager.createFromBswmd(module);
+    // 模拟 ARXML 导入：ARXML 未写的参数在实例 Map 中无条目。
+    config.containers[0].parameters.delete('with-def');
+    config.containers[0].parameters.delete('switch');
+    config.containers[0].parameters.delete('no-def');
+    const engine = new ConstraintEngine();
+    engine.registerRules(DefinitionConstraints);
+    const violations = engine.validate(config, module);
+    const required = violations.filter((item) => item.message.includes('is required'));
+    expect(required).toHaveLength(1);
+    expect(required[0].message).toBe('NoDef is required');
+  });
+
   it.each([
     ['text', 1, 'STRING'],
     ['count', '', 'INTEGER'],

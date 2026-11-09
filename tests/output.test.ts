@@ -160,13 +160,17 @@ describe('one output gate across actions', () => {
       'DEMDTCVALUE'
     );
   });
-  it('rejects every untouched mandatory suggestion with the same four-output issues and preserves JSON retrieval', async () => {
+  it('permits untouched mandatory defaults, keeps the four-output agreement and preserves JSON retrieval', async () => {
+    // 用户裁定（2026-11-09）默认值即配置：n/b 必填的默认值（0/false）放行导出。
     const { config, module } = sample();
     const before = exportJson(config);
     const check = evaluateOutputReadiness(config, module);
-    expect(check.ready).toBe(false);
-    expect(check.issues.map((i) => i.anchor.definitionRef)).toEqual(['n', 'b']);
-    for (const issues of await rejections(config, module)) expect(issues).toEqual(check.issues);
+    expect(check.ready).toBe(true);
+    expect(check.issues).toEqual([]);
+    // 四出口在放行状态下应全部成功（无 OutputValidationError）。
+    const generator = new CGenerator();
+    expect(() => exportArxml(config, module, check)).not.toThrow();
+    expect((await generator.generateHeader(config, module, check)).content).toContain('P0_NUMBER 0');
     expect(exportJson(config)).toBe(before);
   });
 
@@ -245,30 +249,33 @@ describe('one output gate across actions', () => {
       expect(issues).toEqual(check.issues);
   });
 
-  it('L08: the official workspace reports required suggestions before any export, while JSON remains retrievable', async () => {
+  it('L08: the official workspace no longer reports required defaults before export, while non-default issues and JSON retrieval stay intact', async () => {
     const store = useConfigStore();
     store.createConfig();
     const expected = store.getOutputCheck();
-    expect(expected.ready).toBe(false);
     const required = collectContainers(store.config!, store.module!).flatMap((e) =>
       e.definition.parameters.filter((p) => !p.isOptional).map((p) => p.uuid)
     );
     expect(required.length).toBeGreaterThan(20);
     const panel = store.validate();
+    // 用户裁定（2026-11-09）默认值即配置：必填参数默认值不再报 ERROR。
     for (const id of required)
-      expect(panel.some((v) => v.definitionRef === id && v.severity === 'ERROR')).toBe(true);
-    for (const format of ['arxml', 'csv'] as const) {
-      let caught: unknown;
-      try {
-        store.exportConfig(format);
-      } catch (error) {
-        caught = error;
+      expect(panel.some((v) => v.definitionRef === id && v.severity === 'ERROR')).toBe(false);
+    // 非参数类问题（CHOICE 未选候选等）继续按原语义拦截导出，且四出口问题保持一致。
+    if (!expected.ready) {
+      for (const format of ['arxml', 'csv'] as const) {
+        let caught: unknown;
+        try {
+          store.exportConfig(format);
+        } catch (error) {
+          caught = error;
+        }
+        expect(caught).toBeInstanceOf(OutputValidationError);
+        expect((caught as OutputValidationError).result.issues).toEqual(expected.issues);
       }
-      expect(caught).toBeInstanceOf(OutputValidationError);
-      expect((caught as OutputValidationError).result.issues).toEqual(expected.issues);
+      for (const issues of await rejections(store.config!, store.module!, store.getOutputCheck()))
+        expect(issues).toEqual(expected.issues);
     }
-    for (const issues of await rejections(store.config!, store.module!, store.getOutputCheck()))
-      expect(issues).toEqual(expected.issues);
     expect(store.exportConfig('json')).toContain('autosar-bsw-config');
     expect(panel.map((v) => ({ path: v.path, reason: v.message }))).toEqual(
       expected.issues.map((i) => ({ path: i.path, reason: i.reason }))
