@@ -435,13 +435,19 @@
       "finalStatus": "APPROVED",
       "closedAt": "2026-11-09T13:50:00+08:00",
       "submissionCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
-      "note": "功能补全批次一 round 0 APPROVED(0/0/3)。实现者=WorkBuddy 代 Codex(用户授权), 评审同主体已披露并按独立标准执行。G31 列表视图+列设置(容器分组表格/排序/分页20/勾选批量/行打开, 视图层); G32 多值增删行(解除仅单值限制; value 数组语义, pre-G32 零 diff 由 346 基线实证; 三形态归一; ARXML 逐行展开; 约束报行号; C 逐行字段; store edit 可撤销); G33 TASK-021 已实现仅验收; G38 最小版(独立键 autosar-reference-data, 嗅探识别 DBC/LDF/CDD, 存档≤8MB+下载+删除, 解析展示后置明示)。验证: build 13.74s; 26/26 守卫; 353/354→editor-ui 撤销隔离 9/9(既定口径); +8 新用例全过。🟡: 列设置不持久化/remove 无 lower 强制/撤销粒度整次 edit。queue 剩 025→026→020。",
+      "note": "功能补全批次一 round 0 APPROVED(0/0/3)。实现者=WorkBuddy 代 Codex(用户授权), 评审同主体已披露并按独立标准执行。G31 列表视图+列设置(容器分组表格/排序/分页20/勾选批量/行打开, 视图层); G32 多值增删行(解除仅单值限制; value 数组语义, pre-G32 零 diff 由 346 基线实证; 三形态归一; ARXML 逐行展开; 约束报行号; C 逐行字段; store edit 可撤销); G33 TASK-021 已实现仅验收; G38 最小版(独立键 autosar-reference-data, 嗅探识别 DBC/LDF/CDD, 存档≤8MB+下载+删除, 解析展示后置明示)。验证: build 13.74s; 26/26 守卫; 353/354→editor-ui 撤销隔离 9/9(既定口径); +8 新用例全过。🟡: 列设置不持久化/remove 无 lower 强制/撤销粒度整次 edit。queue 剩 025→026→020。 | round 1(用户反馈修复 7429907 APPROVED 0/0/2): 用户裁定「默认值即配置」推翻 TASK-008 显式配置口径——校验回退 defaultValue+BOOLEAN false、OutputGate 不清空、FieldState 默认值态、DemConstraints optionalUnset 按未确认跳过、CGenerator 必填默认值输出、ARXML 保持只写确认值(ECUC 惯例往返零 diff); 模块树右键菜单(校验/生成/导入/导出模块 ARXML); 12 处用例口径调整+新增回退用例; 355 测试隔离口径全过。🟡: 引用未确认仍拦(待用户裁定)/默认值占比统计未立项。已按授权重发布线上。",
       "rounds": [
         {
           "round": 0,
           "verdict": "APPROVED",
           "reviewedCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
           "reviewPath": ".codex/review/TASK-022-ROUND-0-REVIEW.md"
+        },
+        {
+          "round": 1,
+          "verdict": "APPROVED",
+          "reviewedCommit": "7429907cbbad0aa95ccc3467c4844166fdf7a638",
+          "reviewPath": ".codex/review/TASK-022-ROUND-1-REVIEW.md"
         }
       ]
     }
@@ -449,15 +455,15 @@
   "lastReview": {
     "reviewer": "WorkBuddy(代)",
     "taskId": "TASK-022",
-    "round": 0,
-    "reviewedCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
-    "at": "2026-11-09T13:50:00+08:00",
+    "round": 1,
+    "reviewedCommit": "7429907cbbad0aa95ccc3467c4844166fdf7a638",
+    "at": "2026-11-09T15:30:00+08:00",
     "verdict": "APPROVED",
     "blockers": 0,
     "majors": 0,
-    "minors": 3,
-    "reviewPath": ".codex/review/TASK-022-REVIEW.md",
-    "snapshotPath": ".codex/review/TASK-022-ROUND-0-REVIEW.md"
+    "minors": 2,
+    "reviewPath": ".codex/review/TASK-022-ROUND-1-REVIEW.md",
+    "snapshotPath": ".codex/review/TASK-022-ROUND-1-REVIEW.md"
   },
   "autodevReview": {
     "reviewer": "WorkBuddy",
