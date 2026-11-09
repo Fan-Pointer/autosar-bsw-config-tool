@@ -259,7 +259,37 @@
                 />
               </div>
               <ChoiceSelector />
+              <div
+                v-if="store.childInstanceGroups.length"
+                class="form-view-switch"
+                role="tablist"
+                aria-label="参数视图"
+              >
+                <button
+                  role="tab"
+                  :aria-selected="paramView === 'form'"
+                  :class="{ active: paramView === 'form' }"
+                  @click="paramView = 'form'"
+                >
+                  表单
+                </button>
+                <button
+                  role="tab"
+                  :aria-selected="paramView === 'list'"
+                  :class="{ active: paramView === 'list' }"
+                  @click="paramView = 'list'"
+                >
+                  列表
+                </button>
+              </div>
+              <InstanceListView
+                v-if="paramView === 'list' && store.childInstanceGroups.length"
+                :groups="store.childInstanceGroups"
+                @open="store.selectContainer"
+                @batch-edit="batchFromList"
+              />
               <DynamicForm
+                v-show="paramView === 'form'"
                 :key="store.selectedEntry.container.uuid"
                 :container="store.selectedEntry.definition"
                 :config-data="store.parameterData"
@@ -272,6 +302,8 @@
                 :field-errors="selectedFieldErrors"
                 :readonly="store.isImporting || store.isLoading"
                 @parameter-change="store.setParameterValue"
+                @parameter-row-add="store.addParameterValueRow"
+                @parameter-row-remove="store.removeParameterValueRow"
                 @reference-change="store.setReferenceTarget"
                 @create-reference-target="store.createReferenceTarget"
                 @field-help="showFieldHelp"
@@ -441,6 +473,7 @@ import type { GeneratedFile } from '@/core/generator/TemplateEngine';
 import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 import { OutputValidationError } from '@/core/output/OutputGate';
 import DynamicForm from '@/ui/FormEditor/DynamicForm.vue';
+import InstanceListView from '@/ui/FormEditor/InstanceListView.vue';
 import FieldDescriptionPanel from '@/ui/FormEditor/FieldDescriptionPanel.vue';
 import ContainerNavigator from '@/ui/ConfigTree/ContainerNavigator.vue';
 import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
@@ -504,6 +537,11 @@ const helpPath = computed(() => {
   const definition = store.selectedEntry?.definition;
   return `${definition?.definitionPath ?? definition?.shortName ?? ''}/${helpField.value?.shortName ?? ''}`;
 });
+const paramView = ref<'form' | 'list'>('form');
+function batchFromList(uuids: string[]): void {
+  if (!uuids.length) return;
+  store.selectedContainerUuids = uuids;
+}
 function showFieldHelp(uuid: string): void {
   helpFieldUuid.value = uuid;
   dockTab.value = 'help';
@@ -1203,6 +1241,25 @@ function stopResize(): void {
 }
 .crumb-parent {
   font-weight: 600;
+}
+.form-view-switch {
+  display: flex;
+  gap: 4px;
+  margin: 8px 22px 0;
+}
+.form-view-switch button {
+  border: 1px solid var(--color-border);
+  background: var(--color-panel);
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 13px;
+  padding: 4px 14px;
+  cursor: pointer;
+}
+.form-view-switch button.active {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-selected);
 }
 .instance-name {
   height: 71px;

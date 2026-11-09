@@ -387,7 +387,7 @@ export class ConfigInstanceManager {
    * 设置参数值
    * @param container Container to edit.
    * @param paramDefUuid Parameter definition UUID.
-   * @param value New parameter value.
+   * @param value New parameter value. For a multi-value parameter this must be the full row array.
    * @returns Nothing; marks the parameter configured.
    */
   setParameterValue(container: ConfigContainer, paramDefUuid: string, value: unknown): void {
@@ -398,8 +398,83 @@ export class ConfigInstanceManager {
       );
     }
 
+    if (Array.isArray(value)) {
+      // G32: a multi-value parameter stores its rows as the value array itself.
+      param.value = [...value];
+      param.isConfigured = value.length > 0;
+      return;
+    }
     param.value = value;
     param.isConfigured = true;
+  }
+
+  /**
+   * 追加一行多值参数值（G32）。上限由调用方按定义 multiplicity 预先校验。
+   * @param container Container to edit. @param paramDefUuid Multi-value parameter definition UUID.
+   * @param value Row value. @returns The new row count.
+   */
+  addParameterValueRow(
+    container: ConfigContainer,
+    paramDefUuid: string,
+    value: unknown,
+    upper?: number | 'unbounded'
+  ): number {
+    const param = this.parameterFor(container, paramDefUuid);
+    const rows = Array.isArray(param.value) ? param.value : [];
+    if (typeof upper === 'number' && rows.length >= upper)
+      throw new Error(`upper multiplicity ${upper} reached`);
+    const next = [...rows, value];
+    param.value = next;
+    param.isConfigured = next.length > 0;
+    return next.length;
+  }
+
+  /**
+   * 删除一行多值参数值（G32）。
+   * @param container Container to edit. @param paramDefUuid Multi-value parameter definition UUID.
+   * @param index Row index. @returns The remaining row count; throws when the row is missing.
+   */
+  removeParameterValueRow(
+    container: ConfigContainer,
+    paramDefUuid: string,
+    index: number
+  ): number {
+    const param = this.parameterFor(container, paramDefUuid);
+    const rows = Array.isArray(param.value) ? param.value : [];
+    if (index < 0 || index >= rows.length)
+      throw new Error(`行序号越界：${index}（共 ${rows.length} 行）`);
+    const remaining = rows.filter((_, i) => i !== index);
+    param.value = remaining.length ? remaining : undefined;
+    param.isConfigured = remaining.length > 0;
+    return remaining.length;
+  }
+
+  /**
+   * 编辑一行多值参数值（G32）。
+   * @param container Container to edit. @param paramDefUuid Multi-value parameter definition UUID.
+   * @param index Row index. @param value New row value. @returns Nothing.
+   */
+  setParameterValueRow(
+    container: ConfigContainer,
+    paramDefUuid: string,
+    index: number,
+    value: unknown
+  ): void {
+    const param = this.parameterFor(container, paramDefUuid);
+    const rows = Array.isArray(param.value) ? param.value : [];
+    if (index < 0 || index >= rows.length)
+      throw new Error(`行序号越界：${index}（共 ${rows.length} 行）`);
+    param.value = rows.map((row, i) => (i === index ? value : row));
+    param.isConfigured = true;
+  }
+
+  private parameterFor(container: ConfigContainer, paramDefUuid: string): ConfigParameterValue {
+    const param = container.parameters.get(paramDefUuid);
+    if (!param)
+      throw new Error(
+        `Parameter with definitionRef ${paramDefUuid} not found in container ${container.shortName}`
+      );
+    return param;
   }
 
   /**

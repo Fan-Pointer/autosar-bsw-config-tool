@@ -107,6 +107,19 @@
         </template>
       </main>
     </div>
+    <section class="reference-entry" aria-label="参考数据">
+      <button class="reference-entry-btn" type="button" @click="showReferenceData = true">
+        参考数据（DBC / LDF / CDD）
+      </button>
+    </section>
+    <el-dialog
+      v-if="showReferenceData"
+      v-model="showReferenceData"
+      title="参考数据（DBC / LDF / CDD）"
+      width="min(680px, 94vw)"
+    >
+      <ReferenceDataPanel />
+    </el-dialog>
     <ImportDialog
       v-if="showImport"
       v-model="showImport"
@@ -124,12 +137,14 @@ import ProjectWizard from '@/ui/Projects/ProjectWizard.vue';
 import { useProjectNavigation } from '@/ui/Projects/useProjectNavigation';
 import ImportDialog from '@/ui/ImportExport/ImportDialog.vue';
 import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
+import ReferenceDataPanel from '@/ui/Portal/ReferenceDataPanel.vue';
 import type { ImportFormat } from '@/core/io/IoTypes';
 const store = useConfigStore();
 const { opening, navigationError, openProject, openSet, enterWorkspace } = useProjectNavigation();
 const panel = ref<'new' | 'open' | 'import'>('new');
 const showImport = ref(false),
   importFormat = ref<ImportFormat>('json');
+const showReferenceData = ref(false);
 onMounted(() => {
   void store.initialize();
 });
@@ -347,5 +362,24 @@ h2 {
   .import-formats {
     grid-template-columns: 1fr;
   }
+}
+</style>
+<style scoped>
+.reference-entry {
+  margin: 12px 0 0;
+}
+.reference-entry-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-panel);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.reference-entry-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 </style>

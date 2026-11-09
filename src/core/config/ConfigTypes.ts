@@ -39,9 +39,19 @@ export interface ConfigParameterValue {
   definitionRef: string;
   /** Description from the loaded definition, unless the input supplies one. */
   description?: string;
+  /** 单值参数为标量；多值参数（G32）为数组，每元素一行。 */
   value: unknown;
   /** 是否已配置（非默认值） */
   isConfigured: boolean;
+}
+
+/** Whether a definition allows more than one value row (G32 multi-value editing). */
+export function isMultiValueParameter(
+  parameter: { multiplicity?: { lower: number; upper: number | 'unbounded' } } | undefined
+): boolean {
+  const upper = parameter?.multiplicity?.upper;
+  if (upper === undefined) return false;
+  return upper === 'unbounded' || upper > 1;
 }
 
 /**

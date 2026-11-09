@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
+import { ElMessage } from 'element-plus';
 import localforage from 'localforage';
 import type { BswmdModule } from '@/core/bswmd/BswmdTypes';
 import type {
@@ -12,7 +13,7 @@ import type { ConstraintViolation } from '@/core/constraint/ConstraintTypes';
 import { BswmdLoader } from '@/core/bswmd/BswmdLoader';
 import { ConfigInstanceManager } from '@/core/config/ConfigInstance';
 import { cloneConfiguration } from '@/core/config/ConfigClone';
-import { collectContainers } from '@/core/config/ConfigTraversal';
+import { collectContainers, indexDefinitions } from '@/core/config/ConfigTraversal';
 import {
   evaluateOutputReadiness,
   outputViolations,
@@ -317,6 +318,23 @@ export const useConfigStore = defineStore('config', () => {
   const selectedEntry = computed(() =>
     entries.value.find((entry) => entry.container.uuid === selectedContainerUuid.value)
   );
+  const childInstanceGroups = computed(() => {
+    const entry = selectedEntry.value;
+    if (!entry || !module.value) return [];
+    const index = indexDefinitions(module.value);
+    const groups = new Map<string, { definition: (typeof module.value)['containers'][number]; rows: { uuid: string; shortName: string; values: Record<string, unknown> }[] }>();
+    for (const child of entry.container.subContainers) {
+      const def = index.get(child.definitionRef);
+      if (!def) continue;
+      const group = groups.get(def.uuid) ?? { definition: def, rows: [] };
+      const values: Record<string, unknown> = {};
+      for (const p of child.parameters.values())
+        values[p.definitionRef] = Array.isArray(p.value) ? [...p.value] : p.value;
+      group.rows.push({ uuid: child.uuid, shortName: child.shortName, values });
+      groups.set(def.uuid, group);
+    }
+    return [...groups.values()];
+  });
   const selectedEntries = computed(() =>
     entries.value.filter((entry) => selectedContainerUuids.value.includes(entry.container.uuid))
   );
@@ -337,10 +355,12 @@ export const useConfigStore = defineStore('config', () => {
   );
   const parameterData = computed(() =>
     Object.fromEntries(
-      (selectedEntry.value?.definition.parameters ?? []).map((parameter) => [
-        parameter.uuid,
-        selectedEntry.value?.container.parameters.get(parameter.uuid)?.value,
-      ])
+      (selectedEntry.value?.definition.parameters ?? []).map((parameter) => {
+        const stored = selectedEntry.value?.container.parameters.get(parameter.uuid);
+        // G32: multi-value parameters expose their row array to the form layer.
+        if (Array.isArray(stored?.value)) return [parameter.uuid, stored.value];
+        return [parameter.uuid, stored?.value];
+      })
     )
   );
   const referenceData = computed(() =>
@@ -1195,7 +1215,7 @@ export const useConfigStore = defineStore('config', () => {
 
   /** Update a selected parameter through the core manager.
    * @param uuid Parameter definition UUID.
-   * @param value New value.
+   * @param value New value. For a multi-value parameter (G32) this is the full row array.
    * @returns Nothing.
    */
   function setParameterValue(uuid: string, value: unknown): void {
@@ -1204,9 +1224,15 @@ export const useConfigStore = defineStore('config', () => {
     const entry = selectedEntry.value;
     const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
     if (!definition || definition.readOnly) return;
+    const isArrayRows = Array.isArray(value);
     const current = entry.container.parameters.get(uuid);
-    if (current?.isConfigured && Object.is(current.value, value)) return;
-    edit(`修改 ${definition.shortName}`, () => {
+    if (
+      current?.isConfigured &&
+      !isArrayRows &&
+      Object.is(current.value, value)
+    )
+      return;
+    edit(isArrayRows ? `编辑 ${definition.shortName} 多值行` : `修改 ${definition.shortName}`, () => {
       if (!entry.container.parameters.has(uuid))
         entry.container.parameters.set(uuid, {
           definitionRef: uuid,
@@ -1215,6 +1241,44 @@ export const useConfigStore = defineStore('config', () => {
           isConfigured: false,
         });
       manager.setParameterValue(entry.container, uuid, value);
+    });
+  }
+
+  /** Append a row to a multi-value parameter (G32). @param uuid Parameter definition UUID. @returns Nothing. */
+  function addParameterValueRow(uuid: string): void {
+    assertEditable();
+    if (!selectedEntry.value) return;
+    const entry = selectedEntry.value;
+    const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
+    if (!definition || definition.readOnly) return;
+    const upper = definition.multiplicity?.upper;
+    const current = entry.container.parameters.get(uuid);
+    const rowCount = Array.isArray(current?.value) ? current.value.length : 0;
+    if (typeof upper === 'number' && rowCount >= upper) {
+      ElMessage.error(`${definition.shortName}: upper multiplicity ${upper} reached`);
+      return;
+    }
+    edit(`追加 ${definition.shortName} 行`, () => {
+      if (!entry.container.parameters.has(uuid))
+        entry.container.parameters.set(uuid, {
+          definitionRef: uuid,
+          description: definition.description,
+          value: undefined,
+          isConfigured: false,
+        });
+      manager.addParameterValueRow(entry.container, uuid, undefined, upper);
+    });
+  }
+
+  /** Remove a row from a multi-value parameter (G32). @param uuid Parameter definition UUID. @param index Row index. @returns Nothing. */
+  function removeParameterValueRow(uuid: string, index: number): void {
+    assertEditable();
+    if (!selectedEntry.value) return;
+    const entry = selectedEntry.value;
+    const definition = entry.definition.parameters.find((p) => p.uuid === uuid);
+    if (!definition || definition.readOnly) return;
+    edit(`删除 ${definition.shortName} 行`, () => {
+      manager.removeParameterValueRow(entry.container, uuid, index);
     });
   }
 
@@ -1863,6 +1927,7 @@ export const useConfigStore = defineStore('config', () => {
     selectedContainerUuids,
     selectContainers,
     selectedEntries,
+    childInstanceGroups,
     batchParameters,
     batchSetParameter,
     danglingReferences,
@@ -1908,6 +1973,8 @@ export const useConfigStore = defineStore('config', () => {
     createConfig,
     validate,
     setParameterValue,
+    addParameterValueRow,
+    removeParameterValueRow,
     renameContainer,
     setReferenceTarget,
     saveConfig,

@@ -1,5 +1,6 @@
 import type { BswmdContainer, BswmdModule, BswmdParameter } from '../bswmd/BswmdTypes';
 import type { ConfigContainer, ConfigInstance } from '../config/ConfigTypes';
+import { isMultiValueParameter } from '../config/ConfigTypes';
 import type { SerializedConfig, SerializedContainer } from './IoTypes';
 import { choiceSelectionError } from '../config/ChoiceSelection';
 
@@ -173,15 +174,58 @@ export function hydrateConfig(raw: unknown, modules: BswmdModule[]): ConfigInsta
       for (const rawParameter of array(child.parameters, path + '.parameters')) {
         const p = record(rawParameter, path);
         const def = definition.parameters.find((item) => item.uuid === p.definitionRef);
-        if (!def || parameters.has(def.uuid))
+        if (!def) throw definitionError(
+          path,
+          p.definitionRef,
+          definition.parameters.map((item) => item.uuid),
+          '参数'
+        );
+        if (typeof p.isConfigured !== 'boolean')
+          throw new Error(`${path}/${def.shortName}：isConfigured 应为布尔值`);
+        // G32: multi-value parameters normalize three shapes — repeated ARXML entries
+        // aggregate into one row array; a single array entry stays an array; a single
+        // scalar entry (pre-G32 shape) stays scalar. Zero diff for pre-G32 data.
+        if (isMultiValueParameter(def) && parameters.has(def.uuid)) {
+          const existing = parameters.get(def.uuid)!;
+          const previous = Array.isArray(existing.value) ? existing.value : [existing.value];
+          const incoming = Array.isArray(p.value)
+            ? p.value.map((item) => parameterValue(item, def, path + '/' + def.shortName))
+            : [parameterValue(p.value, def, path + '/' + def.shortName)];
+          parameters.set(def.uuid, {
+            ...existing,
+            description:
+              existing.description ??
+              (p.description === undefined
+                ? def.description
+                : string(p.description, path + '/' + def.shortName + '.description', true)),
+            value: [...previous, ...incoming],
+            isConfigured: true,
+          });
+          continue;
+        }
+        if (isMultiValueParameter(def)) {
+          // First entry: keep its own shape — scalar stays scalar, array stays array.
+          const rowValue = Array.isArray(p.value)
+            ? p.value.map((item) => parameterValue(item, def, path + '/' + def.shortName))
+            : parameterValue(p.value, def, path + '/' + def.shortName);
+          parameters.set(def.uuid, {
+            definitionRef: def.uuid,
+            description:
+              p.description === undefined
+                ? def.description
+                : string(p.description, path + '/' + def.shortName + '.description', true),
+            value: rowValue,
+            isConfigured: p.isConfigured,
+          });
+          continue;
+        }
+        if (parameters.has(def.uuid))
           throw definitionError(
             path,
             p.definitionRef,
             definition.parameters.map((item) => item.uuid),
             '参数'
           );
-        if (typeof p.isConfigured !== 'boolean')
-          throw new Error(`${path}/${def.shortName}：isConfigured 应为布尔值`);
         parameters.set(def.uuid, {
           definitionRef: def.uuid,
           description:

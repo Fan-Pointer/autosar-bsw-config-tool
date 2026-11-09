@@ -152,9 +152,18 @@ const struct {
         (parameter, fieldIndex) => {
           const configured = entry.container.parameters.get(parameter.uuid);
           if (!configured?.isConfigured || configured.value === undefined) return [];
-          return [
-            {
-              name: `P${fieldIndex}_${identifier(parameter.shortName).toUpperCase()}`,
+          // G32: a multi-value parameter stores rows as the value array; expand one field per row.
+          const rows =
+            Array.isArray(configured.value) && configured.value.length
+              ? configured.value.map((row, rowIndex) => ({
+                  value: row,
+                  suffix: `_${rowIndex}`,
+                }))
+              : [{ value: configured.value, suffix: '' }];
+          return rows
+            .filter((row) => row.value !== undefined)
+            .map((row) => ({
+              name: `P${fieldIndex}_${identifier(parameter.shortName).toUpperCase()}${row.suffix}`,
               cType:
                 parameter.type === 'BOOLEAN'
                   ? 'int'
@@ -163,9 +172,8 @@ const struct {
                     : parameter.type === 'FLOAT'
                       ? 'double'
                       : 'const char *',
-              value: this.formatValue(configured.value, parameter),
-            },
-          ];
+              value: this.formatValue(row.value, parameter),
+            }));
         }
       );
       entry.definition.references.forEach((reference, referenceIndex) => {

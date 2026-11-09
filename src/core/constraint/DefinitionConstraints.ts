@@ -2,6 +2,7 @@ import type { ConstraintRule, ConstraintViolation } from './ConstraintTypes';
 import { collectContainers } from '../config/ConfigTraversal';
 import { choiceSelectionError } from '../config/ChoiceSelection';
 import { matchesReferenceDefinition } from '../config/ReferenceCandidates';
+import { isMultiValueParameter } from '../config/ConfigTypes';
 
 /** Validate field types, bounds, choices, and reference targets directly from BSWMD. */
 export const DefinitionConstraints: ConstraintRule[] = [
@@ -30,70 +31,80 @@ export const DefinitionConstraints: ConstraintRule[] = [
         if (choiceError)
           add(entry.definition.uuid, '', choiceError, '选择一个候选；切换候选可撤销');
         for (const parameter of entry.definition.parameters) {
-          const value = entry.container.parameters.get(parameter.uuid)?.value;
-          if (value === undefined || value === null) {
-            if (!parameter.isOptional)
+          const stored = entry.container.parameters.get(parameter.uuid);
+          const multi = isMultiValueParameter(parameter);
+          const rows: { value: unknown; label: string }[] = multi
+            ? (Array.isArray(stored?.value) ? stored.value : stored?.value !== undefined ? [stored.value] : []).map((row, index) => ({
+                value: row,
+                label: `${parameter.shortName}[${index}]`,
+              }))
+            : [{ value: stored?.value, label: parameter.shortName }];
+          for (const row of rows) {
+            const value = row.value;
+            if (value === undefined || value === null) {
+              if (!parameter.isOptional)
+                add(
+                  parameter.uuid,
+                  row.label,
+                  `${row.label} is required`,
+                  `Set required parameter ${row.label} (${parameter.type})`
+                );
+              continue;
+            }
+            const numeric = parameter.type === 'INTEGER' || parameter.type === 'FLOAT';
+            const expected =
+              parameter.type === 'INTEGER'
+                ? 'INTEGER (safe integer number)'
+                : parameter.type === 'FLOAT'
+                  ? 'FLOAT (finite number)'
+                  : parameter.type === 'BOOLEAN'
+                    ? 'BOOLEAN (true or false)'
+                    : `${parameter.type} (string)`;
+            const validType = numeric
+              ? typeof value === 'number' &&
+                Number.isFinite(value) &&
+                (parameter.type !== 'INTEGER' || Number.isSafeInteger(value))
+              : parameter.type === 'BOOLEAN'
+                ? typeof value === 'boolean'
+                : typeof value === 'string';
+            // Check presence, type, and domain separately so each error gives a specific repair.
+            if (!validType) {
               add(
                 parameter.uuid,
-                parameter.shortName,
-                `${parameter.shortName} is required`,
-                `Set required parameter ${parameter.shortName} (${parameter.type})`
+                row.label,
+                `${row.label} has an invalid type; expected ${expected}`,
+                `Use ${expected} for ${row.label}`
               );
-            continue;
-          }
-          const numeric = parameter.type === 'INTEGER' || parameter.type === 'FLOAT';
-          const expected =
-            parameter.type === 'INTEGER'
-              ? 'INTEGER (safe integer number)'
-              : parameter.type === 'FLOAT'
-                ? 'FLOAT (finite number)'
-                : parameter.type === 'BOOLEAN'
-                  ? 'BOOLEAN (true or false)'
-                  : `${parameter.type} (string)`;
-          const validType = numeric
-            ? typeof value === 'number' &&
-              Number.isFinite(value) &&
-              (parameter.type !== 'INTEGER' || Number.isSafeInteger(value))
-            : parameter.type === 'BOOLEAN'
-              ? typeof value === 'boolean'
-              : typeof value === 'string';
-          // Check presence, type, and domain separately so each error gives a specific repair.
-          if (!validType) {
-            add(
-              parameter.uuid,
-              parameter.shortName,
-              `${parameter.shortName} has an invalid type; expected ${expected}`,
-              `Use ${expected} for ${parameter.shortName}`
-            );
-            continue;
-          }
-          if (
-            numeric &&
-            typeof value === 'number' &&
-            ((parameter.min !== undefined && value < parameter.min) ||
-              (parameter.max !== undefined && value > parameter.max))
-          ) {
-            const range = `[${parameter.min ?? '-Infinity'}, ${parameter.max ?? 'Infinity'}]`;
-            add(
-              parameter.uuid,
-              parameter.shortName,
-              `${parameter.shortName} is out of range; allowed range: ${range}`,
-              `Choose a ${parameter.type} value in ${range}`
-            );
-          } else if (
-            parameter.type === 'ENUM' &&
-            typeof value === 'string' &&
-            !parameter.enumValues?.includes(value)
-          ) {
-            const choices = (parameter.enumValues ?? [])
-              .map((choice) => JSON.stringify(choice))
-              .join(', ');
-            add(
-              parameter.uuid,
-              parameter.shortName,
-              `${parameter.shortName} has an invalid choice; allowed values: ${choices}`,
-              `Choose one of: ${choices}`
-            );
+              continue;
+            }
+            if (
+              numeric &&
+              typeof value === 'number' &&
+              ((parameter.min !== undefined && value < parameter.min) ||
+                (parameter.max !== undefined && value > parameter.max))
+            ) {
+              const range = `[${parameter.min ?? '-Infinity'}, ${parameter.max ?? 'Infinity'}]`;
+              add(
+                parameter.uuid,
+                row.label,
+                `${row.label} is out of range; allowed range: ${range}`,
+                `Choose a ${parameter.type} value in ${range}`
+              );
+            } else if (
+              parameter.type === 'ENUM' &&
+              typeof value === 'string' &&
+              !parameter.enumValues?.includes(value)
+            ) {
+              const choices = (parameter.enumValues ?? [])
+                .map((choice) => JSON.stringify(choice))
+                .join(', ');
+              add(
+                parameter.uuid,
+                row.label,
+                `${row.label} has an invalid choice; allowed values: ${choices}`,
+                `Choose one of: ${choices}`
+              );
+            }
           }
         }
         for (const reference of entry.definition.references) {

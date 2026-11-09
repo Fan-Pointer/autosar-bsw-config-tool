@@ -8,12 +8,59 @@
         class="parameter-row"
         :class="{
           'is-required': !param.isOptional,
+          'is-multivalue': isMultiValue(param),
           'selected-field': selectedFieldUuid === param.uuid,
           'has-error': Boolean(fieldErrors[param.uuid]),
         }"
         :data-field="param.uuid"
         @click="emit('field-help', param.uuid)"
       >
+        <template v-if="isMultiValue(param)">
+          <span class="optional-space" />
+          <div class="multivalue-block">
+            <button class="parameter-name" type="button" :title="param.shortName" :aria-label="'查看 ' + param.shortName + ' 说明'">
+              {{ param.shortName }}
+              <small class="multivalue-count">{{ multiRows(param).length }}/{{ multiUpper(param) }}</small>
+            </button>
+            <div
+              v-for="(row, rowIndex) in multiRows(param)"
+              :key="param.uuid + '#' + rowIndex"
+              class="multivalue-row"
+            >
+              <div class="field-control">
+                <el-input
+                  :id="'input-' + param.uuid + '-' + rowIndex"
+                  :aria-label="param.shortName + ' 第 ' + (rowIndex + 1) + ' 行'"
+                  :model-value="typeof row === 'string' ? row : ''"
+                  :disabled="readonly || param.readOnly"
+                  @update:model-value="editMultiRow(param, rowIndex, $event)"
+                />
+                <button
+                  class="row-remove"
+                  type="button"
+                  :aria-label="'删除 ' + param.shortName + ' 第 ' + (rowIndex + 1) + ' 行'"
+                  :disabled="readonly || param.readOnly || Boolean(rowRemovalBlocked(param))"
+                  :title="rowRemovalBlocked(param) || '删除该行'"
+                  @click.stop="emit('parameter-row-remove', param.uuid, rowIndex)"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+            <p v-if="!multiRows(param).length" class="multivalue-empty">--</p>
+            <button
+              class="row-add"
+              type="button"
+              :aria-label="'追加 ' + param.shortName + ' 行'"
+              :disabled="readonly || param.readOnly || Boolean(rowAddBlocked(param))"
+              :title="rowAddBlocked(param) || '追加一行'"
+              @click.stop="emit('parameter-row-add', param.uuid)"
+            >
+              ＋ 追加一行
+            </button>
+          </div>
+        </template>
+        <template v-else>
         <input
           v-if="param.isOptional"
           class="optional-toggle"
@@ -121,6 +168,7 @@
         <span v-if="fieldErrors[param.uuid]" class="field-error" role="alert">{{
           fieldErrors[param.uuid]
         }}</span>
+        </template>
       </div>
     </section>
     <section v-if="container.references.length" class="reference-section" aria-label="引用">
@@ -316,9 +364,50 @@ const emit = defineEmits<{
   'field-help': [fieldUuid: string];
   'update:configData': [data: Record<string, unknown>];
   'parameter-change': [paramUuid: string, value: unknown];
+  'parameter-row-add': [paramUuid: string];
+  'parameter-row-remove': [paramUuid: string, rowIndex: number];
   'reference-change': [refUuid: string, targetUuid: string];
   'create-reference-target': [refUuid: string, definitionUuid: string, parentUuid: string | null];
 }>();
+// G32: a multi-value parameter exposes its rows through configData as an array.
+function isMultiValue(parameter: BswmdParameter): boolean {
+  const upper = parameter.multiplicity?.upper;
+  return upper !== undefined && (upper === 'unbounded' || upper > 1);
+}
+function multiRows(parameter: BswmdParameter): unknown[] {
+  const value = props.configData[parameter.uuid];
+  return Array.isArray(value) ? value : [];
+}
+function multiUpper(parameter: BswmdParameter): string {
+  const upper = parameter.multiplicity?.upper;
+  return upper === undefined ? '?' : String(upper);
+}
+function rowAddBlocked(parameter: BswmdParameter): string | undefined {
+  const upper = parameter.multiplicity?.upper;
+  if (typeof upper === 'number' && multiRows(parameter).length >= upper)
+    return `已到上限 ${upper}`;
+  return undefined;
+}
+function rowRemovalBlocked(parameter: BswmdParameter): string | undefined {
+  const lower = parameter.multiplicity?.lower;
+  if (typeof lower === 'number' && multiRows(parameter).length <= lower)
+    return `下限要求至少 ${lower} 行`;
+  return undefined;
+}
+function editMultiRow(parameter: BswmdParameter, rowIndex: number, value: string): void {
+  const rows = [...multiRows(parameter)];
+  rows[rowIndex] =
+    parameter.type === 'INTEGER'
+      ? Number.isSafeInteger(Number(value)) && value.trim() !== ''
+        ? Number(value)
+        : value
+      : parameter.type === 'FLOAT'
+        ? Number.isFinite(Number(value)) && value.trim() !== ''
+          ? Number(value)
+          : value
+        : value;
+  emit('parameter-change', parameter.uuid, rows);
+}
 const radices = ref<Record<string, string>>({});
 const numericErrors = ref<Record<string, string>>({});
 const hexDrafts = ref<Record<string, string>>({});
@@ -664,6 +753,57 @@ defineExpose({ resetForm, getFormData });
   color: var(--color-muted);
   font-size: 13px;
   margin: 24px;
+}
+.is-multivalue {
+  grid-template-columns: 1fr;
+  row-gap: 6px;
+}
+.multivalue-block {
+  min-width: 0;
+}
+.multivalue-count {
+  color: var(--color-muted);
+  font-size: 11px;
+  margin-left: 6px;
+}
+.multivalue-row {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0;
+}
+.multivalue-row .field-control {
+  width: 270px;
+  justify-content: flex-start;
+}
+.multivalue-row :deep(.el-input) {
+  flex: 1;
+}
+.multivalue-empty {
+  color: var(--color-muted);
+  margin: 4px 0;
+}
+.row-add,
+.row-remove {
+  border: 1px solid var(--color-border);
+  background: var(--color-panel);
+  color: var(--color-text);
+  border-radius: 3px;
+  padding: 4px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+.row-remove {
+  padding: 2px 8px;
+  color: var(--color-error);
+}
+.row-add:hover:not(:disabled),
+.row-remove:hover:not(:disabled) {
+  border-color: var(--color-accent);
+}
+.row-add:disabled,
+.row-remove:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 :deep(.el-input__wrapper),
 :deep(.el-select__wrapper) {
