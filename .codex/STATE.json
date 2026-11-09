@@ -7,7 +7,7 @@
   "task": {
     "id": "TASK-022",
     "title": "功能补全批次一：多实例列表视图(G31) + 多值参数增删行(G32) + 进制切换(G33) + 参考数据导入入口预留(G38 最小版)",
-    "status": "READY",
+    "status": "SUBMITTED",
     "round": 0,
     "assignedTo": "codex",
     "contractPath": ".codex/tasks/ACTIVE.md",
@@ -18,9 +18,9 @@
     "reportPath": ".codex/reports/TASK-022-REPORT.md",
     "reviewPath": null,
     "reviewSnapshotPath": null,
-    "submissionCommit": null,
+    "submissionCommit": "58ffd7cc1140c1b085a7698d5432bf6d2fb062d4",
     "createdAt": "2026-11-06T21:45:00+08:00",
-    "submittedAt": null,
+    "submittedAt": "2026-11-09T13:40:00+08:00",
     "approvedAt": null,
     "designPath": "docs/product-design/02-TECH-DESIGN.md"
   },
