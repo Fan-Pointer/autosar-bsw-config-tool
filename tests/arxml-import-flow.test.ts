@@ -46,7 +46,7 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
     expect(scanned).toHaveLength(1);
     expect(scanned[0]).toMatchObject({ shortName: 'CanIf', loaded: false, versionMismatch: false });
 
-    const notes = await store.importArxmlModules(text, [{ shortName: 'CanIf', mode: 'copy' }]);
+    const notes = await store.importArxmlModules(text, [{ shortName: 'CanIf', mode: 'overwrite' }]);
 
     expect(notes.join(" | ")).toContain("已作为新配置集导入");
     // 定义已按文件版本自动加载
@@ -79,7 +79,7 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
       expect(scanned.length).toBeGreaterThan(1);
       const notes = await store.importArxmlModules(
         text,
-        scanned.map((item) => ({ shortName: item.shortName, mode: 'copy' as const }))
+        scanned.map((item) => ({ shortName: item.shortName, mode: 'overwrite' as const }))
       );
       // Dcm 的内置定义仍是旧抽取结果（当时因 ADD-INFO 类型失败被标 unsupported），
       // 逐模块容错后只跳过它，其余模块照常导入。

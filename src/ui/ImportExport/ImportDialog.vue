@@ -74,13 +74,12 @@
             <td>
               <select
                 v-if="item.existingSetUuid"
-                :value="modes[item.shortName] ?? 'copy'"
+                :value="modes[item.shortName] ?? 'overwrite'"
                 :aria-label="item.shortName + ' 处理方式'"
                 :disabled="store.isImporting"
                 @change="setMode(item.shortName, $event)"
               >
-                <option value="overwrite">覆盖现有</option>
-                <option value="copy">新建副本</option>
+                <option value="overwrite">覆盖（文件里有的覆盖，其余保留）</option>
                 <option value="skip">跳过</option>
               </select>
               <span v-else>新建配置集</span>
@@ -219,7 +218,7 @@ watch(
 );
 const multiModules = ref<ReturnType<typeof store.scanArxmlImport>>([]);
 const chosen = ref<string[]>([]);
-const modes = ref<Record<string, 'overwrite' | 'copy' | 'skip'>>({});
+const modes = ref<Record<string, 'overwrite' | 'skip'>>({});
 const multiResult = ref('');
 const allSelected = computed(
   () => multiModules.value.length > 0 && chosen.value.length === multiModules.value.filter((item) => !item.versionMismatch).length
@@ -230,7 +229,7 @@ function toggleAll(): void {
     : multiModules.value.filter((item) => !item.versionMismatch).map((item) => item.shortName);
 }
 function setMode(shortName: string, event: Event): void {
-  const value = (event.target as HTMLSelectElement).value as 'overwrite' | 'copy' | 'skip';
+  const value = (event.target as HTMLSelectElement).value as 'overwrite' | 'skip';
   modes.value = { ...modes.value, [shortName]: value };
   if (value === 'skip') chosen.value = chosen.value.filter((name) => name !== shortName);
 }
@@ -242,7 +241,7 @@ async function applyMulti(): Promise<void> {
       content,
       chosen.value.map((shortName) => ({
         shortName,
-        mode: modes.value[shortName] ?? 'copy',
+        mode: modes.value[shortName] ?? 'overwrite',
       }))
     );
     ElMessage.success('导入完成，已保存到本机');
@@ -315,7 +314,7 @@ async function readFile(event: Event): Promise<void> {
       // 自动加载定义、空壳补骨架、并入工程，不再因「模块与当前配置集不一致」直接报错。
       multiModules.value = scanned;
       chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
-      modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'copy']));
+      modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'overwrite']));
       return;
     }
     prepare();

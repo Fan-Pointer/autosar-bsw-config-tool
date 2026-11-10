@@ -1970,7 +1970,7 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function importArxmlModules(
     text: string,
-    selections: { shortName: string; mode: 'overwrite' | 'copy' | 'skip' }[]
+    selections: { shortName: string; mode: 'overwrite' | 'skip' }[]
   ): Promise<string[]> {
     if (!selections.length) throw new Error('请至少选择一个模块');
     assertEditable();
@@ -2045,8 +2045,10 @@ export const useConfigStore = defineStore('config', () => {
         (set) => set.moduleRef === header.shortName && set.version === header.release
       );
       if (existing && item.mode === 'overwrite') {
+        // 覆盖=合并：文件里出现的容器/参数覆盖，文件中没有的保留，导入后仍可继续配置。
+        const plan = planImport(existing, incoming, definition, 'overwrite');
         const target = cloneData(existing);
-        target.containers = incoming.containers;
+        target.containers = plan.result.containers;
         target.lastModified = Date.now();
         configSets.value = configSets.value.map((set) =>
           set.uuid === existing.uuid ? target : set
