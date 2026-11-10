@@ -1970,7 +1970,8 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function importArxmlModules(
     text: string,
-    selections: { shortName: string; mode: 'overwrite' | 'skip' }[]
+    selections: { shortName: string; mode: 'overwrite' | 'skip' }[],
+    options?: { newProjectName?: string }
   ): Promise<string[]> {
     if (!selections.length) throw new Error('请至少选择一个模块');
     assertEditable();
@@ -2073,7 +2074,22 @@ export const useConfigStore = defineStore('config', () => {
 
     // 3) 自动并入当前工程（用户要求：工程里没有的模块自动添加）。
     const project = activeProject.value;
-    if (project && applied.length) {
+    if (options?.newProjectName?.trim() && applied.length) {
+      // 导入时选择「新建工程」：工程只挂本次导入的配置集与模块。
+      const created: ProjectMetadata = {
+        projectUuid: generateUUID(),
+        name: options.newProjectName.trim(),
+        autosarVersion: projectVersion,
+        chip: { family: project?.chip.family ?? '' },
+        moduleShortNames: applied.map((item) => item.module),
+        setUuids: applied.map((item) => item.set.uuid),
+        createdAt: new Date().toISOString(),
+      };
+      const next = [...projects.value, created];
+      await writeProjectIndex({ schemaVersion: 1, projects: next });
+      projects.value = next;
+      notes.push(`已新建工程「${created.name}」并挂载 ${applied.length} 个配置集`);
+    } else if (project && applied.length) {
       const setUuids = [...project.setUuids];
       const names = [...project.moduleShortNames];
       for (const item of applied) {

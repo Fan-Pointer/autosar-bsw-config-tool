@@ -42,6 +42,25 @@
           ><input type="checkbox" :checked="allSelected" @change="toggleAll" />全选</label
         >
       </header>
+      <div class="project-target">
+        <label
+          ><input v-model="projectMode" type="radio" value="current" :disabled="!store.activeProject" />并入当前工程<span
+            v-if="store.activeProject"
+            class="muted"
+            >（{{ store.activeProject.name }}）</span
+          ></label
+        >
+        <label
+          ><input v-model="projectMode" type="radio" value="new" />新建工程</label
+        >
+        <input
+          v-if="projectMode === 'new'"
+          v-model="newProjectName"
+          class="project-name"
+          placeholder="新工程名称"
+          aria-label="新工程名称"
+        />
+      </div>
       <table>
         <thead>
           <tr>
@@ -220,6 +239,9 @@ const multiModules = ref<ReturnType<typeof store.scanArxmlImport>>([]);
 const chosen = ref<string[]>([]);
 const modes = ref<Record<string, 'overwrite' | 'skip'>>({});
 const multiResult = ref('');
+const projectMode = ref<'current' | 'new'>('current');
+const newProjectName = ref('');
+const fileNameBase = ref('');
 const allSelected = computed(
   () => multiModules.value.length > 0 && chosen.value.length === multiModules.value.filter((item) => !item.versionMismatch).length
 );
@@ -271,6 +293,7 @@ async function readFile(event: Event): Promise<void> {
   const file = input.files?.[0];
   if (!file) return;
   const version = ++readVersion;
+  fileNameBase.value = file.name.replace(/\.[^.]+$/, '');
   content = '';
   session.value = undefined;
   error.value = '';
@@ -315,6 +338,8 @@ async function readFile(event: Event): Promise<void> {
       multiModules.value = scanned;
       chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
       modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'overwrite']));
+      projectMode.value = store.activeProject ? 'current' : 'new';
+      newProjectName.value = store.activeProject ? '' : (fileNameBase.value || '导入工程');
       return;
     }
     prepare();
@@ -368,6 +393,27 @@ async function apply(): Promise<void> {
 }
 .strategies label {
   cursor: pointer;
+}
+.project-target {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 10px 0;
+  font-size: 13px;
+}
+.project-target label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.project-target .muted {
+  color: var(--color-muted);
+}
+.project-name {
+  min-height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 .multi-import {
   border: 1px solid var(--color-border);

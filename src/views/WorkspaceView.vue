@@ -656,14 +656,18 @@ watch(
  * instead of pretending to hold data. */
 /** 与 BSW Modules 同级的三条占位分支（用户裁定：展开为空白，不再写说明）。 */
 const fixedBranches = [{ name: 'RTE' }, { name: '输入文件' }, { name: '输出文件' }] as const;
-const includedModules = computed(() =>
-  store.modules.filter((item) =>
-    store.activeProject
-      ? item.version === store.activeProject.autosarVersion &&
-        store.activeProject.moduleShortNames.includes(item.shortName)
-      : store.getModulePreference(item.shortName, item.version).included
-  )
-);
+const includedModules = computed(() => {
+  const project = store.activeProject;
+  if (project)
+    return store.modules.filter(
+      (item) =>
+        item.version === project.autosarVersion &&
+        project.moduleShortNames.includes(item.shortName)
+    );
+  // 没有工程时只列出「已有配置集」的模块：避免把定义库里的模块全堆到左栏。
+  const configured = new Set(store.configSets.map((set) => set.moduleRef));
+  return store.modules.filter((item) => configured.has(item.shortName));
+});
 const breadcrumb = computed(() => {
   const entry = store.selectedEntry;
   if (!entry) return [];
@@ -879,9 +883,16 @@ async function addFirst(uuid: string): Promise<void> {
     ElMessage.error(String(reason));
   }
 }
-function openContextMenu(event: MouseEvent, target: ContainerContextTarget): void {
+/** 打开任一新菜单前先关掉所有旧菜单，避免两个菜单重叠。 */
+function closeAllMenus(): void {
   showActions.value = false;
   projectMenu.value = undefined;
+  contextMenu.value = undefined;
+  moduleMenu.value = undefined;
+  projectSubmenu.value = undefined;
+}
+function openContextMenu(event: MouseEvent, target: ContainerContextTarget): void {
+  closeAllMenus();
   contextMenu.value = {
     x: event.clientX,
     y: event.clientY,
@@ -904,8 +915,7 @@ async function openModuleMenu(
   item: { shortName: string; version: string },
   event: MouseEvent
 ): Promise<void> {
-  projectMenu.value = undefined;
-  contextMenu.value = undefined;
+  closeAllMenus();
   const anchor = { x: event.clientX, y: event.clientY };
   moduleMenu.value = { ...anchor, shortName: item.shortName, version: item.version };
   await nextTick();
@@ -932,8 +942,7 @@ async function moduleAction(action?: string): Promise<void> {
   if (action === 'export') ioAction('export', 'arxml');
 }
 async function openProjectMenu(event: MouseEvent | KeyboardEvent): Promise<void> {
-  contextMenu.value = undefined;
-  projectSubmenu.value = undefined;
+  closeAllMenus();
   const anchor = {
     x: 'clientX' in event ? event.clientX : 160,
     y: 'clientY' in event ? event.clientY : 80,
