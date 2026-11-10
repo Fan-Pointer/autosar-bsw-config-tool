@@ -355,6 +355,10 @@ async function readFile(event: Event): Promise<void> {
     modes.value = {};
     multiResult.value = '';
     if (props.format === 'arxml') {
+      // 先确定目标工程，再扫描：否则「已有配置/版本」会按上一次的选择判定。
+      projectMode.value = props.newOnly || !store.activeProject ? 'new' : 'current';
+      newProjectName.value =
+        projectMode.value === 'new' ? fileNameBase.value || '导入工程' : '';
       const scanned = store.scanArxmlImport(
         text,
         projectMode.value === 'new' ? null : undefined,
@@ -380,8 +384,6 @@ async function readFile(event: Event): Promise<void> {
       multiModules.value = scanned;
       chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
       modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'overwrite']));
-      projectMode.value = props.newOnly || !store.activeProject ? 'new' : 'current';
-      newProjectName.value = store.activeProject ? '' : (fileNameBase.value || '导入工程');
       return;
     }
     prepare();

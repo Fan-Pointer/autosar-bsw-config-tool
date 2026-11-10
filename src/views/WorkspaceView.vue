@@ -416,7 +416,7 @@
             @click="projectAction(item.action)"
           >
             <span>{{ item.label }}</span
-            ><span v-if="item.submenu">›</span>
+            >
           </button>
           <div
             v-if="projectSubmenu === item.action && item.children"

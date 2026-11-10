@@ -2117,6 +2117,9 @@ export const useConfigStore = defineStore('config', () => {
         setUuids: applied.map((item) => item.set.uuid),
         createdAt: new Date().toISOString(),
       };
+      // 先落库配置集，再写工程索引：否则新工程会引用尚未持久化的配置集（打开时被判为孤儿）。
+      changed();
+      await saveConfig();
       const next = [...projects.value, created];
       await writeProjectIndex({ schemaVersion: 1, projects: next });
       projects.value = next;

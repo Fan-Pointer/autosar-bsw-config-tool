@@ -119,4 +119,24 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
     expect(store.configSets.some((set) => set.uuid === demBefore)).toBe(true);
     expect(store.projects.find((item) => item.name === 'DEMO')!.setUuids).toContain(demBefore);
   });
+
+  it.fails.skipIf(skipProject)('KNOWN: keeps a freshly imported project intact after reload', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    await store.importArxmlModules(
+      readFileSync(PROJECT, 'utf8'),
+      [{ shortName: 'Dem', mode: 'overwrite' }],
+      { newProjectName: 'AAA' }
+    );
+    // 重新初始化 = 从存储重载，模拟用户刷新页面
+    setActivePinia(createPinia());
+    const reloaded = useConfigStore();
+    await reloaded.initialize();
+    const project = reloaded.projects.find((item) => item.name === 'AAA');
+    expect(project).toBeTruthy();
+    const missing = project!.setUuids.filter(
+      (uuid) => !reloaded.configSets.some((set) => set.uuid === uuid)
+    );
+    expect(missing).toEqual([]);
+  });
 });
