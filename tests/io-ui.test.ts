@@ -303,7 +303,7 @@ describe('import preview UI and project menus', () => {
       .mockImplementation(() => undefined);
     for (const format of ['JSON', 'ARXML', 'CSV（DTC 列表）']) {
       await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
-      button('导出›').click();
+      button('导出').click();
       await flushPromises();
       // G44：导出子菜单在三种单模块格式外新增两项工程级导出。
       expect(document.querySelectorAll('.io-submenu button')).toHaveLength(5);
@@ -322,7 +322,7 @@ describe('import preview UI and project menus', () => {
       '模块：Dem · CP TEST-SYNTHETIC-1\n配置集：IO Project'
     );
     await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
-    button('导入›').click();
+    button('导入').click();
     await flushPromises();
     expect(document.querySelectorAll('.io-submenu button')).toHaveLength(2);
     button('JSON').click();

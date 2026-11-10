@@ -1510,6 +1510,29 @@ export const useConfigStore = defineStore('config', () => {
   /** Save values locally with explicit Map serialization for every storage driver.
    * @returns Whether saving succeeded.
    */
+  /**
+   * 全量落库：把当前所有配置集与工程索引一次性写入（不做草稿/正式分流）。
+   * 用于导入新建工程等需要「配置集与归属同时生效」的场景，避免出现工程引用空库。
+   */
+  async function persistLibraryNow(): Promise<void> {
+    const snapshot: StoredLibrary = {
+      ...libraryExtras,
+      schemaVersion: 4,
+      importedModules: JSON.parse(JSON.stringify(importedModules.value)) as BswmdModule[],
+      activeUuid: activeUuid.value,
+      modulePreferences: JSON.parse(JSON.stringify(modulePreferences.value)) as Record<
+        string,
+        ModulePreference
+      >,
+      sets: configSets.value.map((set) => ({
+        ...set,
+        containers: set.containers.map(serialize),
+      })),
+    };
+    await persistLibrary(snapshot, false);
+    await writeProjectIndex({ schemaVersion: 1, projects: projects.value });
+  }
+
   async function saveConfig(): Promise<boolean> {
     if (isImporting.value) return false;
     const toDraft = Boolean(activeUuid.value && draftUuids.value.includes(activeUuid.value));
@@ -2089,7 +2112,9 @@ export const useConfigStore = defineStore('config', () => {
         applied.push({ set: target, module: header.shortName });
         notes.push(`${header.shortName}：已覆盖现有配置`);
       } else {
-        const created = cloneData(incoming);
+        // cloneData 是 JSON 深拷贝，会把 parameters/references 的 Map 拍平成对象；
+        // 这里用 serialize + hydrate 重建，保证容器可被持久化与编辑器遍历。
+        const created = hydrateConfig(serializeConfig(incoming), [definition]);
         created.uuid = generateUUID();
         created.name = `${options?.newProjectName?.trim() ?? activeProject.value?.name ?? '导入'} · ${header.shortName}`;
         created.lastModified = Date.now();
@@ -2117,9 +2142,9 @@ export const useConfigStore = defineStore('config', () => {
         setUuids: applied.map((item) => item.set.uuid),
         createdAt: new Date().toISOString(),
       };
-      // 先落库配置集，再写工程索引：否则新工程会引用尚未持久化的配置集（打开时被判为孤儿）。
+      // 先全量落库配置集，再写工程索引：否则新工程会引用尚未持久化的配置集。
       changed();
-      await saveConfig();
+      await persistLibraryNow();
       const next = [...projects.value, created];
       await writeProjectIndex({ schemaVersion: 1, projects: next });
       projects.value = next;
@@ -2146,7 +2171,7 @@ export const useConfigStore = defineStore('config', () => {
       activeUuid.value = applied[0].set.uuid;
       selectContainer(applied[0].set.containers[0]?.uuid ?? '');
       changed();
-      await saveConfig();
+      await persistLibraryNow();
       validate();
     }
     return notes;

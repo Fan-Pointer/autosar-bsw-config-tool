@@ -120,7 +120,7 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
     expect(store.projects.find((item) => item.name === 'DEMO')!.setUuids).toContain(demBefore);
   });
 
-  it.fails.skipIf(skipProject)('KNOWN: keeps a freshly imported project intact after reload', async () => {
+  it.skipIf(skipProject)('keeps a freshly imported project intact after reload', async () => {
     const store = useConfigStore();
     await store.initialize();
     await store.importArxmlModules(
@@ -138,5 +138,7 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
       (uuid) => !reloaded.configSets.some((set) => set.uuid === uuid)
     );
     expect(missing).toEqual([]);
+    // 重载后工程能真正打开（此前配置集库为空导致「暂不可用」）
+    expect(reloaded.configSets.length).toBeGreaterThan(0);
   });
 });
