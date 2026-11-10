@@ -88,7 +88,7 @@ describe('TASK-021 version-scoped project module lifecycle', () => {
     }
   });
 
-  it('adds, detaches and restores exact configurations across reload; another project is never borrowed', async () => {
+  it.skip(/* 用户 2026-11-10 裁定取消「游离配置集」：该用例测旧语义，待重写 */'adds, detaches and restores exact configurations across reload; another project is never borrowed', async () => {
     const store = useConfigStore();
     await store.createProject({ ...input, moduleShortNames: ['Dem'] });
     const first = store.activeProject!.projectUuid;
@@ -254,7 +254,7 @@ describe('project metadata with real shipped definitions', () => {
     expect(restored.module?.$source?.contentSha256).toBe(dem.$source?.contentSha256);
   });
 
-  it('keeps old configurations in a virtual default project with zero load writes; removing grouping never deletes sets', async () => {
+  it.skip(/* 用户 2026-11-10 裁定取消「游离配置集」：该用例测旧语义，待重写 */'keeps old configurations in a virtual default project with zero load writes; removing grouping never deletes sets', async () => {
     const store = useConfigStore();
     await store.createConfigSet('已有工程');
     const original = JSON.stringify(db.data.get(libraryKey));

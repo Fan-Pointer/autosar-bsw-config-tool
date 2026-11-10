@@ -124,7 +124,7 @@
       <div class="section-heading">
         <h2 id="projects-title">
           本机工程
-          <small>{{ store.projects.length + (store.unassignedSets.length ? 1 : 0) }}</small>
+          <small>{{ store.projects.length }}</small>
         </h2>
       </div>
       <p
@@ -137,7 +137,7 @@
       <p v-for="warning in store.projectWarnings" :key="warning" class="project-warning">
         {{ warning }}
       </p>
-      <div v-if="store.projects.length || store.unassignedSets.length" class="project-list">
+      <div v-if="store.projects.length" class="project-list">
         <div v-for="project in store.projects" :key="project.projectUuid" class="project-row">
           <span class="project-folder" aria-hidden="true"
             ><el-icon><FolderOpened /></el-icon
@@ -164,21 +164,6 @@
             移除归属
           </button>
         </div>
-        <template v-if="store.unassignedSets.length"
-          ><div class="default-caption">默认工程 <span>已有配置保留在这里</span></div>
-          <div v-for="set in store.unassignedSets" :key="set.uuid" class="project-row">
-            <span class="project-folder" aria-hidden="true"
-              ><el-icon><Document /></el-icon
-            ></span>
-            <div class="project-info">
-              <strong>{{ set.name ?? set.moduleRef }}</strong>
-              <p>{{ set.moduleRef }} · CP {{ set.version }}</p>
-            </div>
-            <button class="row-open" :disabled="store.isLoading" @click="openSet(set.uuid)">
-              打开
-            </button>
-          </div></template
-        >
       </div>
       <div v-else class="empty-projects">
         <div>
@@ -201,7 +186,7 @@
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessageBox } from 'element-plus';
-import { SetUp, Tickets, Reading, FolderOpened, Document } from '@element-plus/icons-vue';
+import { SetUp, Tickets, Reading, FolderOpened } from '@element-plus/icons-vue';
 import { useConfigStore } from '@/stores/configStore';
 import PortalLayout from '@/ui/Portal/PortalLayout.vue';
 import ProjectWizard from '@/ui/Projects/ProjectWizard.vue';
@@ -210,7 +195,7 @@ import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 const router = useRouter(),
   store = useConfigStore(),
   showCreate = ref(false);
-const { navigationError, openProject, openSet, enterWorkspace } = useProjectNavigation();
+const { navigationError, openProject, enterWorkspace } = useProjectNavigation();
 onMounted(() => {
   void store.initialize();
 });

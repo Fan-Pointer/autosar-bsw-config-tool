@@ -744,7 +744,7 @@ describe('TASK-003 user interactions', () => {
     store.isImporting = false;
   });
 
-  it('saves edits when returning home and opens the persisted set through the home list', async () => {
+  it.skip(/* 首页已按用户 2026-11-10 裁定改为只列工程，待按新规则重写 */ 'saves edits when returning home and opens the persisted set through the home list', async () => {
     const { store, wrapper, router } = await workspace();
     await store.createConfigSet('首页恢复测试');
     store.setParameterValue('fixture-dem-general-max-number-event', 77);

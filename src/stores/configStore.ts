@@ -246,9 +246,8 @@ export const useConfigStore = defineStore('config', () => {
         : p.projectUuid === emptyProjectUuid.value
     )
   );
-  const unassignedSets = computed(() =>
-    configSets.value.filter((set) => !projects.value.some((p) => p.setUuids.includes(set.uuid)))
-  );
+  /** 用户 2026-11-10 裁定：取消「游离配置集」概念，所有配置集必须属于某个工程。 */
+  const unassignedSets = computed<ConfigInstance[]>(() => []);
   const projectWarnings = computed(() =>
     projects.value.flatMap((p) => {
       const missing = p.setUuids.filter(
@@ -1199,38 +1198,6 @@ export const useConfigStore = defineStore('config', () => {
     if (dataSafety.value.locked) {
       validate();
       return true;
-    }
-    // 打开配置集时同步工程上下文：属于某工程就切到该工程；孤立配置集自动归入「默认工程」，
-    // 避免出现「点 CanIf 打开后仍显示 DEMO」的错误上下文。
-    const owner = projects.value.find((project) => project.setUuids.includes(uuid));
-    if (owner) {
-      if (activeProject.value?.projectUuid !== owner.projectUuid)
-        await openProject(owner.projectUuid).catch(() => false);
-    } else if (!projects.value.some((project) => project.name === '默认工程')) {
-      const fallback: ProjectMetadata = {
-        projectUuid: generateUUID(),
-        name: '默认工程',
-        autosarVersion: module.value?.version ?? '4.4.0',
-        chip: { family: '' },
-        moduleShortNames: [
-          ...new Set(
-            configSets.value
-              .filter((set) => !projects.value.some((p) => p.setUuids.includes(set.uuid)))
-              .map((set) => set.moduleRef)
-          ),
-        ],
-        setUuids: configSets.value
-          .filter((set) => !projects.value.some((p) => p.setUuids.includes(set.uuid)))
-          .map((set) => set.uuid),
-        createdAt: new Date().toISOString(),
-      };
-      const next = [...projects.value, fallback];
-      await writeProjectIndex({ schemaVersion: 1, projects: next });
-      projects.value = next;
-      await openProject(fallback.projectUuid).catch(() => false);
-    } else {
-      const fallbackProject = projects.value.find((project) => project.name === '默认工程');
-      if (fallbackProject) await openProject(fallbackProject.projectUuid).catch(() => false);
     }
     isDirty.value = true;
     validate();
