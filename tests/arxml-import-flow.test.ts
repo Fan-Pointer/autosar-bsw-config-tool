@@ -91,4 +91,32 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
       expect(imported.length).toBeGreaterThan(1);
     }
   );
+
+  it.skipIf(skipProject)('creates a new project without touching the existing one', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    await store.createProject({
+      name: 'DEMO',
+      autosarVersion: '4.4.0',
+      chip: { family: 'S32K3XX' },
+      moduleShortNames: ['Dem'],
+    });
+    const text = readFileSync(PROJECT, 'utf8');
+    // 新建工程：扫描不得显示「已有配置」，也不得判版本冲突。
+    const preview = store.scanArxmlImport(text, null, true);
+    expect(preview.every((item) => item.existingSetUuid === undefined)).toBe(true);
+    expect(preview.every((item) => item.versionMismatch === false)).toBe(true);
+    const demBefore = store.configSets.find((set) => set.moduleRef === 'Dem')!.uuid;
+    await store.importArxmlModules(
+      text,
+      [{ shortName: 'Dem', mode: 'overwrite' }],
+      { newProjectName: 'AAA' }
+    );
+    // 新工程已建立且成为当前工程
+    expect(store.projects.map((item) => item.name)).toContain('AAA');
+    expect(store.activeProject?.name).toBe('AAA');
+    // 原工程 DEMO 的配置未被覆盖/删除
+    expect(store.configSets.some((set) => set.uuid === demBefore)).toBe(true);
+    expect(store.projects.find((item) => item.name === 'DEMO')!.setUuids).toContain(demBefore);
+  });
 });

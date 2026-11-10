@@ -1938,24 +1938,47 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   /** 扫描 ARXML 的模块段并标注导入条件（G45）：定义是否已加载、版本是否与工程一致、是否已有同模块配置。 */
-  function scanArxmlImport(text: string): {
+  function scanArxmlImport(
+    text: string,
+    /** null = 目标为「新建工程」：不沿用当前工程的版本与已有配置。 */
+    target: string | null = activeProject.value?.projectUuid ?? null,
+    creatingNewProject = false
+  ): {
     shortName: string;
     version: string;
     loaded: boolean;
     versionMismatch: boolean;
     existingSetUuid?: string;
   }[] {
-    const projectVersion = activeProject.value?.autosarVersion ?? module.value?.version ?? '4.4.0';
-    return scanArxmlModules(text).map((header) => ({
+    const headers = scanArxmlModules(text);
+    // 新建工程以文件自带版本为准；并入现有工程才用工程版本比对。
+    const projectVersion = creatingNewProject
+      ? (headers[0]?.release ?? '4.4.0')
+      : (projects.value.find((item) => item.projectUuid === target)?.autosarVersion ??
+        activeProject.value?.autosarVersion ??
+        module.value?.version ??
+        '4.4.0');
+    // 已有配置只在目标工程内判定：新建工程时必然为空。
+    const scope = creatingNewProject
+      ? []
+      : (projects.value.find((item) => item.projectUuid === target)?.setUuids ??
+        activeProject.value?.setUuids ??
+        []);
+    return headers.map((header) => ({
       shortName: header.shortName,
       version: header.release,
       loaded: modules.value.some(
         (item) => item.shortName === header.shortName && item.version === header.release
       ),
-      versionMismatch: header.release !== projectVersion,
-      existingSetUuid: configSets.value.find(
-        (set) => set.moduleRef === header.shortName && set.version === header.release
-      )?.uuid,
+      versionMismatch: !creatingNewProject && header.release !== projectVersion,
+      existingSetUuid: creatingNewProject
+        ? undefined
+        : configSets.value.find(
+            (set) =>
+              scope.includes(set.uuid) &&
+              set.moduleRef === header.shortName &&
+              set.version === header.release
+          )?.uuid,
     }));
   }
 
@@ -1975,11 +1998,17 @@ export const useConfigStore = defineStore('config', () => {
     if (!selections.length) throw new Error('请至少选择一个模块');
     assertEditable();
     assertWritable();
-    const projectVersion = activeProject.value?.autosarVersion ?? module.value?.version ?? '4.4.0';
     // 复用调用方已扫描的结果：同一份文本不再二次解析，避免偶发误报「没有可导入的模块」。
     const headers = options?.headers ?? scanArxmlModules(text);
+    const creating = Boolean(options?.newProjectName?.trim());
+    // 新建工程以文件版本为准；并入现有工程才用工程版本。
+    const projectVersion = creating
+      ? (headers[0]?.release ?? module.value?.version ?? '4.4.0')
+      : (activeProject.value?.autosarVersion ?? module.value?.version ?? '4.4.0');
+    // 已有配置的判定范围：新建工程时为空（否则会误判为「已有」并覆盖别的工程）。
+    const targetSetUuids = creating ? [] : (activeProject.value?.setUuids ?? []);
     const wanted = selections.filter((item) => item.mode !== 'skip');
-    const missingVersions = wanted.filter((item) => {
+    const missingVersions = creating ? [] : wanted.filter((item) => {
       const header = headers.find((entry) => entry.shortName === item.shortName);
       return header ? header.release !== projectVersion : true;
     });
@@ -2043,7 +2072,10 @@ export const useConfigStore = defineStore('config', () => {
         notes.push(`${header.shortName}：文件仅含模块壳，已按定义补出默认骨架`);
       }
       const existing = configSets.value.find(
-        (set) => set.moduleRef === header.shortName && set.version === header.release
+        (set) =>
+          targetSetUuids.includes(set.uuid) &&
+          set.moduleRef === header.shortName &&
+          set.version === header.release
       );
       if (existing && item.mode === 'overwrite') {
         // 覆盖=合并：文件里出现的容器/参数覆盖，文件中没有的保留，导入后仍可继续配置。
@@ -2059,7 +2091,7 @@ export const useConfigStore = defineStore('config', () => {
       } else {
         const created = cloneData(incoming);
         created.uuid = generateUUID();
-        created.name = `${activeProject.value?.name ?? '导入'} · ${header.shortName}`;
+        created.name = `${options?.newProjectName?.trim() ?? activeProject.value?.name ?? '导入'} · ${header.shortName}`;
         created.lastModified = Date.now();
         configSets.value.push(created);
         applied.push({ set: created, module: header.shortName });
@@ -2089,6 +2121,9 @@ export const useConfigStore = defineStore('config', () => {
       await writeProjectIndex({ schemaVersion: 1, projects: next });
       projects.value = next;
       notes.push(`已新建工程「${created.name}」并挂载 ${applied.length} 个配置集`);
+      // 导入后直接进入新工程（否则界面仍停在原工程，看起来像「并入」了）。
+      await openProject(created.projectUuid).catch(() => false);
+      activeUuid.value = applied[0].set.uuid;
     } else if (project && applied.length) {
       const setUuids = [...project.setUuids];
       const names = [...project.moduleShortNames];

@@ -44,14 +44,21 @@
       </header>
       <div class="project-target">
         <label
-          ><input v-model="projectMode" type="radio" value="current" :disabled="!store.activeProject" />并入当前工程<span
+          ><input
+            v-model="projectMode"
+            type="radio"
+            value="current"
+            :disabled="!store.activeProject || newOnly"
+            @change="rescan()"
+          />并入当前工程<span
             v-if="store.activeProject"
             class="muted"
             >（{{ store.activeProject.name }}）</span
           ></label
         >
         <label
-          ><input v-model="projectMode" type="radio" value="new" />新建工程</label
+          ><input v-model="projectMode" type="radio" value="new" @change="rescan()" />新建工程
+          <span v-if="newOnly" class="muted">（导入工程固定新建）</span></label
         >
         <input
           v-if="projectMode === 'new'"
@@ -250,6 +257,22 @@ function toggleAll(): void {
     ? []
     : multiModules.value.filter((item) => !item.versionMismatch).map((item) => item.shortName);
 }
+/** 目标工程切换后重扫：已有配置/版本判定都随目标工程变化。 */
+function rescan(): void {
+  if (!content) return;
+  try {
+    const scanned = store.scanArxmlImport(
+      content,
+      projectMode.value === 'new' ? null : undefined,
+      projectMode.value === 'new'
+    );
+    multiModules.value = scanned;
+    chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
+    modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'overwrite']));
+  } catch (reason) {
+    error.value = reason instanceof Error ? reason.message : String(reason);
+  }
+}
 function setMode(shortName: string, event: Event): void {
   const value = (event.target as HTMLSelectElement).value as 'overwrite' | 'skip';
   modes.value = { ...modes.value, [shortName]: value };
@@ -332,7 +355,11 @@ async function readFile(event: Event): Promise<void> {
     modes.value = {};
     multiResult.value = '';
     if (props.format === 'arxml') {
-      const scanned = store.scanArxmlImport(text);
+      const scanned = store.scanArxmlImport(
+        text,
+        projectMode.value === 'new' ? null : undefined,
+        projectMode.value === 'new'
+      );
       const only = scanned[0];
       const sameAsCurrent =
         scanned.length === 1 &&
@@ -353,7 +380,7 @@ async function readFile(event: Event): Promise<void> {
       multiModules.value = scanned;
       chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
       modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'overwrite']));
-      projectMode.value = store.activeProject ? 'current' : 'new';
+      projectMode.value = props.newOnly || !store.activeProject ? 'new' : 'current';
       newProjectName.value = store.activeProject ? '' : (fileNameBase.value || '导入工程');
       return;
     }
