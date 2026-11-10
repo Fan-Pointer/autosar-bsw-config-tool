@@ -55,8 +55,8 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
     const imported = store.configSets.find((set) => set.moduleRef === 'CanIf');
     expect(imported).toBeTruthy();
     expect(store.activeUuid).toBe(imported!.uuid);
-    // 该文件是引用型空壳（模块配置在外部文件），容器数可以为 0，但配置集必须存在。
-    expect(Array.isArray(imported!.containers)).toBe(true);
+    // 引用型空壳导入后必须补出默认骨架，否则用户无法配置。
+    expect(imported!.containers.length).toBeGreaterThan(0);
     // 自动并入工程
     expect(store.activeProject!.moduleShortNames).toContain('CanIf');
     expect(store.activeProject!.setUuids).toContain(imported!.uuid);

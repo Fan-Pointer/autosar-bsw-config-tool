@@ -8,7 +8,7 @@
     :show-close="!store.isImporting"
     @update:model-value="emit('update:modelValue', $event)"
   >
-    <div class="import-options">
+    <div v-if="!multiModules.length" class="import-options">
       <label
         >配置文件（上限 50 MB）<input
           aria-label="配置文件"
@@ -37,7 +37,7 @@
     <!-- G45：工程级 ARXML 含多个模块时，改为勾选导入。 -->
     <section v-if="multiModules.length" class="multi-import" aria-label="选择要导入的模块">
       <header>
-        <strong>该文件包含 {{ multiModules.length }} 个模块配置，请勾选要导入的模块</strong>
+        <strong v-if="multiModules.length > 1">该文件包含 {{ multiModules.length }} 个模块配置，请勾选要导入的模块</strong><strong v-else>文件包含 1 个模块：{{ multiModules[0]?.shortName }}，确认导入</strong>
         <label class="select-all"
           ><input type="checkbox" :checked="allSelected" @change="toggleAll" />全选</label
         >
@@ -296,21 +296,27 @@ async function readFile(event: Event): Promise<void> {
     multiResult.value = '';
     if (props.format === 'arxml') {
       const scanned = store.scanArxmlImport(text);
-      if (scanned.length === 1) {
-        const only = scanned[0];
-        if (only.versionMismatch)
-          throw new Error(
-            `模块 ${only.shortName} 的版本（${only.version}）与当前工程不一致，不能跨版本导入`
-          );
-        // 单模块文件：定义未加载时先按文件版本自动加载，再走原有预览流程。
-        if (!only.loaded) await store.ensureModuleDefinition(only.shortName, only.version);
-      }
-      if (scanned.length > 1) {
-        multiModules.value = scanned;
-        chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
-        modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'copy']));
+      const only = scanned[0];
+      const sameAsCurrent =
+        scanned.length === 1 &&
+        store.config !== null &&
+        only.shortName === store.config.moduleRef &&
+        only.version === store.config.version;
+      if (scanned.length === 1 && only.versionMismatch)
+        throw new Error(
+          `模块 ${only.shortName} 的版本（${only.version}）与当前工程不一致，不能跨版本导入`
+        );
+      // 单模块且与当前配置集同模块：沿用原有预览流程（可看冲突明细与解析告警）。
+      if (sameAsCurrent && only.loaded) {
+        prepare();
         return;
       }
+      // 其余情况（多模块 / 定义未加载 / 与当前配置集不同）统一走勾选导入：
+      // 自动加载定义、空壳补骨架、并入工程，不再因「模块与当前配置集不一致」直接报错。
+      multiModules.value = scanned;
+      chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
+      modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'copy']));
+      return;
     }
     prepare();
   } catch (reason) {
