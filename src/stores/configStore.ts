@@ -32,7 +32,7 @@ import {
 } from '@/core/io/ConfigJson';
 import { exportArxml, importArxml } from '@/core/io/Arxml';
 import { evaluateParameterStates } from '@/core/constraint/ParameterStates';
-import { exportProjectArxml } from '@/core/io/Arxml';
+import { exportProjectArxml, scanArxmlModules } from '@/core/io/Arxml';
 import { buildProjectPackage, type ProjectPackageManifest } from '@/core/io/ProjectPackage';
 import { exportCsv } from '@/core/io/Csv';
 import { planImport } from '@/core/io/ImportPlan';
@@ -1923,6 +1923,176 @@ export const useConfigStore = defineStore('config', () => {
     });
   }
 
+  /** 确保某模块定义已加载（G45）：从内置定义库按版本读取，失败给出可读原因。 */
+  async function ensureModuleDefinition(shortName: string, version: string): Promise<void> {
+    if (modules.value.some((item) => item.shortName === shortName && item.version === version))
+      return;
+    const additions = await readBuiltinModules([shortName], version);
+    const definition = additions.find(
+      (item) => item.shortName === shortName && item.version === version
+    );
+    if (!definition)
+      throw new Error(`内置定义库中没有 ${shortName}（${version}），无法自动加载`);
+    modules.value = [...modules.value, definition];
+    importedModules.value.push(definition);
+    manager = new ConfigInstanceManager(modules.value);
+  }
+
+  /** 扫描 ARXML 的模块段并标注导入条件（G45）：定义是否已加载、版本是否与工程一致、是否已有同模块配置。 */
+  function scanArxmlImport(text: string): {
+    shortName: string;
+    version: string;
+    loaded: boolean;
+    versionMismatch: boolean;
+    existingSetUuid?: string;
+  }[] {
+    const projectVersion = activeProject.value?.autosarVersion ?? module.value?.version ?? '4.4.0';
+    return scanArxmlModules(text).map((header) => ({
+      shortName: header.shortName,
+      version: header.release,
+      loaded: modules.value.some(
+        (item) => item.shortName === header.shortName && item.version === header.release
+      ),
+      versionMismatch: header.release !== projectVersion,
+      existingSetUuid: configSets.value.find(
+        (set) => set.moduleRef === header.shortName && set.version === header.release
+      )?.uuid,
+    }));
+  }
+
+  /**
+   * 导入工程级 ARXML 中选中的模块（G45）。
+   * 缺失定义自动从内置定义库按文件版本加载；版本与工程不一致的模块**跳过并报错**（用户裁定）；
+   * 已有同模块配置按 overwrite / copy / skip 处理；导入成功后自动并入当前工程。
+   * @param text 原始 ARXML。
+   * @param selections 每个模块的处理策略。
+   * @returns 逐模块的结果说明（含跳过原因）。
+   */
+  async function importArxmlModules(
+    text: string,
+    selections: { shortName: string; mode: 'overwrite' | 'copy' | 'skip' }[]
+  ): Promise<string[]> {
+    if (!selections.length) throw new Error('请至少选择一个模块');
+    assertEditable();
+    assertWritable();
+    const projectVersion = activeProject.value?.autosarVersion ?? module.value?.version ?? '4.4.0';
+    const headers = scanArxmlModules(text);
+    const wanted = selections.filter((item) => item.mode !== 'skip');
+    const missingVersions = wanted.filter((item) => {
+      const header = headers.find((entry) => entry.shortName === item.shortName);
+      return header ? header.release !== projectVersion : true;
+    });
+    if (missingVersions.length)
+      throw new Error(
+        `以下模块版本与当前工程（${projectVersion}）不一致，已按裁定跳过：` +
+          missingVersions
+            .map((item) => `${item.shortName}（${headers.find((h) => h.shortName === item.shortName)?.release ?? '未知'}）`)
+            .join('、')
+      );
+
+    // 1) 按文件版本加载缺失的定义（内置库），并保持 modules 与 importedModules 一致。
+    const needLoading = wanted
+      .map((item) => headers.find((header) => header.shortName === item.shortName)!)
+      .filter(
+        (header) =>
+          !modules.value.some(
+            (item) => item.shortName === header.shortName && item.version === header.release
+          )
+      );
+    const notes: string[] = [];
+    if (needLoading.length) {
+      const additions = await readBuiltinModules(
+        [...new Set(needLoading.map((header) => header.shortName))],
+        projectVersion
+      );
+      const loaded = additions.filter((module) =>
+        needLoading.some((header) => header.shortName === module.shortName)
+      );
+      const absent = needLoading.filter(
+        (header) => !loaded.some((module) => module.shortName === header.shortName)
+      );
+      if (absent.length)
+        notes.push(`内置定义库缺失，已跳过：${absent.map((item) => item.shortName).join('、')}`);
+      modules.value = [...modules.value, ...loaded];
+      importedModules.value.push(...loaded);
+      manager = new ConfigInstanceManager(modules.value);
+    }
+
+    // 2) 逐模块解析并写入配置库。
+    const applied: { set: ConfigInstance; module: string }[] = [];
+    for (const item of wanted) {
+      const header = headers.find((entry) => entry.shortName === item.shortName);
+      if (!header) continue;
+      const definition = modules.value.find(
+        (module) => module.shortName === header.shortName && module.version === header.release
+      );
+      if (!definition) continue;
+      const warnings: string[] = [];
+      let incoming: ConfigInstance;
+      try {
+        incoming = importArxml(text, modules.value, (message) => warnings.push(message), header.shortName);
+      } catch (reason) {
+        notes.push(`${header.shortName}：解析失败（${reason instanceof Error ? reason.message : String(reason)}）`);
+        continue;
+      }
+      if (warnings.length) notes.push(`${header.shortName}：${warnings.slice(0, 2).join('；')}`);
+      if (!incoming.containers.length)
+        notes.push(`${header.shortName}：文件仅含模块壳（配置在外部引用），已建空配置集`);
+      const existing = configSets.value.find(
+        (set) => set.moduleRef === header.shortName && set.version === header.release
+      );
+      if (existing && item.mode === 'overwrite') {
+        const target = cloneData(existing);
+        target.containers = incoming.containers;
+        target.lastModified = Date.now();
+        configSets.value = configSets.value.map((set) =>
+          set.uuid === existing.uuid ? target : set
+        );
+        applied.push({ set: target, module: header.shortName });
+        notes.push(`${header.shortName}：已覆盖现有配置`);
+      } else {
+        const created = cloneData(incoming);
+        created.uuid = generateUUID();
+        created.name = `${activeProject.value?.name ?? '导入'} · ${header.shortName}`;
+        created.lastModified = Date.now();
+        configSets.value.push(created);
+        applied.push({ set: created, module: header.shortName });
+        notes.push(`${header.shortName}：已作为新配置集导入`);
+      }
+      modulePreferences.value[moduleKey(header.shortName, header.release)] = {
+        included: true,
+        generation: true,
+        validation: true,
+      };
+    }
+
+    // 3) 自动并入当前工程（用户要求：工程里没有的模块自动添加）。
+    const project = activeProject.value;
+    if (project && applied.length) {
+      const setUuids = [...project.setUuids];
+      const names = [...project.moduleShortNames];
+      for (const item of applied) {
+        if (!setUuids.includes(item.set.uuid)) setUuids.push(item.set.uuid);
+        if (!names.includes(item.module)) names.push(item.module);
+      }
+      const next = projects.value.map((entry) =>
+        entry.projectUuid === project.projectUuid
+          ? { ...entry, setUuids, moduleShortNames: names, updatedAt: new Date().toISOString() }
+          : entry
+      );
+      await writeProjectIndex({ schemaVersion: 1, projects: next });
+      projects.value = next;
+    }
+    if (applied.length) {
+      activeUuid.value = applied[0].set.uuid;
+      selectContainer(applied[0].set.containers[0]?.uuid ?? '');
+      changed();
+      await saveConfig();
+      validate();
+    }
+    return notes;
+  }
+
   /** Parse a file into an isolated preview session without writing storage or editor state.
    * @param text File content.
    * @param format Explicit file format.
@@ -2170,6 +2340,9 @@ export const useConfigStore = defineStore('config', () => {
     projectExportEntries,
     exportProjectArxmlContent,
     exportProjectPackageContent,
+    ensureModuleDefinition,
+    scanArxmlImport,
+    importArxmlModules,
     validateAllProjects,
     closeAllProjects,
     openProject,

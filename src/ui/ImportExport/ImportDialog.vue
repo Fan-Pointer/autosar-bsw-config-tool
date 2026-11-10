@@ -34,6 +34,61 @@
     <p class="import-help">
       文件仅在本机处理。预览后点击“应用导入”才会保存。未在文件中出现的配置集容器会保留。
     </p>
+    <!-- G45：工程级 ARXML 含多个模块时，改为勾选导入。 -->
+    <section v-if="multiModules.length" class="multi-import" aria-label="选择要导入的模块">
+      <header>
+        <strong>该文件包含 {{ multiModules.length }} 个模块配置，请勾选要导入的模块</strong>
+        <label class="select-all"
+          ><input type="checkbox" :checked="allSelected" @change="toggleAll" />全选</label
+        >
+      </header>
+      <table>
+        <thead>
+          <tr>
+            <th>选择</th>
+            <th>模块</th>
+            <th>版本</th>
+            <th>状态</th>
+            <th>已有配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in multiModules" :key="item.shortName">
+            <td>
+              <input
+                v-model="chosen"
+                type="checkbox"
+                :value="item.shortName"
+                :disabled="item.versionMismatch || store.isImporting"
+                :aria-label="'选择模块 ' + item.shortName"
+              />
+            </td>
+            <td>{{ item.shortName }}</td>
+            <td>{{ item.version }}</td>
+            <td>
+              <span v-if="item.versionMismatch" class="bad">版本与工程不一致，将跳过</span>
+              <span v-else-if="item.existingSetUuid" class="warn">已有同模块配置</span>
+              <span v-else-if="!item.loaded">将自动加载定义</span>
+              <span v-else class="ok">就绪</span>
+            </td>
+            <td>
+              <select
+                v-if="item.existingSetUuid"
+                v-model="modes[item.shortName]"
+                :aria-label="item.shortName + ' 处理方式'"
+                :disabled="store.isImporting"
+              >
+                <option value="overwrite">覆盖现有</option>
+                <option value="copy">新建副本</option>
+                <option value="skip">跳过</option>
+              </select>
+              <span v-else>新建配置集</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p v-if="multiResult" role="status" class="multi-result">{{ multiResult }}</p>
+    </section>
     <fieldset class="strategies" :disabled="store.isImporting">
       <legend>冲突解决策略</legend>
       <label><input v-model="strategy" type="radio" value="overwrite" />覆盖</label>
@@ -98,6 +153,14 @@
       ><el-button :disabled="store.isImporting" @click="emit('update:modelValue', false)"
         >取消</el-button
       ><el-button
+        v-if="multiModules.length"
+        type="primary"
+        :disabled="!chosen.length || reading || store.isImporting"
+        :loading="store.isImporting"
+        @click="applyMulti"
+        >导入选中模块（{{ chosen.length }}）</el-button
+      ><el-button
+        v-else
         type="primary"
         :disabled="!preview.plan || reading || Boolean(error)"
         :loading="store.isImporting"
@@ -153,6 +216,39 @@ watch(
     target.value = props.newOnly || !store.config ? 'new' : 'current';
   }
 );
+const multiModules = ref<ReturnType<typeof store.scanArxmlImport>>([]);
+const chosen = ref<string[]>([]);
+const modes = ref<Record<string, 'overwrite' | 'copy' | 'skip'>>({});
+const multiResult = ref('');
+const allSelected = computed(
+  () => multiModules.value.length > 0 && chosen.value.length === multiModules.value.filter((item) => !item.versionMismatch).length
+);
+function toggleAll(): void {
+  chosen.value = allSelected.value
+    ? []
+    : multiModules.value.filter((item) => !item.versionMismatch).map((item) => item.shortName);
+}
+async function applyMulti(): Promise<void> {
+  if (!chosen.value.length) return;
+  multiResult.value = '';
+  try {
+    const notes = await store.importArxmlModules(
+      content,
+      chosen.value.map((shortName) => ({
+        shortName,
+        mode: modes.value[shortName] ?? 'copy',
+      }))
+    );
+    ElMessage.success('导入完成，已保存到本机');
+    multiResult.value = notes.join('；');
+    emit('imported');
+    multiModules.value = [];
+    chosen.value = [];
+    emit('update:modelValue', false);
+  } catch (reason) {
+    error.value = reason instanceof Error ? reason.message : String(reason);
+  }
+}
 function prepare(): void {
   session.value = undefined;
   error.value = '';
@@ -186,6 +282,28 @@ async function readFile(event: Event): Promise<void> {
     if (version !== readVersion) return;
     content = text;
     if (!content.trim()) throw new Error('文件为空');
+    multiModules.value = [];
+    chosen.value = [];
+    modes.value = {};
+    multiResult.value = '';
+    if (props.format === 'arxml') {
+      const scanned = store.scanArxmlImport(text);
+      if (scanned.length === 1) {
+        const only = scanned[0];
+        if (only.versionMismatch)
+          throw new Error(
+            `模块 ${only.shortName} 的版本（${only.version}）与当前工程不一致，不能跨版本导入`
+          );
+        // 单模块文件：定义未加载时先按文件版本自动加载，再走原有预览流程。
+        if (!only.loaded) await store.ensureModuleDefinition(only.shortName, only.version);
+      }
+      if (scanned.length > 1) {
+        multiModules.value = scanned;
+        chosen.value = scanned.filter((item) => !item.versionMismatch).map((item) => item.shortName);
+        modes.value = Object.fromEntries(scanned.map((item) => [item.shortName, 'copy']));
+        return;
+      }
+    }
     prepare();
   } catch (reason) {
     if (version === readVersion)
@@ -237,6 +355,50 @@ async function apply(): Promise<void> {
 }
 .strategies label {
   cursor: pointer;
+}
+.multi-import {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+.multi-import header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.multi-import table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.multi-import th,
+.multi-import td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 6px 8px;
+  text-align: left;
+}
+.multi-import select {
+  min-height: 26px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+.multi-import .bad {
+  color: var(--color-error);
+}
+.multi-import .warn {
+  color: var(--color-warning);
+}
+.multi-import .ok {
+  color: var(--color-success);
+}
+.multi-result {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--color-muted);
+  line-height: 1.6;
 }
 .import-counts {
   display: grid;

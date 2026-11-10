@@ -339,10 +339,46 @@ function readValue(value: string, definition: BswmdParameter): unknown {
  * @param onWarning Receives compatibility warnings; the UI displays these before import.
  * @returns Validated standalone configuration with resolved forward references.
  */
+/** 工程级 ARXML 中一个模块段的基本信息（G45 导入勾选列表）。 */
+export interface ArxmlModuleHeader {
+  shortName: string;
+  definitionPath: string;
+  /** 文件自带的编辑器 release 标记（缺省按 4.4.0）。 */
+  release: string;
+  uuid: string;
+}
+
+/**
+ * 轻量扫描 ARXML 中的模块配置段（不解析容器树，供导入弹窗列举）。
+ * @param source 原始 ARXML 文本。
+ * @returns 按文件顺序的模块头信息；解析失败抛错。
+ */
+export function scanArxmlModules(source: string): ArxmlModuleHeader[] {
+  checkImportSize(new TextEncoder().encode(source).byteLength);
+  const clean = withoutXmlComments(stripDoctype(source));
+  const headers: ArxmlModuleHeader[] = [];
+  const pattern =
+    /<ECUC-MODULE-CONFIGURATION-VALUES(?=\s)(?![-\w])[^>]*>([\s\S]*?)<\/ECUC-MODULE-CONFIGURATION-VALUES>/g;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(clean))) {
+    const body = match[1];
+    const shortName = /<SHORT-NAME>([^<]+)<\/SHORT-NAME>/.exec(body)?.[1]?.trim();
+    const definitionPath = /<DEFINITION-REF[^>]*>([^<]+)<\/DEFINITION-REF>/.exec(body)?.[1]?.trim();
+    const release = /<SD\s+GID="release">([^<]+)<\/SD>/.exec(body)?.[1]?.trim() ?? '4.4.0';
+    const uuid = /UUID="([^"]+)"/.exec(match[0])?.[1] ?? '';
+    if (shortName && definitionPath)
+      headers.push({ shortName, definitionPath, release, uuid });
+  }
+  if (!headers.length) throw new Error('文件里没有可导入的 ECUC 模块配置');
+  return headers;
+}
+
 export function importArxml(
   source: string,
   modules: BswmdModule[],
-  onWarning?: (message: string) => void
+  onWarning?: (message: string) => void,
+  /** 工程级文件中只导入该短名的模块段（G45）。 */
+  onlyModule?: string
 ): ConfigInstance {
   checkImportSize(new TextEncoder().encode(source).byteLength);
   source = withoutXmlComments(source);
@@ -386,14 +422,24 @@ export function importArxml(
     }
   };
   packages(autosar, '');
-  if (found.length !== 1) throw new Error('每次导入须包含且仅包含一个 ECUC 模块配置');
-  const { node: moduleNode, packagePath } = found[0];
+  // 单模块文件必须唯一；工程级文件按选中的模块名取段（G45 多模块导入）。
+  const candidates = onlyModule
+    ? found.filter((item) => text(item.node, 'SHORT-NAME').trim() === onlyModule)
+    : found;
+  if (candidates.length !== 1)
+    throw onlyModule
+      ? new Error(`文件中未找到模块 ${onlyModule} 的配置段`)
+      : new Error('每次导入须包含且仅包含一个 ECUC 模块配置');
+  const { node: moduleNode, packagePath } = candidates[0];
   const modulePath = text(moduleNode, 'DEFINITION-REF').trim();
   const release = editorData(moduleNode).get('release') ?? '4.4.0';
   const module = modules.find(
     (item) =>
       item.version === release &&
       modulePath === (item.definitionPath ?? `/AUTOSAR/EcucDefs/${item.shortName}`)
+  ) ?? modules.find(
+    // 第三方工具常用 `/AUTOSAR/<模块>` 简写路径；短名 + 版本唯一即可认定同一模块定义。
+    (item) => item.version === release && modulePath.endsWith(`/${item.shortName}`)
   );
   if (!module) throw new Error(`未加载模块定义：${modulePath} (${release})；不能跨版本套用定义`);
   const paths = definitionPaths(module);
