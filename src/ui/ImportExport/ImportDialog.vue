@@ -74,9 +74,10 @@
             <td>
               <select
                 v-if="item.existingSetUuid"
-                v-model="modes[item.shortName]"
+                :value="modes[item.shortName] ?? 'copy'"
                 :aria-label="item.shortName + ' 处理方式'"
                 :disabled="store.isImporting"
+                @change="setMode(item.shortName, $event)"
               >
                 <option value="overwrite">覆盖现有</option>
                 <option value="copy">新建副本</option>
@@ -228,6 +229,11 @@ function toggleAll(): void {
     ? []
     : multiModules.value.filter((item) => !item.versionMismatch).map((item) => item.shortName);
 }
+function setMode(shortName: string, event: Event): void {
+  const value = (event.target as HTMLSelectElement).value as 'overwrite' | 'copy' | 'skip';
+  modes.value = { ...modes.value, [shortName]: value };
+  if (value === 'skip') chosen.value = chosen.value.filter((name) => name !== shortName);
+}
 async function applyMulti(): Promise<void> {
   if (!chosen.value.length) return;
   multiResult.value = '';
@@ -246,7 +252,9 @@ async function applyMulti(): Promise<void> {
     chosen.value = [];
     emit('update:modelValue', false);
   } catch (reason) {
-    error.value = reason instanceof Error ? reason.message : String(reason);
+    const message = reason instanceof Error ? reason.message : String(reason);
+    error.value = message;
+    ElMessage.error(message);
   }
 }
 function prepare(): void {

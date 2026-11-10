@@ -122,6 +122,8 @@ export function importEcucModuleArxml(source: string, moduleShortName: string): 
       'ECUC-ENUMERATION-PARAM-DEF': 'ENUM',
       'ECUC-STRING-PARAM-DEF': 'STRING',
       'ECUC-FUNCTION-NAME-DEF': 'FUNCTION',
+      // ADD-INFO 是工具/文档附加信息，按只读字符串承载，避免整模块定义加载失败。
+      'ECUC-ADD-INFO-PARAM-DEF': 'STRING',
     };
     const type = types[tag];
     if (!type) throw new Error(`${id.shortName}: 不支持的参数类型 ${tag}`);

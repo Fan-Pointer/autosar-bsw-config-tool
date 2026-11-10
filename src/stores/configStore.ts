@@ -2000,23 +2000,19 @@ export const useConfigStore = defineStore('config', () => {
           )
       );
     const notes: string[] = [];
-    if (needLoading.length) {
-      const additions = await readBuiltinModules(
-        [...new Set(needLoading.map((header) => header.shortName))],
-        projectVersion
-      );
-      const loaded = additions.filter((module) =>
-        needLoading.some((header) => header.shortName === module.shortName)
-      );
-      const absent = needLoading.filter(
-        (header) => !loaded.some((module) => module.shortName === header.shortName)
-      );
-      if (absent.length)
-        notes.push(`内置定义库缺失，已跳过：${absent.map((item) => item.shortName).join('、')}`);
-      modules.value = [...modules.value, ...loaded];
-      importedModules.value.push(...loaded);
-      manager = new ConfigInstanceManager(modules.value);
+    // 逐模块加载：单个定义失败只跳过该模块，不再拖垮整批导入。
+    for (const header of needLoading) {
+      try {
+        const [definition] = await readBuiltinModules([header.shortName], projectVersion);
+        modules.value = [...modules.value, definition];
+        importedModules.value.push(definition);
+      } catch (reason) {
+        notes.push(
+          `${header.shortName}：定义加载失败（${reason instanceof Error ? reason.message : String(reason)}）`
+        );
+      }
     }
+    if (needLoading.length) manager = new ConfigInstanceManager(modules.value);
 
     // 2) 逐模块解析并写入配置库。
     const applied: { set: ConfigInstance; module: string }[] = [];
@@ -2036,8 +2032,15 @@ export const useConfigStore = defineStore('config', () => {
         continue;
       }
       if (warnings.length) notes.push(`${header.shortName}：${warnings.slice(0, 2).join('；')}`);
-      if (!incoming.containers.length)
-        notes.push(`${header.shortName}：文件仅含模块壳（配置在外部引用），已建空配置集`);
+      if (!incoming.containers.length) {
+        // 文件只含模块壳（配置在外部引用）：按定义补出必填容器骨架，保证还能继续配置。
+        const skeleton = new ConfigInstanceManager(modules.value).createFromBswmd(definition);
+        skeleton.uuid = incoming.uuid;
+        skeleton.name = incoming.name;
+        skeleton.createdAt = incoming.createdAt;
+        incoming = skeleton;
+        notes.push(`${header.shortName}：文件仅含模块壳，已按定义补出默认骨架`);
+      }
       const existing = configSets.value.find(
         (set) => set.moduleRef === header.shortName && set.version === header.release
       );

@@ -13,7 +13,9 @@ vi.mock('localforage', () => ({
   },
 }));
 const CANIF = 'D:/TencentApp/GoogleDownLoad/CanIf.arxml';
+const PROJECT = 'D:/TencentApp/GoogleDownLoad/ZZ_调研测试_DEL.arxml';
 const skip = !existsSync(CANIF);
+const skipProject = !existsSync(PROJECT);
 beforeEach(() => {
   db.data.clear();
   db.write.mockReset();
@@ -60,4 +62,33 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
     expect(store.activeProject!.setUuids).toContain(imported!.uuid);
     expect(notes.join('')).toContain('CanIf');
   });
+
+  it.skipIf(skipProject)(
+    'imports several modules from a project file without one bad module killing the batch',
+    async () => {
+      const store = useConfigStore();
+      await store.initialize();
+      await store.createProject({
+        name: '工程级导入',
+        autosarVersion: '4.4.0',
+        chip: { family: 'S32K3XX' },
+        moduleShortNames: ['Dem'],
+      });
+      const text = readFileSync(PROJECT, 'utf8');
+      const scanned = store.scanArxmlImport(text);
+      expect(scanned.length).toBeGreaterThan(1);
+      const notes = await store.importArxmlModules(
+        text,
+        scanned.map((item) => ({ shortName: item.shortName, mode: 'copy' as const }))
+      );
+      // Dcm 的内置定义仍是旧抽取结果（当时因 ADD-INFO 类型失败被标 unsupported），
+      // 逐模块容错后只跳过它，其余模块照常导入。
+      expect(notes.join(' | ')).toContain('Dcm：定义加载失败');
+      // 多个模块都成功落库（含原本缺定义的模块）。
+      const imported = store.configSets.filter((set) =>
+        scanned.some((item) => item.shortName === set.moduleRef)
+      );
+      expect(imported.length).toBeGreaterThan(1);
+    }
+  );
 });
