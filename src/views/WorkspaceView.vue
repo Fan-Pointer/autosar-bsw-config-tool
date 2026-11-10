@@ -120,6 +120,7 @@
       </button>
     </div>
     <ProjectWizard v-model="showProjectWizard" />
+    <ProjectValidationDialog v-model="showAllValidation" :result="allValidation" />
     <ProjectSettingsDialog
       v-model="showSettings"
       :mode="settingsMode"
@@ -521,6 +522,7 @@ import ValidationPanel from '@/ui/Validator/ValidationPanel.vue';
 import ConfigSetManager from '@/ui/ConfigSets/ConfigSetManager.vue';
 import ProjectWizard from '@/ui/Projects/ProjectWizard.vue';
 import ProjectSettingsDialog from '@/ui/Projects/ProjectSettingsDialog.vue';
+import ProjectValidationDialog from '@/ui/Projects/ProjectValidationDialog.vue';
 import RecoveryPanel from '@/ui/ConfigSets/RecoveryPanel.vue';
 import ContainerActions from '@/ui/ConfigTree/ContainerActions.vue';
 import ContainerContextMenu from '@/ui/ConfigTree/ContainerContextMenu.vue';
@@ -547,6 +549,8 @@ const generatedFiles = ref<GeneratedFile[]>([]),
   showGenerated = ref(false);
 const showProjectWizard = ref(false);
 const showSettings = ref(false);
+const showAllValidation = ref(false);
+const allValidation = ref<ReturnType<typeof store.validateAllProjects>>([]);
 const settingsMode = ref<'edit' | 'detail'>('edit');
 const showSets = ref(false),
   showModules = ref(false),
@@ -683,11 +687,13 @@ const menuItems = [
   },
   { label: '模块管理', submenu: true, action: 'modules' },
   { label: '代码验证', action: 'validate' },
+  { label: '验证所有工程', action: 'validate-all' },
   { label: '代码生成', action: 'generate' },
   { label: '导入', submenu: true, action: 'import' },
   { label: '导出', submenu: true, action: 'export' },
   { separator: true },
   { label: '关闭配置集', action: 'close' },
+  { label: '关闭所有工程', action: 'close-all' },
 ];
 watch(
   () => [
@@ -1006,6 +1012,16 @@ async function projectAction(action?: string): Promise<void> {
   }
   if (action === 'modules') showModules.value = true;
   if (action === 'validate' && operationEnabled('validation')) validate();
+  if (action === 'validate-all') {
+    allValidation.value = store.validateAllProjects();
+    showAllValidation.value = true;
+  }
+  if (action === 'close-all') {
+    if (store.isDirty && !(await store.saveConfig().catch(() => false))) return;
+    store.closeAllProjects();
+    opened.value = [];
+    ElMessage.success('已关闭所有工程，配置数据仍保留在库中');
+  }
   if (action === 'generate' && operationEnabled('generation')) await generateCode();
   if (action === 'close' && (!store.isDirty || (await store.saveConfig().catch(() => false))))
     opened.value = [];

@@ -73,6 +73,27 @@ describe('G40 project management', () => {
     );
   });
 
+  it('validates every project and closes all without deleting data (FR-33)', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    await store.createProject(input);
+    const rows = store.validateAllProjects();
+    expect(rows).toHaveLength(1);
+    expect(rows[0].name).toBe('车身控制器');
+    expect(rows[0].total).toBe(2);
+    // 每个配置集都进入统计，失败数与失败明细条数一致。
+    expect(rows[0].ready + rows[0].errorCount).toBe(2);
+    expect(rows[0].failures).toHaveLength(rows[0].errorCount);
+    const activeBefore = store.activeUuid;
+    const setCount = store.configSets.length;
+    store.closeAllProjects();
+    expect(store.activeUuid).toBeUndefined();
+    expect(store.config).toBeNull();
+    // 关闭只清编辑上下文，库中配置集一个不少。
+    expect(store.configSets).toHaveLength(setCount);
+    expect(store.configSets.some((set) => set.uuid === activeBefore)).toBe(true);
+  });
+
   it('duplicates a project with its configuration data and independent identities', async () => {
     const store = useConfigStore();
     await store.initialize();

@@ -2063,6 +2063,67 @@ export const useConfigStore = defineStore('config', () => {
       : exportCsv(config.value, module.value, check);
   }
 
+  /** 验证所有工程（FR-33）：逐配置集跑纯函数输出闸门，不切换当前编辑上下文。
+   * @returns 每个工程的总数/就绪数/错误数/警告数与前两条失败原因。
+   */
+  function validateAllProjects(): {
+    name: string;
+    total: number;
+    ready: number;
+    errorCount: number;
+    warningCount: number;
+    failures: { set: string; reason: string }[];
+  }[] {
+    const groups = projects.value.length
+      ? projects.value.map((project) => ({ name: project.name, setUuids: project.setUuids }))
+      : [
+          {
+            name: config.value?.name ?? '当前配置集',
+            setUuids: configSets.value.map((set) => set.uuid),
+          },
+        ];
+    return groups.map((group) => {
+      const sets = configSets.value.filter((set) => group.setUuids.includes(set.uuid));
+      let ready = 0;
+      let errorCount = 0;
+      let warningCount = 0;
+      const failures: { set: string; reason: string }[] = [];
+      for (const set of sets) {
+        const definition = modules.value.find(
+          (item) => item.shortName === set.moduleRef && item.version === set.version
+        );
+        if (!definition) {
+          failures.push({ set: set.name ?? set.uuid, reason: '模块定义未加载' });
+          continue;
+        }
+        const check = evaluateOutputReadiness(set, definition, DemConstraints);
+        if (check.ready) ready += 1;
+        else {
+          errorCount += 1;
+          failures.push({
+            set: set.name ?? set.uuid,
+            reason:
+              check.issues
+                .filter((issue) => issue.severity === 'ERROR')
+                .slice(0, 2)
+                .map((issue) => issue.reason)
+                .join('；') || '存在未通过项',
+          });
+        }
+        warningCount += check.issues.filter((issue) => issue.severity !== 'ERROR').length;
+      }
+      return { name: group.name, total: sets.length, ready, errorCount, warningCount, failures };
+    });
+  }
+
+  /** 关闭所有工程（FR-33）：清空当前编辑上下文，配置集数据保留在库中。 */
+  function closeAllProjects(): void {
+    activeUuid.value = undefined;
+    selectContainer('');
+    violations.value = [];
+    validated.value = false;
+  }
+
   /** 工程级导出（G44）：当前工程的全部配置集与对应定义；无工程时退化为当前配置集。 */
   function projectExportEntries(): { config: ConfigInstance; module: BswmdModule }[] {
     const project = activeProject.value;
@@ -2109,6 +2170,8 @@ export const useConfigStore = defineStore('config', () => {
     projectExportEntries,
     exportProjectArxmlContent,
     exportProjectPackageContent,
+    validateAllProjects,
+    closeAllProjects,
     openProject,
     removeProject,
     getOutputCheck,
