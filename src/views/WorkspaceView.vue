@@ -161,8 +161,7 @@
                 @click="openModule(item.shortName, item.version)"
                 @contextmenu.prevent.stop="openModuleMenu(item, $event)"
               >
-                <span class="module-symbol">M</span>{{ item.shortName
-                }}<small v-if="!store.activeProject"> · {{ item.version }}</small>
+                <span class="module-symbol">M</span>{{ item.shortName }}
               </button>
           </details>
           <details v-for="branch in fixedBranches" :key="branch.name" class="fixed-branch">
