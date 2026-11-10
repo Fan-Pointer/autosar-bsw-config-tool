@@ -8,7 +8,7 @@
     :show-close="!store.isImporting"
     @update:model-value="emit('update:modelValue', $event)"
   >
-    <div v-if="!multiModules.length" class="import-options">
+    <div class="import-options">
       <label
         >配置文件（上限 50 MB）<input
           aria-label="配置文件"
@@ -17,7 +17,7 @@
           :disabled="store.isImporting"
           @change="readFile"
       /></label>
-      <label
+      <label v-if="format !== 'arxml'"
         >导入到<select
           v-model="target"
           aria-label="导入目标"
@@ -108,13 +108,13 @@
       </table>
       <p v-if="multiResult" role="status" class="multi-result">{{ multiResult }}</p>
     </section>
-    <fieldset class="strategies" :disabled="store.isImporting">
+    <fieldset v-if="format !== 'arxml'" class="strategies" :disabled="store.isImporting">
       <legend>冲突解决策略</legend>
       <label><input v-model="strategy" type="radio" value="overwrite" />覆盖</label>
       <label><input v-model="strategy" type="radio" value="skip" />跳过</label>
       <label><input v-model="strategy" type="radio" value="rename" />重命名</label>
     </fieldset>
-    <p class="import-help">{{ strategyHelp[strategy] }}</p>
+    <p v-if="format !== 'arxml'" class="import-help">{{ strategyHelp[strategy] }}</p>
     <p v-if="reading" role="status">正在读取文件…</p>
     <el-alert
       v-for="warning in session?.warnings ?? []"
@@ -259,12 +259,27 @@ async function applyMulti(): Promise<void> {
   if (!chosen.value.length) return;
   multiResult.value = '';
   try {
+    if (projectMode.value === 'new' && !newProjectName.value.trim()) {
+      error.value = '请填写新工程名称';
+      return;
+    }
     const notes = await store.importArxmlModules(
       content,
       chosen.value.map((shortName) => ({
         shortName,
         mode: modes.value[shortName] ?? 'overwrite',
-      }))
+      })),
+      {
+        // 选「新建工程」时把名称交给 store 建工程；否则并入当前工程。
+        ...(projectMode.value === 'new' ? { newProjectName: newProjectName.value } : {}),
+        // 复用已扫描结果，避免二次解析导致「文件里没有可导入的模块」误报。
+        headers: multiModules.value.map((item) => ({
+          shortName: item.shortName,
+          definitionPath: `/AUTOSAR/${item.shortName}`,
+          release: item.version,
+          uuid: '',
+        })),
+      }
     );
     ElMessage.success('导入完成，已保存到本机');
     multiResult.value = notes.join('；');

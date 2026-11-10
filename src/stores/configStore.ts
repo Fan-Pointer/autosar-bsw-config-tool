@@ -32,7 +32,7 @@ import {
 } from '@/core/io/ConfigJson';
 import { exportArxml, importArxml } from '@/core/io/Arxml';
 import { evaluateParameterStates } from '@/core/constraint/ParameterStates';
-import { exportProjectArxml, scanArxmlModules } from '@/core/io/Arxml';
+import { exportProjectArxml, scanArxmlModules, type ArxmlModuleHeader } from '@/core/io/Arxml';
 import { buildProjectPackage, type ProjectPackageManifest } from '@/core/io/ProjectPackage';
 import { exportCsv } from '@/core/io/Csv';
 import { planImport } from '@/core/io/ImportPlan';
@@ -1200,6 +1200,38 @@ export const useConfigStore = defineStore('config', () => {
       validate();
       return true;
     }
+    // 打开配置集时同步工程上下文：属于某工程就切到该工程；孤立配置集自动归入「默认工程」，
+    // 避免出现「点 CanIf 打开后仍显示 DEMO」的错误上下文。
+    const owner = projects.value.find((project) => project.setUuids.includes(uuid));
+    if (owner) {
+      if (activeProject.value?.projectUuid !== owner.projectUuid)
+        await openProject(owner.projectUuid).catch(() => false);
+    } else if (!projects.value.some((project) => project.name === '默认工程')) {
+      const fallback: ProjectMetadata = {
+        projectUuid: generateUUID(),
+        name: '默认工程',
+        autosarVersion: module.value?.version ?? '4.4.0',
+        chip: { family: '' },
+        moduleShortNames: [
+          ...new Set(
+            configSets.value
+              .filter((set) => !projects.value.some((p) => p.setUuids.includes(set.uuid)))
+              .map((set) => set.moduleRef)
+          ),
+        ],
+        setUuids: configSets.value
+          .filter((set) => !projects.value.some((p) => p.setUuids.includes(set.uuid)))
+          .map((set) => set.uuid),
+        createdAt: new Date().toISOString(),
+      };
+      const next = [...projects.value, fallback];
+      await writeProjectIndex({ schemaVersion: 1, projects: next });
+      projects.value = next;
+      await openProject(fallback.projectUuid).catch(() => false);
+    } else {
+      const fallbackProject = projects.value.find((project) => project.name === '默认工程');
+      if (fallbackProject) await openProject(fallbackProject.projectUuid).catch(() => false);
+    }
     isDirty.value = true;
     validate();
     return saveConfig();
@@ -1971,13 +2003,14 @@ export const useConfigStore = defineStore('config', () => {
   async function importArxmlModules(
     text: string,
     selections: { shortName: string; mode: 'overwrite' | 'skip' }[],
-    options?: { newProjectName?: string }
+    options?: { newProjectName?: string; headers?: ArxmlModuleHeader[] }
   ): Promise<string[]> {
     if (!selections.length) throw new Error('请至少选择一个模块');
     assertEditable();
     assertWritable();
     const projectVersion = activeProject.value?.autosarVersion ?? module.value?.version ?? '4.4.0';
-    const headers = scanArxmlModules(text);
+    // 复用调用方已扫描的结果：同一份文本不再二次解析，避免偶发误报「没有可导入的模块」。
+    const headers = options?.headers ?? scanArxmlModules(text);
     const wanted = selections.filter((item) => item.mode !== 'skip');
     const missingVersions = wanted.filter((item) => {
       const header = headers.find((entry) => entry.shortName === item.shortName);
