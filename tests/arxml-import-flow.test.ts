@@ -141,4 +141,21 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
     // 重载后工程能真正打开（此前配置集库为空导致「暂不可用」）
     expect(reloaded.configSets.length).toBeGreaterThan(0);
   });
+
+  it.skipIf(skipProject)('exports a complete project document even when modules fail validation', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    const text = readFileSync(PROJECT, 'utf8');
+    const scanned = store.scanArxmlImport(text, null, true);
+    await store.importArxmlModules(
+      text,
+      scanned.map((item) => ({ shortName: item.shortName, mode: 'overwrite' as const })),
+      { newProjectName: 'EXP' }
+    );
+    const xml = store.exportProjectArxmlContent();
+    // 不能只剩 XML 声明与空外壳（用户反馈「导出只有两行」）
+    expect(xml.split('\n').filter(Boolean).length).toBeGreaterThan(10);
+    expect((xml.match(/<ECUC-MODULE-CONFIGURATION-VALUES /g) ?? []).length).toBeGreaterThan(1);
+    expect(xml).toContain('<AUTOSAR ');
+  });
 });

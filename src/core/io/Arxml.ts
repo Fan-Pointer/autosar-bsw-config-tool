@@ -81,15 +81,33 @@ function parameterDest(type: BswmdParameter['type']): string {
 export function exportArxml(
   config: ConfigInstance,
   module: BswmdModule,
-  outputCheck?: OutputCheckResult
+  outputCheck?: OutputCheckResult,
+  /** 工程内其它模块的容器路径（跨模块引用目标解析用，G47）。 */
+  sharedPaths?: Map<string, string>
 ): string {
   assertOutputReady(outputCheck ?? evaluateOutputReadiness(config, module));
+  return renderArxml(config, module, sharedPaths);
+}
+
+/**
+ * 渲染单模块 ARXML（不做输出闸门校验）。工程级导出用它在 force 模式下仍产出完整内容，
+ * 并可通过 sharedPaths 把跨模块引用写成 `/Config/<其它模块>/...`。
+ * @param config 配置集。
+ * @param module 模块定义。
+ * @param sharedPaths 全工程容器路径索引（可选）。
+ * @returns 单模块 AUTOSAR 文档。
+ */
+export function renderArxml(
+  config: ConfigInstance,
+  module: BswmdModule,
+  sharedPaths?: Map<string, string>
+): string {
   const checked = hydrateConfig(serializeConfig(config), [module]);
   const definitions = definitionPaths(module);
   const entries = collectContainers(checked, module);
-  const instancePaths = new Map(
-    entries.map((entry) => [entry.container.uuid, `/Config/${module.shortName}/${entry.path}`])
-  );
+  const instancePaths = new Map(sharedPaths ?? []);
+  for (const entry of entries)
+    instancePaths.set(entry.container.uuid, `/Config/${module.shortName}/${entry.path}`);
   const defRef = (id: string, dest: string): string =>
     `<DEFINITION-REF DEST="${dest}">${escapeXml(definitions.get(id)!)}</DEFINITION-REF>`;
   const containers = (items: ConfigContainer[], defs: BswmdContainer[]): string =>
@@ -183,6 +201,25 @@ function moduleValuesXml(
 }
 
 /** 把若干模块段组装为一个 AUTOSAR 文档（单模块与工程级共用同一外壳）。 */
+/**
+ * 把单行 XML 展开为可读的多行结构（只调整空白，不改内容）。
+ * 文本节点中的 < > 已转义，因此按「><」断行是安全的。
+ * @param xml 压缩后的 XML。
+ * @returns 带缩进的多行 XML。
+ */
+export function prettyXml(xml: string): string {
+  const lines = xml.replace(/></g, '>\n<').split('\n');
+  const output: string[] = [];
+  let depth = 0;
+  for (const line of lines) {
+    if (/^<\//.test(line)) depth = Math.max(0, depth - 1);
+    output.push('  '.repeat(depth) + line);
+    const inline = /^<[^>]+>[^<]*<\/[^>]+>$/.test(line);
+    if (/^<[^/!?]/.test(line) && !/\/>$/.test(line) && !inline) depth += 1;
+  }
+  return output.join('\n');
+}
+
 function arxmlDocument(modules: string[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<AUTOSAR xmlns="${AUTOSAR_NAMESPACE}"><AR-PACKAGES><AR-PACKAGE><SHORT-NAME>Config</SHORT-NAME><ELEMENTS>${modules.join('')}</ELEMENTS></AR-PACKAGE></AR-PACKAGES></AUTOSAR>`;
 }
@@ -199,11 +236,20 @@ export function exportProjectArxml(
   force = false
 ): string {
   if (!entries.length) throw new Error('工程内没有可导出的配置集');
+  // 先建立全工程容器路径索引：跨模块引用的目标才能写成 `/Config/<其它模块>/...`。
+  const sharedPaths = new Map<string, string>();
+  for (const { config, module } of entries) {
+    const checked = hydrateConfig(serializeConfig(config), [module]);
+    for (const entry of collectContainers(checked, module))
+      sharedPaths.set(entry.container.uuid, `/Config/${module.shortName}/${entry.path}`);
+  }
   const failures: string[] = [];
   const modules: string[] = [];
   for (const { config, module } of entries) {
     try {
-      const single = exportArxml(config, module);
+      // 非 force 仍先过闸门；force 时跳过校验直接渲染，保证内容完整（不再只剩注释）。
+      if (!force) assertOutputReady(evaluateOutputReadiness(config, module));
+      const single = renderArxml(config, module, sharedPaths);
       const start = single.indexOf('<ECUC-MODULE-CONFIGURATION-VALUES');
       const end = single.lastIndexOf('</ECUC-MODULE-CONFIGURATION-VALUES>');
       if (start < 0 || end < 0) throw new Error('模块配置段缺失');
@@ -216,10 +262,11 @@ export function exportProjectArxml(
   }
   if (failures.length && !force)
     throw new Error(`以下模块未通过输出校验，未生成工程 ARXML：\n${failures.join('\n')}`);
-  // 校验失败仍导出：外壳照常输出，未通过的模块以注释标注，避免静默丢失。
+  // force 下真正渲染失败的模块才以注释标注；校验类问题已不影响产出。
   if (failures.length && force)
-    modules.push(`<!-- 未通过输出校验、未导出：${failures.join('；')} -->`);
-  return arxmlDocument(modules);
+    modules.push(`<!-- 渲染失败、未导出：${failures.join('；')} -->`);
+  // 工程级导出对使用者可读性要求更高（此前整篇一行，被误认为「只有两行」）。
+  return prettyXml(arxmlDocument(modules));
 }
 
 function nodes(parent: XmlNode, key: string): XmlNode[] {

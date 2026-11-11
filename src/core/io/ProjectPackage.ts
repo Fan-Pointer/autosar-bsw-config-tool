@@ -1,7 +1,7 @@
 import type { BswmdModule } from '@/core/bswmd/BswmdTypes';
 import type { ConfigInstance } from '@/core/config/ConfigTypes';
 import { CGenerator } from '@/core/generator/CGenerator';
-import { exportArxml, exportProjectArxml } from './Arxml';
+import { exportArxml, exportProjectArxml, prettyXml } from './Arxml';
 import { buildZip, type ZipEntry } from './Zip';
 
 /** 工程包输入（G44 / FR-28）：工程元数据 + 该工程的配置集与定义。 */
@@ -89,7 +89,10 @@ export function buildModuleArxmlZip(input: ProjectPackageInput): {
   const skipped: { module: string; reason: string }[] = [];
   for (const { config, module } of input.entries) {
     try {
-      files.push({ path: `${module.shortName}.arxml`, content: exportArxml(config, module) });
+      files.push({
+        path: `${module.shortName}.arxml`,
+        content: prettyXml(exportArxml(config, module)),
+      });
       exported.push(module.shortName);
     } catch (reason) {
       skipped.push({
