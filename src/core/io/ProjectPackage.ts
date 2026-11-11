@@ -72,3 +72,46 @@ export async function buildProjectPackage(
   files.push({ path: 'manifest.json', content: JSON.stringify(manifest, null, 2) });
   return { zip: buildZip(files), manifest };
 }
+
+/**
+ * 模块 ARXML 压缩包：每个模块一个独立 ARXML 文件（G46 用户裁定）。
+ * 校验未通过的模块跳过并在清单里说明，不阻断其余模块导出。
+ * @param input 工程元数据与配置集。
+ * @returns zip 内容与逐模块结果。
+ */
+export function buildModuleArxmlZip(input: ProjectPackageInput): {
+  zip: Uint8Array;
+  exported: string[];
+  skipped: { module: string; reason: string }[];
+} {
+  const files: ZipEntry[] = [];
+  const exported: string[] = [];
+  const skipped: { module: string; reason: string }[] = [];
+  for (const { config, module } of input.entries) {
+    try {
+      files.push({ path: `${module.shortName}.arxml`, content: exportArxml(config, module) });
+      exported.push(module.shortName);
+    } catch (reason) {
+      skipped.push({
+        module: module.shortName,
+        reason: reason instanceof Error ? reason.message.split('\n')[0] : String(reason),
+      });
+    }
+  }
+  files.push({
+    path: 'manifest.json',
+    content: JSON.stringify(
+      {
+        name: input.projectName,
+        autosarVersion: input.autosarVersion,
+        chip: input.chip,
+        generatedAt: new Date().toISOString(),
+        modules: exported,
+        skipped,
+      },
+      null,
+      2
+    ),
+  });
+  return { zip: buildZip(files), exported, skipped };
+}

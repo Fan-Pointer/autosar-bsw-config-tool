@@ -440,20 +440,24 @@
             class="io-submenu"
             role="menu"
           >
-            <button
-              v-for="format in item.action === 'import' ? importFormats : exportFormats"
-              :key="format"
-              role="menuitem"
-              @click="ioAction(item.action, format)"
-            >
-              {{ format === 'csv' ? 'CSV（DTC 列表）' : format.toUpperCase() }}
-            </button>
-            <template v-if="item.action === 'export'">
-              <button role="menuitem" @click="projectAction('export-project-arxml')">
-                工程 ARXML（全部模块）
+            <template v-if="item.action === 'import'">
+              <button
+                v-for="format in importFormats"
+                :key="format"
+                role="menuitem"
+                @click="ioAction(item.action, format)"
+              >
+                {{ format.toUpperCase() }}
               </button>
-              <button role="menuitem" @click="projectAction('export-project-package')">
-                工程包（ZIP：ARXML+C）
+            </template>
+            <template v-else>
+              <!-- 用户裁定：工程导出只保留三项 -->
+              <button role="menuitem" @click="projectAction('export-project-arxml')">
+                ARXML（工程）
+              </button>
+              <button role="menuitem" @click="ioAction(item.action, 'json')">JSON</button>
+              <button role="menuitem" @click="projectAction('export-module-arxml')">
+                模块 ARXML（ZIP）
               </button>
             </template>
           </div>
@@ -641,7 +645,6 @@ const showImport = ref(false),
   importFormat = ref<ImportFormat>('json');
 const projectSubmenu = ref<string>();
 const importFormats: ImportFormat[] = ['json', 'arxml'];
-const exportFormats: ExportFormat[] = ['json', 'arxml', 'csv'];
 const activeOpen = computed(() =>
   Boolean(store.activeUuid && opened.value.includes(store.activeUuid))
 );
@@ -993,6 +996,24 @@ async function projectAction(action?: string): Promise<void> {
     } catch (reason) {
       ElMessage.error(reason instanceof Error ? reason.message : String(reason));
     }
+  }
+  if (action === 'export-module-arxml') {
+    const base = (store.activeProject?.name ?? store.config?.name ?? '工程').replace(
+      /[\\/:*?"<>|]/g,
+      '_'
+    );
+    try {
+      outputError.value = '';
+      const { zip, exported, skipped } = store.exportModuleArxmlZipContent();
+      downloadBlob(`${base}-arxml.zip`, new Blob([new Uint8Array(zip)], { type: 'application/zip' }));
+      ElMessage.success(
+        `已导出 ${exported.length} 个模块的 ARXML` +
+          (skipped.length ? `，${skipped.length} 个模块校验未通过已跳过` : '')
+      );
+    } catch (reason) {
+      showOutputFailure(reason);
+    }
+    return;
   }
   if (action === 'export-project-arxml' || action === 'export-project-package') {
     const base = (store.activeProject?.name ?? store.config?.name ?? '工程').replace(

@@ -194,14 +194,15 @@ function arxmlDocument(modules: string[]): string {
  * @returns 单文档多模块 ARXML；失败时抛出列出模块与原因的聚合错误。
  */
 export function exportProjectArxml(
-  entries: { config: ConfigInstance; module: BswmdModule }[]
+  entries: { config: ConfigInstance; module: BswmdModule }[],
+  /** true = 校验未通过也产出（用户 2026-11-11 裁定：导出不应被校验阻塞）。 */
+  force = false
 ): string {
   if (!entries.length) throw new Error('工程内没有可导出的配置集');
   const failures: string[] = [];
   const modules: string[] = [];
   for (const { config, module } of entries) {
     try {
-      // 单模块导出已内含输出闸门与定义路径校验；失败信息聚合后整体拒绝。
       const single = exportArxml(config, module);
       const start = single.indexOf('<ECUC-MODULE-CONFIGURATION-VALUES');
       const end = single.lastIndexOf('</ECUC-MODULE-CONFIGURATION-VALUES>');
@@ -213,8 +214,11 @@ export function exportProjectArxml(
       failures.push(`${module.shortName}（${firstLine}）`);
     }
   }
-  if (failures.length)
+  if (failures.length && !force)
     throw new Error(`以下模块未通过输出校验，未生成工程 ARXML：\n${failures.join('\n')}`);
+  // 校验失败仍导出：外壳照常输出，未通过的模块以注释标注，避免静默丢失。
+  if (failures.length && force)
+    modules.push(`<!-- 未通过输出校验、未导出：${failures.join('；')} -->`);
   return arxmlDocument(modules);
 }
 

@@ -301,22 +301,20 @@ describe('import preview UI and project menus', () => {
     const click = vi
       .spyOn(HTMLAnchorElement.prototype, 'click')
       .mockImplementation(() => undefined);
-    for (const format of ['JSON', 'ARXML', 'CSV（DTC 列表）']) {
+    for (const format of ['ARXML（工程）', 'JSON', '模块 ARXML（ZIP）']) {
       await wrapper.get('.project-root').trigger('contextmenu', { clientX: 100, clientY: 80 });
       button('导出').click();
       await flushPromises();
-      // G44：导出子菜单在三种单模块格式外新增两项工程级导出。
-      expect(document.querySelectorAll('.io-submenu button')).toHaveLength(5);
-      expect(document.querySelector('.io-submenu')!.textContent).toContain('工程 ARXML');
-      expect(document.querySelector('.io-submenu')!.textContent).toContain('工程包');
+      // 用户 2026-11-11 裁定：工程导出只保留 ARXML（工程）/ JSON / 模块 ARXML（ZIP）。
+      expect(document.querySelectorAll('.io-submenu button')).toHaveLength(3);
       button(format).click();
       await flushPromises();
     }
     expect(click).toHaveBeenCalledTimes(3);
     expect(blobs.map((blob) => blob.type)).toEqual([
-      'application/json;charset=utf-8',
       'application/xml;charset=utf-8',
-      'text/csv;charset=utf-8',
+      'application/json;charset=utf-8',
+      'application/zip',
     ]);
     expect(wrapper.get('.module-tab [role=tab]').attributes('title')).toBe(
       '模块：Dem · CP TEST-SYNTHETIC-1\n配置集：IO Project'

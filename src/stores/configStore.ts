@@ -33,7 +33,11 @@ import {
 import { exportArxml, importArxml } from '@/core/io/Arxml';
 import { evaluateParameterStates } from '@/core/constraint/ParameterStates';
 import { exportProjectArxml, scanArxmlModules, type ArxmlModuleHeader } from '@/core/io/Arxml';
-import { buildProjectPackage, type ProjectPackageManifest } from '@/core/io/ProjectPackage';
+import {
+  buildProjectPackage,
+  buildModuleArxmlZip,
+  type ProjectPackageManifest,
+} from '@/core/io/ProjectPackage';
 import { exportCsv } from '@/core/io/Csv';
 import { planImport } from '@/core/io/ImportPlan';
 import type {
@@ -2394,7 +2398,23 @@ export const useConfigStore = defineStore('config', () => {
 
   /** 工程级 ARXML 内容（多模块合一文档）。 */
   function exportProjectArxmlContent(): string {
-    return exportProjectArxml(projectExportEntries());
+    // 用户裁定：校验失败也允许导出，未通过模块以注释标注。
+    return exportProjectArxml(projectExportEntries(), true);
+  }
+
+  /** 模块 ARXML 压缩包（每模块一个 ARXML 文件）。 */
+  function exportModuleArxmlZipContent(): {
+    zip: Uint8Array;
+    exported: string[];
+    skipped: { module: string; reason: string }[];
+  } {
+    const project = activeProject.value;
+    return buildModuleArxmlZip({
+      projectName: project?.name ?? config.value?.name ?? '本机配置集',
+      autosarVersion: project?.autosarVersion ?? module.value?.version ?? '',
+      chip: project?.chip.family ?? '',
+      entries: projectExportEntries(),
+    });
   }
 
   /** 工程包内容（zip：工程 ARXML + 模块 ARXML + C 代码 + manifest）。 */
@@ -2423,6 +2443,7 @@ export const useConfigStore = defineStore('config', () => {
     duplicateProject,
     projectExportEntries,
     exportProjectArxmlContent,
+    exportModuleArxmlZipContent,
     exportProjectPackageContent,
     ensureModuleDefinition,
     scanArxmlImport,
