@@ -1296,8 +1296,13 @@ export const useConfigStore = defineStore('config', () => {
     if (isDirty.value && !(await saveConfig())) return false;
     activeUuid.value = uuid;
     // 当前模块配置换到别的工程时，当前工程随之切换。
-    const owner = projects.value.find((project) => project.setUuids.includes(uuid));
-    if (owner) activeProjectUuid.value = owner.projectUuid;
+    // 只在「当前工程不包含该模块配置」时才反查归属：否则多个工程共享同一配置时，
+    // find 会取第一个匹配（例如 DEMO1），把 openProject 刚设定的当前工程覆盖掉。
+    const current = projects.value.find((project) => project.projectUuid === activeProjectUuid.value);
+    if (!current || !current.setUuids.includes(uuid)) {
+      const owner = projects.value.find((project) => project.setUuids.includes(uuid));
+      if (owner) activeProjectUuid.value = owner.projectUuid;
+    }
     selectContainer(config.value?.containers[0]?.uuid ?? '');
     revision++;
     if (dataSafety.value.locked) {

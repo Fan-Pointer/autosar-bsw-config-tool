@@ -164,4 +164,38 @@ describe('G40 project management', () => {
       true
     );
   });
+
+  it('opens the clicked project when two projects share the same module config (regression)', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    expect(
+      await store.createProject({
+        name: 'DEMO1',
+        autosarVersion: '4.4.0',
+        chip: { family: 'S32K3XX' },
+        moduleShortNames: ['Dem'],
+      })
+    ).toBe(true);
+    expect(
+      await store.createProject({
+        name: 'DEMO2',
+        autosarVersion: '4.4.0',
+        chip: { family: 'S32K3XX' },
+        moduleShortNames: ['Dem'],
+      })
+    ).toBe(true);
+    const p1 = store.projects.find((item) => item.name === 'DEMO1')!;
+    const p2 = store.projects.find((item) => item.name === 'DEMO2')!;
+    // 模拟历史脏数据：两个工程共享同一份模块配置（DEMO2 额外引用了 DEMO1 的配置集）。
+    store.projects = store.projects.map((item) =>
+      item.projectUuid === p2.projectUuid
+        ? { ...item, setUuids: [p1.setUuids[0], ...item.setUuids] }
+        : item
+    );
+    expect(await store.openProject(p2.projectUuid)).toBe(true);
+    // 打开 DEMO2 必须停在 DEMO2，不能被「归属反查」拉回 DEMO1。
+    expect(store.activeProject?.name).toBe('DEMO2');
+    expect(await store.openProject(p1.projectUuid)).toBe(true);
+    expect(store.activeProject?.name).toBe('DEMO1');
+  });
 });
