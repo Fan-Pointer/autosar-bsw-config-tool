@@ -226,14 +226,18 @@ describe('TASK-015 ARXML interoperation', () => {
       ref.isExternal = true;
       expect(referenceDefinitionDest(ref)).toBe(`ECUC-${kind.toUpperCase()}-REFERENCE-DEF`);
       expect(resolveReferenceCandidates(ref, config, module)).toEqual([]);
-      expect(() => exportArxml(config, module)).toThrow('目标跨模块（本期不支持）');
+      // 已选目标但当前没有工程上下文：只能给出 NO-SCOPE，不会伪造本地目标。
+      expect(() => exportArxml(config, module)).toThrow('跨模块引用需在工程上下文中导出');
       const wrapper = mount(DynamicForm, {
         props: { container: root },
         global: { plugins: [ElementPlus] },
       });
       wrappers.push(wrapper);
-      expect(wrapper.get('button[aria-label="选择 ZChoice"]').attributes('disabled')).toBeDefined();
-      expect(wrapper.text()).toContain('外部引用只读');
+      // 跨模块引用已可选择：选择器不再禁用，提示语改为工程内目标说明。
+      expect(
+        wrapper.get('button[aria-label="选择 ZChoice"]').attributes('disabled')
+      ).toBeUndefined();
+      expect(wrapper.text()).toContain('跨模块引用：目标需在本工程其它模块中选择');
     }
   );
 
@@ -273,16 +277,19 @@ describe('TASK-015 ARXML interoperation', () => {
     store.config!.lastModified = frozen; // two edits within one timer tick must still be detected
     expect(() => store.validate(check)).toThrow('输出检查已过期');
     const newer = store.getOutputCheck();
-    expect(() => store.validate({ ...newer, configUuid: 'other' })).toThrow('不属于当前配置集');
+    expect(() => store.validate({ ...newer, configUuid: 'other' })).toThrow('不属于当前模块配置');
     expect(() => store.validate({ ...newer, lastModified: newer.lastModified - 1 })).toThrow(
       '输出检查已过期'
     );
     expect(store.selectedEntry!.container.uuid).toBe(root.uuid);
     const loaded = store.modules.find((m) => m.shortName === 'Interop')!;
     loaded.containers[0].references[0].isExternal = true;
+    // 该配置集不属于任何工程 → 无工程上下文，跨模块候选恒为空（裁定 B）。
     expect(store.referenceOptions.choice).toEqual([]);
     expect(store.referenceAddOptions.choice).toEqual([]);
-    expect(() => store.setReferenceTarget('choice', '')).toThrow('外部引用只读');
+    // 清空引用永远允许（此前外部引用连清空都被拒绝）。
+    expect(() => store.setReferenceTarget('choice', '')).not.toThrow();
+    expect(store.referenceData.choice).toBe('');
   });
 
   it('propagates the legacy warning to the real import dialog before applying the file', async () => {

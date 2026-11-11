@@ -366,7 +366,7 @@ describe('official module regressions', () => {
     expect(check.issues).toHaveLength(3);
     for (const name of ['CanIfCtrlDrvNameRef', 'CanIfCtrlCanCtrlRef']) {
       const issue = check.issues.find((item) => item.path.endsWith('/' + name))!;
-      expect(issue.reason).toContain('目标跨模块（本期不支持）');
+      expect(issue.reason).toContain('必填跨模块引用未选择目标');
       expect(() => exportArxml(config, module)).toThrow(name);
     }
     const localIssue = check.issues.find((item) =>

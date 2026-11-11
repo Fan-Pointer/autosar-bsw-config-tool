@@ -50,7 +50,7 @@ export function parseProjects(raw: unknown): ProjectMetadata[] {
       throw new Error('工程芯片属性无效');
     for (const key of ['moduleShortNames', 'setUuids']) {
       if (!Array.isArray(p[key]) || !(p[key] as unknown[]).every((id) => typeof id === 'string'))
-        throw new Error('工程模块或配置集关联无效');
+        throw new Error('工程模块或模块配置关联无效');
     }
     if (
       p.detachedSetUuids !== undefined &&
@@ -65,7 +65,7 @@ export function parseProjects(raw: unknown): ProjectMetadata[] {
     if (ids.has(p.projectUuid as string)) throw new Error('工程 UUID 重复');
     ids.add(p.projectUuid as string);
     for (const id of p.setUuids as string[]) {
-      if (setIds.has(id)) throw new Error('配置集被重复关联至工程');
+      if (setIds.has(id)) throw new Error('模块配置被重复关联至工程');
       setIds.add(id);
     }
   }

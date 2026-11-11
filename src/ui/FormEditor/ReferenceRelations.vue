@@ -24,6 +24,7 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
+import { referenceTargets } from '@/core/config/ConfigTypes';
 import { useConfigStore } from '@/stores/configStore';
 const store = useConfigStore();
 const emit = defineEmits<{ navigate: [uuid: string, fieldUuid?: string] }>();
@@ -44,24 +45,30 @@ const incoming = computed(() =>
     })
   )
 );
-const outgoing = computed(() =>
-  (store.selectedEntry?.definition.references ?? []).map((definition) => {
+const outgoing = computed(() => {
+  const scope = store.projectScope();
+  return (store.selectedEntry?.definition.references ?? []).map((definition) => {
     const value = store.selectedEntry?.container.references.get(definition.uuid);
+    // 未确认引用等价于「未选择目标」：与输出闸门口径一致，不能显示成已选目标。
+    const targets = value?.isConfigured ? referenceTargets(value) : [];
+    const targetUuid = targets[0];
+    // 目标先在当前模块内找；找不到再按工程作用域解析（跨模块引用）。
+    const local = targetUuid
+      ? store.entries.find((entry) => entry.container.uuid === targetUuid)
+      : undefined;
+    const scoped = targetUuid && !local ? scope?.containers.get(targetUuid) : undefined;
     return {
       fieldUuid: definition.uuid,
       name: definition.shortName,
-      target:
-        !definition.isExternal && value?.isConfigured
-          ? store.entries.find((entry) => entry.container.uuid === value.targetUuid)
-          : undefined,
-      status: definition.isExternal
-        ? '跨模块（本期不支持）'
-        : !value?.isConfigured || !value.targetUuid
-          ? '未选择目标'
-          : `目标不存在（${value.targetUuid}）`,
+      target: local,
+      status: !targetUuid
+        ? '未选择目标'
+        : scoped
+          ? `${scoped.label}（跨模块）`
+          : `目标不存在（${targetUuid}）`,
     };
-  })
-);
+  });
+});
 </script>
 <style scoped>
 .reference-relations {

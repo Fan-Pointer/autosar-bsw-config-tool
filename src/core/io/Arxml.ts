@@ -5,6 +5,10 @@ import type { ConfigContainer, ConfigInstance, ConfigReferenceValue } from '../c
 import { referenceTargets } from '../config/ConfigTypes';
 import { collectContainers } from '../config/ConfigTraversal';
 import { referenceDefinitionDest } from '../config/ReferenceCandidates';
+import {
+  buildProjectReferenceScope,
+  type ProjectReferenceScope,
+} from '../config/ProjectReferenceScope';
 import { createParameterValue } from '../config/ConfigValues';
 import {
   assertOutputReady,
@@ -82,11 +86,11 @@ export function exportArxml(
   config: ConfigInstance,
   module: BswmdModule,
   outputCheck?: OutputCheckResult,
-  /** 工程内其它模块的容器路径（跨模块引用目标解析用，G47）。 */
-  sharedPaths?: Map<string, string>
+  /** 工程引用作用域（G47）：跨模块引用目标的解析与输出校验都依赖它。 */
+  scope?: ProjectReferenceScope
 ): string {
-  assertOutputReady(outputCheck ?? evaluateOutputReadiness(config, module));
-  return renderArxml(config, module, sharedPaths);
+  assertOutputReady(outputCheck ?? evaluateOutputReadiness(config, module, [], scope));
+  return renderArxml(config, module, scope ? new Map(scope.paths) : undefined);
 }
 
 /**
@@ -217,7 +221,9 @@ export function prettyXml(xml: string): string {
     const inline = /^<[^>]+>[^<]*<\/[^>]+>$/.test(line);
     if (/^<[^/!?]/.test(line) && !/\/>$/.test(line) && !inline) depth += 1;
   }
-  return output.join('\n');
+  // 把被拆开的空元素再合回去（如 <PARAMETER-VALUES>\n</PARAMETER-VALUES>）：
+  // 只调整空白不改内容，空段落必须保持 <X></X> 形态。
+  return output.join('\n').replace(/(<([\w:-]+)(?:\s[^<>]*)?>)\n[ \t]*(<\/\2>)/g, '$1$3');
 }
 
 function arxmlDocument(modules: string[]): string {
@@ -235,21 +241,16 @@ export function exportProjectArxml(
   /** true = 校验未通过也产出（用户 2026-11-11 裁定：导出不应被校验阻塞）。 */
   force = false
 ): string {
-  if (!entries.length) throw new Error('工程内没有可导出的配置集');
-  // 先建立全工程容器路径索引：跨模块引用的目标才能写成 `/Config/<其它模块>/...`。
-  const sharedPaths = new Map<string, string>();
-  for (const { config, module } of entries) {
-    const checked = hydrateConfig(serializeConfig(config), [module]);
-    for (const entry of collectContainers(checked, module))
-      sharedPaths.set(entry.container.uuid, `/Config/${module.shortName}/${entry.path}`);
-  }
+  if (!entries.length) throw new Error('工程内没有可导出的模块配置');
+  // 先建立全工程引用作用域：跨模块引用的目标才能解析，并写成 `/Config/<其它模块>/...`。
+  const scope = buildProjectReferenceScope(entries);
   const failures: string[] = [];
   const modules: string[] = [];
   for (const { config, module } of entries) {
     try {
       // 非 force 仍先过闸门；force 时跳过校验直接渲染，保证内容完整（不再只剩注释）。
-      if (!force) assertOutputReady(evaluateOutputReadiness(config, module));
-      const single = renderArxml(config, module, sharedPaths);
+      if (!force) assertOutputReady(evaluateOutputReadiness(config, module, [], scope));
+      const single = renderArxml(config, module, new Map(scope.paths));
       const start = single.indexOf('<ECUC-MODULE-CONFIGURATION-VALUES');
       const end = single.lastIndexOf('</ECUC-MODULE-CONFIGURATION-VALUES>');
       if (start < 0 || end < 0) throw new Error('模块配置段缺失');
@@ -272,6 +273,9 @@ export function exportProjectArxml(
 function nodes(parent: XmlNode, key: string): XmlNode[] {
   const value = parent[key];
   if (value === undefined || value === '') return [];
+  // 空白文本等价于「空段落」：美化后的 <X>\n</X> 在 trimValues:false 下会解析成空白字符串，
+  // 第三方文件也可能直接写成空元素。两种都必须按「没有子节点」处理，而不是判成坏类型。
+  if (typeof value === 'string' && value.trim() === '') return [];
   return (Array.isArray(value) ? value : [value]).map((item) => record(item, key));
 }
 function single(parent: XmlNode, key: string): XmlNode {
@@ -424,13 +428,8 @@ export function scanArxmlModules(source: string): ArxmlModuleHeader[] {
   return headers;
 }
 
-export function importArxml(
-  source: string,
-  modules: BswmdModule[],
-  onWarning?: (message: string) => void,
-  /** 工程级文件中只导入该短名的模块段（G45）。 */
-  onlyModule?: string
-): ConfigInstance {
+/** 解析并校验 ARXML 文档，返回归一化后的 AUTOSAR 根节点与命名空间（导入与工程级扫描共用同一条校验链）。 */
+function parseArxmlDocument(source: string): { autosar: XmlNode; namespace: unknown } {
   checkImportSize(new TextEncoder().encode(source).byteLength);
   source = withoutXmlComments(source);
   xmlPreflight(source);
@@ -458,7 +457,11 @@ export function importArxml(
   const namespace = root['@_xmlns' + prefix];
   if (namespace !== AUTOSAR_NAMESPACE && namespace !== LEGACY_NAMESPACE)
     throw new Error('ARXML 命名空间须为 AUTOSAR r4.0（兼容旧工具 r4.2.2）');
-  const autosar = record(normalize(root), 'AUTOSAR');
+  return { autosar: record(normalize(root), 'AUTOSAR'), namespace };
+}
+
+/** 枚举文档中所有模块配置段及其 AR 包路径。 */
+function moduleSegments(autosar: XmlNode): { node: XmlNode; packagePath: string }[] {
   const found: { node: XmlNode; packagePath: string }[] = [];
   const packages = (parent: XmlNode, path: string): void => {
     for (const pkg of nodes(single(parent, 'AR-PACKAGES'), 'AR-PACKAGE')) {
@@ -473,6 +476,50 @@ export function importArxml(
     }
   };
   packages(autosar, '');
+  return found;
+}
+
+/**
+ * 工程级文档的容器路径索引：`/Config/<模块短名>/<容器路径>` → 容器 uuid。
+ *
+ * 路径规则与 `renderArxml` 的 sharedPaths **严格一致**，否则工程级导入无法解析跨模块引用。
+ * 仅用于解析引用目标：uuid 重复时保留首个（不抛错），缺失 UUID 的容器跳过——
+ * 真正的结构校验仍由逐模块的 `importArxml` 负责。
+ *
+ * @param source ARXML 文本（工程级或单模块均可）。
+ * @returns 路径到容器 uuid 的只读索引。
+ */
+export function collectProjectContainerPaths(source: string): ReadonlyMap<string, string> {
+  const paths = new Map<string, string>();
+  const walk = (parent: XmlNode, prefixPath: string): void => {
+    for (const node of nodes(parent, 'ECUC-CONTAINER-VALUE')) {
+      const path = `${prefixPath}/${text(node, 'SHORT-NAME')}`;
+      const uuid = node['@_UUID'] === undefined ? '' : string(node['@_UUID'], 'UUID');
+      if (uuid && !paths.has(path)) paths.set(path, uuid);
+      // 嵌套容器挂在 SUB-CONTAINERS 下（与 importArxml 的 visit 完全一致）：
+      // 直接对 node 递归会漏掉所有非根容器，跨模块目标多为嵌套容器，漏掉即整模块导入失败。
+      for (const children of nodes(node, 'SUB-CONTAINERS')) walk(children, path);
+    }
+  };
+  for (const { node, packagePath } of moduleSegments(parseArxmlDocument(source).autosar)) {
+    const [containers] = nodes(node, 'CONTAINERS');
+    if (!containers) continue;
+    walk(containers, `${packagePath}/${text(node, 'SHORT-NAME').trim()}`);
+  }
+  return paths;
+}
+
+export function importArxml(
+  source: string,
+  modules: BswmdModule[],
+  onWarning?: (message: string) => void,
+  /** 工程级文件中只导入该短名的模块段（G45）。 */
+  onlyModule?: string,
+  /** 工程级导入：整篇文档的容器路径→uuid 索引，用于解析跨模块引用目标（单模块导入不传）。 */
+  externalTargets?: ReadonlyMap<string, string>
+): ConfigInstance {
+  const { autosar, namespace } = parseArxmlDocument(source);
+  const found = moduleSegments(autosar);
   // 单模块文件必须唯一；工程级文件按选中的模块名取段（G45 多模块导入）。
   const candidates = onlyModule
     ? found.filter((item) => text(item.node, 'SHORT-NAME').trim() === onlyModule)
@@ -624,9 +671,13 @@ export function importArxml(
   // Resolve only after the whole forest is indexed, so forward references never depend on file ordering.
   for (const item of pending) {
     const resolved = item.paths.map((refPath) => {
-      if (refPath && !targets.has(refPath))
+      const local = targets.get(refPath);
+      // 跨模块目标：本模块段内必然找不到，回落到整篇文档索引（仅工程级导入提供）。
+      // 单模块导入不传 externalTargets，行为保持不变——仍然明确报错，绝不静默留空目标。
+      const external = local === undefined ? externalTargets?.get(refPath) : undefined;
+      if (refPath && local === undefined && external === undefined)
         throw new Error(`引用目标未包含在文件中：${refPath}`);
-      return targets.get(refPath) ?? '';
+      return local ?? external ?? '';
     });
     // 单目标保持兼容字段（不写数组）；多目标另存数组（G42）。
     item.ref.targetUuids = resolved.length > 1 ? resolved : undefined;

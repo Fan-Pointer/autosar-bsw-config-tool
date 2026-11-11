@@ -2,7 +2,7 @@
   <section class="required-defaults" aria-label="必填建议值">
     <el-button
       :disabled="!store.config || store.isLoading || store.isImporting"
-      title="确认当前配置集中尚未配置的必填参数，仅采用定义中的 DEFAULT-VALUE，保留已填写值"
+      title="确认当前模块配置中尚未配置的必填参数，仅采用定义中的 DEFAULT-VALUE，保留已填写值"
       @click="confirm"
       >填充默认值</el-button
     >

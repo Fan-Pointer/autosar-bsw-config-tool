@@ -40,7 +40,7 @@
         <div><dt>AUTOSAR 版本</dt><dd>{{ project.autosarVersion }}</dd></div>
         <div><dt>芯片型号</dt><dd>{{ project.chip.family }}</dd></div>
         <div><dt>模块数</dt><dd>{{ project.moduleShortNames.length }}</dd></div>
-        <div><dt>配置集数</dt><dd>{{ project.setUuids.length }}</dd></div>
+        <div><dt>模块配置数</dt><dd>{{ project.setUuids.length }}</dd></div>
         <div><dt>创建时间</dt><dd>{{ formatTime(project.createdAt) }}</dd></div>
         <div><dt>最后修改</dt><dd>{{ formatTime(project.updatedAt ?? project.createdAt) }}</dd></div>
       </dl>

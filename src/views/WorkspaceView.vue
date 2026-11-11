@@ -64,8 +64,8 @@
       <div class="toolbar-group">
         <button
           class="tool-button amber"
-          title="配置集管理"
-          aria-label="配置集管理"
+          title="模块配置管理"
+          aria-label="模块配置管理"
           @click.stop="showSets = !showSets"
         >
           <el-icon><FolderOpened /></el-icon>
@@ -91,7 +91,7 @@
         <button
           class="tool-button"
           title="返回主页面"
-          aria-label="返回配置集列表"
+          aria-label="返回工程列表"
           @click="router.push('/')"
         >
           <el-icon><HomeFilled /></el-icon><span class="sr-only">返回主页面</span>
@@ -110,7 +110,7 @@
       <span class="language">简体中文⌄</span><span class="avatar">配</span>
     </header>
     <div class="project-strip">
-      <strong>{{ store.activeProject?.name ?? '默认工程' }}</strong>
+      <strong>{{ store.activeProject?.name ?? '未打开工程' }}</strong>
       <span v-if="store.activeProject"
         >CP {{ store.activeProject.autosarVersion }} · {{ store.activeProject.chip.family }}</span
       >
@@ -142,7 +142,7 @@
           >
             <span class="folder">▱</span
             ><span class="project-name">{{
-              store.activeProject?.name ?? store.config?.name ?? '本机配置集'
+              store.activeProject?.name ?? store.config?.name ?? '本机模块配置'
             }}</span
             ><span>⌃</span>
           </div>
@@ -168,14 +168,14 @@
             <summary><span class="folder">▱</span>{{ branch.name }}</summary>
           </details>
           <button v-if="!store.config" class="empty-project" @click.stop="showSets = true">
-            暂无配置集 · 点击创建
+            暂无模块配置 · 点击创建
           </button>
         </div>
       </aside>
       <div
         class="splitter"
         role="separator"
-        aria-label="配置集目录宽度"
+        aria-label="工程目录宽度"
         aria-orientation="vertical"
         tabindex="0"
         @pointerdown="startResize('project', $event)"
@@ -290,6 +290,7 @@
                 :reference-options="store.referenceOptions"
                 :reference-add-options="store.referenceAddOptions"
                 :dangling-references="store.danglingReferences"
+                :has-active-project="Boolean(store.activeProject)"
                 :selected-field-uuid="helpFieldUuid ?? store.selectedFieldUuid"
                 :configured-fields="configuredFields"
                 :parameter-states="store.parameterStates"
@@ -340,11 +341,11 @@
     <section
       v-show="showSets"
       class="utility-panel config-library"
-      aria-label="配置集管理面板"
+      aria-label="模块配置管理面板"
       @click.stop
     >
       <div class="utility-heading">
-        配置集管理<button aria-label="关闭配置集管理" @click="showSets = false">×</button>
+        模块配置管理<button aria-label="关闭模块配置管理" @click="showSets = false">×</button>
       </div>
       <ConfigSetManager @opened="showSets = false" />
     </section>
@@ -698,7 +699,7 @@ const menuItems = [
   { label: '导入', submenu: true, action: 'import' },
   { label: '导出', submenu: true, action: 'export' },
   { separator: true },
-  { label: '关闭配置集', action: 'close' },
+  { label: '关闭模块配置', action: 'close' },
   { label: '关闭所有工程', action: 'close-all' },
 ];
 watch(
@@ -805,7 +806,7 @@ function tabLabel(uuid: string): string {
 function tabTooltip(uuid: string): string {
   const set = store.configSets.find((item) => item.uuid === uuid);
   return set
-    ? `模块：${set.moduleRef} · CP ${set.version}\n配置集：${set.name ?? set.moduleRef}`
+    ? `模块：${set.moduleRef} · CP ${set.version}\n模块配置：${set.name ?? set.moduleRef}`
     : '';
 }
 function reopenImported(): void {

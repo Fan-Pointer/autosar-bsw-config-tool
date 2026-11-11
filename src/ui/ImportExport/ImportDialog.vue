@@ -25,14 +25,14 @@
           @change="prepare"
         >
           <option v-if="!newOnly" value="current" :disabled="!store.config">
-            当前配置集：{{ store.config?.name ?? '未打开' }}
+            当前模块配置：{{ store.config?.name ?? '未打开' }}
           </option>
-          <option value="new">新建配置集</option>
+          <option value="new">新建模块配置</option>
         </select></label
       >
     </div>
     <p class="import-help">
-      文件仅在本机处理。预览后点击“应用导入”才会保存。未在文件中出现的配置集容器会保留。
+      文件仅在本机处理。预览后点击“应用导入”才会保存。未在文件中出现的模块配置容器会保留。
     </p>
     <!-- G45：工程级 ARXML 含多个模块时，改为勾选导入。 -->
     <section v-if="multiModules.length" class="multi-import" aria-label="选择要导入的模块">
@@ -108,7 +108,7 @@
                 <option value="overwrite">覆盖（文件里有的覆盖，其余保留）</option>
                 <option value="skip">跳过</option>
               </select>
-              <span v-else>新建配置集</span>
+              <span v-else>新建模块配置</span>
             </td>
           </tr>
         </tbody>
@@ -160,7 +160,7 @@
               <th>冲突实例路径</th>
               <th>参数名</th>
               <th>文件生成值 / 文件引用值</th>
-              <th>配置集值 / 配置集引用值</th>
+              <th>模块配置值 / 模块配置引用值</th>
             </tr>
           </thead>
           <tbody>
@@ -403,7 +403,7 @@ async function apply(): Promise<void> {
     ElMessage.success('导入完成，已保存到本机');
     emit('imported');
     emit('update:modelValue', false);
-  } else error.value = store.error ?? '导入失败，配置集未改变';
+  } else error.value = store.error ?? '导入失败，模块配置未改变';
 }
 </script>
 

@@ -48,7 +48,7 @@ describe('G45 single-module ARXML import with definition auto-load', () => {
 
     const notes = await store.importArxmlModules(text, [{ shortName: 'CanIf', mode: 'overwrite' }]);
 
-    expect(notes.join(" | ")).toContain("已作为新配置集导入");
+    expect(notes.join(" | ")).toContain("已作为新模块配置导入");
     // 定义已按文件版本自动加载
     expect(store.modules.some((item) => item.shortName === 'CanIf' && item.version === '4.4.0')).toBe(true);
     // 配置集已生成并成为当前配置集

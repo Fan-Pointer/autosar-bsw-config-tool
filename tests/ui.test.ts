@@ -294,15 +294,15 @@ describe('TASK-003 user interactions', () => {
   it('shows a real create action in the empty workspace and opens a named set with the DTC guide', async () => {
     const { store, wrapper } = await workspace();
     expect(store.config).toBeNull();
-    expect(wrapper.text()).toContain('暂无配置集');
+    expect(wrapper.text()).toContain('暂无模块配置');
     const control = wrapper.findComponent(ConfigSetManager);
     await control
       .findAll('button')
-      .find((button) => button.text() === '新建配置集')!
+      .find((button) => button.text() === '新建模块配置')!
       .trigger('click');
     await nextTick();
     const dialog = document.querySelector('[role="dialog"]')!;
-    const input = dialog.querySelector<HTMLInputElement>('input[aria-label="配置集名称"]')!;
+    const input = dialog.querySelector<HTMLInputElement>('input[aria-label="模块配置名称"]')!;
     input.value = '界面测试配置';
     input.dispatchEvent(new Event('input', { bubbles: true }));
     dialog
@@ -379,7 +379,7 @@ describe('TASK-003 user interactions', () => {
       wrapper
         .findComponent(ConfigSetManager)
         .findAll('button')
-        .find((item) => item.text() === '删除配置集')!;
+        .find((item) => item.text() === '删除模块配置')!;
     await button().trigger('click');
     await answerConfirmation('取消');
     await flushPromises();

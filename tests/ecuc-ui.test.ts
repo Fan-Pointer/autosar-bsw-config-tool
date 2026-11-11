@@ -287,7 +287,7 @@ describe('D3 reference empty state', () => {
     await nextTick();
     expect(exportJson(store.config!)).toBe(before);
   });
-  it('explains why cross-module targets cannot be created instead of making invalid local instances', async () => {
+  it('explains why cross-module candidates are empty instead of making invalid local instances', async () => {
     const store = await importedStore();
     store.selectContainer('');
     store.addContainerInstance(
@@ -299,11 +299,12 @@ describe('D3 reference empty state', () => {
       reference = entry.definition.references[0];
     const before = exportJson(store.config!);
     const picker = wrapper.get(`[aria-label="选择 ${reference.shortName}"]`);
-    expect(picker.attributes('disabled')).toBeDefined();
-    expect(wrapper.text()).toContain('外部引用只读：本期不支持跨模块目标');
+    expect(picker.attributes('disabled')).toBeUndefined();
+    expect(wrapper.text()).toContain('跨模块引用：目标需在本工程其它模块中选择');
     await picker.trigger('click');
     await flushPromises();
-    expect(document.querySelector('.reference-empty')).toBeNull();
+    // 无工程上下文 → 候选为空：显示空态，但绝不提供「伪造成本地实例」的按钮。
+    expect(document.querySelector('.reference-empty')).not.toBeNull();
     expect(document.querySelector('.reference-empty button')).toBeNull();
     expect(exportJson(store.config!)).toBe(before);
   });

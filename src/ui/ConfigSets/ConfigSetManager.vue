@@ -3,8 +3,8 @@
     <div class="set-actions">
       <el-select
         :model-value="store.activeUuid"
-        aria-label="当前配置集"
-        placeholder="选择配置集"
+        aria-label="当前模块配置"
+        placeholder="选择模块配置"
         :disabled="store.isLoading"
         @update:model-value="openSet"
       >
@@ -16,19 +16,19 @@
         />
       </el-select>
       <el-button type="primary" :disabled="store.isLoading" @click="showCreate = true"
-        >新建配置集</el-button
+        >新建模块配置</el-button
       >
       <el-button
         :disabled="!store.config || store.isLoading || store.dataSafety.locked"
         @click="cloneSet"
-        >克隆配置集</el-button
+        >克隆模块配置</el-button
       >
       <el-button
         type="danger"
         plain
         :disabled="!store.config || store.isLoading || store.dataSafety.locked"
         @click="deleteSet"
-        >删除配置集</el-button
+        >删除模块配置</el-button
       >
     </div>
     <p v-if="summary" class="set-metadata">
@@ -38,8 +38,8 @@
       最后修改：{{ new Date(summary.lastModified).toLocaleString('zh-CN') }} ·
       {{ summary.containerCount }} 个容器 · {{ summary.errorCount }} 个错误
     </p>
-    <p v-else class="set-metadata">本机暂无配置集，点击「新建配置集」开始。</p>
-    <el-dialog v-model="showCreate" title="新建配置集" width="460px" destroy-on-close>
+    <p v-else class="set-metadata">本机暂无模块配置，点击「新建模块配置」开始。</p>
+    <el-dialog v-model="showCreate" title="新建模块配置" width="460px" destroy-on-close>
       <el-form label-position="top" @submit.prevent="createSet">
         <el-form-item label="模块">
           <el-select v-model="moduleName" aria-label="配置模块">
@@ -51,8 +51,8 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="配置集名称" required>
-          <el-input v-model="name" aria-label="配置集名称" placeholder="例如：基础配置" />
+        <el-form-item label="模块配置名称" required>
+          <el-input v-model="name" aria-label="模块配置名称" placeholder="例如：基础配置" />
         </el-form-item>
         <el-alert v-if="store.error" :title="store.error" type="error" :closable="false" />
         <el-button
@@ -109,8 +109,8 @@ async function deleteSet(): Promise<void> {
   if (!uuid) return;
   try {
     await ElMessageBox.confirm(
-      `删除配置集「${summary.value?.name}」及其中全部实例？`,
-      '删除配置集',
+      `删除模块配置「${summary.value?.name}」及其中全部实例？`,
+      '删除模块配置',
       {
         confirmButtonText: '确认删除',
         cancelButtonText: '取消',

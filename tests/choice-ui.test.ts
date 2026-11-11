@@ -118,7 +118,7 @@ describe('TASK-009 UI selection and default confirmation', () => {
     expect(store.selectedEntry!.container.uuid).toBe(group.container.uuid);
     store.redo();
     expect(exportJson(store.config!)).toBe(switched);
-  });
+  }, 15000); // 并行负载下 jsdom 渲染可达 5s+，显式放宽超时（单跑约 650ms）
   it('confirms only actual default values across all 37 required NvM parameters in one undo operation', async () => {
     const store = await officialStore();
     const before = exportJson(store.config!);

@@ -6,12 +6,12 @@
     width="min(760px, 94vw)"
     @update:model-value="emit('update:modelValue', $event)"
   >
-    <p v-if="!result.length" class="empty">当前没有可验证的工程或配置集。</p>
+    <p v-if="!result.length" class="empty">当前没有可验证的工程或模块配置。</p>
     <table v-else class="result-table" aria-label="验证结果">
       <thead>
         <tr>
           <th>工程</th>
-          <th>配置集</th>
+          <th>模块配置</th>
           <th>就绪</th>
           <th>错误</th>
           <th>警告</th>

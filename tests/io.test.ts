@@ -16,7 +16,7 @@ import {
   MAX_IMPORT_BYTES,
   serializeConfig,
 } from '../src/core/io/ConfigJson';
-import { AUTOSAR_NAMESPACE, exportArxml, importArxml } from '../src/core/io/Arxml';
+import { AUTOSAR_NAMESPACE, exportArxml, importArxml, prettyXml } from '../src/core/io/Arxml';
 import { exportCsv } from '../src/core/io/Csv';
 import { planImport } from '../src/core/io/ImportPlan';
 import { completeDemArxml } from './helpers/completeDemArxml';
@@ -411,5 +411,16 @@ describe('definition-driven DTC CSV', () => {
     const csv = exportCsv(config, module);
     expect(csv).toContain('0x1A2B3C');
     expect(csv).toContain('\'=HYPERLINK(""bad"")');
+  });
+
+  it('keeps empty sections inline when pretty printing so the document stays re-importable', () => {
+    // 空段落被拆成 <X>\n</X> 时，trimValues:false 会把它解析成空白字符串，
+    // 导入端会把「空白文本」判成坏类型——美化只允许改空白，不允许改结构。
+    const pretty = prettyXml(
+      '<AUTOSAR><CONTAINERS><ECUC-CONTAINER-VALUE><PARAMETER-VALUES></PARAMETER-VALUES><SUB-CONTAINERS></SUB-CONTAINERS></ECUC-CONTAINER-VALUE></CONTAINERS></AUTOSAR>'
+    );
+    expect(pretty).toContain('<PARAMETER-VALUES></PARAMETER-VALUES>');
+    expect(pretty).toContain('<SUB-CONTAINERS></SUB-CONTAINERS>');
+    expect(pretty).not.toContain('<PARAMETER-VALUES>\n');
   });
 });

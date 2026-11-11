@@ -282,7 +282,7 @@ describe('project metadata with real shipped definitions', () => {
     });
     const store = useConfigStore();
     await store.initialize();
-    expect(store.projectWarnings[0]).toContain('1 个配置集暂不可用');
+    expect(store.projectWarnings[0]).toContain('1 个模块配置暂不可用');
     expect(await store.openProject('orphan')).toBe(false);
     expect(db.write).not.toHaveBeenCalled();
     db.data.set(projectsKey, { unexpected: ['keep me'] });

@@ -217,7 +217,7 @@
               <button
                 type="button"
                 class="reference-remove"
-                :disabled="readonly || reference.isExternal"
+                :disabled="readonly"
                 :aria-label="'删除 ' + reference.shortName + ' 目标 ' + (index + 1)"
                 @click="emit('reference-remove', reference.uuid, index)"
               >
@@ -227,7 +227,7 @@
             <button
               type="button"
               class="reference-add"
-              :disabled="readonly || reference.isExternal"
+              :disabled="readonly"
               :aria-label="'添加 ' + reference.shortName + ' 目标'"
               @click="openReference(reference.uuid)"
             >
@@ -242,11 +242,13 @@
               readonly
             />
             <span
-              :title="reference.isExternal ? '外部引用只读：本期不支持跨模块目标' : '选择引用目标'"
+              :title="
+                reference.isExternal ? '跨模块引用：目标需在本工程其它模块中选择' : '选择引用目标'
+              "
               ><button
                 class="reference-picker"
                 type="button"
-                :disabled="readonly || reference.isExternal"
+                :disabled="readonly"
                 :aria-label="'选择 ' + reference.shortName"
                 @click="openReference(reference.uuid)"
               >
@@ -255,14 +257,14 @@
             >
           </template>
         </div>
-        <small v-if="reference.isExternal" class="field-error"
-          >外部引用只读：本期不支持跨模块目标</small
+        <small v-if="reference.isExternal" class="reference-hint"
+          >跨模块引用：目标需在本工程其它模块中选择</small
         >
         <span v-if="danglingReferences.includes(reference.uuid)" class="field-error" role="alert">
           目标不存在（{{ referenceData[reference.uuid]?.slice(0, 8) }}）
           <button
             class="clear-reference"
-            :disabled="readonly || reference.isExternal"
+            :disabled="readonly"
             @click="emit('reference-change', reference.uuid, '')"
           >
             清除引用
@@ -313,7 +315,7 @@
               @change="stageReference(option.uuid)"
             />
             <span
-              ><strong>{{ option.label.split('/').pop() }}</strong
+              ><strong>{{ optionName(option) }}</strong
               ><small>{{ option.label }}</small></span
             >
           </label>
@@ -327,14 +329,13 @@
           class="reference-empty"
           role="status"
         >
-          <p>
-            暂无
-            {{
-              container.references.find((item) => item.uuid === referencePicker)
-                ?.destinationContainerType
-            }}
-            实例，请先新增
+          <p v-if="activeReference?.isExternal && !hasActiveProject">
+            当前没有打开工程：请先打开或新建工程后再选择跨模块目标
           </p>
+          <p v-else-if="activeReference?.isExternal">
+            工程内没有匹配的跨模块容器：请确认目标模块已加入本工程且版本正确
+          </p>
+          <p v-else>暂无 {{ activeReference?.destinationContainerType }} 实例，请先新增</p>
           <el-button
             v-for="option in referenceAddOptions[referencePicker] ?? []"
             :key="String(option.parentUuid) + option.definitionUuid"
@@ -343,8 +344,8 @@
             @click="createDraft = option"
             >新增 {{ option.label }}</el-button
           >
-          <p v-if="!referenceAddOptions[referencePicker]?.length">
-            请先新增目标父容器；跨模块目标当前不可创建。
+          <p v-if="!referenceAddOptions[referencePicker]?.length && !activeReference?.isExternal">
+            请先新增目标父容器。
           </p>
         </div>
       </template>
@@ -368,7 +369,7 @@ const props = withDefaults(
     container: BswmdContainer;
     configData?: Record<string, unknown>;
     referenceData?: Record<string, string>;
-    referenceOptions?: Record<string, { uuid: string; label: string }[]>;
+    referenceOptions?: Record<string, { uuid: string; label: string; module?: string }[]>;
     referenceAddOptions?: Record<
       string,
       {
@@ -388,6 +389,8 @@ const props = withDefaults(
     parameterStates?: Record<string, { disabled?: boolean; notice?: string }>;
     /** G42: per-reference target list (multi-value references). */
     referenceTargets?: Record<string, { uuid: string; label: string }[]>;
+    /** 是否存在打开的工程：跨模块引用的空态原因取决于它（无工程 vs 工程内无匹配容器）。 */
+    hasActiveProject?: boolean;
   }>(),
   {
     configData: () => ({}),
@@ -398,6 +401,7 @@ const props = withDefaults(
     danglingReferences: () => [],
     configuredFields: () => ({}),
     fieldErrors: () => ({}),
+    hasActiveProject: false,
   }
 );
 const emit = defineEmits<{
@@ -482,7 +486,6 @@ const canApplyReference = computed(
   () =>
     !props.readonly &&
     activeReference.value &&
-    !activeReference.value.isExternal &&
     (createDraft.value
       ? (props.referenceAddOptions[referencePicker.value ?? ''] ?? []).some(
           (option) =>
@@ -496,12 +499,19 @@ const canApplyReference = computed(
         ))
 );
 function openReference(uuid: string): void {
-  if (props.readonly || props.container.references.find((ref) => ref.uuid === uuid)?.isExternal)
-    return;
+  if (props.readonly) return;
   referenceDraft.value = props.referenceData[uuid] ?? '';
   referenceSearch.value = '';
   createDraft.value = undefined;
   referencePicker.value = uuid;
+}
+/** 候选标题：本地路径取最后一段；跨模块标签「模块 › 路径」同样取最后一段。 */
+function optionName(option: { label: string }): string {
+  const parts = option.label
+    .split(/[\/›]/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+  return parts[parts.length - 1] ?? option.label;
 }
 function stageReference(uuid: string): void {
   referenceDraft.value = uuid;
@@ -813,6 +823,12 @@ defineExpose({ resetForm, getFormData });
 .field-error {
   grid-column: 4;
   color: var(--color-error);
+  font-size: 12px;
+}
+/* 跨模块引用的常驻说明：这是合法状态提示，不能用错误红。 */
+.reference-hint {
+  grid-column: 4;
+  color: var(--color-muted);
   font-size: 12px;
 }
 .has-error > .parameter-name {

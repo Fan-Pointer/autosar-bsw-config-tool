@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:verify": "vitest run --reporter=default --reporter=./scripts/test-collection-guard.ts",
+    "test:perf": "vitest run tests/performance.test.ts --no-file-parallelism",
     "test:ui": "vitest --ui",
     "lint": "eslint . --ext .vue,.ts,.tsx --fix",
     "format": "prettier --write \"src/**/*.{vue,ts,tsx,json,css,scss}\""

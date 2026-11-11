@@ -224,7 +224,7 @@ describe('TASK-009 choice values and round trips', () => {
       expect(check.ready).toBe(false);
       expect(check.issues).toHaveLength(1);
       expect(check.issues[0].anchor.definitionRef).toBe(required[0].uuid);
-      expect(check.issues[0].reason).toContain('目标跨模块（本期不支持）');
+      expect(check.issues[0].reason).toContain('必填跨模块引用未选择目标');
       expect(() => exportArxml(config, module)).toThrow(required[0].shortName);
       expect(group.container.subContainers).toHaveLength(1);
       expect(group.container.subContainers[0].definitionRef).toBe(

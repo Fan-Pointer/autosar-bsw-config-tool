@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createPinia, setActivePinia } from 'pinia';
 import { useConfigStore } from '../src/stores/configStore';
+import { collectContainers } from '../src/core/config/ConfigTraversal';
 import type { ProjectInput } from '../src/stores/projectMetadata';
 
 const db = vi.hoisted(() => ({ data: new Map<string, unknown>(), write: vi.fn() }));
@@ -119,6 +120,48 @@ describe('G40 project management', () => {
     expect(store.projects.filter((item) => item.name === '车身控制器')).toHaveLength(1);
     expect(store.configSets.filter((set) => sourceSetUuids.includes(set.uuid))).toHaveLength(
       sourceSetUuids.length
+    );
+  });
+
+  it('rewrites reference targets onto the copied containers so the duplicate never dangles', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    await store.createProject({ ...input, moduleShortNames: ['Dem'] });
+    const source = store.activeProject!;
+    const eventParameter = store.entries.find(
+      (entry) => entry.definition.shortName === 'DemEventParameter'
+    )!;
+    const operationCycle = store.entries.find(
+      (entry) => entry.definition.shortName === 'DemOperationCycle'
+    )!;
+    const refDefinition = eventParameter.definition.references.find(
+      (reference) => reference.shortName === 'DemOperationCycleRef'
+    )!;
+    store.selectContainer(eventParameter.container.uuid);
+    store.setReferenceTarget(refDefinition.uuid, operationCycle.container.uuid);
+    expect(await store.saveConfig()).toBe(true);
+
+    const copyUuid = await store.duplicateProject(source.projectUuid);
+    const copy = store.projects.find((item) => item.projectUuid === copyUuid)!;
+    const copySet = store.configSets.find((set) => copy.setUuids.includes(set.uuid))!;
+    const definition = store.modules.find(
+      (item) => item.shortName === copySet.moduleRef && item.version === copySet.version
+    )!;
+    const copyEntries = collectContainers(copySet, definition);
+    const copyEvent = copyEntries.find(
+      (entry) => entry.definition.shortName === 'DemEventParameter'
+    )!;
+    const copyCycle = copyEntries.find(
+      (entry) => entry.definition.shortName === 'DemOperationCycle'
+    )!;
+    // 引用目标必须指向副本自己的容器，而不是原工程的 uuid（否则副本必然悬空）。
+    expect(copyEvent.container.references.get(refDefinition.uuid)?.targetUuid).toBe(
+      copyCycle.container.uuid
+    );
+    expect(copyCycle.container.uuid).not.toBe(operationCycle.container.uuid);
+    // 副本必须是可编辑的真实结构：cloneData 的 JSON 深拷贝会把 references 拍平成对象。
+    expect(copySet.containers.every((container) => container.references instanceof Map)).toBe(
+      true
     );
   });
 });

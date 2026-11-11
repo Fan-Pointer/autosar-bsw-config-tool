@@ -1,5 +1,6 @@
 import type { BswmdModule } from '@/core/bswmd/BswmdTypes';
 import type { ConfigInstance } from '@/core/config/ConfigTypes';
+import { buildProjectReferenceScope } from '@/core/config/ProjectReferenceScope';
 import { CGenerator } from '@/core/generator/CGenerator';
 import { exportArxml, exportProjectArxml, prettyXml } from './Arxml';
 import { buildZip, type ZipEntry } from './Zip';
@@ -30,7 +31,7 @@ export interface ProjectPackageManifest {
 export async function buildProjectPackage(
   input: ProjectPackageInput
 ): Promise<{ zip: Uint8Array; manifest: ProjectPackageManifest }> {
-  if (!input.entries.length) throw new Error('工程内没有可导出的配置集');
+  if (!input.entries.length) throw new Error('工程内没有可导出的模块配置');
   const files: ZipEntry[] = [];
   const manifest: ProjectPackageManifest = {
     name: input.projectName,
@@ -44,10 +45,12 @@ export async function buildProjectPackage(
   // 工程级 ARXML 必须先全部通过输出闸门，否则整包不生成（避免半成品交付）。
   files.push({ path: 'project.arxml', content: exportProjectArxml(input.entries) });
 
+  // 每模块 ARXML 单独导出时同样需要工程作用域：否则跨模块引用会被判「目标不存在」。
+  const scope = buildProjectReferenceScope(input.entries);
   const generator = new CGenerator();
   for (const { config, module } of input.entries) {
     const moduleArxmlPath = `modules/${module.shortName}.arxml`;
-    files.push({ path: moduleArxmlPath, content: exportArxml(config, module) });
+    files.push({ path: moduleArxmlPath, content: exportArxml(config, module, undefined, scope) });
     const record: ProjectPackageManifest['modules'][number] = {
       module: module.shortName,
       arxml: moduleArxmlPath,
@@ -87,11 +90,12 @@ export function buildModuleArxmlZip(input: ProjectPackageInput): {
   const files: ZipEntry[] = [];
   const exported: string[] = [];
   const skipped: { module: string; reason: string }[] = [];
+  const scope = buildProjectReferenceScope(input.entries);
   for (const { config, module } of input.entries) {
     try {
       files.push({
         path: `${module.shortName}.arxml`,
-        content: prettyXml(exportArxml(config, module)),
+        content: prettyXml(exportArxml(config, module, undefined, scope)),
       });
       exported.push(module.shortName);
     } catch (reason) {

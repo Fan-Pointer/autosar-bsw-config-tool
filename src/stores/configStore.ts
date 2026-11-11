@@ -32,7 +32,12 @@ import {
 } from '@/core/io/ConfigJson';
 import { exportArxml, importArxml } from '@/core/io/Arxml';
 import { evaluateParameterStates } from '@/core/constraint/ParameterStates';
-import { exportProjectArxml, scanArxmlModules, type ArxmlModuleHeader } from '@/core/io/Arxml';
+import {
+  collectProjectContainerPaths,
+  exportProjectArxml,
+  scanArxmlModules,
+  type ArxmlModuleHeader,
+} from '@/core/io/Arxml';
 import {
   buildProjectPackage,
   buildModuleArxmlZip,
@@ -60,6 +65,12 @@ import {
   matchesReferenceDefinition,
   resolveReferenceCandidates,
 } from '@/core/config/ReferenceCandidates';
+import {
+  buildProjectReferenceScope,
+  labelOf,
+  resolveExternalReferenceCandidates,
+  type ProjectReferenceScope,
+} from '@/core/config/ProjectReferenceScope';
 
 /** Application-owned output result bound to the configuration state that was evaluated. */
 export interface ConfigOutputCheck extends OutputCheckResult {
@@ -149,7 +160,7 @@ function cloneData<T>(value: T): T {
 // Storage is untrusted too. Validate structure without rejecting an unfinished configuration
 // or normalizing away unknown fields: recovery must not turn an invalid value into a default.
 function restoreStored(raw: unknown, definitions: BswmdModule[]): ConfigInstance {
-  const data = record(raw, '配置集');
+  const data = record(raw, '模块配置');
   const moduleRef = string(data.moduleRef, 'moduleRef');
   const version = string(data.version ?? '4.4.0', 'version');
   const definition = definitions.find(
@@ -264,7 +275,7 @@ export const useConfigStore = defineStore('config', () => {
       );
       return missing.length
         ? [
-            `${p.name}：${missing.length} 个配置集暂不可用，请先检查恢复面板，或移除工程归属后重新整理。`,
+            `${p.name}：${missing.length} 个模块配置暂不可用，请先检查恢复面板恢复数据。`,
           ]
         : [];
     })
@@ -351,13 +362,47 @@ export const useConfigStore = defineStore('config', () => {
     entries.value.filter((entry) => selectedContainerUuids.value.includes(entry.container.uuid))
   );
   const batchParameters = computed(() => commonParameters(selectedEntries.value));
+  /** 工程引用作用域的缓存：同一 revision 下反复渲染表单不必重建索引。
+   * 缓存键含配置集 uuid 与 lastModified，跨模块目标被增删后必然失效。 */
+  const scopeCache = new Map<string, { key: string; scope: ProjectReferenceScope }>();
+  function scopeForProject(project: ProjectMetadata | undefined): ProjectReferenceScope | undefined {
+    if (!project) return undefined;
+    const sets = configSets.value.filter((set) => project.setUuids.includes(set.uuid));
+    const key = `${revision}|${sets.map((set) => `${set.uuid}@${set.lastModified}`).join(',')}`;
+    const cached = scopeCache.get(project.projectUuid);
+    if (cached?.key === key) return cached.scope;
+    const entries = sets.flatMap((set) => {
+      const definition = modules.value.find(
+        (item) => item.shortName === set.moduleRef && item.version === set.version
+      );
+      return definition ? [{ config: set, module: definition }] : [];
+    });
+    const scope = buildProjectReferenceScope(entries);
+    scopeCache.set(project.projectUuid, { key, scope });
+    return scope;
+  }
+  /** 当前编辑上下文所属工程的引用作用域；无工程时为 undefined（候选恒为空）。 */
+  function projectScope(): ProjectReferenceScope | undefined {
+    return scopeForProject(activeProject.value);
+  }
+  /** 某个模块配置所属工程的引用作用域（校验非当前配置集时用）。 */
+  function scopeOfSet(setUuid: string): ProjectReferenceScope | undefined {
+    return scopeForProject(projects.value.find((p) => p.setUuids.includes(setUuid)));
+  }
   const danglingReferences = computed(() => {
+    const configured = [...(selectedEntry.value?.container.references.values() ?? [])].filter(
+      (reference) => reference.isConfigured
+    );
+    if (!configured.length) return [];
     const existing = new Set(entries.value.map((entry) => entry.container.uuid));
-    return [...(selectedEntry.value?.container.references.values() ?? [])]
-      .filter(
-        (reference) =>
-          reference.isConfigured && reference.targetUuid && !existing.has(reference.targetUuid)
-      )
+    // 快路径：所有目标都在本模块内时无需构建工程索引（纯参数编辑的常见场景）。
+    if (configured.every((reference) => referenceTargets(reference).every((uuid) => existing.has(uuid))))
+      return [];
+    // 跨模块目标在本模块内当然找不到：存在性判定必须并入工程作用域。
+    const scope = projectScope();
+    if (scope) for (const uuid of scope.containers.keys()) existing.add(uuid);
+    return configured
+      .filter((reference) => referenceTargets(reference).some((uuid) => !existing.has(uuid)))
       .map((reference) => reference.definitionRef);
   });
   const selectedKey = computed(() =>
@@ -376,11 +421,14 @@ export const useConfigStore = defineStore('config', () => {
         const labels = new Map(
           (options[definition.uuid] ?? []).map((option) => [option.uuid, option.label])
         );
+        const targets = referenceTargets(stored);
+        // 只有候选表里查不到标签时才需要工程标签索引（避免无谓建索引）。
+        const scope = targets.some((uuid) => !labels.has(uuid)) ? projectScope() : undefined;
         return [
           definition.uuid,
-          referenceTargets(stored).map((uuid) => ({
+          targets.map((uuid) => ({
             uuid,
-            label: labels.get(uuid) ?? uuid.slice(0, 8),
+            label: labels.get(uuid) ?? labelOf(scope, uuid) ?? uuid.slice(0, 8),
           })),
         ];
       })
@@ -416,18 +464,33 @@ export const useConfigStore = defineStore('config', () => {
       ])
     )
   );
-  const referenceOptions = computed(() =>
+  /** 引用候选：跨模块引用走工程作用域（标签带模块前缀），本地引用保持原契约。
+   * 顺序必须与引用定义一致；候选为空时 UI 显示空态而不是臆造目标。 */
+  const referenceOptions = computed<
+    Record<string, { uuid: string; label: string; module?: string }[]>
+  >(() =>
     Object.fromEntries(
-      (selectedEntry.value?.definition.references ?? []).map((reference) => [
-        reference.uuid,
-        (config.value && module.value
-          ? resolveReferenceCandidates(reference, config.value, module.value)
-          : []
-        ).map((entry) => ({
-          uuid: entry.container.uuid,
-          label: entry.path,
-        })),
-      ])
+      (selectedEntry.value?.definition.references ?? []).map((reference) => {
+        if (reference.isExternal)
+          return [
+            reference.uuid,
+            resolveExternalReferenceCandidates(reference, projectScope()).map((target) => ({
+              uuid: target.uuid,
+              label: target.label,
+              module: target.moduleShortName,
+            })),
+          ];
+        return [
+          reference.uuid,
+          (config.value && module.value
+            ? resolveReferenceCandidates(reference, config.value, module.value)
+            : []
+          ).map((entry) => ({
+            uuid: entry.container.uuid,
+            label: entry.path,
+          })),
+        ];
+      })
     )
   );
 
@@ -636,7 +699,7 @@ export const useConfigStore = defineStore('config', () => {
       setUuid = set.uuid;
     const replay = (forward: boolean): void => {
       const index = configSets.value.findIndex((item) => item.uuid === setUuid);
-      if (index < 0) throw new Error('历史记录所属配置集已不存在');
+      if (index < 0) throw new Error('历史记录所属模块配置已不存在');
       configSets.value[index] = delta(configSets.value[index], forward);
       const selected = forward ? nextSelection : priorSelection;
       selectedContainerUuid.value = selected.uuid;
@@ -732,9 +795,9 @@ export const useConfigStore = defineStore('config', () => {
    * @returns A same-action result; callers must never cache it across actions.
    */
   function getOutputCheck(target = config.value, definition = module.value): ConfigOutputCheck {
-    if (!target || !definition) throw new Error('请先打开配置集');
+    if (!target || !definition) throw new Error('请先打开模块配置');
     return {
-      ...evaluateOutputReadiness(target, definition, DemConstraints),
+      ...evaluateOutputReadiness(target, definition, DemConstraints, scopeOfSet(target.uuid)),
       configUuid: target.uuid,
       lastModified: target.lastModified,
       revision,
@@ -753,7 +816,7 @@ export const useConfigStore = defineStore('config', () => {
         check.lastModified !== config.value.lastModified ||
         check.revision !== revision)
     )
-      throw new Error('输出检查已过期或不属于当前配置集，请重新校验');
+      throw new Error('输出检查已过期或不属于当前模块配置，请重新校验');
     violations.value =
       config.value && module.value ? outputViolations(check ?? getOutputCheck()) : [];
     validated.value = Boolean(config.value && module.value);
@@ -896,7 +959,7 @@ export const useConfigStore = defineStore('config', () => {
         try {
           await writeProjectIndex(previous.raw);
         } catch {
-          projectError.value += '；工程归属回滚未完成，请重新打开检查索引，配置数据未删除。';
+          projectError.value += '；工程关联回滚未完成，请重新打开检查索引，配置数据未删除。';
         }
       }
       projects.value = previous.projects;
@@ -963,25 +1026,52 @@ export const useConfigStore = defineStore('config', () => {
     if (projectBusy.value) throw new Error('工程操作进行中，请稍后');
     const name = `${source.name} 副本`;
     const nextUuid = generateUUID();
+    // 复制工程会重写容器 uuid，引用值里的 targetUuid/targetUuids 必须同步改写，
+    // 否则副本内所有引用都指向原工程的 uuid（必然悬空）。
+    const uuidMap = new Map<string, string>();
     const renameContainers = (containers: ConfigContainer[]): void => {
       for (const container of containers) {
-        container.uuid = generateUUID();
+        const next = generateUUID();
+        uuidMap.set(container.uuid, next);
+        container.uuid = next;
         renameContainers(container.subContainers);
+      }
+    };
+    const remapReferences = (containers: ConfigContainer[]): void => {
+      for (const container of containers) {
+        if (!(container.references instanceof Map)) continue;
+        for (const value of container.references.values()) {
+          if (value.targetUuid) value.targetUuid = uuidMap.get(value.targetUuid) ?? value.targetUuid;
+          if (value.targetUuids?.length)
+            value.targetUuids = value.targetUuids.map((id) => uuidMap.get(id) ?? id);
+        }
+        remapReferences(container.subContainers);
       }
     };
     const copies = configSets.value
       .filter((set) => source.setUuids.includes(set.uuid))
       .map((set) => {
-        const copy = cloneData(set);
+        const definition = modules.value.find(
+          (item) => item.shortName === set.moduleRef && item.version === set.version
+        );
+        // cloneData 是 JSON 深拷贝，会把 parameters/references 的 Map 拍平成对象：
+        // 副本用 serialize + hydrate 重建真实结构，否则引用 remap 无从谈起。
+        const copy = definition
+          ? hydrateConfig(serializeConfig(set), [definition])
+          : cloneData(set);
         copy.uuid = generateUUID();
         copy.createdAt = Date.now();
         copy.lastModified = Date.now();
         const prefix = source.name + ' · ';
         copy.name =
           set.name?.startsWith(prefix) ? name + ' · ' + set.name.slice(prefix.length) : set.name;
-        renameContainers(copy.containers);
         return copy;
       });
+    // 必须分两遍遍历：① 先把全工程副本的容器 uuid 全部改完（填满 uuidMap）；
+    // ② 再统一改写引用目标。合成一遍会让「引用方排在目标模块之前」的跨模块引用漏改——
+    // 那一刻 uuidMap 里还没有目标容器的新 uuid，改写会静默保留原工程的 uuid，副本必然悬空。
+    for (const copy of copies) renameContainers(copy.containers);
+    for (const copy of copies) remapReferences(copy.containers);
     const now = new Date().toISOString();
     const project: ProjectMetadata = {
       ...cloneData(source),
@@ -1043,9 +1133,9 @@ export const useConfigStore = defineStore('config', () => {
       const nextManager = new ConfigInstanceManager(all);
       const own = configSets.value.filter((set) => project.setUuids.includes(set.uuid));
       if (own.length !== project.setUuids.length)
-        throw new Error('工程含不可用配置集，请先检查恢复面板，不能覆盖原关联');
+        throw new Error('工程含不可用的模块配置，请先检查恢复面板，不能覆盖原关联');
       if (own.some((set) => set.version !== release))
-        throw new Error('工程关联了不同版本的配置集，请先修复工程关联');
+        throw new Error('工程关联了不同版本的模块配置，请先修复工程关联');
       const retained = own.filter((set) => names.includes(set.moduleRef));
       const detached = new Set([
         ...(project.detachedSetUuids ?? []),
@@ -1154,7 +1244,7 @@ export const useConfigStore = defineStore('config', () => {
         selectContainer('');
         return true;
       }
-      projectError.value = '工程没有可打开的配置集，请检查恢复面板。';
+      projectError.value = '工程没有可打开的模块配置，请检查恢复面板。';
       return false;
     }
     return switchConfigSet(sets.find((set) => set.uuid === activeUuid.value)?.uuid ?? sets[0].uuid);
@@ -1189,7 +1279,7 @@ export const useConfigStore = defineStore('config', () => {
     release?: string
   ): Promise<boolean> {
     assertEditable();
-    if (!name.trim()) throw new Error('请输入配置集名称');
+    if (!name.trim()) throw new Error('请输入模块配置名称');
     if (!(await initialize()) || (isDirty.value && !(await saveConfig()))) return false;
     createConfig(moduleName, name, release);
     if (dataSafety.value.locked) draftUuids.value.push(activeUuid.value!);
@@ -1312,7 +1402,7 @@ export const useConfigStore = defineStore('config', () => {
    */
   function confirmRequiredDefaults(): { confirmed: number; remaining: number } {
     assertEditable();
-    if (!config.value || !module.value) throw new Error('请先打开配置集');
+    if (!config.value || !module.value) throw new Error('请先打开模块配置');
     const { assignments, remaining } = planRequiredDefaults(config.value, module.value);
     if (assignments.length)
       edit('一键确认建议值', () => {
@@ -1458,11 +1548,12 @@ export const useConfigStore = defineStore('config', () => {
    */
   function setReferenceTarget(uuid: string, targetUuid: string): void {
     assertEditable();
-    if (
-      selectedEntry.value?.definition.references.find((reference) => reference.uuid === uuid)
-        ?.isExternal
-    )
-      throw new Error('外部引用只读：本期不支持跨模块目标');
+    // 清空永远允许；非空目标必须是本模块容器或当前工程内其它模块的容器。
+    if (targetUuid) {
+      const local = entries.value.some((entry) => entry.container.uuid === targetUuid);
+      const scoped = projectScope()?.containers.has(targetUuid) ?? false;
+      if (!local && !scoped) throw new Error('引用目标不在当前工程内');
+    }
     if (!selectedEntry.value) return;
     const entry = selectedEntry.value;
     const definition = entry.definition.references.find((r) => r.uuid === uuid);
@@ -1491,7 +1582,6 @@ export const useConfigStore = defineStore('config', () => {
     const entry = selectedEntry.value;
     const definition = entry.definition.references.find((r) => r.uuid === uuid);
     if (!definition) return;
-    if (definition.isExternal) throw new Error('外部引用只读：本期不支持跨模块目标');
     if (!targetUuid) return;
     edit(`追加引用 ${definition.shortName}`, () => {
       if (!entry.container.references.has(uuid))
@@ -1516,7 +1606,6 @@ export const useConfigStore = defineStore('config', () => {
     const entry = selectedEntry.value;
     const definition = entry.definition.references.find((r) => r.uuid === uuid);
     if (!definition) return;
-    if (definition.isExternal) return;
     edit(`删除引用 ${definition.shortName} 目标`, () => {
       manager.removeReferenceTarget(entry.container, uuid, index);
     });
@@ -1681,7 +1770,7 @@ export const useConfigStore = defineStore('config', () => {
           try {
             const set = restoreStored(item, restoredModules);
             if (restored.some((existing) => existing.uuid === set.uuid))
-              throw new Error('配置集 UUID 重复');
+              throw new Error('模块配置 UUID 重复');
             restored.push(set);
             if (draft) draftUuids.value.push(set.uuid);
           } catch (reason) {
@@ -1935,7 +2024,7 @@ export const useConfigStore = defineStore('config', () => {
     index: number
   ): Promise<{ config: ConfigInstance; module: BswmdModule }> {
     const entry = quarantinedSets.value[index];
-    if (!entry || entry.kind !== 'configuration') throw new Error('请选择不兼容配置集');
+    if (!entry || entry.kind !== 'configuration') throw new Error('请选择兼容的模块配置');
     const legacySources = import.meta.glob<string>('../../bswmd/legacy/*.json', {
       query: '?raw',
       import: 'default',
@@ -2082,7 +2171,17 @@ export const useConfigStore = defineStore('config', () => {
     }
     if (needLoading.length) manager = new ConfigInstanceManager(modules.value);
 
-    // 2) 逐模块解析并写入配置库。
+    // 2) 工程级文档先建一次「容器路径 → uuid」全局索引：
+    //    跨模块 VALUE-REF 在本模块段内永远查不到，没有这张表整模块会被判「解析失败」而静默丢弃。
+    //    构建失败只退化为按模块段解析（单模块语义），不阻断导入。
+    let externalTargets: ReadonlyMap<string, string> | undefined;
+    try {
+      externalTargets = collectProjectContainerPaths(text);
+    } catch {
+      externalTargets = undefined;
+    }
+
+    // 3) 逐模块解析并写入配置库。
     const applied: { set: ConfigInstance; module: string }[] = [];
     for (const item of wanted) {
       const header = headers.find((entry) => entry.shortName === item.shortName);
@@ -2094,7 +2193,13 @@ export const useConfigStore = defineStore('config', () => {
       const warnings: string[] = [];
       let incoming: ConfigInstance;
       try {
-        incoming = importArxml(text, modules.value, (message) => warnings.push(message), header.shortName);
+        incoming = importArxml(
+          text,
+          modules.value,
+          (message) => warnings.push(message),
+          header.shortName,
+          externalTargets
+        );
       } catch (reason) {
         notes.push(`${header.shortName}：解析失败（${reason instanceof Error ? reason.message : String(reason)}）`);
         continue;
@@ -2135,7 +2240,7 @@ export const useConfigStore = defineStore('config', () => {
         created.lastModified = Date.now();
         configSets.value.push(created);
         applied.push({ set: created, module: header.shortName });
-        notes.push(`${header.shortName}：已作为新配置集导入`);
+        notes.push(`${header.shortName}：已作为新模块配置导入`);
       }
       modulePreferences.value[moduleKey(header.shortName, header.release)] = {
         included: true,
@@ -2144,7 +2249,7 @@ export const useConfigStore = defineStore('config', () => {
       };
     }
 
-    // 3) 自动并入当前工程（用户要求：工程里没有的模块自动添加）。
+    // 4) 自动并入当前工程（用户要求：工程里没有的模块自动添加）。
     const project = activeProject.value;
     if (options?.newProjectName?.trim() && applied.length) {
       // 导入时选择「新建工程」：工程只挂本次导入的配置集与模块。
@@ -2163,7 +2268,7 @@ export const useConfigStore = defineStore('config', () => {
       const next = [...projects.value, created];
       await writeProjectIndex({ schemaVersion: 1, projects: next });
       projects.value = next;
-      notes.push(`已新建工程「${created.name}」并挂载 ${applied.length} 个配置集`);
+      notes.push(`已新建工程「${created.name}」并挂载 ${applied.length} 个模块配置`);
       // 导入后直接进入新工程（否则界面仍停在原工程，看起来像「并入」了）。
       await openProject(created.projectUuid).catch(() => false);
       activeUuid.value = applied[0].set.uuid;
@@ -2214,7 +2319,7 @@ export const useConfigStore = defineStore('config', () => {
         config.value &&
         (incoming.moduleRef !== config.value.moduleRef || incoming.version !== config.value.version)
       )
-        throw new Error('文件模块或版本与当前配置集不一致，请选择新建配置集');
+        throw new Error('文件模块或版本与当前模块配置不一致，请选择新建模块配置');
       return {
         incoming,
         warnings,
@@ -2233,7 +2338,7 @@ export const useConfigStore = defineStore('config', () => {
    */
   function previewImport(session: ImportSession, strategy: ConflictStrategy): ImportPlan {
     if (session.baseline !== importBaseline())
-      throw new Error('配置集已在预览后更改，请重新读取文件并预览');
+      throw new Error('模块配置已在预览后更改，请重新读取文件并预览');
     const definition = modules.value.find(
       (item) =>
         item.shortName === session.incoming.moduleRef && item.version === session.incoming.version
@@ -2322,13 +2427,13 @@ export const useConfigStore = defineStore('config', () => {
    * @returns File content; throws a readable error when no configuration is active.
    */
   function exportConfig(format: ExportFormat): string {
-    if (!config.value || !module.value) throw new Error('请先打开配置集');
+    if (!config.value || !module.value) throw new Error('请先打开模块配置');
     // Retrieving user data is always possible, even when business outputs are not ready.
     if (format === 'json') return exportJson(config.value);
     const check = getOutputCheck();
     validate(check);
     return format === 'arxml'
-      ? exportArxml(config.value, module.value, check)
+      ? exportArxml(config.value, module.value, check, scopeOfSet(config.value.uuid))
       : exportCsv(config.value, module.value, check);
   }
 
@@ -2343,12 +2448,18 @@ export const useConfigStore = defineStore('config', () => {
     warningCount: number;
     failures: { set: string; reason: string }[];
   }[] {
+    // 只有真正的工程才有引用作用域；无工程时的兜底分组按「无工程上下文」处理（裁定 B）。
     const groups = projects.value.length
-      ? projects.value.map((project) => ({ name: project.name, setUuids: project.setUuids }))
+      ? projects.value.map((project) => ({
+          name: project.name,
+          setUuids: project.setUuids,
+          scoped: true,
+        }))
       : [
           {
-            name: config.value?.name ?? '当前配置集',
+            name: config.value?.name ?? '当前模块配置',
             setUuids: configSets.value.map((set) => set.uuid),
+            scoped: false,
           },
         ];
     return groups.map((group) => {
@@ -2357,6 +2468,17 @@ export const useConfigStore = defineStore('config', () => {
       let errorCount = 0;
       let warningCount = 0;
       const failures: { set: string; reason: string }[] = [];
+      // 逐工程建立作用域：跨模块引用只有在正确的工程内才可能判定通过。
+      const groupScope = group.scoped
+        ? buildProjectReferenceScope(
+            sets.flatMap((set) => {
+              const definition = modules.value.find(
+                (item) => item.shortName === set.moduleRef && item.version === set.version
+              );
+              return definition ? [{ config: set, module: definition }] : [];
+            })
+          )
+        : undefined;
       for (const set of sets) {
         const definition = modules.value.find(
           (item) => item.shortName === set.moduleRef && item.version === set.version
@@ -2365,7 +2487,7 @@ export const useConfigStore = defineStore('config', () => {
           failures.push({ set: set.name ?? set.uuid, reason: '模块定义未加载' });
           continue;
         }
-        const check = evaluateOutputReadiness(set, definition, DemConstraints);
+        const check = evaluateOutputReadiness(set, definition, DemConstraints, groupScope);
         if (check.ready) ready += 1;
         else {
           errorCount += 1;
@@ -2421,7 +2543,7 @@ export const useConfigStore = defineStore('config', () => {
   } {
     const project = activeProject.value;
     return buildModuleArxmlZip({
-      projectName: project?.name ?? config.value?.name ?? '本机配置集',
+      projectName: project?.name ?? config.value?.name ?? '本机模块配置',
       autosarVersion: project?.autosarVersion ?? module.value?.version ?? '',
       chip: project?.chip.family ?? '',
       entries: projectExportEntries(),
@@ -2435,7 +2557,7 @@ export const useConfigStore = defineStore('config', () => {
   }> {
     const project = activeProject.value;
     return buildProjectPackage({
-      projectName: project?.name ?? config.value?.name ?? '本机配置集',
+      projectName: project?.name ?? config.value?.name ?? '本机模块配置',
       autosarVersion: project?.autosarVersion ?? module.value?.version ?? '',
       chip: project?.chip.family ?? '',
       entries: projectExportEntries(),
@@ -2465,6 +2587,7 @@ export const useConfigStore = defineStore('config', () => {
     openProject,
     removeProject,
     getOutputCheck,
+    projectScope,
     quarantinedSets,
     dataSafety,
     recoveryWarning,

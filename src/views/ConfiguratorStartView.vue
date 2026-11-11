@@ -53,7 +53,7 @@
         />
         <template v-else-if="panel === 'import'">
           <h1>导入工程</h1>
-          <p class="lead">选择 JSON 或 ARXML 配置文件，预览后导入到默认工程。已有工程保持不变。</p>
+          <p class="lead">选择 JSON 或 ARXML 配置文件，预览后导入为新工程。已有工程保持不变。</p>
           <div class="import-formats">
             <button @click="openImport('json')">
               <el-icon><Document /></el-icon><strong>JSON 配置</strong
@@ -86,7 +86,7 @@
                 ></span
               ><span aria-hidden="true">→</span>
             </button>
-            <h2 v-if="store.unassignedSets.length" class="standalone-title">独立配置集</h2>
+            <h2 v-if="store.unassignedSets.length" class="standalone-title">未归属工程的模块配置</h2>
             <button
               v-for="set in store.unassignedSets"
               :key="set.uuid"
