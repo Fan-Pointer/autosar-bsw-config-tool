@@ -243,13 +243,18 @@ export const useConfigStore = defineStore('config', () => {
   let projectsInspected = false;
   let projectsLocked = false;
   const emptyProjectUuid = ref<string>();
-  const activeProject = computed(() =>
-    projects.value.find((p) =>
+  /** 当前工程（显式状态）。此前由 activeUuid 反推，工程间共享模块配置或空工程时会串到别的工程。 */
+  const activeProjectUuid = ref<string>();
+  const activeProject = computed(() => {
+    if (activeProjectUuid.value)
+      return projects.value.find((p) => p.projectUuid === activeProjectUuid.value);
+    // 兼容：未显式指定时仍按当前模块配置的归属推导。
+    return projects.value.find((p) =>
       activeUuid.value
         ? p.setUuids.includes(activeUuid.value)
         : p.projectUuid === emptyProjectUuid.value
-    )
-  );
+    );
+  });
   /** 用户 2026-11-10 裁定：取消「游离配置集」概念，所有配置集必须属于某个工程。 */
   const unassignedSets = computed<ConfigInstance[]>(() => []);
   const projectWarnings = computed(() =>
@@ -1131,6 +1136,8 @@ export const useConfigStore = defineStore('config', () => {
    * @param uuid Project UUID or "default" for unassigned configurations. @returns Success.
    */
   async function openProject(uuid: string): Promise<boolean> {
+    // 先记录当前工程：这样即使该工程暂时没有模块配置，界面也不会显示上一个工程。
+    if (uuid !== 'default') activeProjectUuid.value = uuid;
     const sets =
       uuid === 'default'
         ? unassignedSets.value
@@ -1143,6 +1150,7 @@ export const useConfigStore = defineStore('config', () => {
         if (isDirty.value && !(await saveConfig())) return false;
         activeUuid.value = undefined;
         emptyProjectUuid.value = uuid;
+        activeProjectUuid.value = uuid;
         selectContainer('');
         return true;
       }
@@ -1197,6 +1205,9 @@ export const useConfigStore = defineStore('config', () => {
     if (!configSets.value.some((set) => set.uuid === uuid)) return false;
     if (isDirty.value && !(await saveConfig())) return false;
     activeUuid.value = uuid;
+    // 当前模块配置换到别的工程时，当前工程随之切换。
+    const owner = projects.value.find((project) => project.setUuids.includes(uuid));
+    if (owner) activeProjectUuid.value = owner.projectUuid;
     selectContainer(config.value?.containers[0]?.uuid ?? '');
     revision++;
     if (dataSafety.value.locked) {
@@ -2434,6 +2445,7 @@ export const useConfigStore = defineStore('config', () => {
   return {
     projects,
     activeProject,
+    activeProjectUuid,
     unassignedSets,
     projectWarnings,
     projectError,

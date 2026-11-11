@@ -155,14 +155,7 @@
             @click="openProject(project.projectUuid)"
           >
             打开 →</button
-          ><button
-            class="row-more"
-            title="移除工程归属，保留配置数据"
-            :aria-label="'移除工程 ' + project.name"
-            @click="removeProject(project.projectUuid, project.name)"
           >
-            移除归属
-          </button>
         </div>
       </div>
       <div v-else class="empty-projects">
@@ -185,7 +178,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ElMessageBox } from 'element-plus';
 import { SetUp, Tickets, Reading, FolderOpened } from '@element-plus/icons-vue';
 import { useConfigStore } from '@/stores/configStore';
 import PortalLayout from '@/ui/Portal/PortalLayout.vue';
@@ -201,18 +193,6 @@ onMounted(() => {
 });
 function openConfigurator(): void {
   void router.push('/configurator');
-}
-async function removeProject(uuid: string, name: string): Promise<void> {
-  try {
-    await ElMessageBox.confirm(
-      `移除工程「${name}」的分组？配置数据会保留在默认工程中。`,
-      '移除工程归属',
-      { confirmButtonText: '移除归属', cancelButtonText: '取消' }
-    );
-  } catch {
-    return;
-  }
-  await store.removeProject(uuid).catch(() => false);
 }
 </script>
 <style scoped>
