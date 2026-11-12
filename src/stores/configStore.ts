@@ -1262,7 +1262,7 @@ export const useConfigStore = defineStore('config', () => {
       return false;
     }
     if (project.setUuids.some((id) => projectOwners.value.get(id)?.length !== 1)) {
-      projectError.value = '工程存在共享模块配置，请先在恢复面板查看归属诊断并拆分独立副本。原数据已保留。';
+      projectError.value = '工程存在共享模块配置，需拆分独立副本后打开。原数据已保留。';
       return false;
     }
     const sets = project.setUuids
@@ -1451,7 +1451,7 @@ export const useConfigStore = defineStore('config', () => {
   async function switchConfigSet(uuid: string): Promise<boolean> {
     assertEditable();
     if (projectsLocked) {
-      projectError.value = '工程索引受保护，请先查看恢复面板并修复工程归属。';
+      projectError.value = '工程索引受保护，需修复工程归属后打开。原数据已保留。';
       return false;
     }
     if (!configSets.value.some((set) => set.uuid === uuid)) return false;

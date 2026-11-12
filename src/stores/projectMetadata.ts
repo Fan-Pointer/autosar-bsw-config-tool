@@ -75,7 +75,7 @@ export function parseProjects(raw: unknown): ProjectMetadata[] {
   for (const project of projects)
     for (const id of project.setUuids) {
       if (setIds.has(id))
-        throw new Error('模块配置被重复关联至工程；请在恢复面板查看归属诊断，拆分独立副本后再打开');
+        throw new Error('模块配置被重复关联至工程；需拆分独立副本后打开，原数据已保留');
       setIds.add(id);
     }
   return projects;

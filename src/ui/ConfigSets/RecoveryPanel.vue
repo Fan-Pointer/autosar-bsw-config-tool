@@ -1,20 +1,4 @@
 <template>
-  <section v-if="hasOwnershipIssues" class="recovery" aria-label="工程归属诊断">
-    <strong>工程归属需要修复</strong>
-    <p>共享 {{ store.ownershipDiagnosis.shared.length }} 项 · 未归属 {{ store.ownershipDiagnosis.orphan.length }} 项 · 缺失 {{ store.ownershipDiagnosis.missing.length }} 项。原数据已保留。</p>
-    <p>共享模块须为各工程拆分独立副本，并同步更新容器标识与工程内引用；未归属模块须恢复工程归属。请先导出完整恢复包，勿直接删除或只修改工程名称。</p>
-    <details>
-      <summary>查看归属明细</summary>
-      <ul>
-        <li v-for="item in store.ownershipDiagnosis.shared" :key="'shared-' + item.uuid">共享：{{ item.name }}（{{ item.uuid }}）→ {{ item.projects.join('、') }}</li>
-        <li v-for="item in store.ownershipDiagnosis.orphan" :key="'orphan-' + item.uuid">未归属：{{ item.name }}（{{ item.uuid }}）</li>
-        <li v-for="item in store.ownershipDiagnosis.missing" :key="'missing-' + item.uuid">缺失：{{ item.uuid }} → {{ item.projects.join('、') }}</li>
-      </ul>
-    </details>
-    <el-button @click="download">导出归属诊断与原始数据</el-button>
-    <p v-if="message" role="status">{{ message }}</p>
-    <a v-if="exportUrl" :href="exportUrl" :download="exportName">下载完整恢复包</a>
-  </section>
   <section v-if="store.dataSafety.locked" class="recovery" aria-label="数据恢复保护">
     <div v-if="!collapsed" role="status">
       <strong>数据保护：检测到 {{ store.quarantinedSets.length }} 个不兼容条目</strong>
@@ -154,7 +138,6 @@ import { useConfigStore } from '@/stores/configStore';
 import { collectContainers } from '@/core/config/ConfigTraversal';
 
 const store = useConfigStore();
-const hasOwnershipIssues = computed(() => Object.values(store.ownershipDiagnosis).some((items) => items.length));
 const collapsed = ref(false),
   details = ref(false),
   reading = ref(false),

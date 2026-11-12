@@ -137,8 +137,9 @@ describe('project navigation end to end', () => {
     expect(store.config).toBeNull();
     expect(await store.switchConfigSet(index.projects[0]!.setUuids[0]!)).toBe(false);
     wrapper = mount(RecoveryPanel, { global: { plugins: [pinia, ElementPlus] } });
-    expect(wrapper.get('[aria-label="工程归属诊断"]').text()).toContain('共享 1 项 · 未归属 1 项');
-    expect(wrapper.text()).toContain('拆分独立副本');
+    // User requested removal of the persistent banner; diagnosis and export stay available in the store.
+    expect(wrapper.find('[aria-label="工程归属诊断"]').exists()).toBe(false);
+    expect(wrapper.text()).not.toContain('工程归属需要修复');
     const blob = await store.exportRawLibrary();
     const backupText = await new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
