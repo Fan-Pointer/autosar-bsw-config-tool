@@ -731,9 +731,14 @@ watch(
 watch([showSets, showModules, showImport, showGenerated, () => store.isImporting], () => {
   contextMenu.value = undefined;
 });
+const sceneReady = ref(false);
+let workspaceAlive = true;
 onMounted(async () => {
   await store.initialize();
+  if (!workspaceAlive) return;
   await restoreScene();
+  if (!workspaceAlive) return;
+  sceneReady.value = true;
   window.addEventListener('beforeunload', warnUnsaved);
   // Context menus close on any outside click (menu panels stop propagation themselves).
   document.addEventListener('click', closeContextMenus);
@@ -741,14 +746,20 @@ onMounted(async () => {
 });
 /** G43: restore tabs and selection from this tab's previous session (sessionStorage). */
 async function restoreScene(): Promise<void> {
-  const known = store.configSets.map((set) => set.uuid);
-  const scene = readScene(window.sessionStorage, known);
+  const project = store.activeProject;
+  if (!project) return;
+  const known = store.configSets
+    .filter((set) => project.setUuids.includes(set.uuid))
+    .map((set) => set.uuid);
+  const scene = readScene(window.sessionStorage, known, project.projectUuid);
   if (!scene) return;
   try {
     if (scene.activeUuid && scene.activeUuid !== store.activeUuid) {
       if (!(await store.switchConfigSet(scene.activeUuid).catch(() => false))) return;
     }
-    if (scene.opened.length) opened.value = scene.opened;
+    if (!workspaceAlive || store.activeProject?.projectUuid !== project.projectUuid) return;
+    if (scene.opened.length)
+      opened.value = [...new Set([...scene.opened, ...(store.activeUuid ? [store.activeUuid] : [])])];
     if (scene.containerUuid) store.selectContainer(scene.containerUuid, scene.fieldUuid);
   } catch {
     // 失效的现场不阻断编辑：直接忽略，保留正常初始状态。
@@ -756,13 +767,17 @@ async function restoreScene(): Promise<void> {
 }
 watch(
   () => [
+    sceneReady.value,
+    store.activeProject?.projectUuid,
     opened.value.join('|'),
     store.activeUuid,
     store.selectedEntry?.container.uuid,
     store.selectedFieldUuid,
   ],
   () => {
+    if (!sceneReady.value || !workspaceAlive || !store.activeProject) return;
     writeScene(window.sessionStorage, {
+      projectUuid: store.activeProject.projectUuid,
       opened: opened.value,
       activeUuid: store.activeUuid,
       containerUuid: store.selectedEntry?.container.uuid,
@@ -771,6 +786,7 @@ watch(
   }
 );
 onUnmounted(() => {
+  workspaceAlive = false;
   window.removeEventListener('beforeunload', warnUnsaved);
   document.removeEventListener('click', closeContextMenus);
   document.removeEventListener('contextmenu', closeContextMenus);

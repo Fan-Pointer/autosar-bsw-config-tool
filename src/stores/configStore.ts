@@ -55,7 +55,13 @@ import type {
 import { generateUUID } from '@/utils/uuid';
 import { readBuiltinModules } from '@/modules/builtinCatalog';
 import { moduleKey } from '@/core/bswmd/ModuleKey';
-import { parseProjects, type ProjectMetadata, type ProjectInput } from './projectMetadata';
+import {
+  parseProjects,
+  parseProjectRecords,
+  inspectProjectOwnership,
+  type ProjectMetadata,
+  type ProjectInput,
+} from './projectMetadata';
 import { HistoryStack } from '@/core/history/HistoryStack';
 import { configurationDelta } from '@/core/history/ConfigDelta';
 import { commonParameters, batchSkipReason } from '@/core/config/BatchEdit';
@@ -250,6 +256,17 @@ export const useConfigStore = defineStore('config', () => {
   const projects = ref<ProjectMetadata[]>([]);
   const projectError = ref<string | null>(null);
   const projectBusy = ref(false);
+  const diagnosticProjects = ref<ProjectMetadata[] | null>(null);
+  const ownershipDiagnosis = computed(() =>
+    inspectProjectOwnership(configSets.value, diagnosticProjects.value ?? projects.value)
+  );
+  const projectOwners = computed(() => {
+    const owners = new Map<string, ProjectMetadata[]>();
+    for (const project of projects.value) for (const id of project.setUuids) {
+      owners.set(id, [...(owners.get(id) ?? []), project]);
+    }
+    return owners;
+  });
   let projectsRaw: unknown = null;
   let projectsInspected = false;
   let projectsLocked = false;
@@ -260,11 +277,9 @@ export const useConfigStore = defineStore('config', () => {
     if (activeProjectUuid.value)
       return projects.value.find((p) => p.projectUuid === activeProjectUuid.value);
     // 兼容：未显式指定时仍按当前模块配置的归属推导。
-    return projects.value.find((p) =>
-      activeUuid.value
-        ? p.setUuids.includes(activeUuid.value)
-        : p.projectUuid === emptyProjectUuid.value
-    );
+    if (!activeUuid.value) return projects.value.find((p) => p.projectUuid === emptyProjectUuid.value);
+    const owners = projectOwners.value.get(activeUuid.value);
+    return owners?.length === 1 ? owners[0] : undefined;
   });
   /** 用户 2026-11-10 裁定：取消「游离配置集」概念，所有配置集必须属于某个工程。 */
   const unassignedSets = computed<ConfigInstance[]>(() => []);
@@ -367,6 +382,7 @@ export const useConfigStore = defineStore('config', () => {
   const scopeCache = new Map<string, { key: string; scope: ProjectReferenceScope }>();
   function scopeForProject(project: ProjectMetadata | undefined): ProjectReferenceScope | undefined {
     if (!project) return undefined;
+    if (project.setUuids.some((uuid) => projectOwners.value.get(uuid)?.length !== 1)) return undefined;
     const sets = configSets.value.filter((set) => project.setUuids.includes(set.uuid));
     const key = `${revision}|${sets.map((set) => `${set.uuid}@${set.lastModified}`).join(',')}`;
     const cached = scopeCache.get(project.projectUuid);
@@ -387,7 +403,8 @@ export const useConfigStore = defineStore('config', () => {
   }
   /** 某个模块配置所属工程的引用作用域（校验非当前配置集时用）。 */
   function scopeOfSet(setUuid: string): ProjectReferenceScope | undefined {
-    return scopeForProject(projects.value.find((p) => p.setUuids.includes(setUuid)));
+    const owners = projectOwners.value.get(setUuid);
+    return scopeForProject(owners?.length === 1 ? owners[0] : undefined);
   }
   const danglingReferences = computed(() => {
     const configured = [...(selectedEntry.value?.container.references.values() ?? [])].filter(
@@ -834,6 +851,7 @@ export const useConfigStore = defineStore('config', () => {
    * @returns Whether initialization succeeded (including an empty library).
    */
   async function initialize(): Promise<boolean> {
+    if (initializing) return initializing;
     if (initialized.value) {
       await loadProjects();
       return true;
@@ -855,6 +873,12 @@ export const useConfigStore = defineStore('config', () => {
       projectsInspected = true;
     } catch (reason) {
       projectsLocked = true;
+      // Decode only for the recovery report; never admit shared records to the editable index.
+      try {
+        diagnosticProjects.value = cloneData(parseProjectRecords(projectsRaw));
+      } catch {
+        // A malformed index stays protected; do not invent project memberships.
+      }
       projectError.value = `工程索引读取失败：${reason instanceof Error ? reason.message : String(reason)}`;
     }
   }
@@ -1227,32 +1251,64 @@ export const useConfigStore = defineStore('config', () => {
     }
   }
 
-  /** Activate a surviving set without rewriting project metadata.
-   * @param uuid Project UUID or "default" for unassigned configurations. @returns Success.
+  /** Activate the requested project after initialization and saving outgoing edits.
+   * @param uuid Project UUID. @returns Success; failure retains the previous project.
    */
   async function openProject(uuid: string): Promise<boolean> {
-    // 先记录当前工程：这样即使该工程暂时没有模块配置，界面也不会显示上一个工程。
-    if (uuid !== 'default') activeProjectUuid.value = uuid;
-    const sets =
-      uuid === 'default'
-        ? unassignedSets.value
-        : configSets.value.filter((set) =>
-            projects.value.find((p) => p.projectUuid === uuid)?.setUuids.includes(set.uuid)
-          );
-    if (!sets.length) {
-      const empty = projects.value.find((p) => p.projectUuid === uuid && !p.setUuids.length);
-      if (empty) {
-        if (isDirty.value && !(await saveConfig())) return false;
-        activeUuid.value = undefined;
-        emptyProjectUuid.value = uuid;
-        activeProjectUuid.value = uuid;
-        selectContainer('');
-        return true;
-      }
+    if (!(await initialize()) || projectBusy.value) return false;
+    const project = projects.value.find((item) => item.projectUuid === uuid);
+    if (!project) {
+      projectError.value = '工程不存在或索引无法读取，请检查恢复面板。';
+      return false;
+    }
+    if (project.setUuids.some((id) => projectOwners.value.get(id)?.length !== 1)) {
+      projectError.value = '工程存在共享模块配置，请先在恢复面板查看归属诊断并拆分独立副本。原数据已保留。';
+      return false;
+    }
+    const sets = project.setUuids
+      .map((id) => configSets.value.find((set) => set.uuid === id))
+      .filter((set): set is ConfigInstance => Boolean(set));
+    if (project.setUuids.length && !sets.length) {
       projectError.value = '工程没有可打开的模块配置，请检查恢复面板。';
       return false;
     }
-    return switchConfigSet(sets.find((set) => set.uuid === activeUuid.value)?.uuid ?? sets[0].uuid);
+    projectBusy.value = true;
+    const previous = {
+      project: activeProjectUuid.value,
+      empty: emptyProjectUuid.value,
+      active: activeUuid.value,
+      container: selectedContainerUuid.value,
+      field: selectedFieldUuid.value,
+    };
+    try {
+      if (isDirty.value && !(await saveConfig())) return false;
+      const target =
+        (activeProject.value?.projectUuid === uuid
+          ? sets.find((set) => set.uuid === activeUuid.value)
+          : undefined) ?? sets[0];
+      activeProjectUuid.value = uuid;
+      if (!target) {
+        activeUuid.value = undefined;
+        emptyProjectUuid.value = uuid;
+        selectContainer('');
+        projectError.value = null;
+        return true;
+      }
+      if (await switchConfigSet(target.uuid)) {
+        projectError.value = null;
+        return true;
+      }
+    } catch (reason) {
+      projectError.value = `打开工程失败：${reason instanceof Error ? reason.message : String(reason)}`;
+    } finally {
+      projectBusy.value = false;
+    }
+    activeProjectUuid.value = previous.project;
+    emptyProjectUuid.value = previous.empty;
+    activeUuid.value = previous.active;
+    selectContainer(previous.container ?? '', previous.field);
+    validate();
+    return false;
   }
 
   /** Remove only project grouping. All configuration records remain in the default project.
@@ -1394,12 +1450,18 @@ export const useConfigStore = defineStore('config', () => {
    */
   async function switchConfigSet(uuid: string): Promise<boolean> {
     assertEditable();
+    if (projectsLocked) {
+      projectError.value = '工程索引受保护，请先查看恢复面板并修复工程归属。';
+      return false;
+    }
     if (!configSets.value.some((set) => set.uuid === uuid)) return false;
+    if ((projectOwners.value.get(uuid)?.length ?? 0) > 1) {
+      projectError.value = '该模块配置被多个工程共享，请先拆分独立副本。';
+      return false;
+    }
     if (isDirty.value && !(await saveConfig())) return false;
     activeUuid.value = uuid;
-    // 当前模块配置换到别的工程时，当前工程随之切换。
-    // 只在「当前工程不包含该模块配置」时才反查归属：否则多个工程共享同一配置时，
-    // find 会取第一个匹配（例如 DEMO1），把 openProject 刚设定的当前工程覆盖掉。
+    // Shared ownership is rejected above; a normal tab switch can only select its unique owner.
     const current = projects.value.find((project) => project.projectUuid === activeProjectUuid.value);
     if (!current || !current.setUuids.includes(uuid)) {
       const owner = projects.value.find((project) => project.setUuids.includes(uuid));
@@ -1967,8 +2029,14 @@ export const useConfigStore = defineStore('config', () => {
       selectContainer(config.value?.containers[0]?.uuid ?? '');
       revision++;
       isDirty.value = false;
-      initialized.value = true;
       await loadProjects();
+      if (projectsLocked) {
+        // Do not expose a shared record for editing through a direct /workspace visit.
+        activeUuid.value = undefined;
+        activeProjectUuid.value = undefined;
+        selectContainer('');
+      }
+      initialized.value = true;
       validate();
       return restored.length > 0;
     } catch (reason) {
@@ -2097,10 +2165,13 @@ export const useConfigStore = defineStore('config', () => {
               rawJson: '原配置库的原样 JSON 字符串，包含尚未恢复的条目；请保留完整内容。',
               recoveryState: '隔离原因、写锁与快照索引，仅用于说明恢复状态，不替代原配置数据。',
               draftLibrary: '锁定期间单独保存的新配置草稿，与原配置库分离；可能为空。',
+              projectIndex: '原工程索引；归属修复必须同时保留模块数据与工程索引。共享副本需要新 UUID 及工程内引用重映射，不能只改工程名。',
             },
             exportedAt: new Date().toISOString(),
             sourceKey,
             rawJson: JSON.stringify(raw),
+            projectIndex: await storage.getItem(PROJECTS_KEY),
+            ownershipDiagnosis: ownershipDiagnosis.value,
             recoveryState: { ...dataSafety.value, quarantinedSets: quarantinedSets.value },
             snapshotKeys: dataSafety.value.snapshotKey ? [dataSafety.value.snapshotKey] : [],
             backupIndex: (await storage.getItem('autosar-backup-index')) ?? [],
@@ -2690,6 +2761,7 @@ export const useConfigStore = defineStore('config', () => {
 
   return {
     projects,
+    ownershipDiagnosis,
     activeProject,
     activeProjectUuid,
     unassignedSets,

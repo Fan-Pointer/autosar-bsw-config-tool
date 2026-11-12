@@ -166,7 +166,7 @@ describe('G40 project management', () => {
     );
   });
 
-  it('opens the clicked project when two projects share the same module config (regression)', async () => {
+  it('blocks historical shared ownership without changing the active project or leaking reference scope', async () => {
     const store = useConfigStore();
     await store.initialize();
     expect(
@@ -193,11 +193,18 @@ describe('G40 project management', () => {
         ? { ...item, setUuids: [p1.setUuids[0], ...item.setUuids] }
         : item
     );
-    expect(await store.openProject(p2.projectUuid)).toBe(true);
-    // 打开 DEMO2 必须停在 DEMO2，不能被「归属反查」拉回 DEMO1。
+    const before = JSON.stringify([...db.data]);
+    const activeBefore = store.activeUuid;
+    // 唯一归属模型：不能把共享配置伪装成 DEMO2 的独立模块，更不能改名后继续编辑。
+    expect(await store.openProject(p2.projectUuid)).toBe(false);
     expect(store.activeProject?.name).toBe('DEMO2');
-    expect(await store.openProject(p1.projectUuid)).toBe(true);
-    expect(store.activeProject?.name).toBe('DEMO1');
+    expect(store.activeUuid).toBe(activeBefore);
+    expect(await store.openProject(p1.projectUuid)).toBe(false);
+    expect(await store.switchConfigSet(p1.setUuids[0]!)).toBe(false);
+    expect(store.projectScope()).toBeUndefined();
+    expect(store.projectError).toContain('共享');
+    expect(store.ownershipDiagnosis.shared[0]!.projects).toEqual(['DEMO1', 'DEMO2']);
+    expect(JSON.stringify([...db.data])).toBe(before);
   });
 
   // C1：新建模块配置必须归属工程（否则工程树看不到、跨模块候选为空、导出报 NO-SCOPE）。
