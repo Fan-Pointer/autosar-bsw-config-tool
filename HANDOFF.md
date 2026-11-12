@@ -188,3 +188,34 @@ autosar-bsw-config-tool/
 - 行为变更需先改 `HANDOFF.md` §4 标准口径，再改代码
 - 不接受「只报 Tests 行」——必须报 `Test Files N passed (N)`（防整文件收集失败被掩盖）
 - UI 文案不出现「配置集」「本期不支持跨模块」等旧词
+
+---
+
+## §11 现存问题清单（2026-11-12 10:10 复核，主理人整理）
+
+### P0-1 首页多工程打开串号 —— **未解决（已修一次未生效）**
+
+- **现象**：主页有 3 个工程（DEMO1 / DEMO2 / ZZ_调研测试_DEL），点任意一个进入的都是 DEMO1。
+- **已做**：`b9f500f` 修了 `switchConfigSet` 的归属反查覆盖（多工程共享同一模块配置时 `projects.find` 取首个匹配、覆盖 openProject 设定的当前工程），带回归用例（两工程共享场景 6/6 过）。
+- **线上 07bd068 用户实测仍复现** → 上述修复只处理了一个次要因素，**真根因未找到**。
+- **已排除**：switchConfigSet 归属覆盖（有回归用例锁）；C1 自动挂工程逻辑（attach 幂等、无孤儿，有 5 条用例）。
+- **排查方向（按嫌疑排序）**：
+  1. `initialize()` 时序：`useProjectNavigation.navigate` 先 `store.initialize()` 再 `store.openProject(uuid)`。initialize 会从 localforage 恢复上次会话的 `activeUuid`（大概率残留在 DEMO1 的配置集）。查 initialize 是否存在**异步 restore 在 openProject 之后才完成**（如 WorkspaceView onMounted 再次 initialize / 竞态），把 activeUuid 拉回 DEMO1。
+  2. `store.openProject` 的选集逻辑 `sets.find(s => s.uuid === activeUuid.value)?.uuid ?? sets[0].uuid`：若 DEMO2.setUuids 与 DEMO1 有交集且残留的 activeUuid 恰在交集中，会切到 DEMO1 的**模块配置**——当前工程虽显示 DEMO2，但模块树内容是 DEMO1 的，用户感知即「进了 DEMO1」。注意共享数据可能让这个分支必然命中。
+  3. 数据层：三个工程的 setUuids 存在交集（历史共享），可能需要一次性数据迁移/拆分。
+  4. 路由恢复：路由 push('/workspace') 后是否有 restore-from-storage 逻辑再覆盖。
+- **验收标准**：点 DEMO2 → 模块树为 DEMO2 自己的模块清单；点 ZZ 同理。需写 e2e 用例模拟「storage 残留旧 activeUuid + 三工程」场景；并给出一次性数据修复脚本或 UI 提示（拆分共享配置集）。
+
+### P0-2 历史数据共享/孤儿清理
+
+- 判定标准 = `uuid ∈ 某工程 setUuids`（`unassignedSets` 硬编码 `[]`，不可用于判定）。恢复面板加检测与一键拆分/清理。与 P0-1 的数据层根因可能同源，**建议先做 P0-2 的数据诊断再修 P0-1**。
+
+### P1 旧语义用例重写
+
+- 4 个 skip 用例（tests/projects.test.ts:91/257 等）按「配置必须归属工程」新模型重写。
+
+### P2 DBC/LDF「解析→确认→生成」（SRS §5 下一阶段）。
+
+### P3 性能储备
+
+- 20 步撤销实测 376~644ms（预算 800ms），逼近时优化 WorkspaceView 渲染，不上调预算。
