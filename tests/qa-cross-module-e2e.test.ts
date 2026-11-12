@@ -164,6 +164,8 @@ describe('跨模块引用端到端（store 真实链路）', () => {
     await store.importModuleDefinitions([moduleA, moduleB]);
     // 不建工程，直接建一个游离的模块配置。
     expect(await store.createConfigSet('孤立 B', 'SupplierB', '4.4.0')).toBe(true);
+    // C1 之后新建配置会自动归属工程；本用例验证「无工程上下文」，显式去掉归属。
+    await store.removeProject(store.activeProject!.projectUuid);
     const entryB = store.entries.find((entry) => entry.definition.references.length > 0)!;
     store.selectContainer(entryB.container.uuid);
     expect(store.activeProject).toBeUndefined();

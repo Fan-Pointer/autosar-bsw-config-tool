@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createPinia, setActivePinia } from 'pinia';
 import { useConfigStore } from '../src/stores/configStore';
 import { collectContainers } from '../src/core/config/ConfigTraversal';
+import { moduleKey } from '../src/core/bswmd/ModuleKey';
 import type { ProjectInput } from '../src/stores/projectMetadata';
 
 const db = vi.hoisted(() => ({ data: new Map<string, unknown>(), write: vi.fn() }));
@@ -197,5 +198,77 @@ describe('G40 project management', () => {
     expect(store.activeProject?.name).toBe('DEMO2');
     expect(await store.openProject(p1.projectUuid)).toBe(true);
     expect(store.activeProject?.name).toBe('DEMO1');
+  });
+
+  // C1：新建模块配置必须归属工程（否则工程树看不到、跨模块候选为空、导出报 NO-SCOPE）。
+  it('attaches a newly created module config to the current project and stays idempotent', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    expect(await store.createProject(input)).toBe(true);
+    const project = store.activeProject!;
+    // 用户先把 Dem 的「生成」关掉：新建配置不得把这个开关重置回 true。
+    store.modulePreferences[moduleKey('Dem', '4.4.0')] = {
+      included: true,
+      generation: false,
+      validation: true,
+    };
+
+    expect(await store.createConfigSet('新增 Dem', 'Dem')).toBe(true);
+    const created = store.config!;
+    const attached = store.projects.find((item) => item.projectUuid === project.projectUuid)!;
+    expect(attached.setUuids).toContain(created.uuid);
+    expect(attached.moduleShortNames).toContain('Dem');
+    // 候选来源：新配置的容器必须在工程作用域内（跨模块候选与导出都依赖这张表）。
+    const scope = store.projectScope()!;
+    expect(scope.containers.has(created.containers[0]!.uuid)).toBe(true);
+    // 用户设过的开关不被覆盖。
+    expect(store.modulePreferences[moduleKey('Dem', '4.4.0')]).toEqual({
+      included: true,
+      generation: false,
+      validation: true,
+    });
+    // 幂等：同模块再加一条配置，moduleShortNames 不重复、setUuids 各自独立。
+    expect(await store.createConfigSet('第二条 Dem', 'Dem')).toBe(true);
+    const again = store.projects.find((item) => item.projectUuid === project.projectUuid)!;
+    expect(again.moduleShortNames.filter((name) => name === 'Dem')).toHaveLength(1);
+    expect(again.setUuids.filter((id) => id === created.uuid)).toHaveLength(1);
+    expect(again.setUuids).toContain(store.config!.uuid);
+  });
+
+  it('creates a project instead of leaving an orphan when no project is open', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    expect(store.activeProject).toBeUndefined();
+    expect(await store.createConfigSet('首次使用', 'Dem')).toBe(true);
+    const created = store.config!;
+    // 策略：自动建一个以模块命名的工程并挂载（不产生孤儿配置）。
+    expect(store.projects).toHaveLength(1);
+    const auto = store.projects[0]!;
+    expect(auto.name).toBe('Dem 工程');
+    expect(auto.autosarVersion).toBe(created.version);
+    expect(auto.setUuids).toEqual([created.uuid]);
+    expect(auto.moduleShortNames).toEqual(['Dem']);
+    expect(store.activeProject?.projectUuid).toBe(auto.projectUuid);
+    // 无孤儿：库里每个配置都恰好属于一个工程。
+    for (const set of store.configSets)
+      expect(
+        store.projects.filter((item) => item.setUuids.includes(set.uuid))
+      ).toHaveLength(1);
+  });
+
+  it('detaches a deleted module config from its project so no dangling warning appears', async () => {
+    const store = useConfigStore();
+    await store.initialize();
+    expect(await store.createProject({ ...input, moduleShortNames: ['Dem'] })).toBe(true);
+    const project = store.activeProject!;
+    const setUuid = project.setUuids[0]!;
+
+    expect(await store.deleteConfigSet(setUuid)).toBe(true);
+    const after = store.projects.find((item) => item.projectUuid === project.projectUuid)!;
+    expect(after.setUuids).not.toContain(setUuid);
+    // 该模块已无任何配置留在工程里，模块名也一并摘掉（否则工程树出现空模块）。
+    expect(after.moduleShortNames).toEqual([]);
+    // 关键：工程不再引用不存在的配置，不会触发「N 个模块配置暂不可用」的恢复告警。
+    expect(store.projectWarnings).toEqual([]);
   });
 });

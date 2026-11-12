@@ -944,12 +944,17 @@ export const useConfigStore = defineStore('config', () => {
       changed();
       if (!(await saveConfig())) throw new Error(error.value ?? '配置保存失败');
       projects.value = nextProjects;
+      // 显式设定当前工程：仅靠「当前配置的归属」反查不稳健——新建配置会先切换 activeUuid，
+      // 反查随之落空（历史上导致误判无工程、甚至把新配置挂到自动新建的工程里）。
+      activeProjectUuid.value = project.projectUuid;
+      emptyProjectUuid.value = undefined;
       return true;
     } catch (reason) {
       configSets.value = previous.sets;
       modules.value = previous.modules;
       importedModules.value = previous.imports;
       modulePreferences.value = previous.preferences;
+      activeProjectUuid.value = previous.projects.find((item) => item.setUuids.includes(previous.active ?? ''))?.projectUuid;
       activeUuid.value = previous.active;
       manager = new ConfigInstanceManager(modules.value);
       selectContainer(previous.selected ?? '');
@@ -1273,6 +1278,88 @@ export const useConfigStore = defineStore('config', () => {
    * @param moduleName Discovered module name.
    * @returns Whether the new library was saved.
    */
+  /**
+   * 把新建/克隆出来的模块配置并入当前工程（模型要求：模块配置必须且只能属于一个工程）。
+   *
+   * 幂等：`setUuids`/`moduleShortNames` 已含时不重复追加。
+   * 无当前工程时**不留下孤儿配置**：按「首次使用」流程自动建一个以模块命名的工程再挂载。
+   * 顺序与 `importArxmlModules` 一致——先落库配置、再写工程索引，避免工程引用未持久化的配置。
+   *
+   * @param set 刚创建/克隆的模块配置。
+   * @param project 创建**之前**捕获的当前工程；省略时才回落到 activeProject。
+   * @returns Nothing；索引写入失败时抛出可读错误，由调用方转为用户可见提示。
+   */
+  async function attachSetToProject(
+    set: ConfigInstance,
+    project: ProjectMetadata | undefined = activeProject.value
+  ): Promise<void> {
+    // 只保证「纳入工程」，不得覆盖用户在模块管理里设过的 generation/validation 开关。
+    const key = moduleKey(set.moduleRef, set.version);
+    const existing = modulePreferences.value[key];
+    const preference: ModulePreference = {
+      ...(existing ?? { generation: true, validation: true }),
+      included: true,
+    };
+    const current = project;
+    const next: ProjectMetadata = current
+      ? {
+          ...current,
+          setUuids: current.setUuids.includes(set.uuid)
+            ? current.setUuids
+            : [...current.setUuids, set.uuid],
+          moduleShortNames: current.moduleShortNames.includes(set.moduleRef)
+            ? current.moduleShortNames
+            : [...current.moduleShortNames, set.moduleRef],
+          updatedAt: new Date().toISOString(),
+        }
+      : {
+          projectUuid: generateUUID(),
+          name: `${set.moduleRef} 工程`,
+          description: '新建模块配置时自动创建',
+          autosarVersion: set.version,
+          // 芯片只在工程向导里选得到；自动建工程时给默认值并留痕，避免建出非法工程。
+          chip: { family: 'S32K1XX', note: '自动创建（未指定芯片）' },
+          moduleShortNames: [set.moduleRef],
+          setUuids: [set.uuid],
+          createdAt: new Date().toISOString(),
+        };
+    const nextProjects = current
+      ? projects.value.map((item) => (item.projectUuid === next.projectUuid ? next : item))
+      : [...projects.value, next];
+    await writeProjectIndex({ schemaVersion: 1, projects: nextProjects });
+    projects.value = nextProjects;
+    activeProjectUuid.value = next.projectUuid;
+    modulePreferences.value[key] = preference;
+  }
+
+  /**
+   * 把已删除的模块配置从工程关联中摘除（否则工程会引用一个不存在的配置，
+   * 触发「N 个模块配置暂不可用」的恢复告警）。
+   * @param uuid 已删除的模块配置 UUID。
+   * @returns Nothing；无关联变化时不写索引。
+   */
+  async function detachSetFromProject(uuid: string): Promise<void> {
+    const owner = projects.value.find((project) => project.setUuids.includes(uuid));
+    if (!owner) return;
+    const setUuids = owner.setUuids.filter((item) => item !== uuid);
+    const remaining = configSets.value.filter((set) => setUuids.includes(set.uuid));
+    // 该模块若已没有任何配置留在工程里，模块名也一并摘掉，避免工程树出现空模块。
+    const moduleShortNames = owner.moduleShortNames.filter((name) =>
+      remaining.some((set) => set.moduleRef === name)
+    );
+    const next: ProjectMetadata = {
+      ...owner,
+      setUuids,
+      moduleShortNames,
+      updatedAt: new Date().toISOString(),
+    };
+    const nextProjects = projects.value.map((item) =>
+      item.projectUuid === owner.projectUuid ? next : item
+    );
+    await writeProjectIndex({ schemaVersion: 1, projects: nextProjects });
+    projects.value = nextProjects;
+  }
+
   async function createConfigSet(
     name: string,
     moduleName = modules.value[0]?.shortName,
@@ -1281,9 +1368,24 @@ export const useConfigStore = defineStore('config', () => {
     assertEditable();
     if (!name.trim()) throw new Error('请输入模块配置名称');
     if (!(await initialize()) || (isDirty.value && !(await saveConfig()))) return false;
+    // 必须在 createConfig 之前捕获：它会把 activeUuid 指向新配置，
+    // 而 activeProject 的兜底反查依赖「当前配置属于哪个工程」，捕获晚了就会误判成无工程。
+    const projectBeforeCreate = activeProject.value;
     createConfig(moduleName, name, release);
     if (dataSafety.value.locked) draftUuids.value.push(activeUuid.value!);
-    return saveConfig();
+    if (!(await saveConfig())) return false;
+    // 草稿（数据安全锁定）落在隔离侧库，不并入工程：此时写工程索引会触发写保护。
+    if (dataSafety.value.locked) return true;
+    try {
+      await attachSetToProject(config.value!, projectBeforeCreate);
+    } catch (reason) {
+      // 配置已落库，但工程关联没写成：明确报错，绝不假装成功（否则用户看到「模块消失」）。
+      const message = reason instanceof Error ? reason.message : String(reason);
+      projectError.value = message;
+      error.value = message;
+      return false;
+    }
+    return true;
   }
 
   /** Switch only after persisting the outgoing edits; failed saves retain the current set.
@@ -1327,12 +1429,22 @@ export const useConfigStore = defineStore('config', () => {
     let name = `${base}_2`;
     for (let suffix = 3; configSets.value.some((set) => set.name === name); suffix++)
       name = `${base}_${suffix}`;
+    const projectBeforeClone = activeProject.value;
     const clone = cloneConfiguration(source, name);
     configSets.value.push(clone);
     activeUuid.value = clone.uuid;
     selectContainer(clone.containers[0]?.uuid ?? '');
     changed();
-    return saveConfig();
+    if (!(await saveConfig())) return false;
+    try {
+      await attachSetToProject(clone, projectBeforeClone);
+    } catch (reason) {
+      const message = reason instanceof Error ? reason.message : String(reason);
+      projectError.value = message;
+      error.value = message;
+      return false;
+    }
+    return true;
   }
 
   /** Delete a set after the UI obtains confirmation and persist the remaining library.
@@ -1358,6 +1470,13 @@ export const useConfigStore = defineStore('config', () => {
     if (await saveConfig()) {
       histories.delete(uuid);
       historyRevision.value++;
+      // 工程关联必须同步摘除：否则工程会引用一个已不存在的配置（恢复面板会报「暂不可用」）。
+      try {
+        await detachSetFromProject(uuid);
+      } catch (reason) {
+        const message = reason instanceof Error ? reason.message : String(reason);
+        projectError.value = message;
+      }
       return true;
     }
     configSets.value.splice(index, 0, removed);

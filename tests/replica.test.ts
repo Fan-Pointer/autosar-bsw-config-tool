@@ -150,6 +150,9 @@ describe('screenshot replica interactions', () => {
   it('transfers modules and persists independent validation and generation flags', async () => {
     const store = useConfigStore();
     await store.createConfigSet('Modules');
+    // 新建配置现在会自动归属工程（C1），而本用例验证的是「库范围」的偏好持久化：
+    // 显式去掉工程归属，让模块管理走库分支（断言本身不动）。
+    await store.removeProject(store.activeProject!.projectUuid);
     const name = store.modules[0].shortName;
     const wrapper = mount(ModuleManager, {
       attachTo: document.body,
