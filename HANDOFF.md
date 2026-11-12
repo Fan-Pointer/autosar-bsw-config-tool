@@ -16,7 +16,7 @@
 
 ## 2. 最终效果 / 验收清单
 
-构建 `npm run build` 通过、`npm run test:verify` 22/22 文件 + 317/317 用例全绿（0 fail / 0 skip）后，以下逐条可勾选：
+构建 `npm run build` 通过、`npm run test:verify` **39/39 文件全收集且 0 failed** 后，以下逐条可勾选（用例总数随迭代增长，判定标准是 0 failed；6 skipped 中 2 条为按设计跳过的性能门禁用例，见 §8）：
 
 **功能**
 - [ ] 首页（`/`）：配置集管理列表（创建/打开/重命名/切换/删除），打开后进入 `/workspace`
@@ -122,7 +122,7 @@ autosar-bsw-config-tool/
 7. **定义抽取脚本**：`scripts/gen-bswmd-from-arxml.mjs`——读官方 ARXML，按模块输出确定性 JSON（固定键序、无时间戳、`$source` 含原文件 SHA256 与 `contentSha256`、`changelog.json` 记录字段级 diff）；用法 `node scripts/gen-bswmd-from-arxml.mjs <Module> [source.arxml] [output.json]`。产出=`bswmd/*.json` 资产。
 8. **输出闸门与 C 生成**：`OutputGate.ts` 纯函数 `evaluateOutputReadiness(config, module)`——四输出（校验面板/ARXML/CSV/C）同一动作内调用同一函数**重新求值**，禁止跨动作缓存结果；未配置不导出、必填拒绝列清单、外部引用只读；`TemplateEngine.ts`+`CGenerator.ts`（Handlebars 生成 .h/.c）。产出=四输出一致性 + C 产物。
 9. **UI 工作区**：`WorkspaceView.vue` 组装三栏（工程侧栏 212px + 配置树 240px + 表单区）+ 底部停靠（问题面板/字段说明 v-show 切换）+ 浮层；`ConfigTree`/`DynamicForm`（四态行）/`ContainerContextMenu`（三项竖向菜单：实测定位、边界翻转、键盘导航、aria-disabled+title+aria-description；新建二级仅列子定义名）/`ImportDialog`（预览冲突暂存）/`ChoiceSelector`（预览+撤销）/`ValidationPanel`/`RecoveryPanel`/`GlobalSearch`。所有取消路径零写入。产出=验收清单功能面。
-10. **测试与守卫**：22 个测试文件——core 纯逻辑、io/XXE 攻击矩阵、往返保真、UI 组件挂载、恢复协议、菜单定位；fixture 双轨（`tests/fixtures/` 官方片段 + `tests/helpers/synthDem.ts` 合成定义）；`test-collection-guard.ts` 防收集缺失。产出=`npm run test:verify` 317/317。
+10. **测试与守卫**：39 个测试文件——core 纯逻辑、io/XXE 攻击矩阵、往返保真、跨模块引用（规则表/端到端/空态）、UI 组件挂载、恢复协议、菜单定位、性能门禁；fixture 双轨（`tests/fixtures/` 官方片段 + `tests/helpers/synthDem.ts` 合成定义）；`test-collection-guard.ts` 防收集缺失。产出=`npm run test:verify` 39/39 文件、430 passed（0 failed）。
 11. **桌面入口（可选）**：`scripts/desktop/Start-Configurator.ps1`（后台起 `npm run dev`，健康检查 `http://localhost:3000/workspace` 后打开浏览器；`-NoBrowser` 仅起服务）与 `Install-DesktopShortcut.ps1`。产出=双击即用。
 
 ## 6. 配置与凭证
@@ -140,7 +140,7 @@ autosar-bsw-config-tool/
 1. **纯前端铁律**：无后端、无网络上传、无账号体系；一切数据在浏览器 IndexedDB。
 2. **core 纪律**：`src/core` 零 UI 依赖、零模块名硬编码（模块特例仅 `src/modules/<mod>/`）；规则由 store 注入。
 3. **存储纪律**：LIBRARY_KEY 是主库唯一写点；加载不写库；不兼容数据隔离不覆盖；写回前强制快照。
-4. **标准口径**：CP 4.4.0 定义；导出 namespace r4.0；不做变体；跨模块引用只读拒绝（原因分「必填未配置」与「目标跨模块」两类，不静默丢弃）。
+4. **标准口径**：CP 4.4.0 定义；导出 namespace r4.0；不做变体；跨模块引用**仅限当前工程内可选、可校验、可导出**——候选来自工程作用域（`模块 › 路径` 标签、`/Config/<模块>/<路径>` 路径），无工程上下文时候选为空、不静默丢弃；校验产出 5 类 ruleId：`OUTPUT-EXTERNAL-REQUIRED`（必填未选，ERROR）、`-MISMATCH`（目标定义路径不匹配，ERROR）、`-DANGLING`（目标不在当前工程内，ERROR）、`-NO-SCOPE`（已选目标但无工程上下文，ERROR）、`-VERSION-DRIFT`（目标模块版本与工程不一致，**WARNING 不阻塞导出**）。
 5. **测试纪律**：不删测试/不削断言；`test:verify` 必须过收集守卫；性能门禁（`npm run test:perf`）的预算不得放宽，且**发版前必跑**（见 §8 第 3 条）。
 6. **路径**：项目目录含中文（`教培业务/配置器`）实测可用；Node ≥18。
 7. **已知既有项**：主包约 1.19MB（Element Plus 全量引入）体积警告保留不阻断，优化属后续阶段；Web Worker 用于大文件解析。
