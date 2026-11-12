@@ -188,3 +188,29 @@ autosar-bsw-config-tool/
 - 行为变更需先改 `HANDOFF.md` §4 标准口径，再改代码
 - 不接受「只报 Tests 行」——必须报 `Test Files N passed (N)`（防整文件收集失败被掩盖）
 - UI 文案不出现「配置集」「本期不支持跨模块」等旧词
+
+---
+
+## §10 Codex 交接（2026-11-12，主理人审定）
+
+### 当前状态（HEAD `647fcd7`）
+
+- 基线：`npm run test:verify` → **40/40 文件、438 passed / 6 skipped / 0 failed**；`npx vue-tsc --noEmit` → 0；`npm run test:perf` → 2/2（预算 300/800ms，三次取中位数）
+- 已交付主线：界面术语「配置集→模块配置」；跨模块引用工程内可选/可校验/可导出（5 类 ruleId）；新建/克隆模块配置自动并入当前工程（C1）；首页多工程打开串号修复；导出→导入往返闭环（含嵌套容器）
+- 产品模型（不可违背）：模块配置必须且只能属于一个工程；不存在孤儿配置集；跨模块候选只限当前工程
+
+### 待办（按优先级）
+
+1. **孤儿/共享数据清理**：历史数据中可能存在「多工程共享同一模块配置」或孤儿配置集，判定标准 = `uuid ∈ 某工程 setUuids`（`unassignedSets` 是硬编码 `[]`，不能用于判定）。给恢复面板加检测与一键清理。
+2. **旧语义用例重写**：4 个 skip 用例（tests/projects.test.ts:91/257 等）按「配置必须归属工程」的新模型重写。
+3. **DBC/LDF「解析→确认→生成」**（SRS §5 下一阶段）。
+4. **性能优化储备**：撤销链路 20 步实测 376~644ms（预算 800），若逼近阈值优先优化 `WorkspaceView` 渲染而非上调预算。
+
+### 审核纪律（王上裁定：Codex 提交，主理人审核）
+
+- 每条改动必须通过 `npm run test:verify`（0 failed）+ `npx vue-tsc --noEmit`（0 错误）
+- 三条安全断言不得削弱：`tests/arxml-interoperability.test.ts` 的 `resolveReferenceCandidates(...)===[]`（不得伪造本地引用）、`tests/arxml-fidelity.test.ts` 的 `not.toContain('跨模块')`、`tests/catalog.test.ts`（git 零改动基线）
+- **禁止 `it.fails` 当"通过"**：锁缺陷用例修好后必须摘标记、删"现状断言"
+- 行为变更需先改 `HANDOFF.md` §4 标准口径，再改代码
+- 不接受「只报 Tests 行」——必须报 `Test Files N passed (N)`（防整文件收集失败被掩盖）
+- UI 文案不出现「配置集」「本期不支持跨模块」等旧词
